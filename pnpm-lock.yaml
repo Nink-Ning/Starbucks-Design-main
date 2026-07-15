@@ -96,6 +96,9 @@ importers:
       '@vitepress-demo-preview/plugin':
         specifier: ^1.4.1
         version: 1.4.1(markdown-it-container@3.0.0)(vitepress@1.6.4(@algolia/client-search@5.55.1)(@types/node@22.19.13)(@types/react@18.3.28)(less@4.5.1)(nprogress@0.2.0)(postcss@8.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.3)(terser@5.48.0)(typescript@5.9.3))(vue@3.5.29(typescript@5.9.3))
+      dayjs:
+        specifier: ^1.11.21
+        version: 1.11.21
     devDependencies:
       vitepress:
         specifier: ^1.5.0
@@ -3670,9 +3673,6 @@ packages:
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
-  dayjs@1.11.20:
-    resolution: {integrity: sha512-YbwwqR/uYpeoP4pu043q+LTDLFBLApUP6VxRihdfNTqu4ubqMlGDLd6ErXhEgsyvY0K6nCs7nggYumAN+9uEuQ==}
-
   dayjs@1.11.21:
     resolution: {integrity: sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==}
 
@@ -6902,6 +6902,7 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   value-equal@1.0.1:
@@ -7409,7 +7410,7 @@ snapshots:
       b-tween: 0.3.3
       b-validate: 1.5.3
       compute-scroll-into-view: 1.0.20
-      dayjs: 1.11.20
+      dayjs: 1.11.21
       number-precision: 1.6.0
       resize-observer-polyfill: 1.5.1
       scroll-into-view-if-needed: 2.2.31
@@ -11769,8 +11770,6 @@ snapshots:
       css-tree: 2.2.1
 
   csstype@3.2.3: {}
-
-  dayjs@1.11.20: {}
 
   dayjs@1.11.21: {}
 
