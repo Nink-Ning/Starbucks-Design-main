@@ -1,0 +1,23 @@
+- [x] 确保 PAvatar 的 Vue 和 React 组件实现完毕
+- [x] 确保 PDescriptions 的 Vue 和 React 组件实现完毕
+- [x] 确保 PEmpty 的 Vue 和 React 组件实现完毕
+- [x] 确保 PImage 的 Vue 和 React 组件实现完毕
+- [x] 确保 PTimeline 的 Vue 和 React 组件实现完毕
+- [x] 确保 PResult 的 Vue 和 React 组件实现完毕
+- [x] 确保 PSkeleton 的 Vue 和 React 组件实现完毕
+- [x] 确保 PStatistic 的 Vue 和 React 组件实现完毕
+- [x] 确保 PTypography 的 Vue 和 React 组件实现完毕
+- [x] 确保 PGrid 的 Vue 和 React 组件实现完毕
+- [x] 确保 PMenu 的 Vue 和 React 组件实现完毕
+- [x] 确保 PBreadcrumb 的 Vue 和 React 组件实现完毕
+- [x] 确保 PCascader 的 Vue 和 React 组件实现完毕
+- [x] 确保 PSlider 的 Vue 和 React 组件实现完毕
+- [x] 确保 PRate 的 Vue 和 React 组件实现完毕
+- [x] 确保 PUpload 的 Vue 和 React 组件实现完毕
+- [x] 确保 PTreeSelect 的 Vue 和 React 组件实现完毕
+- [x] 确保 PAutoComplete 的 Vue 和 React 组件实现完毕
+- [x] 确保 PColorPicker 的 Vue 和 React 组件实现完毕
+- [x] 确保 PMentions 的 Vue 和 React 组件实现完毕
+- [x] 确保 PCarousel 的 Vue 和 React 组件实现完毕
+- [x] 检查 `.vitepress/config.ts` 中的路由配置，确保所有新增组件文档都能访问
+- [x] 检查所有新增组件导出配置 `index.ts` 和 `components.ts`

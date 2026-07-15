@@ -1,0 +1,66 @@
+// Popover.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-15
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Popover — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+
+.arco-popover-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  padding: var(--spacing-6);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  background-color: var(--bg-color-container);
+  border: 0.5px solid var(--bg-color-secondarycomponent);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.arco-popover-content-inner {
+  text-align: left;
+  word-break: break-word;
+}
+
+.arco-popover-title {
+  margin-bottom: var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-22);
+}
+
+.arco-popover-title + .arco-popover-inner-content {
+  margin-top: 0;
+}
+
+.arco-popover-inner-content {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-20);
+}
+
+.arco-trigger-arrow.arco-popover-arrow {
+  z-index: 1;
+  width: 8.69px;
+  height: 8.69px;
+  background-color: var(--bg-color-container);
+  border-color: var(--bg-color-secondarycomponent);
+  border-style: solid;
+  border-width: 0.5px 0.5px 0 0;
+}
+
+.arco-popover-inner-rtl {
+  direction: rtl;
+  text-align: right;
+}

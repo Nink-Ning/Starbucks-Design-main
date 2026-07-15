@@ -1,0 +1,3 @@
+<template>
+  <Spin dot />
+</template>

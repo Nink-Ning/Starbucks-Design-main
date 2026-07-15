@@ -1,0 +1,150 @@
+diff --git a/dist/esm/AlgoliaLogo.js b/dist/esm/AlgoliaLogo.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..1dd96d4830337d0bee78cbb38717fe5ee5b40d9d
+--- /dev/null
++++ b/dist/esm/AlgoliaLogo.js
+@@ -0,0 +1,26 @@
++"use strict";
++var __importDefault = (this && this.__importDefault) || function (mod) {
++    return (mod && mod.__esModule) ? mod : { "default": mod };
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.AlgoliaLogo = void 0;
++var react_1 = __importDefault(require("react"));
++function AlgoliaLogo() {
++    return react_1.default.createElement(
++        "a",
++        { href: "https://www.algolia.com/", target: "_blank", rel: "noopener noreferrer",
++          style: { display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 4, textDecoration: "none", padding: "0 16px" } },
++        react_1.default.createElement("span", { style: { fontSize: 12, color: "var(--color-text-3)" } }, "Search by"),
++        react_1.default.createElement("svg", { width: 80, height: 20, viewBox: "0 0 130 25", fill: "none" },
++            react_1.default.createElement("path", { d: "M0 0h130v25H0z", fill: "none" }),
++            react_1.default.createElement("path", { d: "M43.84 8.69c-.63 0-1.14.51-1.14 1.14v.02c0 .63.51 1.14 1.14 1.14h3.71l-4.53 5.44c-.28.34-.25.83.07 1.14.15.15.35.23.55.23.2 0 .4-.08.55-.23l4.53-5.44v3.71c0 .63.51 1.14 1.14 1.14h.02c.63 0 1.14-.51 1.14-1.14V8.83c0-.63-.51-1.14-1.14-1.14H43.84z",
++              fill: "#5468FF" }),
++            react_1.default.createElement("path", { d: "M68.95 18.75c-1.68 0-2.97-.55-3.86-1.65-.88-1.1-1.32-2.63-1.32-4.58s.44-3.45 1.32-4.55c.88-1.11 2.17-1.67 3.86-1.67 1.11 0 2.05.28 2.83.83.78.55 1.28 1.28 1.5 2.19l.06.21-3.75 1.05-.06-.18c-.26-.73-.75-1.09-1.46-1.09-.47 0-.86.19-1.17.56-.31.37-.47.89-.47 1.56v1.27c0 .67.16 1.2.47 1.59.31.39.72.58 1.24.58.32 0 .6-.09.82-.26.23-.17.41-.41.54-.71l.09-.21 3.63 1.18-.12.31c-.28.74-.8 1.37-1.56 1.89-.76.52-1.66.78-2.69.78z",
++              fill: "#5468FF" }),
++            react_1.default.createElement("path", { d: "M83.13 18.75c-1.69 0-2.98-.52-3.88-1.55-.89-1.04-1.34-2.46-1.34-4.28s.45-3.28 1.34-4.33c.9-1.05 2.19-1.57 3.88-1.57 1.69 0 2.99.52 3.88 1.57.89 1.05 1.34 2.49 1.34 4.33s-.45 3.23-1.34 4.28c-.89 1.03-2.19 1.55-3.88 1.55zm0-2.89c.47 0 .82-.19 1.04-.56.22-.38.33-.88.33-1.5v-1.14c0-.62-.11-1.11-.33-1.47-.22-.36-.57-.55-1.04-.55s-.81.19-1.03.56c-.22.38-.33.87-.33 1.47v1.14c0 .62.11 1.12.33 1.5.22.37.56.55 1.03.55z",
++              fill: "#5468FF" })
++        )
++    );
++}
++exports.AlgoliaLogo = AlgoliaLogo;
++exports.default = AlgoliaLogo;
+diff --git a/dist/esm/useSearchClient.js b/dist/esm/useSearchClient.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..17408991dd3f51026c59c8bd709b419ad55732d5
+--- /dev/null
++++ b/dist/esm/useSearchClient.js
+@@ -0,0 +1,37 @@
++"use strict";
++var __importDefault = (this && this.__importDefault) || function (mod) {
++    return (mod && mod.__esModule) ? mod : { "default": mod };
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.useSearchClient = void 0;
++var react_1 = __importDefault(require("react"));
++
++/**
++ * Creates an Algolia search client using the REST API.
++ * Replaces the internal @docsearch/react module that no longer exists in v3.9.0.
++ */
++function useSearchClient(appId, apiKey, transform) {
++    var client = react_1.default.useMemo(function () {
++        var algoliaClient = {
++            search: function (queries) {
++                return fetch("https://".concat(appId, "-dsn.algolia.net/1/indexes/*/queries"), {
++                    method: 'POST',
++                    headers: {
++                        'Content-Type': 'application/json',
++                        'X-Algolia-Application-Id': appId,
++                        'X-Algolia-API-Key': apiKey,
++                    },
++                    body: JSON.stringify({ requests: queries.map(function (q) { return ({
++                            indexName: q.indexName,
++                            query: q.query,
++                            params: q.params ? new URLSearchParams(q.params).toString() : '',
++                        }); }) }),
++                }).then(function (res) { return res.json(); });
++            },
++        };
++        return transform ? transform(algoliaClient) : algoliaClient;
++    }, [appId, apiKey]);
++    return client;
++}
++exports.useSearchClient = useSearchClient;
++exports.default = useSearchClient;
+diff --git a/dist/umd/AlgoliaLogo.js b/dist/umd/AlgoliaLogo.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..1dd96d4830337d0bee78cbb38717fe5ee5b40d9d
+--- /dev/null
++++ b/dist/umd/AlgoliaLogo.js
+@@ -0,0 +1,26 @@
++"use strict";
++var __importDefault = (this && this.__importDefault) || function (mod) {
++    return (mod && mod.__esModule) ? mod : { "default": mod };
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.AlgoliaLogo = void 0;
++var react_1 = __importDefault(require("react"));
++function AlgoliaLogo() {
++    return react_1.default.createElement(
++        "a",
++        { href: "https://www.algolia.com/", target: "_blank", rel: "noopener noreferrer",
++          style: { display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 4, textDecoration: "none", padding: "0 16px" } },
++        react_1.default.createElement("span", { style: { fontSize: 12, color: "var(--color-text-3)" } }, "Search by"),
++        react_1.default.createElement("svg", { width: 80, height: 20, viewBox: "0 0 130 25", fill: "none" },
++            react_1.default.createElement("path", { d: "M0 0h130v25H0z", fill: "none" }),
++            react_1.default.createElement("path", { d: "M43.84 8.69c-.63 0-1.14.51-1.14 1.14v.02c0 .63.51 1.14 1.14 1.14h3.71l-4.53 5.44c-.28.34-.25.83.07 1.14.15.15.35.23.55.23.2 0 .4-.08.55-.23l4.53-5.44v3.71c0 .63.51 1.14 1.14 1.14h.02c.63 0 1.14-.51 1.14-1.14V8.83c0-.63-.51-1.14-1.14-1.14H43.84z",
++              fill: "#5468FF" }),
++            react_1.default.createElement("path", { d: "M68.95 18.75c-1.68 0-2.97-.55-3.86-1.65-.88-1.1-1.32-2.63-1.32-4.58s.44-3.45 1.32-4.55c.88-1.11 2.17-1.67 3.86-1.67 1.11 0 2.05.28 2.83.83.78.55 1.28 1.28 1.5 2.19l.06.21-3.75 1.05-.06-.18c-.26-.73-.75-1.09-1.46-1.09-.47 0-.86.19-1.17.56-.31.37-.47.89-.47 1.56v1.27c0 .67.16 1.2.47 1.59.31.39.72.58 1.24.58.32 0 .6-.09.82-.26.23-.17.41-.41.54-.71l.09-.21 3.63 1.18-.12.31c-.28.74-.8 1.37-1.56 1.89-.76.52-1.66.78-2.69.78z",
++              fill: "#5468FF" }),
++            react_1.default.createElement("path", { d: "M83.13 18.75c-1.69 0-2.98-.52-3.88-1.55-.89-1.04-1.34-2.46-1.34-4.28s.45-3.28 1.34-4.33c.9-1.05 2.19-1.57 3.88-1.57 1.69 0 2.99.52 3.88 1.57.89 1.05 1.34 2.49 1.34 4.33s-.45 3.23-1.34 4.28c-.89 1.03-2.19 1.55-3.88 1.55zm0-2.89c.47 0 .82-.19 1.04-.56.22-.38.33-.88.33-1.5v-1.14c0-.62-.11-1.11-.33-1.47-.22-.36-.57-.55-1.04-.55s-.81.19-1.03.56c-.22.38-.33.87-.33 1.47v1.14c0 .62.11 1.12.33 1.5.22.37.56.55 1.03.55z",
++              fill: "#5468FF" })
++        )
++    );
++}
++exports.AlgoliaLogo = AlgoliaLogo;
++exports.default = AlgoliaLogo;
+diff --git a/dist/umd/useSearchClient.js b/dist/umd/useSearchClient.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..17408991dd3f51026c59c8bd709b419ad55732d5
+--- /dev/null
++++ b/dist/umd/useSearchClient.js
+@@ -0,0 +1,37 @@
++"use strict";
++var __importDefault = (this && this.__importDefault) || function (mod) {
++    return (mod && mod.__esModule) ? mod : { "default": mod };
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.useSearchClient = void 0;
++var react_1 = __importDefault(require("react"));
++
++/**
++ * Creates an Algolia search client using the REST API.
++ * Replaces the internal @docsearch/react module that no longer exists in v3.9.0.
++ */
++function useSearchClient(appId, apiKey, transform) {
++    var client = react_1.default.useMemo(function () {
++        var algoliaClient = {
++            search: function (queries) {
++                return fetch("https://".concat(appId, "-dsn.algolia.net/1/indexes/*/queries"), {
++                    method: 'POST',
++                    headers: {
++                        'Content-Type': 'application/json',
++                        'X-Algolia-Application-Id': appId,
++                        'X-Algolia-API-Key': apiKey,
++                    },
++                    body: JSON.stringify({ requests: queries.map(function (q) { return ({
++                            indexName: q.indexName,
++                            query: q.query,
++                            params: q.params ? new URLSearchParams(q.params).toString() : '',
++                        }); }) }),
++                }).then(function (res) { return res.json(); });
++            },
++        };
++        return transform ? transform(algoliaClient) : algoliaClient;
++    }, [appId, apiKey]);
++    return client;
++}
++exports.useSearchClient = useSearchClient;
++exports.default = useSearchClient;

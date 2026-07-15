@@ -1,0 +1,101 @@
+// Timeline.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Timeline — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+
+// Background tokens:
+//   • bg-color-secondarycomponent
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-secondary
+
+// Typography tokens:
+//   • font-size/body-medium
+//   • font-size/body-large
+//   • font-weight/regular
+//   • font/chinese
+//   • font/numbers
+//   • line-height/body-medium
+//   • line-height/body-large
+
+// Other tokens:
+//   • Gray/Gray4-边框
+
+// Component-specific style overrides:
+.arco-timeline-item {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+}
+
+.arco-timeline-item-label {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-timeline-item-content {
+  margin-bottom: var(--spacing-2);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-timeline-item-content-wrapper {
+  margin-left: var(--spacing-5);
+}
+
+.arco-timeline-item-dot {
+  color: var(--color-primary);
+}
+
+.arco-timeline-item-dot-solid {
+  background-color: var(--color-primary);
+}
+
+.arco-timeline-item-dot-hollow {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-timeline-item-dot-custom {
+  color: var(--color-primary);
+  background-color: var(--bg-color-container);
+}
+
+.arco-timeline-item-dot-line {
+  border-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-timeline-right .arco-timeline-item-vertical-right > .arco-timeline-item-content-wrapper {
+  margin-right: var(--spacing-5);
+}
+
+.arco-timeline-item-vertical-left.arco-timeline-item-label-relative > .arco-timeline-item-label {
+  padding-right: var(--spacing-5);
+}
+
+.arco-timeline-item-vertical-right.arco-timeline-item-label-relative > .arco-timeline-item-label {
+  padding-left: var(--spacing-5);
+}
+
+.arco-timeline-item-horizontal-top > .arco-timeline-item-content-wrapper {
+  margin-top: var(--spacing-5);
+}
+
+.arco-timeline-item-horizontal-bottom > .arco-timeline-item-content-wrapper {
+  margin-bottom: var(--spacing-5);
+}

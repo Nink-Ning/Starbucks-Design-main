@@ -1,0 +1,174 @@
+// Checkbox.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Checkbox — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+
+// Background tokens:
+//   • bg-color-container
+//   • bg-color-secondarycomponent
+//   • bg-color-component-disabled
+//   • bg-color-component-active
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-disabled
+
+// Typography tokens:
+//   • font-size/body-medium
+//   • font-weight/regular
+//   • font/chinese
+//   • line-height/body-medium
+
+// Border radius:
+//   • radius-default
+
+// Other tokens:
+//   • mode/dark/font-white-1
+//   • Text&Icon/Font Wh1 90%-anti
+
+// Component-specific style overrides:
+.arco-checkbox {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: var(--lh-22);
+  padding-left: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  cursor: pointer;
+}
+
+.arco-checkbox-mask-wrapper {
+  top: 0;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  vertical-align: middle;
+}
+
+.arco-checkbox .arco-checkbox-icon-hover::before,
+.arco-checkbox:hover .arco-checkbox-icon-hover::before,
+.arco-checkbox-disabled:hover .arco-checkbox-icon-hover::before,
+.arco-checkbox-checked:hover .arco-checkbox-icon-hover::before,
+.arco-checkbox-indeterminate:hover .arco-checkbox-icon-hover::before {
+  background-color: transparent;
+}
+
+.arco-checkbox-mask {
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-checkbox:not(.arco-checkbox-disabled):not(.arco-checkbox-checked):not(.arco-checkbox-indeterminate):hover .arco-checkbox-mask {
+  border-color: var(--color-primary);
+}
+
+.arco-checkbox > input[type='checkbox']:focus-visible + .arco-checkbox-icon-hover::before {
+  background-color: transparent;
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-checkbox-checked .arco-checkbox-mask,
+.arco-checkbox-indeterminate .arco-checkbox-mask,
+.arco-checkbox-checked:hover .arco-checkbox-mask,
+.arco-checkbox-indeterminate:hover .arco-checkbox-mask {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.arco-checkbox-mask-icon {
+  width: 12px;
+  color: #fff;
+}
+
+.arco-checkbox-indeterminate .arco-checkbox-mask::after {
+  width: 8px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 1px;
+}
+
+.arco-checkbox-text {
+  margin-left: var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-checkbox-disabled,
+.arco-checkbox-disabled:hover {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+
+.arco-checkbox-disabled .arco-checkbox-mask,
+.arco-checkbox-disabled:hover .arco-checkbox-mask {
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+}
+
+.arco-checkbox-disabled.arco-checkbox-checked .arco-checkbox-mask,
+.arco-checkbox-disabled.arco-checkbox-checked:hover .arco-checkbox-mask,
+.arco-checkbox-disabled.arco-checkbox-indeterminate .arco-checkbox-mask,
+.arco-checkbox-disabled.arco-checkbox-indeterminate:hover .arco-checkbox-mask {
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+}
+
+.arco-checkbox-disabled .arco-checkbox-mask-icon,
+.arco-checkbox-disabled.arco-checkbox-indeterminate .arco-checkbox-mask::after {
+  color: var(--color-text-disabled);
+  background-color: var(--color-text-disabled);
+}
+
+.arco-checkbox-disabled.arco-checkbox-checked .arco-checkbox-mask-icon {
+  color: var(--color-text-disabled);
+  background-color: transparent;
+}
+
+.arco-checkbox-disabled .arco-checkbox-text {
+  color: var(--color-text-disabled);
+}
+
+.arco-checkbox-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 var(--spacing-7);
+}
+
+.arco-checkbox-group .arco-checkbox {
+  margin-right: 0;
+}
+
+.arco-checkbox-group-direction-vertical {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-4) 0;
+}
+
+.arco-checkbox-group-direction-vertical .arco-checkbox {
+  line-height: var(--lh-22);
+}

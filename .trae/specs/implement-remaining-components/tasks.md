@@ -1,0 +1,44 @@
+# Tasks
+- [x] Task 1: 实现 PAvatar, PDescriptions, PEmpty
+  - [x] SubTask 1.1: 编写 PAvatar 的 Vue 和 React 组件
+  - [x] SubTask 1.2: 编写 PDescriptions 的 Vue 和 React 组件
+  - [x] SubTask 1.3: 编写 PEmpty 的 Vue 和 React 组件
+  - [x] SubTask 1.4: 编写上述组件的示例和 Markdown 文档，并在 VitePress 配置中注册
+- [x] Task 2: 实现 PImage, PTimeline, PResult
+  - [x] SubTask 2.1: 编写 PImage 的 Vue 和 React 组件
+  - [x] SubTask 2.2: 编写 PTimeline 的 Vue 和 React 组件
+  - [x] SubTask 2.3: 编写 PResult 的 Vue 和 React 组件
+  - [x] SubTask 2.4: 编写上述组件的示例和 Markdown 文档，并在 VitePress 配置中注册
+- [x] Task 3: 实现 PSkeleton, PStatistic, PTypography
+  - [x] SubTask 3.1: 编写 PSkeleton 的 Vue 和 React 组件
+  - [x] SubTask 3.2: 编写 PStatistic 的 Vue 和 React 组件
+  - [x] SubTask 3.3: 编写 PTypography 的 Vue 和 React 组件
+  - [x] SubTask 3.4: 编写上述组件的示例和 Markdown 文档，并在 VitePress 配置中注册
+- [x] Task 4: 实现 PGrid, PMenu, PBreadcrumb
+  - [x] SubTask 4.1: 编写 PGrid 的 Vue 和 React 组件
+  - [x] SubTask 4.2: 编写 PMenu 的 Vue 和 React 组件
+  - [x] SubTask 4.3: 编写 PBreadcrumb 的 Vue 和 React 组件
+  - [x] SubTask 4.4: 编写上述组件的示例和 Markdown 文档，并在 VitePress 配置中注册
+- [x] Task 5: 实现 PCascader, PSlider, PRate
+  - [x] SubTask 5.1: 编写 PCascader 的 Vue 和 React 组件
+  - [x] SubTask 5.2: 编写 PSlider 的 Vue 和 React 组件
+  - [x] SubTask 5.3: 编写 PRate 的 Vue 和 React 组件
+  - [x] SubTask 5.4: 编写上述组件的示例和 Markdown 文档，并在 VitePress 配置中注册
+- [x] Task 6: 实现 PUpload, PTreeSelect, PAutoComplete
+  - [x] SubTask 6.1: 编写 PUpload 的 Vue 和 React 组件
+  - [x] SubTask 6.2: 编写 PTreeSelect 的 Vue 和 React 组件
+  - [x] SubTask 6.3: 编写 PAutoComplete 的 Vue 和 React 组件
+  - [x] SubTask 6.4: 编写上述组件的示例和 Markdown 文档，并在 VitePress 配置中注册
+- [x] Task 7: 实现 PColorPicker, PMentions, PCarousel
+  - [x] SubTask 7.1: 编写 PColorPicker 的 Vue 和 React 组件
+  - [x] SubTask 7.2: 编写 PMentions 的 Vue 和 React 组件
+  - [x] SubTask 7.3: 编写 PCarousel 的 Vue 和 React 组件
+  - [x] SubTask 7.4: 编写上述组件的示例和 Markdown 文档，并在 VitePress 配置中注册
+
+# Task Dependencies
+- [Task 2] depends on [Task 1]
+- [Task 3] depends on [Task 2]
+- [Task 4] depends on [Task 3]
+- [Task 5] depends on [Task 4]
+- [Task 6] depends on [Task 5]
+- [Task 7] depends on [Task 6]

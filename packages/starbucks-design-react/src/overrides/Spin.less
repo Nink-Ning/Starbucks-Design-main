@@ -1,0 +1,97 @@
+// Spin.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Spin — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • mode/light/brand-color-6
+
+// Typography tokens:
+//   • font-size/body-small
+//   • font-size/body-medium
+//   • font-size/body-large
+//   • font-weight/regular
+//   • font/chinese
+//   • line-height/body-small
+//   • line-height/body-medium
+//   • line-height/body-large
+
+// Component-specific style overrides:
+.arco-spin {
+  display: inline-block;
+  color: var(--color-primary);
+  font-family: var(--font-family);
+}
+
+.arco-spin-block {
+  display: block;
+}
+
+.arco-spin-with-tip {
+  text-align: center;
+}
+
+.arco-spin-icon {
+  color: var(--color-primary);
+  font-size: 20px;
+}
+
+.arco-spin-tip {
+  margin-top: var(--spacing-3);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-spin-loading-layer {
+  text-align: center;
+  user-select: none;
+}
+
+.arco-spin-children {
+  position: relative;
+}
+
+.arco-spin-children::after {
+  background-color: color-mix(in srgb, var(--bg-color-container) 72%, transparent);
+}
+
+.arco-spin-loading .arco-spin-loading-layer-inner {
+  z-index: 2;
+}
+
+.arco-spin-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+}
+
+.arco-spin-dot:nth-child(2) {
+  background-color: var(--color-primary-hover);
+}
+
+.arco-spin-dot:nth-child(3),
+.arco-spin-dot:nth-child(4) {
+  background-color: rgb(var(--primary-4));
+}
+
+.arco-spin-dot:nth-child(5) {
+  background-color: var(--color-primary-focus);
+}
+
+.arco-spin-dot-list {
+  width: 56px;
+  height: 8px;
+}

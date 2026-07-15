@@ -1,0 +1,7 @@
+packages:
+  - 'packages/*'
+  - 'packages/docs/*'
+allowBuilds:
+  core-js: true
+  esbuild: false
+  less: false

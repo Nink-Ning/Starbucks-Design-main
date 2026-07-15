@@ -1,0 +1,276 @@
+// Button.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Button — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • brand-color-hover
+//   • brand-color-active
+//   • brand-color-disabled
+//   • error-color
+//   • error-color-hover
+//   • error-color-active
+//   • error-color-disabled
+//   • success-color
+//   • success-color-hover
+//   • success-color-active
+//   • success-color-disabled
+//   • warning-color
+//   • warning-color-hover
+//   • warning-color-active
+//   • warning-color-disabled
+
+// Background tokens:
+//   • bg-color-container
+//   • bg-color-secondarycomponent
+//   • bg-color-secondarycontainer
+//   • bg-color-component
+//   • bg-color-component-disabled
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-disabled
+//   • text-color-brand
+//   • text-color-link
+
+// Typography tokens:
+//   • font-size/body-small
+//   • font-size/body-medium
+//   • font-size/body-large
+//   • font-size/mark-medium
+//   • line-height/body-small
+//   • line-height/body-medium
+//   • line-height/body-large
+//   • line-height/mark-medium
+//   • font-weight/regular
+//   • font-weight/medium
+//   • font/chinese
+
+// Border radius:
+//   • radius-default
+
+// Other tokens:
+//   • gray-color-6
+//   • gray-color-10
+//   • gray-color-12
+//   • mode/dark/font-white-1
+//   • mode/dark/font-white-4
+//   • mode/light/font-gray-4
+//   • Text&Icon/Font Wh1 90%-anti
+//   • Text&Icon/Font Wh4 22%
+
+// Component-specific style overrides:
+.arco-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.1s linear,
+    background-color 0.1s linear,
+    border-color 0.1s linear,
+    box-shadow 0.1s linear;
+
+  > svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  > svg + span,
+  > span + svg {
+    margin-left: var(--spacing-4);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-primary-focus);
+  }
+}
+
+.arco-btn-size-mini,
+.arco-btn-size-small {
+  height: 24px;
+  padding: 0 7px;
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-btn-size-default {
+  height: 32px;
+  padding: 0 15px;
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-btn-size-large {
+  height: 40px;
+  padding: 0 23px;
+  font-size: var(--fs-16);
+  line-height: var(--lh-24);
+}
+
+.arco-btn-size-mini.arco-btn-icon-only,
+.arco-btn-size-small.arco-btn-icon-only,
+.arco-btn-size-mini.arco-btn-shape-circle,
+.arco-btn-size-small.arco-btn-shape-circle {
+  width: 24px;
+}
+
+.arco-btn-size-default.arco-btn-icon-only,
+.arco-btn-size-default.arco-btn-shape-circle {
+  width: 32px;
+}
+
+.arco-btn-size-large.arco-btn-icon-only,
+.arco-btn-size-large.arco-btn-shape-circle {
+  width: 40px;
+}
+
+.arco-btn-primary:not(.arco-btn-disabled) {
+  color: #fff;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+
+  &:not(.arco-btn-loading):hover {
+    color: #fff;
+    background-color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+  }
+
+  &:not(.arco-btn-loading):active {
+    color: #fff;
+    background-color: var(--color-primary-active);
+    border-color: var(--color-primary-active);
+  }
+}
+
+.arco-btn-primary.arco-btn-disabled {
+  color: #fff;
+  background-color: var(--color-primary-disabled);
+  border-color: var(--color-primary-disabled);
+}
+
+.arco-btn-secondary:not(.arco-btn-disabled) {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-component);
+  border-color: var(--bg-color-component);
+
+  &:not(.arco-btn-loading):hover {
+    color: var(--color-text-primary);
+    background-color: var(--bg-color-component-hover);
+    border-color: var(--bg-color-component-hover);
+  }
+
+  &:not(.arco-btn-loading):active {
+    color: var(--color-text-primary);
+    background-color: var(--bg-color-component-active);
+    border-color: var(--bg-color-component-active);
+  }
+}
+
+.arco-btn-secondary.arco-btn-disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+}
+
+.arco-btn-outline:not(.arco-btn-disabled),
+.arco-btn-dashed:not(.arco-btn-disabled) {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-border-component);
+
+  &:not(.arco-btn-loading):hover {
+    color: var(--color-primary-hover);
+    background-color: var(--bg-color-container-hover);
+    border-color: var(--color-primary-hover);
+  }
+
+  &:not(.arco-btn-loading):active {
+    color: var(--color-primary-active);
+    background-color: var(--bg-color-container-active);
+    border-color: var(--color-primary-active);
+  }
+}
+
+.arco-btn-outline.arco-btn-disabled,
+.arco-btn-dashed.arco-btn-disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+}
+
+.arco-btn-text:not(.arco-btn-disabled) {
+  color: var(--color-text-primary);
+  background-color: transparent;
+
+  &:not(.arco-btn-loading):hover {
+    color: var(--color-text-primary);
+    background-color: var(--bg-color-container-hover);
+  }
+
+  &:not(.arco-btn-loading):active {
+    color: var(--color-text-primary);
+    background-color: var(--bg-color-container-active);
+  }
+}
+
+.arco-btn-text.arco-btn-disabled {
+  color: var(--color-text-disabled);
+  background-color: transparent;
+}
+
+.arco-btn-primary.arco-btn-status-danger:not(.arco-btn-disabled) {
+  background-color: var(--color-danger-hover);
+  border-color: var(--color-danger-hover);
+
+  &:not(.arco-btn-loading):hover {
+    background-color: var(--color-danger);
+    border-color: var(--color-danger);
+  }
+
+  &:not(.arco-btn-loading):active {
+    background-color: var(--color-danger-active);
+    border-color: var(--color-danger-active);
+  }
+}
+
+.arco-btn-primary.arco-btn-status-danger.arco-btn-disabled {
+  background-color: var(--color-danger-disabled);
+  border-color: var(--color-danger-disabled);
+}
+
+.arco-btn-outline.arco-btn-status-danger:not(.arco-btn-disabled) {
+  color: var(--color-danger-hover);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger-hover);
+
+  &:not(.arco-btn-loading):hover {
+    color: var(--color-danger);
+    background-color: var(--bg-color-container-hover);
+    border-color: var(--color-danger);
+  }
+
+  &:not(.arco-btn-loading):active {
+    color: var(--color-danger-active);
+    background-color: var(--bg-color-container-active);
+    border-color: var(--color-danger-active);
+  }
+}
+
+.arco-btn-shape-round {
+  border-radius: var(--border-radius-round);
+}

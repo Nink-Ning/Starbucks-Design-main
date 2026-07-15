@@ -1,0 +1,6 @@
+- [x] 成功在 `packages/starbucks-ui-react/src/components/PSteps/index.tsx` 创建了 React `PSteps` 组件并已导出。
+- [x] `packages/starbucks-ui-vue/components/steps/PStepsOld.vue` 文件存在，成功保留了旧版 Vue 步骤条代码。
+- [x] `packages/starbucks-ui-vue/components/steps/PSteps.vue` 已更新为基于 `ant-design-vue` 的标准封装。
+- [x] React 端和 Vue 端的示例均能在文档中正确展示。
+- [x] React 端和 Vue 端的组件说明文档（`steps.md`）包含直接展示的 API 列表，转义正确且未使用外部链接占位。
+- [x] `packages/docs/.vitepress/config.ts` 的 React 导航组件侧边栏中包含 `步骤条 PSteps`。

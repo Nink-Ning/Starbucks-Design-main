@@ -1,0 +1,253 @@
+// Dropdown.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Dropdown — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+
+// Background tokens:
+//   • bg-color-container
+
+// Text tokens:
+//   • text-color-primary
+
+// Typography tokens:
+//   • font-size/body-medium
+//   • font-weight/regular
+//   • font/chinese
+//   • line-height/body-medium
+
+// Border radius:
+//   • radius-default
+
+// Other tokens:
+//   • Gray/White
+
+// Component-specific style overrides:
+.arco-dropdown-menu {
+  box-sizing: border-box;
+  max-height: 240px;
+  padding: var(--spacing-3);
+  overflow: auto;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  background-color: var(--bg-color-container);
+  border: 0.5px solid var(--bg-color-secondarycomponent);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.arco-dropdown-menu-item,
+.arco-dropdown-menu-pop-header {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--spacing-5);
+  overflow: hidden;
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: 36px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease,
+    box-shadow 0.12s ease;
+  z-index: 1;
+}
+
+.arco-dropdown-menu-item:not(:last-child),
+.arco-dropdown-menu-pop-header:not(:last-child) {
+  margin-bottom: var(--spacing-1);
+}
+
+.arco-dropdown-menu-item:not(.arco-dropdown-menu-disabled):hover,
+.arco-dropdown-menu-pop-header:not(.arco-dropdown-menu-disabled):hover {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-dropdown-menu-item.arco-dropdown-menu-selected,
+.arco-dropdown-menu-pop-header.arco-dropdown-menu-selected {
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+  background-color: var(--color-primary-light);
+}
+
+.arco-dropdown-menu-item.arco-dropdown-menu-selected:not(.arco-dropdown-menu-disabled):hover,
+.arco-dropdown-menu-pop-header.arco-dropdown-menu-selected:not(.arco-dropdown-menu-disabled):hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light-hover);
+}
+
+.arco-dropdown-menu-item:focus-visible,
+.arco-dropdown-menu-pop-header:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-dropdown-menu-item.arco-dropdown-menu-active,
+.arco-dropdown-menu-pop-header.arco-dropdown-menu-active {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  box-shadow: none;
+}
+
+.arco-dropdown-menu-item.arco-dropdown-menu-disabled,
+.arco-dropdown-menu-pop-header.arco-dropdown-menu-disabled {
+  color: var(--color-text-disabled);
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+.arco-dropdown-menu-item.arco-dropdown-menu-disabled:hover,
+.arco-dropdown-menu-pop-header.arco-dropdown-menu-disabled:hover {
+  color: var(--color-text-disabled);
+  background-color: transparent;
+}
+
+.arco-dropdown-menu-item a,
+.arco-dropdown-menu-item a:active,
+.arco-dropdown-menu-item a:focus,
+.arco-dropdown-menu-item a:hover,
+.arco-dropdown-menu-pop-header a,
+.arco-dropdown-menu-pop-header a:active,
+.arco-dropdown-menu-pop-header a:focus,
+.arco-dropdown-menu-pop-header a:hover {
+  color: inherit;
+  cursor: inherit;
+  text-decoration: none;
+}
+
+.arco-dropdown-menu-item > a:only-child::before,
+.arco-dropdown-menu-pop-header > a:only-child::before {
+  position: absolute;
+  inset: 0;
+  content: '';
+}
+
+.arco-dropdown-menu-item .arco-icon,
+.arco-dropdown-menu-pop-header .arco-icon {
+  color: var(--color-text-secondary);
+}
+
+.arco-dropdown-menu-item:hover .arco-icon,
+.arco-dropdown-menu-pop-header:hover .arco-icon,
+.arco-dropdown-menu-item.arco-dropdown-menu-selected .arco-icon,
+.arco-dropdown-menu-pop-header.arco-dropdown-menu-selected .arco-icon {
+  color: currentColor;
+}
+
+.arco-dropdown-menu-pop-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arco-dropdown-menu-pop-header .arco-dropdown-menu-icon-suffix {
+  flex-shrink: 0;
+  margin-left: var(--spacing-5);
+  color: var(--color-text-secondary);
+}
+
+.arco-dropdown-menu-pop-header:hover .arco-dropdown-menu-icon-suffix,
+.arco-dropdown-menu-pop-header.arco-dropdown-menu-selected .arco-dropdown-menu-icon-suffix,
+.arco-dropdown-menu-pop-header.arco-dropdown-menu-active .arco-dropdown-menu-icon-suffix {
+  color: currentColor;
+}
+
+.arco-dropdown-menu-group:first-child .arco-dropdown-menu-group-title {
+  margin-top: var(--spacing-2);
+}
+
+.arco-dropdown-menu-group-title {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: var(--spacing-4);
+  padding: 0 var(--spacing-5);
+  overflow: hidden;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arco-dropdown-menu .arco-divider {
+  min-width: auto;
+  margin: var(--spacing-2) 0;
+  border-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-dropdown-menu-dark {
+  background-color: var(--bg-color-container);
+  border-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-dropdown-menu-dark .arco-dropdown-menu-item,
+.arco-dropdown-menu-dark .arco-dropdown-menu-pop-header {
+  color: var(--color-text-primary);
+  background-color: transparent;
+}
+
+.arco-dropdown-menu-dark .arco-dropdown-menu-item:not(.arco-dropdown-menu-disabled):hover,
+.arco-dropdown-menu-dark .arco-dropdown-menu-pop-header:not(.arco-dropdown-menu-disabled):hover {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-dropdown-menu-dark .arco-dropdown-menu-item.arco-dropdown-menu-selected,
+.arco-dropdown-menu-dark .arco-dropdown-menu-pop-header.arco-dropdown-menu-selected {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.arco-dropdown-menu-dark .arco-dropdown-menu-item.arco-dropdown-menu-selected:not(.arco-dropdown-menu-disabled):hover,
+.arco-dropdown-menu-dark .arco-dropdown-menu-pop-header.arco-dropdown-menu-selected:not(.arco-dropdown-menu-disabled):hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light-hover);
+}
+
+.arco-dropdown-menu-dark .arco-dropdown-menu-item.arco-dropdown-menu-disabled,
+.arco-dropdown-menu-dark .arco-dropdown-menu-pop-header.arco-dropdown-menu-disabled {
+  color: var(--color-text-disabled);
+}
+
+.arco-dropdown-menu-dark .arco-dropdown-menu-group-title {
+  color: var(--color-text-secondary);
+}
+
+.arco-dropdown-menu + .arco-trigger-arrow {
+  background-color: var(--bg-color-container);
+  border-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-dropdown-menu-pop-trigger .arco-trigger-arrow {
+  display: none;
+}
+
+.arco-dropdown-menu-rtl .arco-dropdown-menu-item,
+.arco-dropdown-menu-rtl .arco-dropdown-menu-pop-header {
+  text-align: right;
+}
+
+.arco-dropdown-menu-rtl .arco-dropdown-menu-item .arco-dropdown-menu-icon-suffix,
+.arco-dropdown-menu-rtl .arco-dropdown-menu-pop-header .arco-dropdown-menu-icon-suffix {
+  margin-right: var(--spacing-4);
+  margin-left: 0;
+}

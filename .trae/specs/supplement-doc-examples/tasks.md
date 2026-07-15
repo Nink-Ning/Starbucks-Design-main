@@ -1,0 +1,37 @@
+# Tasks
+- [x] Task 1: 完善第一组组件 (PPopover, PCollapse, PAvatar, PDescriptions)
+  - [x] SubTask 1.1: 补充 PPopover 的 Vue 和 React 示例 (placement, trigger, arrow)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 1.2: 补充 PCollapse 的 Vue 和 React 示例 (accordion, nested, borderless, extra)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 1.3: 补充 PAvatar 的 Vue 和 React 示例 (size, shape, group, fallback)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 1.4: 补充 PDescriptions 的 Vue 和 React 示例 (border, size, vertical, responsive)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+- [x] Task 2: 完善第二组组件 (PEmpty, PImage, PTimeline, PResult)
+  - [x] SubTask 2.1: 补充 PEmpty 的 Vue 和 React 示例 (simple, custom)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 2.2: 补充 PImage 的 Vue 和 React 示例 (preview, group, fallback)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 2.3: 补充 PTimeline 的 Vue 和 React 示例 (color, pending, alternate, custom-dot)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 2.4: 补充 PResult 的 Vue 和 React 示例 (custom-icon, extra)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+- [x] Task 3: 完善第三组组件 (PSkeleton, PStatistic, PTypography, PGrid)
+  - [x] SubTask 3.1: 补充 PSkeleton 的 Vue 和 React 示例 (active, avatar, list)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 3.2: 补充 PStatistic 的 Vue 和 React 示例 (prefix-suffix, countdown, card)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 3.3: 补充 PTypography 的 Vue 和 React 示例 (text-type, ellipsis, copyable, editable)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 3.4: 补充 PGrid 的 Vue 和 React 示例 (gutter, offset, flex, responsive)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+- [x] Task 4: 完善第四组组件 (PMenu, PBreadcrumb, PCascader, PSlider)
+  - [x] SubTask 4.1: 补充 PMenu 的 Vue 和 React 示例 (horizontal, vertical, inline, collapsed)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 4.2: 补充 PBreadcrumb 的 Vue 和 React 示例 (separator, icon)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 4.3: 补充 PCascader 的 Vue 和 React 示例 (search, multiple, load-data, size)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 4.4: 补充 PSlider 的 Vue 和 React 示例 (range, marks, vertical)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+- [x] Task 5: 完善第五组组件 (PRate, PUpload, PTreeSelect, PAutoComplete)
+  - [x] SubTask 5.1: 补充 PRate 的 Vue 和 React 示例 (half, text, character)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 5.2: 补充 PUpload 的 Vue 和 React 示例 (drag, avatar, picture-card)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 5.3: 补充 PTreeSelect 的 Vue 和 React 示例 (multiple, checkable, search)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 5.4: 补充 PAutoComplete 的 Vue 和 React 示例 (options, status)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+- [x] Task 6: 完善第六组组件 (PColorPicker, PMentions, PCarousel)
+  - [x] SubTask 6.1: 补充 PColorPicker 的 Vue 和 React 示例 (size, format, presets)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 6.2: 补充 PMentions 的 Vue 和 React 示例 (prefix, placement)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+  - [x] SubTask 6.3: 补充 PCarousel 的 Vue 和 React 示例 (autoplay, fade)，并在 md 中引入，移除 Antd 引用字样并补充 API 表格
+
+# Task Dependencies
+- [Task 2] depends on [Task 1]
+- [Task 3] depends on [Task 2]
+- [Task 4] depends on [Task 3]
+- [Task 5] depends on [Task 4]
+- [Task 6] depends on [Task 5]

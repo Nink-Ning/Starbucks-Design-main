@@ -1,0 +1,226 @@
+// Modal.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Modal — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • error-color
+//   • warning-color
+//   • success-color
+
+// Background tokens:
+//   • bg-color-container
+//   • bg-color-component
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-secondary
+
+// Typography tokens:
+//   • font-size/body-large
+//   • font-size/body-medium
+//   • font-size/title-medium
+//   • font-weight/semibold
+//   • font/chinese
+
+// Border radius:
+//   • radius-default
+//   • radius-large
+
+// Spacing tokens:
+//   • size/8
+
+// Other tokens:
+//   • mode/light/font-white-1
+
+// Component-specific style overrides:
+.arco-modal-mask {
+  background-color: color-mix(in srgb, var(--mask-active) 45%, transparent);
+}
+
+.arco-modal-wrapper {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+}
+
+.arco-modal {
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  line-height: var(--lh-22);
+  background-color: var(--bg-color-container);
+  border: 0.5px solid var(--bg-color-secondarycomponent);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.arco-modal-header {
+  box-sizing: border-box;
+  height: 56px;
+  padding: 0 var(--spacing-8);
+  background-color: var(--bg-color-container);
+  border-bottom: 0.5px solid var(--bg-color-secondarycomponent);
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.arco-modal-header .arco-modal-title,
+.arco-modal-title {
+  color: var(--color-text-primary);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-24);
+  text-align: left;
+}
+
+.arco-modal-content {
+  padding: var(--spacing-8);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-modal-content p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-4);
+}
+
+.arco-modal-content p:last-child {
+  margin-bottom: 0;
+}
+
+.arco-modal-footer {
+  box-sizing: border-box;
+  padding: var(--spacing-6) var(--spacing-8);
+  background-color: var(--bg-color-container);
+  border-top: 0.5px solid var(--bg-color-secondarycomponent);
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+  text-align: right;
+}
+
+.arco-modal-footer > .arco-btn {
+  margin-left: var(--spacing-4);
+}
+
+.arco-modal-footer > .arco-btn:only-child {
+  margin-left: 0;
+}
+
+.arco-modal .arco-modal-close-icon {
+  top: 18px;
+  right: var(--spacing-8);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: 1;
+}
+
+.arco-modal .arco-modal-close-icon:hover {
+  color: var(--color-text-primary);
+}
+
+.arco-modal .arco-icon-hover::before {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+}
+
+.arco-modal .arco-icon-hover:hover::before {
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-modal-title .arco-icon {
+  margin-right: var(--spacing-4);
+  font-size: 22px;
+  vertical-align: -5px;
+}
+
+.arco-modal-title .arco-icon-info-circle-fill {
+  color: var(--color-primary);
+}
+
+.arco-modal-title .arco-icon-check-circle-fill {
+  color: var(--color-success);
+}
+
+.arco-modal-title .arco-icon-exclamation-circle-fill {
+  color: var(--color-warning);
+}
+
+.arco-modal-title .arco-icon-close-circle-fill {
+  color: var(--color-danger);
+}
+
+.arco-modal-simple {
+  width: 464px;
+  padding: var(--spacing-8);
+  border-radius: var(--border-radius-lg);
+}
+
+.arco-modal-simple .arco-modal-header,
+.arco-modal-simple .arco-modal-footer {
+  height: auto;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.arco-modal-simple .arco-modal-header {
+  margin-bottom: var(--spacing-4);
+}
+
+.arco-modal-simple .arco-modal-title {
+  text-align: left;
+}
+
+.arco-modal-simple .arco-modal-content {
+  padding: 0;
+  color: var(--color-text-secondary);
+}
+
+.arco-modal-simple .arco-modal-footer {
+  margin-top: var(--spacing-8);
+  text-align: right;
+}
+
+.arco-modal-rtl {
+  direction: rtl;
+}
+
+.arco-modal-rtl .arco-modal-header .arco-modal-title,
+.arco-modal-rtl .arco-modal-title {
+  text-align: right;
+}
+
+.arco-modal-rtl .arco-modal-footer {
+  text-align: left;
+}
+
+.arco-modal-rtl .arco-modal-footer > .arco-btn {
+  margin-right: var(--spacing-4);
+  margin-left: 0;
+}
+
+.arco-modal-rtl .arco-modal-footer > .arco-btn:only-child {
+  margin-right: 0;
+}
+
+.arco-modal-rtl .arco-modal-title .arco-icon {
+  margin-right: 0;
+  margin-left: var(--spacing-4);
+}
+
+.arco-modal-rtl .arco-modal-close-icon {
+  right: initial;
+  left: var(--spacing-8);
+}

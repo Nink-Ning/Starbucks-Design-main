@@ -1,0 +1,93 @@
+// ButtonGroup.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// ButtonGroup — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Border radius:
+//   • radius-default
+
+// Component-specific style overrides:
+.arco-btn-group {
+  display: inline-flex;
+  align-items: stretch;
+  vertical-align: middle;
+}
+
+.arco-btn-group > .arco-btn {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+  border-radius: 0;
+}
+
+.arco-btn-group > .arco-btn:not(:first-child) {
+  margin-left: -1px;
+}
+
+.arco-btn-group > .arco-btn:hover,
+.arco-btn-group > .arco-btn:focus-visible,
+.arco-btn-group > .arco-btn:active {
+  z-index: 1;
+}
+
+.arco-btn-group > .arco-btn:not(:last-child) {
+  border-right-color: transparent;
+}
+
+.arco-btn-group > .arco-btn:first-child {
+  border-top-left-radius: var(--border-radius-sm);
+  border-bottom-left-radius: var(--border-radius-sm);
+}
+
+.arco-btn-group > .arco-btn:last-child {
+  border-top-right-radius: var(--border-radius-sm);
+  border-bottom-right-radius: var(--border-radius-sm);
+}
+
+.arco-btn-group > .arco-btn:first-child:last-child {
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-btn-group > .arco-btn-shape-round {
+  border-radius: 0;
+}
+
+.arco-btn-group > .arco-btn-shape-round:first-child {
+  border-top-left-radius: var(--border-radius-round);
+  border-bottom-left-radius: var(--border-radius-round);
+}
+
+.arco-btn-group > .arco-btn-shape-round:last-child {
+  border-top-right-radius: var(--border-radius-round);
+  border-bottom-right-radius: var(--border-radius-round);
+}
+
+.arco-btn-group > .arco-btn-shape-round:first-child:last-child {
+  border-radius: var(--border-radius-round);
+}
+
+.arco-btn-group > .arco-btn-primary:not(:last-child) {
+  border-right-color: var(--color-primary-active);
+}
+
+.arco-btn-group > .arco-btn-secondary:not(:last-child) {
+  border-right-color: var(--bg-color-secondarycomponent-hover);
+}
+
+.arco-btn-group > .arco-btn-outline:not(:last-child),
+.arco-btn-group > .arco-btn-dashed:not(:last-child) {
+  border-right-color: var(--color-border-component);
+}
+
+.arco-btn-group > .arco-btn-text:not(:last-child) {
+  border-right-color: transparent;
+}

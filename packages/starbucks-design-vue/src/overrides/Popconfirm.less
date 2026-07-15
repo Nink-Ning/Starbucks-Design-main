@@ -1,0 +1,162 @@
+// Popconfirm.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Popconfirm — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+
+// Background tokens:
+//   • bg-color-container
+//   • bg-color-secondarycomponent
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-secondary
+//   • text-color-placeholder
+//   • text-color-disabled
+
+// Typography tokens:
+//   • font-size/body-medium
+//   • font-weight/regular
+//   • font/chinese
+//   • line-height/body-medium
+
+// Border radius:
+//   • radius-default
+
+// Spacing tokens:
+//   • size/6
+
+// Other tokens:
+//   • Gray/White
+//   • Gray/Gray4-边框
+//   • mode/dark/font-white-1
+//   • Text&Icon/Font Wh1 90%-anti
+
+// Component-specific style overrides:
+.arco-popconfirm-content {
+  box-sizing: border-box;
+  min-width: 160px;
+  max-width: 360px;
+  padding: var(--spacing-6);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  background-color: var(--bg-color-container);
+  border: 0.5px solid var(--bg-color-secondarycomponent);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.arco-popconfirm-wrapper {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  column-gap: var(--spacing-4);
+  row-gap: var(--spacing-6);
+}
+
+.arco-popconfirm-title {
+  display: contents;
+  margin-bottom: 0;
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-22);
+}
+
+.arco-popconfirm-title-icon {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 20px;
+  height: 20px;
+  margin-right: 0;
+  padding-top: 1px;
+  color: var(--color-warning);
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.arco-popconfirm-title-icon .arco-icon {
+  color: inherit;
+}
+
+.arco-popconfirm-title-icon .arco-icon-exclamation-circle-fill {
+  color: var(--color-warning);
+}
+
+.arco-popconfirm-title-text {
+  grid-column: 2;
+  grid-row: 1;
+  flex: 1 1 0;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.arco-popconfirm-has-content .arco-popconfirm-title {
+  margin-bottom: 0;
+  font-weight: var(--fw-semibold);
+}
+
+.arco-popconfirm-inner-content {
+  grid-column: 2;
+  grid-row: 2;
+  margin: calc(-1 * var(--spacing-4)) 0 0;
+  padding-left: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-20);
+  word-break: break-word;
+}
+
+.arco-popconfirm .arco-popconfirm-btn {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: flex-end;
+  gap: var(--spacing-4);
+  height: 24px;
+  text-align: right;
+}
+
+.arco-popconfirm .arco-popconfirm-btn > button {
+  margin-left: 0;
+}
+
+.arco-trigger-arrow.arco-popconfirm-arrow {
+  z-index: 1;
+  width: 8.69px;
+  height: 8.69px;
+  background-color: var(--bg-color-container);
+  border-color: var(--bg-color-secondarycomponent);
+  border-style: solid;
+  border-width: 0.5px 0.5px 0 0;
+}
+
+.arco-popconfirm-rtl .arco-popconfirm-title-icon {
+  margin-left: 0;
+}
+
+.arco-popconfirm-rtl .arco-popconfirm-inner-content {
+  padding-right: 0;
+}
+
+.arco-popconfirm-rtl .arco-popconfirm-btn {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.arco-popconfirm-rtl .arco-popconfirm-btn > button {
+  margin-right: 0;
+}

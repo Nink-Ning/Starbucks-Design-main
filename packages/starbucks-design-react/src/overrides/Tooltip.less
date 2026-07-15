@@ -1,0 +1,77 @@
+// Tooltip.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Tooltip — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • error-color
+//   • error-color-light
+//   • warning-color
+//   • warning-color-light
+//   • success-color
+//   • success-color-light
+
+// Background tokens:
+//   • bg-color-container
+
+// Text tokens:
+//   • text-color-primary
+
+// Typography tokens:
+//   • font-size/body-medium
+//   • font-size/body-small
+
+// Border radius:
+//   • radius-default
+//   • radius-medium
+
+// Other tokens:
+//   • Shadow/Shadow-2
+
+// Component-specific style overrides:
+.arco-tooltip-content {
+  padding: var(--spacing-2) var(--spacing-4);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  background-color: var(--bg-color-container);
+  border: none;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.arco-tooltip-content-inner {
+  text-align: start;
+  word-break: break-word;
+}
+
+.arco-tooltip-mini {
+  min-height: 24px;
+  padding: var(--spacing-1) var(--spacing-4);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-trigger-arrow.arco-tooltip-arrow {
+  z-index: 1;
+  background-color: var(--bg-color-container);
+  border: none !important;
+}
+
+.arco-tooltip-content[style*='background'] + .arco-trigger-arrow.arco-tooltip-arrow,
+.arco-trigger-arrow.arco-tooltip-arrow[style*='background'] {
+  border-color: transparent !important;
+}

@@ -1,0 +1,239 @@
+// Pagination.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Pagination — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • brand-color-light-hover
+
+// Background tokens:
+//   • bg-color-container
+//   • bg-color-secondarycomponent
+//   • bg-color-component
+//   • bg-color-component-disabled
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-secondary
+//   • text-color-disabled
+
+// Typography tokens:
+//   • font-size/body-medium
+//   • font-size/body-small
+
+// Border radius:
+//   • radius-default
+
+// Spacing tokens:
+//   • size/6
+//   • size/8
+//   • size/10
+
+// Other tokens:
+//   • mode/dark/font-white-1
+//   • Text&Icon/Font Wh1 90%-anti
+
+// Component-specific style overrides:
+.arco-pagination {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+}
+
+.arco-pagination-list,
+.arco-pagination-jumper,
+.arco-pagination-option,
+.arco-pagination-total-text {
+  display: inline-flex;
+  align-items: center;
+}
+
+.arco-pagination-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  background-color: transparent;
+  border: 0.5px solid transparent;
+  border-radius: var(--border-radius-md);
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease,
+    border-color 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.arco-pagination .arco-pagination-item {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.arco-pagination-item:not(:last-child) {
+  margin-right: var(--spacing-4);
+}
+
+.arco-pagination-item:not(.arco-pagination-item-disabled):not(.arco-pagination-item-active):hover {
+  color: var(--color-primary);
+  background-color: var(--bg-color-secondarycontainer-hover);
+  border-color: transparent;
+}
+
+.arco-pagination-item-active {
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+  background-color: var(--color-primary-light);
+  border-color: transparent;
+}
+
+.arco-pagination-item-active:hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light-hover);
+  border-color: transparent;
+}
+
+.arco-pagination-item:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-pagination-item-disabled,
+.arco-pagination .arco-pagination-item-next.arco-pagination-item-disabled,
+.arco-pagination .arco-pagination-item-prev.arco-pagination-item-disabled {
+  color: var(--color-text-disabled);
+  background-color: transparent;
+  border-color: transparent;
+  cursor: not-allowed;
+}
+
+.arco-pagination-item-next,
+.arco-pagination-item-prev {
+  color: var(--color-text-secondary);
+  background-color: transparent;
+}
+
+.arco-pagination-item-next:not(.arco-pagination-item-disabled):hover,
+.arco-pagination-item-prev:not(.arco-pagination-item-disabled):hover {
+  color: var(--color-primary);
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-pagination-total-text,
+.arco-pagination-simple .arco-pagination-jumper {
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-pagination-jumper-text-goto,
+.arco-pagination-jumper-text-goto-suffix,
+.arco-pagination-jumper > span {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-pagination .arco-pagination-jumper-input {
+  width: 40px;
+  margin-right: var(--spacing-4);
+  margin-left: var(--spacing-4);
+  text-align: center;
+}
+
+.arco-pagination-option {
+  margin-left: var(--spacing-4);
+}
+
+.arco-pagination-disabled {
+  cursor: not-allowed;
+}
+
+.arco-pagination-disabled .arco-pagination-item,
+.arco-pagination-disabled .arco-pagination-item:not(.arco-pagination-item-disabled):not(.arco-pagination-item-active):hover {
+  color: var(--color-text-disabled);
+  background-color: transparent;
+  border-color: transparent;
+  cursor: not-allowed;
+}
+
+.arco-pagination.arco-pagination-disabled .arco-pagination-item-active {
+  color: var(--color-primary-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: transparent;
+}
+
+.arco-pagination-size-mini .arco-pagination-item {
+  min-width: 24px;
+  height: 24px;
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-pagination-size-small .arco-pagination-item {
+  min-width: 28px;
+  height: 28px;
+  line-height: var(--lh-22);
+}
+
+.arco-pagination-size-large .arco-pagination-item {
+  min-width: 36px;
+  height: 36px;
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-pagination-size-mini .arco-pagination-total-text,
+.arco-pagination-size-mini .arco-pagination-jumper > span,
+.arco-pagination-size-mini .arco-pagination-jumper,
+.arco-pagination-size-mini .arco-pagination-option {
+  font-size: var(--fs-12);
+  line-height: 24px;
+}
+
+.arco-pagination-size-small .arco-pagination-total-text,
+.arco-pagination-size-small .arco-pagination-jumper,
+.arco-pagination-size-small .arco-pagination-option,
+.arco-pagination-size-small .arco-pagination-jumper > span {
+  line-height: 28px;
+}
+
+.arco-pagination-size-large .arco-pagination-total-text,
+.arco-pagination-size-large .arco-pagination-jumper,
+.arco-pagination-size-large .arco-pagination-option,
+.arco-pagination-size-large .arco-pagination-jumper > span {
+  line-height: 36px;
+}
+
+.arco-pagination-size-mini .arco-pagination-option .arco-select-view,
+.arco-pagination-size-mini .arco-pagination-jumper-input {
+  height: 24px;
+}
+
+.arco-pagination-size-small .arco-pagination-option .arco-select-view,
+.arco-pagination-size-small .arco-pagination-jumper-input {
+  height: 28px;
+}
+
+.arco-pagination-size-large .arco-pagination-option .arco-select-view,
+.arco-pagination-size-large .arco-pagination-jumper-input {
+  height: 36px;
+}
+
+.arco-pagination-rtl .arco-pagination-item:not(:last-child) {
+  margin-right: 0;
+  margin-left: var(--spacing-4);
+}

@@ -1,0 +1,88 @@
+<template>
+  <div style="marginBottom: 24px;">
+    <Checkbox
+      v-model="treeCheckStrictly"
+      @change="
+        () => {
+          selected = [];
+        }
+      "
+    >
+      treeCheckStrictly
+    </Checkbox>
+  </div>
+  <TreeSelect
+    v-model="selected"
+    :allow-search="true"
+    :allow-clear="true"
+    :tree-checkable="true"
+    :tree-check-strictly="treeCheckStrictly"
+    :data="treeData"
+    placeholder="Please select ..."
+    style="width: 300px;"
+  ></TreeSelect>
+</template>
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const treeData = [
+  {
+    title: 'Trunk 0-0',
+    value: 'Trunk 0-0',
+    key: '0-0',
+    children: [
+      {
+        title: 'Leaf 0-0-1',
+        value: 'Leaf 0-0-1',
+        key: '0-0-1',
+      },
+      {
+        title: 'Branch 0-0-2',
+        value: 'Branch 0-0-2',
+        key: '0-0-2',
+        children: [
+          {
+            title: 'Leaf 0-0-2-1',
+            value: 'Leaf 0-0-2-1',
+            key: '0-0-2-1',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Trunk 0-1',
+    value: 'Trunk 0-1',
+    key: '0-1',
+    children: [
+      {
+        title: 'Branch 0-1-1',
+        value: 'Branch 0-1-1',
+        key: '0-1-1',
+        checkable: false,
+        children: [
+          {
+            title: 'Leaf 0-1-1-1',
+            value: 'Leaf 0-1-1-1',
+            key: '0-1-1-1',
+          },
+          {
+            title: 'Leaf 0-1-1-2',
+            value: 'Leaf 0-1-1-2',
+            key: '0-1-1-2',
+            disabled: true,
+          },
+        ],
+      },
+      {
+        title: 'Leaf 0-1-2',
+        value: 'Leaf 0-1-2',
+        key: '0-1-2',
+      },
+    ],
+  },
+];
+
+const selected = ref([]);
+const treeCheckStrictly = ref(false);
+</script>

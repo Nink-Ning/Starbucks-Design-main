@@ -1,0 +1,226 @@
+// Notification.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Notification — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • success-color
+//   • warning-color
+//   • error-color
+
+// Background tokens:
+//   • bg-color-container
+//   • bg-color-component
+//   • bg-color-secondarycomponent
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-secondary
+//   • text-color-placeholder
+//   • text-color-disabled
+
+// Typography tokens:
+//   • font-size/body-small
+//   • font-size/body-medium
+//   • font-size/title-small
+//   • font-weight/regular
+//   • font-weight/semibold
+//   • font/chinese
+//   • line-height/body-small
+//   • line-height/body-medium
+//   • line-height/title-small
+
+// Border radius:
+//   • radius-default
+//   • radius-medium
+
+// Spacing tokens:
+//   • size/6
+
+// Other tokens:
+//   • Gray/White
+//   • Gray/Gray4-边框
+//   • mode/dark/font-white-1
+//   • Text&Icon/Font Wh1 90%-anti
+//   • Shadow/Shadow-2
+//   • mode/light/warning-color-4
+
+// Component-specific style overrides:
+.arco-notification-wrapper {
+  position: fixed;
+  z-index: 1003;
+}
+
+.arco-notification-wrapper-topLeft {
+  top: var(--spacing-7);
+  left: var(--spacing-7);
+}
+
+.arco-notification-wrapper-topRight {
+  top: var(--spacing-7);
+  right: var(--spacing-7);
+}
+
+.arco-notification-wrapper-bottomLeft {
+  bottom: var(--spacing-7);
+  left: var(--spacing-7);
+}
+
+.arco-notification-wrapper-bottomRight {
+  right: var(--spacing-7);
+  bottom: var(--spacing-7);
+}
+
+.arco-notification-wrapper-topRight .arco-notification,
+.arco-notification-wrapper-bottomRight .arco-notification {
+  margin-left: auto;
+}
+
+.arco-notification {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  width: 400px;
+  min-height: 86px;
+  margin-bottom: var(--spacing-7);
+  padding: var(--spacing-6);
+  overflow: hidden;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  background-color: var(--bg-color-container);
+  border: 0.5px solid var(--bg-color-secondarycomponent);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
+  opacity: 1;
+  transition: opacity 0.2s cubic-bezier(0, 0, 1, 1);
+}
+
+.arco-notification-left {
+  flex: 0 0 auto;
+  padding-right: var(--spacing-4);
+}
+
+.arco-notification-icon {
+  display: inline-flex;
+  align-items: center;
+  width: 22px;
+  height: 22px;
+  color: var(--color-primary);
+  font-size: 22px;
+}
+
+.arco-notification-icon svg {
+  color: inherit;
+}
+
+.arco-notification-info,
+.arco-notification-success,
+.arco-notification-warning,
+.arco-notification-error,
+.arco-notification-normal {
+  background-color: var(--bg-color-container);
+  border-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-notification-info .arco-notification-icon {
+  color: var(--color-primary);
+}
+
+.arco-notification-success .arco-notification-icon {
+  color: var(--color-success);
+}
+
+.arco-notification-warning .arco-notification-icon {
+  color: var(--color-warning);
+}
+
+.arco-notification-error .arco-notification-icon {
+  color: var(--color-danger);
+}
+
+.arco-notification-right {
+  flex: 1 1 0;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.arco-notification-title {
+  margin-bottom: var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-24);
+}
+
+.arco-notification-content,
+.arco-notification-info .arco-notification-content,
+.arco-notification-success .arco-notification-content,
+.arco-notification-warning .arco-notification-content,
+.arco-notification-error .arco-notification-content,
+.arco-notification-normal .arco-notification-content {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-notification-btn-wrapper {
+  margin-top: var(--spacing-6);
+  text-align: right;
+}
+
+.arco-notification .arco-notification-close-btn {
+  position: absolute;
+  top: var(--spacing-5);
+  right: var(--spacing-5);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  cursor: pointer;
+}
+
+.arco-notification .arco-notification-close-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.arco-notification .arco-notification-close-btn > svg {
+  position: relative;
+}
+
+.arco-notification .arco-icon-hover.arco-notification-icon-hover::before {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+}
+
+.arco-notification .arco-icon-hover.arco-notification-icon-hover:hover::before {
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-notification-wrapper-rtl,
+.arco-notification-rtl {
+  direction: rtl;
+}
+
+.arco-notification-rtl .arco-notification-left {
+  padding-right: 0;
+  padding-left: var(--spacing-4);
+}
+
+.arco-notification-rtl .arco-notification-btn-wrapper {
+  text-align: left;
+}
+
+.arco-notification-rtl .arco-notification-close-btn {
+  right: initial;
+  left: var(--spacing-5);
+}

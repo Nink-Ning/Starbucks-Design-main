@@ -1,0 +1,12 @@
+:root {
+  --vp-c-brand-1: #00754a;
+  --vp-c-brand-2: #008755;
+  --vp-c-brand-3: #006341;
+  --vp-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.dark {
+  --vp-c-brand-1: #009862;
+  --vp-c-brand-2: #00a96d;
+  --vp-c-brand-3: #008153;
+}

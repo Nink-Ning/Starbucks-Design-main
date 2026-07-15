@@ -1,0 +1,119 @@
+// Badge.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Badge — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • error-color
+
+// Typography tokens:
+//   • font-size/body-small
+//   • font-weight/regular
+//   • font/numbers
+//   • line-height/body-small
+
+// Border radius:
+//   • radius-default
+//   • radius-round
+
+// Other tokens:
+//   • mode/dark/font-white-1
+//   • Text&Icon/Font Wh1 90%-anti
+
+// Component-specific style overrides:
+.arco-badge {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+}
+
+.arco-badge-number,
+.arco-badge-text {
+  height: 20px;
+  min-width: 20px;
+  padding: 0 var(--spacing-3);
+  color: var(--color-white-text-1);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  background-color: var(--color-danger);
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px var(--bg-color-container);
+}
+
+.arco-badge-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-danger);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--bg-color-container);
+}
+
+.arco-badge-custom-dot {
+  background-color: var(--bg-color-container);
+}
+
+.arco-badge-status-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.arco-badge-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.arco-badge-status-default {
+  background-color: var(--bg-color-secondarycomponent-active);
+}
+
+.arco-badge-status-processing {
+  background-color: var(--color-primary);
+}
+
+.arco-badge-status-success {
+  background-color: var(--color-success);
+}
+
+.arco-badge-status-warning {
+  background-color: var(--color-warning);
+}
+
+.arco-badge-status-error,
+.arco-badge-color-red {
+  background-color: var(--color-danger);
+}
+
+.arco-badge-color-green {
+  background-color: var(--color-success);
+}
+
+.arco-badge-color-arcoblue {
+  background-color: var(--color-primary);
+}
+
+.arco-badge-color-gray {
+  background-color: var(--bg-color-secondarycomponent-active);
+}
+
+.arco-badge-status-text {
+  margin-left: var(--spacing-3);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-badge-rtl .arco-badge-status-text {
+  margin-right: var(--spacing-3);
+  margin-left: 0;
+}

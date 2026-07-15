@@ -1,0 +1,158 @@
+// Switch.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Switch — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • brand-color-disabled
+//   • mode/light/brand-color-6
+
+// Background tokens:
+//   • bg-color-secondarycomponent
+//   • bg-color-secondarycontainer
+//   • bg-color-component-disabled
+
+// Typography tokens:
+//   • font-size/body-small
+//   • font-weight/regular
+//   • font/chinese
+//   • line-height/body-small
+
+// Other tokens:
+//   • Shadow/Shadow-1
+
+// Component-specific style overrides:
+.arco-switch {
+  min-width: 32px;
+  height: 20px;
+  line-height: var(--lh-20);
+  background-color: var(--bg-color-secondarycomponent);
+  border-radius: var(--border-radius-round);
+}
+
+.arco-switch:has(.arco-switch-text),
+.arco-switch:has(.arco-switch-dot-icon) {
+  min-width: 40px;
+}
+
+.arco-switch-dot {
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  color: var(--bg-color-secondarycomponent);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.arco-switch:not([disabled]):hover {
+  background-color: var(--bg-color-secondarycomponent-hover);
+}
+
+.arco-switch-checked,
+.arco-switch-checked:not([disabled]):hover {
+  background-color: var(--color-primary);
+}
+
+.arco-switch-checked .arco-switch-dot {
+  left: calc(100% - 15px - 2.5px);
+  width: 15px;
+  height: 15px;
+  top: 2.5px;
+  color: var(--color-primary);
+}
+
+.arco-switch[disabled] {
+  background-color: var(--bg-color-component-disabled);
+}
+
+.arco-switch[disabled] .arco-switch-dot {
+  color: var(--color-text-disabled);
+  background-color: var(--color-white);
+}
+
+.arco-switch[disabled].arco-switch-checked {
+  background-color: var(--color-primary-disabled);
+}
+
+.arco-switch[disabled].arco-switch-checked .arco-switch-dot {
+  color: var(--color-primary-disabled);
+}
+
+.arco-switch-loading,
+.arco-switch-loading:not([disabled]):hover {
+  background-color: var(--bg-color-component-disabled);
+}
+
+.arco-switch-loading.arco-switch-checked,
+.arco-switch-loading.arco-switch-checked:not([disabled]):hover {
+  background-color: var(--color-primary-disabled);
+}
+
+.arco-switch-type-round {
+  border-radius: var(--border-radius-round);
+}
+
+.arco-switch-type-round .arco-switch-dot {
+  border-radius: var(--border-radius-round);
+}
+
+.arco-switch-small {
+  min-width: 26px;
+  height: 16px;
+  line-height: var(--lh-20);
+}
+
+.arco-switch-small:has(.arco-switch-text),
+.arco-switch-small:has(.arco-switch-dot-icon) {
+  min-width: 30px;
+}
+
+.arco-switch-small .arco-switch-dot {
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+}
+
+.arco-switch-small.arco-switch-checked .arco-switch-dot {
+  left: calc(100% - 12px - 2px);
+  top: 2px;
+  width: 12px;
+  height: 12px;
+}
+
+.arco-switch-large {
+  min-width: 39px;
+  height: 24px;
+  line-height: var(--lh-20);
+}
+
+.arco-switch-large:has(.arco-switch-text),
+.arco-switch-large:has(.arco-switch-dot-icon) {
+  min-width: 43px;
+}
+
+.arco-switch-large .arco-switch-dot {
+  top: 5px;
+  left: 5px;
+  width: 14px;
+  height: 14px;
+}
+
+.arco-switch-large.arco-switch-checked .arco-switch-dot {
+  left: calc(100% - 18px - 3px);
+  top: 3px;
+  width: 18px;
+  height: 18px;
+}

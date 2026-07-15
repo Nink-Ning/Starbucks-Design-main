@@ -1,0 +1,172 @@
+// Link.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Link — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • brand-color-hover
+//   • brand-color-active
+//   • brand-color-disabled
+//   • error-color
+//   • error-color-hover
+//   • error-color-active
+//   • success-color
+//   • success-color-hover
+//   • success-color-active
+//   • success-color-disabled
+//   • warning-color
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-disabled
+
+// Typography tokens:
+//   • font-size/body-large
+//   • font-size/body-medium
+//   • font-size/body-small
+
+// Component-specific style overrides:
+.arco-link {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1px var(--spacing-2);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  color: var(--color-text-brand);
+  text-decoration: none;
+  background-color: transparent;
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.1s linear,
+    background-color 0.1s linear,
+    box-shadow 0.1s linear;
+}
+
+.arco-link:hover {
+  color: var(--color-primary-hover);
+  background-color: var(--bg-color-container-hover);
+}
+
+.arco-link:active {
+  color: var(--color-primary-active);
+  background-color: var(--bg-color-container-active);
+}
+
+.arco-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-link.arco-link-hoverless {
+  display: inline-flex;
+  padding: 0;
+  background-color: transparent;
+}
+
+.arco-link.arco-link-hoverless:hover,
+.arco-link.arco-link-hoverless:active {
+  background-color: transparent;
+}
+
+.arco-link.arco-link-disabled,
+.arco-link.arco-link-disabled:hover,
+.arco-link.arco-link-disabled:active {
+  color: var(--color-primary-disabled);
+  background-color: transparent;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.arco-link-is-success {
+  color: var(--color-success);
+}
+
+.arco-link-is-success:hover {
+  color: var(--color-success-hover);
+}
+
+.arco-link-is-success:active {
+  color: var(--color-success-active);
+}
+
+.arco-link-is-success:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-success-focus);
+}
+
+.arco-link-is-success.arco-link-disabled,
+.arco-link-is-success.arco-link-disabled:hover,
+.arco-link-is-success.arco-link-disabled:active {
+  color: var(--color-success-disabled);
+}
+
+.arco-link-is-error {
+  color: var(--color-danger);
+}
+
+.arco-link-is-error:hover {
+  color: var(--color-danger-hover);
+}
+
+.arco-link-is-error:active {
+  color: var(--color-danger-active);
+}
+
+.arco-link-is-error:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-danger-focus);
+}
+
+.arco-link-is-error.arco-link-disabled,
+.arco-link-is-error.arco-link-disabled:hover,
+.arco-link-is-error.arco-link-disabled:active {
+  color: var(--color-danger-disabled);
+}
+
+.arco-link-is-warning {
+  color: var(--color-warning);
+}
+
+.arco-link-is-warning:hover {
+  color: var(--color-warning-hover);
+}
+
+.arco-link-is-warning:active {
+  color: var(--color-warning-active);
+}
+
+.arco-link-is-warning:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-warning-focus);
+}
+
+.arco-link-is-warning.arco-link-disabled,
+.arco-link-is-warning.arco-link-disabled:hover,
+.arco-link-is-warning.arco-link-disabled:active {
+  color: var(--color-warning-disabled);
+}
+
+.arco-link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-3);
+  font-size: var(--fs-14);
+  line-height: 1;
+}
+
+.arco-link-icon > svg,
+.arco-link > svg {
+  width: 16px;
+  height: 16px;
+}

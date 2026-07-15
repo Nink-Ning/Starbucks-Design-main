@@ -1,0 +1,21 @@
+{
+  "name": "@starbucks/docs-vue",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev --port 3001",
+    "prebuild": "mkdir -p public/skills && cd ../../../skills && zip -r ../packages/docs/vue/public/skills/starbucks-design-vue.zip starbucks-design-vue/ && zip -r ../packages/docs/vue/public/skills/starbucks-design-vue-preview.zip starbucks-design-vue-preview/",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.5.0",
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@sbux/starbucks-design-vue": "workspace:*",
+    "@vitepress-demo-preview/component": "^2.6.2",
+    "@vitepress-demo-preview/plugin": "^1.4.1",
+    "@arco-design/web-vue": "^2.58.0"
+  }
+}

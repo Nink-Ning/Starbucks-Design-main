@@ -1,0 +1,156 @@
+// Drawer.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Drawer — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+
+// Background tokens:
+//   • bg-color-container
+//   • bg-color-component
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-secondary
+
+// Typography tokens:
+//   • font-size/title-medium
+//   • font-weight/semibold
+//   • font/chinese
+//   • line-height/title-medium
+
+// Border radius:
+//   • radius-default
+
+// Other tokens:
+//   • mode/dark/font-white-1
+//   • Text&Icon/Font Wh1 90%-anti
+//   • mode/light/font-gray-3
+
+// Component-specific style overrides:
+.arco-drawer-mask {
+  background-color: color-mix(in srgb, var(--mask-active) 45%, transparent);
+}
+
+.arco-drawer-wrapper {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+}
+
+.arco-drawer {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  line-height: var(--lh-22);
+  background-color: var(--bg-color-container);
+  box-shadow: var(--shadow-lg);
+}
+
+.arco-drawer-header {
+  box-sizing: border-box;
+  height: 56px;
+  padding: 0 var(--spacing-8);
+  background-color: var(--bg-color-container);
+  border-bottom: 0.5px solid var(--bg-color-secondarycomponent);
+}
+
+.arco-drawer-header-title {
+  color: var(--color-text-primary);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-24);
+  text-align: left;
+}
+
+.arco-drawer-content {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  padding: var(--spacing-8);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  background-color: var(--bg-color-container);
+}
+
+.arco-drawer-content p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-4);
+}
+
+.arco-drawer-content p:last-child {
+  margin-bottom: 0;
+}
+
+.arco-drawer-footer {
+  box-sizing: border-box;
+  padding: var(--spacing-6) var(--spacing-8);
+  background-color: var(--bg-color-container);
+  border-top: 0.5px solid var(--bg-color-secondarycomponent);
+  text-align: right;
+}
+
+.arco-drawer-footer > .arco-btn {
+  margin-left: var(--spacing-4);
+}
+
+.arco-drawer-footer > .arco-btn:only-child {
+  margin-left: 0;
+}
+
+.arco-drawer .arco-drawer-close-icon {
+  top: 18px;
+  right: var(--spacing-8);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: 1;
+}
+
+.arco-drawer .arco-drawer-close-icon:hover {
+  color: var(--color-text-primary);
+}
+
+.arco-drawer .arco-icon-hover::before {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+}
+
+.arco-drawer .arco-icon-hover:hover::before {
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-drawer-rtl {
+  direction: rtl;
+}
+
+.arco-drawer-rtl .arco-drawer-header-title {
+  text-align: right;
+}
+
+.arco-drawer-rtl .arco-drawer-close-icon {
+  right: initial;
+  left: var(--spacing-8);
+}
+
+.arco-drawer-rtl .arco-drawer-footer {
+  text-align: left;
+}
+
+.arco-drawer-rtl .arco-drawer-footer > .arco-btn {
+  margin-right: var(--spacing-4);
+  margin-left: 0;
+}
+
+.arco-drawer-rtl .arco-drawer-footer > .arco-btn:only-child {
+  margin-right: 0;
+}

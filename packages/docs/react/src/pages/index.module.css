@@ -1,0 +1,138 @@
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #00754a 0%, #00a66e 100%);
+  color: white;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.heroButtonPrimary {
+  padding: 0.75rem 2rem;
+  background: white;
+  color: #00754a;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.heroButtonPrimary:hover {
+  transform: translateY(-2px);
+  color: #005232;
+  text-decoration: none;
+}
+
+.heroButtonSecondary {
+  padding: 0.75rem 2rem;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.heroButtonSecondary:hover {
+  transform: translateY(-2px);
+  color: white;
+  text-decoration: none;
+}
+
+.section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.cardDesc {
+  color: var(--ifm-color-emphasis-600);
+}
+
+.installCode {
+  background: var(--ifm-code-background);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.95rem;
+  overflow-x: auto;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.colorPalette {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.colorSwatch {
+  border-radius: 8px;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+}

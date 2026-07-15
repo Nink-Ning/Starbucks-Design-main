@@ -1,0 +1,11 @@
+.playgroundPreview {
+  padding: 1rem;
+  background-color: var(--ifm-pre-background);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-top: none;
+}
+
+[data-theme='dark'] .playgroundPreview {
+  background-color: #0d1117;
+  border-color: var(--ifm-color-emphasis-400);
+}

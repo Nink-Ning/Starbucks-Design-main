@@ -1,0 +1,88 @@
+// Skeleton.less
+// Component-specific overrides using global design variables.
+
+.arco-skeleton {
+  display: flex;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+}
+
+.arco-skeleton-header {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.arco-skeleton-header .arco-skeleton-image,
+.arco-skeleton-content .arco-skeleton-text-row {
+  background-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-skeleton-header .arco-skeleton-image {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-md);
+}
+
+.arco-skeleton-header .arco-skeleton-image-circle {
+  border-radius: 50%;
+}
+
+.arco-skeleton-header .arco-skeleton-image-small {
+  width: 36px;
+  height: 36px;
+}
+
+.arco-skeleton-header .arco-skeleton-image-large {
+  width: 60px;
+  height: 60px;
+}
+
+.arco-skeleton-header .arco-skeleton-image-left {
+  margin-right: var(--spacing-6);
+}
+
+.arco-skeleton-header .arco-skeleton-image-right {
+  margin-left: var(--spacing-6);
+}
+
+.arco-skeleton-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.arco-skeleton-content .arco-skeleton-text {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.arco-skeleton-content .arco-skeleton-text-row {
+  height: 16px;
+  border-radius: var(--border-radius-md);
+}
+
+.arco-skeleton-content .arco-skeleton-text-row:not(:last-child) {
+  margin-bottom: var(--spacing-5);
+}
+
+.arco-skeleton-animate .arco-skeleton-image,
+.arco-skeleton-animate .arco-skeleton-text > li {
+  background: linear-gradient(
+    90deg,
+    var(--bg-color-secondarycomponent) 25%,
+    var(--bg-color-component-hover) 37%,
+    var(--bg-color-secondarycomponent) 63%
+  );
+  background-size: 400% 100%;
+}
+
+.arco-skeleton-rtl .arco-skeleton-image-left {
+  margin-right: 0;
+  margin-left: var(--spacing-6);
+}
+
+.arco-skeleton-rtl .arco-skeleton-image-right {
+  margin-right: var(--spacing-6);
+  margin-left: 0;
+}

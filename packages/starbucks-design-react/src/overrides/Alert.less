@@ -1,0 +1,215 @@
+// Alert.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Alert — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • success-color
+//   • warning-color
+//   • error-color
+
+// Background tokens:
+//   • bg-color-container
+//   • bg-color-secondarycomponent
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-secondary
+
+// Typography tokens:
+//   • font-size/body-medium
+//   • font-weight/regular
+//   • font/chinese
+//   • line-height/body-medium
+
+// Border radius:
+//   • radius-default
+//   • radius-medium
+
+// Component-specific style overrides:
+.arco-alert {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--spacing-6) var(--spacing-8);
+  overflow: hidden;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  text-align: left;
+  border: 1px solid var(--bg-color-secondarycomponent);
+  border-radius: var(--border-radius-md);
+}
+
+.arco-alert-with-title {
+  align-items: flex-start;
+  padding: var(--spacing-6) var(--spacing-8);
+}
+
+.arco-alert-info {
+  background-color: var(--bg-color-component);
+  border-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-alert-success {
+  background-color: var(--color-success-focus);
+  border-color: rgb(var(--success-4));
+}
+
+.arco-alert-warning {
+  background-color: var(--color-warning-focus);
+  border-color: rgb(var(--warning-4));
+}
+
+.arco-alert-error {
+  background-color: var(--color-danger-focus);
+  border-color: rgb(var(--danger-4));
+}
+
+.arco-alert-banner {
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+}
+
+.arco-alert-content-wrapper {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.arco-alert-title {
+  margin-bottom: var(--spacing-2);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-22);
+}
+
+.arco-alert-content,
+.arco-alert-info .arco-alert-content,
+.arco-alert-success .arco-alert-content,
+.arco-alert-warning .arco-alert-content,
+.arco-alert-error .arco-alert-content {
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-alert-with-title .arco-alert-content,
+.arco-alert-info.arco-alert-with-title .arco-alert-content,
+.arco-alert-success.arco-alert-with-title .arco-alert-content,
+.arco-alert-warning.arco-alert-with-title .arco-alert-content,
+.arco-alert-error.arco-alert-with-title .arco-alert-content {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-alert-icon-wrapper {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  margin-right: var(--spacing-4);
+  color: var(--color-primary);
+}
+
+.arco-alert-icon-wrapper svg {
+  color: inherit;
+  font-size: 20px;
+}
+
+.arco-alert-with-title .arco-alert-icon-wrapper {
+  align-items: flex-start;
+  height: 22px;
+  padding-top: 1px;
+}
+
+.arco-alert-with-title .arco-alert-icon-wrapper svg {
+  font-size: 20px;
+}
+
+.arco-alert-info .arco-alert-icon-wrapper {
+  color: var(--color-primary);
+}
+
+.arco-alert-success .arco-alert-icon-wrapper {
+  color: var(--color-success);
+}
+
+.arco-alert-warning .arco-alert-icon-wrapper {
+  color: var(--color-warning);
+}
+
+.arco-alert-error .arco-alert-icon-wrapper {
+  color: var(--color-danger);
+}
+
+.arco-alert-close-btn {
+  box-sizing: border-box;
+  margin-left: var(--spacing-4);
+  padding: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.arco-alert-close-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.arco-alert-action {
+  margin-left: var(--spacing-4);
+}
+
+.arco-alert-action + .arco-alert-close-btn {
+  margin-left: var(--spacing-4);
+}
+
+.arco-alert-with-title .arco-alert-close-btn {
+  margin-top: 0;
+  margin-right: 0;
+}
+
+.arco-alert-rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.arco-alert-rtl .arco-alert-icon-wrapper {
+  margin-right: 0;
+  margin-left: var(--spacing-4);
+}
+
+.arco-alert-rtl .arco-alert-close-btn {
+  right: initial;
+  left: 0;
+}
+
+.arco-alert-rtl .arco-alert-action {
+  margin-right: var(--spacing-4);
+  margin-left: 0;
+}
+
+.arco-alert-rtl .arco-alert-action + .arco-alert-close-btn {
+  margin-right: var(--spacing-4);
+  margin-left: 0;
+}

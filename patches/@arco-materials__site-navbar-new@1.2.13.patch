@@ -1,0 +1,42 @@
+diff --git a/es/context/theme.js b/es/context/theme.js
+index fd1b83c0ad77fbb9adaf69001df3bcce75c54a5a..360d73703041feec55de9224813638ff63208510 100644
+--- a/es/context/theme.js
++++ b/es/context/theme.js
+@@ -19,7 +19,7 @@ import useThemeDetector from '../hooks/useThemeDetector';
+ export var NavbarThemeContext = createContext({});
+ var BODY_ATTRIBUTE_NAME = 'arco-theme';
+ export function NavbarThemeProvider(props) {
+-    var children = props.children, localStorageKey = props.localStorageKey;
++    var children = props.children, localStorageKey = props.localStorageKey !== undefined ? props.localStorageKey : 'arco-theme';
+     var _a = __read(useState(), 2), theme = _a[0], setTheme = _a[1];
+     var isDarkTheme = useThemeDetector();
+     useEffect(function () {
+@@ -51,6 +51,3 @@ export function NavbarThemeProvider(props) {
+             realTheme: theme === 'system' ? (isDarkTheme ? 'dark' : 'light') : theme,
+         } }, children));
+ }
+\ No newline at end of file
+-NavbarThemeProvider.defaultProps = {
+-    localStorageKey: 'arco-theme',
+-};
+diff --git a/lib/context/theme.js b/lib/context/theme.js
+index 0ef5155ce3235008673091a624b8e8a6d9bcc13c..f95d206d32454961008ab2f7823e40acab9a1755 100644
+--- a/lib/context/theme.js
++++ b/lib/context/theme.js
+@@ -44,7 +44,7 @@ var useThemeDetector_1 = __importDefault(require("../hooks/useThemeDetector"));
+ exports.NavbarThemeContext = (0, react_1.createContext)({});
+ var BODY_ATTRIBUTE_NAME = 'arco-theme';
+ function NavbarThemeProvider(props) {
+-    var children = props.children, localStorageKey = props.localStorageKey;
++    var children = props.children, localStorageKey = props.localStorageKey !== undefined ? props.localStorageKey : 'arco-theme';
+     var _a = __read((0, react_1.useState)(), 2), theme = _a[0], setTheme = _a[1];
+     var isDarkTheme = (0, useThemeDetector_1.default)();
+     (0, react_1.useEffect)(function () {
+@@ -77,6 +77,3 @@ function NavbarThemeProvider(props) {
+         } }, children));
+ }
+ exports.NavbarThemeProvider = NavbarThemeProvider;
+\ No newline at end of file
+-NavbarThemeProvider.defaultProps = {
+-    localStorageKey: 'arco-theme',
+-};

@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/starbucks-design-vue" },
+    { "path": "./packages/starbucks-design-react" },
+    { "path": "./packages/docs" }
+  ]
+}

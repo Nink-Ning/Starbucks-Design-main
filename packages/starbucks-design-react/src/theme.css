@@ -1,0 +1,489 @@
+/* theme.css — Arco CSS variables from Figma Design System V2.0 */
+/* Source: Figma export files (real palette values, light + dark) */
+/* Brand color: #00754a (Starbucks Green) */
+
+body {
+  /* ═══════════════════════════════════════════ */
+  /* LIGHT MODE */
+  /* ═══════════════════════════════════════════ */
+
+  /* ── Palette: primary (Starbucks Green) — Figma brand-color 1~10 ── */
+  --primary-1: 230, 247, 241;
+  --arc-color-primary-1: 230, 247, 241;
+  --primary-2: 207, 240, 228;
+  --arc-color-primary-2: 207, 240, 228;
+  --primary-3: 184, 233, 214;
+  --arc-color-primary-3: 184, 233, 214;
+  --primary-4: 139, 219, 187;
+  --arc-color-primary-4: 139, 219, 187;
+  --primary-5: 26, 145, 98;
+  --arc-color-primary-5: 26, 145, 98;
+  --primary-6: 0, 117, 74;
+  --arc-color-primary-6: 0, 117, 74;
+  --primary-7: 0, 106, 68;
+  --arc-color-primary-7: 0, 106, 68;
+  --primary-8: 0, 90, 57;
+  --arc-color-primary-8: 0, 90, 57;
+  --primary-9: 0, 74, 47;
+  --arc-color-primary-9: 0, 74, 47;
+  --primary-10: 0, 53, 34;
+  --arc-color-primary-10: 0, 53, 34;
+
+  /* ── Palette: success — Figma success-color 1~10 ── */
+  --success-1: 227, 249, 233;
+  --arc-color-success-1: 227, 249, 233;
+  --success-2: 198, 243, 215;
+  --arc-color-success-2: 198, 243, 215;
+  --success-3: 146, 218, 178;
+  --arc-color-success-3: 146, 218, 178;
+  --success-4: 43, 164, 113;
+  --arc-color-success-4: 43, 164, 113;
+  --success-5: 0, 136, 88;
+  --arc-color-success-5: 0, 136, 88;
+  --success-6: 0, 108, 69;
+  --arc-color-success-6: 0, 108, 69;
+  --success-7: 0, 83, 52;
+  --arc-color-success-7: 0, 83, 52;
+  --success-8: 86, 192, 141;
+  --arc-color-success-8: 86, 192, 141;
+  --success-9: 0, 59, 35;
+  --arc-color-success-9: 0, 59, 35;
+  --success-10: 0, 37, 21;
+  --arc-color-success-10: 0, 37, 21;
+
+  /* ── Palette: warning — Figma warning-color 1~10 ── */
+  --warning-1: 255, 241, 233;
+  --arc-color-warning-1: 255, 241, 233;
+  --warning-2: 255, 217, 194;
+  --arc-color-warning-2: 255, 217, 194;
+  --warning-3: 255, 185, 140;
+  --arc-color-warning-3: 255, 185, 140;
+  --warning-4: 227, 115, 24;
+  --arc-color-warning-4: 227, 115, 24;
+  --warning-5: 190, 90, 0;
+  --arc-color-warning-5: 190, 90, 0;
+  --warning-6: 149, 69, 0;
+  --arc-color-warning-6: 149, 69, 0;
+  --warning-7: 113, 51, 0;
+  --arc-color-warning-7: 113, 51, 0;
+  --warning-8: 96, 43, 0;
+  --arc-color-warning-8: 96, 43, 0;
+  --warning-9: 83, 35, 0;
+  --arc-color-warning-9: 83, 35, 0;
+  --warning-10: 59, 23, 0;
+  --arc-color-warning-10: 59, 23, 0;
+
+  /* ── Palette: danger — Figma error-color 1~10 ── */
+  --danger-1: 255, 240, 237;
+  --arc-color-danger-1: 255, 240, 237;
+  --danger-2: 255, 216, 210;
+  --arc-color-danger-2: 255, 216, 210;
+  --danger-3: 255, 185, 176;
+  --arc-color-danger-3: 255, 185, 176;
+  --danger-4: 246, 104, 93;
+  --arc-color-danger-4: 246, 104, 93;
+  --danger-5: 213, 73, 65;
+  --arc-color-danger-5: 213, 73, 65;
+  --danger-6: 173, 53, 47;
+  --arc-color-danger-6: 173, 53, 47;
+  --danger-7: 136, 31, 28;
+  --arc-color-danger-7: 136, 31, 28;
+  --danger-8: 123, 28, 25;
+  --arc-color-danger-8: 123, 28, 25;
+  --danger-9: 104, 7, 10;
+  --arc-color-danger-9: 104, 7, 10;
+  --danger-10: 73, 0, 2;
+  --arc-color-danger-10: 73, 0, 2;
+
+  /* ── Palette: link — Figma information-color 1~10 ── */
+  --link-1: 242, 243, 255;
+  --arc-color-link-1: 242, 243, 255;
+  --link-2: 217, 225, 255;
+  --arc-color-link-2: 217, 225, 255;
+  --link-3: 181, 199, 255;
+  --arc-color-link-3: 181, 199, 255;
+  --link-4: 97, 141, 255;
+  --arc-color-link-4: 97, 141, 255;
+  --link-5: 54, 110, 244;
+  --arc-color-link-5: 54, 110, 244;
+  --link-6: 0, 82, 217;
+  --arc-color-link-6: 0, 82, 217;
+  --link-7: 0, 60, 171;
+  --arc-color-link-7: 0, 60, 171;
+  --link-8: 0, 50, 143;
+  --arc-color-link-8: 0, 50, 143;
+  --link-9: 0, 42, 124;
+  --arc-color-link-9: 0, 42, 124;
+  --link-10: 0, 26, 87;
+  --arc-color-link-10: 0, 26, 87;
+
+  /* ── Text colors (alpha-blended against white background) ── */
+  --color-text-1: rgb(26, 26, 26);
+  --color-text-2: rgb(102, 102, 102);
+  --color-text-3: rgb(153, 153, 153);
+  --color-text-4: rgb(189, 189, 189);
+  --color-white-text-1: rgb(255, 255, 255);
+  --color-white-text-2: rgb(255, 255, 255);
+  --color-white-text-3: rgb(255, 255, 255);
+  --color-white-text-4: rgb(255, 255, 255);
+
+  /* ── Background colors ── */
+  --bg-color-page: rgb(238, 238, 238);
+  --bg-color-container: rgb(255, 255, 255);
+  --bg-color-container-hover: rgb(243, 243, 243);
+  --bg-color-container-active: rgb(232, 232, 232);
+  --bg-color-container-select: rgb(255, 255, 255);
+  --bg-color-secondarycontainer: rgb(243, 243, 243);
+  --bg-color-secondarycontainer-hover: rgb(238, 238, 238);
+  --bg-color-secondarycontainer-active: rgb(221, 221, 221);
+  --bg-color-component: rgb(232, 232, 232);
+  --bg-color-component-hover: rgb(221, 221, 221);
+  --bg-color-component-active: rgb(166, 166, 166);
+  --bg-color-secondarycomponent: rgb(221, 221, 221);
+  --bg-color-secondarycomponent-hover: rgb(198, 198, 198);
+  --bg-color-secondarycomponent-active: rgb(166, 166, 166);
+  --bg-color-component-disabled: rgb(238, 238, 238);
+  --bg-color-specialcomponent: rgb(255, 255, 255);
+
+  /* ── Border colors ── */
+  --color-border-1: rgb(232, 232, 232);
+  --color-border-2: rgb(232, 232, 232);
+  --color-border-3: rgb(221, 221, 221);
+  --color-border-component: rgb(221, 221, 221);
+
+  /* ── Brand & semantic base colors ── */
+  --color-primary: rgb(0, 117, 74);
+  --color-primary-hover: rgb(26, 145, 98);
+  --color-primary-active: rgb(0, 106, 68);
+  --color-primary-disabled: rgb(184, 233, 214);
+  --color-primary-focus: rgb(207, 240, 228);
+  --color-primary-light: rgb(230, 247, 241);
+  --color-primary-light-hover: rgb(207, 240, 228);
+  --color-success: rgb(0, 108, 69);
+  --color-success-hover: rgb(0, 136, 88);
+  --color-success-active: rgb(0, 83, 52);
+  --color-success-disabled: rgb(146, 218, 178);
+  --color-success-focus: rgb(198, 243, 215);
+  --color-success-light: rgb(227, 249, 233);
+  --color-success-light-hover: rgb(198, 243, 215);
+  --color-warning: rgb(149, 69, 0);
+  --color-warning-hover: rgb(190, 90, 0);
+  --color-warning-active: rgb(113, 51, 0);
+  --color-warning-disabled: rgb(255, 185, 140);
+  --color-warning-focus: rgb(255, 217, 194);
+  --color-warning-light: rgb(255, 241, 233);
+  --color-warning-light-hover: rgb(255, 217, 194);
+  --color-danger: rgb(173, 53, 47);
+  --color-danger-hover: rgb(213, 73, 65);
+  --color-danger-active: rgb(136, 31, 28);
+  --color-danger-disabled: rgb(255, 185, 176);
+  --color-danger-focus: rgb(255, 216, 210);
+  --color-danger-light: rgb(255, 240, 237);
+  --color-danger-light-hover: rgb(255, 216, 210);
+  --color-link: rgb(0, 82, 217);
+  --color-link-hover: rgb(54, 110, 244);
+  --color-link-active: rgb(0, 60, 171);
+  --color-link-disabled: rgb(181, 199, 255);
+  --color-link-focus: rgb(217, 225, 255);
+  --color-link-light: rgb(242, 243, 255);
+  --color-link-light-hover: rgb(217, 225, 255);
+
+  /* ── Text semantic colors ── */
+  --color-text-primary: rgb(26, 26, 26);
+  --color-text-secondary: rgb(102, 102, 102);
+  --color-text-disabled: rgb(189, 189, 189);
+  --color-text-placeholder: rgb(153, 153, 153);
+  --color-text-brand: rgb(0, 117, 74);
+  --color-text-link: rgb(0, 106, 68);
+
+  /* ── Typography ── */
+  --font-family: "Noto Sans SC", "Poppins", Roboto, sans-serif;
+  --fs-12: 12px;
+  --fs-14: 14px;
+  --fs-16: 16px;
+  --fs-18: 18px;
+  --fs-20: 20px;
+  --fs-24: 24px;
+  --fs-28: 28px;
+  --fs-36: 36px;
+  --fs-48: 48px;
+  --fs-64: 64px;
+  --fs-link-sm: 12px;
+  --fs-link-md: 14px;
+  --fs-link-lg: 16px;
+  --fs-mark-sm: 12px;
+  --fs-mark-md: 14px;
+  --lh-20: 20px;
+  --lh-22: 22px;
+  --lh-24: 24px;
+  --lh-28: 28px;
+  --lh-26: 26px;
+  --lh-32: 32px;
+  --lh-36: 36px;
+  --lh-44: 44px;
+  --lh-56: 56px;
+  --lh-72: 72px;
+  --lh-link-sm: 20px;
+  --lh-link-md: 22px;
+  --lh-link-lg: 24px;
+  --lh-mark-sm: 20px;
+  --lh-mark-md: 22px;
+  --fw-bold: 700;
+  --fw-semibold: 600;
+  --fw-medium: 500;
+  --fw-regular: 400;
+
+  /* ── Spacing / Size — Figma size tokens 1~16 ── */
+  --spacing-1: 2px;
+  --spacing-2: 4px;
+  --spacing-3: 6px;
+  --spacing-4: 8px;
+  --spacing-5: 12px;
+  --spacing-6: 16px;
+  --spacing-7: 20px;
+  --spacing-8: 24px;
+  --spacing-9: 28px;
+  --spacing-10: 32px;
+  --spacing-11: 36px;
+  --spacing-12: 40px;
+  --spacing-13: 48px;
+  --spacing-14: 56px;
+  --spacing-15: 64px;
+  --spacing-16: 72px;
+
+  /* ── Border Radius ── */
+  --border-radius-xs: 2px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+  --border-radius-round: 999px;
+
+  /* ── Box Shadows ── */
+  --shadow-sm: 0px 1px 10px 0px rgba(0, 0, 0, 0.05), 0px 4px 5px 0px rgba(0, 0, 0, 0.08), 0px 2px 4px -1px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0px 3px 14px 2px rgba(0, 0, 0, 0.05), 0px 8px 10px 1px rgba(0, 0, 0, 0.06), 0px 5px 5px -3px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0px 6px 30px 5px rgba(0, 0, 0, 0.04), 0px 16px 24px 2px rgba(0, 0, 0, 0.05), 0px 8px 10px -5px rgba(0, 0, 0, 0.08);
+
+  /* ── Scrollbar ── */
+  --scrollbar-color: rgb(229, 229, 229);
+  --scrollbar-hover-color: rgb(178, 178, 178);
+  --scrollbar-track-color: rgb(255, 255, 255);
+
+  /* ── Mask / Overlay ── */
+  --mask-active: rgb(102, 102, 102);
+  --mask-disabled: rgb(255, 255, 255);
+  --mask-background: rgb(255, 255, 255);
+
+  }
+
+html[data-arco-theme="dark"],
+html[data-theme="dark"],
+body[data-arco-theme="dark"],
+[data-arco-theme="dark"] body,
+body[data-theme="dark"],
+[data-theme="dark"] body {
+  /* ═══════════════════════════════════════════ */
+  /* DARK MODE */
+  /* ═══════════════════════════════════════════ */
+
+  /* ── Palette: primary (Starbucks Green) — Figma brand-color 1~10 dark ── */
+  --primary-1: 9, 26, 19;
+  --arc-color-primary-1: 9, 26, 19;
+  --primary-2: 12, 43, 31;
+  --arc-color-primary-2: 12, 43, 31;
+  --primary-3: 16, 64, 46;
+  --arc-color-primary-3: 16, 64, 46;
+  --primary-4: 23, 115, 82;
+  --arc-color-primary-4: 23, 115, 82;
+  --primary-5: 23, 115, 82;
+  --arc-color-primary-5: 23, 115, 82;
+  --primary-6: 0, 117, 74;
+  --arc-color-primary-6: 0, 117, 74;
+  --primary-7: 59, 181, 139;
+  --arc-color-primary-7: 59, 181, 139;
+  --primary-8: 81, 180, 142;
+  --arc-color-primary-8: 81, 180, 142;
+  --primary-9: 99, 207, 166;
+  --arc-color-primary-9: 99, 207, 166;
+  --primary-10: 141, 234, 194;
+  --arc-color-primary-10: 141, 234, 194;
+
+  /* ── Palette: success — Figma success-color 1~10 dark ── */
+  --success-1: 25, 58, 42;
+  --arc-color-success-1: 25, 58, 42;
+  --success-2: 26, 66, 48;
+  --arc-color-success-2: 26, 66, 48;
+  --success-3: 23, 83, 61;
+  --arc-color-success-3: 23, 83, 61;
+  --success-4: 5, 148, 101;
+  --arc-color-success-4: 5, 148, 101;
+  --success-5: 67, 175, 138;
+  --arc-color-success-5: 67, 175, 138;
+  --success-6: 70, 191, 150;
+  --arc-color-success-6: 70, 191, 150;
+  --success-7: 128, 210, 182;
+  --arc-color-success-7: 128, 210, 182;
+  --success-8: 200, 238, 220;
+  --arc-color-success-8: 200, 238, 220;
+  --success-9: 180, 225, 211;
+  --arc-color-success-9: 180, 225, 211;
+  --success-10: 222, 237, 232;
+  --arc-color-success-10: 222, 237, 232;
+
+  /* ── Palette: warning — Figma warning-color 1~10 dark ── */
+  --warning-1: 79, 42, 29;
+  --arc-color-warning-1: 79, 42, 29;
+  --warning-2: 88, 47, 33;
+  --arc-color-warning-2: 88, 47, 33;
+  --warning-3: 115, 60, 35;
+  --arc-color-warning-3: 115, 60, 35;
+  --warning-4: 207, 110, 45;
+  --arc-color-warning-4: 207, 110, 45;
+  --warning-5: 220, 118, 51;
+  --arc-color-warning-5: 220, 118, 51;
+  --warning-6: 232, 147, 92;
+  --arc-color-warning-6: 232, 147, 92;
+  --warning-7: 236, 191, 145;
+  --arc-color-warning-7: 236, 191, 145;
+  --warning-8: 237, 185, 133;
+  --arc-color-warning-8: 237, 185, 133;
+  --warning-9: 238, 215, 191;
+  --arc-color-warning-9: 238, 215, 191;
+  --warning-10: 243, 233, 220;
+  --arc-color-warning-10: 243, 233, 220;
+
+  /* ── Palette: danger — Figma error-color 1~10 dark ── */
+  --danger-1: 71, 35, 36;
+  --arc-color-danger-1: 71, 35, 36;
+  --danger-2: 94, 42, 45;
+  --arc-color-danger-2: 94, 42, 45;
+  --danger-3: 112, 52, 57;
+  --arc-color-danger-3: 112, 52, 57;
+  --danger-4: 160, 63, 70;
+  --arc-color-danger-4: 160, 63, 70;
+  --danger-5: 198, 71, 81;
+  --arc-color-danger-5: 198, 71, 81;
+  --danger-6: 222, 102, 112;
+  --arc-color-danger-6: 222, 102, 112;
+  --danger-7: 236, 136, 142;
+  --arc-color-danger-7: 236, 136, 142;
+  --danger-8: 236, 187, 192;
+  --arc-color-danger-8: 236, 187, 192;
+  --danger-9: 237, 177, 182;
+  --arc-color-danger-9: 237, 177, 182;
+  --danger-10: 238, 206, 208;
+  --arc-color-danger-10: 238, 206, 208;
+
+  /* ── Palette: link — Figma information-color 1~10 dark ── */
+  --link-1: 27, 47, 81;
+  --arc-color-link-1: 27, 47, 81;
+  --link-2: 23, 52, 99;
+  --arc-color-link-2: 23, 52, 99;
+  --link-3: 20, 57, 117;
+  --arc-color-link-3: 20, 57, 117;
+  --link-4: 13, 66, 154;
+  --arc-color-link-4: 13, 66, 154;
+  --link-5: 5, 75, 190;
+  --arc-color-link-5: 5, 75, 190;
+  --link-6: 38, 103, 212;
+  --arc-color-link-6: 38, 103, 212;
+  --link-7: 69, 130, 230;
+  --arc-color-link-7: 69, 130, 230;
+  --link-8: 83, 123, 215;
+  --arc-color-link-8: 83, 123, 215;
+  --link-9: 105, 158, 245;
+  --arc-color-link-9: 105, 158, 245;
+  --link-10: 150, 187, 248;
+  --arc-color-link-10: 150, 187, 248;
+
+  /* ── Text colors (alpha-blended against dark bg #242424) ── */
+  --color-text-1: rgb(233, 233, 233);
+  --color-text-2: rgb(156, 156, 156);
+  --color-text-3: rgb(113, 113, 113);
+  --color-text-4: rgb(84, 84, 84);
+
+  /* ── Background colors ── */
+  --bg-color-page: rgb(44, 44, 44);
+  --bg-color-container: rgb(36, 36, 36);
+  --bg-color-container-hover: rgb(44, 44, 44);
+  --bg-color-container-active: rgb(75, 75, 75);
+  --bg-color-container-select: rgb(94, 94, 94);
+  --bg-color-secondarycontainer: rgb(44, 44, 44);
+  --bg-color-secondarycontainer-hover: rgb(57, 57, 57);
+  --bg-color-secondarycontainer-active: rgb(94, 94, 94);
+  --bg-color-component: rgb(57, 57, 57);
+  --bg-color-component-hover: rgb(75, 75, 75);
+  --bg-color-component-active: rgb(94, 94, 94);
+  --bg-color-secondarycomponent: rgb(75, 75, 75);
+  --bg-color-secondarycomponent-hover: rgb(94, 94, 94);
+  --bg-color-secondarycomponent-active: rgb(119, 119, 119);
+  --bg-color-component-disabled: rgb(44, 44, 44);
+  --bg-color-specialcomponent: rgb(36, 36, 36);
+
+  /* ── Border colors ── */
+  --color-border-1: rgb(57, 57, 57);
+  --color-border-2: rgb(57, 57, 57);
+  --color-border-3: rgb(94, 94, 94);
+  --color-border-component: rgb(94, 94, 94);
+
+  /* ── Brand & semantic base colors ── */
+  --color-primary: rgb(0, 117, 74);
+  --color-primary-hover: rgb(23, 115, 82);
+  --color-primary-active: rgb(59, 181, 139);
+  --color-primary-disabled: rgb(16, 64, 46);
+  --color-primary-focus: rgb(12, 43, 31);
+  --color-primary-light: rgb(9, 26, 19);
+  --color-primary-light-hover: rgb(12, 43, 31);
+  --color-success: rgb(0, 108, 69);
+  --color-success-hover: rgb(67, 175, 138);
+  --color-success-active: rgb(0, 83, 52);
+  --color-success-disabled: rgb(146, 218, 178);
+  --color-success-focus: rgb(26, 66, 48);
+  --color-success-light: rgb(25, 58, 42);
+  --color-success-light-hover: rgb(26, 66, 48);
+  --color-warning: rgb(232, 147, 92);
+  --color-warning-hover: rgb(220, 118, 51);
+  --color-warning-active: rgb(236, 191, 145);
+  --color-warning-disabled: rgb(115, 60, 35);
+  --color-warning-focus: rgb(88, 47, 33);
+  --color-warning-light: rgb(79, 42, 29);
+  --color-warning-light-hover: rgb(88, 47, 33);
+  --color-danger: rgb(222, 102, 112);
+  --color-danger-hover: rgb(198, 71, 81);
+  --color-danger-active: rgb(236, 136, 142);
+  --color-danger-disabled: rgb(112, 52, 57);
+  --color-danger-focus: rgb(94, 42, 45);
+  --color-danger-light: rgb(71, 35, 36);
+  --color-danger-light-hover: rgb(94, 42, 45);
+  --color-link: rgb(0, 82, 217);
+  --color-link-hover: rgb(5, 75, 190);
+  --color-link-active: rgb(69, 130, 230);
+  --color-link-disabled: rgb(20, 57, 117);
+  --color-link-focus: rgb(23, 52, 99);
+  --color-link-light: rgb(27, 47, 81);
+  --color-link-light-hover: rgb(23, 52, 99);
+
+  /* ── Text semantic colors ── */
+  --color-text-primary: rgb(233, 233, 233);
+  --color-text-secondary: rgb(156, 156, 156);
+  --color-text-disabled: rgb(84, 84, 84);
+  --color-text-placeholder: rgb(113, 113, 113);
+  --color-text-brand: rgb(0, 117, 74);
+  --color-text-link: rgb(59, 181, 139);
+
+  /* ── Box Shadows ── */
+  --shadow-sm: 0px 4px 6px 0px rgba(0, 0, 0, 0.06), 0px 1px 10px 0px rgba(0, 0, 0, 0.08), 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0px 8px 10px 0px rgba(0, 0, 0, 0.12), 0px 3px 14px 0px rgba(0, 0, 0, 0.10), 0px 5px 5px 0px rgba(0, 0, 0, 0.16);
+  --shadow-lg: 0px 16px 24px 0px rgba(0, 0, 0, 0.12), 0px 6px 30px 0px rgba(0, 0, 0, 0.14), 0px 8px 10px 0px rgba(0, 0, 0, 0.20);
+
+  /* ── Scrollbar ── */
+  --scrollbar-color: rgb(58, 58, 58);
+  --scrollbar-hover-color: rgb(102, 102, 102);
+  --scrollbar-track-color: rgb(51, 51, 51);
+
+  /* ── Mask / Overlay ── */
+  --mask-active: rgb(22, 22, 22);
+  --mask-disabled: rgb(14, 14, 14);
+  --mask-background: rgb(36, 36, 36);
+
+  }

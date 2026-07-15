@@ -1,0 +1,579 @@
+// Input.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Input — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • brand-color-focus
+
+// Background tokens:
+//   • bg-color-container
+//   • bg-color-secondarycomponent
+//   • bg-color-component-disabled
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-placeholder
+//   • text-color-disabled
+//   • text-color-secondary
+
+// Typography tokens:
+//   • font-size/body-small
+//   • font-size/body-medium
+//   • font-size/body-large
+//   • line-height/body-small
+//   • line-height/body-medium
+//   • line-height/body-large
+//   • font-weight/regular
+//   • font/chinese
+
+// Border radius:
+//   • radius-default
+
+// Other tokens:
+//   • Focus Shadow/Default
+
+// Component-specific style overrides:
+// (extend with CSS custom property overrides as needed)
+
+.arco-input,
+.arco-input-inner-wrapper,
+.arco-textarea {
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-primary);
+}
+
+.arco-input-inner-wrapper {
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: 0 var(--spacing-4);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-input-inner-wrapper.arco-input-inner-wrapper-default,
+.arco-input-inner-wrapper.arco-input-clear-wrapper,
+.arco-input-inner-wrapper.arco-input-inner-wrapper-has-prefix,
+.arco-input-inner-wrapper.arco-input-inner-wrapper-has-suffix {
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-input-inner-wrapper:hover {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-input-inner-wrapper:focus-within,
+.arco-input-inner-wrapper.arco-input-inner-wrapper-focus {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-input-inner-wrapper:focus-within:hover,
+.arco-input-inner-wrapper.arco-input-inner-wrapper-focus:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-input-inner-wrapper.arco-input-inner-wrapper-disabled,
+.arco-input-inner-wrapper[disabled] {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+  cursor: not-allowed;
+}
+
+.arco-input-inner-wrapper.arco-input-inner-wrapper-disabled:hover,
+.arco-input-inner-wrapper[disabled]:hover {
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+}
+
+.arco-input-inner-wrapper.arco-input-inner-wrapper-error {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger);
+}
+
+.arco-input-inner-wrapper.arco-input-inner-wrapper-error:focus-within,
+.arco-input-inner-wrapper.arco-input-inner-wrapper-error:focus-within:hover,
+.arco-input-inner-wrapper.arco-input-inner-wrapper-error.arco-input-inner-wrapper-focus,
+.arco-input-inner-wrapper.arco-input-inner-wrapper-error.arco-input-inner-wrapper-focus:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger) !important;
+  box-shadow: 0 0 0 2px var(--color-danger-focus) !important;
+}
+
+.arco-input-inner-wrapper.arco-input-inner-wrapper-warning {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-warning);
+}
+
+.arco-input-inner-wrapper.arco-input-inner-wrapper-warning:focus-within,
+.arco-input-inner-wrapper.arco-input-inner-wrapper-warning:focus-within:hover,
+.arco-input-inner-wrapper.arco-input-inner-wrapper-warning.arco-input-inner-wrapper-focus,
+.arco-input-inner-wrapper.arco-input-inner-wrapper-warning.arco-input-inner-wrapper-focus:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-warning) !important;
+  box-shadow: 0 0 0 2px var(--color-warning-focus) !important;
+}
+
+.arco-input {
+  height: 30px;
+  padding: 4px var(--spacing-4);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-input:hover {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-input:focus,
+.arco-input-focus {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-input:focus:hover,
+.arco-input-focus:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-input-error,
+.arco-input.arco-input-error {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger);
+}
+
+.arco-input-error:hover,
+.arco-input.arco-input-error:hover,
+.arco-input-error:focus,
+.arco-input.arco-input-error:focus,
+.arco-input-error.arco-input-focus,
+.arco-input.arco-input-error.arco-input-focus {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger);
+}
+
+.arco-input-error:focus,
+.arco-input.arco-input-error:focus,
+.arco-input-error.arco-input-focus,
+.arco-input.arco-input-error.arco-input-focus {
+  box-shadow: 0 0 0 2px var(--color-danger-focus);
+}
+
+.arco-input-warning,
+.arco-input.arco-input-warning {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-warning);
+}
+
+.arco-input-warning:hover,
+.arco-input.arco-input-warning:hover,
+.arco-input-warning:focus,
+.arco-input.arco-input-warning:focus,
+.arco-input-warning.arco-input-focus,
+.arco-input.arco-input-warning.arco-input-focus {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-warning);
+}
+
+.arco-input-warning:focus,
+.arco-input.arco-input-warning:focus,
+.arco-input-warning.arco-input-focus,
+.arco-input.arco-input-warning.arco-input-focus {
+  box-shadow: 0 0 0 2px var(--color-warning-focus);
+}
+
+.arco-input::placeholder,
+.arco-textarea::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.arco-input[disabled],
+.arco-input-disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+  cursor: not-allowed;
+}
+
+.arco-input[disabled]:hover,
+.arco-input-disabled:hover {
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+}
+
+.arco-input-inner-wrapper-size-mini,
+.arco-input-inner-wrapper-size-small {
+  min-height: 24px;
+}
+
+.arco-input-size-mini,
+.arco-input-size-small {
+  height: 24px;
+  padding: 1px 0;
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-input-size-mini {
+  padding-right: var(--spacing-4);
+  padding-left: var(--spacing-4);
+}
+
+.arco-input-inner-wrapper .arco-input-size-mini,
+.arco-input-inner-wrapper .arco-input-size-small {
+  height: 22px;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.arco-input-inner-wrapper-size-large {
+  min-height: 40px;
+  padding-right: var(--spacing-6);
+  padding-left: var(--spacing-6);
+}
+
+.arco-input-size-large {
+  height: 38px;
+  padding: 7px 0;
+  font-size: var(--fs-16);
+  line-height: var(--lh-24);
+}
+
+.arco-input-inner-wrapper .arco-input-prefix,
+.arco-input-inner-wrapper .arco-input-suffix,
+.arco-input-inner-wrapper .arco-input-clear-icon {
+  color: var(--color-text-secondary);
+}
+
+.arco-input-inner-wrapper .arco-input,
+.arco-input-inner-wrapper .arco-input:hover,
+.arco-input-inner-wrapper .arco-input:focus,
+.arco-input-inner-wrapper .arco-input-focus,
+.arco-input-inner-wrapper .arco-input-error,
+.arco-input-inner-wrapper .arco-input-error:hover,
+.arco-input-inner-wrapper .arco-input-error:focus,
+.arco-input-inner-wrapper .arco-input-warning,
+.arco-input-inner-wrapper .arco-input-warning:hover,
+.arco-input-inner-wrapper .arco-input-warning:focus {
+  padding: 4px 0;
+  color: var(--color-text-primary);
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.arco-input-inner-wrapper .arco-input-word-limit {
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border-left: none;
+}
+
+.arco-input-inner-wrapper .arco-input-word-limit-error {
+  color: var(--color-danger);
+}
+
+.arco-input-group-addbefore,
+.arco-input-group-addafter {
+  min-height: 32px;
+  padding: 0 var(--spacing-4);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-input-group:has(> .arco-input-group-addbefore) > .arco-input-inner-wrapper {
+  border-left-color: transparent;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.arco-input-group:has(> .arco-input-group-addafter) > .arco-input-inner-wrapper {
+  border-right-color: transparent;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.arco-input-group > .arco-input-group-addbefore {
+  border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+}
+
+.arco-input-group > .arco-input-group-addafter {
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+
+.arco-input-group-addbefore .arco-select,
+.arco-input-group-addafter .arco-select {
+  height: 100%;
+  margin: 0;
+  vertical-align: top;
+}
+
+.arco-input-group-addbefore .arco-select .arco-select-view,
+.arco-input-group-addbefore .arco-select:not(.arco-select-disabled):hover .arco-select-view,
+.arco-input-group-addbefore .arco-select-focused:not(.arco-select-disabled) .arco-select-view,
+.arco-input-group-addafter .arco-select .arco-select-view,
+.arco-input-group-addafter .arco-select:not(.arco-select-disabled):hover .arco-select-view,
+.arco-input-group-addafter .arco-select-focused:not(.arco-select-disabled) .arco-select-view {
+  height: 100%;
+  padding: 0;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.arco-input-group-addbefore .arco-select-single .arco-select-view-selector,
+.arco-input-group-addafter .arco-select-single .arco-select-view-selector {
+  align-items: center;
+  height: 100%;
+}
+
+.arco-input-group-addbefore .arco-select-view-input,
+.arco-input-group-addbefore .arco-select-view-input:focus,
+.arco-input-group-addbefore .arco-select-view-input:hover,
+.arco-input-group-addbefore .arco-select-view-input:focus-visible,
+.arco-input-group-addafter .arco-select-view-input,
+.arco-input-group-addafter .arco-select-view-input:focus,
+.arco-input-group-addafter .arco-select-view-input:hover,
+.arco-input-group-addafter .arco-select-view-input:focus-visible {
+  height: 100%;
+  padding: 0;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.arco-input-group-addbefore .arco-select-view-value,
+.arco-input-group-addbefore .arco-select-view-value-mirror,
+.arco-input-group-addafter .arco-select-view-value,
+.arco-input-group-addafter .arco-select-view-value-mirror {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  color: inherit;
+}
+
+.arco-input-group-addbefore .arco-select-suffix,
+.arco-input-group-addafter .arco-select-suffix {
+  margin-left: var(--spacing-3);
+}
+
+.arco-input-group:has(> .arco-input-inner-wrapper:focus-within) > .arco-input-inner-wrapper {
+  border-right-color: var(--color-primary);
+  border-left-color: var(--color-primary);
+}
+
+.arco-input-group:not(.arco-input-group-compact, :has(> .arco-input-group-addbefore), :has(> .arco-input-group-addafter)) > .arco-input,
+.arco-input-group:not(.arco-input-group-compact, :has(> .arco-input-group-addbefore), :has(> .arco-input-group-addafter)) > .arco-input-inner-wrapper,
+.arco-input-group:not(.arco-input-group-compact, :has(> .arco-input-group-addbefore), :has(> .arco-input-group-addafter)) > .arco-select .arco-select-view,
+.arco-input-group:not(.arco-input-group-compact) > .arco-picker {
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-input-group:has(> .arco-input-group-addbefore) > .arco-input,
+.arco-input-group:has(> .arco-input-group-addbefore) > .arco-input-inner-wrapper {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.arco-input-group:has(> .arco-input-group-addafter) > .arco-input,
+.arco-input-group:has(> .arco-input-group-addafter) > .arco-input-inner-wrapper {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.arco-input-group.arco-input-group-compact {
+  display: inline-flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.arco-input-group.arco-input-group-compact > * {
+  border-radius: 0;
+}
+
+.arco-input-group.arco-input-group-compact > :not(:first-child) {
+  margin-left: -1px;
+}
+
+.arco-input-group.arco-input-group-compact > :not(:last-child) {
+  border-right: none;
+}
+
+.arco-input-group.arco-input-group-compact > .arco-input,
+.arco-input-group.arco-input-group-compact > .arco-input-inner-wrapper,
+.arco-input-group.arco-input-group-compact > .arco-input-group-wrapper,
+.arco-input-group.arco-input-group-compact > .arco-select,
+.arco-input-group.arco-input-group-compact > .arco-picker {
+  position: relative;
+}
+
+.arco-input-group.arco-input-group-compact > .arco-input:hover,
+.arco-input-group.arco-input-group-compact > .arco-input:focus,
+.arco-input-group.arco-input-group-compact > .arco-input-focus,
+.arco-input-group.arco-input-group-compact > .arco-input-inner-wrapper:hover,
+.arco-input-group.arco-input-group-compact > .arco-input-inner-wrapper:focus-within,
+.arco-input-group.arco-input-group-compact > .arco-input-inner-wrapper-focus,
+.arco-input-group.arco-input-group-compact > .arco-select:hover,
+.arco-input-group.arco-input-group-compact > .arco-select-focused,
+.arco-input-group.arco-input-group-compact > .arco-picker:hover,
+.arco-input-group.arco-input-group-compact > .arco-picker-focused,
+.arco-input-group.arco-input-group-compact > .arco-input-group-wrapper:hover,
+.arco-input-group.arco-input-group-compact > .arco-input-group-wrapper:focus-within {
+  z-index: 1;
+}
+
+.arco-input-group.arco-input-group-compact > .arco-input,
+.arco-input-group.arco-input-group-compact > .arco-input-inner-wrapper,
+.arco-input-group.arco-input-group-compact > .arco-input-group-wrapper .arco-input-group,
+.arco-input-group.arco-input-group-compact > .arco-select .arco-select-view,
+.arco-input-group.arco-input-group-compact > .arco-picker {
+  border-radius: 0;
+}
+
+.arco-input-group.arco-input-group-compact > :first-child,
+.arco-input-group.arco-input-group-compact > :first-child .arco-input-group,
+.arco-input-group.arco-input-group-compact > :first-child .arco-select-view,
+.arco-input-group.arco-input-group-compact > :first-child.arco-input,
+.arco-input-group.arco-input-group-compact > :first-child.arco-input-inner-wrapper,
+.arco-input-group.arco-input-group-compact > :first-child.arco-picker {
+  border-top-left-radius: var(--border-radius-sm);
+  border-bottom-left-radius: var(--border-radius-sm);
+}
+
+.arco-input-group.arco-input-group-compact > :last-child,
+.arco-input-group.arco-input-group-compact > :last-child .arco-input-group,
+.arco-input-group.arco-input-group-compact > :last-child .arco-select-view,
+.arco-input-group.arco-input-group-compact > :last-child.arco-input,
+.arco-input-group.arco-input-group-compact > :last-child.arco-input-inner-wrapper,
+.arco-input-group.arco-input-group-compact > :last-child.arco-picker {
+  border-top-right-radius: var(--border-radius-sm);
+  border-bottom-right-radius: var(--border-radius-sm);
+}
+
+.arco-input-group.arco-input-group-compact > .arco-input-group-wrapper .arco-input-group-addbefore,
+.arco-input-group.arco-input-group-compact > .arco-input-group-wrapper .arco-input-group-addafter {
+  border-color: var(--color-border-component);
+}
+
+.arco-textarea {
+  box-sizing: border-box;
+  min-height: 56px;
+  padding: 5px var(--spacing-4);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-textarea:hover {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-textarea:focus,
+.arco-textarea-focus {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-textarea:focus:hover,
+.arco-textarea-focus:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-textarea[disabled],
+.arco-textarea-disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+  cursor: not-allowed;
+}
+
+.arco-textarea[disabled]:hover,
+.arco-textarea-disabled:hover {
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+}
+
+.arco-textarea-error,
+.arco-textarea.arco-textarea-error {
+  border-color: var(--color-danger);
+}
+
+.arco-textarea-error:focus,
+.arco-textarea.arco-textarea-error:focus {
+  box-shadow: 0 0 0 2px var(--color-danger-focus);
+}
+
+.arco-textarea-warning,
+.arco-textarea.arco-textarea-warning {
+  border-color: var(--color-warning);
+}
+
+.arco-textarea-warning:hover,
+.arco-textarea.arco-textarea-warning:hover,
+.arco-textarea-warning:focus,
+.arco-textarea.arco-textarea-warning:focus {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-warning);
+}
+
+.arco-textarea-warning:focus,
+.arco-textarea.arco-textarea-warning:focus {
+  box-shadow: 0 0 0 2px var(--color-warning-focus);
+}

@@ -1,0 +1,192 @@
+// Message.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Message — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • success-color
+//   • warning-color
+//   • error-color
+
+// Background tokens:
+//   • bg-color-container
+//   • bg-color-secondarycomponent
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-secondary
+//   • text-color-placeholder
+
+// Typography tokens:
+//   • font-size/body-small
+//   • font-size/body-medium
+//   • font-size/title-medium
+//   • font-size/title-small
+//   • font-weight/regular
+//   • font-weight/semibold
+//   • font/chinese
+//   • line-height/body-small
+//   • line-height/body-medium
+//   • line-height/title-medium
+//   • line-height/title-small
+
+// Border radius:
+//   • radius-default
+//   • radius-medium
+
+// Other tokens:
+//   • Shadow/Shadow-2
+//   • Shadow/Shadow-3
+//   • Gray/White
+//   • Gray/Gray4-边框
+//   • mode/dark/font-white-1
+//   • Text&Icon/Font Wh1 90%-anti
+
+// Component-specific style overrides:
+.arco-message-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 var(--spacing-4);
+  pointer-events: none;
+}
+
+.arco-message-wrapper-top {
+  top: var(--spacing-7);
+}
+
+.arco-message-wrapper-bottom {
+  bottom: var(--spacing-7);
+}
+
+.arco-message {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  margin-bottom: var(--spacing-4);
+  padding: var(--spacing-3) var(--spacing-5);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  line-height: var(--lh-22);
+  text-align: left;
+  background-color: var(--bg-color-container);
+  border: 0.5px solid var(--bg-color-secondarycomponent);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  pointer-events: auto;
+}
+
+.arco-message-closable {
+  padding-right: 38px;
+}
+
+.arco-message-info,
+.arco-message-success,
+.arco-message-warning,
+.arco-message-error,
+.arco-message-loading,
+.arco-message-normal {
+  background-color: var(--bg-color-container);
+  border-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-message-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  margin-right: var(--spacing-3);
+  color: var(--color-primary);
+  font-size: var(--fs-18);
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.arco-message-icon svg {
+  color: inherit;
+}
+
+.arco-message-info .arco-message-icon,
+.arco-message-loading .arco-message-icon {
+  color: var(--color-primary);
+}
+
+.arco-message-success .arco-message-icon {
+  color: var(--color-success);
+}
+
+.arco-message-warning .arco-message-icon {
+  color: var(--color-warning);
+}
+
+.arco-message-error .arco-message-icon {
+  color: var(--color-danger);
+}
+
+.arco-message-content,
+.arco-message-info .arco-message-content,
+.arco-message-success .arco-message-content,
+.arco-message-warning .arco-message-content,
+.arco-message-error .arco-message-content,
+.arco-message-loading .arco-message-content,
+.arco-message-normal .arco-message-content {
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  vertical-align: middle;
+}
+
+.arco-message-close-btn {
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-4);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: 1;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.arco-message-close-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.arco-message .arco-icon-hover.arco-message-icon-hover::before {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+}
+
+.arco-message .arco-icon-hover.arco-message-icon-hover:hover::before {
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-message-rtl {
+  direction: rtl;
+}
+
+.arco-message-rtl .arco-message-icon {
+  margin-right: 0;
+  margin-left: var(--spacing-3);
+}
+
+.arco-message-rtl.arco-message-closable {
+  padding-right: var(--spacing-5);
+  padding-left: 38px;
+}
+
+.arco-message-rtl .arco-message-close-btn {
+  right: auto;
+  left: var(--spacing-4);
+}

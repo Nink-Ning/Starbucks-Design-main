@@ -1,0 +1,34 @@
+// BackTop.less
+// Component-specific overrides using global design variables.
+
+.arco-backtop {
+  z-index: 100;
+}
+
+.arco-backtop-button {
+  width: 40px;
+  height: 40px;
+  color: var(--color-white-text-1);
+  font-size: var(--fs-12);
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+}
+
+.arco-backtop-button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.arco-backtop-button:active {
+  background-color: var(--color-primary-active);
+}
+
+.arco-backtop-button:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-backtop-button svg {
+  color: inherit;
+  font-size: var(--fs-14);
+}

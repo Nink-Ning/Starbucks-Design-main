@@ -1,0 +1,263 @@
+// Steps.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Steps — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+
+// Background tokens:
+//   • bg-color-secondarycomponent
+//   • bg-color-secondarycomponent-hover
+
+// Text tokens:
+//   • text-color-primary
+//   • text-color-secondary
+//   • text-color-placeholder
+
+// Typography tokens:
+//   • font-size/body-large
+//   • font-size/body-medium
+//   • font-size/title-medium
+//   • font-weight/regular
+//   • font-weight/semibold
+//   • font/chinese
+//   • font/numbers
+//   • line-height/body-large
+//   • line-height/body-medium
+//   • line-height/title-medium
+
+// Other tokens:
+//   • mode/dark/font-white-1
+//   • Text&Icon/Font Wh1 90%-anti
+
+// Component-specific style overrides:
+.arco-steps {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+}
+
+.arco-steps-item-title {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-regular);
+  line-height: 28px;
+}
+
+.arco-steps-item-active .arco-steps-item-title {
+  font-weight: var(--fw-medium);
+}
+
+.arco-steps-item-description {
+  color: var(--color-text-placeholder);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-steps-icon {
+  border-radius: var(--border-radius-round);
+}
+
+.arco-steps-item-wait .arco-steps-icon {
+  color: var(--color-text-secondary);
+  background-color: var(--bg-color-component);
+  border-color: transparent;
+}
+
+.arco-steps-item-process .arco-steps-icon {
+  color: var(--color-white-text-1);
+  background-color: var(--color-primary);
+  border-color: transparent;
+}
+
+.arco-steps-item-finish .arco-steps-icon {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  border-color: transparent;
+}
+
+.arco-steps-item-error .arco-steps-icon {
+  color: var(--color-white-text-1);
+  background-color: rgb(var(--danger-4));
+  border-color: transparent;
+}
+
+.arco-steps-item-wait .arco-steps-item-title {
+  color: var(--color-text-secondary);
+}
+
+.arco-steps-item-process .arco-steps-item-title,
+.arco-steps-item-finish .arco-steps-item-title {
+  color: var(--color-text-primary);
+}
+
+.arco-steps-item-error .arco-steps-item-title {
+  color: rgb(var(--danger-4));
+}
+
+.arco-steps-item-wait .arco-steps-item-description,
+.arco-steps-item-process .arco-steps-item-description,
+.arco-steps-item-finish .arco-steps-item-description,
+.arco-steps-item-error .arco-steps-item-description {
+  color: var(--color-text-placeholder);
+}
+
+.arco-steps-label-horizontal:not(.arco-steps-vertical) > .arco-steps-item:not(:last-child) .arco-steps-item-title::after,
+.arco-steps-label-horizontal > .arco-steps-item.arco-steps-item-process .arco-steps-item-content .arco-steps-item-title::after,
+.arco-steps > .arco-steps-item:not(:last-child) > .arco-steps-item-tail::after,
+.arco-steps.arco-steps-vertical > .arco-steps-item:not(:last-child) > .arco-steps-item-tail::after {
+  background-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-steps-label-horizontal > .arco-steps-item.arco-steps-item-finish .arco-steps-item-content .arco-steps-item-title::after,
+.arco-steps .arco-steps-item:not(:last-child).arco-steps-item-finish .arco-steps-item-tail::after {
+  background-color: var(--color-primary);
+}
+
+.arco-steps-label-horizontal > .arco-steps-item.arco-steps-item-next-error .arco-steps-item-content .arco-steps-item-title::after,
+.arco-steps .arco-steps-item:not(:last-child).arco-steps-item-next-error .arco-steps-item-tail::after {
+  background-color: rgb(var(--danger-4));
+}
+
+.arco-steps-size-small .arco-steps-item-title {
+  font-size: var(--fs-14);
+  line-height: 24px;
+}
+
+.arco-steps-size-small .arco-steps-item-description {
+  font-size: var(--fs-12);
+}
+
+.arco-steps-mode-dot .arco-steps-item-wait .arco-steps-item-icon {
+  background-color: var(--bg-color-secondarycomponent);
+  border-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-steps-mode-dot .arco-steps-item-process .arco-steps-item-icon,
+.arco-steps-mode-dot .arco-steps-item-finish .arco-steps-item-icon {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.arco-steps-mode-dot .arco-steps-item-error .arco-steps-item-icon {
+  background-color: rgb(var(--danger-4));
+  border-color: rgb(var(--danger-4));
+}
+
+.arco-steps-mode-dot .arco-steps-item-wait .arco-steps-item-title {
+  color: var(--color-text-secondary);
+}
+
+.arco-steps-mode-dot .arco-steps-item-process .arco-steps-item-title,
+.arco-steps-mode-dot .arco-steps-item-finish .arco-steps-item-title {
+  color: var(--color-text-primary);
+}
+
+.arco-steps-mode-dot .arco-steps-item-error .arco-steps-item-title {
+  color: rgb(var(--danger-4));
+}
+
+.arco-steps-mode-dot > .arco-steps-item:not(:last-child) > .arco-steps-item-tail,
+.arco-steps-mode-dot .arco-steps-item:not(:last-child).arco-steps-item-process .arco-steps-item-tail,
+.arco-steps-mode-dot.arco-steps-vertical > .arco-steps-item:not(:last-child) > .arco-steps-item-tail::after,
+.arco-steps-mode-dot.arco-steps-vertical > .arco-steps-item:not(:last-child).arco-steps-item-process > .arco-steps-item-tail::after {
+  background-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-steps-mode-dot .arco-steps-item:not(:last-child).arco-steps-item-finish .arco-steps-item-tail,
+.arco-steps-mode-dot.arco-steps-vertical > .arco-steps-item:not(:last-child).arco-steps-item-finish > .arco-steps-item-tail::after {
+  background-color: var(--color-primary);
+}
+
+.arco-steps-mode-dot .arco-steps-item:not(:last-child).arco-steps-item-next-error .arco-steps-item-tail,
+.arco-steps-mode-dot.arco-steps-vertical > .arco-steps-item:not(:last-child).arco-steps-item-next-error > .arco-steps-item-tail::after {
+  background-color: rgb(var(--danger-4));
+}
+
+.arco-steps-mode-arrow .arco-steps-item-wait {
+  background-color: var(--bg-color-secondarycontainer);
+}
+
+.arco-steps-mode-arrow .arco-steps-item-process {
+  background-color: var(--color-primary);
+}
+
+.arco-steps-mode-arrow .arco-steps-item-finish {
+  background-color: var(--color-primary-light);
+}
+
+.arco-steps-mode-arrow .arco-steps-item-error {
+  background-color: rgb(var(--danger-4));
+}
+
+.arco-steps-mode-arrow .arco-steps-item-wait .arco-steps-item-title,
+.arco-steps-mode-arrow .arco-steps-item-finish .arco-steps-item-title {
+  color: var(--color-text-primary);
+}
+
+.arco-steps-mode-arrow .arco-steps-item-process .arco-steps-item-title,
+.arco-steps-mode-arrow .arco-steps-item-error .arco-steps-item-title,
+.arco-steps-mode-arrow .arco-steps-item-process .arco-steps-item-description,
+.arco-steps-mode-arrow .arco-steps-item-error .arco-steps-item-description {
+  color: var(--color-white-text-1);
+}
+
+.arco-steps-mode-arrow .arco-steps-item-wait .arco-steps-item-description,
+.arco-steps-mode-arrow .arco-steps-item-finish .arco-steps-item-description {
+  color: var(--color-text-placeholder);
+}
+
+.arco-steps-mode-arrow .arco-steps-item:not(:first-child)::before,
+.arco-steps-mode-arrow.arco-steps-size-small .arco-steps-item:not(:first-child)::before {
+  border-left-color: var(--bg-color-container);
+}
+
+.arco-steps-mode-arrow .arco-steps-item:not(:last-child).arco-steps-item-wait::after,
+.arco-steps-mode-arrow.arco-steps-size-small .arco-steps-item:not(:last-child).arco-steps-item-wait::after {
+  border-left-color: var(--bg-color-secondarycontainer);
+}
+
+.arco-steps-mode-arrow .arco-steps-item:not(:last-child).arco-steps-item-process::after,
+.arco-steps-mode-arrow.arco-steps-size-small .arco-steps-item:not(:last-child).arco-steps-item-process::after {
+  border-left-color: var(--color-primary);
+}
+
+.arco-steps-mode-arrow .arco-steps-item:not(:last-child).arco-steps-item-finish::after,
+.arco-steps-mode-arrow.arco-steps-size-small .arco-steps-item:not(:last-child).arco-steps-item-finish::after {
+  border-left-color: var(--color-primary-light);
+}
+
+.arco-steps-mode-arrow .arco-steps-item:not(:last-child).arco-steps-item-error::after,
+.arco-steps-mode-arrow.arco-steps-size-small .arco-steps-item:not(:last-child).arco-steps-item-error::after {
+  border-left-color: rgb(var(--danger-4));
+}
+
+.arco-steps-mode-navigation .arco-steps-item-active::after {
+  background-color: var(--color-primary);
+}
+
+.arco-steps-mode-navigation .arco-steps-item:not(:last-child) .arco-steps-item-content::after {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-text-disabled);
+}
+
+.arco-steps-change-onclick .arco-steps-item:not(.arco-steps-item-active):not(.arco-steps-item-disabled):hover .arco-steps-item-content .arco-steps-item-description,
+.arco-steps-change-onclick .arco-steps-item:not(.arco-steps-item-active):not(.arco-steps-item-disabled):hover .arco-steps-item-content .arco-steps-item-title {
+  color: var(--color-primary);
+}
+
+.arco-steps-item-disabled,
+.arco-steps-item-disabled .arco-steps-item-title,
+.arco-steps-item-disabled .arco-steps-item-description {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}

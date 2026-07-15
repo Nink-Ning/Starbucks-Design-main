@@ -1,0 +1,257 @@
+// Tag.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Tag — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Component-specific style overrides:
+.arco-tag {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 24px;
+  padding: 0 var(--spacing-4);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-20);
+  background-color: transparent;
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-tag-content {
+  line-height: inherit;
+}
+
+.arco-tag-size-small {
+  height: 20px;
+  padding: 0 var(--spacing-2);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-tag-size-medium,
+.arco-tag-size-default {
+  height: 24px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-tag-size-large {
+  height: 32px;
+  padding: 0 var(--spacing-5);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-tag-bordered {
+  border-color: var(--color-border-component);
+}
+
+.arco-tag-checkable {
+  cursor: pointer;
+}
+
+.arco-tag-checkable:not(.arco-tag-checked) {
+  color: var(--color-text-primary);
+  background-color: transparent;
+  border-color: var(--color-border-component);
+}
+
+.arco-tag-checkable:not(.arco-tag-checked):hover {
+  background-color: var(--bg-color-container-hover);
+}
+
+.arco-tag-checked {
+  color: var(--color-text-primary);
+  background-color: transparent;
+  border-color: var(--color-border-component);
+}
+
+.arco-tag-checked:hover,
+.arco-tag-checkable.arco-tag-checked:hover {
+  background-color: var(--bg-color-container-hover);
+}
+
+.arco-tag-checked.arco-tag-bordered {
+  border-color: var(--color-border-component);
+}
+
+.arco-tag-checked.arco-tag-arcoblue,
+.arco-tag-checked.arco-tag-blue {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  border-color: transparent;
+}
+
+.arco-tag-checked.arco-tag-arcoblue.arco-tag-bordered,
+.arco-tag-checked.arco-tag-blue.arco-tag-bordered {
+  border-color: var(--color-primary);
+}
+
+.arco-tag-checked.arco-tag-orange,
+.arco-tag-checked.arco-tag-orangered,
+.arco-tag-checked.arco-tag-gold {
+  color: var(--color-warning-hover);
+  background-color: var(--color-warning-light);
+  border-color: transparent;
+}
+
+.arco-tag-checked.arco-tag-orange.arco-tag-bordered,
+.arco-tag-checked.arco-tag-orangered.arco-tag-bordered,
+.arco-tag-checked.arco-tag-gold.arco-tag-bordered {
+  border-color: var(--color-warning-hover);
+}
+
+.arco-tag-checked.arco-tag-red,
+.arco-tag-checked.arco-tag-magenta {
+  color: var(--color-danger-hover);
+  background-color: var(--color-danger-light);
+  border-color: transparent;
+}
+
+.arco-tag-checked.arco-tag-red.arco-tag-bordered,
+.arco-tag-checked.arco-tag-magenta.arco-tag-bordered {
+  border-color: var(--color-danger-hover);
+}
+
+.arco-tag-checked.arco-tag-green,
+.arco-tag-checked.arco-tag-lime {
+  color: var(--color-success-hover);
+  background-color: var(--color-success-light);
+  border-color: transparent;
+}
+
+.arco-tag-checked.arco-tag-green.arco-tag-bordered,
+.arco-tag-checked.arco-tag-lime.arco-tag-bordered {
+  border-color: var(--color-success-hover);
+}
+
+.arco-tag-checked.arco-tag-gray {
+  color: var(--color-text-primary);
+  background-color: transparent;
+  border-color: var(--color-border-component);
+}
+
+.arco-tag-checked.arco-tag-gray.arco-tag-bordered {
+  border-color: var(--color-border-component);
+}
+
+.arco-tag-custom-color {
+  color: #fff;
+}
+
+.arco-tag-icon {
+  margin-right: var(--spacing-2);
+  color: inherit;
+  font-size: inherit;
+}
+
+.arco-tag .arco-tag-close-btn,
+.arco-tag-loading-icon {
+  margin-left: var(--spacing-4);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+}
+
+.arco-tag .arco-tag-close-btn {
+  line-height: 1;
+}
+
+.arco-tag .arco-tag-close-btn:hover {
+  color: var(--color-text-primary);
+  background-color: transparent;
+}
+
+.arco-tag .arco-tag-close-btn::before,
+.arco-tag .arco-tag-close-btn:hover::before,
+.arco-tag .arco-icon-hover::before,
+.arco-tag .arco-icon-hover:hover::before {
+  background-color: transparent !important;
+}
+
+.arco-tag-arcoblue .arco-tag-close-btn,
+.arco-tag-blue .arco-tag-close-btn {
+  color: var(--color-primary);
+}
+
+.arco-tag-arcoblue .arco-tag-close-btn:hover,
+.arco-tag-blue .arco-tag-close-btn:hover {
+  color: var(--color-primary-hover);
+}
+
+.arco-tag-green .arco-tag-close-btn,
+.arco-tag-lime .arco-tag-close-btn {
+  color: var(--color-success);
+}
+
+.arco-tag-green .arco-tag-close-btn:hover,
+.arco-tag-lime .arco-tag-close-btn:hover {
+  color: var(--color-success-hover);
+}
+
+.arco-tag-orange .arco-tag-close-btn,
+.arco-tag-orangered .arco-tag-close-btn,
+.arco-tag-gold .arco-tag-close-btn {
+  color: var(--color-warning);
+}
+
+.arco-tag-orange .arco-tag-close-btn:hover,
+.arco-tag-orangered .arco-tag-close-btn:hover,
+.arco-tag-gold .arco-tag-close-btn:hover {
+  color: var(--color-warning-hover);
+}
+
+.arco-tag-red .arco-tag-close-btn,
+.arco-tag-magenta .arco-tag-close-btn {
+  color: var(--color-danger);
+}
+
+.arco-tag-red .arco-tag-close-btn:hover,
+.arco-tag-magenta .arco-tag-close-btn:hover {
+  color: var(--color-danger-hover);
+}
+
+.arco-tag-custom-color .arco-tag-close-btn,
+.arco-tag-custom-color .arco-tag-close-btn:hover {
+  color: var(--color-white);
+}
+
+.arco-tag.add-tag {
+  color: var(--color-text-placeholder);
+  background-color: var(--bg-color-container) !important;
+  border-color: var(--color-border-component) !important;
+}
+
+.arco-tag.add-tag:hover {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container-hover) !important;
+  border-color: var(--color-border-component) !important;
+}
+
+.arco-tag.add-tag .arco-tag-icon {
+  color: inherit;
+}
+
+.arco-tag-size-small .arco-tag-close-btn,
+.arco-tag-size-small .arco-tag-loading-icon {
+  margin-left: var(--spacing-2);
+  font-size: var(--fs-12);
+}
+
+.arco-tag-size-large .arco-tag-close-btn,
+.arco-tag-size-large .arco-tag-loading-icon {
+  margin-left: var(--spacing-4);
+  font-size: var(--fs-16);
+}

@@ -1,0 +1,243 @@
+// Progress.less
+// Auto-generated from Figma Design System V2.0
+// Generated: 2026-07-04
+// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+
+// ═══════════════════════════════════════════
+// Progress — Figma Design Tokens
+// ═══════════════════════════════════════════
+//
+// All design tokens are GLOBAL — this component references
+// them through CSS custom properties defined in theme.css.
+// This file documents which tokens apply and adds any
+// component-specific overrides (focus shadows, effects, etc.).
+//
+// Color tokens:
+//   • brand-color
+//   • success-color
+//   • warning-color
+//   • error-color
+
+// Background tokens:
+//   • bg-color-component
+//   • bg-color-secondarycomponent
+
+// Text tokens:
+//   • text-color-primary
+
+// Typography tokens:
+//   • font-size/body-small
+//   • font-size/body-medium
+//   • font-size/title-extralarge
+//   • font-size/headline-large
+//   • font-size/mark-small
+//   • font-weight/regular
+//   • font-weight/medium
+//   • font-weight/semibold
+//   • font/numbers
+//   • line-height/body-small
+//   • line-height/body-medium
+//   • line-height/title-extralarge
+//   • line-height/headline-large
+//   • line-height/mark-small
+
+// Other tokens:
+//   • Gray/Gray3-分割线
+//   • mode/dark/font-white-1
+//   • Text&Icon/Font Wh1 90%-anti
+
+// Component-specific style overrides:
+.arco-progress {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-12);
+  line-height: 1;
+}
+
+.arco-progress-line-wrapper,
+.arco-progress-steps-wrapper {
+  align-items: center;
+}
+
+.arco-progress-line-outer {
+  background-color: var(--bg-color-secondarycomponent);
+  border-radius: 999px;
+}
+
+.arco-progress-line-inner {
+  background-color: var(--color-primary);
+  border-radius: 999px;
+}
+
+.arco-progress-line-inner-buffer {
+  background-color: var(--color-primary-focus);
+  border-radius: 0 999px 999px 0;
+}
+
+.arco-progress-line-inner-animate::after {
+  background: linear-gradient(90deg, transparent 25%, rgba(255, 255, 255, 0.5) 50%, transparent 75%);
+}
+
+.arco-progress-line-text,
+.arco-progress-steps-text {
+  min-width: 32px;
+  margin-left: var(--spacing-5);
+  color: var(--color-text-primary);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-20);
+}
+
+.arco-progress-line-text .arco-icon,
+.arco-progress-steps-text .arco-icon {
+  margin-left: var(--spacing-2);
+  color: inherit;
+  font-size: var(--fs-12);
+}
+
+.arco-progress-steps-outer {
+  display: flex;
+}
+
+.arco-progress-steps-item {
+  background-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-progress-steps-item-active {
+  background-color: var(--color-primary);
+}
+
+.arco-progress-steps-item:not(:last-of-type) {
+  margin-right: var(--spacing-1);
+}
+
+.arco-progress-steps-text {
+  margin-left: var(--spacing-3);
+}
+
+.arco-progress-is-warning .arco-progress-line-inner,
+.arco-progress-is-warning .arco-progress-steps-item-active {
+  background-color: var(--color-warning);
+}
+
+.arco-progress-is-success .arco-progress-line-inner,
+.arco-progress-is-success .arco-progress-steps-item-active {
+  background-color: var(--color-success);
+}
+
+.arco-progress-is-error .arco-progress-line-inner,
+.arco-progress-is-error .arco-progress-steps-item-active {
+  background-color: var(--color-danger);
+}
+
+.arco-progress-is-warning .arco-progress-line-text .arco-icon,
+.arco-progress-is-warning .arco-progress-steps-text .arco-icon,
+.arco-progress-is-warning .arco-icon {
+  color: var(--color-warning);
+}
+
+.arco-progress-is-success .arco-progress-line-text .arco-icon,
+.arco-progress-is-success .arco-progress-steps-text .arco-icon,
+.arco-progress-is-success .arco-icon {
+  color: var(--color-success);
+}
+
+.arco-progress-is-error .arco-progress-line-text .arco-icon,
+.arco-progress-is-error .arco-progress-steps-text .arco-icon,
+.arco-progress-is-error .arco-icon {
+  color: var(--color-danger);
+}
+
+.arco-progress-small .arco-progress-line-text {
+  margin-left: var(--spacing-5);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-progress-large .arco-progress-line-text {
+  margin-left: var(--spacing-5);
+  font-size: var(--fs-16);
+  line-height: var(--lh-24);
+}
+
+.arco-progress-circle-wrapper {
+  color: var(--color-text-primary);
+}
+
+.arco-progress-circle-mask {
+  stroke: var(--bg-color-secondarycomponent);
+}
+
+.arco-progress-circle-path {
+  stroke: var(--color-primary);
+}
+
+.arco-progress-circle .arco-progress-circle-text {
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-progress-circle-text .arco-icon {
+  color: inherit;
+}
+
+.arco-progress-mini .arco-progress-circle-mask {
+  stroke: var(--color-primary-focus);
+}
+
+.arco-progress-mini.arco-progress-is-warning .arco-progress-circle-mask {
+  stroke: var(--color-warning-focus);
+}
+
+.arco-progress-mini.arco-progress-is-error .arco-progress-circle-mask {
+  stroke: var(--color-danger-focus);
+}
+
+.arco-progress-mini.arco-progress-is-success .arco-progress-circle-mask {
+  stroke: var(--color-success-focus);
+}
+
+.arco-progress-is-warning .arco-progress-circle-path {
+  stroke: var(--color-warning);
+}
+
+.arco-progress-is-success .arco-progress-circle-path {
+  stroke: var(--color-success);
+}
+
+.arco-progress-is-error .arco-progress-circle-path {
+  stroke: var(--color-danger);
+}
+
+.arco-progress-small .arco-progress-circle-text {
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-progress-large .arco-progress-circle-text {
+  font-size: var(--fs-16);
+  line-height: var(--lh-24);
+}
+
+.arco-progress-rtl .arco-progress-line-text,
+.arco-progress-rtl .arco-progress-steps-text {
+  margin-right: var(--spacing-5);
+  margin-left: 0;
+}
+
+.arco-progress-rtl .arco-progress-steps-text {
+  margin-right: var(--spacing-3);
+}
+
+.arco-progress-rtl .arco-progress-line-text .arco-icon,
+.arco-progress-rtl .arco-progress-steps-text .arco-icon {
+  margin-right: var(--spacing-2);
+  margin-left: 0;
+}
+
+.arco-progress-rtl .arco-progress-steps-item:not(:last-of-type) {
+  margin-right: 0;
+  margin-left: var(--spacing-1);
+}

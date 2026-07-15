@@ -1,0 +1,53 @@
+{
+  "name": "@sbux/starbucks-design-vue",
+  "version": "1.0.13",
+  "private": false,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.es.js",
+  "unpkg": "./dist/index.umd.js",
+  "jsdelivr": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": ["dist/**"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
+    },
+    "./icon": {
+      "types": "./dist/icon.d.ts",
+      "import": "./dist/icon.cjs",
+      "require": "./dist/icon.cjs"
+    },
+    "./locale": {
+      "types": "./dist/locale.d.ts",
+      "import": "./dist/locale.cjs",
+      "require": "./dist/locale.cjs"
+    },
+    "./src/theme.css": "./src/theme.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build && node scripts/build-shims.mjs",
+    "sync-figma": "tsx scripts/sync-figma.ts"
+  },
+  "dependencies": {
+    "@arco-design/web-vue": ">=2.57.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vite-plugin-css-injected-by-js": "^5.0.1",
+    "vite-plugin-dts": "^4.4.0",
+    "vue-tsc": "^2.2.0"
+  }
+}

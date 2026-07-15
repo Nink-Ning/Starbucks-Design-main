@@ -1,0 +1,22 @@
+// components.less — Arco Design component styles compiled with Figma design tokens.
+//
+// How this works:
+// 1. Pre-load Arco's global.less (defines all @size-*, @spacing-*, @font-size-*, etc.)
+// 2. Override with Figma values from figma-overrides.less
+// 3. Import all Arco component styles — they use our overridden variables
+//
+// Less automatically de-duplicates @import — global.less is only processed once,
+// so when component token.less files re-import it, our overrides stay in effect.
+
+// Step 1: Pre-load Arco global variables
+@import '@arco-design/web-vue/es/style/theme/global.less';
+
+// Step 2: Override with Figma design values
+@import './figma-overrides.less';
+
+// Step 3: Base styles + all component styles
+@import '@arco-design/web-vue/es/style/index.less';
+@import '@arco-design/web-vue/es/index.less';
+
+// Step 5: Component-specific overrides (auto-generated from Figma)
+@import './overrides/_index.less';
