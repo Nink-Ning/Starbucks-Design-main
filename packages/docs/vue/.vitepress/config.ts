@@ -115,7 +115,7 @@ const sidebarComponents = [
 export default defineConfig({
   title: 'Starbucks UI — Vue',
   description: 'Starbucks UI Vue 组件库文档',
-  base: '/china/bopfui-starbucks-ui/vue/',
+  base: '/kning/starbucks-design-main/vue/',
   ignoreDeadLinks: true,
 
   markdown: {
@@ -129,8 +129,8 @@ export default defineConfig({
     nav: [
       { text: '快速开始', link: '/guide/getting-started' },
       { text: '组件', link: '/components/general/button' },
-      { text: '下载 Skills', link: '/china/bopfui-starbucks-ui/vue/skills/starbucks-design-vue.zip', target: '_top' },
-        { text: '下载预览 Skills', link: '/china/bopfui-starbucks-ui/vue/skills/starbucks-design-vue-preview.zip', target: '_top' },
+      { text: '下载 Skills', link: '/kning/starbucks-design-main/vue/skills/starbucks-design-vue.zip', target: '_top' },
+      { text: '下载预览 Skills', link: '/kning/starbucks-design-main/vue/skills/starbucks-design-vue-preview.zip', target: '_top' },
     ],
 
     sidebar: {
@@ -144,7 +144,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com' },
+      { icon: 'github', link: 'https://scm.starbucks.com/kning/starbucks-design-main' },
     ],
 
     footer: {
