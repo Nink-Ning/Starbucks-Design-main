@@ -1,0 +1,201 @@
+// ColorPicker.less
+// Starbucks Design System V2.0 component override
+
+.arco-color-picker,
+.arco-color-picker-panel {
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+}
+
+.arco-color-picker {
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-color-picker:not(.arco-color-picker-disabled):hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-color-picker:not(.arco-color-picker-disabled):focus-within {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-color-picker-preview {
+  border: 0;
+  border-radius: var(--border-radius-xs);
+  overflow: hidden;
+}
+
+.arco-color-picker-value {
+  margin-left: var(--spacing-3);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-color-picker-size-mini {
+  min-height: 24px;
+  padding: 3px var(--spacing-3);
+}
+
+.arco-color-picker-size-mini .arco-color-picker-preview {
+  width: 16px;
+  height: 16px;
+}
+
+.arco-color-picker-size-mini .arco-color-picker-value {
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-color-picker-size-small {
+  min-height: 28px;
+  padding: 3px var(--spacing-3);
+}
+
+.arco-color-picker-size-small .arco-color-picker-preview {
+  width: 20px;
+  height: 20px;
+}
+
+.arco-color-picker-size-default,
+.arco-color-picker-size-medium {
+  min-height: 32px;
+  padding: 3px var(--spacing-3);
+}
+
+.arco-color-picker-size-default .arco-color-picker-preview,
+.arco-color-picker-size-medium .arco-color-picker-preview {
+  width: 24px;
+  height: 24px;
+}
+
+.arco-color-picker-size-large {
+  min-height: 36px;
+  padding: 3px var(--spacing-4);
+}
+
+.arco-color-picker-size-large .arco-color-picker-preview {
+  width: 28px;
+  height: 28px;
+}
+
+.arco-color-picker.arco-color-picker-disabled,
+.arco-color-picker.arco-color-picker-disabled:hover,
+.arco-color-picker.arco-color-picker-disabled:focus-within {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.arco-color-picker.arco-color-picker-disabled .arco-color-picker-value {
+  color: var(--color-text-disabled);
+}
+
+// Popup card: only add the outer card shell. Inner inputs/selects keep their own component styles.
+.arco-color-picker-panel {
+  padding: var(--spacing-5);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.arco-color-picker-panel .arco-color-picker-palette {
+  border: 0;
+}
+
+.arco-color-picker-panel .arco-color-picker-panel-control {
+  padding: var(--spacing-5) 0 0;
+}
+
+.arco-color-picker-panel .arco-color-picker-panel-control-gradient {
+  padding: var(--spacing-5) 0 0;
+}
+
+.arco-color-picker-panel .arco-color-picker-input-wrapper {
+  align-items: center;
+}
+
+.arco-color-picker-panel .arco-color-picker-input-group,
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-color-picker-group-wrapper {
+  gap: var(--spacing-4);
+}
+
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-color-picker-group-wrapper {
+  min-width: 0;
+  margin-left: var(--spacing-4);
+}
+
+.arco-color-picker-panel .arco-color-picker-input-group {
+  width: 100%;
+  min-width: 0;
+}
+
+.arco-color-picker-panel .arco-color-picker-input-group > * {
+  flex: 1 1 0;
+  width: auto !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+}
+
+.arco-color-picker-panel .arco-color-picker-input-group .arco-color-picker-input-alpha {
+  flex: 0 0 58px;
+}
+
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-select-view,
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-input-inner-wrapper {
+  box-sizing: border-box;
+  min-height: 32px;
+  height: 32px;
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-border-component);
+  border-radius: var(--border-radius-sm) !important;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-input-inner-wrapper .arco-input,
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-input-number .arco-input {
+  height: auto;
+  min-height: 0;
+  color: var(--color-text-primary);
+  background-color: transparent;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none;
+  box-shadow: none !important;
+}
+
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-select:not(.arco-select-disabled):hover .arco-select-view,
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-input-inner-wrapper:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-input-inner-wrapper:focus-within,
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-input-inner-wrapper-focus,
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-select-focused:not(.arco-select-disabled) .arco-select-view,
+.arco-color-picker-panel .arco-color-picker-input-wrapper .arco-select-view:focus-within {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}

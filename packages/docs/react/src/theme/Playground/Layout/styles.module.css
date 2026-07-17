@@ -19,6 +19,17 @@
   overflow: visible;
 }
 
+.previewContent:has(:global(.arco-tabs)) {
+  align-items: stretch;
+  overflow-x: auto;
+}
+
+.previewContent:has(:global(.arco-tabs)) > :global(*) {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
 .previewContent :global(.arco-space) {
   max-width: 100%;
   flex-wrap: wrap;
@@ -27,6 +38,20 @@
 
 .previewContent :global(.arco-space-item) {
   max-width: 100%;
+}
+
+.previewContent :global(.arco-tabs) {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.previewContent :global(.arco-tabs-header-nav),
+.previewContent :global(.arco-tabs-header-wrapper),
+.previewContent :global(.arco-tabs-header-scroll),
+.previewContent :global(.arco-tabs-content) {
+  max-width: 100%;
+  min-width: 0;
 }
 
 .previewContent :global(.arco-cascader),

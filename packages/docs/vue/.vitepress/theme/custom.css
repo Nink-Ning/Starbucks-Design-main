@@ -57,6 +57,9 @@ body {
 }
 
 .VPNavBarTitle .title {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   color: #1e1f21;
   font-size: 16px;
   font-weight: 500;
@@ -64,13 +67,10 @@ body {
 }
 
 .VPNavBarTitle .title span {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 0;
+  display: none;
 }
 
-.VPNavBarTitle .title span::before {
+.VPNavBarTitle .title::before {
   color: #00754a;
   font-size: 18px;
   font-weight: 700;
@@ -78,7 +78,7 @@ body {
   content: 'STARBUCKS';
 }
 
-.VPNavBarTitle .title span::after {
+.VPNavBarTitle .title::after {
   padding-left: 8px;
   color: #1e1f21;
   font-size: 16px;

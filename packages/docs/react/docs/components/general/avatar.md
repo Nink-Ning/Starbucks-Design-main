@@ -10,8 +10,8 @@ sidebar_position: 3
 function Demo() {
   return (
     <Space>
-      <Avatar>张</Avatar>
-      <Avatar style={{ backgroundColor: '#00754A' }}>星</Avatar>
+      <Avatar>Nink</Avatar>
+      <Avatar style={{ backgroundColor: '#00754A' }}>凯</Avatar>
       <Avatar>
         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=starbucks" alt="avatar" />
       </Avatar>

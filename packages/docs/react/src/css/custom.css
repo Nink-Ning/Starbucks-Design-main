@@ -366,7 +366,14 @@ div[class*='codeBlockContent_'] code {
 }
 
 .markdown table {
-  border-color: var(--color-border-component, #dddddd);
+  display: table;
+  width: 100%;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border-component, #dddddd);
+  border-radius: var(--ifm-global-radius);
 }
 
 .markdown table thead tr {
@@ -375,7 +382,7 @@ div[class*='codeBlockContent_'] code {
 
 .markdown table tr {
   background: var(--bg-color-container, #fff);
-  border-top-color: var(--color-border-component, #dddddd);
+  border-top: 0;
 }
 
 .markdown table tr:nth-child(2n) {
@@ -384,10 +391,46 @@ div[class*='codeBlockContent_'] code {
 
 .markdown table th,
 .markdown table td {
-  border-color: var(--color-border-component, #dddddd);
+  box-sizing: border-box;
+  border: 0;
+  border-right: 1px solid var(--color-border-component, #dddddd);
+  border-bottom: 1px solid var(--color-border-component, #dddddd);
+}
+
+.markdown table th:last-child,
+.markdown table td:last-child {
+  border-right: 0;
+}
+
+.markdown table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .markdown table {
+    display: block;
+    overflow-x: auto;
+  }
 }
 
 @media (min-width: 1600px) {
+  main[class*='docMainContainer'] .container {
+    width: 100%;
+    max-width: none;
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: calc(32px + 180px + 40px);
+    padding-left: 40px;
+  }
+
+  main[class*='docMainContainer'] .row > .col:not(:has(.theme-doc-toc-desktop)) {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
   main[class*='docMainContainer'] .row > .col:has(.theme-doc-toc-desktop) {
     flex: 0 0 0;
     width: 0;
@@ -415,8 +458,8 @@ div[class*='codeBlockContent_'] code {
   }
 
   main[class*='docMainContainer'] .row > .col:not(:has(.theme-doc-toc-desktop)) {
-    padding-right: var(--spacing-8);
-    padding-left: var(--spacing-6);
+    padding-right: 40px;
+    padding-left: 40px;
   }
 }
 

@@ -41,7 +41,11 @@ export default function NavbarColorModeToggle({className}: Props): ReactNode {
   const {colorMode, setColorMode} = useColorMode();
   const location = useLocation();
   const reactUrl = useBaseUrl('/docs/components/general/button');
-  const vueUrl = useBaseUrl('/vue/');
+  const vueBaseUrl = useBaseUrl('/vue/');
+  const vueUrl =
+    isBrowser && window.location.hostname === 'localhost'
+      ? 'http://localhost:3001/kning/starbucks-design-main/vue/'
+      : vueBaseUrl;
 
   if (disableSwitch) {
     return null;
@@ -87,6 +91,8 @@ export default function NavbarColorModeToggle({className}: Props): ReactNode {
           aria-label="切换到 Vue 文档"
           title="Vue"
           href={vueUrl}
+          target="_blank"
+          rel="noreferrer"
         >
           <span
             className="navbar-framework-switch__icon navbar-framework-switch__icon--vue"

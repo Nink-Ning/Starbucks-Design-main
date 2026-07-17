@@ -569,7 +569,7 @@ function App() {
 
   const [direction, setDirection] = useState('horizontal');
   return (
-    <div>
+    <div style={{ width: '100%', maxWidth: '100%', minWidth: 0, overflow: 'hidden' }}>
       <Radio.Group
         type="button"
         name="direction"
@@ -578,7 +578,11 @@ function App() {
         style={{ marginBottom: 40 }}
         options={['horizontal', 'vertical']}
       ></Radio.Group>
-      <Tabs defaultActiveTab="key1" direction={direction} style={{ height: 200 }}>
+      <Tabs
+        defaultActiveTab="key1"
+        direction={direction}
+        style={{ width: '100%', minWidth: 0, height: 200 }}
+      >
         {tabs.map((x, i) => (
           <Tabs.TabPane destroyOnHide key={x.key} title={x.title}>
             <div style={paneStyle}>{`这里是${x.content}`}</div>
@@ -612,7 +616,7 @@ function App() {
   const [direction, setDirection] = useState('horizontal');
   const [position, setPosition] = useState('auto');
   return (
-    <div>
+    <div style={{ width: '100%', maxWidth: '100%', minWidth: 0, overflow: 'hidden' }}>
       <Space direction="vertical" style={{ marginBottom: 40 }}>
         <Radio.Group
           type="button"
@@ -633,7 +637,7 @@ function App() {
       <Tabs
         defaultActiveTab="key1"
         direction={direction}
-        style={{ height: 200 }}
+        style={{ width: '100%', minWidth: 0, height: 200 }}
         scrollPosition={position}
       >
         {tabs.map((x, i) => (
@@ -693,4 +697,3 @@ function App() {
 |title|选项卡的标题显示|string \| ReactNode  **(必填)**|`-`|
 |className|节点类名|string \| string[] |`-`|
 |style|节点样式|CSSProperties |`-`|
-

@@ -34,6 +34,20 @@
 .arco-tabs {
   color: var(--color-text-primary);
   font-family: var(--font-family);
+  max-width: 100%;
+  min-width: 0;
+}
+
+.arco-tabs-header-nav,
+.arco-tabs-header-wrapper,
+.arco-tabs-header-scroll,
+.arco-tabs-content {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.arco-tabs-horizontal > .arco-tabs-header-nav {
+  overflow: hidden;
 }
 
 .arco-tabs-header-nav::before {

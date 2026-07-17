@@ -14,17 +14,14 @@ sidebar_position: 1
 function Demo() {
   return (
     <Space size="large">
-      <Avatar>A</Avatar>
+      <Avatar>N</Avatar>
       <Avatar style={{ backgroundColor: '#3370ff' }}>
         <IconUser />
       </Avatar>
-      <Avatar style={{ backgroundColor: '#14a9f8' }}>Arco</Avatar>
+      <Avatar style={{ backgroundColor: '#14a9f8' }}>Nink</Avatar>
       <Avatar style={{ backgroundColor: '#00d0b6' }}>Design</Avatar>
       <Avatar>
-        <img
-          alt="avatar"
-          src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
-        />
+        <img alt="Starbucks logo" src="/kning/starbucks-design-main/img/favicon.svg" />
       </Avatar>
     </Space>
   )
@@ -40,23 +37,23 @@ function Demo() {
   return (
     <Space size="large" direction="vertical">
       <Space size="large">
-        <Avatar size={64}>Arco</Avatar>
-        <Avatar size={40}>Arco</Avatar>
-        <Avatar size={32}>Arco</Avatar>
-        <Avatar size={24}>Arco</Avatar>
+        <Avatar size={64}>Nink</Avatar>
+        <Avatar size={40}>Nink</Avatar>
+        <Avatar size={32}>Nink</Avatar>
+        <Avatar size={24}>Nink</Avatar>
       </Space>
       <Space size="large">
         <Avatar size={64} shape="square">
-          Arco
+          Nink
         </Avatar>
         <Avatar size={40} shape="square">
-          Arco
+          Nink
         </Avatar>
         <Avatar size={32} shape="square">
-          Arco
+          Nink
         </Avatar>
         <Avatar size={24} shape="square">
-          Arco
+          Nink
         </Avatar>
       </Space>
     </Space>
@@ -76,7 +73,7 @@ function Demo() {
         <Avatar style={{ backgroundColor: '#7BC616' }}>A</Avatar>
         <Avatar style={{ backgroundColor: '#14C9C9' }}>B</Avatar>
         <Avatar style={{ backgroundColor: '#168CFF' }}>C</Avatar>
-        <Avatar style={{ backgroundColor: '#FF7D00' }}>Arco</Avatar>
+        <Avatar style={{ backgroundColor: '#FF7D00' }}>Nink</Avatar>
         <Avatar style={{ backgroundColor: '#FFC72E' }}>Design</Avatar>
       </Avatar.Group>
       <br />
@@ -84,7 +81,7 @@ function Demo() {
         <Avatar style={{ backgroundColor: '#7BC616' }}>A</Avatar>
         <Avatar style={{ backgroundColor: '#14C9C9' }}>B</Avatar>
         <Avatar style={{ backgroundColor: '#168CFF' }}>C</Avatar>
-        <Avatar style={{ backgroundColor: '#FF7D00' }}>Arco</Avatar>
+        <Avatar style={{ backgroundColor: '#FF7D00' }}>Nink</Avatar>
         <Avatar style={{ backgroundColor: '#FFC72E' }}>Design</Avatar>
       </Avatar.Group>
     </div>
@@ -147,7 +144,7 @@ function Demo() {
 
 function App() {
   const [index, setIndex] = useState(0)
-  const list = ['B', 'Arco', 'Design', 'Tom', 'AD']
+  const list = ['B', 'Nink', 'Design', 'Tom', 'AD']
   return (
     <Space>
       <Avatar>{list[index]}</Avatar>

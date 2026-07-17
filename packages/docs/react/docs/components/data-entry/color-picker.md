@@ -14,9 +14,9 @@ sidebar_position: 1
 function Demo() {
   return (
     <div>
-      <ColorPicker defaultValue={'#165DFF'} />
+      <ColorPicker defaultValue={'#00754A'} />
       <div style={{ marginTop: 10 }}/>
-      <ColorPicker defaultValue={'#165DFF'} showText />
+      <ColorPicker defaultValue={'#00754A'} showText />
     </div>
   );
 };
@@ -29,13 +29,13 @@ function Demo() {
 ```jsx live
 
 function Demo() {
-  const [value, setValue] = useState('#165DFF');
+  const [value, setValue] = useState('#00754A');
 
   return (
     <div>
       <div>
-        <Button onClick={() => setValue('#165DFF')}>#165DFF</Button>
-        <Button onClick={() => setValue('#165DFF88')}>#165DFF88</Button>
+        <Button onClick={() => setValue('#00754A')}>#00754A</Button>
+        <Button onClick={() => setValue('#00754A88')}>#00754A88</Button>
       </div>
       <div style={{ marginTop: 10 }}/>
       <ColorPicker value={value} onChange={(value)=>setValue(value)} showText />
@@ -52,13 +52,13 @@ function Demo() {
 function Demo() {
   return (
     <div>
-      <ColorPicker defaultValue={'#165DFF'} size={'mini'} />
+      <ColorPicker defaultValue={'#00754A'} size={'mini'} />
       <div style={{ marginTop: 10 }}/>
-      <ColorPicker defaultValue={'#165DFF'} size={'small'} />
+      <ColorPicker defaultValue={'#00754A'} size={'small'} />
       <div style={{ marginTop: 10 }}/>
-      <ColorPicker defaultValue={'#165DFF'} size={'default'} />
+      <ColorPicker defaultValue={'#00754A'} size={'default'} />
       <div style={{ marginTop: 10 }}/>
-      <ColorPicker defaultValue={'#165DFF'} size={'large'} />
+      <ColorPicker defaultValue={'#00754A'} size={'large'} />
     </div>
   );
 };
@@ -72,9 +72,9 @@ function Demo() {
 function Demo() {
   return (
     <div>
-      <ColorPicker defaultValue={'#165DFF'} disabled />
+      <ColorPicker defaultValue={'#00754A'} disabled />
       <div style={{ marginTop: 10 }}/>
-      <ColorPicker defaultValue={'#165DFF'} showText disabled />
+      <ColorPicker defaultValue={'#00754A'} showText disabled />
     </div>
   ) ;
 };
@@ -90,9 +90,9 @@ function Demo() {
 function Demo() {
   return (
     <div>
-      <ColorPicker defaultValue={'#165DFF'} disabledAlpha />
+      <ColorPicker defaultValue={'#00754A'} disabledAlpha />
       <br />
-      <ColorPicker defaultValue={'#165DFF80'} disabledAlpha />
+      <ColorPicker defaultValue={'#00754A80'} disabledAlpha />
     </div>
   ) ;
 };
@@ -126,7 +126,7 @@ function Demo() {
         })}
       </Radio.Group>
       <div style={{ marginTop: 10 }}/>
-      <ColorPicker defaultValue={'#165DFF'} showText format={format} />
+      <ColorPicker defaultValue={'#00754A'} showText format={format} />
     </div>
   );
 };
@@ -141,11 +141,11 @@ function Demo() {
 function Demo() {
   const defaultValue = [
     {
-      color: '#165DFFAA',
+      color: '#00754AAA',
       percent: 0,
     },
     {
-      color: '#00B42AFF',
+      color: '#1BA075FF',
       percent: 100,
     },
   ]
@@ -166,7 +166,7 @@ function Demo() {
 ```jsx live
 
 function Demo() {
-  const [color, setColor] = useState('#165DFF')
+  const [color, setColor] = useState('#00754A')
   const [history, setHistory] = useState([]);
 
   const addHistory = (visible) => {
@@ -179,7 +179,7 @@ function Demo() {
   return (
     <div>
       <div>Preset: </div>
-      <ColorPicker defaultValue={'#165DFF'} showPreset showText />
+      <ColorPicker defaultValue={'#00754A'} showPreset showText />
       <div style={{ marginTop: 10 }} />
       <div>History & Preset: </div>
       <ColorPicker value={color} historyColors={history} showPreset showHistory showText onChange={setColor}
@@ -196,11 +196,11 @@ function Demo() {
 ```jsx live
 
 function Demo() {
-  const [value, setValue] = useState('#165DFF');
+  const [value, setValue] = useState('#00754A');
 
   return (
     <div>
-      <ColorPicker defaultValue={'#165DFF'} triggerElement={({ value }) => {
+      <ColorPicker defaultValue={'#00754A'} triggerElement={({ value }) => {
         return <Button>Open Color Picker: {value}</Button>
       }}>
 

@@ -16,7 +16,7 @@ function Demo() {
     <div style={{ background: 'var(--color-fill-2)', padding: 40 }}>
       <PageHeader
         style={{ background: 'var(--color-bg-2)' }}
-        title="ArcoDesign"
+        title="Starbucks"
         subTitle="This is a description"
         extra={
           <div>
@@ -43,7 +43,7 @@ function Demo() {
     <div style={{ background: 'var(--color-fill-2)', padding: 40 }}>
       <PageHeader
         style={{ background: 'var(--color-bg-2)' }}
-        title="ArcoDesign"
+        title="Starbucks"
         subTitle="This is a description"
         breadcrumb={{
           routes: [
@@ -91,7 +91,7 @@ function Demo() {
   return (
     <div style={ghostBgStyle}>
       <PageHeader
-        title="ArcoDesign"
+        title="Starbucks"
         subTitle="This is a description"
         backIcon
         onBack={() => Message.info('点击了返回按钮')}
@@ -120,7 +120,7 @@ function Demo() {
     <div style={{ background: 'var(--color-fill-2)', padding: 40 }}>
       <PageHeader
         style={{ background: 'var(--color-bg-2)' }}
-        title="ArcoDesign"
+        title="Starbucks"
         subTitle={
           <>
             This is a description

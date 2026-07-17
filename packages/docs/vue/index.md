@@ -17,7 +17,11 @@ hero:
 <section class="home-section">
   <h2 class="home-section-title">选择你的技术栈</h2>
   <div class="home-stack-cards">
-    <a class="home-stack-card" href="../docs/components/general/button">
+    <a
+      class="home-stack-card"
+      href="/kning/starbucks-design-main/docs/components/general/button"
+      onclick="if (location.hostname === 'localhost' && location.port === '3001') { event.preventDefault(); location.href = 'http://localhost:3000/kning/starbucks-design-main/docs/components/general/button'; }"
+    >
       <div class="home-stack-icon">⚛️</div>
       <div class="home-stack-title">React</div>
       <div class="home-stack-desc">
