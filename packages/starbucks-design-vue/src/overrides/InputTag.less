@@ -1,0 +1,300 @@
+// InputTag.less
+// Component-specific overrides using Starbucks global design variables.
+
+.arco-input-tag,
+.arco-input-tag-input,
+.arco-input-tag-tag {
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+}
+
+.arco-input-tag {
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: 3px var(--spacing-3);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-input-tag:hover {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-input-tag.arco-input-tag-focus,
+.arco-input-tag:focus-within {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-input-tag.arco-input-tag-focus:hover,
+.arco-input-tag:focus-within:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-input-tag-error,
+.arco-input-tag-error:hover,
+.arco-input-tag-error.arco-input-tag-focus,
+.arco-input-tag-error:focus-within {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger);
+}
+
+.arco-input-tag-error.arco-input-tag-focus,
+.arco-input-tag-error:focus-within {
+  box-shadow: 0 0 0 2px var(--color-danger-focus);
+}
+
+.arco-input-tag-warning,
+.arco-input-tag-warning:hover,
+.arco-input-tag-warning.arco-input-tag-focus,
+.arco-input-tag-warning:focus-within {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-warning);
+}
+
+.arco-input-tag-warning.arco-input-tag-focus,
+.arco-input-tag-warning:focus-within {
+  box-shadow: 0 0 0 2px var(--color-warning-focus);
+}
+
+.arco-input-tag-disabled,
+.arco-input-tag-disabled:hover {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.arco-input-tag-view {
+  min-height: 24px;
+}
+
+.arco-input-tag-inner {
+  gap: var(--spacing-2);
+  align-items: center;
+  padding: 0 !important;
+}
+
+.arco-input-tag .arco-draggable {
+  display: inline-flex !important;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.arco-input-tag .arco-draggable-item {
+  display: inline-flex !important;
+  align-items: center;
+  margin: 0;
+}
+
+.arco-input-tag .arco-overflow {
+  display: inline-flex !important;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  max-width: 100%;
+}
+
+.arco-input-tag .arco-overflow-item {
+  display: inline-flex !important;
+  align-items: center;
+  margin: 0;
+}
+
+.arco-input-tag-input,
+.arco-input-tag-input-mirror {
+  min-height: 24px;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.arco-input-tag-input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.arco-input-tag-disabled .arco-input-tag-input::placeholder {
+  color: var(--color-text-disabled);
+}
+
+.arco-input-tag-prefix,
+.arco-input-tag-suffix,
+.arco-input-tag-clear-icon {
+  color: var(--color-text-secondary);
+}
+
+.arco-input-tag-disabled .arco-input-tag-prefix,
+.arco-input-tag-disabled .arco-input-tag-suffix,
+.arco-input-tag-disabled .arco-input-tag-clear-icon {
+  color: var(--color-text-disabled);
+}
+
+.arco-input-tag .arco-input-tag-clear-icon:hover,
+.arco-input-tag .arco-icon-hover:hover {
+  color: var(--color-text-primary);
+  background-color: transparent;
+}
+
+.arco-input-tag .arco-input-tag-clear-icon::before,
+.arco-input-tag .arco-input-tag-clear-icon:hover::before,
+.arco-input-tag .arco-icon-hover::before,
+.arco-input-tag .arco-icon-hover:hover::before {
+  background-color: transparent !important;
+}
+
+.arco-input-tag .arco-input-tag-tag,
+.arco-input-tag .arco-tag {
+  height: 24px;
+  min-height: 24px;
+  margin: 0;
+  padding: 0 var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+  background-color: var(--bg-color-component);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-input-tag .arco-input-tag-tag:hover,
+.arco-input-tag .arco-tag:hover {
+  background-color: var(--bg-color-component-hover);
+}
+
+.arco-input-tag.arco-input-tag-focus .arco-input-tag-tag,
+.arco-input-tag.arco-input-tag-focus .arco-tag {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-component);
+  border-color: transparent;
+}
+
+.arco-input-tag-disabled .arco-input-tag-tag,
+.arco-input-tag-disabled .arco-tag {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+}
+
+.arco-input-tag-size-mini,
+.arco-input-tag-size-small {
+  min-height: 24px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-input-tag-size-mini .arco-input-tag-view,
+.arco-input-tag-size-small .arco-input-tag-view {
+  min-height: 20px;
+}
+
+.arco-input-tag-size-mini .arco-input-tag-tag,
+.arco-input-tag-size-mini .arco-tag,
+.arco-input-tag-size-small .arco-input-tag-tag,
+.arco-input-tag-size-small .arco-tag {
+  height: 20px;
+  min-height: 20px;
+  padding: 0 var(--spacing-2);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-input-tag-size-default {
+  min-height: 32px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-input-tag-size-default .arco-input-tag-view {
+  min-height: 24px;
+}
+
+.arco-input-tag-size-large {
+  min-height: 40px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: var(--fs-16);
+  line-height: var(--lh-24);
+}
+
+.arco-input-tag-size-large .arco-input-tag-view {
+  min-height: 24px;
+}
+
+.arco-input-tag-size-large .arco-input-tag-tag,
+.arco-input-tag-size-large .arco-tag {
+  height: 24px;
+  min-height: 24px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-input-tag-wrapper {
+  display: inline-flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.arco-input-tag-wrapper .arco-input-tag {
+  min-width: 0;
+}
+
+.arco-input-tag-addbefore,
+.arco-input-tag-addafter {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 var(--spacing-4);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container-hover);
+  border: 1px solid var(--color-border-component);
+}
+
+.arco-input-tag-addbefore {
+  border-right-color: transparent;
+  border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+}
+
+.arco-input-tag-addafter {
+  border-left-color: transparent;
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+
+.arco-input-tag-wrapper:has(> .arco-input-tag-addbefore) > .arco-input-tag {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.arco-input-tag-wrapper:has(> .arco-input-tag-addafter) > .arco-input-tag {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.arco-input-tag-wrapper:has(> .arco-input-tag-addbefore) > .arco-input-tag:hover,
+.arco-input-tag-wrapper:has(> .arco-input-tag-addbefore) > .arco-input-tag-focus,
+.arco-input-tag-wrapper:has(> .arco-input-tag-addbefore) > .arco-input-tag:focus-within {
+  border-left-color: var(--color-primary);
+}
+
+.arco-input-tag-wrapper:has(> .arco-input-tag-addafter) > .arco-input-tag:hover,
+.arco-input-tag-wrapper:has(> .arco-input-tag-addafter) > .arco-input-tag-focus,
+.arco-input-tag-wrapper:has(> .arco-input-tag-addafter) > .arco-input-tag:focus-within {
+  border-right-color: var(--color-primary);
+}

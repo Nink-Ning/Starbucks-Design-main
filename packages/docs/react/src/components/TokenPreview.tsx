@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createContext, useContext, useState, type ReactNode } from 'react';
 import { Radio } from '@sbux/starbucks-design-react';
 import styles from './TokenPreview.module.css';
 
@@ -17,6 +17,12 @@ type TokenGroup = {
   title: string;
   rows: TokenRow[];
 };
+
+type TokenPreviewContextValue = {
+  mode: Mode;
+};
+
+const TokenPreviewContext = createContext<TokenPreviewContextValue>({ mode: 'light' });
 
 const tokenValues: Record<string, Record<Mode, string>> = {
   'primary-1': { light: '230, 247, 241', dark: '9, 26, 19' },
@@ -260,7 +266,6 @@ function getSampleStyle(row: TokenRow, mode: Mode): React.CSSProperties {
 function TokenTable({ group, mode }: { group: TokenGroup; mode: Mode }) {
   return (
     <section className={styles.group}>
-      <h2 className={styles.groupTitle}>{group.title}</h2>
       <div className={styles.tableWrap}>
         <table className={styles.table}>
           <thead>
@@ -305,7 +310,7 @@ function TokenTable({ group, mode }: { group: TokenGroup; mode: Mode }) {
   );
 }
 
-export default function TokenPreview() {
+export function TokenPreviewProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<Mode>('light');
 
   return (
@@ -322,9 +327,43 @@ export default function TokenPreview() {
         />
       </div>
 
-      {groups.map((group) => (
-        <TokenTable key={group.title} group={group} mode={mode} />
-      ))}
+      <TokenPreviewContext.Provider value={{ mode }}>
+        {children}
+      </TokenPreviewContext.Provider>
     </div>
+  );
+}
+
+export function TokenGroupPreview({ group: groupTitle }: { group: string }) {
+  const { mode } = useContext(TokenPreviewContext);
+  const group = groups.find((item) => item.title === groupTitle);
+
+  if (!group) {
+    return null;
+  }
+
+  return <TokenTable group={group} mode={mode} />;
+}
+
+function TokenPreviewGroups() {
+  const { mode } = useContext(TokenPreviewContext);
+
+  return (
+    <>
+      {groups.map((group) => (
+        <React.Fragment key={group.title}>
+          <h2 className={styles.groupTitle}>{group.title}</h2>
+          <TokenTable group={group} mode={mode} />
+        </React.Fragment>
+      ))}
+    </>
+  );
+}
+
+export default function TokenPreview() {
+  return (
+    <TokenPreviewProvider>
+      <TokenPreviewGroups />
+    </TokenPreviewProvider>
   );
 }

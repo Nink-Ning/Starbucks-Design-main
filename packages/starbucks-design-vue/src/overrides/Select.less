@@ -111,6 +111,15 @@
   box-shadow: none;
 }
 
+.arco-select-disabled:hover .arco-select-view,
+.arco-select-disabled .arco-select-view:hover,
+.arco-select-disabled .arco-select-view:focus-within {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled) !important;
+  border-color: var(--color-border-component) !important;
+  box-shadow: none !important;
+}
+
 .arco-select-size-default.arco-select-single .arco-select-view,
 .arco-select-single .arco-select-view {
   height: 32px;
@@ -179,6 +188,22 @@
 .arco-select-arrow-icon,
 .arco-select-expand-icon {
   color: var(--color-text-secondary);
+}
+
+.arco-select-clear-icon:hover,
+.arco-select-clear-icon.arco-icon-hover:hover,
+.arco-select-clear-icon .arco-icon-hover:hover {
+  color: var(--color-text-primary);
+  background-color: transparent;
+}
+
+.arco-select-clear-icon::before,
+.arco-select-clear-icon:hover::before,
+.arco-select-clear-icon.arco-icon-hover::before,
+.arco-select-clear-icon.arco-icon-hover:hover::before,
+.arco-select-clear-icon .arco-icon-hover::before,
+.arco-select-clear-icon .arco-icon-hover:hover::before {
+  background-color: transparent !important;
 }
 
 .arco-select-suffix {

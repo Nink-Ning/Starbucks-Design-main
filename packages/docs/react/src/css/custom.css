@@ -24,9 +24,15 @@
 .navbar {
   padding-block: 0;
   padding-inline: var(--ifm-navbar-padding-horizontal);
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid rgba(11, 18, 14, 0.14);
+  background: var(--bg-color-container, #fff);
+  border-bottom: 1px solid var(--color-border-component, #e5e5e5);
   box-shadow: none;
+}
+
+.theme-layout-footer.footer {
+  background: var(--bg-color-container, #fff);
+  border-top: 1px solid var(--color-border-component, #e5e5e5);
+  color: var(--color-text-secondary, rgba(0, 0, 0, 0.66));
 }
 
 .navbar__inner { flex-wrap: nowrap; }
@@ -172,8 +178,9 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  min-width: 40px;
+  min-width: 72px;
   height: 26px;
+  gap: 6px;
   padding: 0 10px;
   color: var(--color-text-secondary, rgba(0, 0, 0, 0.66));
   border-radius: 3px;
@@ -183,6 +190,11 @@
   line-height: var(--lh-22, 22px);
   text-decoration: none;
   transition: color 100ms linear, background-color 100ms linear;
+}
+
+.navbar-framework-switch__text {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .navbar-framework-switch__icon {
@@ -325,6 +337,54 @@
     font-weight: var(--fw-medium);
     background-color: transparent;
   }
+
+}
+
+/* Docusaurus docs chrome: use component-library neutral variables */
+.pagination-nav__link {
+  background: var(--bg-color-container, #fff);
+  border-color: var(--color-border-component, #dddddd);
+  box-shadow: none;
+  transition: background-color 100ms linear, border-color 100ms linear;
+}
+
+.pagination-nav__link:hover {
+  background: var(--bg-color-container-hover, #f3f3f3);
+  border-color: var(--color-border-component, #dddddd);
+}
+
+div[class*='codeBlockContainer_'] {
+  background: var(--bg-color-secondarycontainer, #f3f3f3) !important;
+  border: 1px solid var(--color-border-component, #dddddd);
+  box-shadow: none;
+}
+
+div[class*='codeBlockContent_'],
+div[class*='codeBlockContent_'] pre,
+div[class*='codeBlockContent_'] code {
+  background: transparent !important;
+}
+
+.markdown table {
+  border-color: var(--color-border-component, #dddddd);
+}
+
+.markdown table thead tr {
+  background: var(--bg-color-secondarycontainer, #f3f3f3);
+}
+
+.markdown table tr {
+  background: var(--bg-color-container, #fff);
+  border-top-color: var(--color-border-component, #dddddd);
+}
+
+.markdown table tr:nth-child(2n) {
+  background: var(--bg-color-secondarycontainer, #f3f3f3);
+}
+
+.markdown table th,
+.markdown table td {
+  border-color: var(--color-border-component, #dddddd);
 }
 
 @media (min-width: 1600px) {
@@ -348,10 +408,22 @@
   }
 }
 
+@media (min-width: 997px) and (max-width: 1599px) {
+  main[class*='docMainContainer'] .container {
+    padding-right: var(--spacing-12);
+    padding-left: var(--spacing-12);
+  }
+
+  main[class*='docMainContainer'] .row > .col:not(:has(.theme-doc-toc-desktop)) {
+    padding-right: var(--spacing-8);
+    padding-left: var(--spacing-6);
+  }
+}
+
 /* Docs sidebar: Codex-like project navigation */
 .theme-doc-sidebar-container {
-  background: var(--bg-color-container);
-  border-right: 1px solid var(--color-border-component);
+  background: var(--bg-color-container, #fff);
+  border-right: 1px solid var(--color-border-component, #e5e5e5);
 }
 
 .theme-doc-sidebar-container .menu {
@@ -400,15 +472,27 @@
 }
 
 .theme-doc-sidebar-container .menu__link--active,
-.theme-doc-sidebar-container .menu__link--active:hover,
-.theme-doc-sidebar-container .menu__list-item-collapsible:has(.menu__link--active) {
+.theme-doc-sidebar-container .menu__link--active:hover {
   color: var(--color-text-brand);
   background: var(--bg-color-container-hover);
   font-weight: 600;
 }
 
+.theme-doc-sidebar-container .menu__list-item-collapsible:has(.menu__link--active) {
+  background: transparent;
+  font-weight: 600;
+}
+
+.theme-doc-sidebar-container .menu__list-item-collapsible:has(.menu__link--active):hover {
+  background: var(--bg-color-container-hover);
+}
+
 .theme-doc-sidebar-container .menu__link--sublist[aria-expanded='true'] {
-  color: var(--color-text-brand);
+  color: var(--color-text-secondary);
+}
+
+.theme-doc-sidebar-container .menu__link--sublist[aria-expanded='true']:hover {
+  color: var(--color-text-primary);
 }
 
 .theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link {
@@ -417,6 +501,17 @@
   padding-left: 16px;
   padding-right: 36px;
   font-size: 14px;
+}
+
+.theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--active,
+.theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--sublist[aria-expanded='true'] {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--active:hover,
+.theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--sublist[aria-expanded='true']:hover {
+  color: var(--color-text-primary);
 }
 
 .theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link::before {
@@ -458,7 +553,50 @@
   background: transparent !important;
   border: 0;
   border-radius: 6px;
+  color: var(--color-text-secondary);
   transform: translateY(-50%);
+}
+
+.theme-doc-sidebar-container .menu__list-item-collapsible:hover > .menu__caret,
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link:hover + .menu__caret {
+  color: var(--color-text-primary) !important;
+}
+
+.theme-doc-sidebar-container .menu__list-item-collapsible:hover > .menu__caret::before,
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link:hover + .menu__caret::before {
+  opacity: 0.72;
+}
+
+[data-theme='dark'] .theme-doc-sidebar-container .menu__list-item-collapsible:hover > .menu__caret::before,
+[data-theme='dark'] .theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link:hover + .menu__caret::before {
+  background: var(--color-text-primary) !important;
+  opacity: 1;
+}
+
+[data-theme='dark']
+  .theme-doc-sidebar-container
+  .menu__list-item-collapsible:hover
+  > .menu__link--sublist-caret::after,
+[data-theme='dark'] .theme-doc-sidebar-container .menu__link--sublist-caret:hover::after {
+  background: var(--color-text-primary) !important;
+  opacity: 1;
+}
+
+.theme-doc-sidebar-container .menu__list-item-collapsible:has(.menu__link--active) .menu__caret,
+.theme-doc-sidebar-container .menu__link--sublist[aria-expanded='true'] + .menu__caret,
+.theme-doc-sidebar-container .menu__caret[aria-expanded='true'] {
+  color: var(--color-text-brand) !important;
+}
+
+.theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:has(.menu__link--active) > .menu__caret,
+.theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--sublist[aria-expanded='true'] + .menu__caret,
+.theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__caret[aria-expanded='true'] {
+  color: var(--color-text-secondary) !important;
+}
+
+.theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:hover > .menu__caret,
+.theme-doc-sidebar-container .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link:hover + .menu__caret {
+  color: var(--color-text-primary) !important;
 }
 
 .theme-doc-sidebar-container .menu__caret:hover,
@@ -534,8 +672,14 @@ html[data-theme='dark'] {
 }
 
 html[data-theme='dark'] .navbar {
-  background: rgba(13, 17, 23, 0.96);
-  border-bottom-color: rgba(255, 255, 255, 0.14);
+  background: var(--bg-color-container, rgb(36, 36, 36));
+  border-bottom-color: var(--color-border-component, rgb(94, 94, 94));
+}
+
+html[data-theme='dark'] .theme-layout-footer.footer {
+  background: var(--bg-color-container, rgb(36, 36, 36));
+  border-top-color: var(--color-border-component, rgb(94, 94, 94));
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.68));
 }
 
 html[data-theme='dark'] .navbar__logo-image {

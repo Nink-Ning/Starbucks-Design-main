@@ -1,4 +1,4 @@
-import React, {type ReactNode} from 'react';
+import React, {type ReactNode, useState} from 'react';
 import PlaygroundProvider from '@theme/Playground/Provider';
 import PlaygroundLayout from '@theme/Playground/Layout';
 
@@ -12,6 +12,8 @@ export default function Playground({
   metastring,
   ...props
 }: Props): ReactNode {
+  const [showCode, setShowCode] = useState(false);
+
   return (
     <div className={containerStyles.playgroundContainer}>
       <PlaygroundProvider
@@ -19,7 +21,11 @@ export default function Playground({
         transformCode={transformCode}
         metastring={metastring}
         {...props}>
-        <PlaygroundLayout position={position} />
+        <PlaygroundLayout
+          position={position}
+          showCode={showCode}
+          onToggleCode={() => setShowCode((visible) => !visible)}
+        />
       </PlaygroundProvider>
     </div>
   );

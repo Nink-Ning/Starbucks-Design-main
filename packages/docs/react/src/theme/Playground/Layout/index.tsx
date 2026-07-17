@@ -116,8 +116,13 @@ function EditorActions(): ReactNode {
   );
 }
 
-export default function PlaygroundLayout(): ReactNode {
-  const [showCode, setShowCode] = useState(false);
+type Props = {
+  showCode: boolean;
+  onToggleCode: () => void;
+  position?: unknown;
+};
+
+export default function PlaygroundLayout({showCode, onToggleCode}: Props): ReactNode {
   const isBrowser = useIsBrowser();
 
   return (
@@ -144,7 +149,7 @@ export default function PlaygroundLayout(): ReactNode {
           type="button"
           className={styles.showCodeButton}
           aria-expanded={showCode}
-          onClick={() => setShowCode((visible) => !visible)}>
+          onClick={onToggleCode}>
           <CodeIcon />
           {showCode ? 'Hide code' : 'Show code'}
         </button>

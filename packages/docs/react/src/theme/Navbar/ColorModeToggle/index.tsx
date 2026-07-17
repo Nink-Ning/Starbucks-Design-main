@@ -73,6 +73,7 @@ export default function NavbarColorModeToggle({className}: Props): ReactNode {
             className="navbar-framework-switch__icon navbar-framework-switch__icon--react"
             aria-hidden="true"
           />
+          <span className="navbar-framework-switch__text">React</span>
         </a>
         <a
           className={[
@@ -91,6 +92,7 @@ export default function NavbarColorModeToggle({className}: Props): ReactNode {
             className="navbar-framework-switch__icon navbar-framework-switch__icon--vue"
             aria-hidden="true"
           />
+          <span className="navbar-framework-switch__text">Vue</span>
         </a>
       </div>
       <button

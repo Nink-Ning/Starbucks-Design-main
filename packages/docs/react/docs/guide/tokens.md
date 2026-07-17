@@ -2,13 +2,59 @@
 sidebar_position: 3
 ---
 
-import TokenPreview from '@site/src/components/TokenPreview';
+import { TokenPreviewProvider, TokenGroupPreview } from '@site/src/components/TokenPreview';
 
 # 设计令牌
 
 组件库的全局 Token，可以在此查看组件库内置的设计变量以及默认值。
 
-<TokenPreview />
+<TokenPreviewProvider>
+
+## 主色
+
+<TokenGroupPreview group="主色" />
+
+## 成功色
+
+<TokenGroupPreview group="成功色" />
+
+## 警告色
+
+<TokenGroupPreview group="警告色" />
+
+## 危险色
+
+<TokenGroupPreview group="危险色" />
+
+## 链接色
+
+<TokenGroupPreview group="链接色" />
+
+## 语义主色
+
+<TokenGroupPreview group="语义主色" />
+
+## 文本色
+
+<TokenGroupPreview group="文本色" />
+
+## 背景色
+
+<TokenGroupPreview group="背景色" />
+
+## 字体
+
+<TokenGroupPreview group="字体" />
+
+## 圆角
+
+<TokenGroupPreview group="圆角" />
+
+## 间距
+
+<TokenGroupPreview group="间距" />
+
+</TokenPreviewProvider>
 
 ## 更新 Token
 

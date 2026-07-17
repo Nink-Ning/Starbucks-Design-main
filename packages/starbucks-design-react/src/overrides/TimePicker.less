@@ -42,4 +42,344 @@
 //   • Focus Shadow/Default
 
 // Component-specific style overrides:
-// (extend with CSS custom property overrides as needed)
+.arco-picker,
+.arco-timepicker-container,
+.arco-timepicker,
+.arco-timepicker-cell {
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+}
+
+// TimePicker shares Arco's `.arco-picker` shell with DatePicker.
+// Keep the field behavior aligned with the optimized Input/Select states.
+.arco-picker {
+  box-sizing: border-box;
+  height: 32px;
+  padding: 0 var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-picker:not(.arco-picker-disabled):not(.arco-picker-error):not(.arco-picker-warning):hover {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-picker-focused:not(.arco-picker-disabled):not(.arco-picker-error):not(.arco-picker-warning),
+.arco-picker:not(.arco-picker-disabled):not(.arco-picker-error):not(.arco-picker-warning):focus-within {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-picker-focused:not(.arco-picker-disabled):not(.arco-picker-error):not(.arco-picker-warning):hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-picker-error,
+.arco-picker-error:hover,
+.arco-picker-error.arco-picker-focused,
+.arco-picker-error:focus-within {
+  color: var(--color-text-primary) !important;
+  background-color: var(--bg-color-container) !important;
+  border-color: var(--color-danger) !important;
+}
+
+.arco-picker-error.arco-picker-focused,
+.arco-picker-error:focus-within {
+  box-shadow: 0 0 0 2px var(--color-danger-focus) !important;
+}
+
+.arco-picker-warning,
+.arco-picker-warning:hover,
+.arco-picker-warning.arco-picker-focused,
+.arco-picker-warning:focus-within {
+  color: var(--color-text-primary) !important;
+  background-color: var(--bg-color-container) !important;
+  border-color: var(--color-warning) !important;
+}
+
+.arco-picker-warning.arco-picker-focused,
+.arco-picker-warning:focus-within {
+  box-shadow: 0 0 0 2px var(--color-warning-focus) !important;
+}
+
+.arco-picker-disabled,
+.arco-picker-disabled:hover,
+.arco-picker-disabled:focus-within {
+  color: var(--color-text-disabled) !important;
+  background-color: var(--bg-color-component-disabled) !important;
+  border-color: var(--color-border-component) !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+}
+
+.arco-picker-size-mini {
+  height: 24px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-picker-size-small {
+  height: 28px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-picker-size-large {
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  font-size: var(--fs-16);
+  line-height: var(--lh-24);
+}
+
+.arco-picker-input {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.arco-picker-input input {
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  color: var(--color-text-primary);
+  font-size: inherit;
+  line-height: inherit;
+  background: transparent;
+}
+
+.arco-picker-input input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.arco-picker-disabled .arco-picker-input input,
+.arco-picker-disabled .arco-picker-input input::placeholder {
+  color: var(--color-text-disabled);
+}
+
+.arco-picker-prefix,
+.arco-picker-suffix,
+.arco-picker-suffix-icon,
+.arco-picker-clear-icon,
+.arco-picker-separator {
+  color: var(--color-text-secondary);
+}
+
+.arco-picker-prefix {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  margin-right: var(--spacing-4);
+}
+
+.arco-picker-suffix {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 100%;
+  margin-left: var(--spacing-4);
+  padding: 0;
+}
+
+.arco-picker-suffix-icon,
+.arco-picker-clear-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: var(--fs-16);
+  line-height: 16px;
+}
+
+.arco-picker-clear-icon:hover,
+.arco-picker-clear-icon.arco-icon-hover:hover,
+.arco-picker-clear-icon .arco-icon-hover:hover,
+.arco-picker-icon-hover:hover {
+  color: var(--color-text-primary);
+  background-color: transparent;
+}
+
+.arco-picker-clear-icon::before,
+.arco-picker-clear-icon:hover::before,
+.arco-picker-clear-icon.arco-icon-hover::before,
+.arco-picker-clear-icon.arco-icon-hover:hover::before,
+.arco-picker-clear-icon .arco-icon-hover::before,
+.arco-picker-clear-icon .arco-icon-hover:hover::before,
+.arco-picker-icon-hover::before,
+.arco-picker-icon-hover:hover::before {
+  background-color: transparent !important;
+}
+
+.arco-picker-range .arco-picker-input {
+  flex: 1 1 0;
+  align-self: center;
+  height: calc(100% - var(--spacing-4));
+  padding: 0 var(--spacing-3);
+  background-color: transparent !important;
+  border-radius: var(--border-radius-xs);
+}
+
+.arco-picker-range .arco-picker-input-active,
+.arco-picker-range .arco-picker-input-active:hover,
+.arco-picker-range .arco-picker-input-active:focus-within {
+  background-color: transparent !important;
+  border-radius: var(--border-radius-xs);
+  box-shadow: none;
+}
+
+.arco-picker-range .arco-picker-input:focus-within {
+  background-color: var(--bg-color-component) !important;
+}
+
+.arco-picker-range .arco-picker-input input,
+.arco-picker-range .arco-picker-input-active input,
+.arco-picker-range .arco-picker-input-active:hover input,
+.arco-picker-range .arco-picker-input-active:focus-within input {
+  height: 100%;
+  padding: 0;
+  background-color: transparent !important;
+  border-radius: var(--border-radius-xs);
+}
+
+.arco-picker-range .arco-picker-suffix,
+.arco-picker-range .arco-picker-suffix:hover,
+.arco-picker-range .arco-picker-suffix:focus-within {
+  background-color: transparent !important;
+}
+
+.arco-picker-range .arco-picker-separator {
+  flex: 0 0 auto;
+  margin: 0 var(--spacing-2);
+  color: var(--color-text-secondary);
+}
+
+// Time panel: reuse Select/Dropdown panel language.
+.arco-timepicker-container {
+  box-sizing: border-box;
+  margin-top: var(--spacing-2);
+  overflow: hidden;
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.arco-timepicker {
+  background-color: var(--bg-color-container);
+}
+
+.arco-timepicker-list {
+  box-sizing: border-box;
+  width: 72px;
+  padding: var(--spacing-3);
+  overflow-y: auto;
+  background-color: var(--bg-color-container);
+  border-right: 1px solid var(--bg-color-secondarycomponent) !important;
+}
+
+.arco-timepicker-list:last-child {
+  border-right: none !important;
+}
+
+.arco-timepicker-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.arco-timepicker-cell {
+  box-sizing: border-box;
+  height: 28px;
+  margin: 0 0 var(--spacing-1);
+  padding: 0;
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  list-style: none;
+}
+
+.arco-timepicker-cell:last-child {
+  margin-bottom: 0;
+}
+
+.arco-timepicker-cell-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 28px;
+  color: inherit;
+  font-size: inherit;
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  background-color: transparent;
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease;
+}
+
+.arco-timepicker-cell:not(.arco-timepicker-cell-disabled):hover .arco-timepicker-cell-inner {
+  color: var(--color-text-primary) !important;
+  background-color: var(--bg-color-secondarycontainer-hover) !important;
+}
+
+.arco-timepicker-cell-selected .arco-timepicker-cell-inner,
+.arco-timepicker-cell-selected:not(.arco-timepicker-cell-disabled):hover .arco-timepicker-cell-inner {
+  color: var(--color-primary) !important;
+  font-weight: var(--fw-semibold);
+  background-color: var(--color-primary-light) !important;
+}
+
+.arco-timepicker-cell-disabled,
+.arco-timepicker-cell-disabled .arco-timepicker-cell-inner,
+.arco-timepicker-cell-disabled:hover .arco-timepicker-cell-inner {
+  color: var(--color-text-disabled) !important;
+  background-color: transparent !important;
+  cursor: not-allowed;
+}
+
+.arco-timepicker-footer,
+.arco-timepicker-footer-btn-wrapper {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-top: 1px solid var(--bg-color-secondarycomponent);
+}
+
+.arco-timepicker-footer {
+  padding: var(--spacing-3);
+}
+
+.arco-timepicker-footer-btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arco-timepicker-footer-btn-wrapper .arco-btn {
+  height: 28px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}

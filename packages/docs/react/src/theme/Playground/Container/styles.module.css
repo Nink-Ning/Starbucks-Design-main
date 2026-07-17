@@ -1,12 +1,19 @@
 .playgroundContainer {
   position: relative;
+  z-index: 0;
   margin-bottom: var(--ifm-leading);
   border-radius: var(--ifm-global-radius);
   box-shadow: none;
   overflow: visible;
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border: 1px solid var(--color-border-component, var(--ifm-color-emphasis-300));
+}
+
+.playgroundContainer:has(:global(.arco-select-popup)),
+.playgroundContainer:has(:global(.arco-dropdown-menu)),
+.playgroundContainer:has(:global(.arco-trigger-popup)) {
+  z-index: 20;
 }
 
 [data-theme='dark'] .playgroundContainer {
-  border-color: var(--ifm-color-emphasis-400);
+  border-color: var(--color-border-component, var(--ifm-color-emphasis-400));
 }

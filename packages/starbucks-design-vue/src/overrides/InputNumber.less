@@ -43,4 +43,292 @@
 //   • mode/light/font-gray-4
 
 // Component-specific style overrides:
-// (extend with CSS custom property overrides as needed)
+.arco-input-number {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+}
+
+.arco-input-number .arco-input-inner-wrapper {
+  min-height: 32px;
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-input-number:not(.arco-input-group-wrapper-disabled) .arco-input-inner-wrapper:hover {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-input-number:not(.arco-input-group-wrapper-disabled) .arco-input-inner-wrapper-focus,
+.arco-input-number:not(.arco-input-group-wrapper-disabled) .arco-input-inner-wrapper:focus-within {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-input-number.arco-input-number-illegal-value .arco-input-inner-wrapper,
+.arco-input-number.arco-input-number-illegal-value .arco-input-inner-wrapper:hover,
+.arco-input-number.arco-input-number-illegal-value .arco-input-inner-wrapper-focus,
+.arco-input-number.arco-input-number-illegal-value .arco-input-inner-wrapper:focus-within {
+  border-color: var(--color-danger);
+}
+
+.arco-input-number.arco-input-number-illegal-value .arco-input-inner-wrapper-focus,
+.arco-input-number.arco-input-number-illegal-value .arco-input-inner-wrapper:focus-within {
+  box-shadow: 0 0 0 2px var(--color-danger-focus);
+}
+
+.arco-input-number.arco-input-group-wrapper-disabled .arco-input-inner-wrapper,
+.arco-input-number.arco-input-group-wrapper-disabled .arco-input-inner-wrapper:hover {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.arco-input-number .arco-input {
+  color: inherit;
+  background-color: transparent;
+}
+
+.arco-input-number .arco-input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.arco-input-number.arco-input-group-wrapper-disabled .arco-input::placeholder {
+  color: var(--color-text-disabled);
+}
+
+.arco-input-number-prefix,
+.arco-input-number-suffix {
+  color: var(--color-text-secondary);
+}
+
+.arco-input-number.arco-input-group-wrapper-disabled .arco-input-number-prefix,
+.arco-input-number.arco-input-group-wrapper-disabled .arco-input-number-suffix {
+  color: var(--color-text-disabled);
+}
+
+.arco-input-number-size-mini,
+.arco-input-number-size-mini .arco-input-group,
+.arco-input-number-size-mini .arco-input-inner-wrapper {
+  height: 24px;
+  min-height: 24px;
+}
+
+.arco-input-number-size-small,
+.arco-input-number-size-small .arco-input-group,
+.arco-input-number-size-small .arco-input-inner-wrapper {
+  height: 28px;
+  min-height: 28px;
+}
+
+.arco-input-number-size-default,
+.arco-input-number-size-default .arco-input-group,
+.arco-input-number-size-default .arco-input-inner-wrapper {
+  height: 32px;
+  min-height: 32px;
+}
+
+.arco-input-number-size-large,
+.arco-input-number-size-large .arco-input-group,
+.arco-input-number-size-large .arco-input-inner-wrapper {
+  height: 36px;
+  min-height: 36px;
+}
+
+.arco-input-number-step-button {
+  color: var(--color-text-secondary);
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-input-number-step-button:not(.arco-input-number-step-button-disabled):hover {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-component);
+  border-color: var(--color-border-component);
+}
+
+.arco-input-number-step-button:not(.arco-input-number-step-button-disabled):active {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-component-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-input-number-step-button-disabled,
+.arco-input-number-step-button-disabled:hover,
+.arco-input-number-step-button-disabled:active {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+}
+
+.arco-input-number-mode-embed .arco-input-number-step-layer {
+  right: var(--spacing-2);
+  top: var(--spacing-2);
+  bottom: var(--spacing-2);
+  width: 18px;
+  border-radius: var(--border-radius-xs);
+}
+
+.arco-input-number-mode-embed .arco-input-number-step-layer .arco-input-number-step-button {
+  background-color: var(--bg-color-component);
+  border-color: transparent;
+}
+
+.arco-input-number-mode-embed .arco-input-number-step-layer .arco-input-number-step-button:not(.arco-input-number-step-button-disabled):hover {
+  background-color: var(--bg-color-component-hover);
+}
+
+.arco-input-number-mode-embed.arco-input-group-wrapper-disabled .arco-input-number-step-layer .arco-input-number-step-button {
+  background-color: var(--bg-color-component-disabled);
+}
+
+.arco-input-number-mode-button .arco-input-group {
+  display: inline-flex;
+  align-items: stretch;
+  width: 100%;
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-input-number-mode-button .arco-input-group-addbefore,
+.arco-input-number-mode-button .arco-input-group-addafter {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 32px;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  overflow: hidden;
+  padding: 0;
+  color: var(--color-text-secondary);
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.arco-input-number-mode-button .arco-input-group-addbefore {
+  border-right-color: var(--color-border-component);
+  border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm) !important;
+}
+
+.arco-input-number-mode-button .arco-input-group-addafter {
+  border-left-color: var(--color-border-component);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0 !important;
+}
+
+.arco-input-number-mode-button .arco-input-inner-wrapper {
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-radius: 0 !important;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.arco-input-number-mode-button:not(.arco-input-group-wrapper-disabled) .arco-input-inner-wrapper:hover {
+  background-color: var(--bg-color-container-hover);
+  border-top-color: var(--color-border-component);
+  border-bottom-color: var(--color-border-component);
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-radius: 0 !important;
+}
+
+.arco-input-number-mode-button:not(.arco-input-group-wrapper-disabled) .arco-input-inner-wrapper-focus,
+.arco-input-number-mode-button:not(.arco-input-group-wrapper-disabled) .arco-input-inner-wrapper:focus-within {
+  z-index: 1;
+  background-color: var(--bg-color-container);
+  border-top-color: var(--color-primary) !important;
+  border-bottom-color: var(--color-primary) !important;
+  border-right-color: var(--color-primary) !important;
+  border-left-color: var(--color-primary) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 0 0 2px var(--color-primary-focus) !important;
+}
+
+.arco-input-number-mode-button .arco-input-group .arco-input-number-step-button {
+  position: static !important;
+  inset: auto !important;
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  min-width: 0;
+  height: 100% !important;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  border-radius: 0 !important;
+}
+
+.arco-input-number-mode-button.arco-input-number-size-mini .arco-input-group-addbefore,
+.arco-input-number-mode-button.arco-input-number-size-mini .arco-input-group-addafter {
+  flex-basis: 24px;
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  min-height: 24px;
+}
+
+.arco-input-number-mode-button.arco-input-number-size-small .arco-input-group-addbefore,
+.arco-input-number-mode-button.arco-input-number-size-small .arco-input-group-addafter {
+  flex-basis: 28px;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+}
+
+.arco-input-number-mode-button.arco-input-number-size-large .arco-input-group-addbefore,
+.arco-input-number-mode-button.arco-input-number-size-large .arco-input-group-addafter {
+  flex-basis: 36px;
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  min-height: 36px;
+}
+
+.arco-input-number-mode-button .arco-input-group .arco-input-number-step-button:not(.arco-input-number-step-button-disabled):hover {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-component);
+}
+
+.arco-input-number-mode-button .arco-input-group .arco-input-number-step-button:not(.arco-input-number-step-button-disabled):active {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-component-hover);
+}
+
+.arco-input-number-mode-button .arco-input-group .arco-input-number-step-button-disabled,
+.arco-input-number-mode-button .arco-input-group .arco-input-number-step-button-disabled:hover,
+.arco-input-number-mode-button.arco-input-group-wrapper-disabled .arco-input-group-addbefore,
+.arco-input-number-mode-button.arco-input-group-wrapper-disabled .arco-input-group-addafter {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+}
+
+.arco-input-number-mode-button.arco-input-group-wrapper-disabled .arco-input-inner-wrapper,
+.arco-input-number-mode-button.arco-input-group-wrapper-disabled .arco-input-inner-wrapper:hover {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-top-color: var(--color-border-component);
+  border-bottom-color: var(--color-border-component);
+  border-right-color: transparent;
+  border-left-color: transparent;
+  box-shadow: none;
+}
+
+.arco-input-number-mode-button.arco-input-group-wrapper-disabled .arco-input-group-addbefore {
+  border-right-color: var(--color-border-component);
+}
+
+.arco-input-number-mode-button.arco-input-group-wrapper-disabled .arco-input-group-addafter {
+  border-left-color: var(--color-border-component);
+}

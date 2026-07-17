@@ -1146,7 +1146,7 @@ class App extends React.Component {
         <div>
           <Cascader
             placeholder="Please select ..."
-            style={{ width: 300, marginBottom: 20 }}
+            style={{ width: '100%', maxWidth: 300, marginBottom: 20 }}
             options={options}
             size={this.state.value}
             allowClear
@@ -1154,7 +1154,7 @@ class App extends React.Component {
           <br />
           <Cascader
             placeholder="Please select ..."
-            style={{ width: 300 }}
+            style={{ width: '100%', maxWidth: 300 }}
             options={options}
             mode="multiple"
             size={this.state.value}
@@ -1699,7 +1699,7 @@ function Demo() {
   ];
 
   return (
-    <Space size="large">
+    <Space size="large" wrap>
       <Cascader
         placeholder="Please select ..."
         style={{ width: 300 }}
@@ -1840,6 +1840,18 @@ function Demo() {
         defaultValue={[['beijing', 'Beijing', 'chaoyang', 'datunli']]}
         showSearch
         allowClear
+        renderTag={(props) => {
+          const { label, closable, onClose } = props;
+          return (
+            <Tag
+              closable={closable}
+              onClose={onClose}
+              style={{ margin: '2px 4px 2px 0', maxWidth: '100%' }}
+            >
+              {label}
+            </Tag>
+          );
+        }}
         fieldNames={{
           children: 'child',
           label: 'name',
@@ -1895,7 +1907,7 @@ function App () {
         <Cascader
           placeholder="Please enter ..."
           showSearch
-          style={{ width: 300 }}
+          style={{ width: '100%', maxWidth: 300 }}
           options={options}
           onSearch={handleSearch}
           onChange={(_, a) => {
@@ -1908,6 +1920,7 @@ function App () {
                 style={{
                   height: 100,
                   width: 300,
+                  maxWidth: '100%',
                   textAlign: 'center',
                   lineHeight: '100px',
                 }}
@@ -1929,7 +1942,7 @@ function App () {
     <div style={{marginBottom: 20}}>
       <Checkbox checked={showSearchPanel} onChange={setShowSearchPanel}>是否以搜索面板展示可选项</Checkbox>
     </div>
-    <Space size="large">
+    <Space size="large" wrap style={{ width: '100%' }}>
       <CascaderDemo showSearch={{ panelMode: showSearchPanel ? 'select' : 'cascader' }} />
       <CascaderDemo  showSearch={{ panelMode: showSearchPanel ? 'select' : 'cascader'}} mode="multiple" />
     </Space>
@@ -2024,7 +2037,7 @@ function Demo() {
     <Cascader
         mode='multiple'
         placeholder='Please select ...'
-        style={{ width: 600 }}
+        style={{ width: '100%', maxWidth: 600 }}
         onChange={(x, y) => {
           console.log(x, y);
         }}
@@ -2214,4 +2227,3 @@ export type ObjectValueType = {
 this.select.focus();
 this.select.blur();
 ```
-

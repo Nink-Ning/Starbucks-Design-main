@@ -41,4 +41,352 @@
 //   • Focus Shadow/Default
 
 // Component-specific style overrides:
-// (extend with CSS custom property overrides as needed)
+// DatePicker shares the `.arco-picker` trigger shell with TimePicker.
+// The shared trigger states are defined in TimePicker.less; this file focuses
+// on the calendar popup, cells and date-specific interaction states.
+
+.arco-picker-container,
+.arco-picker-range-container,
+.arco-picker-panel-wrapper,
+.arco-picker-range-panel-wrapper,
+.arco-panel-date,
+.arco-panel-month,
+.arco-panel-quarter,
+.arco-panel-year,
+.arco-panel-week {
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-primary);
+}
+
+.arco-picker-container,
+.arco-picker-range-container {
+  box-sizing: border-box;
+  margin-top: var(--spacing-2);
+  overflow: hidden;
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.arco-picker-panel-wrapper,
+.arco-picker-range-panel-wrapper,
+.arco-panel-date,
+.arco-panel-month,
+.arco-panel-quarter,
+.arco-panel-year,
+.arco-panel-week {
+  background-color: var(--bg-color-container);
+}
+
+.arco-picker-header {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-4) var(--spacing-6);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-bottom: 1px solid var(--color-border-2);
+}
+
+.arco-picker-header-value {
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-22);
+}
+
+.arco-picker-header-icon,
+.arco-picker-header-label {
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease;
+}
+
+.arco-picker-header-icon:not(.arco-picker-header-icon-hidden):hover,
+.arco-picker-header-label:hover {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-picker-body {
+  padding: var(--spacing-3) var(--spacing-5) var(--spacing-5);
+  background-color: var(--bg-color-container);
+}
+
+.arco-picker-week-list {
+  box-sizing: border-box;
+  padding: var(--spacing-4) var(--spacing-5) 0;
+  background-color: var(--bg-color-container);
+}
+
+.arco-picker-week-list-item {
+  height: 32px;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: 32px;
+  text-align: center;
+}
+
+.arco-picker-row {
+  display: flex;
+}
+
+.arco-picker-cell {
+  box-sizing: border-box;
+  padding: var(--spacing-1) 0;
+  color: var(--color-text-disabled);
+}
+
+.arco-picker-cell .arco-picker-date {
+  box-sizing: border-box;
+  padding: var(--spacing-1) var(--spacing-1);
+  background-color: transparent;
+}
+
+.arco-picker-date-value {
+  box-sizing: border-box;
+  min-width: 28px;
+  height: 28px;
+  color: var(--color-text-disabled);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: 26px;
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.arco-picker-cell-in-view .arco-picker-date-value {
+  color: var(--color-text-primary);
+  font-weight: var(--fw-regular);
+}
+
+.arco-picker-cell:not(.arco-picker-cell-disabled):not(.arco-picker-cell-selected):not(.arco-picker-cell-range-start):not(.arco-picker-cell-range-end):hover
+  .arco-picker-date-value {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  border-color: transparent;
+}
+
+.arco-picker-cell-today::after {
+  display: none;
+}
+
+.arco-picker-cell-today:not(.arco-picker-cell-selected):not(.arco-picker-cell-range-start):not(.arco-picker-cell-range-end)
+  .arco-picker-date-value {
+  color: var(--color-text-primary);
+  background-color: transparent;
+  border-color: var(--color-primary);
+}
+
+.arco-picker-cell-today:not(.arco-picker-cell-selected):not(.arco-picker-cell-range-start):not(.arco-picker-cell-range-end):hover
+  .arco-picker-date-value {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.arco-picker-cell-selected .arco-picker-date-value,
+.arco-picker-cell-selected:hover .arco-picker-date-value,
+.arco-picker-cell-range-start .arco-picker-date-value,
+.arco-picker-cell-range-start:hover .arco-picker-date-value,
+.arco-picker-cell-range-end .arco-picker-date-value,
+.arco-picker-cell-range-end:hover .arco-picker-date-value {
+  color: var(--color-white-text-1);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.arco-picker-cell-in-range .arco-picker-date,
+.arco-picker-cell-hover-in-range .arco-picker-date {
+  background-color: var(--color-primary-light);
+}
+
+.arco-picker-cell-hover-in-range .arco-picker-date-value,
+.arco-picker-cell-in-range:not(.arco-picker-cell-range-start):not(.arco-picker-cell-range-end) .arco-picker-date-value {
+  color: var(--color-primary);
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.arco-picker-cell-hover-range-start .arco-picker-date,
+.arco-picker-cell-range-start .arco-picker-date {
+  border-top-left-radius: var(--border-radius-sm);
+  border-bottom-left-radius: var(--border-radius-sm);
+}
+
+.arco-picker-cell-hover-range-end .arco-picker-date,
+.arco-picker-cell-range-end .arco-picker-date {
+  border-top-right-radius: var(--border-radius-sm);
+  border-bottom-right-radius: var(--border-radius-sm);
+}
+
+.arco-picker-cell-disabled,
+.arco-picker-cell-disabled .arco-picker-date,
+.arco-picker-cell-disabled:hover .arco-picker-date {
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+.arco-picker-cell-disabled .arco-picker-date-value,
+.arco-picker-cell-disabled:hover .arco-picker-date-value,
+.arco-picker-cell-disabled.arco-picker-cell-in-view .arco-picker-date-value {
+  color: var(--color-text-disabled);
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.arco-panel-month .arco-picker-date,
+.arco-panel-quarter .arco-picker-date,
+.arco-panel-year .arco-picker-date {
+  padding: var(--spacing-2);
+}
+
+.arco-panel-month .arco-picker-date-value,
+.arco-panel-quarter .arco-picker-date-value,
+.arco-panel-year .arco-picker-date-value {
+  width: 100%;
+  border-radius: var(--border-radius-sm) !important;
+}
+
+.arco-panel-month .arco-picker-cell .arco-picker-date-value,
+.arco-panel-quarter .arco-picker-cell .arco-picker-date-value,
+.arco-panel-year .arco-picker-cell .arco-picker-date-value,
+.arco-panel-month .arco-picker-cell:hover .arco-picker-date-value,
+.arco-panel-quarter .arco-picker-cell:hover .arco-picker-date-value,
+.arco-panel-year .arco-picker-cell:hover .arco-picker-date-value,
+.arco-panel-month .arco-picker-cell-selected .arco-picker-date-value,
+.arco-panel-quarter .arco-picker-cell-selected .arco-picker-date-value,
+.arco-panel-year .arco-picker-cell-selected .arco-picker-date-value,
+.arco-panel-month .arco-picker-cell-in-range .arco-picker-date-value,
+.arco-panel-quarter .arco-picker-cell-in-range .arco-picker-date-value,
+.arco-panel-year .arco-picker-cell-in-range .arco-picker-date-value,
+.arco-panel-month .arco-picker-cell-range-start .arco-picker-date-value,
+.arco-panel-quarter .arco-picker-cell-range-start .arco-picker-date-value,
+.arco-panel-year .arco-picker-cell-range-start .arco-picker-date-value,
+.arco-panel-month .arco-picker-cell-range-end .arco-picker-date-value,
+.arco-panel-quarter .arco-picker-cell-range-end .arco-picker-date-value,
+.arco-panel-year .arco-picker-cell-range-end .arco-picker-date-value {
+  border-radius: var(--border-radius-sm) !important;
+}
+
+.arco-panel-month
+  .arco-picker-cell:not(.arco-picker-cell-selected):not(.arco-picker-cell-range-start):not(.arco-picker-cell-range-end):not(
+    .arco-picker-cell-disabled
+  ):not(.arco-picker-cell-week)
+  .arco-picker-date-value:hover,
+.arco-panel-quarter
+  .arco-picker-cell:not(.arco-picker-cell-selected):not(.arco-picker-cell-range-start):not(.arco-picker-cell-range-end):not(
+    .arco-picker-cell-disabled
+  ):not(.arco-picker-cell-week)
+  .arco-picker-date-value:hover,
+.arco-panel-year
+  .arco-picker-cell:not(.arco-picker-cell-selected):not(.arco-picker-cell-range-start):not(.arco-picker-cell-range-end):not(
+    .arco-picker-cell-disabled
+  ):not(.arco-picker-cell-week)
+  .arco-picker-date-value:hover {
+  color: var(--color-primary) !important;
+  background-color: var(--color-primary-light) !important;
+  border-color: transparent !important;
+  border-radius: var(--border-radius-sm) !important;
+}
+
+.arco-panel-week .arco-picker-row-week .arco-picker-cell:not(.arco-picker-cell-week) .arco-picker-date {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  background-color: transparent;
+  border-radius: 0 !important;
+}
+
+.arco-panel-week .arco-picker-row-week .arco-picker-cell:nth-child(2) .arco-picker-date {
+  border-top-left-radius: var(--border-radius-sm) !important;
+  border-bottom-left-radius: var(--border-radius-sm) !important;
+}
+
+.arco-panel-week .arco-picker-row-week .arco-picker-cell:nth-child(8) .arco-picker-date {
+  border-top-right-radius: var(--border-radius-sm) !important;
+  border-bottom-right-radius: var(--border-radius-sm) !important;
+}
+
+.arco-panel-week .arco-picker-row-week .arco-picker-cell:not(.arco-picker-cell-week) .arco-picker-date-value {
+  width: 100%;
+  color: inherit;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+}
+
+.arco-panel-week .arco-picker-row-week:hover .arco-picker-cell:not(.arco-picker-cell-week):not(.arco-picker-cell-disabled) .arco-picker-date,
+.arco-panel-week .arco-picker-row-week .arco-picker-cell-in-range:not(.arco-picker-cell-week) .arco-picker-date {
+  background-color: var(--color-primary-light) !important;
+}
+
+.arco-panel-week .arco-picker-row-week:hover .arco-picker-cell:not(.arco-picker-cell-week):not(.arco-picker-cell-disabled) .arco-picker-date-value,
+.arco-panel-week .arco-picker-row-week .arco-picker-cell-in-range:not(.arco-picker-cell-week) .arco-picker-date-value {
+  color: var(--color-primary) !important;
+}
+
+.arco-panel-week .arco-picker-row-week .arco-picker-cell-selected:not(.arco-picker-cell-week) .arco-picker-date,
+.arco-panel-week .arco-picker-row-week .arco-picker-cell-range-start:not(.arco-picker-cell-week) .arco-picker-date,
+.arco-panel-week .arco-picker-row-week .arco-picker-cell-range-end:not(.arco-picker-cell-week) .arco-picker-date {
+  background-color: var(--color-primary) !important;
+}
+
+.arco-panel-week .arco-picker-row-week .arco-picker-cell-selected:not(.arco-picker-cell-week) .arco-picker-date-value,
+.arco-panel-week .arco-picker-row-week .arco-picker-cell-range-start:not(.arco-picker-cell-week) .arco-picker-date-value,
+.arco-panel-week .arco-picker-row-week .arco-picker-cell-range-end:not(.arco-picker-cell-week) .arco-picker-date-value {
+  color: var(--color-white-text-1) !important;
+}
+
+.arco-picker-footer-btn-wrapper,
+.arco-picker-footer-extra-wrapper,
+.arco-picker-footer-now-wrapper,
+.arco-panel-date-timepicker-title,
+.arco-panel-date-holder,
+.arco-panel-date:first-child .arco-panel-date-holder,
+.arco-panel-date-holder-btn:first-child,
+.arco-picker-container-shortcuts-placement-left .arco-picker-panel-wrapper,
+.arco-picker-container-shortcuts-placement-left .arco-picker-range-panel-wrapper,
+.arco-picker-range-container-shortcuts-placement-left .arco-picker-panel-wrapper,
+.arco-picker-range-container-shortcuts-placement-left .arco-picker-range-panel-wrapper {
+  border-color: var(--color-border-2);
+}
+
+.arco-picker-footer,
+.arco-picker-footer-btn-wrapper,
+.arco-picker-footer-extra-wrapper,
+.arco-picker-footer-now-wrapper {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+}
+
+.arco-picker-footer-btn-wrapper {
+  padding: var(--spacing-3);
+}
+
+.arco-picker-shortcuts,
+.arco-datepicker-shortcuts-wrapper {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+}
+
+.arco-datepicker-shortcuts-wrapper > li {
+  color: var(--color-text-primary);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-datepicker-shortcuts-wrapper > li:hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}

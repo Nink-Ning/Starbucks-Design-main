@@ -142,9 +142,16 @@ function Demo() {
         total={200}
         showJumper
         sizeCanChange
-        style={{ width: 800, marginBottom: 20 }}
+        style={{ width: '100%', maxWidth: 800, marginBottom: 20 }}
       />
-      <Pagination disabled showTotal total={200} showJumper sizeCanChange style={{ width: 800 }} />
+      <Pagination
+        disabled
+        showTotal
+        total={200}
+        showJumper
+        sizeCanChange
+        style={{ width: '100%', maxWidth: 800 }}
+      />
     </div>
   );
 };

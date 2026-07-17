@@ -131,7 +131,7 @@ function Demo() {
   return (
     <TimePicker
       format="HH:mm"
-      defaultValue={dayjs('09:24', 'HH:mm')}
+      defaultValue="09:24"
       style={{ width: 130, }}
     />
   );
@@ -244,28 +244,28 @@ function Demo() {
       <TimePicker
         use12Hours
         format="hh:mm:ss A"
-        defaultValue={dayjs('12:20:20 AM', 'hh:mm:ss A')}
+        defaultValue="12:20:20 AM"
         placeholder="请选择时间"
         style={style}
       />
       <TimePicker
         use12Hours
         format="hh:mm:ss a"
-        defaultValue={dayjs('09:20:20 pm', 'hh:mm:ss a')}
+        defaultValue="09:20:20 pm"
         placeholder="请选择时间"
         style={style}
       />
       <TimePicker
         use12Hours
         format="h:mm A"
-        defaultValue={dayjs('2:20 AM', 'h:mm A')}
+        defaultValue="2:20 AM"
         placeholder="请选择时间"
         style={style}
       />
       <TimePicker.RangePicker
         use12Hours
         format="hh:mm:ss A"
-        defaultValue={[dayjs('12:20:20 AM', 'hh:mm:ss A'), dayjs('08:30:30 PM', 'hh:mm:ss A')]}
+        defaultValue={['12:20:20 AM', '08:30:30 PM']}
         style={{ ...style, width: 300 }}
       />
     </div>
@@ -499,4 +499,3 @@ function App() {
 ```js
 export type CalendarValue = Dayjs | Date | string | number;
 ```
-

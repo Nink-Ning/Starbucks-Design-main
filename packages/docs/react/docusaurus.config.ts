@@ -1,6 +1,22 @@
 import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 
+const RESIZE_OBSERVER_LOOP_MESSAGES = [
+  'ResizeObserver loop completed with undelivered notifications.',
+  'ResizeObserver loop limit exceeded',
+];
+
+function isResizeObserverLoopError(error: unknown): boolean {
+  const message =
+    typeof error === 'string'
+      ? error
+      : error && typeof error === 'object' && 'message' in error
+        ? String((error as { message?: unknown }).message ?? '')
+        : '';
+
+  return RESIZE_OBSERVER_LOOP_MESSAGES.some((item) => message.includes(item));
+}
+
 const config: Config = {
   title: 'Starbucks Design',
   tagline: '基于 Arco Design 的星巴克主题组件库',
@@ -38,6 +54,38 @@ const config: Config = {
   ],
 
   themes: ['@docusaurus/theme-live-codeblock'],
+  plugins: [
+    function filterResizeObserverOverlay() {
+      return {
+        name: 'filter-resize-observer-overlay',
+        configureWebpack() {
+          return {
+            devServer: {
+              client: {
+                overlay: {
+                  warnings: false,
+                  errors: true,
+                  runtimeErrors: (error: unknown) => {
+                    const message =
+                      typeof error === 'string'
+                        ? error
+                        : error && typeof error === 'object' && 'message' in error
+                          ? String((error as { message?: unknown }).message ?? '')
+                          : '';
+
+                    return ![
+                      'ResizeObserver loop completed with undelivered notifications.',
+                      'ResizeObserver loop limit exceeded',
+                    ].some((item) => message.includes(item));
+                  },
+                },
+              },
+            },
+          };
+        },
+      };
+    },
+  ],
   clientModules: ['./src/client/resizeObserverErrorFilter.ts'],
 
   themeConfig: {
@@ -50,6 +98,7 @@ const config: Config = {
       items: [
         {
           to: '/docs/guide/getting-started',
+          activeBasePath: 'docs/guide',
           label: '全局配置',
           position: 'right',
           className: 'arco-btn arco-btn-text arco-btn-size-default',

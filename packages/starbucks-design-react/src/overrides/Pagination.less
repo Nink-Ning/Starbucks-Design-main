@@ -46,7 +46,10 @@
 // Component-specific style overrides:
 .arco-pagination {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
+  row-gap: var(--spacing-8);
+  max-width: 100%;
   color: var(--color-text-primary);
   font-family: var(--font-family);
   font-size: var(--fs-14);
@@ -58,6 +61,17 @@
 .arco-pagination-total-text {
   display: inline-flex;
   align-items: center;
+}
+
+.arco-pagination-list {
+  flex-wrap: wrap;
+  row-gap: var(--spacing-4);
+}
+
+.arco-pagination-jumper,
+.arco-pagination-option,
+.arco-pagination-total-text {
+  flex: none;
 }
 
 .arco-pagination-item {
