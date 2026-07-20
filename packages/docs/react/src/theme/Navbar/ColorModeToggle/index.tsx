@@ -57,6 +57,42 @@ export default function NavbarColorModeToggle({className}: Props): ReactNode {
   const title = isDark ? '切换到亮色模式' : '切换到暗色模式';
   const isVue = location.pathname.includes('/vue/');
 
+  const handleColorModeChange = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const updateColorMode = () => {
+      setColorMode(nextMode);
+    };
+
+    if (!isBrowser || !('startViewTransition' in document)) {
+      updateColorMode();
+      return;
+    }
+
+    const x = event.clientX;
+    const y = event.clientY;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    );
+
+    document.documentElement.style.setProperty('--sbux-theme-transition-x', `${x}px`);
+    document.documentElement.style.setProperty('--sbux-theme-transition-y', `${y}px`);
+    document.documentElement.style.setProperty(
+      '--sbux-theme-transition-radius',
+      `${endRadius}px`,
+    );
+    document.documentElement.dataset.themeTransition = nextMode;
+    const transition = (document as Document & {
+      startViewTransition: (callback: () => void) => {finished: Promise<void>};
+    }).startViewTransition(updateColorMode);
+
+    transition.finished.finally(() => {
+      delete document.documentElement.dataset.themeTransition;
+      document.documentElement.style.removeProperty('--sbux-theme-transition-x');
+      document.documentElement.style.removeProperty('--sbux-theme-transition-y');
+      document.documentElement.style.removeProperty('--sbux-theme-transition-radius');
+    });
+  };
+
   return (
     <div className={['navbar-theme-button-wrap', className].filter(Boolean).join(' ')}>
       <div className="navbar-framework-switch" role="radiogroup" aria-label="切换组件库框架">
@@ -103,13 +139,14 @@ export default function NavbarColorModeToggle({className}: Props): ReactNode {
       </div>
       <button
         type="button"
-        className="clean-btn navbar-theme-button"
+        className={[
+          'clean-btn navbar-theme-button',
+          isDark ? 'navbar-theme-button--dark' : 'navbar-theme-button--light',
+        ].join(' ')}
         disabled={!isBrowser}
         title={title}
         aria-label={title}
-        onClick={() => {
-          setColorMode(nextMode);
-        }}
+        onClick={handleColorModeChange}
       >
         {isDark ? <MoonIcon /> : <SunIcon />}
         <span>{label}</span>
