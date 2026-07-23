@@ -35,4 +35,208 @@
 //   • Gray/Gray4-边框
 
 // Component-specific style overrides:
-// (extend with CSS custom property overrides as needed)
+.arco-tree {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-tree-node {
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: var(--spacing-4);
+  color: var(--color-text-primary);
+  line-height: var(--lh-22);
+}
+
+// Figma's medium/default row is 34px: 4px row inset + 26px content + 4px row inset.
+.arco-tree:not(.arco-tree-size-mini):not(.arco-tree-size-small):not(.arco-tree-size-large)
+  .arco-tree-node {
+  padding-top: var(--spacing-2);
+  padding-bottom: var(--spacing-2);
+}
+
+.arco-tree-node-switcher {
+  flex: 0 0 16px;
+  width: 16px;
+  margin-right: var(--spacing-2);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  line-height: 0;
+}
+
+.arco-tree:not(.arco-tree-size-mini):not(.arco-tree-size-small):not(.arco-tree-size-large)
+  .arco-tree-node-switcher {
+  height: 16px;
+}
+
+.arco-tree-node-icon-hover {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  line-height: 0;
+}
+
+.arco-tree-node-icon-hover::before,
+.arco-tree-node-icon-hover:hover::before {
+  background-color: transparent !important;
+}
+
+.arco-tree-node-switcher-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  line-height: 0;
+}
+
+.arco-tree-node-switcher-icon svg {
+  width: 12px;
+  height: 12px;
+  font-size: var(--fs-12);
+}
+
+.arco-tree-node-switcher-icon:focus-visible {
+  outline: none;
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-tree-node-indent-block {
+  width: 16px;
+  margin-right: var(--spacing-4);
+}
+
+.arco-tree-node-title {
+  margin-left: 0;
+  padding-right: var(--spacing-4);
+  padding-left: var(--spacing-2);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.arco-tree:not(.arco-tree-size-mini):not(.arco-tree-size-small):not(.arco-tree-size-large)
+  .arco-tree-node-title {
+  min-height: 26px;
+  padding-top: var(--spacing-1);
+  padding-bottom: var(--spacing-1);
+}
+
+.arco-tree-node-title:hover {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-secondarycontainer);
+}
+
+.arco-tree-node-selected .arco-tree-node-title,
+.arco-tree-node-selected .arco-tree-node-title:hover,
+.arco-tree-node-title-highlight {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.arco-tree-node-disabled .arco-tree-node-title,
+.arco-tree-node-disabled .arco-tree-node-title:hover,
+.arco-tree-node-disabled-selectable .arco-tree-node-title,
+.arco-tree-node-disabled-selectable .arco-tree-node-title:hover,
+.arco-tree .arco-tree-node-disabled.arco-tree-node-selected .arco-tree-node-title,
+.arco-tree
+  .arco-tree-node-disabled-selectable.arco-tree-node-selected
+  .arco-tree-node-title {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-container);
+  cursor: not-allowed;
+}
+
+.arco-tree-node-disabled .arco-tree-node-switcher,
+.arco-tree-node-disabled .arco-tree-node-custom-icon,
+.arco-tree-node-disabled-selectable .arco-tree-node-switcher,
+.arco-tree-node-disabled-selectable .arco-tree-node-custom-icon {
+  color: var(--color-text-disabled);
+}
+
+.arco-tree .arco-checkbox {
+  flex: 0 0 auto;
+  margin-right: var(--spacing-4);
+  margin-left: var(--spacing-2);
+}
+
+.arco-tree-node-custom-icon {
+  margin-right: var(--spacing-4);
+  color: var(--color-text-secondary);
+  line-height: 1;
+}
+
+.arco-tree-node-drag-icon,
+.arco-tree .arco-icon-loading {
+  color: var(--color-primary);
+}
+
+.arco-tree-node-title-dragging,
+.arco-tree-node-title-dragging:hover {
+  color: var(--color-text-secondary);
+  background-color: var(--bg-color-secondarycontainer-active);
+}
+
+.arco-tree-show-line .arco-tree-node-switcher,
+.arco-tree-show-line .arco-tree-node-indent-block {
+  width: 16px;
+}
+
+.arco-tree-show-line .arco-tree-node-indent-block::before,
+.arco-tree-show-line
+  .arco-tree-node-is-leaf:not(.arco-tree-node-is-tail)
+  .arco-tree-node-indent::after {
+  border-color: var(--color-border-component);
+}
+
+.arco-tree-node-minus-icon,
+.arco-tree-node-plus-icon {
+  color: var(--color-text-secondary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+}
+
+.arco-tree-node-minus-icon::after,
+.arco-tree-node-plus-icon::before,
+.arco-tree-node-plus-icon::after {
+  color: var(--color-text-secondary);
+  background-color: var(--color-text-secondary);
+}
+
+.arco-tree-rtl .arco-tree-node {
+  padding-right: var(--spacing-4);
+  padding-left: 0;
+}
+
+.arco-tree-rtl .arco-tree-node-switcher {
+  margin-right: 0;
+  margin-left: var(--spacing-2);
+}
+
+.arco-tree-rtl .arco-tree-node-indent-block {
+  margin-right: 0;
+  margin-left: var(--spacing-4);
+}
+
+.arco-tree-rtl .arco-tree-node-title {
+  margin-right: 0;
+  padding-right: var(--spacing-2);
+  padding-left: var(--spacing-4);
+}
+
+.arco-tree-rtl .arco-checkbox {
+  margin-right: var(--spacing-2);
+  margin-left: var(--spacing-4);
+}

@@ -1,0 +1,33 @@
+.tree-extra-demo .arco-tree-node-title-block {
+  padding-right: var(--spacing-9);
+}
+
+.tree-extra-demo .tree-node-add-button {
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-2);
+  width: var(--spacing-7);
+  min-width: var(--spacing-7);
+  height: var(--spacing-7);
+  padding: 0;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.tree-extra-demo .tree-node-add-button svg {
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+}
+
+.tree-extra-demo .arco-tree-node:hover .tree-node-add-button,
+.tree-extra-demo .arco-tree-node:focus-within .tree-node-add-button {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
