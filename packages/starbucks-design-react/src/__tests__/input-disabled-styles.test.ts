@@ -27,3 +27,20 @@ describe('input disabled styles', () => {
     },
   )
 })
+
+describe('input addon styles', () => {
+  it('aligns addBefore and addAfter labels with the Select addon pattern', () => {
+    const styles = readOverride('Input')
+
+    expect(styles).toContain(
+      '.arco-input-group-addbefore,\n.arco-input-group-addafter {',
+    )
+    expect(styles).toContain('min-height: 32px;')
+    expect(styles).toContain('padding: 0 var(--spacing-6);')
+    expect(styles).toContain('font-size: var(--fs-14);')
+    expect(styles).toContain('line-height: var(--lh-22);')
+    expect(styles).toContain('vertical-align: middle;')
+    expect(styles).toContain('border: 1px solid var(--color-border-component);')
+    expect(styles).toContain('border-radius: var(--border-radius-sm);')
+  })
+})
