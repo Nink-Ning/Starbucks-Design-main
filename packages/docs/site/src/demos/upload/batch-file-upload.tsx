@@ -28,6 +28,7 @@ export default function Demo() {
           </div>
           <Table
             className="sb-upload-file-table"
+            border={false}
             columns={columns}
             data={[]}
             pagination={false}

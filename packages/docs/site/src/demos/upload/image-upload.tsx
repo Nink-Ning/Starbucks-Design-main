@@ -13,7 +13,7 @@ export default function Demo() {
         listType="picture-card"
         showUploadList={false}
       >
-        <Button className="sb-upload-image-trigger" type="outline" icon={<IconPlus />}>
+        <Button className="sb-upload-image-trigger" type="dashed" icon={<IconPlus />}>
           点击上传图片
         </Button>
       </Upload>

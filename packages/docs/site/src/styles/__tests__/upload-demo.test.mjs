@@ -12,6 +12,7 @@ const vueOverrideUrl = new URL(
   '../../../../../starbucks-design-vue/src/overrides/Upload.less',
   import.meta.url,
 );
+const showcaseStylesUrl = new URL('../../demos/upload/showcase.css', import.meta.url);
 
 test('upload showcases follow the Figma order and reuse design-system primitives', async () => {
   const docs = await readFile(docsUrl, 'utf8');
@@ -54,6 +55,7 @@ test('upload showcases follow the Figma order and reuse design-system primitives
   assert.match(imageReact, /<IconPlus\b/);
   assert.match(dragReact, /<Link\b/);
   assert.match(batchFileReact, /<Table\b/);
+  assert.match(batchFileReact, /border=\{false\}/);
 });
 
 test('React and Vue Upload overrides preserve the shared Figma geometry', async () => {
@@ -73,4 +75,28 @@ test('React and Vue Upload overrides preserve the shared Figma geometry', async 
 
   assert.match(reactStyles, /\.arco-upload-trigger-with-icon\.arco-btn-primary/);
   assert.match(vueStyles, /\.arco-upload > \.arco-btn-primary/);
+});
+
+test('upload showcase matches the file-flow geometry and alignment', async () => {
+  const styles = await readFile(showcaseStylesUrl, 'utf8');
+
+  assert.match(
+    styles,
+    /\.sb-upload-image-trigger\.arco-btn\.arco-btn-dashed\s*\{[^}]*border:\s*1px dashed/s,
+  );
+  assert.match(
+    styles,
+    /\.sb-upload-demo\.sb-upload-flow-upload\s*\{[^}]*width:\s*496px/s,
+  );
+  assert.match(
+    styles,
+    /\.sb-upload-flow-header \.sb-upload-tip\s*\{[^}]*text-align:\s*left/s,
+  );
+  assert.match(styles, /\.sb-upload-file-table thead \.arco-table-th\s*\{[^}]*height:\s*46px/s);
+  assert.match(
+    styles,
+    /\.sb-upload-file-table thead \.arco-table-th\s*\{[^}]*border-bottom:\s*0/s,
+  );
+  assert.match(styles, /\.sb-upload-file-table \.arco-table-th-item\s*\{[^}]*padding:\s*0/s);
+  assert.match(styles, /\.sb-upload-table-empty\s*\{[^}]*height:\s*210px/s);
 });

@@ -16,6 +16,7 @@
           </div>
           <Table
             class="sb-upload-file-table"
+            :bordered="false"
             :columns="columns"
             :data="[]"
             :pagination="false"
