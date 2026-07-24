@@ -287,29 +287,44 @@
 }
 
 .arco-select-multiple .arco-input-tag {
+  height: 24px;
+  min-height: 24px;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
 
 .arco-select-multiple .arco-input-tag-view {
+  height: 24px;
   min-height: 24px;
   overflow: hidden;
 }
 
 .arco-select-multiple .arco-input-tag-inner {
+  align-items: center;
+  height: 24px;
+  min-height: 24px;
   flex-wrap: nowrap;
   padding-top: 0;
   padding-bottom: 0;
   overflow: hidden;
 }
 
+.arco-select-size-mini.arco-select-multiple .arco-input-tag,
+.arco-select-size-mini.arco-select-multiple .arco-input-tag-view,
+.arco-select-size-mini.arco-select-multiple .arco-input-tag-inner,
+.arco-select-size-small.arco-select-multiple .arco-input-tag,
+.arco-select-size-small.arco-select-multiple .arco-input-tag-view,
+.arco-select-size-small.arco-select-multiple .arco-input-tag-inner {
+  height: 20px;
+  min-height: 20px;
+}
+
 .arco-select-multiple .arco-input-tag-tag,
 .arco-select-multiple .arco-tag {
   height: 24px;
   min-height: 24px;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0 !important;
   padding: 0 var(--spacing-4);
   color: var(--color-text-primary);
   font-size: var(--fs-12);
@@ -317,6 +332,15 @@
   background-color: var(--bg-color-component);
   border: 1px solid transparent;
   border-radius: var(--border-radius-sm);
+}
+
+.arco-select-size-mini.arco-select-multiple .arco-input-tag-tag,
+.arco-select-size-mini.arco-select-multiple .arco-tag,
+.arco-select-size-small.arco-select-multiple .arco-input-tag-tag,
+.arco-select-size-small.arco-select-multiple .arco-tag {
+  height: 20px;
+  min-height: 20px;
+  padding: 0 var(--spacing-2);
 }
 
 .arco-select-multiple .arco-input-tag.arco-input-tag-focus .arco-input-tag-tag,
