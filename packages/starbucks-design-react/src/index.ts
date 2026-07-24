@@ -3,6 +3,8 @@
 import './components.less'
 import './theme.css'
 
+export { Radio } from './radio'
+export type { RadioButtonVariant, StarbucksRadioGroupProps } from './radio'
 import React, { forwardRef } from 'react'
 import { Select as ArcoSelect } from '@arco-design/web-react'
 import type { SelectProps } from '@arco-design/web-react'
