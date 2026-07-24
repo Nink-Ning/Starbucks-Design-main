@@ -1,0 +1,209 @@
+.sb-upload-demo {
+  width: 496px;
+  max-width: 100%;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+}
+
+.sb-demo-preview > .fw-react:has(.sb-upload-demo),
+.sb-demo-preview > .fw-vue:has(.sb-upload-demo) {
+  width: 100%;
+}
+
+.sb-upload-tip {
+  margin-top: 8px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.sb-upload-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.sb-upload-input-row > .arco-input,
+.sb-upload-input-row > .arco-input-wrapper,
+.sb-upload-input-row > .arco-input-inner-wrapper {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.sb-upload-image-trigger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 120px;
+  height: 120px;
+  padding: 16px;
+  color: var(--color-text-secondary);
+  font: inherit;
+  font-size: 12px;
+  line-height: 20px;
+  background: var(--bg-color-component-disabled);
+  border: 1px dashed var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sb-upload-image-trigger:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.sb-upload-image-trigger:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+  outline: none;
+}
+
+.sb-upload-image-trigger svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 10px;
+}
+
+.sb-upload-image-trigger > svg + span {
+  margin-left: 0;
+}
+
+.sb-upload-drop-upload,
+.sb-upload-drop-upload .arco-upload,
+.sb-upload-drop-upload .arco-upload-trigger,
+.sb-upload-drop-upload .arco-upload-trigger > div {
+  width: 100%;
+}
+
+.sb-upload-drop-upload > .arco-upload-drag,
+.sb-upload-flow-upload > .arco-upload-drag {
+  height: auto;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.sb-upload-drop-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 144px;
+  padding: 16px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 22px;
+  background: var(--bg-color-container);
+  border: 1px dashed var(--color-border-component);
+  border-radius: var(--border-radius-xs);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sb-upload-drop-trigger:hover {
+  border-color: var(--color-primary);
+}
+
+.sb-upload-drop-trigger:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+  outline: none;
+}
+
+.sb-upload-drop-trigger .arco-link {
+  margin-right: 4px;
+}
+
+.sb-upload-flow-upload,
+.sb-upload-flow-upload .arco-upload,
+.sb-upload-flow-upload .arco-upload-trigger,
+.sb-upload-flow-upload .arco-upload-trigger > div {
+  width: 100%;
+}
+
+.sb-upload-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.sb-upload-flow-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sb-upload-flow-header .sb-upload-tip {
+  flex: 1;
+  margin-top: 0;
+}
+
+.sb-upload-flow-drop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 256px;
+  padding: 16px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  background: var(--bg-color-container);
+  border: 1px dashed var(--color-border-component);
+}
+
+.sb-upload-flow-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.sb-upload-file-table {
+  width: 100%;
+}
+
+.sb-upload-file-table .arco-table-container {
+  border-color: var(--color-border-component);
+}
+
+.sb-upload-table-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 164px;
+  padding: 16px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  border: 1px dashed var(--color-border-component);
+}
+
+@media (max-width: 560px) {
+  .sb-upload-flow-header,
+  .sb-upload-input-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .sb-upload-input-row .arco-upload,
+  .sb-upload-input-row .arco-btn,
+  .sb-upload-flow-header .arco-btn {
+    width: 100%;
+  }
+}

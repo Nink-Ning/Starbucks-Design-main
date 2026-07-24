@@ -1,0 +1,458 @@
+---
+title: 上传 Upload
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+用户可传输文件或提交相应的内容。
+
+## 基础上传
+
+点击按钮选择文件上传。上传按钮、上传图标与提示文字均复用设计系统中的现有组件和样式。
+
+<FrameworkBlock framework="react">
+上传的文件列表可以通过 `fileList` 与 `onChange` 受控使用，或通过 `defaultFileList` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+上传的文件列表可以通过 `v-model`（即 `file-list` 配合 `change` 事件）双向绑定，或通过 `default-file-list` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="upload/basic-usage" />
+
+## 输入框文件上传
+
+输入框展示已选择的文件名，右侧按钮触发文件选择。
+
+<Demo name="upload/file-input-upload" />
+
+## 图片上传
+
+点击 120 × 120px 的图片上传区域选择图片文件。
+
+<Demo name="upload/image-upload" />
+
+## 拖拽上传
+
+<FrameworkBlock framework="react">
+通过 `drag` 开启拖拽上传。上传区域同时支持点击选择与拖入文件。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `draggable` 开启拖拽上传。上传区域同时支持点击选择与拖入文件。
+</FrameworkBlock>
+
+<Demo name="upload/drag-upload" />
+
+## 批量上传图片
+
+<FrameworkBlock framework="react">
+通过 `multiple` 开启多选，配合 `autoUpload={false}` 和 `limit` 组成手动批量上传流程。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `multiple` 开启多选，配合 `:auto-upload="false"` 和 `limit` 组成手动批量上传流程。
+</FrameworkBlock>
+
+<Demo name="upload/batch-image-upload" />
+
+## 批量上传文件
+
+<FrameworkBlock framework="react">
+上传入口、文件表格与操作按钮组合展示，空状态支持拖拽添加文件。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+上传入口、文件表格与操作按钮组合展示，空状态支持拖拽添加文件。
+</FrameworkBlock>
+
+<Demo name="upload/batch-file-upload" />
+
+## 手动上传
+
+<FrameworkBlock framework="react">
+设置 `autoUpload` 为 `false` 时候，可以通过调用 `submit` 方法进行手动上传。`submit` 只会上传处于 `fileList` 中的文件。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+设置 `auto-upload` 为 `false` 时候，可以通过调用 `submit` 方法进行手动上传。
+</FrameworkBlock>
+
+<Demo name="upload/manual-upload" />
+
+## 上传前校验
+
+`beforeUpload` 会在每一个文件上传之前执行。如果返回 `false` 或者 `Promise.reject`，那么将会取消当前文件的上传。
+
+<Demo name="upload/before-upload" />
+
+## 上传前裁剪
+
+<FrameworkBlock framework="react">
+`beforeUpload` 会在每一个文件上传之前执行。如果返回 false 或者 Promise.reject，那么将会取消当前文件的上传。该示例配合 `react-easy-crop` 可以实现上传前裁剪。
+</FrameworkBlock>
+
+## 移除前校验
+
+<FrameworkBlock framework="react">
+`onRemove` 会在每个文件从上传列表中删除之前执行。如果返回 `false` 或者 `Promise.reject`，那么将会终止移除操作。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+`on-before-remove` 会在每一个文件移除之前执行。如果返回 `false` 或者 `Promise.reject`，那么将会取消当前文件的操作。
+</FrameworkBlock>
+
+<Demo name="upload/before-remove" />
+
+## 限制上传数量
+
+通过 `limit` 限制上传的最大数量。超出后上传按钮会隐藏。
+
+<Demo name="upload/limit-upload" />
+
+## 自定义上传节点
+
+<FrameworkBlock framework="react">
+可以传入自定义内容作为文件上传的触发节点。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以通过插槽 `upload-button` 传入自定义内容作为文件上传的触发节点。
+</FrameworkBlock>
+
+<Demo name="upload/custom-upload-node" />
+
+## 自定义图标
+
+<FrameworkBlock framework="react">
+`showUploadList` 字段可以设置图标。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `custom-icon` 自定义图标。
+</FrameworkBlock>
+
+<Demo name="upload/custom-icon" />
+
+## 自定义文件上传列表展示
+
+<FrameworkBlock framework="react">
+传入 `renderUploadList` 可以自定义展示文件上传列表。第一个参数是当前上传列表，第二个参数是上传列表相关的属性。详细可参考 `<UploadListProps>`。
+</FrameworkBlock>
+
+<Demo name="upload/render-upload-list" />
+
+## 自定义上传请求
+
+<FrameworkBlock framework="react">
+默认通过 Ajax 请求上传，可以设置 `customRequest` 覆盖默认的上传请求，实现自定义上传。返回值是一个对象，包含 `abort` 用来终止上传。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以通过 `custom-request` 实现自定义上传请求。
+</FrameworkBlock>
+
+<Demo name="upload/custom-upload-request" />
+
+## 自定义进度条
+
+<FrameworkBlock framework="react">
+`progressProps` 字段可以自定义进度条属性。
+</FrameworkBlock>
+
+<Demo name="upload/custom-progress" />
+
+## 文件夹上传
+
+可以通过 `directory` 开启文件夹上传。
+
+<Demo name="upload/folder-upload" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Upload
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|autoUpload|是否选中文件后自动上传|boolean |`true`|-|
+|directory|文件夹上传|boolean |`-`|2.11.0|
+|disabled|禁用|boolean |`-`|-|
+|drag|是否拖拽上传|boolean |`-`|-|
+|imagePreview|启用内置的图片预览，仅在 listType='picture-card' 时生效。(`v2.41.0`)|boolean |`-`|-|
+|multiple|文件多选|boolean |`-`|-|
+|withCredentials|上传请求是否携带 cookie|boolean |`-`|-|
+|action|上传接口地址|string |`-`|-|
+|method|上传请求的 http method|string |`post`|2.55.0|
+|listType|展示类型|'text' \| 'picture-list' \| 'picture-card' |`text`|-|
+|tip|提示文字，listType 不同，展示会有区别|string \| React.ReactNode |`-`|-|
+|accept|接受上传的类型 详细请参考。（`strict` in `2.53.0`，默认为 true。设置为 false 时，accept 表现和原生一致。设置为 true 时，会严格匹配文件后缀名，过滤掉不符合 accept 规则的文件。)|`string \| { type: string; strict?: boolean }` |`-`|-|
+|beforeUpload|上传文件之前的回调。返回 false 或者 promise抛出异常的时候会取消上传。|`(file: File, filesList: File[]) => boolean \| Promise<any>` |`() => true`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|defaultFileList|默认已上传的文件列表|UploadItem[] |`-`|-|
+|fileList|已上传的文件列表|UploadItem[] |`-`|-|
+|headers|上传时使用的 headers|object |`-`|-|
+|limit|限制上传数量。默认超出后会隐藏上传节点。对象类型在 `2.28.0` 支持|`number \| { maxCount: number; hideOnExceedLimit?: boolean }` |`-`|-|
+|onRemove|点击删除文件时的回调。返回 `false` 或者 `Promise.reject` 的时候不会执行删除。|`(file: UploadItem, fileList: UploadItem[]) => void \| boolean \| Promise<void \| boolean>` |`-`|-|
+|progressProps|进度条属性，接收所有进度条的 props。|`Partial<ProgressProps>` |`-`|-|
+|showUploadList|是否展示上传文件列表。预览图标，删除图标，文件图标，重新上传图标，取消上传图标。|boolean \| CustomIconType |`true`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|customRequest|通过覆盖默认的上传行为，可以自定义自己的上传实现|`(options: RequestOptions) => UploadRequestReturn \| void` |`-`|-|
+|data|上传时的 Body 参数|`object \| ((any: any) => object)` |`-`|-|
+|name|发请求时文件内容的参数名|`string \| ((any: any) => string)` |`-`|-|
+|onChange|上传文件改变时的回调。文件开始上传，失败，成功时会触发。注意：如果需要实时获取文件的上传进度，请在 `onProgress` 中处理。|`(fileList: UploadItem[], file: UploadItem) => void` |`-`|-|
+|onDragLeave|拖拽上传文件离开拖拽区时的回调|`(e: React.DragEvent) => void` |`-`|2.41.0|
+|onDragOver|拖拽上传文件进入拖拽区时的回调|`(e: React.DragEvent) => void` |`-`|2.41.0|
+|onDrop|拖拽上传文件时执行的回调|`(e: React.DragEvent) => void` |`-`|2.37.0|
+|onExceedLimit|超出上传数量限制时触发|`(files: File[], fileList: UploadItem[]) => void` |`-`|-|
+|onPreview|点击预览时候的回调|`(file: UploadItem) => void` |`-`|-|
+|onProgress|文件上传进度的回调|`(file: UploadItem, e?: ProgressEvent) => void` |`-`|-|
+|onReupload|文件重新上传时触发的回调|`(file: UploadItem) => void` |`-`|-|
+|renderUploadItem|自定义上传列表项|`(originNode: ReactNode, file: UploadItem, fileList: UploadItem[]) => ReactNode` |`-`|-|
+|renderUploadList|自定义展示上传文件列表|`(fileList: UploadItem[], uploadListProps: UploadListProps) => ReactNode` |`-`|-|
+
+### UploadListProps
+
+文件上传列表展示
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|disabled|禁用|boolean |`-`|
+|onRemove|点击删除文件时的回调。返回 false 或者 Promise.reject 的时候不会执行删除|`(file: UploadItem) => void \| boolean \| Promise<void \| boolean>` |`-`|
+|onAbort|中止文件上传的回调|`(file: UploadItem) => void` |`-`|
+|onPreview|点击预览时候的回调。|`(file: UploadItem) => void` |`-`|
+|onReupload|重新上传的回调|`(file: UploadItem) => void` |`-`|
+
+### UploadItem
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|percent|上传进度百分比|number |`-`|
+|name|文件名|string |`-`|
+|uid|当前上传文件的唯一标示|string  **(必填)**|`-`|
+|url|文件 url|string |`-`|
+|originFile|文件对象|File |`-`|
+|response|当前文件上传请求返回的响应|object |`-`|
+|status|当前上传文件的状态|UploadStatus |`-`|
+
+### RequestOptions
+
+```js
+export type RequestOptions = Pick<
+  UploadProps,
+  "headers" | "name" | "data" | "withCredentials" | "action" | "method"
+> & {
+  /** 更新当前文件的上传进度 。percent: 当前上传进度百分比 */
+  onProgress: (percent: number, event?: ProgressEvent) => void;
+  /** 上传成功后，调用onSuccess方法，传入的response参数将会附加到当前上传文件的reponse字段上 */
+  onSuccess: (response?: object) => void;
+  /** 上传失败后，调用onError方法，传入的 response 参数将会附加到当前上传文件的response字段 */
+  onError: (response?: object) => void;
+  /** 当前上传文件 */
+  file: File;
+};
+```
+
+### UploadRequestReturn
+
+```js
+export interface UploadRequestReturn {
+  abort?: () => void;
+  [key: string]: any;
+}
+```
+
+### CustomIconType
+
+```js
+export type CustomIconType = {
+  previewIcon?: ReactNode;
+  removeIcon?: ReactNode;
+  fileIcon?: ReactNode;
+  reuploadIcon?: ReactNode;
+  cancelIcon?: ReactNode;
+  startIcon?: ReactNode;
+  errorIcon?: ReactNode;
+  successIcon?: ReactNode;
+  fileName?: (file: UploadItem) => ReactNode;
+  // 2.34.0
+  progressRender?: (
+    file: UploadItem,
+    originDom: ReactNode
+  ) => React.ReactElement;
+  // 2.34.0
+  imageRender?: (file: UploadItem) => React.ReactNode;
+};
+```
+
+### UploadStatus
+
+```js
+export type UploadStatus = "init" | "uploading" | "done" | "error";
+```
+
+### 方法/Methods
+
+| 参数名     |                                  描述                                   |                         类型                        |
+| ---------- | :---------------------------------------------------------------------: | :--------------------------------------------------: |
+| submit   | 手动上传时，调用该方法，开始上传。示例。不传参数时，会默认上传全部`init`状态的文件。  | `(file?: UploadItem) => void` |
+| abort   | 中止文件上传 | `(file: UploadItem) => void` |
+| reupload   | 重新上传文件 | `(file: UploadItem) => void` |
+
+```js
+// 自定义图标类型
+type CustomIconType = {
+  previewIcon?: ReactNode;
+  removeIcon?: ReactNode;
+  fileIcon?: ReactNode;
+  reuploadIcon?: ReactNode;
+  cancelIcon?: ReactNode;
+  startIcon?: ReactNode;
+  errorIcon?: ReactNode;
+  fileName?: (file: UploadItem) => ReactNode;
+  progressRender?: (file: UploadItem, originDom: ReactNode) => ReactElement; // 2.34.0
+  imageRender?: (file: UploadItem) => ReactNode; // 2.34.0
+}
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<upload>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|file-list **(v-model)**|文件列表|`FileItem[]`|`-`||
+|default-file-list|默认的文件列表（非受控状态）|`FileItem[]`|`[]`||
+|accept|接收的上传文件类型，具体参考 HTML标准|`string`|`-`||
+|action|上传的URL|`string`|`-`||
+|disabled|是否禁用|`boolean`|`false`||
+|multiple|是否支持多文件上传|`boolean`|`false`||
+|directory|是否支持文件夹上传（需要浏览器支持）|`boolean`|`false`||
+|draggable|是否支持拖拽上传|`boolean`|`false`||
+|tip|提示文字|`string`|`-`||
+|headers|上传请求附加的头信息|`Record<string, string>`|`-`||
+|data|上传请求附加的数据|`Record<string, string \| Blob>\| ((fileItem: FileItem) => Record<string, string \| Blob>)`|`-`||
+|name|上传的文件名|`string \| ((fileItem: FileItem) => string)`|`-`||
+|with-credentials|上传请求是否携带 cookie|`boolean`|`false`||
+|custom-request|自定义上传行为|`(option: RequestOption) => UploadRequest`|`-`||
+|limit|限制上传文件的数量。`0`表示不限制|`number`|`0`||
+|auto-upload|是否自动上传文件|`boolean`|`true`||
+|show-file-list|是否显示文件列表|`boolean`|`true`||
+|show-remove-button|是否显示删除按钮|`boolean`|`true`|2.11.0|
+|show-retry-button|是否显示重试按钮|`boolean`|`true`|2.11.0|
+|show-cancel-button|是否显示取消按钮|`boolean`|`true`|2.11.0|
+|show-upload-button|是否显示上传按钮。2.14.0 版本新增 `showOnExceedLimit` 支持|`boolean \| { showOnExceedLimit: boolean }`|`true`|2.11.0|
+|show-preview-button|照片墙是否显示预览按钮|`boolean`|`true`|2.42.0|
+|download|是否在 `<a>` 链接上添加 download 属性|`boolean`|`false`|2.11.0|
+|show-link|在列表模式下，如果上传的文件存在 URL 则展示链接。如果关闭仅展示文字并且点击可以触发 `preview` 事件。|`boolean`|`true`|2.13.0|
+|image-loading|`<img>` 的原生 HTML 属性，需要浏览器支持|`'eager' \| 'lazy'`|`-`|2.11.0|
+|list-type|图片列表类型|`'text' \| 'picture' \| 'picture-card'`|`'text'`||
+|response-url-key|Response中获取图片URL的key，开启后会用上传的图片替换预加载的图片|`string \| ((fileItem: FileItem) => string)`|`-`||
+|custom-icon|自定义图标|`CustomIcon`|`-`||
+|image-preview|是否使用 ImagePreview 组件进行预览|`boolean`|`false`|2.14.0|
+|on-before-upload|上传文件前触发|`(file: File) => boolean \| Promise<boolean \| File>`|`-`||
+|on-before-remove|移除文件前触发|`(fileItem: FileItem) => Promise<boolean>`|`-`||
+|on-button-click|点击上传按钮触发（如果返回 Promise 则会关闭默认 input 上传）|`(event: Event) => Promise<FileList> \| void`|`-`||
+
+### `<upload>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|exceed-limit|上传的文件超出限制后触发|fileList: `FileItem[]`<br/>files: `File[]`|
+|change|上传的文件状态发生改变时触发|fileList: `FileItem[]`<br/>fileItem: `fileItem`|
+|progress|上传中的文件进度改变时触发|fileItem: `fileItem`<br/>ev: `ProgressEvent`|
+|preview|点击图片预览时的触发|fileItem: `FileItem`|
+|success|上传成功时触发|fileItem: `FileItem`|
+|error|上传失败时触发|fileItem: `FileItem`|
+
+### `<upload>` Methods
+
+|方法名|描述|参数|返回值|版本|
+|---|---|---|---|:---|
+|submit|上传文件（已经初始化完成的文件）|fileItem: `FileItem`|-||
+|abort|中止上传|fileItem: `FileItem`|-||
+|updateFile|更新文件|id: `string`<br/>file: `File`|-||
+|upload|上传文件|files: `File[]`|-|2.41.0|
+
+### `<upload>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|extra-button|上传列表额外按钮|fileItem: `FileItem`|2.43.0|
+|image|自定义图片|fileItem: `FileItem`|2.23.0|
+|file-name|文件名称|-|2.23.0|
+|file-icon|文件图标|-|2.23.0|
+|remove-icon|删除图标|-|2.23.0|
+|preview-icon|预览图标|-|2.23.0|
+|cancel-icon|取消图标|-|2.23.0|
+|start-icon|开始图标|-|2.23.0|
+|error-icon|失败图标|-|2.23.0|
+|success-icon|成功图标|-|2.23.0|
+|retry-icon|重试图标|-|2.23.0|
+|upload-button|上传按钮|-||
+|upload-item|上传列表的项目|fileItem: `FileItem`<br/>index: `number`||
+
+### FileItem
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|uid|当前上传文件的唯一标示|`string`|`-`|
+|status|当前上传文件的状态|`FileStatus`|`-`|
+|file|文件对象|`File`|`-`|
+|percent|上传进度百分比|`number`|`-`|
+|response|当前文件上传请求返回的响应|`any`|`-`|
+|url|文件地址|`string`|`-`|
+|name|文件名|`string`|`-`|
+
+### CustomIcon
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|startIcon|开始图标|`RenderFunction`|`-`|
+|cancelIcon|取消图标|`RenderFunction`|`-`|
+|retryIcon|重试图标|`RenderFunction`|`-`|
+|successIcon|成功图标|`RenderFunction`|`-`|
+|errorIcon|失败图标|`RenderFunction`|`-`|
+|removeIcon|移除图标|`RenderFunction`|`-`|
+|previewIcon|预览图标|`RenderFunction`|`-`|
+|fileIcon|文件图标|`(fileItem: FileItem) => VNode`|`-`|
+|fileName|文件名|`(fileItem: FileItem) => string \| VNode`|`-`|
+
+### RequestOption
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|action|上传的URL|`string`|`-`|
+|headers|请求报文的头信息|`Record<string, string>`|`-`|
+|name|上传文件的文件名|`string \| ((fileItem: FileItem) => string)`|`-`|
+|fileItem|上传文件|`FileItem`|`-`|
+|data|附加的请求信息|`Record<string, string \| Blob>    \| ((fileItem: FileItem) => Record<string, string \| Blob>)`|`-`|
+|withCredentials|是否携带cookie信息|`boolean`|`false`|
+|onProgress|更新当前文件的上传进度。percent: 当前上传进度百分比|`(percent: number, event?: ProgressEvent) => void`|`-`|
+|onSuccess|上传成功后，调用onSuccess方法，传入的response参数将会附加到当前上传文件的response字段上|`(response?: any) => void`|`-`|
+|onError|上传失败后，调用onError方法，传入的response参数将会附加到当前上传文件的response字段上|`(response?: any) => void`|`-`|
+
+### UploadRequest
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|abort|终止上传|`() => void`|`-`|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="react">
+
+## 常见问题
+
+#### 如何完全控制上传文件的状态和进度？
+
+可以参考 示例 ，，建议设置 `autoUpload`为 `false`。并通过 `fileList` 和 `onChange` 使组件完全受控。
+`fileList `是`UploadItem[]`，可以直接设置元素的 `status`，`percent `等字段。
+
+</FrameworkBlock>

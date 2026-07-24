@@ -46,4 +46,169 @@
 //   • Text&Icon/Font Wh1 90%-anti
 
 // Component-specific style overrides:
-// (extend with CSS custom property overrides as needed)
+.arco-upload,
+.arco-upload-list {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+}
+
+.arco-upload > .arco-btn-primary:not(.arco-btn-disabled) {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-border-component);
+}
+
+.arco-upload > .arco-btn-primary:not(.arco-btn-disabled):hover {
+  color: var(--color-primary-hover);
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.arco-upload > .arco-btn-primary:not(.arco-btn-disabled):active {
+  color: var(--color-primary-active);
+  background-color: var(--bg-color-container-active);
+  border-color: var(--color-primary-active);
+}
+
+.arco-upload > .arco-btn-primary.arco-btn-disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+}
+
+.arco-upload-tip {
+  margin-top: var(--spacing-2);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+  white-space: normal;
+  text-overflow: clip;
+}
+
+.arco-upload-picture-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 120px;
+  min-width: 120px;
+  height: 120px;
+  color: var(--color-text-secondary);
+  background-color: var(--bg-color-component-disabled);
+  border: 1px dashed var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-upload-picture-card:hover {
+  color: var(--color-primary);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-primary);
+}
+
+.arco-upload-picture-card:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-upload-picture-card-text {
+  color: inherit;
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-upload-picture-card-text > svg {
+  width: 24px;
+  height: 24px;
+}
+
+.arco-upload-drag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 144px;
+  padding: var(--spacing-6);
+  color: var(--color-text-secondary);
+  background-color: var(--bg-color-container);
+  border: 1px dashed var(--color-border-component);
+  border-radius: var(--border-radius-xs);
+}
+
+.arco-upload-drag:hover,
+.arco-upload-drag-active {
+  color: var(--color-text-secondary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-upload-drag > div:first-child {
+  display: none;
+}
+
+.arco-upload-drag-text {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-upload-disabled .arco-upload-picture-card,
+.arco-upload-disabled .arco-upload-picture-card:hover,
+.arco-upload-disabled .arco-upload-drag,
+.arco-upload-disabled .arco-upload-drag:hover {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+  box-shadow: none;
+}
+
+.arco-upload-list.arco-upload-list-type-text .arco-upload-list-item:first-of-type,
+.arco-upload-list.arco-upload-list-type-picture .arco-upload-list-item:first-of-type {
+  margin-top: var(--spacing-8);
+}
+
+.arco-upload-list-item {
+  margin-top: var(--spacing-4);
+}
+
+.arco-upload-list-item-content {
+  min-height: 40px;
+  padding: var(--spacing-4) var(--spacing-5);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-1);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-upload-list-item-file-icon,
+.arco-upload-icon-upload {
+  color: var(--color-primary);
+}
+
+.arco-upload-list-picture,
+.arco-upload-list-picture-mask {
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-upload-list-picture {
+  background-color: var(--bg-color-component-disabled);
+  border: 1px solid var(--color-border-component);
+}
+
+.arco-upload-list-picture img {
+  object-fit: cover;
+}
+
+.arco-upload-list-picture-mask {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.arco-upload-list-picture {
+  margin-right: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
+}
