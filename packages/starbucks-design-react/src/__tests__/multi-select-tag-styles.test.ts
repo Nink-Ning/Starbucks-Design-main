@@ -5,7 +5,9 @@ import { describe, expect, it } from 'vitest'
 
 const overridesDir = resolve(dirname(fileURLToPath(import.meta.url)), '../overrides')
 const styles = readFileSync(resolve(overridesDir, 'MultiSelectTag.less'), 'utf8')
+const inputTagStyles = readFileSync(resolve(overridesDir, 'InputTag.less'), 'utf8')
 const overrideIndex = readFileSync(resolve(overridesDir, '_index.less'), 'utf8')
+const theme = readFileSync(resolve(overridesDir, '../theme.css'), 'utf8')
 
 describe('shared multi-select tag styles', () => {
   it('loads the shared selected-tag override for every InputTag-backed component', () => {
@@ -21,5 +23,11 @@ describe('shared multi-select tag styles', () => {
     expect(styles).toContain('border-radius: var(--border-radius-sm);')
     expect(styles).not.toContain('background-color: transparent;')
     expect(styles).not.toContain('var(--color-border-component)')
+  })
+
+  it('keeps the rendered distance between adjacent tags at 4px', () => {
+    expect(inputTagStyles).toContain('gap: var(--spacing-2);')
+    expect(theme).toContain('--spacing-2: 4px;')
+    expect(styles).toContain('margin: 0;')
   })
 })
