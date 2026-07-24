@@ -56,4 +56,28 @@ describe('TreeSelect stylesheet', () => {
       'padding: 0 !important;',
     ])
   })
+
+  it('uses one square seam between addBefore and the focused field', () => {
+    const treeSelect = readFileSync(resolve(srcDir, 'overrides/TreeSelect.less'), 'utf8')
+
+    expectExactRule(
+      treeSelect,
+      '.arco-tree-select-wrapper > .arco-tree-select-addbefore',
+      [
+        'padding: 0 var(--spacing-6);',
+        'color: var(--color-text-secondary);',
+        'background-color: var(--bg-color-component);',
+        'border-color: var(--color-border-component);',
+        'border-right: 0;',
+        'border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);',
+      ],
+    )
+    expectExactRule(
+      treeSelect,
+      '.arco-tree-select-wrapper\n' +
+        '  > .arco-tree-select:not(:first-child)\n' +
+        '  .arco-tree-select-view',
+      ['border-top-left-radius: 0;', 'border-bottom-left-radius: 0;'],
+    )
+  })
 })

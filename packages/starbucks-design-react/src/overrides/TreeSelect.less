@@ -217,12 +217,20 @@
   background-color: transparent !important;
 }
 
-.arco-tree-select-addbefore {
+.arco-tree-select-wrapper > .arco-tree-select-addbefore {
   padding: 0 var(--spacing-6);
   color: var(--color-text-secondary);
   background-color: var(--bg-color-component);
   border-color: var(--color-border-component);
+  border-right: 0;
   border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+}
+
+.arco-tree-select-wrapper
+  > .arco-tree-select:not(:first-child)
+  .arco-tree-select-view {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .arco-tree-select-popup {
