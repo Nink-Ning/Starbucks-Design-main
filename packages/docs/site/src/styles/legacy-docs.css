@@ -1447,15 +1447,23 @@ footer:has(.pagination-links) .meta:empty {
   margin-top: 40px;
 }
 
+.sl-markdown-content > h2:has(+ .sbux-changelog) {
+  display: none;
+}
+
+.sbux-changelog ~ .sbux-changelog {
+  margin-top: 0;
+}
+
 .sbux-changelog-item {
   position: relative;
   padding-left: 32px;
 }
 
-.sbux-changelog-item::before {
+.sbux-changelog:has(~ .sbux-changelog) .sbux-changelog-item::before {
   position: absolute;
-  top: 14px;
-  bottom: 0;
+  top: 12px;
+  bottom: -12px;
   left: 4px;
   width: 1px;
   background: var(--sb-docs-border);
@@ -1467,14 +1475,20 @@ footer:has(.pagination-links) .meta:empty {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   column-gap: 16px;
-  align-items: baseline;
+  align-items: center;
   margin-bottom: 16px;
   text-align: left;
 }
 
+.sbux-changelog-date,
+.sbux-changelog-author {
+  margin-top: 0 !important;
+}
+
 .sbux-changelog-dot {
+  box-sizing: border-box;
   position: absolute;
-  top: 8px;
+  top: 7px;
   left: -33px;
   z-index: 1;
   width: 10px;
