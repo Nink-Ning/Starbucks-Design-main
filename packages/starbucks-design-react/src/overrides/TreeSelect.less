@@ -1,0 +1,255 @@
+// TreeSelect.less
+// TreeSelect combines the shared Select field contract with Tree content.
+
+.arco-tree-select,
+.arco-tree-select-view,
+.arco-tree-select-popup {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+}
+
+.arco-tree-select .arco-tree-select-view {
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-tree-select:not(.arco-tree-select-disabled):hover .arco-tree-select-view {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-tree-select-focused:not(.arco-tree-select-disabled) .arco-tree-select-view,
+.arco-tree-select:not(.arco-tree-select-disabled) .arco-tree-select-view:focus-within {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-tree-select-error .arco-tree-select-view,
+.arco-tree-select-error:not(.arco-tree-select-disabled):hover .arco-tree-select-view,
+.arco-tree-select-error.arco-tree-select-focused:not(.arco-tree-select-disabled)
+  .arco-tree-select-view {
+  border-color: var(--color-danger);
+}
+
+.arco-tree-select-error.arco-tree-select-focused:not(.arco-tree-select-disabled)
+  .arco-tree-select-view {
+  box-shadow: 0 0 0 2px var(--color-danger-focus);
+}
+
+.arco-tree-select-warning .arco-tree-select-view,
+.arco-tree-select-warning:not(.arco-tree-select-disabled):hover .arco-tree-select-view,
+.arco-tree-select-warning.arco-tree-select-focused:not(.arco-tree-select-disabled)
+  .arco-tree-select-view {
+  border-color: var(--color-warning);
+}
+
+.arco-tree-select-warning.arco-tree-select-focused:not(.arco-tree-select-disabled)
+  .arco-tree-select-view {
+  box-shadow: 0 0 0 2px var(--color-warning-focus);
+}
+
+.arco-tree-select-disabled,
+.arco-tree-select-disabled .arco-tree-select-view {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+
+.arco-tree-select-disabled .arco-tree-select-view,
+.arco-tree-select-disabled:hover .arco-tree-select-view {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+  box-shadow: none;
+}
+
+.arco-tree-select-size-default.arco-tree-select-single .arco-tree-select-view,
+.arco-tree-select-single .arco-tree-select-view {
+  height: 32px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-tree-select-size-mini.arco-tree-select-single .arco-tree-select-view,
+.arco-tree-select-size-small.arco-tree-select-single .arco-tree-select-view {
+  height: 24px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-tree-select-size-large.arco-tree-select-single .arco-tree-select-view {
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  font-size: var(--fs-16);
+  line-height: var(--lh-24);
+}
+
+.arco-tree-select-single .arco-tree-select-view-selector,
+.arco-tree-select-single .arco-tree-select-view-value {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  min-height: 0;
+}
+
+.arco-tree-select-view-input,
+.arco-tree-select-view-value,
+.arco-tree-select-view-value-mirror {
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.arco-tree-select-view-placeholder,
+.arco-tree-select-view input::placeholder,
+.arco-tree-select .arco-input-tag-input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.arco-tree-select-disabled .arco-tree-select-view-placeholder,
+.arco-tree-select-disabled .arco-tree-select-view input::placeholder,
+.arco-tree-select-disabled .arco-input-tag-input::placeholder {
+  color: var(--color-text-disabled);
+}
+
+.arco-tree-select-size-default.arco-tree-select-multiple .arco-tree-select-view,
+.arco-tree-select-multiple .arco-tree-select-view {
+  box-sizing: border-box;
+  height: 32px;
+  min-height: 32px;
+  padding: 3px var(--spacing-4) 3px var(--spacing-2);
+  overflow: hidden;
+  font-size: var(--fs-14);
+  line-height: 0;
+}
+
+.arco-tree-select-size-mini.arco-tree-select-multiple .arco-tree-select-view,
+.arco-tree-select-size-small.arco-tree-select-multiple .arco-tree-select-view {
+  height: 24px;
+  min-height: 24px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: var(--fs-12);
+}
+
+.arco-tree-select-size-large.arco-tree-select-multiple .arco-tree-select-view {
+  height: 40px;
+  min-height: 40px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: var(--spacing-4);
+  padding-right: var(--spacing-4);
+  font-size: var(--fs-16);
+}
+
+.arco-tree-select-multiple .arco-input-tag {
+  height: 24px;
+  min-height: 24px;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.arco-tree-select-multiple .arco-input-tag-view,
+.arco-tree-select-multiple .arco-input-tag-inner {
+  height: 24px;
+  min-height: 24px;
+  overflow: hidden;
+}
+
+.arco-tree-select-multiple .arco-input-tag-inner {
+  align-items: center;
+  flex-wrap: nowrap;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.arco-tree-select-prefix {
+  margin-right: var(--spacing-4);
+  color: var(--color-text-secondary);
+}
+
+.arco-tree-select-suffix {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 100%;
+  margin-left: var(--spacing-4);
+  padding: 0;
+  color: var(--color-text-secondary);
+}
+
+.arco-tree-select-multiple .arco-tree-select-suffix {
+  height: 24px;
+  padding: 0 !important;
+}
+
+.arco-tree-select-arrow-icon,
+.arco-tree-select-clear-icon,
+.arco-tree-select-loading-icon,
+.arco-tree-select-search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-16);
+  line-height: 16px;
+}
+
+.arco-tree-select-clear-icon::before,
+.arco-tree-select-clear-icon:hover::before {
+  background-color: transparent !important;
+}
+
+.arco-tree-select-addbefore {
+  padding: 0 var(--spacing-6);
+  color: var(--color-text-secondary);
+  background-color: var(--bg-color-component);
+  border-color: var(--color-border-component);
+  border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+}
+
+.arco-tree-select-popup {
+  box-sizing: border-box;
+  margin-top: var(--spacing-2);
+  padding: var(--spacing-3);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.arco-tree-select-popup .arco-tree {
+  width: 100%;
+}
+
+.arco-tree-select-popup .arco-tree-node {
+  padding-left: var(--spacing-4);
+}
+
+.arco-tree-select-highlight {
+  color: var(--color-primary);
+  font-weight: var(--fw-medium);
+}
+
+.arco-trigger:has(.arco-tree-select-popup) {
+  z-index: 10000 !important;
+  pointer-events: auto;
+}
