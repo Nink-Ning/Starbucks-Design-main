@@ -1,0 +1,100 @@
+---
+title: 间距 Space
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+设置组件之间的间距。
+
+## 基本用法
+
+间距组件的基本用法。
+
+<Demo name="space/basic" />
+
+## 垂直间距
+
+可以设置垂直方向排列的间距。
+
+<Demo name="space/vertical-gap" />
+
+## 尺寸
+
+内置 4 个尺寸，`mini - 4px` `small - 8px (默认)` `medium - 16px` `large - 24px`，也支持传数字来自定义尺寸。
+
+<Demo name="space/size" />
+
+## 对齐
+
+内置 4 种对齐方式，分别为 `start` `center` `end` `baseline`，在水平模式下默认为 `center`。
+
+<Demo name="space/alignment" />
+
+## 环绕间距
+
+环绕类型的间距，四周都有间距，一般用于换行的场景。
+
+<Demo name="space/wrap-spacing" />
+
+## 分隔符
+
+为相邻子元素设置分隔符。
+
+<Demo name="space/separator" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Space
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|wrap|环绕类型的间距，用于折行的场景。|boolean |`-`|-|
+|align|对齐方式|'start' \| 'end' \| 'center' \| 'baseline' |`-`|-|
+|direction|间距方向|'vertical' \| 'horizontal' |`horizontal`|-|
+|split|设置分隔符|ReactNode |`-`|2.22.0|
+|className|节点类名|string \| string[] |`-`|-|
+|size|尺寸。( `2.15.0` 开始支持数组形式 )|SpaceSize \| SpaceSize[] |`small`|-|
+|style|节点样式|CSSProperties |`-`|-|
+
+### SpaceSize
+
+```js
+export type SpaceSize = "mini" | "small" | "medium" | "large" | number;
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<space>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|align|对齐方式|`'start' \| 'end' \| 'center' \| 'baseline'`|`-`||
+|direction|间距方向|`'vertical' \| 'horizontal'`|`'horizontal'`||
+|size|间距大小，支持分别制定横向和竖向的间距|`number \| 'mini' \| 'small' \| 'medium' \| 'large' \| [SpaceSize, SpaceSize]`|`'small'`||
+|wrap|环绕类型的间距，用于折行的场景。|`boolean`|`false`||
+|fill|充满整行|`boolean`|`false`|2.11.0|
+
+### `<space>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|split|设置分隔符|-|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+## Type
+
+```ts
+type SpaceSize = number | 'mini' | 'small' | 'medium' | 'large';
+```
+
+</FrameworkBlock>

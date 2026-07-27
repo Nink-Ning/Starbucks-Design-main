@@ -1,0 +1,113 @@
+---
+title: 文字气泡 Tooltip
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+鼠标悬停、聚焦或点击在某个组件时，弹出的文字提示。
+
+## 基本用法
+
+鼠标移入，气泡出现，鼠标移出，气泡消失。
+
+<Demo name="tooltip/basic" />
+
+## 迷你尺寸
+
+适用于小场景或数字气泡样式。
+
+<Demo name="tooltip/mini-size" />
+
+## 位置
+
+文字气泡支持 12 个不同的方位。分别为：`上左`、`上`、`上右`、`下左`、`下`、`下右`、`左上`、`左`、`左下`、`右上`、`右`、`右下`。
+
+<Demo name="tooltip/placement" />
+
+## 受控模式
+
+<FrameworkBlock framework="react">
+通过 `popupVisible` 和 `onVisibleChange` 控制文字气泡的展开和收起。具体 `onVisibleChange` 的触发时机可查看 Trigger 组件文档。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `v-model:popup-visible` 双向绑定文字气泡的显示状态，显隐变化会触发 `popup-visible-change` 事件。
+</FrameworkBlock>
+
+<Demo name="tooltip/controlled" />
+
+## 自定义背景颜色
+
+<FrameworkBlock framework="react">
+通过 `color` 属性设置不同背景色的 `tooltip`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `background-color` 属性自定义背景颜色。
+</FrameworkBlock>
+
+<Demo name="tooltip/custom-bg-color" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Tooltip
+
+| 参数名 | 描述 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| blurToHide | 是否在失去焦点的时候关闭弹出框 | boolean | `true` | - |
+| defaultPopupVisible | 默认的弹出框状态 | boolean | `-` | - |
+| disabled | 是否禁用弹出 | boolean | `-` | - |
+| mini | 迷你尺寸 | boolean | `-` | - |
+| popupHoverStay | 鼠标移入弹出框的话，弹出框会保留而不销毁 | boolean | `true` | - |
+| popupVisible | 弹出框是打开还是关闭状态 | boolean | `-` | - |
+| unmountOnExit | 是否在隐藏的时候销毁 DOM 结构 | boolean | `true` | - |
+| childrenPrefix | 会在打开状态给元素加上一个类，格式为 `${childrenPrefix}-open`。 | string | `-` | - |
+| color | 弹出层背景色 | string | `-` | 2.22.0 |
+| position | 弹出框的方位，有 12 个方位可供选择 | \| 'top'\| 'tl'\| 'tr'\| 'bottom'\| 'bl'\| 'br'\| 'left'\| 'lt'\| 'lb'\| 'right'\| 'rt'\| 'rb' | `top` | - |
+| trigger | 触发方式 | TriggerProps['trigger'] | `hover` | - |
+| content | 弹出的内容 | ReactNode | `-` | - |
+| className | 节点类名 | string \| string[] | `-` | - |
+| style | 节点样式 | CSSProperties | `-` | - |
+| triggerProps | 可以接受所有 `Trigger` 组件的参数 | `Partial<TriggerProps>` | `-` | - |
+| getPopupContainer | 弹出框挂载的节点 | `(node: HTMLElement) => Element` | `-` | - |
+| onVisibleChange | 显示或隐藏时触发的回调 | `(visible: boolean) => void` | `-` | - |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<tooltip>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|popup-visible **(v-model)**|文字气泡是否可见|`boolean`|`-`|
+|default-popup-visible|文字气泡默认是否可见（非受控模式）|`boolean`|`false`|
+|disabled|文字气泡是否禁用|`boolean`|`false`|
+|content|文字气泡内容|`string`|`-`|
+|position|弹出位置|`'top' \| 'tl' \| 'tr' \| 'bottom' \| 'bl' \| 'br' \| 'left' \| 'lt' \| 'lb' \| 'right' \| 'rt' \| 'rb'`|`'top'`|
+|mini|是否展示为迷你尺寸|`boolean`|`false`|
+|background-color|弹出框的背景颜色|`string`|`-`|
+|content-class|弹出框内容的类名|`ClassName`|`-`|
+|content-style|弹出框内容的样式|`CSSProperties`|`-`|
+|arrow-class|弹出框箭头的类名|`ClassName`|`-`|
+|arrow-style|弹出框箭头的样式|`CSSProperties`|`-`|
+|popup-container|弹出框的挂载容器|`string \| HTMLElement`|`-`|
+
+### `<tooltip>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|popup-visible-change|文字气泡显示状态改变时触发|visible: `boolean`|
+
+### `<tooltip>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|content|内容|-|
+
+</FrameworkBlock>

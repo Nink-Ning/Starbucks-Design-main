@@ -76,3 +76,36 @@
   margin-right: var(--spacing-3);
   margin-left: 0;
 }
+
+// Vue DOM adapters
+.arco-anchor .arco-anchor-link {
+  margin-bottom: var(--spacing-1);
+  padding: var(--spacing-2) var(--spacing-4);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  text-decoration: none;
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-anchor .arco-anchor-link:hover {
+  color: var(--color-text-primary);
+  font-weight: var(--fw-medium);
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-anchor .arco-anchor-link:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-anchor .arco-anchor-link-item.arco-anchor-link-active > .arco-anchor-link {
+  color: var(--color-primary);
+  font-weight: var(--fw-medium);
+}
+
+.arco-anchor-line-less
+  .arco-anchor-link-item.arco-anchor-link-active
+  > .arco-anchor-link {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}

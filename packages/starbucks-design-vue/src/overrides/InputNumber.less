@@ -332,3 +332,43 @@
 .arco-input-number-mode-button.arco-input-group-wrapper-disabled .arco-input-group-addafter {
   border-left-color: var(--color-border-component);
 }
+
+// Arco Vue puts the InputNumber state classes on the visible input wrapper.
+.arco-input-number.arco-input-wrapper {
+  min-height: 32px;
+  padding: 0 var(--spacing-4);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-input-number.arco-input-wrapper:not(.arco-input-disabled):hover,
+.arco-input-number.arco-input-wrapper:not(.arco-input-disabled):focus-within {
+  background-color: var(--bg-color-container);
+}
+
+.arco-input-number.arco-input-wrapper:not(.arco-input-disabled):focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-input-number.arco-input-wrapper.arco-input-disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+  box-shadow: none;
+}
+
+.arco-input-number.arco-input-outer .arco-input-wrapper {
+  min-height: inherit;
+  background-color: var(--bg-color-container);
+  border-color: var(--color-border-component);
+  border-radius: 0;
+}
+
+.arco-input-number.arco-input-outer .arco-input-prepend,
+.arco-input-number.arco-input-outer .arco-input-append {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}

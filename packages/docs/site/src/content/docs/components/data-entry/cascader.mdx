@@ -1,0 +1,553 @@
+---
+title: 级联选择 Cascader
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+指在选择器选项数量较多时，采用多级分类的方式将选项进行分隔。
+
+## 基本使用
+
+级联选择器的基本用法。默认通过点击展开下一级。
+
+<FrameworkBlock framework="react">
+可以设置 `expandTrigger="hover"` 让 `hover` 展开下一级。级联选择的值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以设置 `expand-trigger="hover"` 让 `hover` 展开下一级。级联选择的值可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="cascader/basic-usage" />
+
+## 允许清除
+
+允许清除已选择的值。
+
+<Demo name="cascader/clearable" />
+
+## 前置标签
+
+<FrameworkBlock framework="react">
+通过 `addBefore` 设置前置标签。
+</FrameworkBlock>
+
+<Demo name="cascader/add-before" />
+
+## 自定义输入框的展示值
+
+对选择框中显示的内容进行自定义处理。
+
+<FrameworkBlock framework="react">
+利用 `renderFormat` 对显示的内容进行自定义处理。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+利用 `format-label` 对显示的内容进行自定义处理。
+</FrameworkBlock>
+
+<Demo name="cascader/custom-input-display" />
+
+## 自定义选择框
+
+<FrameworkBlock framework="react">
+通过 `children` 覆盖默认的选择框。
+</FrameworkBlock>
+
+<Demo name="cascader/custom-trigger" />
+
+## 严格选择模式
+
+点击任何一级选项都可以选择。多选时将会解除父子节点的关联。
+
+<FrameworkBlock framework="react">
+设置属性 `changeOnSelect`，点击任何一级都可以选择。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+设置属性 `check-strictly`，开启严格选择模式，点击任何结点都可以选择。
+</FrameworkBlock>
+
+<Demo name="cascader/strict-mode" />
+
+## 展开子菜单
+
+<FrameworkBlock framework="vue">
+通过设置 `expand-child` 可以在选择时展开第一个子菜单。
+</FrameworkBlock>
+
+<Demo name="cascader/expand-submenu" />
+
+## 多选模式
+
+通过多选模式可以选择多个值。
+
+<FrameworkBlock framework="react">
+指定 `mode="multiple"` 即可使用多选。设置 `checkedStrategy` 属性可以设置数据回显方式。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `multiple` 开启多选模式。
+</FrameworkBlock>
+
+<Demo name="cascader/multi-mode" />
+
+## 允许搜索
+
+支持输入文本对选项进行搜索。
+
+<FrameworkBlock framework="react">
+指定 `showSearch=true`，可以输入文本对选项进行搜索。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `allow-search` 让输入框支持搜索功能。
+</FrameworkBlock>
+
+<Demo name="cascader/searchable" />
+
+## 自定义搜索
+
+<FrameworkBlock framework="react">
+通过 `filterOption` 自定义搜索逻辑。
+</FrameworkBlock>
+
+<Demo name="cascader/custom-filter" />
+
+## 子选项懒加载
+
+开启数据懒加载功能后，需要在叶子节点标注 `isLeaf: true`，没有标注且没有 `children` 属性的节点会认为需要懒加载处理。
+
+<FrameworkBlock framework="react">
+利用 `loadMore` 可以进行动态加载数据。使用动态加载时，选项必须设置 `isLeaf` 来标示是否需要继续加载；如果使用搜索功能，将只对已加载选项执行搜索逻辑。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `load-more` 属性可以开启数据懒加载功能。`load-more` 属性提供 `done` 函数进行回调，可以在回调中传入懒加载的子数据。如果 `done` 函数没有传入数据会认为懒加载失败，此节点可以再次触发懒加载。
+</FrameworkBlock>
+
+<Demo name="cascader/lazy-load-options" />
+
+## 加载中
+
+选择框和下拉菜单显示加载中状态。
+
+<Demo name="cascader/loading" />
+
+## 禁用选项
+
+指定 `option` 的 `disabled` 为 `true`，可以禁用该选项。
+
+<Demo name="cascader/disabled-option" />
+
+## 受控模式
+
+<FrameworkBlock framework="react">
+可以完全控制级联选择，通过 `value` 与 `onChange` 实现受控。
+</FrameworkBlock>
+
+<Demo name="cascader/controlled" />
+
+## 不同尺寸
+
+设置 `size` 可以使用四种尺寸的选择器，高度分别对应 `24px`、`28px`、`32px`、`36px`。
+
+<FrameworkBlock framework="react">
+可选尺寸为 `mini`、`small`、`default`、`large`，默认尺寸为 `default`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可选尺寸为 `mini`、`small`、`medium`、`large`，默认尺寸为 `medium`。
+</FrameworkBlock>
+
+<Demo name="cascader/size" />
+
+## 自定义 Option
+
+<FrameworkBlock framework="react">
+使用 `renderOption`，可以自定义渲染选项。
+</FrameworkBlock>
+
+<Demo name="cascader/custom-option" />
+
+## 自定义 footer
+
+<FrameworkBlock framework="react">
+通过 `renderFooter` 可以自定义每一层级的 footer。
+</FrameworkBlock>
+
+<Demo name="cascader/custom-footer" />
+
+## 展示空数据
+
+<FrameworkBlock framework="react">
+`showEmptyChildren=true` 时，当 `children` 为 `[]` 也会展示下一级空菜单。
+</FrameworkBlock>
+
+<Demo name="cascader/empty-children" />
+
+## 控制下拉框的展开收起
+
+<FrameworkBlock framework="react">
+通过 `popupVisible` 和 `onVisibleChange` 控制下拉框的展开和收起。更多示例可查看 Trigger 组件文档。
+</FrameworkBlock>
+
+<Demo name="cascader/popup-visible" />
+
+## 自定义下拉菜单的展示
+
+<FrameworkBlock framework="react">
+使用 `dropdownRender` 对下拉菜单进行扩展。
+</FrameworkBlock>
+
+<Demo name="cascader/dropdown-render" />
+
+## 自定义字段名
+
+自定义 `options` 中数据的字段名。
+
+<FrameworkBlock framework="react">
+通过 `fieldNames` 属性指定 `label`、`value`、`isLeaf`、`disabled`、`children` 对应的字段。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `field-names` 属性自定义 `options` 中数据的格式。
+</FrameworkBlock>
+
+<Demo name="cascader/custom-field-name" />
+
+## 远程搜索
+
+<FrameworkBlock framework="react">
+使用 `onSearch` 自定义搜索逻辑。可以通过 `showSearch.panelMode` 属性控制是否以搜索面板的形式展示所有可选项。
+</FrameworkBlock>
+
+<Demo name="cascader/remote-search" />
+
+## 拖拽排序
+
+<FrameworkBlock framework="react">
+多选时，指定 `dragToSort` 属性以允许对已输入的值进行拖拽排序。
+</FrameworkBlock>
+
+<Demo name="cascader/drag-sort" />
+
+## 回退选项
+
+<FrameworkBlock framework="vue">
+组件默认会展示在选项中不存在的值，可通过 `fallback` 自定义展示或者关闭。
+</FrameworkBlock>
+
+<Demo name="cascader/fallback" />
+
+## 路径模式
+
+<FrameworkBlock framework="vue">
+`model-value` 使用路径作为值。
+</FrameworkBlock>
+
+<Demo name="cascader/path-mode" />
+
+## 级联菜单
+
+<FrameworkBlock framework="vue">
+级联菜单可以单独使用，此时为数据展示组件。
+</FrameworkBlock>
+
+<Demo name="cascader/cascade-menu" />
+
+## 虚拟列表
+
+<FrameworkBlock framework="vue">
+虚拟列表的使用方法。
+</FrameworkBlock>
+
+<Demo name="cascader/virtual-list" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Cascader
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|allowClear|允许清除值。|boolean |`-`|-|
+|animation|是否为内部标签变化添加动画。|boolean |`true`|2.15.0|
+|bordered|是否需要边框|boolean |`true`|-|
+|changeOnSelect|每当选择的时候，值都会发生改变。多选时如果设置为`true`，会取消父子关系的关联。(默认只有在选择完成的时候，值才会更新)|boolean |`-`|-|
+|defaultActiveFirstOption|是否默认高亮搜索结果第一个选项。|boolean |`true`|2.37.0|
+|defaultPopupVisible|默认下拉框的展开收起状态|boolean |`-`|-|
+|disabled|是否为禁用状态。|boolean |`-`|-|
+|dragToSort|是否可以通过拖拽为 Tag 排序|boolean |`-`|2.27.0|
+|error|是否是错误状态。(废弃，下个大版本移除，使用 status='error' 替代)|boolean |`-`|-|
+|loading|是否为加载状态。|boolean |`-`|-|
+|popupVisible|控制下拉框的展开收起|boolean |`-`|-|
+|showEmptyChildren|是否在非动态加载时，选中项children为[]的时候渲染下一级节点。|boolean |`-`|-|
+|unmountOnExit|是否在隐藏之后销毁DOM结构，默认为 `true`。如果是动态加载时，默认为`false`。|boolean |`-`|-|
+|inputValue|输入框的值|string |`-`|2.34.0|
+|placeholder|选择框默认文字。|string |`-`|-|
+|autoWidth|设置宽度自适应。minWidth 默认为 0，maxWidth 默认为 100%|\| boolean\| &#123; minWidth?: CSSProperties['minWidth']; maxWidth?: CSSProperties['maxWidth'] } |`-`|2.54.0|
+|checkedStrategy|定制回填方式 &lt;br/> parent: 子节点都被选中时候返回父节点 &lt;br/> child: 返回子节点|'parent' \| 'child' |`child`|2.31.0|
+|expandTrigger|展开下一级方式|'click' \| 'hover' |`click`|-|
+|maxTagCount|最多显示多少个 `tag`，仅在多选或标签模式有效。设置 `responsive` 响应式显示标签数不建议在选项较多时使用，可能存在性能问题，|\| number\| 'responsive'\| &#123;count: number \| 'responsive';render?: (invisibleTagCount: number) =&gt; ReactNode;showPopover?: boolean \| Partial&lt;PopoverProps&gt;;} |`-`|Object type in 2.37.0. `responsive ` in `2.62.0`|
+|mode|是否开启多选|'multiple' |`-`|-|
+|showSearch|使单选模式可搜索，传入 `&#123; retainInputValue: true }` 在搜索框聚焦时保留现有内容传入 `&#123; retainInputValueWhileSelect: true }` 在多选选择时保留输入框内容。传入 `&#123; panelMode: 'select' }` 以搜索面板形式展示可选项 (`2.39.0`)`renderOption` 自定义渲染搜索项 (`2.39.0`)|\| boolean\| &#123;panelMode?: 'cascader' \| 'select';renderOption?: (inputValue: string,option: NodeProps&lt;T&gt;,options: extraOptions) =&gt; ReactNode;retainInputValue?: boolean;retainInputValueWhileSelect?: boolean;} |`-`|-|
+|size|分别不同尺寸的选择器。对应 `24px`, `28px`, `32px`, `36px`|'mini' \| 'small' \| 'default' \| 'large' |`-`|-|
+|status|状态|'error' \| 'warning' |`-`|2.45.0|
+|virtualListProps|传递虚拟滚动属性。开启虚拟滚动后，每列级联菜单的会存在默认宽度，可通过 `dropdownMenuColumnStyle` 进行样式调整|Pick&lt;VirtualListProps&lt;any&gt;, 'threshold' \| 'isStaticItemHeight'&gt; |`-`|2.35.0|
+|addBefore|选择框前添加元素|ReactNode |`-`|2.41.0|
+|clearIcon|`allowClear` 时配置清除按钮的图标。|ReactNode |`-`|2.26.0|
+|notFoundContent|没有数据时显示的内容|ReactNode |`-`|-|
+|prefix|前缀。|ReactNode |`-`|2.11.0|
+|suffixIcon|自定义选择框后缀图标。|ReactNode |`-`|-|
+|arrowIcon|自定义箭头图标，设置为 `null` 不显示箭头图标。|ReactNode \| null |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|defaultValue|选择框的默认值|(string \| string[])[] |`-`|-|
+|dropdownMenuClassName|自定义下拉列表类名|string \| string[] |`-`|2.35.0|
+|dropdownMenuColumnStyle|菜单列样式|CSSProperties |`-`|2.35.0|
+|fieldNames|指定label，value，isLeaf，disabled，children 对应的字段|FieldNamesType |`DefaultFieldNames`|-|
+|filterOption|默认搜索从 `label` 属性中进行关键字搜索。通过该方法可以自定义搜索逻辑|(inputValue: string, option: NodeProps&lt;T&gt;) =&gt; boolean |`-`|-|
+|icons|图标配置。|&#123;loading?: ReactNode;checked?: ReactNode;next?: ReactNode;} |`-`|2.50.0|
+|loadMore|动态加载数据。pathValue: 当前选中项的路径 value； level: 选中项层级。|(pathValue: string[], level: number) =&gt; Promise&lt;T[]&gt; |`-`|-|
+|options|级联数据|T[] |`[]`|-|
+|removeIcon|多选时配置选中项的删除图标。当传入`null`，不显示删除图标。|ReactNode \| null |`-`|-|
+|renderFooter|定义每一层级的 `footer`。参数：level: 当前层级, activeOption: 当前点击的节点。返回 `null` 不展示|(level: number, activeOption: NodeProps&lt;T&gt; \| null) =&gt; ReactNode |`-`|-|
+|renderOption|自定义展示 `option`|(option: NodeProps&lt;T&gt;, level: number) =&gt; ReactNode |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|triggerProps|可以接受所有 Trigger 组件的 Props|Partial&lt;TriggerProps&gt; |`-`|-|
+|value|选中值|(string \| string[])[] |`-`|-|
+|dropdownColumnRender|自定义下拉菜单每一列的展示。|`(menu: ReactNode, level: number) => ReactNode` |`-`|2.15.0, `level` in 2.17.0|
+|dropdownRender|自定义下拉菜单的展示。|`(menu: ReactNode) => ReactNode` |`-`|2.15.0|
+|getPopupContainer|弹出框挂在的父节点|`(node: HTMLElement) => Element` |`-`|-|
+|onChange|点击选择框的回调。|`(value: (string \| string[])[], selectedOptions, extra: { dropdownVisible?: boolean }) => void` |`-`|-|
+|onClear|点击清除时触发，参数是当前下拉框的展开状态。|`(visible: boolean) => void` |`-`|-|
+|onClick|鼠标点击下拉框时的回调|`(e) => void` |`-`|-|
+|onInputValueChange|inputValue改变时的回调|`(inputValue: string, reason: InputValueChangeReason) => void` |`-`|2.34.0|
+|onKeyDown|键盘输入时的回调|`(e) => void` |`-`|2.40.0|
+|onSearch|搜索时的回调。(reason in `2.34.0`)|`(inputValue: string, reason: InputValueChangeReason) => void` |`-`|2.20.0|
+|onVisibleChange|下拉框收起展开时触发。|`(visible: boolean) => void` |`-`|-|
+|renderFormat|格式化显示内容。|`(valueShow: any[], options?: OptionProps[]) => ReactNode` |`-`|-|
+|renderTag|自定义标签渲染，`props` 为当前标签属性，`index` 为当前标签的顺序，`values` 为所有标签的值.|`(props: { value: any; label: ReactNode; closable: boolean; onClose: (event) => void; }, index: number, values: ObjectValueType[]) => ReactNode` |`-`|index、values added in 2.15.0|
+
+### extraOptions
+
+```js
+export interface extraOptions {
+  checked: boolean;
+}
+```
+
+### FieldNamesType
+
+```js
+/**
+ * fieldnames 属性类型
+ */
+export type FieldNamesType = {
+  /* Custom field name for label */
+  label?: string;
+  /** Custom field name for value */
+  value?: string;
+  /** Custom field name for children */
+  children?: string;
+  /** Custom field name for disabled  */
+  disabled?: string;
+  /** Custom field name for isLeaf */
+  isLeaf?: string;
+};
+```
+
+### OptionProps
+
+```js
+export interface OptionProps {
+  /**
+   * @zh 选项的值
+   * @en: the value of Option
+   *
+   */
+  value?: string;
+  /**
+   * @zh 选项文本
+   * @en option text
+   */
+  label?: string;
+  /**
+   * @zh 是否禁用该选项
+   * @en whether to disabled
+   */
+  disabled?: boolean;
+  /**
+   * @zh 下一级选项
+   * @en next level menu
+   */
+  children?: OptionProps[];
+  /**
+   * @zh 是否是叶子节点
+   * @en Flag whether it is a leaf node
+   */
+  isLeaf?: boolean;
+  /**
+   * @zh 是否禁用复选框选中
+   * @en Whether to disable the check box is selected
+   * @version 2.21.0
+   */
+  disableCheckbox?: boolean;
+  /**
+   * @zh 其他字段
+   * @en other fields
+   */
+  [key: string]: any;
+}
+```
+
+### InputValueChangeReason
+
+```js
+// 造成输入框值改变的原因：用户输入、选项下拉框收起、其他
+export type InputValueChangeReason =
+  | "manual"
+  | "optionListHide"
+  | "optionChecked";
+```
+
+### ObjectValueType
+
+```js
+export type ObjectValueType = {
+  value?: any;
+  label?: ReactNode;
+  closable?: boolean;
+};
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<cascader>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|path-mode|绑定值是否为路径|`boolean`|`false`||
+|multiple|是否为多选状态（多选模式默认开启搜索）|`boolean`|`false`||
+|model-value **(v-model)**|绑定值|`string\| number\| Record<string, any>\| (    \| string    \| number    \| Record<string, any>    \| (string \| number \| Record<string, any>)[]  )[]\| undefined`|`-`||
+|default-value|默认值（非受控状态）|`string\| number\| Record<string, any>\| (    \| string    \| number    \| Record<string, any>    \| (string \| number \| Record<string, any>)[]  )[]\| undefined`|`'' \| undefined \| []`||
+|options|级联选择器的选项|`CascaderOption[]`|`[]`||
+|disabled|是否禁用|`boolean`|`false`||
+|error|是否为错误状态|`boolean`|`false`||
+|size|选择框的大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
+|allow-search|是否允许搜索|`boolean`|`false (single) \| true (multiple)`||
+|allow-clear|是否允许清除|`boolean`|`false`||
+|input-value **(v-model)**|输入框的值|`string`|`-`||
+|default-input-value|输入框的默认值（非受控状态）|`string`|`''`||
+|popup-visible **(v-model)**|是否显示下拉框|`boolean`|`-`||
+|expand-trigger|展开下一级的触发方式|`'click' \| 'hover'`|`'click'`||
+|default-popup-visible|是否默认显示下拉框（非受控状态）|`boolean`|`false`||
+|placeholder|占位符|`string`|`-`||
+|filter-option|自定义选项过滤方法|`(inputValue: string, option: CascaderOption) => boolean`|`-`||
+|popup-container|弹出框的挂载容器|`string \| HTMLElement`|`-`||
+|max-tag-count|多选模式下，最多显示的标签数量。0 表示不限制|`number`|`0`||
+|format-label|格式化展示内容|`(options: CascaderOption[]) => string`|`-`||
+|trigger-props|下拉菜单的触发器属性|`TriggerProps`|`-`||
+|check-strictly|是否开启严格选择模式|`boolean`|`false`||
+|load-more|数据懒加载函数，传入时开启懒加载功能|`(  option: CascaderOption,  done: (children?: CascaderOption[]) => void) => void`|`-`|2.13.0|
+|loading|是否为加载中状态|`boolean`|`false`|2.15.0|
+|search-option-only-label|搜索下拉菜单中的选项是否仅展示标签|`boolean`|`false`|2.18.0|
+|search-delay|触发搜索事件的延迟时间|`number`|`500`|2.18.0|
+|field-names|自定义 `CascaderOption` 中的字段|`CascaderFieldNames`|`-`|2.22.0|
+|value-key|用于确定选项键值的属性名|`string`|`'value'`|2.29.0|
+|fallback|自定义不存在选项的值的展示|`boolean\| ((    value:      \| string      \| number      \| Record<string, unknown>      \| (string \| number \| Record<string, unknown>)[]  ) => string)`|`true`|2.29.0|
+|expand-child|是否展开子菜单|`boolean`|`false`|2.29.0|
+|virtual-list-props|传递虚拟列表属性，传入此参数以开启虚拟滚动 VirtualListProps|`VirtualListProps`|`-`|2.49.0|
+|tag-nowrap|标签内容不换行|`boolean`|`false`|2.56.1|
+
+### `<cascader>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|选中值改变时触发|value: `string \| number \| (string \| number \| (string \| number)[])[] \| undefined`|
+|input-value-change|输入值改变时触发|value: `string`|
+|clear|点击清除按钮时触发|-|
+|search|用户搜索时触发|value: `string`|
+|popup-visible-change|下拉框的显示状态改变时触发|visible: `boolean`|
+|focus|获得焦点时触发|ev: `FocusEvent`|
+|blur|失去焦点时触发|ev: `FocusEvent`|
+
+### `<cascader>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|label|选择框的显示内容|data: `CascaderOption`|2.18.0|
+|prefix|前缀元素|-|2.23.0|
+|arrow-icon|选择框的箭头图标|-|2.16.0|
+|loading-icon|选择框的加载中图标|-|2.16.0|
+|search-icon|选择框的搜索图标|-|2.16.0|
+|empty|选项为空时的显示内容|-|2.23.0|
+|option|选项内容|data: `CascaderOption`|2.18.0|
+
+### `<cascader-panel>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|path-mode|绑定值是否为路径|`boolean`|`false`||
+|multiple|是否为多选状态（多选模式默认开启搜索）|`boolean`|`false`||
+|model-value **(v-model)**|绑定值|`string\| number\| Record<string, any>\| (    \| string    \| number    \| Record<string, any>    \| (string \| number \| Record<string, any>)[]  )[]\| undefined`|`-`||
+|default-value|默认值（非受控状态）|`string\| number\| Record<string, any>\| (    \| string    \| number    \| Record<string, any>    \| (string \| number \| Record<string, any>)[]  )[]\| undefined`|`'' \| undefined \| []`||
+|options|级联选择器的选项|`CascaderOption[]`|`[]`||
+|expand-trigger|展开下一级的触发方式|`string`|`'click'`||
+|check-strictly|是否开启严格选择模式|`boolean`|`false`||
+|load-more|数据懒加载函数，传入时开启懒加载功能|`(  option: CascaderOption,  done: (children?: CascaderOption[]) => void) => void`|`-`|2.13.0|
+|field-names|自定义 `CascaderOption` 中的字段|`CascaderFieldNames`|`-`|2.22.0|
+|value-key|用于确定选项键值的属性名|`string`|`'value'`|2.29.0|
+|expand-child|是否展开子菜单|`boolean`|`false`|2.29.0|
+
+### `<cascader-panel>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|选中值改变时触发|value: `string \| number \| (string \| number \| (string \| number)[])[] \| undefined`|
+
+### `<cascader-panel>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|empty|选项为空时的显示内容|-|2.23.0|
+
+### CascaderOption
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|value|选项值，2.29.0 版本支持对象|`string \| number \| Record<string, any>`|`-`||
+|label|选项文本|`string`|`-`||
+|render|自定义渲染|`RenderFunction`|`-`||
+|disabled|是否禁用|`boolean`|`false`||
+|tagProps|展示的标签属性|`TagProps`|`-`|2.8.0|
+|children|下一级选项|`CascaderOption[]`|`-`||
+|isLeaf|是否是叶子节点|`boolean`|`false`||
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="react">
+
+## 方法
+
+| 参数名 |     描述     |    类型    | 默认值 |
+| ------ | :----------: | :--------: | -----: |
+| focus  |   焦点事件。   | `Function` |    `-` |
+| blur   | 失去焦点事件。 | `Function` |    `-` |
+
+**示例**
+
+```js
+<Cascader ref={(ref) => (this.select = ref)} />;
+
+this.select.focus();
+this.select.blur();
+```
+
+</FrameworkBlock>

@@ -1,0 +1,43 @@
+---
+title: 阴影 Shadow
+sidebar:
+  order: 3
+---
+
+import ShadowScale from '../../../components/foundations/ShadowScale.astro';
+
+阴影用来表达元素在 Z 轴上的高度与层级——离页面越远，投影越大越柔和。系统提供三档投影，每档由三层 `drop-shadow` 叠加而成，兼顾轮廓清晰与自然过渡。点击卡片可复制完整 `box-shadow`。
+
+<ShadowScale
+  items={[
+    {
+      name: 'Shadow 1',
+      cn: '基础投影',
+      note: '常驻元素轻微悬浮：Card、Button hover',
+      value:
+        '0 2px 4px -1px rgba(0,0,0,0.12), 0 4px 5px 0 rgba(0,0,0,0.08), 0 1px 10px 0 rgba(0,0,0,0.05)',
+    },
+    {
+      name: 'Shadow 2',
+      cn: '中层投影',
+      note: '浮层：Dropdown、Popover、Tooltip',
+      value:
+        '0 5px 5px -3px rgba(0,0,0,0.1), 0 8px 10px 1px rgba(0,0,0,0.06), 0 3px 14px 2px rgba(0,0,0,0.05)',
+    },
+    {
+      name: 'Shadow 3',
+      cn: '上层投影',
+      note: '高层浮层：Modal、Drawer、Notification',
+      value:
+        '0 8px 10px -5px rgba(0,0,0,0.08), 0 16px 24px 2px rgba(0,0,0,0.04), 0 6px 30px 5px rgba(0,0,0,0.05)',
+    },
+  ]}
+/>
+
+## 使用建议
+
+- **Shadow 1 基础投影**：贴近页面的常驻元素，用于卡片、可悬浮按钮等，投影克制，仅作轻微区分。
+- **Shadow 2 中层投影**：由交互唤起、临时出现的浮层，如下拉菜单、气泡卡片、文字提示。
+- **Shadow 3 上层投影**：位于界面最上层的重量级浮层，如对话框、抽屉、通知，投影最大以拉开与背景的距离。
+
+层级越高，投影越强——切勿在低层元素上使用高档投影，否则会破坏界面的深度秩序。

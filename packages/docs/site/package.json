@@ -1,0 +1,25 @@
+{
+  "name": "@starbucks/docs-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --port 4321",
+    "test": "node --test src/styles/__tests__/*.test.mjs",
+    "prebuild": "mkdir -p public/skills && rm -f public/skills/*.zip && cd ../../../skills && zip -rq ../packages/docs/site/public/skills/starbucks-design-react.zip starbucks-design-react/ && zip -rq ../packages/docs/site/public/skills/starbucks-design-react-preview.zip starbucks-design-react-preview/ && zip -rq ../packages/docs/site/public/skills/starbucks-design-vue.zip starbucks-design-vue/ && zip -rq ../packages/docs/site/public/skills/starbucks-design-vue-preview.zip starbucks-design-vue-preview/",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.0.0",
+    "@astrojs/starlight": "^0.32.0",
+    "@astrojs/vue": "^5.0.0",
+    "@shikijs/langs": "^3.0.0",
+    "@shikijs/themes": "^3.0.0",
+    "@sbux/starbucks-design-react": "workspace:*",
+    "@sbux/starbucks-design-vue": "workspace:*",
+    "astro": "^5.0.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "vue": "^3.5.0"
+  }
+}

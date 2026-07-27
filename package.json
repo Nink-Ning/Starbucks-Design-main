@@ -3,18 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev:vue": "pnpm -C packages/starbucks-design-vue dev",
-    "dev:react": "pnpm -C packages/starbucks-design-react dev",
-    "dev:docs": "pnpm -C packages/docs/react dev",
-    "dev:docs-vue": "pnpm -C packages/docs/vue dev",
+    "dev:docs": "pnpm -C packages/docs/site dev",
+    "test": "pnpm -r test",
     "build": "pnpm -r build",
-    "build:docs": "pnpm -C packages/docs/react build && pnpm -C packages/docs/vue build",
+    "build:docs": "pnpm -C packages/docs/site build",
     "deploy:docs": "bash scripts/deploy-gh-pages.sh",
-    "pack:skills": "cd skills && zip -r ../packages/docs/react/static/skills/starbucks-design-react.zip starbucks-design-react/ && zip -r ../packages/docs/react/static/skills/starbucks-design-react-preview.zip starbucks-design-react-preview/ && zip -r ../packages/docs/vue/public/skills/starbucks-design-vue.zip starbucks-design-vue/ && zip -r ../packages/docs/vue/public/skills/starbucks-design-vue-preview.zip starbucks-design-vue-preview/",
-    "sync-figma": "pnpm -C packages/starbucks-design-vue sync-figma && pnpm -C packages/starbucks-design-react sync-figma",
-    "generate:tokens": "python3 scripts/generate-theme-from-figma-export.py",
-    "lint": "eslint . --fix",
-    "figma-to-arco": "npx tsx scripts/figma-to-arco/index.ts"
+    "pack:skills": "pnpm -C packages/docs/site prebuild",
+    "lint": "eslint . --fix"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",

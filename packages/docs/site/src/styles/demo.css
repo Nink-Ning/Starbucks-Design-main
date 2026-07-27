@@ -1,0 +1,94 @@
+.sb-demo {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+.sb-demo-preview {
+  /* Reserve space for one row of controls so client:only islands popping in
+     after hydration don't shift the rest of the page (refresh flicker). */
+  padding: 1.5rem;
+  min-height: 72px;
+}
+.sb-demo-missing {
+  color: var(--sl-color-gray-3);
+  font-size: var(--sl-text-sm);
+}
+/* Runtime fallback: shown by the demo loaders when a single demo throws while
+   loading or rendering, so one bad demo degrades to a note instead of blanking
+   the whole island/page. Tinted (not muted like -missing) to stay noticeable
+   during migration. */
+.sb-demo-error {
+  color: var(--sb-docs-danger);
+  font-size: var(--sl-text-sm);
+}
+
+/* Loading placeholder for client:only demo islands.
+ *
+ * Astro stamps a boolean `ssr` attribute on <astro-island> while it hasn't
+ * hydrated yet and removes it the instant the framework component mounts
+ * (see @astrojs/starlight's astro-island custom element, which also leaves
+ * the element childless until then) — verified against this project's own
+ * built output (dist/components/general/button/index.html):
+ *   <div class="fw-react"><astro-island ... ssr client="only" ...></astro-island></div>
+ * That makes `astro-island[ssr]` a reliable pre-hydration hook. `.fw-react`/
+ * `.fw-vue` wrappers around demos WITHOUT a framework example (the "该组件暂无
+ * X 示例" text) never contain an <astro-island>, so :has() naturally skips them.
+ */
+.sb-demo-preview .fw-react:has(astro-island[ssr])::before,
+.sb-demo-preview .fw-vue:has(astro-island[ssr])::before {
+  content: '';
+  display: block;
+  width: 7rem;
+  height: 2.25rem;
+  border-radius: 6px;
+  background: var(--sl-color-gray-5);
+  opacity: 0.5;
+  animation: sb-demo-pulse 1.4s ease-in-out infinite;
+}
+@keyframes sb-demo-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sb-demo-preview .fw-react:has(astro-island[ssr])::before,
+  .sb-demo-preview .fw-vue:has(astro-island[ssr])::before {
+    animation: none;
+  }
+}
+.sb-demo-code {
+  border-top: 1px dashed var(--sl-color-gray-5);
+}
+.sb-demo-code summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-2);
+}
+.sb-demo-code pre {
+  margin: 0;
+  border-radius: 0 0 8px 8px;
+}
+.sb-demo-copy {
+  border: 0;
+  background: transparent;
+  color: var(--sl-color-text-accent);
+  cursor: pointer;
+  font-size: var(--sl-text-sm);
+}
+
+/* ── 页面范例：整页 1:1 还原需要全宽 ──────────────────────────────
+ * 模板 demo(data-demo 以 "template-" 开头)复原的是 ~1000px+ 的完整应用页，
+ * 塞进 Starlight 默认 720px 内容列会把表格挤到竖排换行。当内容列含 template
+ * demo 时去掉 720 上限,让它占满侧栏与右侧 TOC 之间的可用宽度。
+ * ────────────────────────────────────────────────────────────── */
+.sl-container:has(.sb-demo[data-demo^='template-']) {
+  max-width: none;
+}

@@ -1,0 +1,70 @@
+---
+title: 空状态 Empty
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+指当前场景没有对应的数据内容，呈现出的一种状态。
+
+## 基本用法
+
+空状态组件的基本用法。
+
+<Demo name="empty/basic" />
+
+## 自定义图片和文案
+
+<FrameworkBlock framework="react">
+可以通过 `icon` 参数传入自定义图标，`description` 修改显示文案。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `image` 插槽自定义图标、图片，或通过内容修改文案。
+</FrameworkBlock>
+
+<Demo name="empty/custom-image-text" />
+
+## 自定义图片
+
+<FrameworkBlock framework="react">
+可以通过 `imgSrc` 参数传入图片 Url。
+</FrameworkBlock>
+
+<Demo name="empty/custom-image" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Empty
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|imgSrc|将图标替换为图片|string |`-`|
+|description|显示文案|ReactNode |`-`|
+|icon|自定义显示图案|ReactNode |`-`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<empty>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|description|描述内容|`string`|`-`||
+|img-src|自定义图片的地址|`string`|`-`||
+|in-config-provider|是否在 ConfigProvider 中使用|`boolean`|`false`|2.47.0|
+
+### `<empty>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|image|图片/图标|-|
+
+</FrameworkBlock>

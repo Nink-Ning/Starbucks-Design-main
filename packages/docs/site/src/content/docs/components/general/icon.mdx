@@ -1,0 +1,33 @@
+---
+title: Icon 图标
+sidebar:
+  order: 2
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+:::note[仅 React 提供]
+该组件目前仅提供 React 版本。
+:::
+
+<FrameworkBlock framework="react">
+
+Starbucks UI 内置 Arco Design 图标集。
+
+<Demo name="icon/basic" />
+
+## API
+
+| 属性      | 类型            | 默认值 | 说明       |
+| --------- | --------------- | ------ | ---------- |
+| style     | `CSSProperties` | —      | 自定义样式 |
+| className | `string`        | —      | 自定义类名 |
+
+## 使用 Icon 组件
+
+也可以通过 `Icon` 组件的 `type` 属性使用图标（需配置 iconfont）。
+
+> 完整图标列表请参考 [Arco Design Icon](https://arco.design/react/components/icon)。
+
+</FrameworkBlock>

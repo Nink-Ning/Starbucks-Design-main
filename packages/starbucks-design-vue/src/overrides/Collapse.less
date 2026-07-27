@@ -38,4 +38,39 @@
 //   • Gray/Gray4-边框
 
 // Component-specific style overrides:
-// (extend with CSS custom property overrides as needed)
+.arco-collapse {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  border-color: var(--color-border-1);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-collapse-item:not(:last-of-type) {
+  border-bottom-color: var(--color-border-1);
+}
+
+.arco-collapse-item-header {
+  font-size: var(--fs-14);
+  line-height: var(--lh-24);
+}
+
+.arco-collapse-item-header:not(.arco-collapse-item-header-disabled) {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+}
+
+.arco-collapse-item-header-left {
+  padding-right: 13px;
+  padding-left: var(--spacing-10);
+}
+
+.arco-collapse-item-content {
+  padding: 0 13px 0 34px;
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  background-color: var(--bg-color-container);
+}
+
+.arco-collapse-item-content-box {
+  padding: var(--spacing-4) 0;
+}

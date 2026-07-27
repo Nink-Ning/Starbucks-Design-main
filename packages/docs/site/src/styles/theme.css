@@ -1,0 +1,204 @@
+/**
+ * Starbucks brand theme for Starlight chrome.
+ *
+ * Loaded LAST in astro.config.mjs customCss so it wins over framework/demo css.
+ * Everything here targets the docs site chrome only — Arco component demos are
+ * themed by @sbux/starbucks-design-react/src/theme.css and are not touched.
+ *
+ * Docs chrome variables are mapped to the component library design variables
+ * (packages/starbucks-design-react/src/theme.css), so the site chrome and
+ * rendered component demos share one token source.
+ */
+
+/* ── Dark mode (Starlight default scope) ─────────────────────────────── */
+:root,
+::backdrop {
+	--sl-color-accent-low: var(--color-primary-focus, rgb(12, 43, 31));
+	--sl-color-accent: var(--color-primary-active, rgb(0, 106, 68));
+	--sl-color-accent-high: var(--color-primary-active, rgb(0, 106, 68));
+
+	--sl-color-gray-1: var(--color-text-primary, rgb(233, 233, 233));
+	--sl-color-gray-2: var(--color-text-secondary, rgb(156, 156, 156));
+	--sl-color-gray-3: var(--color-text-placeholder, rgb(113, 113, 113));
+	--sl-color-gray-4: var(--color-text-disabled, rgb(84, 84, 84));
+	--sl-color-gray-5: var(--color-border-component, rgb(94, 94, 94));
+	--sl-color-gray-6: var(--bg-color-component, rgb(57, 57, 57));
+	--sl-color-black: var(--bg-color-container, rgb(36, 36, 36));
+
+	/* Align Starlight's semantic green (success asides/badges) with the brand hue. */
+	--sl-hue-green: 160;
+
+	--sb-sidebar-hover-bg: var(--bg-color-container-hover, rgb(44, 44, 44));
+}
+
+/* ── Light mode ──────────────────────────────────────────────────────── */
+:root[data-theme='light'],
+[data-theme='light'] ::backdrop {
+	--sl-color-accent-low: var(--color-primary-focus, rgb(207, 240, 228));
+	--sl-color-accent: var(--color-primary, rgb(0, 117, 74));
+	--sl-color-accent-high: var(--color-primary-active, rgb(0, 106, 68));
+
+	/* Starlight uses `white` as its highest-contrast foreground token. In
+	 * light mode it must resolve to the primary dark text color, not the white
+	 * container background, otherwise page and content headings disappear. */
+	--sl-color-white: var(--color-text-primary, rgb(26, 26, 26));
+	--sl-color-gray-1: rgb(26, 26, 26);
+	--sl-color-gray-2: rgb(102, 102, 102);
+	--sl-color-gray-3: rgb(153, 153, 153);
+	--sl-color-gray-4: rgb(189, 189, 189);
+	--sl-color-gray-5: var(--color-border-component, rgb(221, 221, 221));
+	--sl-color-gray-6: var(--bg-color-secondarycontainer, rgb(243, 243, 243));
+	--sl-color-gray-7: var(--bg-color-page, rgb(238, 238, 238));
+
+	--sb-sidebar-hover-bg: var(--bg-color-container-hover, rgb(243, 243, 243));
+}
+
+/* ── Sidebar refinements (the piece that read as "stock") ────────────── */
+
+/*
+ * Top-level group labels (指南 / 组件): quiet, letterspaced wayfinding labels
+ * instead of bold body-size text, so the hierarchy — section → category →
+ * page — reads at a glance. Nested category labels keep Starlight's default
+ * weight to stay one clear level above the leaf links.
+ */
+#starlight__sidebar .top-level > li > details > summary .large {
+	font-size: var(--sl-text-xs);
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+}
+
+/*
+ * Category labels (通用 / 布局 / 数据展示 …): the nested group summaries. Rendered
+ * as small brand-green section labels — one clear level above the leaf links and
+ * the visual anchor for each spine group below.
+ */
+#starlight__sidebar .top-level ul .large {
+	font-size: var(--sl-text-sm);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	color: var(--sl-color-text-accent);
+}
+
+/*
+ * "Spine tree" navigation. A continuous guide line runs down each category's leaf
+ * list (the two-levels-deep <ul>s under 组件 — 指南's flat list stays railless),
+ * tying the nesting into a legible tree; the current page marks its place on the
+ * spine with a green dot. Chosen over a stock highlighted row because it reads as
+ * a designed system nav, not a templated list.
+ */
+#starlight__sidebar .top-level ul ul {
+	border-inline-start: 1.5px solid var(--sl-color-gray-5);
+	margin-inline-start: 0.4rem;
+	padding-inline-start: 0.55rem;
+}
+
+/* Leaf links: tighter rhythm than Starlight's 0.3em, muted resting color, rounded
+   hover area. `position: relative` anchors nothing itself — the dot is absolute
+   to the link so it lands on the spine regardless of label length. */
+#starlight__sidebar .top-level a {
+	position: relative;
+	padding-block: 0.32em;
+	border-radius: 0.4rem;
+	color: var(--sl-color-gray-2);
+	transition:
+		background-color 0.15s ease,
+		color 0.15s ease;
+}
+
+/* Hover: a faint green wash (theme-scoped var above) + green text. */
+#starlight__sidebar .top-level a:hover,
+#starlight__sidebar .top-level a:focus-visible {
+	background-color: var(--sb-sidebar-hover-bg);
+	color: var(--sl-color-text-accent);
+}
+
+/*
+ * Active page: a soft brand-tint row + green text, plus a green dot pinned onto
+ * the spine to its left. The dot's ring is painted in the page background so it
+ * cleanly punches through the guide line. Contrast holds both modes (light =
+ * The contrast is inherited from the component primary/text variables.
+ */
+#starlight__sidebar .top-level a[aria-current='page'],
+#starlight__sidebar .top-level a[aria-current='page']:hover,
+#starlight__sidebar .top-level a[aria-current='page']:focus-visible {
+	background-color: var(--sl-color-accent-low);
+	color: var(--sl-color-text-accent);
+	font-weight: 600;
+}
+#starlight__sidebar .top-level ul ul a[aria-current='page']::before {
+	content: '';
+	position: absolute;
+	inset-inline-start: -0.63rem;
+	top: 50%;
+	width: 8px;
+	height: 8px;
+	transform: translateY(-50%);
+	background-color: var(--sl-color-text-accent);
+	border-radius: 999px;
+	box-shadow: 0 0 0 2.5px var(--sl-color-bg);
+}
+
+/* ==========================================================================
+ * Homepage feature cards (index.mdx wraps its <CardGrid> in `.home-features`)
+ *
+ * Two cards per row at desktop widths (the three feature cards read better as a
+ * 2 + 1 grid than squeezed into a single 3-up row). The `stagger` variant is
+ * dropped in the mdx so the columns stay aligned; the third card falls into the
+ * bottom-left cell, a normal incomplete last row. Scoped under `.home-features`
+ * so it never affects CardGrids on component doc pages.
+ * ========================================================================== */
+@media (min-width: 50rem) {
+	.home-features .card-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Softer, rounder corners on all four feature cards (uniform). */
+.home-features .card-grid > .card {
+	border-radius: 0.85rem;
+}
+
+/*
+ * Lead card (AI Skills) — the standout capability. A quiet featured treatment:
+ * just a soft mint-tinted ground (no hard accent border, which read as abrupt),
+ * so it draws the eye gently while the corner rounding stays consistent with the
+ * other three. Theme-scoped var keeps it legible in dark mode (accent-low is a
+ * deep green there).
+ */
+.home-features .card-grid > .card:first-child {
+	background: var(--color-primary-light);
+}
+
+/* ── 色彩基础页:中性/文本色卡的主题响应变量 ──────────────────────────
+ * 色彩页使用 --fs-* 别名展示中性/文本色卡。这里不再维护独立色值,
+ * 仅映射到组件库全局设计变量。
+ * ──────────────────────────────────────────────────────────────── */
+:root,
+::backdrop {
+  --fs-bg-container: var(--bg-color-container);
+  --fs-bg-secondary: var(--bg-color-secondarycontainer);
+  --fs-bg-page: var(--bg-color-page);
+  --fs-bg-component: var(--bg-color-component);
+  --fs-border-1: var(--color-border-1);
+  --fs-border-2: var(--color-border-component);
+  --fs-fill-active: var(--bg-color-component-active);
+  --fs-text-1: var(--color-text-primary);
+  --fs-text-2: var(--color-text-secondary);
+  --fs-text-3: var(--color-text-placeholder);
+  --fs-text-4: var(--color-text-disabled);
+}
+:root[data-theme='light'] {
+  --fs-bg-container: var(--bg-color-container);
+  --fs-bg-secondary: var(--bg-color-secondarycontainer);
+  --fs-bg-page: var(--bg-color-page);
+  --fs-bg-component: var(--bg-color-component);
+  --fs-border-1: var(--color-border-1);
+  --fs-border-2: var(--color-border-component);
+  --fs-fill-active: var(--bg-color-component-active);
+  --fs-text-1: var(--color-text-primary);
+  --fs-text-2: var(--color-text-secondary);
+  --fs-text-3: var(--color-text-placeholder);
+  --fs-text-4: var(--color-text-disabled);
+}

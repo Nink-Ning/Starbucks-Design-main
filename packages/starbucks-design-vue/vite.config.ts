@@ -6,22 +6,21 @@ import cssInjectedByJs from 'vite-plugin-css-injected-by-js'
 export default defineConfig({
   plugins: [
     vue(),
-    cssInjectedByJs(),
+    cssInjectedByJs({ relativeCSSInjection: true }), // 多入口:各入口只注入自己的 CSS
     dts({
       outDir: 'dist',
+      exclude: ['**/__tests__/**', 'src/umd.ts'],
     }),
   ],
   build: {
     lib: {
       entry: {
         index: 'src/index.ts',
-        // icon entry removed — ./icon subpath uses exports map to
-        // resolve directly to @arco-design/web-vue/es/icon (see package.json)
+        pro: 'src/pro/index.ts',
       },
-      formats: ['es', 'cjs', 'umd'],
+      formats: ['es', 'cjs'], // UMD 移至 vite.config.umd.ts(lib 多入口不支持 umd)
       name: 'StarbucksVue',
       fileName: (format, entryName) => {
-        if (format === 'umd') return `${entryName}.umd.js`;
         return `${entryName}.${format === 'es' ? 'es' : 'cjs'}.js`;
       },
     },

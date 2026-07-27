@@ -1,0 +1,115 @@
+---
+/**
+ * Elevation specimens for the Foundations / Shadow page. Each cell floats a card
+ * with the token's composite box-shadow, alongside its name and usage. Click
+ * copies the full box-shadow CSS.
+ */
+interface Item {
+  name: string;
+  cn: string;
+  value: string;
+  note?: string;
+}
+const { items } = Astro.props as { items: Item[] };
+---
+
+<div class="fs-shadow not-content">
+  {
+    items.map((it) => (
+      <button
+        class="fs-shadow-cell"
+        type="button"
+        data-copy={it.value}
+        title="点击复制 box-shadow"
+      >
+        <span class="fs-shadow-stage">
+          <span class="fs-shadow-card" style={`box-shadow:${it.value}`}>
+            {it.name}
+          </span>
+        </span>
+        <span class="fs-shadow-meta">
+          <span class="fs-shadow-name">{it.cn}</span>
+          {it.note && <span class="fs-shadow-note">{it.note}</span>}
+        </span>
+      </button>
+    ))
+  }
+</div>
+
+<style>
+  .fs-shadow {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.9rem;
+    margin: 1rem 0 1.75rem;
+  }
+  .fs-shadow-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+  }
+  .fs-shadow-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* A quiet ground so the elevation reads in both themes. */
+    background: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 12px;
+    padding: 2.25rem 1.25rem;
+  }
+  .fs-shadow-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 68px;
+    background: var(--sl-color-bg);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--sl-color-gray-2);
+  }
+  .fs-shadow-cell:focus-visible .fs-shadow-stage {
+    outline: 2px solid var(--sl-color-text-accent);
+    outline-offset: 2px;
+  }
+  .fs-shadow-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding-inline: 0.15rem;
+  }
+  .fs-shadow-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .fs-shadow-note {
+    font-size: 0.76rem;
+    color: var(--sl-color-gray-3);
+  }
+  .fs-shadow-cell.copied .fs-shadow-name::after {
+    content: ' ✓ 已复制';
+    color: var(--sl-color-text-accent);
+    font-weight: 500;
+  }
+</style>
+
+<script>
+  document.addEventListener('click', async (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.fs-shadow-cell');
+    if (!btn?.dataset.copy) return;
+    try {
+      await navigator.clipboard.writeText(btn.dataset.copy);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1400);
+    } catch {}
+  });
+</script>

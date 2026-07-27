@@ -1,0 +1,129 @@
+---
+title: 徽标数 Badge
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+一般出现在图标或文字的右上角。提供及时、重要的信息提示。
+
+## 基本用法
+
+<FrameworkBlock framework="react">
+基础的用法。只需指定 `count`，即可显示徽标。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+基本用法。只需指定 `count` 或者 `content` 插槽，即可显示徽标。
+</FrameworkBlock>
+
+<Demo name="badge/basic" />
+
+## 独立使用
+
+<FrameworkBlock framework="react">
+`children` 为空时，将会独立展示徽标。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+默认插槽（`default slot`）为空时，将会独立展示徽标。
+</FrameworkBlock>
+
+<Demo name="badge/standalone" />
+
+## 小红点
+
+设置 `dot`，即可只显示小红点而不显示数字。`count > 0` 时才显示。
+
+<Demo name="badge/dot-badge" />
+
+## 文本内容
+
+设置 `text`，可设置自定义提示内容。
+
+<Demo name="badge/text-content" />
+
+## 最大值
+
+<FrameworkBlock framework="react">
+设置 `maxCount`，可以限制最大显示的徽标数值，超过将会加 `+` 后缀。`maxCount` 默认为 `99`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+设置 `max-count`，可以限制最大显示的徽标数值，超过将会加 `+` 后缀。`max-count` 默认为 `99`。
+</FrameworkBlock>
+
+<Demo name="badge/max-value" />
+
+## 状态点
+
+<FrameworkBlock framework="react">
+设置 `status`，可以得到不同的状态点。`default - 默认` `processing - 进行中` `success - 成功` `warning - 提醒` `error - 错误`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+设置 `status`，可以得到不同的状态点。`normal - 正常` `processing - 进行中` `success - 成功` `warning - 提醒` `danger - 危险`。
+</FrameworkBlock>
+
+<Demo name="badge/status-dot" />
+
+## 颜色
+
+我们提供多种预设色彩的徽标样式。如果预设值不能满足你的需求，`color` 字段也可以设置自定义色值。
+
+<Demo name="badge/color" />
+
+## 动画效果
+
+`count` 改变时候存在动画效果。
+
+<Demo name="badge/animation" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Badge
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| dot | 显示为小红点 | boolean | `-` |
+| maxCount | 徽标最大显示数值，如果 count 超过这个数值会显示为 `${maxCount}+` | number | `99` |
+| text | 自定义提示内容 | string | `-` |
+| color | 内置的一些颜色 | \| 'red'\| 'orangered'\| 'orange'\| 'gold'\| 'lime'\| 'green'\| 'cyan'\| 'arcoblue'\| 'purple'\| 'pinkpurple'\| 'magenta'\| 'gray'\| string | `-` |
+| status | 徽标的状态类型 | 'default' \| 'processing' \| 'success' \| 'warning' \| 'error' | `-` |
+| count | 徽标显示的数字 | number \| ReactNode | `0` |
+| className | 节点类名 | string \| string[] | `-` |
+| dotClassName | 徽标的类名 | string \| string[] | `-` |
+| dotStyle | 徽标的样式 | CSSProperties | `-` |
+| offset | 设置徽标位置的偏移 | [number, number] | `-` |
+| style | 节点样式 | CSSProperties | `-` |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<badge>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|text|自定义提示内容|`string`|`-`|
+|dot|显示为小红点|`boolean`|`false`|
+|dot-style|徽标的样式|`object`|`-`|
+|max-count|徽标最大显示数值，如果count超过这个数值会显示为maxCount|`number`|`99`|
+|offset|设置徽标位置的偏移|`number[]`|`[]`|
+|color|内置的一些颜色|`ColorType \| string`|`-`|
+|status|徽标的状态类型|`'normal' \| 'processing' \| 'success' \| 'warning' \| 'danger'`|`-`|
+|count|徽标显示的数字|`number`|`-`|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="react">
+
+## 常见问题
+
+1. 如何在 `dot=true` 时设置不显示小红点？可以设置 `count=0`。`count > 0` 的时候才会展示徽标。
+
+</FrameworkBlock>

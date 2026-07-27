@@ -1,0 +1,193 @@
+---
+title: 折叠面板 Collapse
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+可以折叠 / 展开的内容区域。
+
+## 基本用法
+
+用于将复杂的内容区域分组和隐藏，可折叠或展开，默认可以展开多个面板，也可以只展开某几个面板。
+
+<FrameworkBlock framework="react">
+面板的展开项可以通过 `activeKey` 与 `onChange` 受控使用，或通过 `defaultActiveKey` 指定默认展开项（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+面板的展开项可以通过 `v-model:active-key`（即 `active-key` 配合 `change` 事件）双向绑定，或通过 `default-active-key` 指定默认展开项（非受控）。
+</FrameworkBlock>
+
+<Demo name="collapse/basic" />
+
+## 手风琴模式
+
+通过 `accordion` 开启手风琴模式，同时只能打开一个面板。
+
+<Demo name="collapse/accordion" />
+
+## 嵌套面板
+
+面板多层嵌套。
+
+<Demo name="collapse/nested-panel" />
+
+## 无边框模式
+
+<FrameworkBlock framework="react">
+通过使用 `bordered={false}` 来使用没有边框的简洁样式。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `bordered="false"` 隐藏边框。
+</FrameworkBlock>
+
+<Demo name="collapse/borderless" />
+
+## 自定义样式
+
+通过指定 `style` 实现自定义的面板样式。
+
+<Demo name="collapse/custom-style" />
+
+## 额外节点
+
+通过 `extra` 可以设置额外节点。
+
+<FrameworkBlock framework="vue">
+`extra` 单击可以设置 `stop` 修饰符（`@click.stop`），以阻止当前项目展开。
+</FrameworkBlock>
+
+<Demo name="collapse/extra-node" />
+
+## 展开图标位置
+
+<FrameworkBlock framework="react">
+可以通过 `expandIconPosition` 属性设置展开图标的位置。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `expand-icon-position` 属性设置展开图标的位置。
+</FrameworkBlock>
+
+<Demo name="collapse/expand-icon-position" />
+
+## 展开图标
+
+为展开项自定义展开图标。
+
+<Demo name="collapse/expand-icon" />
+
+## Lazyload
+
+是否直到 `Collapse.Item` 首次展开时才渲染 `children`。
+
+<Demo name="collapse/lazyload" />
+
+## 隐藏时销毁
+
+<FrameworkBlock framework="react">
+通过 `destroyOnHide` 属性可以设置销毁被折叠的面板。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `destroy-on-hide` 可以让面板内容在隐藏时销毁。
+</FrameworkBlock>
+
+<Demo name="collapse/destroy-on-hide" />
+
+## 指定折叠触发区域
+
+通过 `triggerRegion` 属性，设置面板可以触发折叠的区域。
+
+<Demo name="collapse/trigger-region" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Collapse
+
+| 参数名 | 描述 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| accordion | 是否是手风琴模式 | boolean | `-` | - |
+| bordered | 无边框样式 | boolean | `true` | - |
+| destroyOnHide | 是否销毁被折叠的面板 | boolean | `-` | - |
+| lazyload | 设置为 `true` 时，挂载时不会渲染被隐藏的面板。 | boolean | `true` | - |
+| expandIconPosition | 展开图标的位置 | 'left' \| 'right' | `left` | - |
+| triggerRegion | 可触发折叠操作的区域 | 'header' \| 'icon' | `-` | 2.41.0 |
+| expandIcon | 自定义展开图标 | ReactNode | `-` | - |
+| activeKey | 当前面板选中值 | string \| string[] | `-` | - |
+| className | 节点类名 | string \| string[] | `-` | - |
+| defaultActiveKey | 默认展开的面板 | string \| string[] | `-` | - |
+| style | 节点样式 | CSSProperties | `-` | - |
+| onChange | 展开面板改变时触发 | `(key: string, keys: string[], e) => void` | `-` | - |
+
+### Collapse.Item
+
+| 参数名 | 描述 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| destroyOnHide | 面板被折叠时是否销毁节点，优先级高于 `Collapse` 的 `destroyOnHide` | boolean | `-` | - |
+| disabled | 是否禁用 | boolean | `-` | - |
+| showExpandIcon | 是否展示展开按钮 | boolean | `true` | - |
+| name | 对应 activeKey，当前面板组件的的唯一标识 | string **(必填)** | `-` | - |
+| expandIcon | 自定义展开图标 | ReactNode | `-` | - |
+| extra | 额外节点 | ReactNode | `-` | - |
+| header | 折叠面板头部内容，允许自定义 | ReactNode | `-` | - |
+| className | 节点类名 | string \| string[] | `-` | - |
+| contentStyle | 内容区域的附加样式。 | CSSProperties | `-` | 2.15.0 |
+| style | 节点样式 | CSSProperties | `-` | - |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<collapse>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|active-key **(v-model)**|当前展开的面板的 `key`|`(string \| number)[]`|`-`||
+|default-active-key|默认展开的面板的 `key` （非受控模式）|`(string \| number)[]`|`[]`||
+|accordion|是否开启手风琴模式|`boolean`|`false`||
+|show-expand-icon|是否显示展开图标|`boolean`|`-`|2.33.0|
+|expand-icon-position|展开图标显示的位置|`'left' \| 'right'`|`'left'`||
+|bordered|是否显示边框|`boolean`|`true`||
+|destroy-on-hide|是否在隐藏时销毁内容|`boolean`|`false`|2.27.0|
+
+### `<collapse>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|展开的面板发生改变时触发|activeKey: `(string \| number)[]`<br/>ev: `Event`|
+
+### `<collapse-item>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|header|面板的标题|`string`|`-`||
+|disabled|是否禁用|`boolean`|`false`||
+|show-expand-icon|是否显示展开图标|`boolean`|`true`||
+|destroy-on-hide|是否在隐藏时销毁内容|`boolean`|`false`|2.27.0|
+
+### `<collapse-item>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|extra|额外内容|-||
+|expand-icon|展开图标|active: `boolean`<br/>disabled: `boolean`<br/>position: `'left' \| 'right'`|2.33.0|
+|header|面板的标题|-||
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+## FAQ
+
+### `<CollapseItem>` 组件的 `key` 属性为必填
+
+在 `<Collapse>` 组件中每个 `<CollapseItem>` 都需要指定唯一的 `key` 属性，`key` 对应 `activeKey` 中的值。
+
+</FrameworkBlock>

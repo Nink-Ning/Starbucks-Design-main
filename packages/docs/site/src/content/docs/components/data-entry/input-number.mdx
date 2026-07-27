@@ -1,0 +1,212 @@
+---
+title: 数字输入框 InputNumber
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+仅允许输入数字格式的输入框。
+
+## 基本用法
+
+通过鼠标或者键盘输入范围内的标准数值。
+
+<FrameworkBlock framework="react">
+数字输入框的值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+数字输入框的值可以通过 `v-model`（即 `model-value` 配合 `change` / `input` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="input-number/basic" />
+
+## v-model 的触发事件
+
+<FrameworkBlock framework="vue">
+
+数字输入框默认在 blur 或者按下 Enter 时会修改绑定的值，通过设置属性 `model-event="input"` 让组件在输入时修改绑定的值。
+
+注意：在此模式下，输入时的值会超出设置的 min/max，组件会在失焦时修正值的大小。
+
+</FrameworkBlock>
+
+<Demo name="input-number/v-model-trigger" />
+
+## 按钮模式
+
+指定 `mode` 为 `button` 来使用带按钮的数字输入框。
+
+<Demo name="input-number/button-mode" />
+
+## 四种尺寸
+
+<FrameworkBlock framework="react">
+设置 `size` 可以使用四种尺寸（`mini`、`small`、`default`、`large`）的数字输入框。高度分别对应 `24px`、`28px`、`32px`、`36px`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+设置 `size` 可以使用四种尺寸（`mini`、`small`、`medium`、`large`）的数字输入框。高度分别对应 `24px`、`28px`、`32px`、`36px`。
+</FrameworkBlock>
+
+<Demo name="input-number/four-sizes" />
+
+## 精度和步长
+
+通过 `precision` 来设置数字精度。当 `precision` 小于 `step` 的小数位时，精度取 `step` 的小数个数。
+
+<Demo name="input-number/precision-step" />
+
+## 格式化展示值
+
+通过 `formatter` 和 `parser` 配合使用可以定义输入框展示值。
+
+<FrameworkBlock framework="react">
+通过 `formatter` 中的 `userTyping` 参数，判断是否正在输入，可以延迟显示 `formatter` 后的值。
+</FrameworkBlock>
+
+<Demo name="input-number/format-display" />
+
+## 前缀与后缀
+
+<FrameworkBlock framework="react">
+通过 `prefix` 和 `suffix` 属性来在输入框内添加前缀和后缀。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过指定 `prefix` 和 `suffix` 插槽来在输入框内添加前缀和后缀。
+</FrameworkBlock>
+
+<Demo name="input-number/prefix-suffix" />
+
+## 高精度
+
+<FrameworkBlock framework="react">
+通过 `strictMode` 开启严格模式以支持更高精度，`onChange` 此时将会返回字符串。
+</FrameworkBlock>
+
+<Demo name="input-number/strict-mode" />
+
+## 自定义图标
+
+<FrameworkBlock framework="react">
+通过 `icons` 属性配置 `up`、`down`、`plus`、`minus` 图标。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过指定 `plus` 和 `minus` 插槽来修改数值增减操作的图标。
+</FrameworkBlock>
+
+<Demo name="input-number/custom-icon" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### InputNumber
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|disabled|是否禁用|boolean |`-`|-|
+|error|错误状态|boolean |`-`|-|
+|hideControl|隐藏右侧按钮|boolean |`-`|-|
+|readOnly|是否只读|boolean |`-`|2.17.0|
+|strictMode|严格模式下，`onChange` 回调将返回字符串类型|boolean |`-`|2.42.0|
+|max|最大值|number |`Infinity`|-|
+|min|最小值|number |`-Infinity`|-|
+|precision|数字精度。设置精度小于`step`的小数位时，取`step`的小数个数。|number |`-`|-|
+|step|数字变化步长|number |`1`|-|
+|placeholder|默认显示文案|string |`-`|-|
+|mode|`embed` - 按钮内嵌模式，`button` - 左右按钮模式|'embed' \| 'button' |`embed`|-|
+|size|不同尺寸的数字输入框。分别对应 `24px`, `28px`, `32px`, `36px`|'mini' \| 'small' \| 'default' \| 'large' |`-`|-|
+|prefix|显示前缀|ReactNode |`-`|-|
+|suffix|显示后缀|ReactNode |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|defaultValue|初始值|number \| string |`-`|-|
+|icons|配置图标|`{ up?: ReactNode; down?: ReactNode; plus?: ReactNode; minus?: ReactNode }` |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|value|当前值|undefined \| number \| string |`-`|-|
+|formatter|定义输入框展示值|`(value: number \| string, info: { userTyping: boolean; input: string }) => string` |`-`|Param `info` in `2.41.0`|
+|onBlur|输入框失去聚焦事件的回调|`(e) => void` |`-`|-|
+|onChange|变化回调|`(value: number, reason?: InputNumberValueChangeReason) => void` |`-`|`reason` in 2.61.0|
+|onFocus|输入框聚焦事件的回调|`(e) => void` |`-`|-|
+|onKeyDown|键盘事件回调|`(e: Event) => void` |`-`|-|
+|parser|从 formatter 转换为数字，和 formatter 搭配使用。|`(value: string) => number \| string` |`(input) => input.replace(/[^\w\.-]+/g, '')`|-|
+
+### InputNumberValueChangeReason
+
+```js
+// 造成输入框值改变的原因：用户输入、增加、减少、超出范围值修正
+export type InputNumberValueChangeReason =
+  | "manual"
+  | "increase"
+  | "decrease"
+  | "outOfRange";
+```
+
+## 方法/Methods
+
+|名称|描述|
+|---|:---:|
+|blur()|	移除焦点|
+|focus()|	获取焦点|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<input-number>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|model-value **(v-model)**|绑定值|`number`|`-`||
+|default-value|默认值（非受控模式）|`number`|`-`||
+|mode|模式（`embed`：按钮内嵌模式，`button`：左右按钮模式）|`'embed' \| 'button'`|`'embed'`||
+|precision|数字精度|`number`|`-`||
+|step|数字变化步长|`number`|`1`||
+|disabled|是否禁用|`boolean`|`false`||
+|error|是否为错误状态|`boolean`|`false`||
+|max|最大值|`number`|`Infinity`||
+|min|最小值|`number`|`-Infinity`||
+|formatter|定义输入框展示值|`func`|`-`||
+|parser|从 `formatter` 转换为数字，和 `formatter` 搭配使用|`func`|`-`||
+|placeholder|输入框提示文字|`string`|`-`||
+|hide-button|是否隐藏按钮|`boolean`|`false`||
+|size|输入框大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
+|allow-clear|是否允许清空输入框|`boolean`|`false`||
+|model-event|触发 `v-model` 的事件|`'change' \| 'input'`|`'change'`||
+|read-only|只读|`boolean`|`false`|2.33.1|
+|input-attrs|内部 input 元素的属性|`object`|`-`|2.52.0|
+
+### `<input-number>` Events
+
+|事件名|描述|参数|版本|
+|---|---|---|:---|
+|change|值发生改变时触发|value: ` number \| undefined `<br/>ev: `Event`||
+|focus|输入框获取焦点时触发|ev: `FocusEvent`||
+|blur|输入框失去焦点时触发|ev: `FocusEvent`||
+|clear|用户点击清除按钮时触发|ev: `Event`|2.23.0|
+|input|输入时触发|value: ` number \| undefined `<br/>inputValue: `string`<br/>ev: `Event`|2.27.0|
+|keydown|按下键盘时触发|ev: `MouseEvent`|2.56.0|
+
+### `<input-number>` Methods
+
+|方法名|描述|参数|返回值|
+|---|---|---|---|
+|focus|使输入框获取焦点|-|-|
+|blur|使输入框失去焦点|-|-|
+
+### `<input-number>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|minus|数值减少图标|-|
+|plus|数值增加图标|-|
+|append|后置标签|-|
+|prepend|前置标签|-|
+|suffix|后缀|-|
+|prefix|前缀|-|
+
+</FrameworkBlock>

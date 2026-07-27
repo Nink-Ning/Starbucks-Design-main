@@ -1,0 +1,3 @@
+<template>
+  <Rate grading />
+</template>

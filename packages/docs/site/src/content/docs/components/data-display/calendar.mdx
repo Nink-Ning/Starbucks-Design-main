@@ -1,0 +1,122 @@
+---
+title: 日历 Calendar
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+日历组件。
+
+## 基本用法
+
+日历的基本用法，用于展示和选择日期。
+
+<FrameworkBlock framework="react">
+日历的值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+日历的值可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="calendar/basic" />
+
+## 下拉选择的头部
+
+除了默认的头部切换外，也支持下拉选择的头部，可以更快速地定位。
+
+<Demo name="calendar/dropdown-header" />
+
+## 日历内容定制
+
+<FrameworkBlock framework="react">
+通过 `dateInnerContent` 可以将自定义元素追加到日历单元格中，用于展示待办等信息。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `date-inner-content` 可以将自定义元素追加到日历单元格中，用于展示待办等信息。
+</FrameworkBlock>
+
+<Demo name="calendar/calendar-content" />
+
+## 卡片日历
+
+设置 `panel`，可以使用卡片日历。
+
+<Demo name="calendar/card-calendar" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Calendar
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| allowSelect | 是否允许选中和切换日期，`panel` 模式下默认可选中切换 | boolean | `-` |
+| isWeek | 周选择 | boolean | `-` |
+| panel | 是否放在容器中进行展示。 | boolean | `-` |
+| panelTodayBtn | 是否显示跳转到今天的按钮 | boolean | `-` |
+| defaultMode | 选择日期的月日历和选择月份的年日历。 | 'day' \| 'week' \| 'month' \| 'year' | `month` |
+| headerType | 有两种头部可供选择，默认的按钮类型和下拉框类型，只在全屏日历模式下生效。 | 'button' \| 'select' | `button` |
+| mode | 选择日期的月日历和选择月份的年日历，受控模式。 | 'day' \| 'week' \| 'month' \| 'year' | `-` |
+| panelOperations | 卡片模式下配置操作按钮 | `Array<'left' \| 'double-left' \| 'right' \| 'double-right'>` | `-` |
+| className | 节点类名 | string \| string[] | `-` |
+| dayStartOfWeek | 每周的第一天开始于周几，0 - 周日，1 - 周一。 | 0 \| 1 | `0` |
+| locale | 国际化配置 | `Record<string, any>` | `-` |
+| panelWidth | 卡片模式的宽度 | number \| string | `265` |
+| style | 节点样式 | CSSProperties | `-` |
+| dateInnerContent | 定制日期单元格，内容会被添加到单元格内，只在全屏日历模式下生效。 | `(currentDate: Dayjs) => ReactNode` | `-` |
+| dateRender | 定制日期显示，会完全覆盖日期单元格。 | `(currentDate: Dayjs) => ReactNode` | `-` |
+| disabledDate | 不可选取的时间 | `(current: Dayjs) => boolean` | `-` |
+| headerRender | 自定义头部渲染。 | `(props: {value?: Dayjs;pageShowDate?: Dayjs;mode?: string;onChange;onChangePageDate;onChangeMode;}) => ReactNode` | `-` |
+| monthRender | 定制月份显示，会完全覆盖月份单元格。 | `(currentDate: Dayjs) => ReactNode` | `-` |
+| onChange | 日期变化触发的回调。 | `(date: Dayjs) => void` | `-` |
+| onPanelChange | 面板日期发生改变触发的回调。 | `(date: Dayjs) => void` | `-` |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<calendar>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|model-value **(v-model)**|绑定值|`date`|`-`|
+|default-value|默认值（非受控状态）|`date`|`-`|
+|default-page-show-date|默认展示的面板日期|`date`|`-`|
+|page-show-date|展示的面板日期（受控）|`date`|`-`|
+|mode|模式|`'day' \| 'week' \| 'month' \| 'year'`|`-`|
+|default-mode|默认模式|`'day' \| 'week' \| 'month' \| 'year'`|`'month'`|
+|modes|显示的模式|`('day' \| 'week' \| 'month' \| 'year')[]`|`['month', 'year']`|
+|panel-operations|卡片模式下配置操作按钮|`Array<'left' \| 'double-left' \| 'right' \| 'double-right'>`|`-`|
+|header-type|头部类型|`'button' \| 'select'`|`'button'`|
+|allow-select|是否允许选中和切换日期|`boolean`|`true`|
+|panel|是否放在容器中进行展示|`boolean`|`false`|
+|panel-width|卡片模式的宽度|`number \| string`|`265`|
+|panel-today-btn|是否显示跳转到今天的按钮|`boolean`|`false`|
+|day-start-of-week|每周的第一天开始于周几，0 - 周日，1 - 周一|`'0' \| '1'`|`0`|
+|is-week|周选择|`boolean`|`false`|
+|disabled-date|不可选取的时间|`(current: Dayjs) => boolean`|`-`|
+|date-render|定制日期显示，会完全覆盖日期单元格|`(currentDate: Dayjs) => any`|`-`|
+|date-inner-content|定制日期单元格，内容会被添加到单元格内|`(currentDate: Dayjs) => any`|`-`|
+|month-render|定制月份显示，会完全覆盖月份单元格|`(currentDate: Dayjs) => any`|`-`|
+|header-render|自定义头部渲染|`(props: {  value?: Dayjs;  pageShowDate?: Dayjs;  mode?: string;  onChange: (date: Dayjs) => void;  onChangePageDate: (date: Dayjs) => void;  onChangeMode: (mode: 'day' \| 'week' \| 'month' \| 'year') => void;}) => any`|`-`|
+
+### `<calendar>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|选择的日期改变时触发|date: `Date`|
+|panel-change|日期面板改变时触发|date: `Date`|
+
+### `<calendar>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|header|自定义头部内容|year: `number`<br/>month: `number`|2.53.0|
+|default|自定义单元格内容|year: `number`<br/>month: `number`<br/>date: `number`|2.53.0|
+
+</FrameworkBlock>

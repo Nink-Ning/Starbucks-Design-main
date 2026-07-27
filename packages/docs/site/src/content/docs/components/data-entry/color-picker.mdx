@@ -1,0 +1,178 @@
+---
+title: 颜色选择器 ColorPicker
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+用于选择和展示颜色
+
+## 基本使用
+
+基本用法。
+
+<FrameworkBlock framework="react">
+颜色值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+颜色值可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="color-picker/basic-usage" />
+
+## 受控模式
+
+颜色选择器面板会在打开时同步输入框中的值。
+
+<Demo name="color-picker/controlled" />
+
+## 尺寸
+
+<FrameworkBlock framework="react">
+颜色选择器定义了四种尺寸（`mini`、`small`、`default`、`large`），分别为 24px，28px，32px，36px。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+颜色选择器定义了四种尺寸（`mini`、`small`、`medium`、`large`），分别为 24px，28px，32px，36px。
+</FrameworkBlock>
+
+<Demo name="color-picker/size" />
+
+## 禁用
+
+设置 `disabled` 禁用整个选择器。
+
+<Demo name="color-picker/disabled" />
+
+## 禁用透明通道
+
+设置 `disabledAlpha` 以隐藏 Alpha 值滑条和数值显示。
+
+如果 `defaultValue` 传入的初始色值包含 Alpha，那么初次显示时，色块会保留传入的 Alpha。当用户在取色版上取色时，Alpha 将被重置并锁定为 100。
+
+<Demo name="color-picker/disabled-alpha" />
+
+## 颜色格式
+
+通过 `format` 设置颜色值的格式，支持 `hex` 和 `rgb`。
+
+<Demo name="color-picker/color-format" />
+
+## 渐变色
+
+通过 `mode` 设置颜色为单一颜色或渐变色。
+
+<Demo name="color-picker/gradient" />
+
+## 预设颜色和历史颜色
+
+<FrameworkBlock framework="react">
+可以通过 `showPreset` 和 `showHistory` 开启预设颜色和历史颜色区域。历史颜色需要用户自行控制展示内容。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `show-preset` 和 `show-history` 开启预设颜色和历史颜色区域。历史颜色需要用户自行控制展示内容。
+</FrameworkBlock>
+
+<Demo name="color-picker/preset-colors" />
+
+## 自定义触发元素
+
+可以自定义颜色选择器的触发元素，此时与颜色输入框相关的属性将会失效。
+
+<Demo name="color-picker/custom-trigger" />
+
+## 触发器
+
+可以通过 `trigger-props` 设置触发器的所有属性。
+
+<Demo name="color-picker/trigger" />
+
+## 只使用面板
+
+只用颜色选择面板。
+
+<Demo name="color-picker/panel-only" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### ColorPicker
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|defaultPopupVisible|默认弹出框是打开还是关闭|boolean |`-`|-|
+|disabled|禁用|boolean |`-`|-|
+|disabledAlpha|禁用透明通道|boolean |`-`|-|
+|popupVisible|弹出框是打开还是关闭。(受控)|boolean |`-`|-|
+|showHistory|显示历史颜色|boolean |`-`|-|
+|showPreset|显示预设颜色|boolean |`-`|-|
+|showText|显示颜色值|boolean |`-`|-|
+|unmountOnExit|隐藏后是否销毁 DOM 结构|boolean |`true`|-|
+|format|颜色值的格式|'hex' \| 'rgb' |`-`|-|
+|size|输入框的尺寸|InputProps['size'] |`default`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|defaultValue|默认值|string \| GradientColor[] |`-`|-|
+|historyColors|历史颜色的颜色数组|string[] |`-`|-|
+|mode|单一颜色或渐变色模式|ColorPickerMode \| ColorPickerMode[] |`single`|-|
+|presetColors|预设颜色的颜色数组|string[] |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|triggerProps|可以接受所有 Trigger 组件的 Props|`Partial<TriggerProps>` |`-`|-|
+|value|颜色值，受控模式|string \| GradientColor[] |`-`|-|
+|onChange|颜色值改变时触发|`(value: string \| GradientColor[]) => void` |`-`|-|
+|onVisibleChange|下拉框收起展开时触发。|`(visible: boolean) => void` |`-`|-|
+|renderFooter|自定义面板底部内容|`() => ReactNode` |`-`|2.62.0|
+|triggerElement|自定义触发元素。|`ReactNode \| ((params: { value: string \| GradientColor[] }) => ReactNode)` |`-`|2.60.0|
+
+### GradientColor
+
+```js
+export interface GradientColor {
+  color: string;
+  percent: number;
+}
+```
+
+### ColorPickerMode
+
+```js
+export enum ColorPickerMode {
+  Single = "single",
+  Gradient = "gradient",
+}
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<color-picker>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|model-value **(v-model)**|绑定值|`string`|`-`|
+|default-value|默认值（非受控状态）|`string`|`-`|
+|format|颜色值的格式|`'hex' \| 'rgb'`|`-`|
+|size|尺寸|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`|
+|show-text|显示颜色值|`boolean`|`false`|
+|show-history|显示历史颜色|`boolean`|`false`|
+|show-preset|显示预设颜色|`boolean`|`false`|
+|disabled|禁用|`boolean`|`false`|
+|disabled-alpha|禁用透明通道|`boolean`|`false`|
+|hide-trigger|没有触发元素，只显示颜色面板|`boolean`|`false`|
+|trigger-props|接受所有 Trigger 组件的Props|`Partial<TriggerProps>`|`-`|
+|history-colors|历史颜色的颜色数组|`string[]`|`-`|
+|preset-colors|预设颜色的颜色数组|`string[]`|`() => colors`|
+
+### `<color-picker>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|颜色值改变时触发|value: `string`|
+|popup-visible-change|颜色面板展开和收起时触发|visible: `boolean`<br/>value: `string`|
+
+</FrameworkBlock>

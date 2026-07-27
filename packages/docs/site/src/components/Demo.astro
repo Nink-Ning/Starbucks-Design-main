@@ -1,0 +1,122 @@
+---
+import { Code } from 'astro:components';
+import ReactDemoLoader from '../demos/_shared/ReactDemoLoader.tsx';
+import VueDemoLoader from '../demos/_shared/VueDemoLoader.vue';
+// Explicit theme/lang grammar objects (rather than the string presets
+// "github-dark" / "tsx" / "vue") to sidestep a Rollup SSR bundling quirk in
+// this project's astro@5.18.2 + shiki@3.23.0 combo: Code's default string
+// lookup path resolves through shiki's fine-grained `createBundledHighlighter`,
+// whose theme/lang registry arrays (`shiki/themes`, `shiki/langs`) get
+// tree-shaken to empty during the static build, throwing "Theme `github-dark`
+// is not included in this bundle" even for a bare `<Code lang="tsx" />` with
+// no Demo/glob involvement. Passing resolved objects bypasses that registry
+// lookup entirely (Code.astro's documented "load a custom theme/language" path).
+import githubLight from '@shikijs/themes/github-light';
+import tsxLang from '@shikijs/langs/tsx';
+import vueLang from '@shikijs/langs/vue';
+
+interface Props {
+  name: string; // 如 "button/basic" → src/demos/button/basic.{tsx,vue}
+}
+const { name } = Astro.props;
+
+// Non-eager: only used to check existence at build time; the components
+// themselves are dynamically imported client-side by the loader islands
+// below (see ReactDemoLoader.tsx / VueDemoLoader.vue for why).
+const reactModules = import.meta.glob('../demos/**/*.tsx');
+const vueModules = import.meta.glob('../demos/**/*.vue');
+const reactSources = import.meta.glob<string>('../demos/**/*.tsx', { eager: true, query: '?raw', import: 'default' });
+const vueSources = import.meta.glob<string>('../demos/**/*.vue', { eager: true, query: '?raw', import: 'default' });
+
+const reactKey = `../demos/${name}.tsx`;
+const vueKey = `../demos/${name}.vue`;
+const hasReact = reactKey in reactModules;
+const hasVue = vueKey in vueModules;
+const reactCode = reactSources[reactKey];
+const vueCode = vueSources[vueKey];
+
+if (!hasReact && !hasVue) {
+  throw new Error(`Demo 不存在: src/demos/${name}.{tsx,vue}`);
+}
+---
+
+<div class="sb-demo" data-demo={name}>
+  <div class="sb-demo-preview not-content">
+    {hasReact
+      ? <div class="fw-react"><ReactDemoLoader name={name} client:only="react" /></div>
+      : <div class="fw-react sb-demo-missing">该组件暂无 React 示例</div>}
+    {hasVue
+      ? <div class="fw-vue"><VueDemoLoader name={name} client:only="vue" /></div>
+      : <div class="fw-vue sb-demo-missing">该组件暂无 Vue 示例</div>}
+  </div>
+  {/* Drop the inactive framework's preview island BEFORE Astro's (deferred,
+      module-script) client:only hydration runs — this synchronous is:inline
+      script executes during HTML parse, so the removed <astro-island> never
+      hydrates and its wrapper's Arco CSS is never injected. Result: only the
+      active framework's `.arco-*` CSS exists per page load (the framework
+      toggle does a full reload). Lets the docs depend only on the component
+      library, no arco-v prefix isolation. data-astro-rerun re-runs it after a
+      view-transition swap so newly-swapped-in demos are pruned too. */}
+  <script is:inline data-astro-rerun>
+    (function () {
+      var s = document.currentScript;
+      var demo = s && s.closest('.sb-demo');
+      if (!demo) return;
+      var fw = document.documentElement.dataset.framework || 'react';
+      var el = demo.querySelector('.sb-demo-preview > .fw-' + (fw === 'react' ? 'vue' : 'react'));
+      if (el) el.remove();
+    })();
+  </script>
+  <details class="sb-demo-code">
+    <summary>
+      <svg class="sb-demo-code-icon" aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M8.59 16.59 4 12l4.59-4.59L10 8.83 6.83 12 10 15.17l-1.41 1.42ZM15.41 16.59 14 15.17 17.17 12 14 8.83l1.41-1.42L20 12l-4.59 4.59Z" fill="currentColor" />
+      </svg>
+      <span class="sb-demo-code-label" data-show-label="Show code" data-hide-label="Hide code">Show code</span>
+    </summary>
+    <div class="sb-demo-editor-header">
+      <span class="sb-demo-editor-title">代码示例</span>
+      <button class="sb-demo-copy" type="button">
+        <svg class="sb-demo-copy-icon" aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M8 7a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-1v1a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3h1V7Zm2 1h3a3 3 0 0 1 3 3v3h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v1Zm-3 2a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H7Z" fill="currentColor" />
+        </svg>
+        <span class="sb-demo-copy-label">Copy</span>
+      </button>
+    </div>
+    {reactCode && <div class="fw-react" data-code={reactCode}><Code code={reactCode} lang={tsxLang} theme={githubLight} /></div>}
+    {vueCode && <div class="fw-vue" data-code={vueCode}><Code code={vueCode} lang={vueLang} theme={githubLight} /></div>}
+  </details>
+</div>
+
+<script>
+  // Event delegation on the persistent document: a single binding survives
+  // view-transition swaps. Per-element listeners would be lost every time the
+  // ClientRouter replaces <body> on navigation, breaking copy on swapped-in
+  // pages. Binds once — no data-astro-rerun needed.
+  document.addEventListener('click', async (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.sb-demo-copy');
+    if (!btn) return;
+    e.preventDefault(); // 不触发 details 开合
+    const root = btn.closest('.sb-demo')!;
+    const fw = document.documentElement.dataset.framework || 'react';
+    const block = root.querySelector<HTMLElement>(`.sb-demo-code .fw-${fw}`);
+    if (block?.dataset.code) {
+      await navigator.clipboard.writeText(block.dataset.code);
+      const label = btn.querySelector<HTMLElement>('.sb-demo-copy-label');
+      if (label) {
+        label.textContent = 'Copied';
+        setTimeout(() => (label.textContent = 'Copy'), 1500);
+      }
+    }
+  });
+
+  document.addEventListener('toggle', (e) => {
+    const details = e.target as HTMLDetailsElement;
+    if (!details.matches?.('.sb-demo-code')) return;
+    const label = details.querySelector<HTMLElement>('.sb-demo-code-label');
+    if (!label) return;
+    label.textContent = details.open
+      ? label.dataset.hideLabel || 'Hide code'
+      : label.dataset.showLabel || 'Show code';
+  }, true);
+</script>

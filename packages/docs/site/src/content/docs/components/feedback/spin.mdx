@@ -1,0 +1,107 @@
+---
+title: 加载中 Spin
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+用于页面和区块的加载中状态 - 页面局部处于等待异步数据或正在渲染过程时，合适的加载动效会有效缓解用户的焦虑。
+
+## 基本用法
+
+用于展示加载中的状态。
+
+<Demo name="spin/basic" />
+
+## 点类型指示符
+
+通过 `dot` 属性，可以展示点类型的指示符。
+
+<Demo name="spin/dot-indicator" />
+
+## 容器中
+
+<FrameworkBlock framework="react">
+可以给任意元素添加加载状态。容器默认是 `inline-block` 布局，当你需要撑满父级容器时，可以设置 `style={{ display: 'block' }}`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以给任意内容添加加载中指示符。
+</FrameworkBlock>
+
+<Demo name="spin/in-container" />
+
+## 添加描述文案
+
+通过 `tip` 属性添加描述文案。
+
+<Demo name="spin/add-description" />
+
+## 延迟
+
+通过 `delay` 延迟显示 loading，对状态切换进行防抖处理，有效避免状态快速切换时的屏幕闪烁。
+
+<Demo name="spin/delay" />
+
+## 自定义图标
+
+<FrameworkBlock framework="react">
+通过指定 `icon` 可以指定自定义图标作为加载组件。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `#icon` 插槽可以自定义图标。
+</FrameworkBlock>
+
+<Demo name="spin/custom-icon" />
+
+## 不同尺寸
+
+设置 `size` 可以得到不同尺寸的加载图标。
+
+<Demo name="spin/sizes" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Spin
+
+| 参数名    | 描述                                                          | 类型                | 默认值 | 版本   |
+| --------- | ------------------------------------------------------------- | ------------------- | ------ | ------ |
+| block     | 是否为块级元素                                                | boolean             | `-`    | 2.29.0 |
+| dot       | 是否使用点类型的动画                                          | boolean             | `-`    | -      |
+| loading   | 是否为加载状态（仅在 `Spin` 有子节点时生效）                  | boolean             | `-`    | -      |
+| delay     | 延迟显示加载的时间 (ms)                                       | number              | `-`    | -      |
+| size      | 加载动画的尺寸                                                | number              | `-`    | -      |
+| element   | 自定义元素，非图标，不附带旋转效果。可用于设置为 gif 图片等。 | ReactNode           | `-`    | -      |
+| icon      | 自定义图标，会自动旋转。                                      | ReactNode           | `-`    | -      |
+| tip       | 加载的文案                                                    | string \| ReactNode | `-`    | -      |
+| className | 节点类名                                                      | string \| string[]  | `-`    | -      |
+| style     | 节点样式                                                      | CSSProperties       | `-`    | -      |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<spin>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|size|尺寸|`number`|`-`|
+|loading|是否为加载中状态（仅在容器模式下生效）|`boolean`|`false`|
+|dot|是否使用点类型的动画|`boolean`|`false`|
+|tip|提示内容|`string`|`-`|
+|hide-icon|是否隐藏图标|`boolean`|`false`|
+
+### `<spin>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|tip|自定义提示内容|-|
+|element|自定义元素|-|
+|icon|自定义图标（自动旋转）|-|
+
+</FrameworkBlock>

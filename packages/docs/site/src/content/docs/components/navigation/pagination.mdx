@@ -1,0 +1,201 @@
+---
+title: 分页 Pagination
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+采用分页控制单页内的信息数量，也可进行页面跳转。
+
+## 基本用法
+
+分页的基本用法，`total` 属性为必填项。
+
+<Demo name="pagination/basic" />
+
+## 更多页码
+
+当页码较大时，会使用更多页码的分页样式。
+
+<Demo name="pagination/more-pages" />
+
+## 每页条数
+
+<FrameworkBlock framework="react">
+通过设置 `sizeCanChange`，可定义每页展示条目数量。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `show-page-size`，展示每页条数选择器。
+</FrameworkBlock>
+
+<Demo name="pagination/page-size" />
+
+## 页码跳转
+
+<FrameworkBlock framework="react">
+通过设置 `showJumper`，输入页码可快速跳转到指定页。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `show-jumper`，显示页码跳转输入框。
+</FrameworkBlock>
+
+<Demo name="pagination/page-jumper" />
+
+## 分页尺寸
+
+<FrameworkBlock framework="react">
+分页分为 `mini`、`small`、`default`、`large` 四种尺寸，通过 `size` 字段指定。默认尺寸为 `default`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+分页分为 `mini`、`small`、`medium`、`large` 四种尺寸，通过 `size` 字段指定。默认尺寸为 `medium`。
+</FrameworkBlock>
+
+<Demo name="pagination/pagination-size" />
+
+## 简洁模式
+
+通过设置 `simple` 属性，在空间有限的场景下开启较为简单的文本分页模式。
+
+<Demo name="pagination/simple-mode" />
+
+## 展示总数
+
+<FrameworkBlock framework="react">
+通过设置 `showTotal`，显示数据总数。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `show-total`，显示数据总数。
+</FrameworkBlock>
+
+<Demo name="pagination/show-total" />
+
+## 受控的数据总数
+
+通过改变 `total` 的值，解决无法计算页码总数的情景。
+
+<Demo name="pagination/controlled-total" />
+
+## 全部展示
+
+展示全部配置项。
+
+<Demo name="pagination/show-all" />
+
+## 样式定制
+
+可以通过样式定制得到不同的视觉风格。
+
+<Demo name="pagination/custom-style" />
+
+## 自定义分页按钮
+
+<FrameworkBlock framework="react">
+设置 `itemRender`，可以自由定制分页按钮（如上一步、下一步）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以通过插槽自定义分页按钮内容。
+</FrameworkBlock>
+
+<Demo name="pagination/custom-pager-button" />
+
+## 省略页码时展示长度
+
+<FrameworkBlock framework="react">
+通过 `bufferSize` 可以设置 `current` 页与 `...` 之间的页码个数。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `buffer-size` 可以设置 `current` 页与 `...` 之间的页码个数。
+</FrameworkBlock>
+
+一个 `...` 至少代表省略 `2` 页。
+
+<Demo name="pagination/buffer-size" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Pagination
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|disabled|是否禁用|boolean |`-`|-|
+|hideOnSinglePage|是否在只有一页的情况下隐藏|boolean |`-`|2.6.0|
+|pageSizeChangeResetCurrent|`pageSize` 改变的时候重置当前页码为 `1`|boolean |`true`|-|
+|showJumper|是否显示快速跳转到某页，在 `simple` 模式下默认为 true|boolean |`-`|-|
+|showMore|是否显示更多页码提示（当尚无法计算数据总数时可以使用）|boolean |`-`|-|
+|simple|是否应用精简分页模式|boolean |`-`|-|
+|sizeCanChange|是否可以改变每页条数|boolean |`-`|-|
+|bufferSize|`current` 页与 `...` 之间的页码个数|number |`2`|2.32.0|
+|current|当前页|number |`-`|-|
+|defaultCurrent|当前页默认值|number |`-`|-|
+|defaultPageSize|默认每页数据条数|number |`-`|-|
+|pageSize|每页数据条数|number |`-`|-|
+|total|数据总数|number |`-`|-|
+|itemRender|定制分页按钮的结构|`(page: number, type: 'page' \| 'more' \| 'prev' \| 'next', originElement: ReactNode) => ReactNode`|`-`|-|
+|size|分页器尺寸|'mini' \| 'small' \| 'default' \| 'large' |`-`|-|
+|activePageItemStyle|被选中的分页按钮样式|CSSProperties |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|icons|设置分页器的图标|`{prev?: ReactNode;next?: ReactNode;more?: ReactNode;}`|`-`|-|
+|pageItemStyle|分页按钮样式|CSSProperties |`-`|-|
+|selectProps|用于配置弹出框的属性|`Partial<SelectProps>`|`-`|-|
+|sizeOptions|每页可以显示数据条数|number[] |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|onChange|变化时的回调|`(pageNumber: number, pageSize: number) => void`|`-`|-|
+|onPageSizeChange|pageSize 变化时的回调|`(size: number, current: number) => void`|`-`|-|
+|showTotal|是否显示数据总数|`boolean \| ((total: number, range: number[]) => ReactNode)`|`-`|-|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<pagination>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|total **(必填)**|数据总数|`number`|`-`||
+|current **(v-model)**|当前的页数|`number`|`-`||
+|default-current|默认的页数（非受控状态）|`number`|`1`||
+|page-size **(v-model)**|每页展示的数据条数|`number`|`-`||
+|default-page-size|默认每页展示的数据条数（非受控状态）|`number`|`10`||
+|disabled|是否禁用|`boolean`|`false`||
+|hide-on-single-page|单页时是否隐藏分页|`boolean`|`false`||
+|simple|是否为简单模式|`boolean`|`false`||
+|show-total|是否显示数据总数|`boolean`|`false`||
+|show-more|是否显示更多按钮|`boolean`|`false`||
+|show-jumper|是否显示跳转|`boolean`|`false`||
+|show-page-size|是否显示数据条数选择器|`boolean`|`false`||
+|page-size-options|数据条数选择器的选项列表|`number[]`|`[10, 20, 30, 40, 50]`||
+|page-size-props|数据条数选择器的Props|`SelectProps`|`-`||
+|size|分页选择器的大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
+|page-item-style|分页按钮的样式|`CSSProperties`|`-`||
+|active-page-item-style|当前分页按钮的样式|`CSSProperties`|`-`||
+|base-size|计算显示省略的基础个数。显示省略的个数为 `baseSize + 2 * bufferSize`|`number`|`6`||
+|buffer-size|显示省略号时，当前页码左右显示的页码个数|`number`|`2`||
+|auto-adjust|是否在改变数据条数时调整页码|`boolean`|`true`|2.34.0|
+
+### `<pagination>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|页码改变时触发|current: `number`|
+|page-size-change|数据条数改变时触发|pageSize: `number`|
+
+### `<pagination>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|total|总数|total: `number`|2.9.0|
+|page-item-ellipsis|分页按钮（省略）|-|2.9.0|
+|page-item-step|分页按钮（步）|type: `'previous'\|'next'`The type of page item step|2.9.0|
+|page-item|分页按钮|page: `number`The page number of the paging button|2.9.0|
+
+</FrameworkBlock>

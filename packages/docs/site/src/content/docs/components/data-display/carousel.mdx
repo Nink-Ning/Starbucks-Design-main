@@ -1,0 +1,173 @@
+---
+title: 图片轮播 Carousel
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+用于展示多张图片、视频或内嵌框架等内容的循环播放，支持系统自动播放或用户手动切换。
+
+## 基本用法
+
+最基本的使用。
+
+<FrameworkBlock framework="react">
+轮播的当前展示索引可以通过 `currentIndex` 与 `onChange` 受控使用。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+轮播的当前展示索引可以通过 `v-model:current`（即 `current` 配合 `change` 事件）双向绑定，或通过 `default-current` 指定默认索引（非受控）。
+</FrameworkBlock>
+
+<Demo name="carousel/basic" />
+
+## 自动切换
+
+<FrameworkBlock framework="react">
+可以通过 `autoPlay` 设置是否自动切换。可设置 `moveSpeed`、`timingFunc` 实现不同切换幻灯片效果。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以通过 `auto-play` 设置是否自动切换。可设置 `move-speed`、`transition-timing-function` 实现不同切换幻灯片效果。
+</FrameworkBlock>
+
+<Demo name="carousel/auto-switch" />
+
+## 指示器
+
+可以指定指示器类型：`dot` | `line` | `slider` 和位置 `left` | `right` | `top` | `bottom` | `outer`。
+
+<Demo name="carousel/indicator" />
+
+## 切换方向
+
+默认情况下，`direction` 为 `horizontal`。通过设置 `direction` 为 `vertical` 来使用垂直方向切换。
+
+<Demo name="carousel/switch-direction" />
+
+## 卡片化
+
+<FrameworkBlock framework="react">
+当页面宽度方向空间空余，但高度方向空间多余时，可指定 `animation` 为 `card` 使用卡片化风格。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+当页面宽度方向空间空余，但高度方向空间多余时，可指定 `animation-name` 为 `card` 使用卡片化风格。
+</FrameworkBlock>
+
+<Demo name="carousel/card-style" />
+
+## 纵向卡片
+
+<FrameworkBlock framework="react">
+当使用纵向卡片时，需要手动指定容器的宽高来撑起空间，容器高度可以指定为 `图片高度 * 1.5`。在此模式下需要同时设定 `indicatorPosition="outer-right"`。
+</FrameworkBlock>
+
+<Demo name="carousel/vertical-card" />
+
+## 渐隐切换
+
+<FrameworkBlock framework="react">
+指定 `animation` 为 `fade` 使用渐隐切换效果。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+指定 `animation-name` 为 `fade` 使用渐隐切换效果。
+</FrameworkBlock>
+
+<Demo name="carousel/fade-switch" />
+
+## 自定义子元素
+
+<FrameworkBlock framework="react">
+因为动画是通过 CSS 实现，所以当使用`自定义组件`作为 `Carousel` 的子元素时，自定义组件需要支持 `style` 和 `className` 两个属性。
+</FrameworkBlock>
+
+<Demo name="carousel/custom-child" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Carousel
+
+| 参数名 | 描述 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| miniRender | 是否仅渲染满足动画效果的最少数量的 children | boolean | `-` | 2.21.0 |
+| currentIndex | 当前展示索引 | number | `0` | - |
+| moveSpeed | 幻灯片移动速率(ms) | number | `500` | - |
+| timingFunc | 过渡速度曲线, 默认匀速 transition-timing-function | string | `cubic-bezier(0.34, 0.69, 0.1, 1)` | - |
+| animation | 切换动画 | 'slide' \| 'card' \| 'fade' | `slide` | - |
+| direction | 幻灯片移动方向 | 'horizontal' \| 'vertical' | `horizontal` | - |
+| indicatorPosition | 指示器位置 | 'bottom' \| 'top' \| 'left' \| 'right' \| 'outer' \| 'outer-right' | `bottom` | - |
+| indicatorType | 指示器类型，可为小方块和小圆点或不显示 | 'line' \| 'dot' \| 'slider' \| 'never' | `dot` | - |
+| showArrow | 切换箭头显示时机 | 'always' \| 'hover' \| 'never' | `always` | - |
+| trigger | 幻灯片切换触发方式, click/hover 指示器 | 'click' \| 'hover' | `click` | - |
+| arrowClassName | 切换箭头样式 | string \| string[] | `-` | - |
+| autoPlay | 是否自动循环展示，或者传入 `{ interval: 自动切换的时间间隔(默认: 3000), hoverToPause: 鼠标悬浮时是否暂停自动切换(默认: true) }` 进行高级配置 (`2.14.0` 支持传入对象) | `boolean \| { interval?: number; hoverToPause?: boolean }` | `-` | - |
+| carousel | 用于获得带有 API 方法的 Carousel 引用。 | `MutableRefObject<CarouselHandle>` | `-` | 2.16.1 |
+| className | 节点类名 | string \| string[] | `-` | - |
+| icons | 自定义图标 | `{prev?: ReactNode;next?: ReactNode;}` | `-` | 2.25.0 |
+| indicatorClassName | 指示器的样式 | string \| string[] | `-` | - |
+| style | 节点样式 | CSSProperties | `-` | - |
+| onChange | 幻灯片发生切换时的回调函数。 | `(index: number, prevIndex: number, isManual: boolean) => void` | `-` | `isManual` in 2.4.0 |
+
+### CarouselHandle
+
+```js
+export type CarouselHandle = {
+  dom: HTMLElement;
+  goto: (options: {
+    /** 目标索引 */
+    index: number;
+    /** 是否为逆向 */
+    isNegative?: boolean;
+    /** 是否由用户触发，将决定 onChange 回调的第三个参数 */
+    isManual?: boolean;
+    /** 是否重置自动播放的 interval */
+    resetAutoPlayInterval?: boolean;
+  }) => void;
+};
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<carousel>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|current **(v-model)**|当前展示索引|`number`|`-`|
+|default-current|当前展示索引|`number`|`1`|
+|auto-play|是否自动循环展示，或者传入 `{ interval: 自动切换的时间间隔(默认: 3000), hoverToPause: 鼠标悬浮时是否暂停自动切换(默认: true) }` 进行高级配置|`boolean \| CarouselAutoPlayConfig`|`false`|
+|move-speed|幻灯片移动速率(ms)|`number`|`500`|
+|animation-name|切换动画|`'slide' \| 'fade' \| 'card'`|`'slide'`|
+|trigger|幻灯片切换触发方式, click/hover 指示器|`'click' \| 'hover'`|`'click'`|
+|direction|幻灯片移动方向|`'horizontal' \| 'vertical'`|`'horizontal'`|
+|show-arrow|切换箭头显示时机|`'always' \| 'hover' \| 'never'`|`'always'`|
+|arrow-class|切换箭头样式|`string`|`''`|
+|indicator-type|指示器类型，可为小方块和小圆点或不显示|`'line' \| 'dot' \| 'slider' \| 'never'`|`'dot'`|
+|indicator-position|指示器位置|`'bottom' \| 'top' \| 'left' \| 'right' \| 'outer'`|`'bottom'`|
+|indicator-class|指示器的样式|`string`|`''`|
+|transition-timing-function|过渡速度曲线, 默认匀速 transition-timing-function|`string`|`'cubic-bezier(0.34, 0.69, 0.1, 1)'`|
+
+### `<carousel>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|幻灯片发生切换时的回调函数|index: `number`<br/>prevIndex: `number`<br/>isManual: `boolean`|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="react">
+
+## 常见问题
+
+### 动画结束后闪动
+
+如果子元素是透明的，`Carousel` 翻页完成之后可能出现由于浏览器渲染导致的闪动问题，此时可以尝试为子元素添加背景色解决。参考此 ISSUE。
+
+</FrameworkBlock>

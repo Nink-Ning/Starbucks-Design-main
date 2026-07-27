@@ -1,0 +1,8 @@
+---
+interface Props {
+  framework: 'react' | 'vue';
+}
+const { framework } = Astro.props;
+---
+
+<div class={`fw-${framework}`}><slot /></div>

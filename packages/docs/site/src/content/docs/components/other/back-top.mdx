@@ -1,0 +1,59 @@
+---
+title: 返回顶部 BackTop
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+可一键返回顶部的按钮。
+
+## 基本用法
+
+当容器滚动到一定高度的时候，在右下角会出现一个返回顶部的按钮。
+
+<Demo name="back-top/basic" />
+
+## 自定义按钮
+
+可以自定义返回顶部的按钮。
+
+<Demo name="back-top/custom-button" />
+
+## 滚动类型和滚动时间
+
+当然，我们提供了更丰富的功能可供使用，你可以通过指定 `easing` 和 `duration` 来指定滚动到顶部的过度效果和滚动时间。
+
+<Demo name="back-top/easing-duration" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### BackTop
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|duration|滚动到顶部的时间。|number |`400`|
+|visibleHeight|当滚动到这个高度时，显示返回顶部按钮。|number |`400`|
+|easing|滚动到顶部的缓动方式类型, 所有类型：easing。|string |`quartOut`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+|onClick|点击返回顶部时的回调函数。|`() => void` |`-`|
+|target|设置需要监听其滚动事件的元素，值为一个返回对应 `DOM` 元素的函数。|`() => HTMLElement \| Window` |`() => window`|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<back-top>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|visible-height|显示回到顶部按钮的触发滚动高度|`number`|`200`|
+|target-container|滚动事件的监听容器|`string \| HTMLElement`|`-`|
+|easing|滚动动画的缓动方式，可选值参考 BTween|`string`|`'quartOut'`|
+|duration|滚动动画的持续时间|`number`|`200`|
+
+</FrameworkBlock>

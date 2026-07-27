@@ -108,6 +108,98 @@
   --sl-color-accent: var(--sb-docs-brand);
 }
 
+/* ── Global documentation alerts ───────────────────────────────────── */
+
+/*
+ * Starlight asides are the shared alert primitive used by framework
+ * availability notices and authored note/tip/caution/danger blocks. Keep their
+ * content markup, icons and accessibility labels, but map the visual layer to
+ * the same global tokens and geometry as the component-library Alert.
+ */
+.sl-markdown-content .starlight-aside {
+  --sb-docs-aside-bg: var(--bg-color-component, var(--sb-docs-component-bg));
+  --sb-docs-aside-border: var(--bg-color-secondarycomponent, var(--sb-docs-border));
+  --sb-docs-aside-accent: var(--color-primary, var(--sb-docs-brand));
+
+  box-sizing: border-box;
+  padding: var(--spacing-6, 12px) var(--spacing-8, 16px);
+  overflow: hidden;
+  color: var(--sb-docs-text-1);
+  font-family: var(--font-family, inherit);
+  font-size: var(--fs-14, 14px);
+  font-weight: var(--fw-regular, 400);
+  line-height: var(--lh-22, 22px);
+  text-align: left;
+  background: var(--sb-docs-aside-bg);
+  border: 1px solid var(--sb-docs-aside-border);
+  border-radius: var(--border-radius-md, var(--sb-docs-radius));
+}
+
+.sl-markdown-content .starlight-aside--note {
+  --sb-docs-aside-bg: var(--bg-color-component, var(--sb-docs-component-bg));
+  --sb-docs-aside-border: var(--bg-color-secondarycomponent, var(--sb-docs-border));
+  --sb-docs-aside-accent: var(--color-primary, var(--sb-docs-brand));
+}
+
+.sl-markdown-content .starlight-aside--tip {
+  --sb-docs-aside-bg: var(--color-success-focus, var(--sb-docs-success-bg));
+  --sb-docs-aside-border: rgb(var(--success-4, 146 218 178));
+  --sb-docs-aside-accent: var(--color-success, var(--sb-docs-success));
+}
+
+.sl-markdown-content .starlight-aside--caution {
+  --sb-docs-aside-bg: var(--color-warning-focus, rgb(255, 217, 194));
+  --sb-docs-aside-border: rgb(var(--warning-4, 255 185 140));
+  --sb-docs-aside-accent: var(--color-warning, rgb(149, 69, 0));
+}
+
+.sl-markdown-content .starlight-aside--danger {
+  --sb-docs-aside-bg: var(--color-danger-focus, var(--sb-docs-danger-bg));
+  --sb-docs-aside-border: rgb(var(--danger-4, 255 185 176));
+  --sb-docs-aside-accent: var(--color-danger, var(--sb-docs-danger));
+}
+
+.sl-markdown-content .starlight-aside__title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4, 8px);
+  margin: 0;
+  color: var(--sb-docs-text-1);
+  font-size: var(--fs-14, 14px);
+  font-weight: var(--fw-semibold, 600);
+  line-height: var(--lh-22, 22px);
+}
+
+.sl-markdown-content .starlight-aside__icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: var(--sb-docs-aside-accent);
+  font-size: 20px;
+}
+
+.sl-markdown-content .starlight-aside__title + .starlight-aside__content {
+  margin-top: var(--spacing-2, 4px);
+}
+
+.sl-markdown-content .starlight-aside__content {
+  color: var(--sb-docs-text-2);
+  font-size: var(--fs-12, 12px);
+  line-height: var(--lh-20, 20px);
+}
+
+.sl-markdown-content .starlight-aside__content > :first-child {
+  margin-top: 0;
+}
+
+.sl-markdown-content .starlight-aside__content > :last-child {
+  margin-bottom: 0;
+}
+
+.sl-markdown-content .starlight-aside__content a {
+  color: var(--sb-docs-aside-accent);
+}
+
 /* ── App chrome ─────────────────────────────────────────────────────── */
 
 :root {

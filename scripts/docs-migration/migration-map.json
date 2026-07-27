@@ -1,0 +1,885 @@
+[
+  {
+    "slug": "affix",
+    "category": "other",
+    "title": "固钉 Affix",
+    "reactSrc": "packages/docs/react/docs/components/other/affix.md",
+    "vueSrc": "packages/docs/vue/components/other/affix.md",
+    "vueDemosDir": "packages/docs/vue/components/other/demos/affix",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "alert",
+    "category": "feedback",
+    "title": "警告提示 Alert",
+    "reactSrc": "packages/docs/react/docs/components/feedback/alert.md",
+    "vueSrc": "packages/docs/vue/components/feedback/alert.md",
+    "vueDemosDir": "packages/docs/vue/components/feedback/demos/alert",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "anchor",
+    "category": "other",
+    "title": "锚点 Anchor",
+    "reactSrc": "packages/docs/react/docs/components/other/anchor.md",
+    "vueSrc": "packages/docs/vue/components/other/anchor.md",
+    "vueDemosDir": "packages/docs/vue/components/other/demos/anchor",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "auto-complete",
+    "category": "data-entry",
+    "title": "自动补全 AutoComplete",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/auto-complete.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/auto-complete.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/auto-complete",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "avatar",
+    "category": "data-display",
+    "title": "头像 Avatar",
+    "reactSrc": "packages/docs/react/docs/components/data-display/avatar.md",
+    "vueSrc": "packages/docs/vue/components/data-display/avatar.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/avatar",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "back-top",
+    "category": "other",
+    "title": "返回顶部 BackTop",
+    "reactSrc": "packages/docs/react/docs/components/other/back-top.md",
+    "vueSrc": "packages/docs/vue/components/other/back-top.md",
+    "vueDemosDir": "packages/docs/vue/components/other/demos/back-top",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "badge",
+    "category": "data-display",
+    "title": "徽标数 Badge",
+    "reactSrc": "packages/docs/react/docs/components/data-display/badge.md",
+    "vueSrc": "packages/docs/vue/components/data-display/badge.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/badge",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "breadcrumb",
+    "category": "navigation",
+    "title": "面包屑 Breadcrumb",
+    "reactSrc": "packages/docs/react/docs/components/navigation/breadcrumb.md",
+    "vueSrc": "packages/docs/vue/components/navigation/breadcrumb.md",
+    "vueDemosDir": "packages/docs/vue/components/navigation/demos/breadcrumb",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "button",
+    "category": "general",
+    "title": "按钮 Button",
+    "reactSrc": "packages/docs/react/docs/components/general/button.md",
+    "vueSrc": "packages/docs/vue/components/general/button.md",
+    "vueDemosDir": "packages/docs/vue/components/general/demos/button",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "calendar",
+    "category": "data-display",
+    "title": "日历 Calendar",
+    "reactSrc": "packages/docs/react/docs/components/data-display/calendar.md",
+    "vueSrc": "packages/docs/vue/components/data-display/calendar.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/calendar",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "card",
+    "category": "data-display",
+    "title": "卡片 Card",
+    "reactSrc": "packages/docs/react/docs/components/data-display/card.md",
+    "vueSrc": "packages/docs/vue/components/data-display/card.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/card",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "carousel",
+    "category": "data-display",
+    "title": "图片轮播 Carousel",
+    "reactSrc": "packages/docs/react/docs/components/data-display/carousel.md",
+    "vueSrc": "packages/docs/vue/components/data-display/carousel.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/carousel",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "cascader",
+    "category": "data-entry",
+    "title": "级联选择 Cascader",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/cascader.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/cascader.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/cascader",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "checkbox",
+    "category": "data-entry",
+    "title": "复选框 Checkbox",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/checkbox.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/checkbox.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/checkbox",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "collapse",
+    "category": "data-display",
+    "title": "折叠面板 Collapse",
+    "reactSrc": "packages/docs/react/docs/components/data-display/collapse.md",
+    "vueSrc": "packages/docs/vue/components/data-display/collapse.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/collapse",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "color-picker",
+    "category": "data-entry",
+    "title": "颜色选择器 ColorPicker",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/color-picker.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/color-picker.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/color-picker",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "comment",
+    "category": "data-display",
+    "title": "评论 Comment",
+    "reactSrc": "packages/docs/react/docs/components/data-display/comment.md",
+    "vueSrc": "packages/docs/vue/components/data-display/comment.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/comment",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "config-provider",
+    "category": "other",
+    "title": "全局配置 ConfigProvider",
+    "reactSrc": "packages/docs/react/docs/components/other/config-provider.md",
+    "vueSrc": "packages/docs/vue/components/general/config-provider.md",
+    "vueDemosDir": "packages/docs/vue/components/general/demos/config-provider",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "date-picker",
+    "category": "data-entry",
+    "title": "日期选择器 DatePicker",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/date-picker.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/date-picker.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/date-picker",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "descriptions",
+    "category": "data-display",
+    "title": "描述列表 Descriptions",
+    "reactSrc": "packages/docs/react/docs/components/data-display/descriptions.md",
+    "vueSrc": "packages/docs/vue/components/data-display/descriptions.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/descriptions",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "divider",
+    "category": "layout",
+    "title": "分割线 Divider",
+    "reactSrc": "packages/docs/react/docs/components/layout/divider.md",
+    "vueSrc": "packages/docs/vue/components/layout/divider.md",
+    "vueDemosDir": "packages/docs/vue/components/layout/demos/divider",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "drawer",
+    "category": "feedback",
+    "title": "抽屉 Drawer",
+    "reactSrc": "packages/docs/react/docs/components/feedback/drawer.md",
+    "vueSrc": "packages/docs/vue/components/feedback/drawer.md",
+    "vueDemosDir": "packages/docs/vue/components/feedback/demos/drawer",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "dropdown",
+    "category": "navigation",
+    "title": "下拉菜单 Dropdown",
+    "reactSrc": "packages/docs/react/docs/components/navigation/dropdown.md",
+    "vueSrc": "packages/docs/vue/components/navigation/dropdown.md",
+    "vueDemosDir": "packages/docs/vue/components/navigation/demos/dropdown",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "empty",
+    "category": "data-display",
+    "title": "空状态 Empty",
+    "reactSrc": "packages/docs/react/docs/components/data-display/empty.md",
+    "vueSrc": "packages/docs/vue/components/data-display/empty.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/empty",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "form",
+    "category": "data-entry",
+    "title": "表单 Form",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/form.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/form.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/form",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "grid",
+    "category": "layout",
+    "title": "栅格 Grid",
+    "reactSrc": "packages/docs/react/docs/components/layout/grid.md",
+    "vueSrc": "packages/docs/vue/components/layout/grid.md",
+    "vueDemosDir": "packages/docs/vue/components/layout/demos/grid",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "icon",
+    "category": "general",
+    "title": "Icon 图标",
+    "reactSrc": "packages/docs/react/docs/components/general/icon.md",
+    "vueSrc": null,
+    "vueDemosDir": null,
+    "frameworks": [
+      "react"
+    ]
+  },
+  {
+    "slug": "image",
+    "category": "data-display",
+    "title": "图片 Image",
+    "reactSrc": "packages/docs/react/docs/components/data-display/image.md",
+    "vueSrc": "packages/docs/vue/components/data-display/image.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/image",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "input",
+    "category": "data-entry",
+    "title": "输入框 Input",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/input.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/input.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/input",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "input-number",
+    "category": "data-entry",
+    "title": "数字输入框 InputNumber",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/input-number.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/input-number.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/input-number",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "input-tag",
+    "category": "data-entry",
+    "title": "InputTag",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/input-tag.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/input-tag.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/input-tag",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "layout",
+    "category": "layout",
+    "title": "布局 Layout",
+    "reactSrc": "packages/docs/react/docs/components/layout/layout.md",
+    "vueSrc": "packages/docs/vue/components/layout/layout.md",
+    "vueDemosDir": "packages/docs/vue/components/layout/demos/layout",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "link",
+    "category": "general",
+    "title": "链接 Link",
+    "reactSrc": "packages/docs/react/docs/components/general/link.md",
+    "vueSrc": "packages/docs/vue/components/general/link.md",
+    "vueDemosDir": "packages/docs/vue/components/general/demos/link",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "list",
+    "category": "data-display",
+    "title": "列表 List",
+    "reactSrc": "packages/docs/react/docs/components/data-display/list.md",
+    "vueSrc": "packages/docs/vue/components/data-display/list.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/list",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "mentions",
+    "category": "data-entry",
+    "title": "提及 Mentions",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/mentions.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/mention.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/mention",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "menu",
+    "category": "navigation",
+    "title": "菜单 Menu",
+    "reactSrc": "packages/docs/react/docs/components/navigation/menu.md",
+    "vueSrc": "packages/docs/vue/components/navigation/menu.md",
+    "vueDemosDir": "packages/docs/vue/components/navigation/demos/menu",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "message",
+    "category": "feedback",
+    "title": "全局提示 Message",
+    "reactSrc": "packages/docs/react/docs/components/feedback/message.md",
+    "vueSrc": "packages/docs/vue/components/feedback/message.md",
+    "vueDemosDir": "packages/docs/vue/components/feedback/demos/message",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "modal",
+    "category": "feedback",
+    "title": "对话框 Modal",
+    "reactSrc": "packages/docs/react/docs/components/feedback/modal.md",
+    "vueSrc": "packages/docs/vue/components/feedback/modal.md",
+    "vueDemosDir": "packages/docs/vue/components/feedback/demos/modal",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "notification",
+    "category": "feedback",
+    "title": "通知提醒框 Notification",
+    "reactSrc": "packages/docs/react/docs/components/feedback/notification.md",
+    "vueSrc": "packages/docs/vue/components/feedback/notification.md",
+    "vueDemosDir": "packages/docs/vue/components/feedback/demos/notification",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "overflow-list",
+    "category": "other",
+    "title": "折叠列表 OverflowList",
+    "reactSrc": null,
+    "vueSrc": "packages/docs/vue/components/other/overflow-list.md",
+    "vueDemosDir": "packages/docs/vue/components/other/demos/overflow-list",
+    "frameworks": [
+      "vue"
+    ]
+  },
+  {
+    "slug": "page-header",
+    "category": "navigation",
+    "title": "页头 PageHeader",
+    "reactSrc": "packages/docs/react/docs/components/navigation/page-header.md",
+    "vueSrc": "packages/docs/vue/components/navigation/page-header.md",
+    "vueDemosDir": "packages/docs/vue/components/navigation/demos/page-header",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "pagination",
+    "category": "navigation",
+    "title": "分页 Pagination",
+    "reactSrc": "packages/docs/react/docs/components/navigation/pagination.md",
+    "vueSrc": "packages/docs/vue/components/navigation/pagination.md",
+    "vueDemosDir": "packages/docs/vue/components/navigation/demos/pagination",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "popconfirm",
+    "category": "feedback",
+    "title": "气泡确认框 Popconfirm",
+    "reactSrc": "packages/docs/react/docs/components/feedback/popconfirm.md",
+    "vueSrc": "packages/docs/vue/components/feedback/popconfirm.md",
+    "vueDemosDir": "packages/docs/vue/components/feedback/demos/popconfirm",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "popover",
+    "category": "data-display",
+    "title": "气泡卡片 Popover",
+    "reactSrc": "packages/docs/react/docs/components/data-display/popover.md",
+    "vueSrc": "packages/docs/vue/components/data-display/popover.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/popover",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "progress",
+    "category": "feedback",
+    "title": "进度条 Progress",
+    "reactSrc": "packages/docs/react/docs/components/feedback/progress.md",
+    "vueSrc": "packages/docs/vue/components/feedback/progress.md",
+    "vueDemosDir": "packages/docs/vue/components/feedback/demos/progress",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "radio",
+    "category": "data-entry",
+    "title": "单选框 Radio",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/radio.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/radio.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/radio",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "rate",
+    "category": "data-entry",
+    "title": "评分 Rate",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/rate.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/rate.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/rate",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "resize-box",
+    "category": "other",
+    "title": "伸缩框 ResizeBox",
+    "reactSrc": "packages/docs/react/docs/components/other/resize-box.md",
+    "vueSrc": "packages/docs/vue/components/other/resize-box.md",
+    "vueDemosDir": "packages/docs/vue/components/other/demos/resize-box",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "result",
+    "category": "feedback",
+    "title": "结果 Result",
+    "reactSrc": "packages/docs/react/docs/components/feedback/result.md",
+    "vueSrc": "packages/docs/vue/components/feedback/result.md",
+    "vueDemosDir": "packages/docs/vue/components/feedback/demos/result",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "scrollbar",
+    "category": "other",
+    "title": "滚动条 Scrollbar",
+    "reactSrc": null,
+    "vueSrc": "packages/docs/vue/components/other/scrollbar.md",
+    "vueDemosDir": "packages/docs/vue/components/other/demos/scrollbar",
+    "frameworks": [
+      "vue"
+    ]
+  },
+  {
+    "slug": "select",
+    "category": "data-entry",
+    "title": "选择器 Select",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/select.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/select.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/select",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "skeleton",
+    "category": "feedback",
+    "title": "骨架屏 Skeleton",
+    "reactSrc": "packages/docs/react/docs/components/feedback/skeleton.md",
+    "vueSrc": "packages/docs/vue/components/feedback/skeleton.md",
+    "vueDemosDir": "packages/docs/vue/components/feedback/demos/skeleton",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "slider",
+    "category": "data-entry",
+    "title": "滑动输入条 Slider",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/slider.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/slider.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/slider",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "space",
+    "category": "layout",
+    "title": "间距 Space",
+    "reactSrc": "packages/docs/react/docs/components/layout/space.md",
+    "vueSrc": "packages/docs/vue/components/layout/space.md",
+    "vueDemosDir": "packages/docs/vue/components/layout/demos/space",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "spin",
+    "category": "feedback",
+    "title": "加载中 Spin",
+    "reactSrc": "packages/docs/react/docs/components/feedback/spin.md",
+    "vueSrc": "packages/docs/vue/components/feedback/spin.md",
+    "vueDemosDir": "packages/docs/vue/components/feedback/demos/spin",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "split",
+    "category": "other",
+    "title": "面板分割 Split",
+    "reactSrc": null,
+    "vueSrc": "packages/docs/vue/components/other/split.md",
+    "vueDemosDir": "packages/docs/vue/components/other/demos/split",
+    "frameworks": [
+      "vue"
+    ]
+  },
+  {
+    "slug": "statistic",
+    "category": "data-display",
+    "title": "数值显示 Statistic",
+    "reactSrc": "packages/docs/react/docs/components/data-display/statistic.md",
+    "vueSrc": "packages/docs/vue/components/data-display/statistic.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/statistic",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "steps",
+    "category": "navigation",
+    "title": "步骤条 Steps",
+    "reactSrc": "packages/docs/react/docs/components/navigation/steps.md",
+    "vueSrc": "packages/docs/vue/components/navigation/steps.md",
+    "vueDemosDir": "packages/docs/vue/components/navigation/demos/steps",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "switch",
+    "category": "data-entry",
+    "title": "开关 Switch",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/switch.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/switch.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/switch",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "table",
+    "category": "data-display",
+    "title": "表格 Table",
+    "reactSrc": "packages/docs/react/docs/components/data-display/table.md",
+    "vueSrc": "packages/docs/vue/components/data-display/table.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/table",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "tabs",
+    "category": "data-display",
+    "title": "标签页 Tabs",
+    "reactSrc": "packages/docs/react/docs/components/data-display/tabs.md",
+    "vueSrc": "packages/docs/vue/components/data-display/tabs.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/tabs",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "tag",
+    "category": "data-display",
+    "title": "标签 Tag",
+    "reactSrc": "packages/docs/react/docs/components/data-display/tag.md",
+    "vueSrc": "packages/docs/vue/components/data-display/tag.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/tag",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "textarea",
+    "category": "data-entry",
+    "title": "文本域 Textarea",
+    "reactSrc": null,
+    "vueSrc": "packages/docs/vue/components/data-entry/textarea.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/textarea",
+    "frameworks": [
+      "vue"
+    ]
+  },
+  {
+    "slug": "time-picker",
+    "category": "data-entry",
+    "title": "时间选择器 TimePicker",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/time-picker.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/time-picker.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/time-picker",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "timeline",
+    "category": "data-display",
+    "title": "时间轴 Timeline",
+    "reactSrc": "packages/docs/react/docs/components/data-display/timeline.md",
+    "vueSrc": "packages/docs/vue/components/data-display/timeline.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/timeline",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "tooltip",
+    "category": "data-display",
+    "title": "文字气泡 Tooltip",
+    "reactSrc": "packages/docs/react/docs/components/data-display/tooltip.md",
+    "vueSrc": "packages/docs/vue/components/data-display/tooltip.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/tooltip",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "transfer",
+    "category": "data-entry",
+    "title": "数据穿梭框 Transfer",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/transfer.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/transfer.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/transfer",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "tree",
+    "category": "data-display",
+    "title": "树 Tree",
+    "reactSrc": "packages/docs/react/docs/components/data-display/tree.md",
+    "vueSrc": "packages/docs/vue/components/data-display/tree.md",
+    "vueDemosDir": "packages/docs/vue/components/data-display/demos/tree",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "tree-select",
+    "category": "data-entry",
+    "title": "树选择 TreeSelect",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/tree-select.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/tree-select.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/tree-select",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "trigger",
+    "category": "other",
+    "title": "触发器 Trigger",
+    "reactSrc": "packages/docs/react/docs/components/other/trigger.md",
+    "vueSrc": "packages/docs/vue/components/other/trigger.md",
+    "vueDemosDir": "packages/docs/vue/components/other/demos/trigger",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "typography",
+    "category": "general",
+    "title": "排版 Typography",
+    "reactSrc": "packages/docs/react/docs/components/general/typography.md",
+    "vueSrc": "packages/docs/vue/components/general/typography.md",
+    "vueDemosDir": "packages/docs/vue/components/general/demos/typography",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "upload",
+    "category": "data-entry",
+    "title": "上传 Upload",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/upload.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/upload.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/upload",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "verification-code",
+    "category": "data-entry",
+    "title": "验证码输入 VerificationCode",
+    "reactSrc": "packages/docs/react/docs/components/data-entry/verification-code.md",
+    "vueSrc": "packages/docs/vue/components/data-entry/verification-code.md",
+    "vueDemosDir": "packages/docs/vue/components/data-entry/demos/verification-code",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  },
+  {
+    "slug": "watermark",
+    "category": "feedback",
+    "title": "水印 Watermark",
+    "reactSrc": "packages/docs/react/docs/components/feedback/watermark.md",
+    "vueSrc": "packages/docs/vue/components/other/watermark.md",
+    "vueDemosDir": "packages/docs/vue/components/other/demos/watermark",
+    "frameworks": [
+      "react",
+      "vue"
+    ]
+  }
+]

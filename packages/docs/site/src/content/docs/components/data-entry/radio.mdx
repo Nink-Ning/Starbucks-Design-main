@@ -1,0 +1,210 @@
+---
+title: 单选框 Radio
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+在一组相关且互斥数据中，用户仅能选择一个选项。
+
+## 基本用法
+
+单选框的基本用法。
+
+<FrameworkBlock framework="react">
+单选框的选中状态可以通过 `checked` 与 `onChange` 受控使用，或通过 `defaultChecked` 指定默认选中（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+单选框的选中状态可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-checked` 指定默认选中（非受控）。
+</FrameworkBlock>
+
+<Demo name="radio/basic" />
+
+## 受控
+
+<FrameworkBlock framework="react">
+通过 `checked` 与 `onChange` 控制单选框是否选中。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `v-model`（`model-value`）属性控制是否选中。
+</FrameworkBlock>
+
+<Demo name="radio/controlled" />
+
+## 单选框组
+
+<FrameworkBlock framework="react">
+单选组的用法。有两种用法，可以通过 `children` 的方式或者 `options` 数组的方式。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `<a-radio-group>` 组件展示单选框组。
+</FrameworkBlock>
+
+<Demo name="radio/radio-group" />
+
+## 单选框组选项
+
+<FrameworkBlock framework="react">
+通过 `Radio.Group` 的 `options` 属性设置子元素。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+`a-radio-group` 通过 `options` 属性设置子元素。
+</FrameworkBlock>
+
+<Demo name="radio/radio-group-options" />
+
+## 布局
+
+配合栅格组件（Grid）可以实现单选框的灵活布局。
+
+<FrameworkBlock framework="vue">
+使用 `<a-radio-group>` 传入 `<a-radio>`，配合 `<a-grid>` 组件实现灵活的布局。
+</FrameworkBlock>
+
+<Demo name="radio/layout" />
+
+## 单选框组方向
+
+设置 `direction="vertical"` 可以展示竖直的单选框组。
+
+<Demo name="radio/radio-group-direction" />
+
+## 带图标的单选框
+
+单选框可以与图标进行组合。
+
+<Demo name="radio/icon" />
+
+## 按钮类型的单选框组
+
+指定 `type="button"`，单选框会展示为按钮样式。组件提供描边型、主色填充型和默认填充型三种按钮组样式。
+
+<FrameworkBlock framework="react">
+通过 `variant="outline"`、`variant="primary-filled"` 和 `variant="default-filled"` 使用三种样式。
+</FrameworkBlock>
+
+<Demo name="radio/button-radio-group" />
+
+## 按钮类型单选框组的尺寸
+
+<FrameworkBlock framework="react">
+按钮类型的单选框分为 `mini`、`small`、`default`、`large` 四种尺寸。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+按钮类型的单选框组分为 `mini`、`small`、`medium`、`large` 四种尺寸。
+</FrameworkBlock>
+
+<Demo name="radio/button-radio-group-size" />
+
+## 自定义单选框
+
+<FrameworkBlock framework="react">
+可以通过传入函数类型的 `children` 来自定义渲染单选节点。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+使用 `#radio` 插槽自定义单选框的展示。
+</FrameworkBlock>
+
+<Demo name="radio/custom-radio" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Radio
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|checked|是否选中（受控模式）|boolean |`-`|
+|defaultChecked|初始是否选中|boolean |`-`|
+|disabled|是否禁用|boolean |`-`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+|value|控件的 `value`|T |`-`|
+|onChange|值变化的回调|`(checked: boolean, event: ChangeEvent) => void` |`-`|
+
+### Radio.Group
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|disabled|禁用|boolean |`-`|
+|name|`Radio` 的 name|string |`-`|
+|direction|方向|'vertical' \| 'horizontal' |`horizontal`|
+|size|按钮类型的单选框尺寸（只在按钮类型下生效）|'small' \| 'default' \| 'large' \| 'mini' |`-`|
+|type|单选的类型，是单选还是按钮|'radio' \| 'button' |`radio`|
+|variant|按钮类型单选框组的视觉样式|'outline' \| 'primary-filled' \| 'default-filled' |`-`|
+|className|节点类名|string \| string[] |`-`|
+|defaultValue|默认选中的值|any |`-`|
+|options|以数组配置的形式来设置单选组|`(string \| number \| { label: ReactNode; value: any; disabled?: boolean })[]` |`-`|
+|style|节点样式|CSSProperties |`-`|
+|value|选中的值（受控模式）|any |`-`|
+|onChange|点击单选的回调|`(value: any, event: ChangeEvent) => void` |`-`|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<radio>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|model-value **(v-model)**|绑定值|`string \| number \| boolean`|`-`|
+|default-checked|默认是否选中（非受控状态）|`boolean`|`false`|
+|value|选项的 `value`|`string \| number \| boolean`|`true`|
+|type|单选的类型|`'radio' \| 'button'`|`'radio'`|
+|disabled|是否禁用|`boolean`|`false`|
+
+### `<radio>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|值改变时触发|value: ` string \| number \| boolean `<br/>ev: `Event`|
+
+### `<radio>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|radio|自定义单选框|checked: `boolean`<br/>disabled: `boolean`|2.18.0|
+
+### `<radio-group>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|model-value **(v-model)**|绑定值|`string \| number \| boolean`|`-`||
+|default-value|默认值（非受控状态）|`string \| number \| boolean`|`''`||
+|type|单选框组的类型|`'radio' \| 'button'`|`'radio'`||
+|size|单选框组的尺寸|`'mini' \| 'small' \| 'medium' \| 'large'`|`-`||
+|options|选项|`Array<string \| number \| RadioOption>`|`-`|2.27.0|
+|direction|单选框组的方向|`'horizontal' \| 'vertical'`|`'horizontal'`||
+|disabled|是否禁用|`boolean`|`false`||
+
+### `<radio-group>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|值改变时触发|value: ` string \| number \| boolean `|
+
+### `<radio-group>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|radio|自定义单选框|checked: `boolean`<br/>disabled: `boolean`|2.27.0|
+|label|radio 文案内容|data: `RadioOption`|2.27.0|
+
+### RadioOption
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|label|文案|`RenderContent`|`-`|
+|value|选项的 `value`|`string \| number`|`-`|
+|disabled|是否禁用|`boolean`|`false`|
+
+</FrameworkBlock>

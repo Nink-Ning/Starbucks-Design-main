@@ -1,0 +1,222 @@
+---
+title: 复选框 Checkbox
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+在一组数据中，用户可通过复选框选择一个或多个数据。
+
+## 基本用法
+
+最基本的点击选中操作。
+
+<Demo name="checkbox/basic" />
+
+## 禁用状态
+
+禁用复选框。
+
+<Demo name="checkbox/disabled" />
+
+## 受控
+
+<FrameworkBlock framework="react">
+复选框的值可以通过 `checked` 与 `onChange` 受控使用，或通过 `defaultChecked` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+复选框的值可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-checked` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="checkbox/controlled" />
+
+## 复选框组
+
+<FrameworkBlock framework="react">
+通过 `Checkbox.Group` 生成复选框组。设置 `direction="vertical"` 可以展示竖向的复选框组。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `<a-checkbox-group>` 组件展示复选框组。设置 `direction="vertical"` 可以展示竖向的复选框组。
+</FrameworkBlock>
+
+<Demo name="checkbox/checkbox-group" />
+
+## 限制可勾选数量
+
+<FrameworkBlock framework="vue">
+通过设置 `max` 限制最多可被勾选的项目数。
+</FrameworkBlock>
+
+<Demo name="checkbox/limit-checked" />
+
+## 复选框组选项
+
+<FrameworkBlock framework="vue">
+`<a-checkbox-group>` 通过 `options` 属性设置子元素。
+</FrameworkBlock>
+
+<Demo name="checkbox/checkbox-group-options" />
+
+## 全选
+
+通过 `indeterminate` 属性可以实现半选效果。
+
+<Demo name="checkbox/select-all" />
+
+## 布局
+
+<FrameworkBlock framework="react">
+可以通过 `children` 传入 `Checkbox`，配合 `Grid` 组件实现灵活的布局。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+使用 `<a-checkbox-group>` 传入 `<a-checkbox>`，配合 `<a-grid>` 组件实现灵活的布局。
+</FrameworkBlock>
+
+<Demo name="checkbox/layout" />
+
+## 自定义 Icon
+
+<FrameworkBlock framework="react">
+通过 `icon` 属性自定义选中态图标。
+</FrameworkBlock>
+
+<Demo name="checkbox/custom-icon" />
+
+## 自定义复选框
+
+<FrameworkBlock framework="react">
+可以通过传入函数类型的 `children` 来自定义渲染节点内容（`v2.29.0`）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+使用 `#checkbox` 插槽自定义复选框的展示。
+</FrameworkBlock>
+
+<Demo name="checkbox/custom-checkbox" />
+
+<FrameworkBlock framework="react">
+使用 `Checkbox.useCheckbox` 快捷管理复选框数据。
+</FrameworkBlock>
+
+<Demo name="checkbox/custom-checkbox-2" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Checkbox
+
+`T = string | number`
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|checked|是否选中|boolean |`-`|-|
+|defaultChecked|默认是否选中|boolean |`-`|-|
+|disabled|是否禁用|boolean |`-`|-|
+|error|错误样式|boolean |`-`|-|
+|indeterminate|半选状态|boolean |`-`|-|
+|icon|自定义 IconCheck|ReactNode |`-`|2.43.0|
+|className|节点类名|string \| string[] |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|value|复选框的 value 属性|T |`-`|-|
+|onChange|点击复选框的回调|`(checked: boolean, e: Event) => void` |`-`|-|
+
+### Checkbox.Group
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|disabled|整组失效|boolean |`-`|
+|direction|方向|'horizontal' \| 'vertical' |`horizontal`|
+|className|节点类名|string \| string[] |`-`|
+|defaultValue|默认选中的选项|T[] |`-`|
+|options|可选项|`(T \| { label: ReactNode; value: T; disabled?: boolean; icon?: ReactNode })[]` |`-`|
+|style|节点样式|CSSProperties |`-`|
+|value|选中的选项（受控模式）|T[] |`-`|
+|onChange|变化时的回调函数|`(value: T[], e: Event) => void` |`-`|
+
+### `Checkbox.useCheckbox`
+
+```js
+/** T = string | number */
+const result: ResultType = Checkbox.useCheckbox<T>(values: T[], defaultSelected?: T[]);
+```
+
+**ResultType**
+
+|参数名|描述|类型|
+|---|:---:|:---:|
+| selected | 当前选中项 | `T[]` |
+| setSelected | 只选中传入参数的选项 | `(value: T[]) => void;` |
+| setValueSelected | 设置选项的选中状态，第二个参数为要设置的选中状态。 | `(value: T \| T[], selected?: boolean) => void;` |
+| selectAll | 选中全部 | `() => void;` |
+| unSelectAll | 取消全部选中 | `() => void;` |
+| isSelected | 是否选项被选中 | `(value: T) => boolean;` |
+| toggle | 切换选项选中状态。不传参数时，会切换所有选项的选中状态 | `(value?: T \| T[]) => void;` |
+| isAllSelected | 是否全部选项被选中 | `() => boolean;` |
+| isPartialSelected | 是否只有部分选项选中 | `() => boolean;` |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<checkbox>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|model-value **(v-model)**|绑定值|`boolean \| Array<string \| number \| boolean>`|`-`|
+|default-checked|默认是否选中（非受控状态）|`boolean`|`false`|
+|value|选项的 `value`|`string\|number\|boolean`|`-`|
+|disabled|是否禁用|`boolean`|`false`|
+|indeterminate|是否为半选状态|`boolean`|`false`|
+
+### `<checkbox>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|值改变时触发|value: ` boolean \| (string \| number \| boolean)[] `<br/>ev: `Event`|
+
+### `<checkbox>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|checkbox|自定义复选框|checked: `boolean`<br/>disabled: `boolean`|2.18.0|
+
+### `<checkbox-group>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|model-value **(v-model)**|绑定值|`Array<string \| number \| boolean>`|`-`||
+|default-value|默认值（非受控状态）|`Array<string \| number \| boolean>`|`[]`||
+|max|支持最多选中的数量|`number`|`-`|2.36.0|
+|options|选项|`Array<string \| number \| CheckboxOption>`|`-`|2.27.0|
+|direction|复选框的排列方向|`Direction`|`'horizontal'`||
+|disabled|是否禁用|`boolean`|`false`||
+
+### `<checkbox-group>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|值改变时触发|value: `(string \| number \| boolean)[]`<br/>ev: `Event`|
+
+### `<checkbox-group>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|checkbox|自定义复选框|checked: `boolean`<br/>disabled: `boolean`|2.27.0|
+|label|checkbox 文案内容|data: `CheckboxOption`|2.27.0|
+
+### CheckboxOption
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|label|文案|`RenderContent`|`-`|
+|value|选项的 `value`|`string \| number`|`-`|
+|disabled|是否禁用|`boolean`|`false`|
+|indeterminate|是否为半选状态|`boolean`|`false`|
+
+</FrameworkBlock>

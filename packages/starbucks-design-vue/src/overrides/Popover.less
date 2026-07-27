@@ -10,7 +10,7 @@
 // All design tokens are GLOBAL — this component references
 // them through CSS custom properties defined in theme.css.
 
-.arco-popover-content {
+.arco-popover-popup-content {
   box-sizing: border-box;
   width: 100%;
   max-width: none;
@@ -63,4 +63,30 @@
 .arco-popover-inner-rtl {
   direction: rtl;
   text-align: right;
+}
+
+.arco-popover-popup-content .arco-popover-title + .arco-popover-content {
+  margin-top: 0;
+}
+
+.arco-popover-popup-content .arco-popover-content {
+  padding: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-20);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.arco-trigger-arrow.arco-popover-popup-arrow {
+  z-index: 1;
+  width: 8.69px;
+  height: 8.69px;
+  background-color: var(--bg-color-container);
+  border-color: var(--bg-color-secondarycomponent);
+  border-style: solid;
+  border-width: 0.5px 0.5px 0 0;
 }

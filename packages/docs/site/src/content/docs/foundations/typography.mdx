@@ -1,0 +1,37 @@
+---
+title: 排版 Typography
+sidebar:
+  order: 4
+---
+
+import TypeScale from '../../../components/foundations/TypeScale.astro';
+
+排版建立信息的层级与节奏。中文正文使用 **Noto Sans SC**，西文使用 **Poppins**，数字使用 **Roboto**（等宽对齐更利于数据展示）。字号与行高成组定义，确保跨场景的一致节奏。
+
+## 字体
+
+| 用途 | 字体 |
+| --- | --- |
+| 中文 | Noto Sans SC |
+| 西文 | Poppins |
+| 数字 | Roboto |
+
+## 字号阶梯
+
+<TypeScale
+  items={[
+    { label: '标题 Headline', size: 28, line: 40, weight: 500, sample: '星巴克设计系统 Starbucks Design' },
+    { label: '大标题 Title XL', size: 20, line: 28, weight: 500, sample: '一致的设计语言' },
+    { label: '标题 Title', size: 16, line: 24, weight: 500, sample: '两套原生实现，一致体验' },
+    { label: '正文 Large', size: 16, line: 24, weight: 400, sample: '正文大号，用于重点段落与引导文字。' },
+    { label: '正文 Medium', size: 14, line: 22, weight: 400, sample: '正文默认，界面中最常见的文本尺寸。' },
+    { label: '正文 Small', size: 12, line: 20, weight: 400, sample: '辅助说明、次要信息与注释文字。' },
+    { label: '链接 Link', size: 14, line: 22, weight: 500, sample: '查看文档 →' },
+  ]}
+/>
+
+## 使用建议
+
+- **标题**用 Medium 字重拉开层级，正文统一 Regular，避免通篇加粗削弱重点。
+- **行高**已随字号成组定义，直接套用即可，无需逐处微调。
+- **数字**（价格、统计、表格数值）使用 Roboto 并开启等宽数字（`tabular-nums`），保证纵向对齐。

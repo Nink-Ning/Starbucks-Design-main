@@ -1,0 +1,31 @@
+html[data-framework='react'] .fw-vue {
+  display: none !important;
+}
+html[data-framework='vue'] .fw-react {
+  display: none !important;
+}
+
+.sb-fw-switch {
+  display: inline-flex;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-inline-end: 0.5rem;
+}
+.sb-fw-switch button {
+  /* 两态盒模型完全一致：只有背景/文字色随选中变，尺寸不变（修「选中比未选中小」）。 */
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+  color: var(--sl-color-gray-2);
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--sl-text-sm);
+  line-height: 1.5;
+  font-weight: 500;
+}
+.sb-fw-switch button[aria-pressed='true'] {
+  background: var(--sl-color-text-accent);
+  color: var(--sl-color-black);
+}

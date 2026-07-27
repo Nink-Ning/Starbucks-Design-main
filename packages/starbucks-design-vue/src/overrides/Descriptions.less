@@ -13,4 +13,23 @@
 // component-specific overrides (focus shadows, effects, etc.).
 //
 // Component-specific style overrides:
-// (extend with CSS custom property overrides as needed)
+.arco-descriptions {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+}
+
+.arco-descriptions.arco-descriptions-size-medium .arco-descriptions-title {
+  margin-bottom: var(--spacing-6);
+}
+
+.arco-descriptions.arco-descriptions-size-medium:not(.arco-descriptions-border) .arco-descriptions-item,
+.arco-descriptions.arco-descriptions-size-medium:not(.arco-descriptions-border) .arco-descriptions-item-label,
+.arco-descriptions.arco-descriptions-size-medium:not(.arco-descriptions-border) .arco-descriptions-item-value {
+  padding: 0 var(--spacing-2) var(--spacing-5) 0;
+}
+
+.arco-descriptions-border .arco-descriptions-body {
+  overflow: hidden;
+  border-color: var(--color-border-1);
+  border-radius: var(--border-radius-sm);
+}

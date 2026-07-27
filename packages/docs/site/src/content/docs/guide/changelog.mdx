@@ -20,17 +20,34 @@ sidebar:
     <div class="sbux-changelog-content">
       <div class="sbux-changelog-card">
         <div class="sbux-changelog-card-header">
-          <h2>Docs 站点体验与组件示例收敛</h2>
+          <h2>Astro + Starlight 统一 Docs 引擎与组件体验升级</h2>
           <p>
-            本周围绕 React 基础组件视觉一致性与 Starbucks UI Docs 体验收敛展开。组件侧继续基于全局设计变量统一输入、选择、导航和树形组件，文档侧重点解决导航、锚点、代码模块、响应式布局和亮暗色切换中的一致性问题。
+            本周以 React / Vue Docs 引擎统一为主线：基于 Astro 5 + Starlight，将原 React Docusaurus 与 Vue VitePress 的启动入口、文档内容、组件 Demo 和构建流程收敛至 <code>packages/docs/site</code>，并完成双框架集成、Vue Demo Runtime、框架切换边界及生产构建验证。同时系统优化 Docs 信息架构、搜索与响应式布局，完善基础组件及 React / Vue 示例，集中修复输入选择类组件、亮暗主题切换和内容展示问题，进一步统一 React / Vue 的文档浏览与组件预览体验。
           </p>
         </div>
 
         <div class="sbux-changelog-group">
           <div class="sbux-changelog-group-content">
             <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-feature">Engine</span>
+              Astro + Starlight 统一 Docs 引擎
+            </h3>
+            <ul>
+              <li>统一 Docs 启动入口：根目录的 <code>dev:docs</code>、<code>build:docs</code> 和 <code>pack:skills</code> 均指向 <code>packages/docs/site</code>，统一使用 Astro + Starlight 构建，不再分别维护 React Docs 与 Vue Docs 两套入口。</li>
+              <li>通过 <code>@astrojs/react</code> 与 <code>@astrojs/vue</code> 将 React / Vue 文档和组件示例纳入同一套 Starlight 信息架构，使框架切换前后的顶部导航、侧边栏、内容区、右侧锚点、代码块和组件预览保持一致。</li>
+              <li>完善基于 Astro Islands 与 Vue 集成的 Demo Runtime，集中修复预览、Show code / Hide code、实时编辑、Reset、Copy、代码高亮、组件注册和图标组件解析；Button 页面 PoC 验证通过，并完成更大范围的页面扫描与问题收敛。</li>
+              <li>明确框架切换边界：React / Vue 切换仅影响基础组件、业务组件和页面模板等框架相关内容，全局配置与 Skills 等公共内容保持不变。</li>
+              <li>确定旧站废弃方向：Vue Docs 不再沿 VitePress Theme 独立追平 React Docusaurus Docs，文档内容与 Vue Demo 源码迁入 Astro + Starlight 统一引擎；原独立站点后续进入废弃说明与清理阶段。</li>
+              <li>多次完成 Astro + Starlight 统一站点的生产构建，并重点验证 Vue 预览、实时编辑器、图标组件以及亮色 / 暗色切换等关键交互。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
               <span class="sbux-changelog-tag sbux-changelog-tag-docs">Docs</span>
-              文档站信息架构
+              附带：文档站信息架构与外壳优化
             </h3>
             <ul>
               <li>统一顶部导航、左侧菜单、中间内容区和右侧锚点的视觉规范。</li>
@@ -45,7 +62,7 @@ sidebar:
           <div class="sbux-changelog-group-content">
             <h3>
               <span class="sbux-changelog-tag sbux-changelog-tag-style">Style</span>
-              内容模块与响应式布局
+              附带：内容模块与响应式布局
             </h3>
             <ul>
               <li>统一代码块、终端命令、组件预览、要求列表和表格模块的圆角、描边与背景变量。</li>
@@ -103,7 +120,7 @@ sidebar:
               <li>当前阶段优先保证 React 组件视觉一致性，Vue 样式暂不做机械同步。</li>
               <li>输入、选择和多选类组件继续复用 Input、Select、InputTag、Tag 的共享样式规范。</li>
               <li>所有颜色、背景、描边和圆角优先引用全局设计变量，并同步验收亮色与暗色主题。</li>
-              <li>React 43 项测试、Docs 41 项测试及 92 个页面的生产构建全部通过。</li>
+              <li>React 43 项测试、Vue 63 项测试、Docs 43 项测试及 92 个页面的生产构建全部通过。</li>
             </ul>
           </div>
         </div>

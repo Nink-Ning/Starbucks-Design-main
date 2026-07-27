@@ -6,22 +6,23 @@ import cssInjectedByJs from 'vite-plugin-css-injected-by-js'
 export default defineConfig({
   plugins: [
     react(),
-    cssInjectedByJs(),
+    cssInjectedByJs({ relativeCSSInjection: true }),
     dts({
       outDir: 'dist',
+      exclude: ['**/__tests__/**', 'src/umd.ts'],
     }),
   ],
   build: {
     lib: {
       entry: {
         index: 'src/index.ts',
+        pro: 'src/pro/index.ts',
         // icon entry removed — ./icon subpath uses exports map to
         // resolve directly to @arco-design/web-react/icon (see package.json)
       },
-      formats: ['es', 'cjs', 'umd'],
+      formats: ['es', 'cjs'],
       name: 'StarbucksReact',
       fileName: (format, entryName) => {
-        if (format === 'umd') return `${entryName}.umd.js`;
         return `${entryName}.${format === 'es' ? 'es' : 'cjs'}.js`;
       },
     },

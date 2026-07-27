@@ -1,6 +1,6 @@
 {
   "name": "@sbux/starbucks-design-react",
-  "version": "1.1.20",
+  "version": "1.1.21",
   "private": false,
   "type": "module",
   "files": [
@@ -18,27 +18,27 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js",
-      "default": "./dist/index.es.js"
+      "require": "./dist/index.cjs.js"
     },
     "./icon": {
       "types": "./dist/icon.d.ts",
       "import": "./dist/icon.es.js",
-      "require": "./dist/icon.cjs",
-      "default": "./dist/icon.es.js"
+      "require": "./dist/icon.cjs"
     },
     "./locale": {
       "types": "./dist/locale.d.ts",
       "import": "./dist/locale.es.js",
-      "require": "./dist/locale.cjs",
-      "default": "./dist/locale.es.js"
+      "require": "./dist/locale.cjs"
     },
-    "./src/theme.css": "./src/theme.css"
+    "./pro": {
+      "types": "./dist/pro/index.d.ts",
+      "import": "./dist/pro.es.js",
+      "require": "./dist/pro.cjs.js"
+    }
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build && node scripts/build-shims.mjs",
-    "sync-figma": "tsx scripts/sync-figma.ts"
+    "build": "tsc --noEmit && vite build && vite build -c vite.config.umd.ts && node scripts/build-shims.mjs",
+    "test": "vitest run"
   },
   "dependencies": {
     "@arco-design/web-react": ">=2.63.0"
@@ -48,13 +48,19 @@
     "react-dom": ">=18.0.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.3.2",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^4.2.0",
+    "jsdom": "^29.1.1",
+    "less": "^4.6.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "tsx": "^4.19.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.7",
     "vite-plugin-css-injected-by-js": "^4.0.1",
-    "vite-plugin-dts": "^4.4.0"
+    "vite-plugin-dts": "^4.4.0",
+    "vitest": "^4.1.10"
   }
 }

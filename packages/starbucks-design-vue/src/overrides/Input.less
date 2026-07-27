@@ -577,3 +577,77 @@
 .arco-textarea.arco-textarea-warning:focus {
   box-shadow: 0 0 0 2px var(--color-warning-focus);
 }
+
+// Arco Vue uses `.arco-input-wrapper` for the visible field shell.
+.arco-input-wrapper {
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: 0 var(--spacing-4);
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-input-wrapper:not(.arco-input-disabled):hover {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-input-wrapper:not(.arco-input-disabled):focus-within {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-input-wrapper.arco-input-error {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger);
+}
+
+.arco-input-wrapper.arco-input-error:focus-within {
+  box-shadow: 0 0 0 2px var(--color-danger-focus);
+}
+
+.arco-input-wrapper.arco-input-warning {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-warning);
+}
+
+.arco-input-wrapper.arco-input-warning:focus-within {
+  box-shadow: 0 0 0 2px var(--color-warning-focus);
+}
+
+.arco-input-wrapper.arco-input-disabled,
+.arco-input-wrapper.arco-input-disabled:hover {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-component-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.arco-input-wrapper .arco-input,
+.arco-input-wrapper .arco-input:hover,
+.arco-input-wrapper .arco-input:focus {
+  height: auto;
+  padding-right: 0;
+  padding-left: 0;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.arco-input-prepend,
+.arco-input-append {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}

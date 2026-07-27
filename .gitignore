@@ -12,6 +12,7 @@ node_modules
 .env
 .env.*
 !.env.example
+.pnpm-store/
 # components
 dist
 es
@@ -25,13 +26,10 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
-# Docusaurus cache and build output
-packages/docs/react/.docusaurus
-packages/docs/react/build
-
-# VitePress cache and build output
-packages/docs/vue/.vitepress/cache
-packages/docs/vue/.vitepress/dist
+# Astro cache and build output
+packages/docs/site/.astro
+packages/docs/site/dist
+packages/docs/site/public/skills/
 
 # Editor directories and files
 .vscode/*
@@ -45,3 +43,4 @@ packages/docs/vue/.vitepress/dist
 *.sw?
 
 .history/
+.worktrees/

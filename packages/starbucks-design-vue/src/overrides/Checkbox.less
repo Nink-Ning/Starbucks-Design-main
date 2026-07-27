@@ -172,3 +172,48 @@
 .arco-checkbox-group-direction-vertical .arco-checkbox {
   line-height: var(--lh-22);
 }
+
+// Arco Vue renders `.arco-checkbox-icon`/`.arco-checkbox-label` where React
+// renders `.arco-checkbox-mask`/`.arco-checkbox-text`.
+.arco-checkbox .arco-checkbox-icon {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-checkbox .arco-checkbox-label {
+  margin-left: var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-checkbox:not(.arco-checkbox-disabled):not(.arco-checkbox-checked):not(.arco-checkbox-indeterminate):hover
+  .arco-checkbox-icon {
+  border-color: var(--color-primary);
+}
+
+.arco-checkbox-checked .arco-checkbox-icon,
+.arco-checkbox-indeterminate .arco-checkbox-icon,
+.arco-checkbox-checked:hover .arco-checkbox-icon,
+.arco-checkbox-indeterminate:hover .arco-checkbox-icon {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.arco-checkbox-disabled .arco-checkbox-icon,
+.arco-checkbox-disabled:hover .arco-checkbox-icon,
+.arco-checkbox-disabled.arco-checkbox-checked .arco-checkbox-icon,
+.arco-checkbox-disabled.arco-checkbox-indeterminate .arco-checkbox-icon {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+}
+
+.arco-checkbox-disabled .arco-checkbox-label {
+  color: var(--color-text-disabled);
+}

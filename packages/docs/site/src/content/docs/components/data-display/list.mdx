@@ -1,0 +1,299 @@
+---
+title: 列表 List
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+最基础的列表展示，可承载文字、列表、图片、段落，常用于后台数据展示页面。
+
+## 基本使用
+
+最基础的列表展示，可承载文字、列表、图片、段落。
+
+<Demo name="list/basic-usage" />
+
+## 不同尺寸
+
+<FrameworkBlock framework="react">
+设置 `size` 可以使用三种尺寸（`small`、`default`、`large`）的列表，可根据业务需求自行选择。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+列表组件提供了三种大小 `small`、`medium`、`large`，可根据业务需求自行选择。
+</FrameworkBlock>
+
+<Demo name="list/sizes" />
+
+## 列表元素
+
+<FrameworkBlock framework="react">
+使用 `List.Item.Meta` 可快速指定头像、标题、文字。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+使用 `list-item-meta` 组件可快速指定头像、标题、文字。
+</FrameworkBlock>
+
+<Demo name="list/list-item" />
+
+## 增加操作项
+
+通过 `actions` 来为列表添加操作项。
+
+<Demo name="list/extra-actions" />
+
+## 竖排列表样式
+
+这是一个包括分页、右侧内容、下方列表操作的示例。
+
+<Demo name="list/vertical-list" />
+
+## 格栅列表
+
+<FrameworkBlock framework="react">
+通过 `grid.span` 设置期望每行展示的列数。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `grid` 属性来配置格栅列表。
+</FrameworkBlock>
+
+<Demo name="list/grid-list" />
+
+## 响应式栅格
+
+通过 `grid.sm` 等响应式参数动态设置每个单项横跨的列数，注意此时不要设置 `grid.span`。
+
+<Demo name="list/responsive-grid" />
+
+## 滚动
+
+<FrameworkBlock framework="react">
+可设置 `onReachBottom` 来动态滚动加载列表。当 `onReachBottom` 无法满足需求，可通过 `onListScroll` 来自定义列表滚动监听函数，此时默认的滚动监听函数将失效。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `max-height` 属性限制列表的最大高度。通过 `reach-bottom` 事件可以监听列表触底的事件。
+</FrameworkBlock>
+
+<Demo name="list/scroll" />
+
+## 无限长列表
+
+通过指定 `virtualListProps` 来开启虚拟列表，在大量数据时获得高性能表现。
+
+<FrameworkBlock framework="react">
+
+在使用虚拟列表时，如果列表元素之间高度变化较大可能导致滚动时视口出现空白区域，可以通过设定 `virtualListProps.itemHeight` 解决。`itemHeight` 用于计算实际需要渲染的 DOM 节点数目（视口高度 / 元素高度），其值越小实际渲染的 DOM 节点越多，性能开销也会随之增大。
+
+**由于虚拟列表内部使用到了 ListItem 的 `ref`，因此如果你通过 `render` 返回了一个自定义函数组件，请使用 `React.forwardRef` 包裹它。**
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+在使用虚拟列表时，如果列表元素之间高度变化较大可能导致滚动时视口出现空白区域，可通过调整 `virtualListProps.buffer` 属性解决。
+</FrameworkBlock>
+
+<Demo name="list/infinite-list" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### List
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|bordered|是否显示边框|boolean |`true`|-|
+|hoverable|列表项是否可悬浮|boolean |`-`|2.9.0|
+|loading|是否加载中|boolean |`-`|-|
+|split|是否显示分割线|boolean |`true`|-|
+|defaultCurrent|滚动加载数据当前页码|number |`1`|-|
+|offsetBottom|触发底部函数的距离阙值|number |`0`|-|
+|throttleDelay|节流延时|number |`500`|-|
+|size|列表的尺寸|'small' \| 'default' \| 'large' |`-`|-|
+|children|当 dataSource 和 render 存在时，可不传此参数|ReactNode |`-`|-|
+|footer|列表底部|ReactNode |`-`|-|
+|header|列表头部|ReactNode |`-`|-|
+|noDataElement|没有数据的时候显示的元素|ReactNode |`-`|-|
+|scrollLoading|滚动加载状态时，滚动到底部的提示|string \| ReactNode |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|dataSource|列表渲染数据源，当children存在时，可不传此参数 (dataSource优先级更高）|T[] |`-`|-|
+|grid|列表栅格配置|ListGridProps |`-`|`column` in 2.20.0|
+|listRef|当前列表的引用|`MutableRefObject<ListHandle>` |`-`|2.20.0|
+|pagination|是否使用翻页，也可传入 `Pagination` 的配置|boolean \| PaginationProps |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|virtualListProps|传递虚拟列表属性，传入此参数以开启虚拟滚动|AvailableVirtualListProps |`-`|2.11.0|
+|wrapperClassName|指定最外层包裹元素的类名|string \| string[] |`-`|-|
+|wrapperStyle|指定最外层包裹元素的样式|CSSProperties |`-`|-|
+|onListScroll|列表滚动回调函数,参数为列表滚动元素，当onReachBottom无法满足需求，可自定义滚动监听函数。|`(elem: Element) => void` |`-`|-|
+|onReachBottom|滚动至底部触发函数|`(currentPage: number) => void` |`-`|-|
+|render|单个列表渲染函数，当 children 存在时，可不传此参数|`(item: T, index: number) => ReactNode` |`-`|-|
+
+### List.Item
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|actionLayout|列表操作组的位置，默认horizontal，出现在右侧；vertical出现在下方。|'horizontal' \| 'vertical' |`horizontal`|
+|extra|列表最右侧内容，额外内容|ReactNode |`-`|
+|actions|列表项下方内容（列表操作组）|ReactNode[] |`-`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+
+### List.Item.Meta
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|avatar|列表元素的图标|ReactNode |`-`|
+|description|列表元素描述内容|ReactNode |`-`|
+|title|列表元素标题|ReactNode |`-`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+
+### ListGridProps
+
+```js
+type ListGridProps = {
+  column?: number;
+} & Pick<RowProps, "gutter" | "justify" | "align"> &
+  Pick<
+    ColProps,
+    "span" | "offset" | "order" | "pull" | "push" | GridResponsiveBreakpoint
+  >;
+```
+
+### ListHandle
+
+```js
+export type ListHandle = {
+  dom: HTMLDivElement;
+  scrollIntoView: (index: number) => void;
+};
+```
+
+### AvailableVirtualListProps
+
+```js
+export type AvailableVirtualListProps = Pick<
+  VirtualListProps<any>,
+  | "height"
+  | "itemHeight"
+  | "threshold"
+  | "isStaticItemHeight"
+  | "scrollOptions"
+  | "onScroll"
+  | "wrapperChild"
+>;
+```
+
+### `<ListGridProps>`
+
+|参数名|描述|类型|默认值|
+|---|:---:|:---:|---:|
+|gutter|行间距|`number`|`-`|
+|span|栅格占位格数|`number`|`-`|
+|xs|`xs` 对应的栅格占位格数|`number`|`-`|
+|sm|`sm` 对应的栅格占位格数|`number`|`-`|
+|md|`md` 对应的栅格占位格数|`number`|`-`|
+|lg|`lg` 对应的栅格占位格数|`number`|`-`|
+|xl|`xl` 对应的栅格占位格数|`number`|`-`|
+|xxl|`xxl` 对应的栅格占位格数|`number`|`-`|
+
+### VirtualListProps
+
+|参数名|描述|类型|默认值|
+|------|:----------:|:--------:|-----:|
+|height|可视区高度 (`2.11.0` 开始支持如 `80%` 的 `string` 类型)|`number`|`200`|
+|threshold|自动开启虚拟滚动的元素数量阈值，传入`null`以禁用虚拟滚动。|`number`\|`null`|`100`|
+|isStaticItemHeight|是否为相同高度的静态元素|`boolean`|`true`|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<list>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|data|列表数据，需要和 `item` 插槽同时使用|`any[]`|`-`||
+|size|列表大小|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|bordered|是否显示边框|`boolean`|`true`||
+|split|是否显示分割线|`boolean`|`true`||
+|loading|是否为加载中状态|`boolean`|`false`||
+|hoverable|是否显示选中样式|`boolean`|`false`||
+|pagination-props|列表分页配置|`PaginationProps`|`-`||
+|grid-props|列表栅格配置|`object`|`-`||
+|max-height|列表的最大高度|`string \| number`|`0`||
+|bottom-offset|触发到达底部的距离阈值|`number`|`0`||
+|virtual-list-props|传递虚拟列表属性，传入此参数以开启虚拟滚动 VirtualListProps|`VirtualListProps`|`-`||
+|scrollbar|是否开启虚拟滚动条|`boolean \| ScrollbarProps`|`true`|2.38.0|
+
+### `<list>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|scroll|列表滚动时触发|-|
+|reach-bottom|当列表到达底部时触发|-|
+|page-change|表格分页发生改变时触发|page: `number`|
+|page-size-change|表格每页数据数量发生改变时触发|pageSize: `number`|
+
+### `<list>` Methods
+
+|方法名|描述|参数|返回值|
+|---|---|---|---|
+|scrollIntoView|虚拟滚动到某个元素|options: `{ index?: number; key?: number \| string; align: 'auto' \| 'top' \| 'bottom'}`|-|
+
+### `<list>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|scroll-loading|滚动加载状态时，滚动到底部的提示|-|2.20.0|
+|item|列表项|index: `number`<br/>item: `any`||
+|empty|空白展示|-||
+|footer|底部信息|-||
+|header|头部信息|-||
+
+### `<list-item>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|action-layout|操作组排列方向|`Direction`|`'horizontal'`|
+
+### `<list-item>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|meta|meta信息|-|
+|extra|额外内容|-|
+|actions|操作组|-|
+
+### `<list-item-meta>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|title|标题|`string`|`-`|
+|description|描述内容|`string`|`-`|
+
+### `<list-item-meta>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|avatar|头像|-|
+|title|标题|-|
+|description|描述内容|-|
+
+### VirtualListProps
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|height|可视区域高度|`number \| string`|`-`||
+|threshold|开启虚拟滚动的元素数量阈值，当数据数量小于阈值时不会开启虚拟滚动。|`number`|`-`||
+|isStaticItemHeight|（已废除）元素高度是否是固定的。2.34.1 版本废除，请使用 `fixedSize`|`boolean`|`false`||
+|fixedSize|元素高度是否是固定的。|`boolean`|`false`|2.34.1|
+|estimatedSize|元素高度不固定时的预估高度。|`number`|`-`|2.34.1|
+|buffer|视口边界外提前挂载的元素数量。|`number`|`10`|2.34.1|
+
+</FrameworkBlock>

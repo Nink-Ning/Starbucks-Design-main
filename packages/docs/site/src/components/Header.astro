@@ -1,0 +1,89 @@
+---
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+
+const base = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname;
+const logoSrc = `${base}img/logo-icon.svg`;
+const repositoryUrl = 'https://scm.starbucks.com/kning/starbucks-design-main';
+
+const navItems = [
+  {
+    label: '全局配置',
+    href: `${base}guide/getting-started/`,
+    active: pathname.includes('/guide/') && !pathname.includes('/guide/ai-skills/'),
+  },
+  {
+    label: '基础组件',
+    href: `${base}components/general/button/`,
+    active: pathname.includes('/components/'),
+  },
+  {
+    label: '业务组件',
+    href: `${base}business-components/`,
+    active: pathname.includes('/business-components/'),
+  },
+  {
+    label: '页面模板',
+    href: `${base}templates/list/tag-list/`,
+    active: pathname.includes('/templates/'),
+  },
+  {
+    label: 'Skills',
+    href: `${base}guide/ai-skills/`,
+    active: pathname.includes('/guide/ai-skills/'),
+  },
+];
+---
+
+<div class="header sl-flex sb-docs-header">
+  <div class="title-wrapper sl-flex sb-docs-title">
+    <a class="sb-docs-brand" href={base} aria-label="Starbucks Design 首页">
+      <img class="sb-docs-logo-image" src={logoSrc} alt="Starbucks" />
+    </a>
+  </div>
+
+  <nav class="sb-docs-topnav" aria-label="主导航">
+    {
+      navItems.map((item) => (
+        <a class="sb-docs-topnav__link" href={item.href} aria-current={item.active ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+
+  <div class="sl-hidden md:sl-flex print:hidden right-group sb-docs-actions">
+    <ThemeSelect />
+    <a
+      class="sb-docs-github"
+      href={repositoryUrl}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="打开代码仓库"
+      title="打开代码仓库"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12 2C6.48 2 2 6.59 2 12.25c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.98c.85 0 1.7.12 2.5.35 1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.59.69.49A10.08 10.08 0 0 0 22 12.25C22 6.59 17.52 2 12 2Z"
+        ></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    function syncDocsSection() {
+      var path = location.pathname;
+      var section = 'global';
+      if (path.indexOf('/guide/ai-skills/') > -1) section = 'skills';
+      else if (path.indexOf('/components/') > -1) section = 'components';
+      else if (path.indexOf('/templates/') > -1) section = 'templates';
+      else if (path.indexOf('/business-components/') > -1) section = 'business';
+      else if (path.indexOf('/foundations/') > -1) section = 'global';
+      document.documentElement.dataset.docsSection = section;
+    }
+    syncDocsSection();
+    document.addEventListener('astro:after-swap', syncDocsSection);
+  })();
+</script>

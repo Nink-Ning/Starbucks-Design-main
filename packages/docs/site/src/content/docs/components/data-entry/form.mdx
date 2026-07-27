@@ -1,0 +1,858 @@
+---
+title: 表单 Form
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+具有数据收集、校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。
+
+## 基本用法
+
+表单的基本用法。
+
+<FrameworkBlock framework="react">
+React 版本通过 `Form.Item` 的 `field` 属性收集控件值，通过 `Form` 的 `initialValues` 或 `Form.Item` 的 `initialValue` 设置默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+Vue 版本通过 `:model` 绑定表单数据对象，并在各表单控件上使用 `v-model` 进行双向绑定。
+</FrameworkBlock>
+
+<Demo name="form/basic" />
+
+## 表单布局
+
+表单支持三种布局方式：`horizontal` 水平排列（默认）、`vertical` 垂直排列、`inline` 行内排列。
+
+<Demo name="form/form-layout" />
+
+## 自动标签宽度
+
+<FrameworkBlock framework="vue">
+
+设置 `auto-label-width` 开启自动标签宽度。仅在 `layout="horizontal"` 布局下生效。
+
+_\* 目前仅在首次加载后生效。_
+
+</FrameworkBlock>
+
+<Demo name="form/auto-label-width" />
+
+## 栅格布局
+
+<FrameworkBlock framework="vue">
+展示了使用栅格布局的方式。可以使用 `label-col-flex` 属性指定标签的具体宽度。
+</FrameworkBlock>
+
+<Demo name="form/grid-layout" />
+
+## 受控表单
+
+<FrameworkBlock framework="react">
+
+可以在 `Form.Item` 传入 `field` 属性，即可使控件变为受控组件，表单项的值都将会被 `Form` 收集。
+
+1. 受控模式下 `Form.Item` 会接管控件，自动给表单控件添加相应的 `value`（或 `triggerPropName` 指定的其他属性）和 `onChange`（或 `trigger` 指定的其他属性)，所有的数据收集都由 `Form` 内部完成。
+2. 受控下不要为表单控件添加 `defaultValue`。默认值可以通过 `Form` 的 `initialValues` 或 `Form.Item` 的 `initialValue` 来设置。
+
+</FrameworkBlock>
+
+<Demo name="form/controlled" />
+
+## 低版本受控模式
+
+<FrameworkBlock framework="react">
+
+在 `1.15.0` 以下版本让表单控件变为受控组件，需要用到 `Form.Control`。
+
+**注意：** 受控模式会接管表单控件，会自动给表单控件添加相应的 trigger（默认是 onChange）函数，并且会自动收集表单数据，也可以进行表单验证。也就是说，你不需要给表单控件添加 onChange 等事件了。通过给 `Form.Control` 设置 `initialValue` 来设置初始值，而不是 `defaultValue`。
+
+</FrameworkBlock>
+
+<Demo name="form/form-control" />
+
+## 表单方法调用
+
+<FrameworkBlock framework="react">
+在函数式组件里可以使用 `Form.useForm` 获取表单实例。通过该实例调用表单方法，例如设置表单字段值、重置表单等。在类组件里可以使用 `ref` 获取表单实例。
+</FrameworkBlock>
+
+<Demo name="form/form-methods" />
+
+## 控制表单项错误状态
+
+<FrameworkBlock framework="react">
+通过 `setFields` 方法的 `error` 参数，可以在外部控制表单项的错误状态。
+</FrameworkBlock>
+
+<Demo name="form/set-fields-error" />
+
+## 复杂类型的数据
+
+<FrameworkBlock framework="react">
+通过设置 `field` 为 `a.b.c` 格式，可以得到 `{a:{b:{c: xx}}}`。
+</FrameworkBlock>
+
+<Demo name="form/complex-data" />
+
+## 嵌套数据
+
+<FrameworkBlock framework="react">
+`Form.Item` 可以互相嵌套。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+展示了多种表单项嵌套的方式。表单项组件默认会将表单项状态和事件绑定到第一子组件，如果想要使用表单项进行布局设置，请设置 `:merge-props="false"` 以关闭绑定，或者使用函数指定需要绑定的数据。
+
+如果使用 grid 组件进行布局，请设置 `:content-flex="false"` 关闭表单项内容的 flex 布局。
+
+</FrameworkBlock>
+
+<Demo name="form/nested-data" />
+
+## 表单控件联动
+
+<FrameworkBlock framework="react">
+可以通过 `shouldUpdate` 实现控件间的联动。
+</FrameworkBlock>
+
+<Demo name="form/linkage" />
+
+## 动态表单
+
+<FrameworkBlock framework="react">
+通过 `Form.List` 管理数组类型的表单结构。设置校验规则时 `Form.List` 会渲染出额外的 `DOM` 节点用来展示校验信息，如果不需要可以传入 `noStyle=false`，并通过 `Form.useFormState` 自定义校验信息的展示。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过数据动态控制表单内容。
+</FrameworkBlock>
+
+<Demo name="form/dynamic-form" />
+
+## 动态增减嵌套类型的表单项
+
+<FrameworkBlock framework="react">
+通过 `Form.List` 管理数组类型的表单结构。可以通过对 `field` 进行一些处理，实现动态增减复杂类型的表单项。
+</FrameworkBlock>
+
+<Demo name="form/dynamic-nested" />
+
+## 自定义表单组件
+
+<FrameworkBlock framework="react">
+`Form.Item` 会给自己的直接子节点（必须是唯一子节点）传递 `onChange` 和 `value` 属性，自定义控件只有在调用这个 `onChange` 之后，自己的值才能被 `Form.Item` 收集到。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `useFormItem` 自定义表单组件。2.18.0 版本后可用。
+</FrameworkBlock>
+
+<Demo name="form/custom-form-component" />
+
+## 额外信息和帮助信息
+
+<FrameworkBlock framework="vue">
+
+可以使用 `extra` 添加额外信息。
+
+如果需要在外部自定义校验信息，可以使用 `help` 属性或插槽。设置 `help` 时校验信息会被屏蔽。
+
+</FrameworkBlock>
+
+<Demo name="form/extra-info" />
+
+## 处理表单项的值
+
+<FrameworkBlock framework="react">
+在使用受控表单时，所有表单项的值在改变时都会被 `Form` 收集到。如果需要对表单项的值进行处理后再存储在 `Form` 中，可以使用 `normalize` 属性。与之相对，在进行表单项的渲染时，都会从 `Form` 中取值并作为 `value` 属性传递给对应的表单项，如果需要对从 `Form` 中取出的值进行转换再传递给表单项，可以使用 `formatter` 属性。注意：`form.setFieldValue` 不会触发 `normalize`。
+</FrameworkBlock>
+
+<Demo name="form/normalize" />
+
+## 注册表单
+
+<FrameworkBlock framework="react">
+填写必须的信息以注册新用户。
+</FrameworkBlock>
+
+<Demo name="form/register" />
+
+## 全局禁用
+
+给 `Form` 组件设置 `disabled` 属性可以全局禁用所有表单控件。
+
+<Demo name="form/global-disabled" />
+
+## 不同尺寸
+
+<FrameworkBlock framework="react">
+通过 `size` 属性可以设置不同尺寸的表单。
+</FrameworkBlock>
+
+<Demo name="form/form-size" />
+
+## 自定义表单校验状态
+
+<FrameworkBlock framework="react">
+`Form.Item` 支持通过 `hasFeedback`、`validateStatus` 和 `help` 属性自定义表单校验状态及校验文案。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+开启 `feedback` 可以让部分输入组件展示当前状态信息，配合 `validate-status` 控制校验状态。
+</FrameworkBlock>
+
+<Demo name="form/custom-form-validation" />
+
+## 验证表单
+
+<FrameworkBlock framework="react">
+可以通过 `form.validate` 方法进行表单字段的校验，可以通过参数指定校验特定字段。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+展示了表单校验的使用方法。校验规则通过 `rules` 配置。
+</FrameworkBlock>
+
+<Demo name="form/form-validation" />
+
+## 验证表单2
+
+<FrameworkBlock framework="vue">
+展示了表单校验 `rules` 使用在 `a-form` 上的使用方法，以及可以直接校验 `email`、`ip`、`url`。
+</FrameworkBlock>
+
+<Demo name="form/form-validation-2" />
+
+## 表单异步校验
+
+<FrameworkBlock framework="react">
+
+在 `rules` 中自定义 `validator` 方法，并返回一个 `Promise` 即可实现表单的异步校验。
+
+p.s: 如果用 `lodash.debounce` 不生效，建议使用 `debounce.promise`，它返回的是一个 `promise`。
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过异步的方法校验表单功能。
+</FrameworkBlock>
+
+<Demo name="form/async-validation" />
+
+## 表单校验信息模板
+
+<FrameworkBlock framework="react">
+
+可以通过 `validateMessages` 属性设置校验信息提示模板（`2.32.0` 支持）。
+
+也可以在 `ConfigProvider` 组件的 `componentConfig` 参数，为全局的 `Form` 组件设置 `validateMessages`。
+
+</FrameworkBlock>
+
+<Demo name="form/validate-messages" />
+
+## 滚动到指定表单字段
+
+展示了提交失败自动滚动到第一个错误字段和手动滚动对应字段的使用方法。
+
+<Demo name="form/scroll-to-field" />
+
+## 表单校验失败不阻塞提交
+
+<FrameworkBlock framework="react">
+可以通过 `validateLevel` 设置表单校验失败时显示为 `warning` 状态，不阻塞表单提交。
+</FrameworkBlock>
+
+<Demo name="form/validate-level" />
+
+## 多表单联动
+
+<FrameworkBlock framework="react">
+可以通过 `Form.Provider` 组件管理多个表单的数据（`2.30.0` 支持）。如果想要获得对应的表单实例，需要为 `Form` 组件设置 `id` 属性。
+</FrameworkBlock>
+
+<Demo name="form/form-provider" />
+
+## useWatch
+
+<FrameworkBlock framework="react">
+可以通过 `Form.useWatch` 监听表单内部字段值的变动（`2.33.0` 支持）。
+</FrameworkBlock>
+
+<Demo name="form/use-watch" />
+
+## 获取表单上下文
+
+<FrameworkBlock framework="react">
+在函数式组件里可以使用 `Form.useFormContext` 获取 Form 组件上下文，便于表单控件的封装（version `2.33.0`，`isSubmitting` in `2.44.0`）。`isSubmitting` 仅在通过 `type=submit` 的 `button` 触发表单 `Form` 的 `onSubmit` 属性进行提交时有效。如果 `onSubmit` 内部包含异步逻辑，请返回一个 Promise。
+</FrameworkBlock>
+
+<Demo name="form/form-context" />
+
+## useFormState
+
+<FrameworkBlock framework="react">
+可以通过 `Form.useFormState` 监听表单内部状态的变动（`2.44.0` 支持）。
+</FrameworkBlock>
+
+<Demo name="form/use-form-state" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Form
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|disabled|统一配置表单控件是否可用|`boolean`|`-`|-|
+|id|设置后，会作为表单控件 `id` 的前缀。|`string`|`-`|-|
+|labelAlign|标签的文本对齐方式|`'left' \| 'right'`|`right`|-|
+|layout|表单的布局，有三种布局，水平、垂直、多列。|`'horizontal' \| 'vertical' \| 'inline'`|`horizontal`|-|
+|requiredSymbol|是否在 required 的时候显示加重的红色星号，设置 position 可选择将星号置于 label 前/后|`boolean \| { position: 'start' \| 'end' }`|`true`|`position` in 2.24.0|
+|size|不同尺寸。|`'mini' \| 'small' \| 'default' \| 'large'`|`-`|-|
+|colon|是否显示标签后的一个冒号，优先级小于 `Form.Item` 中 `colon` 的优先级。(`ReactNode` in `v2.41.0`)|`boolean \| ReactNode`|`-`|-|
+|className|节点类名|`string \| string[]`|`-`|-|
+|form|form|`FormInstance<FormData, FieldValue, FieldKey>`|`-`|-|
+|initialValues|设置表单初始值|`Partial<FormData>`|`-`|-|
+|labelCol|`<label>` 标签布局，同 `<Grid.Col>` 组件接收的参数相同，可以配置 `span` 和 `offset` 值，会覆盖全局的 `labelCol` 设置|`ColProps`|`{ span: 5, offset: 0 }`|-|
+|onChange|表单项值改变时候触发。和 onValuesChange 不同的是只会在用户操作表单项时触发|`(value: Partial<FormData>, values: Partial<FormData>) => void`|`-`|-|
+|onValuesChange|任意表单项值改变时候触发。第一个参数是被改变表单项的值，第二个参数是所有的表单项值|`(value: Partial<FormData>, values: Partial<FormData>) => void`|`-`|-|
+|scrollToFirstError|验证失败后滚动到第一个错误字段。(`ScrollIntoViewOptions` 类型在 `2.19.0` 开始支持)|`boolean \| ScrollIntoViewOptions`|`-`|-|
+|style|节点样式|`CSSProperties`|`-`|-|
+|validateMessages|校验提示信息模板 demo|`Partial<{[key in keyof ValidateMessagesTemplateType]: ValidateMessagesTemplateType[key] extends string? ValidateMessagesTemplateType[key] \| ((data, { label }) => any): Partial<Record<keyof ValidateMessagesTemplateType[key], string \| ((data, { label }) => any)>>;}>`|`-`|2.32.0|
+|validateTrigger|触发验证的时机。|`string \| string[]`|`onChange`|2.28.0|
+|wrapper|配置最外层标签，可以是 html 标签或是组件|`ComponentType`|`form`|-|
+|wrapperCol|控件布局，同 `labelCol` 的设置方法一致，会覆盖全局的 `wrapperCol` 设置，ColProps|`ColProps`|`{ span: 19, offset: 0 }`|-|
+|wrapperProps|配置 `wrapper` 之后，可以传一些参数到 wrapper 上。|`IndexedObject`|`-`|-|
+|onSubmit|数据验证成功后回调事件|`(values: FormData) => void`|`-`|-|
+|onSubmitFailed|数据验证失败后回调事件|`(errors: { [key: string]: FieldError }) => void`|`-`|2.21.0|
+
+### Form.Item
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|disabled|是否禁用，优先级高于 `Form` 的 `disabled` 属性|`boolean`|`-`|-|
+|hasFeedback|是否显示校验图标，配置 validateStatus 使用。|`boolean`|`-`|-|
+|hidden|隐藏表单项. 表单字段值仍然会被获取|`boolean`|`-`|2.29.0|
+|required|是否必选，会在 `label` 标签前显示加重红色符号，如果这里不设置，会从 rules 中寻找是否是 required|`boolean`|`-`|-|
+|trigger|接管子节点，搜集子节点值的时机。|`string`|`onChange`|-|
+|triggerPropName|子节点被接管的值的属性名，默认是 `value`，比如 `<Checkbox>` 为 `checked`。|`string`|`value`|-|
+|labelAlign|标签的文本对齐方式，优先级高于 `Form`|`'left' \| 'right'`|`right`|-|
+|layout|布局|`'horizontal' \| 'vertical' \| 'inline'`|`-`|-|
+|requiredSymbol|是否在 required 的时候显示加重的红色星号，设置 position 可选择将星号置于 label 前/后|`boolean \| { position: 'start' \| 'end' }`|`true`|`position` in 2.24.0|
+|validateStatus|校验状态|`'success' \| 'warning' \| 'error' \| 'validating'`|`-`|-|
+|colon|是否显示标签后的一个冒号，优先级小于 `Form.Item` 中 `colon` 的优先级。(`ReactNode` in `v2.41.0`)|`boolean \| ReactNode`|`-`|-|
+|extra|额外的提示内容。|`ReactNode`|`-`|-|
+|help|自定义校验文案|`ReactNode`|`-`|-|
+|label|标签的文本|`ReactNode`|`-`|-|
+|children|`ReactNode` 类型与函数类型的 children|`React.ReactNode \| FormItemChildrenFn<FormData, FieldValue, FieldKey>`|`-`|-|
+|className|节点类名|`string \| string[]`|`-`|-|
+|dependencies|设置依赖字段。当依赖的字段值改变时，触发自身的校验。如果是想动态渲染某个表单控件/表单区域，使用 shouldUpdate|`string[]`|`-`|2.40.0|
+|field|受控组件的唯一标示|`FieldKey`|`-`|-|
+|initialValue|设置控件初始值.(初始值，请不要使用受控组件的 defaultValue 了)|`FieldValue`|`-`|-|
+|labelCol|`<label>` 标签布局，同 `<Grid.Col>` 组件接收的参数相同，可以配置 `span` 和 `offset` 值，会覆盖全局的 `labelCol` 设置|`ColProps`|`-`|-|
+|normalize|将控件的 `value` 进行一定的转换再保存到 form 中。|`(value: FieldValue \| undefined, prevValue: FieldValue \| undefined, allValues: Partial<FormData>) => any`|`-`|-|
+|noStyle|不渲染任何外部标签/样式，只进行字段绑定。**注意**: 设置该属性为 true 时，该字段若未通过校验，错误信息将不会显示出来。可以传入对象，并设置 showErrorTip（`2.5.0` 开始支持）为 true，错误信息将会展示在上层 formItem 节点下。|`boolean \| { showErrorTip: boolean }`|`-`|-|
+|rules|受控模式下的验证规则，RulesProps|`RulesProps<FieldValue>[]`|`-`|-|
+|shouldUpdate|是否在其他控件值改变时候重新渲染当前区域。设置为 true 时候，表单的任意改变都会重新渲染该区域。|`boolean \| ((prevValues: Partial<FormData>, currentValues: Partial<FormData>, info: { isFormList?: boolean; field?: FieldKey \| FieldKey[]; isInner?: boolean; }) => boolean)`|`-`|-|
+|style|节点样式|`CSSProperties`|`-`|-|
+|tooltip|提示文本|`ReactNode \| (TooltipProps & { icon?: ReactElement })`|`-`|2.43.0|
+|validateTrigger|触发验证的时机。取值和跟包裹的控件有关系，控件支持的触发事件，都可以作为值。例如 `Input` 支持的 `onFocus`、`onBlur`、`onChange` 都可以作为 `validateTrigger` 的值。传递为 `[]` 时，仅会在调用表单 `validate` 方法时执行校验规则。|`string \| string[]`|`onChange`|-|
+|wrapperCol|控件布局，同 `labelCol` 的设置方法一致，会覆盖全局的 `wrapperCol` 设置，ColProps|`ColProps`|`-`|-|
+|formatter|将 Form 内保存的当前控件对应的值进行一定的转换，再传递给控件。|`(value: FieldValue \| undefined) => any`|`-`|2.23.0|
+|getValueFromEvent|指定在子节点触发 `onChange` 事件时如何处理值。（如果自定义了 `trigger` 属性，那么这里的参数就是对应的事件回调函数的参数类型）|`(...args) => FieldValue`|`-`|2.23.0|
+
+### Form.List
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|noStyle|FormItemProps['noStyle'].`rules` 存在时默认为 `false`(需要渲染校验信息)，否则默认为 `true`|`FormItemProps['noStyle']`|`-`|2.46.0|
+|field|字段名|`FieldKey` **(必填)**|`-`|-|
+|initialValue|初始值|`SubFieldValue[]`|`-`|2.22.0|
+|rules|受控模式下的验证规则，RulesProps|`RulesProps<SubFieldValue[]>[]`|`-`|2.46.0|
+|children|函数类型的 children|`(fields: { key: number; field: SubFieldKey }[], operation: { add: (defaultValue?: SubFieldValue, index?: number) => void; remove: (index: number) => void; move: (fromIndex: number, toIndex: number) => void; }) => React.ReactNode`|`-`|-|
+
+### Form.Provider(`2.30.0`)
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|onFormSubmit|包裹的任意 `Form` 组件触发提交时，该方法会被调用|`(id: string \| undefined, values, { forms, }: { forms: { [key: string]: FormInstance; }; }) => void`|`-`|
+|onFormValuesChange|包裹的任意 `Form` 组件的值改变时，该方法会被调用|`(id: string \| undefined, changedValues, { forms, }: { forms: { [key: string]: FormInstance; }; }) => void`|`-`|
+
+### FormInstance
+
+```js
+export type FormInstance<
+  FormData = any,
+  FieldValue = FormData[keyof FormData],
+  FieldKey extends KeyType = keyof FormData
+> = Pick<
+  Store<FormData, FieldValue, FieldKey>,
+  | "getFieldsValue"
+  | "getFieldValue"
+  | "getFieldError"
+  | "getFieldsError"
+  | "getTouchedFields"
+  | "getFields"
+  | "setFieldValue"
+  | "setFieldsValue"
+  | "setFields"
+  | "resetFields"
+  | "clearFields"
+  | "submit"
+  | "validate"
+  | "getFieldsState"
+> & {
+  scrollToField: (field: FieldKey, options?: ScrollIntoViewOptions) => void;
+  // arco 内部使用，业务万不可调用
+  getInnerMethods: (
+    inner?: boolean
+  ) => InnerMethodsReturnType<FormData, FieldValue, FieldKey>;
+};
+```
+
+### InnerMethodsReturnType
+
+```js
+export type InnerMethodsReturnType<
+  FormData = any,
+  FieldValue = FormData[keyof FormData],
+  FieldKey extends KeyType = keyof FormData
+> = Pick<
+  Store<FormData, FieldValue, FieldKey>,
+  | "registerField"
+  | "registerStateWatcher"
+  | "registerFormWatcher"
+  | "registerWatcher"
+  | "innerSetInitialValues"
+  | "innerSetInitialValue"
+  | "innerSetCallbacks"
+  | "innerSetFieldValue"
+  | "innerGetStore"
+  | "innerGetStoreStatus"
+  | "innerCollectFormState"
+  | "innerGetFieldValue"
+>;
+```
+
+### ComponentType
+
+```js
+export type ComponentType =
+  | keyof JSX.IntrinsicElements
+  | React.ComponentType<any>;
+```
+
+### IndexedObject
+
+```js
+export type IndexedObject = {
+  [key: string]: any;
+};
+```
+
+### FieldError
+
+```js
+export type FieldError<FieldValue = any> = {
+  value?: FieldValue;
+  message?: ReactNode;
+  type?: string;
+  requiredError?: boolean;
+};
+```
+
+### FormItemChildrenFn
+
+```js
+export type FormItemChildrenFn<
+  FormData = any,
+  FieldValue = FormData[keyof FormData],
+  FieldKey extends KeyType = keyof FormData
+> = (
+  formData: any,
+  form: FormInstance<FormData, FieldValue, FieldKey>
+) => React.ReactNode;
+```
+
+### Rules
+
+底层使用 b-validate。
+
+```js
+export interface RulesProps {
+  // 触发校验的时机
+  validateTrigger?: string | string[];
+  // 校验失败时候以 `error` 或 `warning` 形式展示错误信息。当设置为 `warning` 时不会阻塞表单提交
+  validateLevel?: 'error' | 'warning';
+  required?: boolean;
+  type?: string;
+  length?: number;
+  // Array
+  maxLength?: number;
+  minLength?: number;
+  includes?: boolean;
+  deepEqual?: any;
+  empty?: boolean;
+  // Number
+  min?: number;
+  max?: number;
+  equal?: number;
+  positive?: boolean;
+  negative?: boolean;
+  // Object
+  hasKeys?: string[];
+  // String
+  match?: RegExp;
+  uppercase?: boolean;
+  lowercase?: boolean;
+  // Boolean
+  true?: boolean;
+  false?: boolean;
+  // custom
+  validator?: (value, callback: (error?: ReactNode) => void) => void;
+  message?: string;
+}
+```
+
+### this.form
+
+通过 `ref` 可以拿到 `this.form`，`this.form` 包含了表单的验证、设值等常用操作。
+
+```js
+<Form ref={(ref) => (this.form = ref)}>
+  <Form.Item>...</Form.Item>
+</Form>
+```
+
+|方法|描述|类型|
+|---|---|---|
+|validate|校验并获取表单输入域的值与 Errors，如果不设置 fields 的话，会验证所有的 fields。支持 callback 和 promise 两种使用方法。|`Function(fields?: string[], callback(errors, values) => void)`|
+|submit|提交表单|`Function`|
+|setFieldValue|设置一个表单控件的值|`Function(field: string, value)`|
+|setFields|设置一组表单控件的值和报错。|`Function({ [field]: string: { value: any, error: FieldError } })`|
+|setFieldsValue|设置多个表单控件的值|`Function({ [field]: string, value })`|
+|getFieldValue|获取一个表单控件的值。**请不要把返回值直接作为 useEffect 的依赖，其返回值会被深克隆，引用地址会发生改变**|`Function(field: string)`|
+|getFields|获取全部表单项的值，包括被创建后销毁的表单项。**请不要把返回值直接作为 useEffect 的依赖，其返回值会被深克隆，引用地址会发生改变**|`Function`|
+|getFieldsValue|获取一组表单控件的值，如果不设置 fields 的话，会获取所有的 fields。**请不要把返回值直接作为 useEffect 的依赖，其返回值会被深克隆，引用地址会发生改变**|`Function(fields: string[])`|
+|getFieldError|获取一个表单控件的错误状态|`Function(field: string)`|
+|getFieldsError|获取一组表单控件的错误状态，如果不设置 fields 的话，会获取所有的控件的错误状态。|`Function(fields?: string[])`|
+|scrollToField|滚动到指定表单字段位置。ScrollIntoViewOptions|`Function(field: string, options?: ScrollIntoViewOptions)`|
+|getTouchedFields|获取被操作过的字段|`() => string[]`|
+|resetFields|重置表单控件的值变为初始值|`Function(field?: string[])`|
+|clearFields|清除表单控件的值以及校验状态。等同于 `form.setFields({ [field]: { value: undefined; error: null, warning: null } })`|`Function(field?: string[])`（`2.29.0`）|
+
+### `validate` 用法
+
+```js
+this.form.validate((errors, values) => {
+  console.log(errors, values);
+});
+// 或者
+this.form.validate().then((values) => {
+  console.log(values);
+}).catch((error) => {
+  console.log(error.name);
+  console.log(error.message);
+  console.log(error.errors);
+});
+// 或者 (注意要在 async 方法中使用)
+try {
+  const values = await this.form.validate();
+} catch (error) {
+  console.log(error.name);
+  console.log(error.message);
+  console.log(error.errors);
+}
+```
+
+### `setFields` 用法
+
+```js
+this.form.setFields({
+  name: {
+    value: 'pjy',
+    error: {
+      message: 'Yes, I know!'
+    },
+    warning: 'warning...'
+  }
+});
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<form>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|model **(必填)**|表单数据对象|`object`|`-`||
+|layout|表单的布局方式，包括水平、垂直、多列|`'horizontal' \| 'vertical' \| 'inline'`|`'horizontal'`||
+|size|表单控件的尺寸|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
+|label-col-props|标签元素布局选项。参数同 `<col>` 组件一致|`object`|` span: 5, offset: 0 `||
+|wrapper-col-props|表单控件布局选项。参数同 `<col>` 组件一致|`object`|` span: 19, offset: 0 `||
+|label-align|标签的对齐方向|`'left' \| 'right'`|`'right'`||
+|disabled|是否禁用表单|`boolean`|`-`||
+|rules|表单项校验规则|`Record<string, FieldRule \| FieldRule[]>`|`-`||
+|auto-label-width|是否开启自动标签宽度，仅在 `layout="horizontal"` 下生效。|`boolean`|`false`|2.13.0|
+|id|表单 `id` 属性和表单控件 `id` 前缀|`string`|`-`||
+|scroll-to-first-error|验证失败后滚动到第一个错误字段|`boolean`|`false`|2.51.0|
+
+### `<form>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|submit|表单提交时触发|data: `{values: Record<string, any>; errors: Record<string, ValidatedError> \| undefined}`<br/>ev: `Event`|
+|submit-success|验证成功时触发|values: `Record<string, any>`<br/>ev: `Event`|
+|submit-failed|验证失败时触发|data: `{values: Record<string, any>; errors: Record<string, ValidatedError>}`<br/>ev: `Event`|
+
+### `<form>` Methods
+
+|方法名|描述|参数|返回值|版本|
+|---|---|---|---|:---|
+|validate|校验全部表单数据|callback: `(errors: undefined \| Record<string, ValidatedError>) => void`|`Promise<undefined \| Record<string, ValidatedError>>`||
+|validateField|校验部分表单数据|field: `string \| string[]`<br/>callback: `(errors: undefined \| Record<string, ValidatedError>) => void`|`Promise<undefined \| Record<string, ValidatedError>>`||
+|resetFields|重置表单数据|field: `string \| string[]`|-||
+|clearValidate|清除校验状态|field: `string \| string[]`|-||
+|setFields|设置表单项的值和状态|data: `Record<string, FieldData>`|-||
+|scrollToField|滚动到指定表单项|field: `string`|-|2.51.0|
+
+### `<form-item>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|field|表单元素在数据对象中的 path（数据项必填）|`string`|`''`||
+|label|标签的文本|`string`|`-`||
+|tooltip|提示内容|`string`|`-`|2.41.0|
+|show-colon|是否显示冒号|`boolean`|`false`||
+|no-style|是否去除样式|`boolean`|`false`||
+|disabled|是否禁用|`boolean`|`-`||
+|help|帮助文案|`string`|`-`||
+|extra|额外显示的文案|`string`|`-`||
+|required|是否必须填写|`boolean`|`false`||
+|asterisk-position|可选择将星号置于 label 前/后|`'start' \| 'end'`|`'start'`|2.41.0|
+|rules|表单项校验规则（优先级高于 form 的 rules）|`FieldRule \| FieldRule[]`|`-`||
+|validate-status|校验状态|`'success' \| 'warning' \| 'error' \| 'validating'`|`-`||
+|validate-trigger|触发校验的事件|`'change' \| 'input' \| 'focus' \| 'blur'`|`'change'`||
+|label-col-props|标签元素布局选项。参数同 `<col>` 组件一致|`object`|`-`||
+|wrapper-col-props|表单控件布局选项。参数同 `<col>` 组件一致|`object`|`-`||
+|hide-label|是否隐藏标签|`boolean`|`false`||
+|hide-asterisk|是否隐藏星号|`boolean`|`false`||
+|label-col-style|标签元素布局组件的 style|`object`|`-`|2.10.0|
+|wrapper-col-style|表单控件布局组件的 style|`object`|`-`|2.10.0|
+|row-props|表单项布局选项。参数同 `<row>` 组件一致|`object`|`-`|2.10.0|
+|row-class|表单项布局组件的 class|`string\|array\|object`|`-`|2.10.0|
+|content-class|表单控件包裹层的 class|`string\|array\|object`|`-`|2.10.0|
+|content-flex|内容层是否开启 flex 布局|`boolean`|`true`|2.13.0|
+|merge-props|（已废除）控制传递到子元素上的 Props。默认包括 disabled、error、size、events 和 FormItem 上的额外属性。2.18.0 版本废除|`boolean \| ((props: Record<string, any>) => Record<string, any>)`|`true`|2.13.0|
+|label-col-flex|设置标签 `Col` 组件的 flex 属性。设置时表单 `Col` 组件的 flex 属性会被设置为 `auto`。|`number\|string`|`-`|2.13.0|
+|feedback|是否显示表单控件的反馈图标|`boolean`|`false`|2.16.0|
+|label-component|表单项标签渲染的元素|`string`|`'label'`|2.22.0|
+|label-attrs|表单项元素的属性|`object`|`-`|2.22.0|
+
+### `<form-item>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|label|标签|-|
+|help|帮助信息|-|
+|extra|额外内容|-|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="react">
+
+## 常见问题
+
+### 为什么无法调用 `Modal` 里嵌套的 `Form` 的方法？
+
+例如以下使用方式：
+
+```js
+// ...
+const [form] = Form.useForm();
+useEffect(() => {
+  form.setFieldsValue({})
+}, [])
+return <div>
+  <Modal visible={visible}>
+    <Form form={form}>
+      {/** ... */}
+    </Form>
+  </Modal>
+</div>
+```
+
+这是因为在调用 form 的方法时，`Modal` 还未挂载，`Form` 还未创建。可以设置 Modal 的 `mountOnEnter=false`。
+
+### Form.Control
+
+非常非常极其不建议直接使用 `Form.Control`。在 `1.15.0` 及以上版本，组件库对 `Form.Item` 进行了较多功能扩展，简化了受控表单的写法，不再推荐直接使用 `Form.Control` 组件（当然 `1.x` 兼容了此写法）。但升级到 `2.0` 后，`Form.Control` 作为 `Form` 的一个内部组件，为了功能升级或 bugfix 可能会进行一些改动，较少考虑到外部直接使用的场景，所以非常建议使用 `Form.Item` 代替 `Form.Control`。
+
+### 如何设置表单控件的默认值？（为什么给控件例如 Input，直接设置 defaultValue 不生效）
+
+在被 `FormItem` 包裹，并且 `Form.Item` 设置了 `field` 属性的控件上，不要再设置 `defaultValue` 和 `value` 属性。可以在 `Form.Item` 上通过 `initialValue` 来设置默认值。
+
+### `Modal` 里嵌套的 `Form` 时，无法调用 `Form` 的方法。
+
+`Modal` 默认在打开时挂载，所以页面加载完成时 `Modal` 还未挂载，`Form` 还未创建。可以设置 `Modal` 的 **`mountOnEnter=false`**。
+
+### 传了 `initialValue` 但不生效。
+
+`initialValue` 解释为**初始值**，只会在表单挂载时生效，如果表单数据是异步加载的请用 `setFieldValue` / `setFieldsValue` / `setFields` 更新表单值。
+
+### Form.Item 未收集到所包裹表单控件的值 / 未触发校验？
+
+* Form.Item 设置了 field 属性
+* Form.Item 直接包裹在表单控件外，并且表单控件是 FormItem 的**唯一子节点**
+* Form.Item 的默认 triggerPropName 是 value，表示会给子控件注入 value 属性。如果表单控件的受控属性是 `checked`(如 switch, checkbox, radio)、`fileList`（如 Upload）或者其他，那么需要根据实际情况设置下 `Form.Item` 的 `triggerPropName={表单控件的受控属性}`
+* 类似 triggerPropName，默认 `FormItem` 监听子组件的 `onChange` 回调来收集控件值以及触发校验逻辑。如果子组件的回调不是 `onChange`，记得设置下 `FormItem` 的 `trigger={表单控件的事件回调}`
+* Form.Item 所包裹的控件是挂载状态（即未被销毁）
+
+### 某个表单元素填了值但已经被销毁，我如何获取这个值？
+
+**`getFields`** 方法会获取所有在 `Form` 中注册过的字段的值，包括被创建后销毁的表单项。
+
+### 校验节流 或 异步校验？
+
+在 `rules` 中自定义 `validator` 方法，并返回一个 `Promise` 即可实现表单的异步校验。节流如果用 `lodash.debounce` 不生效，建议使用 `debounce.promise`，它返回的是一个 `promise`。
+
+### Form 中对 Checkbox/Switch/Upload 设置值不生效
+
+在 `Checkbox/Switch` 对应的 `Form.Item` 上设置 `triggerPropName=checked`；在 `Upload` 对应的 `Form.Item` 上设置 `triggerPropName=fileList`，其他组件类似。
+
+### Form 内 Input 出现浅蓝色背景色（Chrome 浏览器）？
+
+蓝色背景色是 Chrome 浏览器的自动填充样式，关闭 form 的自动填充即可。
+
+### 如何关闭自动填充？
+
+`Form` 组件的原生属性，设置 `autoComplete=off` 即可。
+
+### 点击 label 会触发对应表单控件的行为改变？如：switch 切换，checkbox 选中，input 聚焦
+
+> **标签定义及使用说明**
+> label 标签为 input 元素定义标注（标记）。label 元素不会向用户呈现任何特殊效果。不过，它为鼠标用户改进了可用性。如果您在 label 元素内点击文本，就会触发此控件。就是说，当用户选择该标签时，浏览器就会自动将焦点转到和标签相关的表单控件上。label 标签的 for 属性应当与相关元素的 id 属性相同。
+
+如果实在不想要这个效果，给表单控件随便设置个 id 属性，不要和 label 的 for 属性一致即可。如 `<Switch id="aaaaa" />`。
+
+### DatePicker.WeekPicker 传值解析不了
+
+> DatePicker.QuarterPicker 同理
+
+给 `Form.Item` 加上 `getValueFromEvent={(v, dv) => dv}`。
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+## Type
+
+### FieldRule
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|type|校验的值的类型，默认为 `'string'`|`'string' \| 'number' \| 'boolean' \| 'array' \| 'object' \| 'email' \| 'url' \| 'ip'`|`-`|
+|required|是否必填|`boolean`|`false`|
+|message|校验失败时展示的信息|`string`|`-`|
+|length|校验长度（string, array）|`number`|`-`|
+|maxLength|最大长度（string）|`number`|`-`|
+|minLength|最小长度（string）|`number`|`-`|
+|match|匹配校验（string）|`RegExp`|`-`|
+|uppercase|大写（string）|`boolean`|`false`|
+|lowercase|小写（string）|`boolean`|`false`|
+|min|最小值（number）|`number`|`-`|
+|max|最大值（number）|`number`|`-`|
+|equal|校验数值（number）|`number`|`-`|
+|positive|正数（number）|`boolean`|`false`|
+|negative|负数（number）|`boolean`|`false`|
+|true|是否为 `true`（boolean）|`boolean`|`false`|
+|false|是否为 `false`（boolean）|`boolean`|`false`|
+|includes|数组中是否包含给定值（array）|`any[]`|`-`|
+|deepEqual|数组元素是否相等（array）|`any`|`-`|
+|empty|是否为空（object）|`boolean`|`false`|
+|hasKeys|对象是否包含给定属性（object）|`string[]`|`-`|
+|validator|自定义校验规则|`(value: FieldValue \| undefined, callback: (error?: string) => void) => void`|`-`|
+
+### FieldData
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|value|字段的值|`any`|`-`|
+|status|字段的状态|`ValidateStatus`|`-`|
+|message|字段的错误信息|`string`|`-`|
+
+### ValidatedError
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|label|标签的文本|`string`|`-`|2.18.0|
+|field|字段名|`string`|`-`||
+|value|字段值|`any`|`-`||
+|type|字段类型|`string`|`-`||
+|isRequiredError|是否为 `required` 错误|`boolean`|`false`||
+|message|错误信息|`string`|`-`||
+
+### FormItemEventHandler
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|onChange|onChange|`(ev?: Event) => void`|`-`|
+|onInput|onInput|`(ev?: Event) => void`|`-`|
+|onFocus|onFocus|`(ev?: Event) => void`|`-`|
+|onBlur|onBlur|`(ev?: Event) => void`|`-`|
+
+### useFormItem
+
+```ts
+const useFormItem = (data: {
+  size?: Ref<Size | undefined>;
+  disabled?: Ref<boolean>;
+  error?: Ref<boolean>;
+}) => {
+  mergedSize:Ref<Size>;
+  mergedDisabled:Ref<boolean>;
+  mergedError:Ref<boolean>;
+  feedback:Ref<string>;
+  eventHandlers:Ref<FormItemEventHandler>;
+}
+```
+
+## FAQ
+
+### 关于 `form-item` 的 `field` 属性
+
+`field` 属性的值为获取当前 `form-item` 对应值的路径字符串。
+
+例如传入 model 属性的数据结构为：
+
+```ts
+const data = reactive({
+  name:'xiaoming',
+  people:[
+    {
+      id:'1111'
+    },
+    {
+      // bind this value
+      id:'2222'
+    }
+  ]
+})
+```
+
+此时，如果想要指定当前 `form-item` 对应的值为 `id: '2222'`，需要设置 `field="people.2.id"`，值中的分隔符需要使用 `.`。数组分割也可以使用 `[]`，例如 `field="people[2].id"`。
+
+### 关于在 label 插槽中使用可点击元素
+
+表单组件的标题区域默认使用 `label` 元素包裹，会在点击时激活输入组件，如果在其中放入可以点击组件，会影响其正常功能。此时可以使用 `label-component` 属性修改包裹元素为 `span` 解决这个问题。
+
+</FrameworkBlock>

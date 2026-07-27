@@ -1,0 +1,26 @@
+@import '../style/variables.less';
+
+// 上游规格:sticky 吸底、高 64、白底(参考 Figma 2015:24994 分步表单底栏)
+.sbux-pro-page-footer-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: @sbux-pro-footer-bar-height;
+  padding: 0 @sbux-pro-card-padding;
+  background-color: var(--color-bg-2);
+
+  &-bordered {
+    border-top: 1px solid var(--color-border-2);
+  }
+
+  &-align-left {
+    justify-content: flex-start;
+  }
+
+  &-align-right {
+    justify-content: flex-end;
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@sbux/starbucks-design-vue",
-  "version": "1.1.18",
+  "version": "1.1.19",
   "private": false,
   "type": "module",
   "files": [
@@ -11,7 +11,9 @@
   "unpkg": "./dist/index.umd.js",
   "jsdelivr": "./dist/index.umd.js",
   "types": "./dist/index.d.ts",
-  "sideEffects": ["dist/**"],
+  "sideEffects": [
+    "dist/**"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -20,20 +22,23 @@
     },
     "./icon": {
       "types": "./dist/icon.d.ts",
-      "import": "./dist/icon.cjs",
+      "import": "./dist/icon.mjs",
       "require": "./dist/icon.cjs"
     },
     "./locale": {
       "types": "./dist/locale.d.ts",
-      "import": "./dist/locale.cjs",
+      "import": "./dist/locale.mjs",
       "require": "./dist/locale.cjs"
     },
-    "./src/theme.css": "./src/theme.css"
+    "./pro": {
+      "types": "./dist/pro/index.d.ts",
+      "import": "./dist/pro.es.js",
+      "require": "./dist/pro.cjs.js"
+    }
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build && node scripts/build-shims.mjs",
-    "sync-figma": "tsx scripts/sync-figma.ts"
+    "build": "vue-tsc --noEmit && vite build && vite build -c vite.config.umd.ts && node scripts/build-shims.mjs",
+    "test": "vitest run"
   },
   "dependencies": {
     "@arco-design/web-vue": ">=2.57.0"
@@ -43,11 +48,16 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/test-utils": "^2.4.11",
+    "jsdom": "^29.1.1",
+    "less": "^4.6.7",
     "tsx": "^4.19.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.7",
     "vite-plugin-css-injected-by-js": "^5.0.1",
     "vite-plugin-dts": "^4.4.0",
+    "vitest": "^4.1.10",
+    "vue": "^3.5.13",
     "vue-tsc": "^2.2.0"
   }
 }

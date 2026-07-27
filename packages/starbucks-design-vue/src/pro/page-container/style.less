@@ -1,0 +1,37 @@
+@import '../style/variables.less';
+
+// Figma 1804:5413(内容区 1184×750,灰底,padding 20)/ 2001:8165(白卡片)
+.sbux-pro-page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: @sbux-pro-page-padding;
+  background-color: var(--color-fill-1);
+
+  &-header {
+    margin-bottom: @sbux-pro-page-header-gap;
+  }
+
+  &-spin {
+    display: block;
+    flex: 1;
+  }
+
+  &-body {
+    min-height: 100%;
+    padding: @sbux-pro-card-padding;
+    background-color: var(--color-bg-2);
+    border-radius: @sbux-pro-card-radius;
+
+    &-ghost {
+      padding: 0;
+      background: none;
+      border-radius: 0;
+    }
+  }
+
+  // 底栏吸底需贴容器边缘,抵消容器 padding
+  &-footer {
+    margin: 0 (-@sbux-pro-page-padding) (-@sbux-pro-page-padding);
+  }
+}

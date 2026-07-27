@@ -1,0 +1,109 @@
+---
+title: 快速开始
+sidebar:
+  order: 1
+---
+
+import FrameworkBlock from '../../../components/FrameworkBlock.astro';
+
+Starbucks UI 提供 React 与 Vue 两套组件库实现，安装并引入组件后主题自动生效。
+
+## 安装
+
+<FrameworkBlock framework="react">
+
+```bash
+npm i @sbux/starbucks-design-react
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+```bash
+npm i @sbux/starbucks-design-vue
+```
+
+</FrameworkBlock>
+
+## 引入即用
+
+<FrameworkBlock framework="react">
+
+```tsx title="App.tsx"
+import { Button, ConfigProvider } from '@sbux/starbucks-design-react';
+
+export default function App() {
+  return (
+    <ConfigProvider>
+      <Button type="primary">你好，星巴克</Button>
+    </ConfigProvider>
+  );
+}
+```
+
+引入即用，主题自动生效。无需额外引入 CSS 或注册组件。
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+```vue title="App.vue"
+<script setup>
+import { Button } from '@sbux/starbucks-design-vue';
+</script>
+
+<template>
+  <Button type="primary">你好，星巴克</Button>
+</template>
+```
+
+引入即用，主题自动生效。
+
+</FrameworkBlock>
+
+## UMD 用法
+
+无需 Node.js / npm / 构建工具，可通过 `<script>` 标签以 CDN 方式引入 UMD 版本，适合零环境快速预览。
+
+<FrameworkBlock framework="react">
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@arco-design/web-react@2.66.15/dist/arco.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@arco-design/web-react@2.66.15/dist/arco-icon.min.js"></script>
+<script src="https://active.starbucks.com.cn/wxmini_vanilla/bizops/starbucks-design-react/1.0.15/index.umd.js"></script>
+```
+
+加载完成后，组件从全局对象 `StarbucksReact` 解构使用，图标从 `window.arcoicon` 解构使用：
+
+```jsx
+const { Button } = StarbucksReact;
+const { IconPlus } = window.arcoicon;
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@arco-design/web-vue@2.58.0/dist/arco-vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@arco-design/web-vue@2.58.0/dist/arco-vue-icon.min.js"></script>
+<script src="https://active.starbucks.com.cn/wxmini_vanilla/bizops/starbucks-design-vue/1.0.13/index.umd.js"></script>
+```
+
+加载完成后，通过 `app.use(StarbucksVue)` 注册全部组件（标签使用 `a-` 前缀）：
+
+```js
+app.use(StarbucksVue);
+```
+
+</FrameworkBlock>
+
+## 要求
+
+- React >= 18.0.0
+- Vue >= 3.3.0
+- Node >= 18.0.0

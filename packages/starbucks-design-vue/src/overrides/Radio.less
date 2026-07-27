@@ -240,147 +240,45 @@
   flex-direction: column;
 }
 
-.arco-radio-group-type-button.starbucks-radio-button-outline {
-  padding: 0;
-  background-color: transparent;
-  border-radius: var(--border-radius-sm);
-  overflow: hidden;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button {
+// Arco Vue renders `.arco-radio-icon`/`.arco-radio-label` where React renders
+// `.arco-radio-mask`/`.arco-radio-text`.
+.arco-radio .arco-radio-icon {
   box-sizing: border-box;
-  min-width: 72px;
-  height: 32px;
-  color: var(--color-text-secondary);
-  border-top: 1px solid var(--color-border-component);
-  border-bottom: 1px solid var(--color-border-component);
-  border-left: 1px solid transparent;
-  border-right: 0;
-  border-radius: 0;
-  line-height: 32px;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button:first-of-type {
-  border-left-color: var(--color-border-component);
-  border-top-left-radius: var(--border-radius-sm);
-  border-bottom-left-radius: var(--border-radius-sm);
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button:last-of-type {
-  border-right: 1px solid var(--color-border-component);
-  border-top-right-radius: var(--border-radius-sm);
-  border-bottom-right-radius: var(--border-radius-sm);
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button-inner {
-  width: 100%;
-  padding: 0 var(--spacing-6);
-  text-align: center;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button:not(:first-of-type) {
-  border-left-color: var(--color-border-component);
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button:not(.arco-radio-disabled):hover {
-  color: var(--color-primary);
-  background-color: transparent;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-checked,
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-checked:not(.arco-radio-disabled):hover {
-  z-index: 1;
-  color: var(--color-primary);
-  background-color: transparent;
-  border: 1px solid var(--color-primary);
-  box-shadow: none;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-checked::after,
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-checked:not(.arco-radio-disabled):hover::after {
-  display: none;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-checked + .arco-radio-button {
-  border-left-color: transparent;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-checked + .arco-radio-button::before {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-disabled {
-  color: var(--color-text-disabled);
-  background-color: var(--bg-color-component-disabled);
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-disabled.arco-radio-checked,
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-disabled.arco-radio-checked:hover {
-  z-index: 1;
-  color: var(--color-primary-disabled);
-  background-color: var(--bg-color-component-disabled);
-  border: 1px solid var(--color-primary-disabled);
-  box-shadow: none;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-disabled.arco-radio-checked::after,
-.arco-radio-group-type-button.starbucks-radio-button-outline .arco-radio-button.arco-radio-disabled.arco-radio-checked:hover::after {
-  display: none;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-primary-filled,
-.arco-radio-group-type-button.starbucks-radio-button-default-filled {
-  padding: var(--spacing-1);
-  background-color: var(--bg-color-component);
-  border-radius: var(--border-radius-md);
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-primary-filled .arco-radio-button,
-.arco-radio-group-type-button.starbucks-radio-button-default-filled .arco-radio-button {
-  height: 28px;
-  color: var(--color-text-secondary);
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-primary-filled .arco-radio-button:not(:first-of-type)::before,
-.arco-radio-group-type-button.starbucks-radio-button-default-filled .arco-radio-button:not(:first-of-type)::before {
-  display: block;
-  left: 0;
-  background-color: var(--bg-color-secondarycomponent-hover);
-  opacity: 1;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-primary-filled .arco-radio-button.arco-radio-checked::before,
-.arco-radio-group-type-button.starbucks-radio-button-primary-filled .arco-radio-button.arco-radio-checked + .arco-radio-button::before,
-.arco-radio-group-type-button.starbucks-radio-button-default-filled .arco-radio-button.arco-radio-checked::before,
-.arco-radio-group-type-button.starbucks-radio-button-default-filled .arco-radio-button.arco-radio-checked + .arco-radio-button::before {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden;
-  background-color: transparent;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-primary-filled .arco-radio-button:not(.arco-radio-disabled):hover,
-.arco-radio-group-type-button.starbucks-radio-button-default-filled .arco-radio-button:not(.arco-radio-disabled):hover {
-  color: var(--color-primary);
-  background-color: transparent;
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-primary-filled .arco-radio-button.arco-radio-checked,
-.arco-radio-group-type-button.starbucks-radio-button-primary-filled .arco-radio-button.arco-radio-checked:hover {
-  color: var(--color-white);
-  background-color: var(--color-primary-hover);
-}
-
-.arco-radio-group-type-button.starbucks-radio-button-default-filled .arco-radio-button.arco-radio-checked,
-.arco-radio-group-type-button.starbucks-radio-button-default-filled .arco-radio-button.arco-radio-checked:hover {
-  color: var(--color-primary);
+  width: 16px;
+  height: 16px;
   background-color: var(--bg-color-container);
+  border: 1px solid var(--bg-color-secondarycomponent);
 }
 
-.arco-radio-group-type-button.starbucks-radio-button-primary-filled .arco-radio-button.arco-radio-disabled,
-.arco-radio-group-type-button.starbucks-radio-button-default-filled .arco-radio-button.arco-radio-disabled {
+.arco-radio .arco-radio-label {
+  margin-left: var(--spacing-4);
+  color: var(--color-text-primary);
+}
+
+.arco-radio:not(.arco-radio-disabled):hover .arco-radio-icon,
+.arco-radio-checked .arco-radio-icon,
+.arco-radio-checked:hover .arco-radio-icon {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-radio-checked .arco-radio-icon::after {
+  background-color: var(--color-primary);
+}
+
+.arco-radio-disabled .arco-radio-label,
+.arco-radio-checked.arco-radio-disabled .arco-radio-label {
   color: var(--color-text-disabled);
-  background-color: transparent;
+}
+
+.arco-radio-disabled .arco-radio-icon,
+.arco-radio-disabled:hover .arco-radio-icon,
+.arco-radio-checked.arco-radio-disabled .arco-radio-icon,
+.arco-radio-checked.arco-radio-disabled:hover .arco-radio-icon {
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-radio-checked.arco-radio-disabled .arco-radio-icon::after {
+  background-color: var(--bg-color-secondarycomponent);
 }

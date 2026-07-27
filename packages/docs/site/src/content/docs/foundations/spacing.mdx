@@ -1,0 +1,30 @@
+---
+title: 间距 Spacing
+sidebar:
+  order: 5
+---
+
+import SpacingScale from '../../../components/foundations/SpacingScale.astro';
+
+间距以 **4px 为基准单位**逐级递增，控制元素间的呼吸感与信息分组。统一的间距阶梯让不同页面保持一致的节奏。点击任一档可复制其像素值。
+
+<SpacingScale
+  items={[
+    { name: 'spacing-1', value: 4, note: '最小间距：图标与文字' },
+    { name: 'spacing-2', value: 8, note: '紧凑间距：标签内边距' },
+    { name: 'spacing-3', value: 12, note: '组件内边距' },
+    { name: 'spacing-4', value: 16, note: '默认间距：卡片内边距' },
+    { name: 'spacing-5', value: 20, note: '' },
+    { name: 'spacing-6', value: 24, note: '区块内间距' },
+    { name: 'spacing-7', value: 32, note: '区块间距' },
+    { name: 'spacing-8', value: 40, note: '' },
+    { name: 'spacing-9', value: 48, note: '大区块间距' },
+    { name: 'spacing-10', value: 72, note: '页面级留白' },
+  ]}
+/>
+
+## 使用建议
+
+- **以 4 的倍数取值**，避免出现 5px、7px 这类破坏节奏的间距。
+- **元素内**（图标与文字、标签内边距）用 4–8；**组件内边距**用 12–16；**区块之间**用 24–32；**页面级留白**用 48–72。
+- 同一层级的元素使用**相同间距**，靠间距的疏密表达信息的分组关系——关系近的靠得近，关系远的隔得开。

@@ -1,32 +1,9 @@
-// Order matters: components.less includes Arco's css-variables (loaded first),
-// then theme.css overrides with Figma values (loaded second, wins in cascade).
+// Arco and designer component styles load first; theme.css supplies the
+// designer-authored runtime variables that those overrides consume.
 import './components.less'
 import './theme.css'
 
-import { defineComponent, h } from 'vue'
-import { Select as ArcoSelect } from '@arco-design/web-vue'
-
 export * from '@arco-design/web-vue'
-
-const StarbucksSelectBase = defineComponent({
-  name: 'Select',
-  inheritAttrs: false,
-  setup(_, { attrs, slots }) {
-    return () => {
-      const nextAttrs =
-        attrs.mode === 'multiple' && attrs.maxTagCount === undefined
-          ? { ...attrs, maxTagCount: { count: 1, render: (invisibleCount: number) => `+${invisibleCount}` } }
-          : attrs
-
-      return h(ArcoSelect as any, nextAttrs, slots)
-    }
-  },
-})
-
-export const Select = Object.assign(StarbucksSelectBase, {
-  Option: (ArcoSelect as any).Option,
-  OptGroup: (ArcoSelect as any).OptGroup,
-})
 
 // Arco's main entry only re-exports addI18nMessages, useLocale, getLocale from locale —
 // useI18n and the locale types (ArcoLang, ArcoI18nMessages, etc.) are missing.

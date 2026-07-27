@@ -1,0 +1,129 @@
+---
+title: 气泡确认框 Popconfirm
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+点击元素，弹出气泡式的确认框。
+
+## 基本用法
+
+气泡确认框的基本用法。
+
+<Demo name="popconfirm/basic" />
+
+## 自定义按钮
+
+自定义按钮的文字或图标。
+
+<Demo name="popconfirm/custom-button" />
+
+## 弹出位置
+
+气泡确认框支持 12 个不同的方位。分别为：`上左`、`上`、`上右`、`下左`、`下`、`下右`、`左上`、`左`、`左下`、`右上`、`右`、`右下`。
+
+<Demo name="popconfirm/popup-position" />
+
+## 异步关闭
+
+<FrameworkBlock framework="react">
+用于异步执行某些操作，等操作完成再关闭弹出框。通过 `onOk` 返回一个 `Promise` 用于异步关闭。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以通过 `on-before-ok` 更简洁的实现异步关闭功能。
+</FrameworkBlock>
+
+<Demo name="popconfirm/async-close" />
+
+## 自定义icon
+
+自定义图标。
+
+<Demo name="popconfirm/custom-icon" />
+
+## 确认框类型
+
+<FrameworkBlock framework="vue">
+通过 `type` 属性可以设置确认框类型。
+</FrameworkBlock>
+
+<Demo name="popconfirm/confirm-type" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Popconfirm
+
+| 参数名 | 描述 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| autoFocus | 是否自动聚焦弹出框内的可聚焦元素 | boolean | `-` | - |
+| defaultPopupVisible | 默认弹出框是打开还是关闭 | boolean | `-` | - |
+| disabled | 是否禁用 | boolean | `-` | 2.11.0 |
+| focusLock | 是否将焦点锁定在弹出框内 | boolean | `-` | - |
+| popupVisible | 弹出框是打开还是关闭。(受控) | boolean | `-` | - |
+| unmountOnExit | 是否在隐藏的时候销毁 DOM 节点 | boolean | `true` | - |
+| okType | 确认按钮的类型 | `ButtonProps['type']` | `primary` | - |
+| position | 弹出框的方位，有 12 个方位可供选择 | `'top' \| 'tl' \| 'tr' \| 'bottom' \| 'bl' \| 'br' \| 'left' \| 'lt' \| 'lb' \| 'right' \| 'rt' \| 'rb'` | `top` | - |
+| trigger | 触发方式 | `TriggerProps['trigger']` | `click` | - |
+| cancelText | 取消按钮文字 | ReactNode | `-` | - |
+| icon | 标题前的图标 | ReactNode | `<IconExclamationCircleFill />` | - |
+| okText | 确认按钮文字 | ReactNode | `-` | - |
+| cancelButtonProps | 取消按钮的参数，可接受 `Button` 组件的所有参数 | ButtonProps | `-` | - |
+| className | 节点类名 | string \| string[] | `-` | - |
+| okButtonProps | 确定按钮的参数，可接受 `Button` 组件的所有参数 | ButtonProps | `-` | - |
+| onOk | 点击确认按钮的回调函数。回调函数 `event` 参数在 `2.29.0` 支持 | `(e: React.MouseEvent) => Promise<any> \| void` | `-` | - |
+| style | 节点样式 | CSSProperties | `-` | - |
+| triggerProps | 可以接受所有 Trigger 的参数 | `Partial<TriggerProps>` | `-` | - |
+| content | 内容.函数类型在 `2.48.0` 支持 | `ReactNode \| (() => ReactNode)` | `-` | 2.44.0 |
+| getPopupContainer | 弹出挂载的节点 | `(node: HTMLElement) => Element` | `-` | - |
+| onCancel | 点击取消按钮的回调函数。 回调函数 `event` 参数在 `2.29.0` 支持 | `(e: React.MouseEvent) => void` | `-` | - |
+| onVisibleChange | 弹出打开和关闭触发的回调 | `(visible: boolean) => void` | `-` | - |
+| title | 标题。 函数类型在 `2.48.0` 支持 | `ReactNode \| (() => ReactNode)` | `-` | - |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<popconfirm>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|content|内容|`string`|`-`|
+|position|弹出位置|`'top' \| 'tl' \| 'tr' \| 'bottom' \| 'bl' \| 'br' \| 'left' \| 'lt' \| 'lb' \| 'right' \| 'rt' \| 'rb'`|`'top'`|
+|popup-visible **(v-model)**|气泡确认框是否可见|`boolean`|`-`|
+|default-popup-visible|气泡确认框默认是否可见（非受控模式）|`boolean`|`false`|
+|type|气泡确认框的类型|`'info' \| 'success' \| 'warning' \| 'error'`|`'info'`|
+|ok-text|确认按钮的内容|`string`|`-`|
+|cancel-text|取消按钮的内容|`string`|`-`|
+|ok-loading|确认按钮是否为加载中状态|`boolean`|`false`|
+|ok-button-props|确认按钮的Props|`ButtonProps`|`-`|
+|cancel-button-props|取消按钮的Props|`ButtonProps`|`-`|
+|content-class|弹出框内容的类名|`ClassName`|`-`|
+|content-style|弹出框内容的样式|`CSSProperties`|`-`|
+|arrow-class|弹出框箭头的类名|`ClassName`|`-`|
+|arrow-style|弹出框箭头的样式|`CSSProperties`|`-`|
+|popup-container|弹出框的挂载点|`string \| HTMLElement`|`-`|
+|on-before-ok|触发 ok 事件前的回调函数。如果返回 false 则不会触发后续事件，也可使用 done 进行异步关闭。|`(  done: (closed: boolean) => void) => void \| boolean \| Promise<void \| boolean>`|`-`|
+|on-before-cancel|触发 cancel 事件前的回调函数。如果返回 false 则不会触发后续事件。|`() => boolean`|`-`|
+
+### `<popconfirm>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|popup-visible-change|气泡确认框的显隐状态改变时触发|visible: `boolean`|
+|ok|点击确认按钮时触发|-|
+|cancel|点击取消按钮时触发|-|
+
+### `<popconfirm>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|icon|图标|-|
+|content|内容|-|
+
+</FrameworkBlock>

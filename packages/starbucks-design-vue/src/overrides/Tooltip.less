@@ -75,3 +75,14 @@
 .arco-trigger-arrow.arco-tooltip-arrow[style*='background'] {
   border-color: transparent !important;
 }
+
+.arco-trigger-arrow.arco-tooltip-popup-arrow {
+  z-index: 1;
+  background-color: var(--bg-color-container);
+  border: none !important;
+}
+
+.arco-tooltip-content[style*='background'] + .arco-trigger-arrow.arco-tooltip-popup-arrow,
+.arco-trigger-arrow.arco-tooltip-popup-arrow[style*='background'] {
+  border-color: transparent !important;
+}

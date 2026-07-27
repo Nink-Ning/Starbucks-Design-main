@@ -1,0 +1,294 @@
+---
+title: 时间选择器 TimePicker
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+在弹出面板上选择时间，以便捷完成时间输入的控件。
+
+## 基本用法
+
+时间输入器的基础用法。
+
+<Demo name="time-picker/basic" />
+
+## 不同状态
+
+<FrameworkBlock framework="react">
+不同状态的时间输入器。
+</FrameworkBlock>
+
+<Demo name="time-picker/status" />
+
+## 双向绑定
+
+<FrameworkBlock framework="react">
+时间选择器的值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+时间选择器的值可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="time-picker/v-model" />
+
+## 前缀
+
+<FrameworkBlock framework="react">
+通过 `prefix` 属性设置前缀。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `prefix` 插槽可以设置输入框前缀。
+</FrameworkBlock>
+
+<Demo name="time-picker/prefix" />
+
+## 尺寸
+
+有四种尺寸可供选择。
+
+<FrameworkBlock framework="react">
+可选尺寸为 `mini`、`small`、`default`、`large`，默认为 `default`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可选尺寸为 `mini`、`small`、`medium`、`large`，默认为 `medium`。
+</FrameworkBlock>
+
+<Demo name="time-picker/size" />
+
+## 禁用
+
+禁用状态。
+
+<Demo name="time-picker/disabled" />
+
+## 定制格式
+
+通过设置 `format`，可以定制需要显示的时、分、秒。
+
+<Demo name="time-picker/custom-format" />
+
+## 定制步长
+
+通过设置 `step`，可以定制需要显示的时、分、秒的步长。
+
+<Demo name="time-picker/custom-step" />
+
+## 默认值
+
+时间选择器可以设置默认值。
+
+<Demo name="time-picker/default-value" />
+
+## 附加内容
+
+选择框底部显示自定义的内容。
+
+<Demo name="time-picker/extra-content" />
+
+## 禁用部分时间选项
+
+通过设置 `disabledHours` `disabledMinutes` `disabledSeconds`，可以禁用 时 / 分 / 秒的部分选项。
+
+<Demo name="time-picker/disabled-time" />
+
+## 十二小时制
+
+通过设置 `use12Hours`，可以定制需要显示的时、分、秒。
+
+<Demo name="time-picker/12-hour" />
+
+## 范围选择器
+
+时间输入器的范围选择器。
+
+<Demo name="time-picker/range-picker" />
+
+## 跳过确认
+
+跳过确认步骤，直接点击选择时间。
+
+<Demo name="time-picker/skip-confirm" />
+
+## UTC 时间
+
+<FrameworkBlock framework="react">
+
+通过 `utcOffset` 字段设置 UTC 时间。
+
+**注意：使用 UTC 或者时区时间，传值的时候要用 timestamp 或者 Date 对象，使用字符串不能表示唯一时间，会造成困扰。**
+
+</FrameworkBlock>
+
+<Demo name="time-picker/utc-offset" />
+
+## 时区
+
+<FrameworkBlock framework="react">
+
+通过 `timezone` 字段设置时区，如果设置了 `utcOffset`，以 `utcOffset` 为准。
+
+**注意：使用 UTC 或者时区时间，传值的时候要用 timestamp 或者 Date 对象，使用字符串不能表示唯一时间，会造成困扰。**
+
+</FrameworkBlock>
+
+<Demo name="time-picker/timezone" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Picker
+
+`TimePicker` 和 `RangePicker` 的通用属性
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|allowClear|允许清除|boolean |`true`|-|
+|disableConfirm|禁用确认步骤，开启后直接点选时间不需要点击确认按钮。|boolean |`-`|2.12.0|
+|disabled|是否禁用|boolean |`-`|-|
+|editable|是否可手动输入|boolean |`true`|-|
+|error|是否是错误状态。(废弃，下个大版本移除，使用 status='error' 替代)|boolean |`-`|-|
+|hideDisabledOptions|隐藏禁止选择的选项|boolean |`-`|-|
+|popupVisible|控制弹出框打开或者关闭|boolean |`-`|-|
+|scrollSticky|时间列在滚动的时候自动吸附和选中|boolean |`true`|2.23.0|
+|unmountOnExit|是否在关闭后销毁 dom 结构|boolean |`-`|-|
+|use12Hours|12 小时制|boolean |`-`|-|
+|utcOffset|设置时区偏移，如果需要 utc 时间则设置为 0。|number |`-`|-|
+|format|展示日期的格式，参考dayjs|string |`HH:mm:ss`|-|
+|timezone|设置时区, 如果设置了 `utcOffset`，则以 `utcOffset` 为准。|string |`-`|-|
+|position|弹出的框的位置|'top' \| 'tl' \| 'tr' \| 'bottom' \| 'bl' \| 'br' |`bl`|-|
+|size|输入框尺寸|'mini' \| 'small' \| 'default' \| 'large' |`-`|-|
+|status|状态|'error' \| 'warning' |`-`|2.45.0|
+|extra|底部附加内容|ReactNode |`-`|-|
+|prefix|前缀|ReactNode |`-`|2.43.0|
+|triggerElement|触发元素。|ReactNode |`-`|2.38.0|
+|className|节点类名|string \| string[] |`-`|-|
+|icons|用于配置图标|`{ inputSuffix?: ReactNode }` |`-`|-|
+|placeholder|提示文案|string \| string[] |`-`|-|
+|step|设置 时 / 分 / 秒 的选择间隔|`{ hour?: number; minute?: number; second?: number }` |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|triggerProps|可以传入 `Trigger` 组件的参数|`Partial<TriggerProps>` |`-`|-|
+|disabledHours|禁用的部分小时选项|`() => number[]` |`-`|-|
+|disabledMinutes|禁用的部分分钟选项|`(selectedHour) => number[]` |`-`|-|
+|disabledSeconds|禁用的部分秒数选项|`(selectedHour, selectedMinute) => number[]` |`-`|-|
+|getPopupContainer|弹出框挂载的父节点|`(node: HTMLElement) => Element` |`-`|-|
+|onClear|点击清除按钮的回调|`() => void` |`-`|-|
+
+### TimePicker
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|showNowBtn|是否显示选择当前时间的按钮|boolean |`true`|2.21.0|
+|defaultValue|默认时间|CalendarValue |`-`|-|
+|value|组件的值，受控模式|CalendarValue |`-`|-|
+|onChange|选择时间时的回调|`(valueString: string, value: Dayjs) => void` |`-`|-|
+|onSelect|组件值发生改变时的回调|`(valueString: string, value: Dayjs) => void` |`-`|-|
+
+### TimePicker.RangePicker
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|order|起止时间是否自动排序|boolean |`true`|2.21.0|
+|defaultValue|默认时间|CalendarValue[] |`-`|-|
+|placeholder|提示文案|string[] |`-`|-|
+|value|日历组件的值|CalendarValue[] |`-`|-|
+|onChange|日历组件值发生改变时的回调|`(valueString: string[], value: Dayjs[]) => void` |`-`|-|
+|onSelect|选择日期时的回调|`(valueString: string[], value: Dayjs[]) => void` |`-`|-|
+
+### CalendarValue
+
+```js
+export type CalendarValue = Dayjs | Date | string | number;
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<time-picker>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|type|选择器类型|`'time' \| 'time-range'`|`'time'`|
+|model-value **(v-model)**|绑定值|`string \| number \| Date \| Array<string \| number \| Date>`|`-`|
+|default-value|默认值|`string \| number \| Date \| Array<string \| number \| Date>`|`-`|
+|disabled|是否禁用|`boolean`|`false`|
+|allow-clear|是否允许清除|`boolean`|`true`|
+|readonly|是否为只读模式|`boolean`|`false`|
+|error|是否为错误状态|`boolean`|`false`|
+|format|展示日期的格式，参考字符串解析格式|`string`|`'HH:mm:ss'`|
+|placeholder|提示文案|`string \| string[]`|`-`|
+|size|输入框尺寸|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`|
+|popup-container|弹出框的挂载容器|`string \| HTMLElement`|`-`|
+|use12-hours|12 小时制|`boolean`|`false`|
+|step|设置 时 / 分 / 秒 的选择间隔|`{  hour?: number;  minute?: number;  second?: number;}`|`-`|
+|disabled-hours|禁用的部分小时选项|`() => number[]`|`-`|
+|disabled-minutes|禁用的部分分钟选项|`(selectedHour?: number) => number[]`|`-`|
+|disabled-seconds|禁用的部分秒数选项|`(selectedHour?: number, selectedMinute?: number) => number[]`|`-`|
+|hide-disabled-options|隐藏禁止选择的选项|`boolean`|`false`|
+|disable-confirm|禁用确认步骤，开启后直接点选时间不需要点击确认按钮|`boolean`|`false`|
+|position|弹出的位置|`'top' \| 'tl' \| 'tr' \| 'bottom' \| 'bl' \| 'br'`|`'bl'`|
+|popup-visible **(v-model)**|控制弹出框打开或者关闭|`boolean`|`-`|
+|default-popup-visible|弹出框默认打开或者关闭|`boolean`|`false`|
+|trigger-props|可以传入 `Trigger` 组件的参数|`TriggerProps`|`-`|
+|unmount-on-close|是否在关闭后销毁 dom 结构|`boolean`|`false`|
+
+### `<time-picker>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|组件值发生改变|timeString: `string \| Array<string \| undefined> \| undefined`<br/>time: `date \| Array<date \| undefined> \| undefined`|
+|select|选择时间但未触发组件值变化|timeString: `string \| Array<string \| undefined>`<br/>time: `Date \| Array<Date \| undefined>`|
+|clear|点击清除按钮|-|
+|popup-visible-change|弹出框展开和收起|visible: `boolean`|
+
+### `<time-picker>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|prefix|输入框前缀|-|2.41.0|
+|suffix-icon|输入框后缀图标|-||
+|extra|额外的页脚|-||
+
+### 字符串解析格式
+
+格式|输出|描述
+---|---|---:
+`YY`|21|两位数的年份
+`YYYY`|2021|四位数年份
+`M`|1-12|月份，从 1 开始
+`MM`|01-12|月份，两位数
+`MMM`|Jan-Dec|缩写的月份名称
+`MMMM`|January-December|完整的月份名称
+`D`|1-31|月份里的一天
+`DD`|01-31|月份里的一天，两位数
+`d`|0-6|一周中的一天，星期天是 0
+`dd`|Su-Sa|最简写的一周中一天的名称
+`ddd`|Sun-Sat|简写的一周中一天的名称
+`dddd`|Sunday-Saturday|一周中一天的名称
+`H`|0-23|小时
+`HH`|00-23|小时，两位数
+`h`|1-12|小时, 12 小时制
+`hh`|01-12|小时, 12 小时制, 两位数
+`m`|0-59|分钟
+`mm`|00-59|分钟，两位数
+`s`|0-59|秒
+`ss`|00-59|秒，两位数
+`S`|0-9|数百毫秒，一位数
+`SS`|00-99|几十毫秒，两位数
+`SSS`|000-999|毫秒，三位数字
+`Z`|-5:00|UTC 的偏移量
+`ZZ`|-0500|UTC 的偏移量，数字前面加上 0
+`A`|AM PM|-
+`a`|am pm|-
+`Do`|1st... 3st|带序号的月份中的某天
+`X`|1410715640.579|Unix 时间戳
+`x`|1410715640579|Unix 毫秒时间戳
+
+</FrameworkBlock>

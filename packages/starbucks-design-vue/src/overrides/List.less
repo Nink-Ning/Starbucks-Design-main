@@ -33,4 +33,16 @@
 //   • font/chinese
 
 // Component-specific style overrides:
-// (extend with CSS custom property overrides as needed)
+.arco-list {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  border-radius: var(--border-radius-md);
+}
+
+.arco-list-item-main {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}

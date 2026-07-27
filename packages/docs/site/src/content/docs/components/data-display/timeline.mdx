@@ -1,0 +1,168 @@
+---
+title: 时间轴 Timeline
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+按照时间顺序或倒序规则的展示信息内容。
+
+## 基本用法
+
+时间轴的基本用法，可以通过 `reverse` 控制正序或倒序展示。
+
+<Demo name="timeline/basic" />
+
+## 自定义节点内容
+
+自定义节点内容。
+
+<Demo name="timeline/custom-node-content" />
+
+## 自定义节点
+
+<FrameworkBlock framework="react">
+可以通过属性 `dotColor`、`dotType` 设置节点的颜色以及节点类型。同时可通过 `dot` 直接传入 `ReactNode` 自定义节点样式，优先级高于 `dotColor` 和 `dotType`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以通过属性 `dot-color`、`dot-type` 设置节点的颜色以及节点类型。同时可通过 `#dot` 插槽自定义节点样式，优先级高于 `dot-color` 和 `dot-type`。
+</FrameworkBlock>
+
+<Demo name="timeline/custom-node" />
+
+## 自定义轴线样式
+
+自定义轴线的示例。
+
+<Demo name="timeline/custom-axis-style" />
+
+## 幽灵节点
+
+<FrameworkBlock framework="react">
+当任务状态正在发生、还在记录过程中，可用幽灵节点来表示当前的时间节点，通过 `pendingDot` 定制其轴点。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+当任务状态正在发生、还在记录过程中，可用幽灵节点来表示当前的时间节点，通过 `#dot` 插槽定制其轴点。
+</FrameworkBlock>
+
+<Demo name="timeline/ghost-node" />
+
+## 时间轴展示类型
+
+设置 `mode=alternate` 时将会交替展示内容。同时可以通过设置 `TimelineItem` 的 `position` 属性控制时间轴节点的位置。
+
+<Demo name="timeline/timeline-type" />
+
+## 纵向时间轴
+
+竖直方向的时间轴。
+
+<Demo name="timeline/vertical-timeline" />
+
+## 横向时间轴
+
+可以通过 `direction` 设置展示横向时间轴。
+
+<Demo name="timeline/horizontal-timeline" />
+
+## 标签文本位置
+
+<FrameworkBlock framework="react">
+通过 `labelPosition` 可以设置标签文本的位置。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `label-position` 可以设置标签文本的位置。
+</FrameworkBlock>
+
+<Demo name="timeline/label-position" />
+
+## 自定义标签
+
+<FrameworkBlock framework="react">
+可以通过 `label` 属性传入自定义节点作为标签内容。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以通过 `label` 插槽自定义标签。
+</FrameworkBlock>
+
+<Demo name="timeline/custom-tag" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+**注意: 非 `Timeline.Item` 组件将会被过滤掉，不会被展示**
+
+### Timeline
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|reverse|是否倒序|boolean |`-`|
+|direction|时间轴方向|'horizontal' \| 'vertical' |`vertical`|
+|labelPosition|设置标签文本的位置|'relative' \| 'same' |`same`|
+|mode|时间轴的展示类型：时间轴在左侧/右侧(垂直方向)、上方/下方（水平方向），或交替出现。|'left' \| 'right' \| 'top' \| 'bottom' \| 'alternate' |`left(vertical) \| top(horizontal)`|
+|pending|是否展示幽灵节点，设置为 true 时候只展示幽灵节点。传入ReactNode时，会作为节点内容展示。|boolean \| ReactNode |`-`|
+|pendingDot|可以传入 ReactNode 定制幽灵节点|ReactNode |`<Spin size={12} />`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+
+### Timeline.Item
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|autoFixDotSize|是否自动适配自定义节点尺寸到 16px|boolean |`true`|
+|dotColor|节点颜色|string |`-`|
+|lineColor|时间轴颜色|string |`-`|
+|dotType|节点类型：空心圆/实心圆|'hollow' \| 'solid' |`solid`|
+|labelPosition|时间轴节点的位置。 在时间轴组件 `mode=alternate` 时候生效|'relative' \| 'same' |`-`|
+|lineType|时间轴类型：实线/虚线/点状线|'solid' \| 'dashed' \| 'dotted' |`solid`|
+|dot|自定义节点|string \| ReactNode |`-`|
+|label|标签文本|string \| ReactNode |`-`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<timeline>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|reverse|是否倒序|`boolean`|`false`|
+|direction|时间轴方向|`'horizontal' \| 'vertical'`|`'vertical'`|
+|mode|时间轴的展示类型：时间轴在左侧，时间轴在右侧, 交替出现。|`'left' \| 'right' \| 'top' \| 'bottom' \| 'alternate'`|`'left'`|
+|pending|是否展示幽灵节点，设置为 true 时候只展示幽灵节点。传入ReactNode时，会作为节点内容展示。|`boolean\|string`|`-`|
+|label-position|设置标签文本的位置|`'relative' \| 'same'`|`'same'`|
+
+### `<timeline>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|dot|幽灵节点|-|
+
+### `<timeline-item>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|dot-color|节点颜色|`string`|`-`|
+|dot-type|节点类型：空心圆/实心圆|`'hollow' \| 'solid'`|`'solid'`|
+|line-type|时间轴类型：实线/虚线/点状线|`'solid' \| 'dashed' \| 'dotted'`|`'solid'`|
+|line-color|时间轴颜色|`string`|`-`|
+|label|标签文本|`string`|`-`|
+|position|Item 位置|`PositionType`|`-`|
+
+### `<timeline-item>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|dot|自定义节点|-||
+|label|自定义标签|-|2.50.0|
+
+</FrameworkBlock>

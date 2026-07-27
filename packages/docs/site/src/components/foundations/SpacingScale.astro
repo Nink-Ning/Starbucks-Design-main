@@ -1,0 +1,120 @@
+---
+/**
+ * Spacing specimens for the Foundations / Spacing page. Each row draws a bar the
+ * width of the token's value next to its name, px value and usage. Click copies
+ * the px value.
+ */
+interface Item {
+  name: string;
+  value: number;
+  note?: string;
+}
+const { items } = Astro.props as { items: Item[] };
+---
+
+<div class="fs-spacing not-content">
+  {
+    items.map((it) => (
+      <button
+        class="fs-spacing-row"
+        type="button"
+        data-copy={`${it.value}px`}
+        title={`点击复制 ${it.value}px`}
+      >
+        <span class="fs-spacing-key">
+          <span class="fs-spacing-name">{it.name}</span>
+          <span class="fs-spacing-val">{it.value}px</span>
+        </span>
+        <span class="fs-spacing-track">
+          <span class="fs-spacing-bar" style={`width:${it.value}px`} />
+        </span>
+        {it.note && <span class="fs-spacing-note">{it.note}</span>}
+      </button>
+    ))
+  }
+</div>
+
+<style>
+  .fs-spacing {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin: 1rem 0 1.75rem;
+  }
+  .fs-spacing-row {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0.6rem;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    transition: background-color 0.12s ease;
+  }
+  .fs-spacing-row:hover {
+    background: var(--sb-sidebar-hover-bg);
+  }
+  .fs-spacing-row:focus-visible {
+    outline: 2px solid var(--sl-color-text-accent);
+    outline-offset: 1px;
+  }
+  .fs-spacing-key {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+  }
+  .fs-spacing-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .fs-spacing-val {
+    font-size: 0.74rem;
+    color: var(--sl-color-gray-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .fs-spacing-track {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+  .fs-spacing-bar {
+    height: 18px;
+    border-radius: 3px;
+    background: var(--sl-color-text-accent);
+    flex: none;
+  }
+  .fs-spacing-note {
+    font-size: 0.78rem;
+    color: var(--sl-color-gray-3);
+    white-space: nowrap;
+  }
+  .fs-spacing-row.copied .fs-spacing-val::after {
+    content: ' ✓';
+    color: var(--sl-color-text-accent);
+  }
+  @media (max-width: 34rem) {
+    .fs-spacing-row {
+      grid-template-columns: 7rem 1fr;
+    }
+    .fs-spacing-note {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('click', async (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.fs-spacing-row');
+    if (!btn?.dataset.copy) return;
+    try {
+      await navigator.clipboard.writeText(btn.dataset.copy);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1400);
+    } catch {}
+  });
+</script>

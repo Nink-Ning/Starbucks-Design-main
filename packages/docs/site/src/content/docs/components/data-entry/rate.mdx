@@ -1,0 +1,146 @@
+---
+title: 评分 Rate
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+评分打星组件，用于评分或打星。
+
+## 基本用法
+
+评分组件基本用法。
+
+<FrameworkBlock framework="react">
+评分的值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+评分的值可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="rate/basic" />
+
+## 半选
+
+<FrameworkBlock framework="react">
+指定 `allowHalf` 来支持半选。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+指定 `allow-half` 来开启半选。
+</FrameworkBlock>
+
+<Demo name="rate/indeterminate" />
+
+## 附有文案
+
+含有文案的评分组件。
+
+<Demo name="rate/with-text" />
+
+## 只读模式
+
+通过设置 `readonly` 让评分组件为只读状态。
+
+<Demo name="rate/readonly" />
+
+## 支持清除
+
+<FrameworkBlock framework="react">
+指定 `allowClear` 来允许清除评分。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `allow-clear` 来允许清除评分。
+</FrameworkBlock>
+
+<Demo name="rate/allow-clear" />
+
+## 自定义评分字符
+
+可以将星星替换为其他字符，比如表情、字母，数字，字体图标甚至中文。
+
+<Demo name="rate/custom-rate-character" />
+
+## 自定义颜色
+
+通过 `color` 可以自定义颜色。另外可以通过对象形式自定义不同分值时的颜色。
+
+<Demo name="rate/custom-color" />
+
+## 任意长度的评分
+
+通过指定 `count` 来打造任意长度的评分组件。
+
+<Demo name="rate/arbitrary-rate" />
+
+## 笑脸分级
+
+通过 `grading` 使用笑脸分级。
+
+<Demo name="rate/smiley-rating" />
+
+## 显示提示信息
+
+通过 `tooltips` 来为每一个评级提供鼠标悬浮时的提示信息。
+
+<Demo name="rate/tooltips" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Rate
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|allowClear|是否允许清除|boolean |`-`|
+|allowHalf|是否允许半选|boolean |`-`|
+|disabled|是否禁用|boolean |`-`|
+|grading|笑脸分级|boolean |`-`|
+|readonly|是否只读，不能选择|boolean |`-`|
+|count|星的总数|number |`5`|
+|defaultValue|默认值|number |`-`|
+|value|星的个数，受控值|number |`-`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+|tooltips|自定义每一项的提示信息|string[] |`-`|
+|character|自定义字符|`ReactNode \| ((index: number) => ReactNode)` |`<IconStarFill />`|
+|onChange|选择时的回调|`(value: number) => void` |`-`|
+|onHoverChange|鼠标经过时数值变化的回调|`(value: number) => void` |`-`|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<rate>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|count|评分的总数|`number`|`5`||
+|model-value **(v-model)**|绑定值|`number`|`-`||
+|default-value|默认值|`number`|`0`||
+|allow-half|是否允许半选|`boolean`|`false`||
+|allow-clear|是否允许清除|`boolean`|`false`||
+|grading|是否开启笑脸分级|`boolean`|`false`||
+|readonly|是否为只读状态|`boolean`|`false`||
+|disabled|是否禁用|`boolean`|`false`||
+|color|颜色|`string \| Record<string, string>`|`-`|2.18.0|
+
+### `<rate>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|值改变时触发|value: `number`|
+|hover-change|鼠标移动到数值上时触发|value: `number`|
+
+### `<rate>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|character|符号|index: `number`|
+
+</FrameworkBlock>

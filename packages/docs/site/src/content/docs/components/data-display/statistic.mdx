@@ -1,0 +1,161 @@
+---
+title: 数值显示 Statistic
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+突出展示某个或某组数字、带描述的统计类数据。
+
+## 基本用法
+
+当需要突出某个或某组数字或展示带描述的统计类数据时使用。
+
+<Demo name="statistic/basic" />
+
+## 自定义前缀&后缀
+
+<FrameworkBlock framework="react">
+通过 `prefix`、`suffix` 属性添加前后缀，并可通过 `styleValue` 自定义数值显示的样式。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `prefix` 和 `suffix` 插槽可以添加前后缀，并可通过 `value-style` 自定义数值显示的样式。
+</FrameworkBlock>
+
+<Demo name="statistic/custom-prefix-suffix" />
+
+## 数值动画
+
+<FrameworkBlock framework="react">
+利用 `Statistic`，你可以作出一些好玩儿的效果，比如，数值缓动变大，让数值的展示更加具有视觉效果。如果你设置了 `countUp`，那么在组件 mount 之后，会执行动效。如果你想自己控制动效，也可以通过 `ref` 拿到实例，执行 `ins.countUp()` 即可。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `animation` 可以开启数值动画。
+</FrameworkBlock>
+
+<Demo name="statistic/number-animation" />
+
+## 倒计时组件
+
+<FrameworkBlock framework="react">
+倒计时组件 `Statistic.Countdown`。可以通过 `now` 来传入 `Date.now()`，用于修复初始值显示的小误差问题。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+倒计时组件 `countdown` 的基本使用方法。可以通过 `now` 来传入 `Date.now()`，用于修复初始值显示的小误差问题。
+</FrameworkBlock>
+
+<Demo name="statistic/countdown" />
+
+## 时间格式
+
+时间显示。通过 dayjs 来进行时间格式化，`format` 即 dayjs 的 format。
+
+<Demo name="statistic/time-format" />
+
+## 加载中
+
+通过 `loading` 可以控制是否显示加载中状态。
+
+<Demo name="statistic/loading" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Statistic
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|countUp|数字动态变大|boolean |`-`|-|
+|groupSeparator|显示千位分割符|boolean |`-`|-|
+|loading|数字是否加载中|boolean |`-`|2.20.0|
+|countDuration|动态变大的过渡时间 (ms)|number |`2000`|-|
+|countFrom|从什么数字开始动态变大|number |`0`|-|
+|precision|数字精度|number |`-`|-|
+|format|dayjs's format|string |`-`|-|
+|renderFormat|自定义 render 函数。`formattedValue` 表示格式化后的值。|`(value: StatisticProps['value'], formattedValue: string) => ReactNode` |`-`|2.36.0|
+|extra|在数值下展示额外内容|ReactNode |`-`|-|
+|prefix|前缀|string \| ReactNode |`-`|-|
+|suffix|后缀|string \| ReactNode |`-`|-|
+|title|数值的标题|string \| ReactNode |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|styleDecimal|数值小数部分的样式|CSSProperties |`-`|2.47.0|
+|styleValue|数值的样式|CSSProperties |`-`|-|
+|value|数值|string \| number \| Dayjs |`-`|-|
+
+### Statistic.Countdown
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|start|是否开始倒计时，默认为 `true`，可以通过设置该值控制倒计时的时机|boolean |`true`|-|
+|format|dayjs's format|string |`HH:mm:ss`|-|
+|title|数值的标题|string \| ReactNode |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|now|用于修正初始化时间显示不正确|number \| string \| Date \| Dayjs |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|styleValue|数值的样式|CSSProperties |`-`|-|
+|value|倒计时的时间|number \| string \| Date \| Dayjs |`-`|-|
+|onFinish|倒计时完成后触发的回调|`() => void` |`-`|-|
+|renderFormat|自定义 render 函数。`valueDiff` 表示两个时间的时间差，`formattedDiff` 表示格式化后的时间差，|`(valueDiff: number, formattedDiff: string) => ReactNode` |`-`|2.36.0|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<statistic>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|title|数值显示的标题|`string`|`-`||
+|value|数值显示的值|`number \| Date`|`-`||
+|format|数值显示的格式 dayjs（日期模式使用）|`string`|`'HH:mm:ss'`||
+|extra|额外的显示内容|`string`|`-`||
+|start|是否开始动画|`boolean`|`true`||
+|precision|小数保留位数（数字模式使用）|`number`|`0`||
+|separator|进位分隔符（数字模式使用）|`string`|`-`||
+|show-group-separator|是否展示进位分隔符（数字模式使用）|`boolean`|`false`||
+|animation|是否开启动画|`boolean`|`false`||
+|animation-duration|动画的过度时间|`number`|`2000`||
+|value-from|动画的起始值|`number`|`-`||
+|placeholder|提示文字（当 value 为 undefined 时显示）|`string`|`-`|2.28.0|
+|value-style|自定义显示值的样式|`CSSProperties`|`-`|2.32.0|
+
+### `<statistic>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|title|标题|-|
+|prefix|前缀|-|
+|suffix|后缀|-|
+|extra|额外内容|-|
+
+### `<countdown>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|title|倒计时的标题|`string`|`-`||
+|value|倒计时的值|`number`|`() => Date.now() + 300000`||
+|now|用于修正初始化时间显示不正确|`number`|`() => Date.now()`||
+|format|倒计时的展示格式 dayjs|`string`|`'HH:mm:ss'`||
+|start|是否开始倒计时|`boolean`|`true`||
+|value-style|自定义显示值的样式|`CSSProperties`|`-`|2.32.0|
+
+### `<countdown>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|finish|倒计时完成后触发的回调|-|
+
+### `<countdown>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|title|标题|-|
+
+</FrameworkBlock>

@@ -1,0 +1,49 @@
+@import '../style/variables.less';
+
+// Figma 1804:5414(页头行)/ 2015:24562(backable 形态)
+.sbux-pro-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: @sbux-pro-page-header-height;
+
+  &-main {
+    display: flex;
+    align-items: center;
+    gap: 4px; // 标题↔帮助图标间距(1804:5415)
+    min-width: 0;
+  }
+
+  &-back {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 4px; // 箭头↔标题共 8(2015:24564 x24→标题 x32,gap4+margin4)
+    color: var(--color-text-1);
+    font-size: 24px; // arrow-left 24×24(2015:24564)
+    cursor: pointer;
+  }
+
+  &-title {
+    color: var(--color-text-1);
+    font-size: 16px; // title-medium(1804:5416)
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  &-help {
+    color: var(--color-text-3);
+    font-size: 16px; // help-circle 16×16(1804:5417)
+    cursor: help;
+  }
+
+  &-help-link {
+    margin-left: 8px;
+  }
+
+  &-extra {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 8px; // 操作按钮间距(1804:5418)
+  }
+}

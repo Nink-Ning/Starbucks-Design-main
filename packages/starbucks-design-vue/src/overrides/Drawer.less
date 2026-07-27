@@ -154,3 +154,40 @@
 .arco-drawer-rtl .arco-drawer-footer > .arco-btn:only-child {
   margin-right: 0;
 }
+
+.arco-drawer-title {
+  color: var(--color-text-primary);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-24);
+  text-align: left;
+}
+
+.arco-drawer-body {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  padding: var(--spacing-8);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  background-color: var(--bg-color-container);
+}
+
+.arco-drawer .arco-drawer-close-btn {
+  position: absolute;
+  top: 18px;
+  right: var(--spacing-8);
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: 1;
+}
+
+.arco-drawer .arco-drawer-close-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.arco-drawer .arco-drawer-close-btn:hover::before {
+  background-color: var(--bg-color-secondarycontainer-hover);
+}

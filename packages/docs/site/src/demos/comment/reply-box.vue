@@ -1,0 +1,48 @@
+<template>
+  <Comment
+    align="right"
+    author="Balzac"
+    avatar="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
+    content="A design is a plan or specification for the construction of an object
+          or system or for the implementation of an activity or process, or the
+          result of that plan or specification in the form of a prototype,
+          product or process."
+    datetime="1 hour"
+  >
+    <template #actions>
+      <span class="action"> <IconMessage /> Reply </span>
+    </template>
+    <Comment
+      align="right"
+      avatar="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
+    >
+      <template #actions>
+        <Button key="0" type="secondary"> Cancel </Button>
+        <Button key="1" type="primary"> Reply </Button>
+      </template>
+      <template #content>
+        <Input placeholder="Here is you content." />
+      </template>
+    </Comment>
+  </Comment>
+</template>
+
+<script setup lang="ts">
+import { IconMessage } from '@sbux/starbucks-design-vue/icon';
+</script>
+
+<style scoped>
+.action {
+  display: inline-block;
+  padding: 0 4px;
+  color: var(--color-text-1);
+  line-height: 24px;
+  background: transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+.action:hover {
+  background: var(--color-fill-3);
+}
+</style>

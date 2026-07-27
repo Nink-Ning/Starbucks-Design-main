@@ -213,3 +213,34 @@
   margin-right: var(--spacing-4);
   margin-left: 0;
 }
+
+.arco-alert-icon {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  margin-right: var(--spacing-4);
+  color: var(--color-primary);
+}
+
+.arco-alert-icon svg {
+  color: inherit;
+  font-size: 20px;
+}
+
+.arco-alert-with-title .arco-alert-icon {
+  align-items: flex-start;
+  height: 22px;
+  padding-top: 1px;
+}
+
+.arco-alert-success .arco-alert-icon {
+  color: var(--color-success);
+}
+
+.arco-alert-warning .arco-alert-icon {
+  color: var(--color-warning);
+}
+
+.arco-alert-error .arco-alert-icon {
+  color: var(--color-danger);
+}

@@ -1,0 +1,148 @@
+---
+title: 描述列表 Descriptions
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+一般用于详情页的信息展示。
+
+## 基本用法
+
+简单地成组展示多个只读字段，一般用于详情页的信息。
+
+<Demo name="descriptions/basic" />
+
+## 单列样式
+
+单列的描述列表样式。
+
+<Demo name="descriptions/single-column" />
+
+## 标签文本对齐
+
+标签文本可以设置左对齐右对齐，也可以设置垂直的排列方式。
+
+<Demo name="descriptions/label-align" />
+
+## 带边框样式
+
+带边框和背景颜色的列表。
+
+<Demo name="descriptions/bordered-style" />
+
+## 布局模式
+
+有水平排列、垂直排列、行内水平排列、行内垂直排列四种布局模式。
+
+<Demo name="descriptions/layout-mode" />
+
+## 布局示例
+
+`span` 所占列数大于 `column` 可放置的数据个数时，`span` 会被设置为 `column` 的值，当行剩余列数不够放置下一列时将自动换行，每行末尾列会自动填充剩余量。
+
+<Demo name="descriptions/layout-example" />
+
+## 不同尺寸
+
+展示不同尺寸下的描述列表。
+
+<FrameworkBlock framework="react">
+描述列表分为 `mini`、`small`、`medium`、`default`、`large` 五种尺寸，默认为 `default`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+描述列表分为 `mini`、`small`、`medium`、`large` 四种尺寸。
+</FrameworkBlock>
+
+<Demo name="descriptions/size" />
+
+## 响应式排列
+
+支持响应式排列。
+
+<Demo name="descriptions/responsive" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Descriptions
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|border|是否显示边框|boolean |`-`|-|
+|layout|排列方式|'horizontal' \| 'vertical' \| 'inline-horizontal' \| 'inline-vertical' |`horizontal`|-|
+|size|描述列表的尺寸，如不指定默认为 `default`|'mini' \| 'small' \| 'medium' \| 'default' \| 'large' |`-`|-|
+|tableLayout|描述中表格样式的 `layout-fixed`，当设置成 `fixed` 时，宽度会均分。|'auto' \| 'fixed' |`auto`|2.6.0|
+|colon|标签文字后显示的内容，一般配置为 ` :`|ReactNode |`-`|-|
+|title|标题|ReactNode |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|column|一行放置几列数据，一个数据为一列。支持配置 `column` 为数字或者对象，配置对象格式时，支持配置为 `{ xs: 1, md: 2, lg: 3 }` 这种形式来支持响应式排列|`\| number\| {xs?: number;sm?: number;md?: number;lg?: number;xl?: number;xxl?: number;xxxl?: number;}` |`3`|-|
+|data|描述列表的数据|DataType |`-`|-|
+|labelStyle|显示标签的单元格的样式|CSSProperties |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|valueStyle|显示值的单元格的样式|CSSProperties |`-`|-|
+
+### DataType
+
+```js
+export type DataType = {
+  key?: React.Key;
+  label?: ReactNode;
+  value?: ReactNode;
+  span?: number;
+}[];
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<descriptions>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|data|描述列表的数据|`DescData[]`|`[]`||
+|column|每行放置的数据个数。2.20.0 版本支持响应式配置，配置可参考 Grid|`number \| ResponsiveValue`|`3`||
+|title|描述列表的标题|`string`|`-`||
+|layout|描述列表的排列方式|`'horizontal' \| 'vertical' \| 'inline-horizontal' \| 'inline-vertical'`|`'horizontal'`||
+|align|文字的对齐位置|`TextAlign \| { label?: TextAlign; value?: TextAlign }`|`'left'`||
+|size|描述列表的大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`-`||
+|bordered|是否显示边框|`boolean`|`false`||
+|label-style|数据标签的样式|`CSSProperties`|`-`||
+|value-style|数据内容的样式|`CSSProperties`|`-`||
+|table-layout|描述中表格样式的 `layout-fixed`，当设置成 `fixed` 时，宽度会均分。|`'auto' \| 'fixed'`|`'auto'`|2.38.0|
+
+### `<descriptions>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|value|数据内容|value: `string`<br/>index: `number`<br/>data: `DescData`|
+|label|数据标签|label: `string`<br/>index: `number`<br/>data: `DescData`|
+|title|标题|-|
+
+### `<descriptions-item>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|span|所占列数|`number`|`1`|2.18.0|
+|label|标签|`string`|`-`|2.18.0|
+
+### `<descriptions-item>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|label|标签|-|2.18.0|
+
+### DescData
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|label|标签|`string \| RenderFunction`|`-`|
+|value|数据|`string \| RenderFunction`|`-`|
+|span|所占列数|`number`|`1`|
+
+</FrameworkBlock>

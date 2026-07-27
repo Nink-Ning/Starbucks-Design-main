@@ -1,0 +1,228 @@
+---
+title: 滑动输入条 Slider
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+滑动型输入器，展示当前值和可选范围。
+
+## 基本用法
+
+滑动输入条的基本用法。
+
+<FrameworkBlock framework="react">
+滑动输入条的值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+滑动输入条的值可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="slider/basic" />
+
+## 禁用状态
+
+通过 `disabled` 禁用滑动输入条，展示默认态与禁用态。
+
+<Demo name="slider/disabled" />
+
+## 设置步长
+
+<FrameworkBlock framework="react">
+传入 `step` 设置步长，默认步长为 1。建议设置能够被 `max-min` 整除的值，否则会出现可选最大值小于 `max` 的情况。当设置 `showTicks` 为 `true` 时，可显示 step 的刻度线。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `step` 设置步长，默认步长为 1。建议设置能够被 `max-min` 整除的值，否则会出现可选最大值小于 `max` 的情况。当设置 `show-ticks` 时，显示步长刻度线。
+</FrameworkBlock>
+
+<Demo name="slider/set-step" />
+
+## 范围选择
+
+<FrameworkBlock framework="react">
+设置 `range` 为 `true` 即可开启范围选择，此时 `value` 为数组。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `range` 可开启范围选择，此时 `model-value` 为数组。
+</FrameworkBlock>
+
+<Demo name="slider/range-select" />
+
+## 多点选择
+
+<FrameworkBlock framework="react">
+范围内多个点选择。（`2.61.0` 支持）
+</FrameworkBlock>
+
+<Demo name="slider/multiple-points" />
+
+## 显示输入框
+
+<FrameworkBlock framework="react">
+
+当 `showInput` 为 `true` 时，将显示输入框。当设置 `onlyMarkValue` 为 `true` 或者范围内多点选择时，输入框始终不会显示。
+
+当 `showInput` 传入 `InputNumberProps` 时，`min`、`max`、`step` 属性会以 `SliderProps` 为先。
+
+**分段输入条设置的分段步长对 InputNumber 无效**
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+当设置 `show-input` 时，将显示输入框。
+</FrameworkBlock>
+
+<Demo name="slider/show-input" />
+
+## 添加文本标签
+
+<FrameworkBlock framework="react">
+可以通过传入 `marks` 添加标签文本。当设置 `onlyMarkValue` 时，只可以选择节点值，此时 `step` 会被忽略。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `marks` 可以添加文本标签。
+</FrameworkBlock>
+
+<Demo name="slider/add-text-label" />
+
+## 带有icon的滑动输入条
+
+<FrameworkBlock framework="react">
+两边带有 icon 表示状态。
+</FrameworkBlock>
+
+<Demo name="slider/icon" />
+
+## 竖直滑动条
+
+<FrameworkBlock framework="react">
+设置 `vertical` 为 `true`，将会显示竖直的滑动条。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+设置 `direction="vertical"`，将会显示竖直的滑动条。
+</FrameworkBlock>
+
+<Demo name="slider/vertical-slider" />
+
+## 控制 tooltip 的展示
+
+<FrameworkBlock framework="react">
+通过 `tooltipVisible` 控制 tooltip 的展示。设置为 `true` 时将一直展示，设置为 `false` 时将一直隐藏。
+</FrameworkBlock>
+
+<Demo name="slider/tooltip-visible" />
+
+## 自定义提示
+
+<FrameworkBlock framework="react">
+使用 `formatTooltip` 可以格式化 Tooltip 的内容。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `format-tooltip` 可以自定义提示文字。
+</FrameworkBlock>
+
+<Demo name="slider/custom-tooltip" />
+
+## 范围刻度可拖拽
+
+<FrameworkBlock framework="react">
+通过设置 `range.draggableBar` 为 `true`，让范围刻度可以拖拽。
+</FrameworkBlock>
+
+<Demo name="slider/draggable-bar" />
+
+## 设置范围
+
+<FrameworkBlock framework="react">
+通过 `min` 和 `max` 设置可选范围。
+</FrameworkBlock>
+
+<Demo name="slider/set-range" />
+
+## 反向
+
+<FrameworkBlock framework="react">
+设置 `reverse={true}`，可以交换滑动条的起点和终点。
+</FrameworkBlock>
+
+<Demo name="slider/reverse" />
+
+## 分段输入条
+
+<FrameworkBlock framework="react">
+
+在设置了 `marks` 后，实际上将 `Slider` 分成了多个区间，可以传入 `getIntervalConfig` 对每个区间的宽度和步长进行设置。
+
+**注意：会优先将空间分配给传入了 `width` 的区间，剩下的将会按照区间长度分配剩余的空间。**
+
+</FrameworkBlock>
+
+<Demo name="slider/segmented" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Slider
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|disabled|是否禁用|boolean |`-`|-|
+|onlyMarkValue|只能选择标签值，此时step将会被忽略|boolean |`-`|-|
+|reverse|反向坐标轴, `rtl` 场景默认为 `true`|boolean |`-`|-|
+|showTicks|是否显示步长刻度线|boolean |`-`|-|
+|tooltipVisible|控制 tooltip 的展示。设置为 `true` 时，将一直展示 tooltip。设置为 `false` 时，将一直隐藏 tooltip。|boolean |`-`|-|
+|vertical|是否竖直方向|boolean |`-`|-|
+|max|滑动范围最大值|number |`100`|-|
+|min|滑动范围最小值|number |`0`|-|
+|step|步长|number |`1`|-|
+|tooltipPosition|tooltip 的位置|\| 'top'\| 'tl'\| 'tr'\| 'bottom'\| 'bl'\| 'br'\| 'left'\| 'lt'\| 'lb'\| 'right'\| 'rt'\| 'rb' |`-`|-|
+|formatTooltip|格式化 `tooltip` 内容|`(value: number) => string \| ReactNode` |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|defaultValue|默认值|number \| number[] |`-`|-|
+|marks|标签。是一个对象。key 为在[min, max]内的整数。|`Record<number, ReactNode>` |`-`|-|
+|range|是否是范围选择|`boolean \| { draggableBar: boolean }` |`-`|2.14.0|
+|showInput|是否展示输入框，`onlyMarkValue` 为 `true` 或范围内多点选择时输入框始终隐藏。可接受 `InputNumber` 的 `props`。|boolean \| InputNumberProps \| InputNumberProps[] |`-`|`InputNumberProps` in `2.32.0`|
+|style|节点样式|CSSProperties |`-`|-|
+|value|值|number \| number[] |`-`|-|
+|getIntervalConfig|针对区间配置，返回区间步长和相对于整个滑动轴的宽度比例(如 0.5 或 "50%")。**只在`marks`场景下生效**|`(range: number[],index: number) => { step?: number; width?: number \| string }` |`-`|2.30.0|
+|getTooltipContainer|设置 `tooltip` 所插入的父元素|`() => Element` |`-`|-|
+|onAfterChange|触发时机在 `mouseup`，参数是当前值|`(val: number \| number[]) => void` |`-`|2.20.0|
+|onChange|选择值变化时触发|`(val: number \| number[]) => void` |`-`|-|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<slider>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|model-value **(v-model)**|绑定值|`number \| [number, number]`|`-`||
+|default-value|默认值（非受控状态）|`number \| [number, number]`|`0`||
+|step|滑动的步长|`number`|`1`||
+|min|滑动范围的最小值|`number`|`0`||
+|marks|设置显示的标签|`Record<number, string>`|`-`||
+|max|滑动范围的最大值|`number`|`100`||
+|direction|滑动输入条的方向|`Direction`|`'horizontal'`||
+|disabled|是否禁用|`boolean`|`false`||
+|show-ticks|是否显示刻度线|`boolean`|`false`||
+|show-input|是否显示输入框|`boolean`|`false`||
+|range|是否开启范围选择|`boolean`|`false`||
+|show-tooltip|是否显示tooltip|`boolean`|`true`|2.42.0|
+
+### `<slider>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|值改变时触发|value: `number \| [number, number]`|
+
+</FrameworkBlock>

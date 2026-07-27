@@ -1,0 +1,233 @@
+---
+title: 菜单 Menu
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+收纳、排列并展示一系列选项的列表。
+
+## 顶部导航菜单
+
+设置 `mode` 为 `horizontal` 时，使用水平菜单。
+
+<Demo name="menu/top-nav-menu" />
+
+## 深色模式导航
+
+通过 `theme` 指定主题，分为 `light` 和 `dark` 两种。
+
+<Demo name="menu/dark-nav" />
+
+## 缩起内嵌菜单
+
+<FrameworkBlock framework="react">
+通过 `collapse` 来指定菜单收起。通过 `renderItemInTooltip` 指定菜单收起时，`Tooltip` 中展示的菜单项内容。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `collapsed` 来指定菜单收起。
+</FrameworkBlock>
+
+<Demo name="menu/collapse-inline-menu" />
+
+## 响应式收缩
+
+设置 `breakpoint` 可触发响应式收缩。
+
+<Demo name="menu/responsive-shrink" />
+
+## 内嵌菜单
+
+<FrameworkBlock framework="react">
+菜单内可以嵌入多个子项，通过 `defaultOpenKeys` 可以设置默认打开的子项。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+菜单内可以嵌入多个子项，通过 `openKeys` 可以设置默认打开的子项。
+</FrameworkBlock>
+
+<Demo name="menu/inline-menu" />
+
+## 不同大小菜单
+
+通过 `style` 自由指定菜单的宽度和菜单项的高度。
+
+<Demo name="menu/menu-sizes" />
+
+## 悬浮菜单
+
+指定 `mode` 为 `pop` 可以使用悬浮菜单。
+
+<Demo name="menu/hover-menu" />
+
+## 悬浮按钮菜单
+
+指定 `mode` 为 `popButton` 使用按钮组样式的悬浮菜单。
+
+<Demo name="menu/hover-button-menu" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Menu
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|accordion|开启手风琴效果|boolean |`-`|-|
+|autoOpen|默认展开所有多级菜单|boolean |`-`|-|
+|autoScrollIntoView|是否自动滚动选中项目到可见区域|boolean |`-`|-|
+|collapse|是否水平折叠收起菜单|boolean |`-`|-|
+|hasCollapseButton|是否内置折叠按钮|boolean |`-`|-|
+|selectable|菜单选项是否可选|boolean |`true`|-|
+|levelIndent|层级之间的缩进量|number |`-`|-|
+|mode|菜单类型，目前支持垂直（vertical）、水平菜单（horizontal）、弹出（pop）|'vertical' \| 'horizontal' \| 'pop' \| 'popButton' |`vertical`|-|
+|theme|菜单风格|'light' \| 'dark' |`light`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|defaultOpenKeys|初始展开的子菜单 key 数组|string[] |`-`|-|
+|defaultSelectedKeys|初始选中的菜单项 key 数组|string[] |`-`|-|
+|ellipsis|水平菜单是否自动溢出省略|`\| boolean\| {text?: ReactNode;}` |`true`|2.24.0|
+|icons|用于定制图标|`{horizontalArrowDown?: ReactNode \| null;popArrowRight?: ReactNode \| null;collapseDefault?: ReactNode \| null;collapseActive?: ReactNode \| null;}` |`-`|-|
+|openKeys|展开的子菜单 key 数组（受控模式）|string[] |`-`|-|
+|scrollConfig|滚动到可见区域的配置项，接收所有scroll-into-view-if-needed的参数|`{ [key: string]: any }` |`-`|-|
+|selectedKeys|选中的菜单项 key 数组（受控模式）|string[] |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|tooltipProps|弹出模式下可接受所有 `ToolTip` 的 `Props`|`Partial<TooltipProps>` |`-`|-|
+|triggerProps|弹出模式下可接受所有 `Trigger` 的 `Props`|`Partial<TriggerProps>` |`-`|-|
+|onClickMenuItem|点击菜单项的回调|`(key: string, event, keyPath: string[]) => any` |`-`|`event` in 2.15.0, `keyPath` in 2.19.0|
+|onClickSubMenu|点击子菜单标题的回调|`(key: string, openKeys: string[], keyPath: string[]) => void` |`-`|`keyPath` in 2.19.0|
+|onCollapseChange|折叠状态改变时的回调|`(collapse: boolean) => void` |`-`|-|
+|onEllipsisChange|水平菜单自动超出省略发生变化时的回调|`(status: { lastVisibleIndex: number; overflowNodes: ReactNode[] }) => void` |`-`|2.57.0|
+
+### Menu.SubMenu
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|selectable|是否将多级菜单头也作为一个菜单项，支持点击选中等状态。|boolean |`-`|-|
+|key|唯一标志|string  **(必填)**|`-`|-|
+|title|子菜单的标题|string \| ReactNode |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|triggerProps|弹出模式下可接受所有 `Trigger` 的 `Props`|`Partial<TriggerProps>` |`-`|2.19.0|
+|popup|是否强制使用弹出模式，`level` 表示当前子菜单的层级|`boolean \| ((level: number) => boolean)` |`-`|2.8.0|
+
+### Menu.ItemGroup
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|title|菜单组的标题|string \| ReactNode |`-`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+
+### Menu.Item
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|disabled|菜单项禁止选中|boolean |`-`|-|
+|key|唯一标志|string  **(必填)**|`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|wrapper|配置最外层标签，可以是 html 标签或是组件|`string \| React.FC<any> \| React.ComponentClass<any>` |`div`|2.16.0|
+|renderItemInTooltip|菜单折叠时，指定在 Tooltip 中展示的菜单项节点|`() => ReactNode` |`-`|2.51.0|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<menu>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|theme|菜单的主题|`'light' \| 'dark'`|`'light'`||
+|mode|菜单的模式|`'vertical' \| 'horizontal' \| 'pop' \| 'popButton'`|`'vertical'`||
+|level-indent|层级之间的缩进量|`number`|`-`||
+|auto-open|默认展开所有多级菜单|`boolean`|`false`||
+|collapsed **(v-model)**|是否折叠菜单|`boolean`|`-`||
+|default-collapsed|默认是否折叠菜单|`boolean`|`false`||
+|collapsed-width|折叠菜单宽度|`number`|`-`||
+|accordion|开启手风琴效果|`boolean`|`false`||
+|auto-scroll-into-view|是否自动滚动选中项目到可见区域|`boolean`|`false`||
+|show-collapse-button|是否内置折叠按钮|`boolean`|`false`||
+|selected-keys **(v-model)**|选中的菜单项 key 数组|`string[]`|`-`||
+|default-selected-keys|默认选中的菜单项 key 数组|`string[]`|`[]`||
+|open-keys **(v-model)**|展开的子菜单 key 数组|`string[]`|`-`||
+|default-open-keys|默认展开的子菜单 key 数组|`string[]`|`[]`||
+|scroll-config|滚动到可见区域的配置项，接收所有scroll-into-view-if-needed的参数|`{ [key: string]: any }`|`-`||
+|trigger-props|弹出模式下可接受所有 `Trigger` 的 `Props`|`TriggerProps`|`-`||
+|tooltip-props|弹出模式下可接受所有 `ToolTip` 的 `Props`|`object`|`-`||
+|auto-open-selected|默认展开选中的菜单|`boolean`|`false`|2.8.0|
+|breakpoint|响应式的断点, 详见响应式栅格|`'xxl' \| 'xl' \| 'lg' \| 'md' \| 'sm' \| 'xs'`|`-`|2.18.0|
+|popup-max-height|弹出框的最大高度|`boolean \| number`|`true`|2.23.0|
+
+### `<menu>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|collapse|折叠状态改变时触发|collapsed: `boolean`<br/>type: `'clickTrigger'\|'responsive'`|
+|menu-item-click|点击菜单项时触发|key: `string`|
+|sub-menu-click|点击子菜单时触发|key: `string`<br/>openKeys: `string[]`|
+
+### `<menu>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|collapse-icon|折叠图标|collapsed: `boolean`|
+|expand-icon-right|向右展开的图标|-|
+|expand-icon-down|向下展开的图标|-|
+
+### `<sub-menu>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|title|子菜单的标题|`string`|`-`||
+|selectable|弹出模式下，是否将多级菜单头也作为一个菜单项，支持点击选中等状态|`boolean`|`false`||
+|popup|是否强制使用弹出模式，`level` 表示当前子菜单的层级|`boolean \| ((level: number) => boolean)`|`false`||
+|popup-max-height|弹出框的最大高度|`boolean \| number`|`true`|2.23.0|
+
+### `<sub-menu>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|title|标题|-||
+|expand-icon-right|向右展开的图标|-||
+|expand-icon-down|向下展开的图标|-||
+|icon|菜单的图标|-|2.11.0|
+
+### `<menu-item-group>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|title|菜单组的标题|`string`|`-`|
+
+### `<menu-item-group>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|title|标题|-|
+
+### `<menu-item>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|disabled|是否禁用|`boolean`|`false`|
+
+### `<menu-item>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|icon|菜单的图标|-|2.11.0|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+## FAQ
+
+### `<MenuItem>` 和 `<SubMenu>` 组件的 `key` 属性为必填
+在 `<Menu>` 组件中使用 `<MenuItem>` 和 `<SubMenu>` 组件时，请传入唯一的 `key` 属性。
+组件内部在进行计算时会依赖此值，如果没有赋值会导致部分场景下异常
+
+</FrameworkBlock>

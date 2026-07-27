@@ -1,0 +1,104 @@
+---
+title: 色彩 Color
+sidebar:
+  order: 1
+---
+
+import Swatches from '../../../components/foundations/Swatches.astro';
+
+色彩系统以星巴克品牌绿为核心，配合成功、警告、错误三组功能色与一套中性色，构成完整的界面语义。每个色板点击即可复制色值。
+
+## 品牌色
+
+主色用于关键操作、选中态与品牌表达。围绕主色提供 hover / active / focus / disabled 及浅色变体，覆盖交互全流程。
+
+<Swatches
+  items={[
+    { name: 'brand-color', value: '#00754a', note: '主色' },
+    { name: 'brand-color-hover', value: '#1a9162' },
+    { name: 'brand-color-active', value: '#006a44' },
+    { name: 'brand-color-focus', value: '#cff0e4' },
+    { name: 'brand-color-disabled', value: '#b8e9d6' },
+    { name: 'brand-color-light', value: '#e6f7f1' },
+    { name: 'brand-color-light-hover', value: '#cff0e4' },
+  ]}
+/>
+
+## 成功 Success
+
+用于成功、完成、通过等正向反馈。
+
+<Swatches
+  items={[
+    { name: 'success-color', value: '#006c45' },
+    { name: 'success-color-hover', value: '#008858' },
+    { name: 'success-color-active', value: '#005334' },
+    { name: 'success-color-focus', value: '#c6f3d7' },
+    { name: 'success-color-disabled', value: '#92dab2' },
+    { name: 'success-color-light', value: '#e3f9e9' },
+    { name: 'success-color-light-hover', value: '#c6f3d7' },
+  ]}
+/>
+
+## 警告 Warning
+
+用于需要用户注意、但非阻断性的提示。
+
+<Swatches
+  items={[
+    { name: 'warning-color', value: '#954500' },
+    { name: 'warning-color-hover', value: '#be5a00' },
+    { name: 'warning-color-active', value: '#713300' },
+    { name: 'warning-color-focus', value: '#ffd9c2' },
+    { name: 'warning-color-disabled', value: '#ffb98c' },
+    { name: 'warning-color-light', value: '#fff1e9' },
+    { name: 'warning-color-light-hover', value: '#ffd9c2' },
+  ]}
+/>
+
+## 错误 Error
+
+用于错误、失败、危险及阻断性操作。
+
+<Swatches
+  items={[
+    { name: 'error-color', value: '#ad352f' },
+    { name: 'error-color-hover', value: '#d54941' },
+    { name: 'error-color-active', value: '#881f1c' },
+    { name: 'error-color-focus', value: '#ffd8d2' },
+    { name: 'error-color-disabled', value: '#ffb9b0' },
+    { name: 'error-color-light', value: '#fff0ed' },
+    { name: 'error-color-light-hover', value: '#ffd8d2' },
+  ]}
+/>
+
+## 中性与背景
+
+页面、容器、组件的层次由中性色区分；边框与分割线界定结构。
+
+<Swatches
+  items={[
+    { name: 'bg-color-container', value: '#ffffff', note: '容器', cssVar: '--fs-bg-container' },
+    { name: 'bg-color-secondarycontainer', value: '#f3f3f3', cssVar: '--fs-bg-secondary' },
+    { name: 'bg-color-page', value: '#eeeeee', note: '页面', cssVar: '--fs-bg-page' },
+    { name: 'bg-color-component', value: '#e8e8e8', cssVar: '--fs-bg-component' },
+    { name: 'border-level-1-color', value: '#e8e8e8', note: '分割线', cssVar: '--fs-border-1' },
+    { name: 'component-border', value: '#dddddd', note: '边框', cssVar: '--fs-border-2' },
+    { name: 'bg-color-secondarycomponent-active', value: '#a6a6a6', cssVar: '--fs-fill-active' },
+  ]}
+/>
+
+## 文本颜色
+
+文本颜色以不同透明度的黑色表达层级，保证在容器背景上的可读性。
+
+<Swatches
+  items={[
+    { name: 'text-color-primary', value: '#000000e5', note: '一级', cssVar: '--fs-text-1' },
+    { name: 'text-color-secondary', value: '#00000099', note: '二级', cssVar: '--fs-text-2' },
+    { name: 'font-gray-3', value: '#00000066', note: '占位', cssVar: '--fs-text-3' },
+    { name: 'font-gray-4', value: '#00000042', note: '禁用', cssVar: '--fs-text-4' },
+    { name: 'text-color-brand', value: '#00754a', note: '品牌' },
+    { name: 'text-color-link', value: '#006a44', note: '链接' },
+  ]}
+/>

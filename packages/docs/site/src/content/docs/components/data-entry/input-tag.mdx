@@ -1,0 +1,254 @@
+---
+title: InputTag
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+标签输入。用来输入标签。
+
+## 基本用法
+
+标签输入框的基本用法。
+
+<FrameworkBlock framework="react">
+标签的值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+标签的值可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="input-tag/basic" />
+
+## 输入框状态
+
+输入框有禁用、只读和错误三种状态。
+
+<FrameworkBlock framework="react">
+分别通过 `disabled`、`readOnly` 与 `status="error"` 设置。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+分别通过 `disabled`、`readonly` 与 `error` 设置。
+</FrameworkBlock>
+
+<Demo name="input-tag/input-status" />
+
+## 前缀/前置标签/后置标签
+
+<FrameworkBlock framework="react">
+通过 `prefix` 添加前缀，通过 `addBefore`、`addAfter` 在输入框前后添加前置/后置标签。
+</FrameworkBlock>
+
+<Demo name="input-tag/prefix-addon" />
+
+## 输入框尺寸
+
+<FrameworkBlock framework="react">
+输入框分为 `mini`、`small`、`default`、`large` 四种尺寸，通过 `size` 指定，默认为 `default`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+输入框分为 `mini`、`small`、`medium`、`large` 四种尺寸，通过 `size` 指定，默认为 `medium`。
+</FrameworkBlock>
+
+<Demo name="input-tag/input-size" />
+
+## 获取选项的文本
+
+<FrameworkBlock framework="react">
+可以通过设置 `labelInValue=true` 获取选项的 label 值。
+</FrameworkBlock>
+
+<Demo name="input-tag/label-in-value" />
+
+## 校验与格式化输入
+
+<FrameworkBlock framework="react">
+
+通过 `validate` 校验输入。此外，可以返回**非布尔类型**来将用户输入的字符串为特定的 `value` 格式。
+
+</FrameworkBlock>
+
+<Demo name="input-tag/validate" />
+
+## 失焦时保存
+
+<FrameworkBlock framework="react">
+设置 `saveOnBlur` 在失焦时自动将正在输入的文本保存为标签。
+</FrameworkBlock>
+
+<Demo name="input-tag/save-on-blur" />
+
+## 自定义标签节点
+
+<FrameworkBlock framework="react">
+指定 `renderTag` 来自定义标签节点。
+</FrameworkBlock>
+
+<Demo name="input-tag/custom-tag" />
+
+## 拖拽排序
+
+<FrameworkBlock framework="react">
+指定 `dragToSort` 属性以允许对已输入的值进行拖拽排序。
+</FrameworkBlock>
+
+<Demo name="input-tag/drag-to-sort" />
+
+## 自动分词
+
+<FrameworkBlock framework="react">
+设置 `tokenSeparators` 可以使用自动分词功能。尝试复制下方文本到输入框里。
+</FrameworkBlock>
+
+<Demo name="input-tag/token-separators" />
+
+## 最多展示标签数量
+
+<FrameworkBlock framework="react">
+通过 `maxTagCount` 设置最多展示的标签数，`maxTagCount.render` 自定义 `+x` 部分的节点内容。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `max-tag-count` 设置最多展示的标签数量，`0` 表示不限制。
+</FrameworkBlock>
+
+<Demo name="input-tag/max-tags" />
+
+## 响应式显示Tag
+
+<FrameworkBlock framework="react">
+
+通过 `maxTagCount="responsive"` 设置根据容器尺寸动态显示 Tag 数。会监听所有 Tag 及容器的尺寸变化，所以在标签数较多时不建议使用，可能存在性能问题。此时拖拽和动画效果不可用。
+
+</FrameworkBlock>
+
+<Demo name="input-tag/responsive-tag" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### InputTag
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|allowClear|是否允许清除|boolean |`-`|-|
+|animation|是否为内部标签变化添加动画。|boolean |`true`|2.15.0|
+|autoFocus|自动聚焦|boolean |`-`|-|
+|disabled|是否禁用|boolean |`-`|-|
+|dragToSort|是否可以通过拖拽为 Tag 排序|boolean |`-`|2.27.0|
+|error|是否是错误状态.(废弃，下个大版本移除，使用 status='error' 替代)|boolean |`-`|-|
+|labelInValue|设置传入和回调出的值均为 `{ label: '', value: ''}` 格式。|boolean |`-`|-|
+|readOnly|是否只读|boolean |`-`|-|
+|saveOnBlur|是否在失焦时自动存储正在输入的文本|boolean |`-`|2.25.0|
+|inputValue|控件的输入框内的值|string |`-`|-|
+|placeholder|预设文案|string |`-`|-|
+|maxTagCount|最多显示多少个 `tag`|`\| number\| 'responsive'\| {count: number \| 'responsive';render?: (invisibleTagCount: number, value: T[]) => ReactNode;popoverProps?: Partial<PopoverProps>;}` |`-`|2.59.0. `responsive ` in `2.62.0`|
+|size|不同尺寸|'mini' \| 'small' \| 'default' \| 'large' |`-`|-|
+|status|状态|'error' \| 'warning' |`-`|2.45.0|
+|addAfter|输入框后添加元素|ReactNode |`-`|2.47.0|
+|addBefore|输入框前添加元素|ReactNode |`-`|2.47.0|
+|prefix|添加前缀文字或者图标|ReactNode |`-`|2.47.0|
+|suffix|后缀|ReactNode |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|defaultValue|默认值|T[] |`-`|-|
+|icon|自定义图标|`{ removeIcon?: ReactNode; clearIcon?: ReactNode }` |`-`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|tokenSeparators|触发自动分词的分隔符|string[] |`-`|2.44.0|
+|validate|校验函数，默认在 按下enter时候触发。|`(inputValue: string, values: T[]) => boolean \| Promise<boolean> \| T \| Promise<T>` |`(inputValue, values) => inputValue && values.every((item) => item !== inputValue)`|return type T and `Promise<T>` in 2.37.0|
+|value|控件值|T[] |`-`|-|
+|onBlur|失去焦点时候触发|`(e) => void` |`-`|-|
+|onChange|控件值改变时触发|`(value: T[], reason: ValueChangeReason) => void` |`-`|`reason` in 2.27.0|
+|onClear|点击清除按钮的回调|`() => void` |`-`|2.20.0|
+|onClick|单击组件的回调。|`(e) => void` |`-`|-|
+|onFocus|聚焦时触发|`(e) => void` |`-`|-|
+|onInputChange|输入框文本改变的回调。|`(inputValue: string, event?) => void` |`-`|-|
+|onKeyDown|键盘事件回调|`(e) => void` |`-`|-|
+|onPaste|输入框文本粘贴的回调。|`(e) => void` |`-`|-|
+|onPressEnter|按 enter 键触发|`(e) => void` |`-`|-|
+|onRemove|移除某一个标签时改变时触发|`(value: T, index: number, event) => void` |`-`|-|
+|renderTag|自定义标签渲染，`props` 为当前标签属性，`index` 为当前标签的顺序，`values` 为所有标签的值.|`(props: {value: any;label: ReactNode;closable: boolean;onClose: (event) => void;},index: number,values: ObjectValueType[]) => ReactNode` |`-`|index、values added in 2.15.0|
+
+### ObjectValueType
+
+```js
+export type ObjectValueType = {
+  value?: any;
+  label?: ReactNode;
+  closable?: boolean;
+};
+```
+
+### ValueChangeReason
+
+```js
+export type ValueChangeReason = "add" | "remove" | "clear" | "sort";
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<input-tag>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|model-value **(v-model)**|绑定值|`(string \| number \| TagData)[]`|`-`||
+|default-value|默认值（非受控状态）|`(string \| number \| TagData)[]`|`[]`||
+|input-value **(v-model)**|输入框的值|`string`|`-`||
+|default-input-value|输入框的默认值（非受控状态）|`string`|`''`||
+|placeholder|占位符|`string`|`-`||
+|disabled|是否禁用|`boolean`|`false`||
+|error|是否为错误状态|`boolean`|`false`||
+|readonly|是否为只读模式|`boolean`|`false`||
+|allow-clear|是否允许清空|`boolean`|`false`||
+|size|输入框的大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
+|max-tag-count|最多展示的标签个数，`0` 表示不限制|`number`|`0`||
+|retain-input-value|是否保留输入框的内容|`boolean \| { create?: boolean; blur?: boolean }`|`false`||
+|format-tag|格式化标签内容|`(data: TagData) => string`|`-`||
+|unique-value|是否仅创建唯一的值|`boolean`|`false`|2.15.0|
+|field-names|自定义 `TagData` 中的字段|`InputTagFieldNames`|`-`|2.22.0|
+|tag-nowrap|标签内容不换行|`boolean`|`false`|2.56.1|
+
+### `<input-tag>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|值发生改变时触发|value: `(string \| number \| TagData)[]`<br/>ev: `Event`|
+|input-value-change|输入值发生改变时触发|inputValue: `string`<br/>ev: `Event`|
+|press-enter|按下回车键时触发|inputValue: `string`<br/>ev: `KeyboardEvent`|
+|remove|点击标签的删除按钮时触发|removed: `string \| number`<br/>ev: `Event`|
+|clear|点击清除按钮时触发|ev: `MouseEvent`|
+|focus|输入框获取焦点时触发|ev: `FocusEvent`|
+|blur|输入框失去焦点时触发|ev: `FocusEvent`|
+
+### `<input-tag>` Methods
+
+|方法名|描述|参数|返回值|
+|---|---|---|---|
+|focus|使输入框获取焦点|-|-|
+|blur|使输入框失去焦点|-|-|
+
+### `<input-tag>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|tag|输入框标签的显示内容|data: `TagData`|
+|prefix|前缀元素|-|
+|suffix|后缀元素|-|
+
+### TagData
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|value|标签值|`string \| number`|`-`|
+|label|标签内容|`string`|`-`|
+|closable|是否可关闭|`boolean`|`false`|
+|tagProps|标签属性|`TagProps`|`-`|
+
+</FrameworkBlock>

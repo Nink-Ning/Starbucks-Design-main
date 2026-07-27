@@ -1,0 +1,340 @@
+---
+const base = import.meta.env.BASE_URL;
+const reactIcon = `${base}img/react.svg`;
+const vueIcon = `${base}img/vue.svg`;
+---
+
+<div
+  class="sb-fw-switch"
+  role="group"
+  aria-label="切换框架"
+  style={`--sb-react-icon: url("${reactIcon}"); --sb-vue-icon: url("${vueIcon}");`}
+>
+  <button data-fw="react" aria-pressed="true">
+    <span class="sb-fw-icon sb-fw-icon-react" aria-hidden="true"></span>
+    <span>React</span>
+  </button>
+  <button data-fw="vue" aria-pressed="false">
+    <span class="sb-fw-icon sb-fw-icon-vue" aria-hidden="true"></span>
+    <span>Vue</span>
+  </button>
+</div>
+
+<button
+  type="button"
+  id="sb-theme-toggle"
+  class="sb-theme-toggle"
+  aria-label="切换深色/浅色模式"
+  title="切换深色/浅色模式"
+>
+  <svg
+    class="sb-theme-icon sb-theme-icon-sun"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    ><path
+      d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"
+    ></path></svg
+  >
+  <svg
+    class="sb-theme-icon sb-theme-icon-moon"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    ><path
+      d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"
+    ></path></svg
+  >
+  <span class="sb-theme-label sb-theme-label-light">亮色</span>
+  <span class="sb-theme-label sb-theme-label-dark">暗色</span>
+</button>
+
+<style>
+  .sb-fw-switch {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    gap: 4px;
+    padding: 3px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--sb-docs-surface, var(--sl-color-gray-6));
+  }
+
+  .sb-fw-switch button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 72px;
+    height: 26px;
+    gap: 6px;
+    border: 0;
+    border-radius: 3px;
+    padding: 0 10px;
+    background: transparent;
+    color: var(--sb-docs-text-2, var(--sl-color-gray-2));
+    font: inherit;
+    font-size: 14px;
+    line-height: 22px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .sb-fw-switch button[aria-pressed='true'] {
+    background: var(--sb-docs-bg, var(--sl-color-bg));
+    color: var(--sb-docs-brand);
+    font-weight: 600;
+  }
+
+  .sb-fw-icon {
+    display: inline-block;
+    flex: none;
+    background: currentColor;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+  }
+
+  .sb-fw-icon-react {
+    width: 18px;
+    height: 18px;
+    mask-image: var(--sb-react-icon);
+    -webkit-mask-image: var(--sb-react-icon);
+  }
+
+  .sb-fw-icon-vue {
+    width: 16px;
+    height: 16px;
+    mask-image: var(--sb-vue-icon);
+    -webkit-mask-image: var(--sb-vue-icon);
+  }
+
+  .sb-theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 32px;
+    gap: 4px;
+    border: 1px solid var(--sb-docs-border, var(--sl-color-gray-5));
+    border-radius: 4px;
+    padding: 0 10px;
+    background: var(--sb-docs-bg, var(--sl-color-bg));
+    color: var(--sb-docs-text-1, var(--sl-color-gray-1));
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .sb-theme-toggle:hover {
+    background: var(--sb-docs-surface-hover, var(--sl-color-gray-6));
+    color: var(--sb-docs-text-1, var(--sl-color-gray-1));
+  }
+  .sb-theme-icon {
+    width: 16px;
+    height: 16px;
+  }
+  .sb-theme-icon-moon {
+    display: none;
+  }
+  .sb-theme-label {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .sb-theme-label-dark {
+    display: none;
+  }
+  :global(html[data-theme='dark']) .sb-theme-icon-sun {
+    display: none;
+  }
+  :global(html[data-theme='dark']) .sb-theme-icon-moon {
+    display: block;
+  }
+  :global(html[data-theme='dark']) .sb-theme-label-light {
+    display: none;
+  }
+  :global(html[data-theme='dark']) .sb-theme-label-dark {
+    display: inline;
+  }
+</style>
+
+<script>
+  (function () {
+    /** Key Starlight's ThemeProvider/ThemeSelect read/write in localStorage. */
+    const STORAGE_KEY = 'starlight-theme';
+
+    function getPreferredColorScheme(): 'light' | 'dark' {
+      return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    /** Mirrors Starlight's own onThemeChange: stamp <html data-theme>, persist, sync any pickers. */
+    function applyTheme(theme: 'light' | 'dark', persist: boolean): void {
+      document.documentElement.dataset.theme = theme;
+      ['arco-theme', 'data-arco-theme'].forEach((attribute) => {
+        if (theme === 'dark') document.body.setAttribute(attribute, 'dark');
+        else document.body.removeAttribute(attribute);
+      });
+      if (persist) localStorage.setItem(STORAGE_KEY, theme);
+      window.StarlightThemeProvider?.updatePickers(theme);
+    }
+
+    function readThemeProperties(): Map<string, string> {
+      const properties = new Map<string, string>();
+      [document.documentElement, document.body].forEach((element) => {
+        const computed = getComputedStyle(element);
+        for (let index = 0; index < computed.length; index += 1) {
+          const property = computed.item(index);
+          if (property.startsWith('--')) properties.set(property, computed.getPropertyValue(property));
+        }
+      });
+      return properties;
+    }
+
+    function waitForThemeLayer(layer: HTMLElement): Promise<void> {
+      return new Promise((resolve) => {
+        let settled = false;
+        const finish = () => {
+          if (settled) return;
+          settled = true;
+          resolve();
+        };
+
+        layer.addEventListener('animationend', finish, { once: true });
+        window.setTimeout(finish, 850);
+      });
+    }
+
+    function waitForThemeCommit(): Promise<void> {
+      return new Promise((resolve) => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => resolve());
+        });
+      });
+    }
+
+    let transitionRunning = false;
+
+    async function transitionTheme(nextTheme: 'light' | 'dark'): Promise<void> {
+      if (transitionRunning) return;
+
+      const currentTheme =
+        document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      if (currentTheme === nextTheme) return;
+
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        applyTheme(nextTheme, true);
+        return;
+      }
+
+      const page = document.querySelector<HTMLElement>('.page');
+      if (!page) {
+        applyTheme(nextTheme, true);
+        return;
+      }
+
+      transitionRunning = true;
+
+      // Resolve the target theme synchronously, copy its generated variables
+      // and DOM, then restore the current page before the browser can paint.
+      applyTheme(nextTheme, false);
+      const targetProperties = readThemeProperties();
+      const layer = page.cloneNode(true) as HTMLElement;
+      const sourceElements = [page, ...page.querySelectorAll<HTMLElement>('*')];
+      const cloneElements = [layer, ...layer.querySelectorAll<HTMLElement>('*')];
+      const scrollPositions = sourceElements.map((element) => ({
+        top: element.scrollTop,
+        left: element.scrollLeft,
+      }));
+      applyTheme(currentTheme, false);
+
+      layer.classList.add('sb-theme-transition-layer', `sb-theme-transition-to-${nextTheme}`);
+      layer.dataset.theme = nextTheme;
+      // Expressive Code keeps its palette variables on each module instead of
+      // the document root. Once the target snapshot is appended below the
+      // current-theme <html>, those modules would otherwise resolve the old
+      // page theme until the final commit, leaving light code panels inside a
+      // dark wipe (and causing a visible repaint when the layer is removed).
+      layer.querySelectorAll<HTMLElement>('.expressive-code').forEach((block) => {
+        block.dataset.theme = nextTheme;
+      });
+      layer.setAttribute('aria-hidden', 'true');
+      targetProperties.forEach((value, property) => layer.style.setProperty(property, value));
+      document.body.append(layer);
+      cloneElements.forEach((element, index) => {
+        element.scrollTop = scrollPositions[index]?.top ?? 0;
+        element.scrollLeft = scrollPositions[index]?.left ?? 0;
+      });
+      layer.scrollTop = window.scrollY;
+
+      await waitForThemeLayer(layer);
+
+      // Keep the fully revealed target-theme layer in place while the real page
+      // commits the same theme. Two animation frames guarantee the new styles
+      // have painted before the snapshot layer is removed, preventing a
+      // one-frame flash of the previous theme.
+      document.documentElement.classList.add('sb-theme-transition-commit');
+      try {
+        applyTheme(nextTheme, true);
+        await waitForThemeCommit();
+      } finally {
+        layer.remove();
+        document.documentElement.classList.remove('sb-theme-transition-commit');
+        transitionRunning = false;
+      }
+    }
+
+    // Delegated click on the persistent document: the toggle button is a fresh
+    // element after every view-transition swap, so a direct listener would die
+    // on navigation. Binds once and survives all swaps.
+    document.addEventListener('click', (e) => {
+      if (!(e.target as HTMLElement).closest('#sb-theme-toggle')) return;
+      const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      void transitionTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Users who never interacted with the (now removed) select may still have
+    // 'auto' persisted (Starlight stores that as an empty string). Keep the
+    // page in sync with OS-level scheme changes until they explicitly pick a
+    // theme via this button, same as Starlight's own listener did.
+    matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored !== 'light' && stored !== 'dark') {
+        applyTheme(getPreferredColorScheme(), false);
+      }
+    });
+  })();
+</script>
+
+<script>
+  function syncButtons(fw: string) {
+    document.querySelectorAll<HTMLButtonElement>('.sb-fw-switch button').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b.dataset.fw === fw));
+    });
+  }
+  function setFramework(fw: string) {
+    if ((localStorage.getItem('sb-framework') || 'react') === fw) return;
+    localStorage.setItem('sb-framework', fw);
+    // Full reload (not an instant swap): the inactive framework's demo island
+    // is display:none, and with client:visible it only hydrates when visible —
+    // so a reload guarantees just the newly-active framework's island loads,
+    // and only its Arco `.arco-*` CSS is injected. This is what lets the docs
+    // depend solely on @sbux/starbucks-design-* without dual-runtime prefix
+    // isolation (no arco-v, no native-Arco dependency).
+    location.reload();
+  }
+  // Delegated click on the persistent document: switch buttons are re-created
+  // on every view-transition swap, so per-button listeners would die.
+  document.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.sb-fw-switch button');
+    if (b) setFramework(b.dataset.fw!);
+  });
+  // astro:page-load fires on initial load AND after every swap: re-sync the
+  // fresh buttons' pressed state to the current framework (the <head> script
+  // already re-applied data-framework pre-paint on after-swap). Syncing here —
+  // not via setFramework — means we no longer fire sb-framework-change on load.
+  document.addEventListener('astro:page-load', () =>
+    syncButtons(document.documentElement.dataset.framework || 'react'),
+  );
+</script>

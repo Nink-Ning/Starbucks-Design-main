@@ -1,0 +1,30 @@
+---
+title: 滚动条 Scrollbar
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+:::note[仅 Vue 提供]
+该组件目前仅提供 Vue 版本。
+:::
+
+<FrameworkBlock framework="vue">
+
+用于替换浏览器默认滚动条样式。
+
+## 基本用法
+
+滚动条组件基本用法。scrollbar 的默认插槽需要唯一的子元素。
+
+<Demo name="scrollbar/basic" />
+
+## 滚动条类型
+
+设置 `type` 属性改变滚动条类型，`track` 类型会显示滚动条轨道。
+
+<Demo name="scrollbar/scrollbar-type" />
+
+</FrameworkBlock>

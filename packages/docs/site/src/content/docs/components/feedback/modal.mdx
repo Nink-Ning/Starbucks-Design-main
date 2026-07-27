@@ -1,0 +1,435 @@
+---
+title: 对话框 Modal
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+在当前页面打开一个浮层，承载相关操作。
+
+## 基本用法
+
+对话框的基本用法。
+
+<FrameworkBlock framework="react">
+对话框的显示与隐藏通过 `visible` 属性控制，配合 `onOk` / `onCancel` 回调更新状态。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+对话框的显示与隐藏通过 `v-model:visible` 双向绑定，或通过 `default-visible` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="modal/basic" />
+
+## 异步关闭
+
+<FrameworkBlock framework="react">
+在对话框中使用表单时，如提交表单，点击确定后异步关闭对话框。通过 `confirmLoading` 控制确认按钮的加载状态，在 `onOk` 回调中处理异步逻辑。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以通过 `on-before-ok` 的 `done` 回调更简洁地实现异步关闭功能。
+</FrameworkBlock>
+
+<Demo name="modal/async-close" />
+
+## 弹出层表单
+
+<FrameworkBlock framework="vue">
+在对话框中使用表单。
+</FrameworkBlock>
+
+<Demo name="modal/popup-form" />
+
+## 自定义页脚
+
+<FrameworkBlock framework="react">
+传入 `okButtonProps` 和 `cancelButtonProps` 可分别自定义确定按钮和取消按钮的 props。如果 `okButtonProps` 、 `cancelButtonProps` 仍然不能满足需要的话，可以直接传入 `footer` 来自定义页脚内容。
+</FrameworkBlock>
+
+<Demo name="modal/custom-footer" />
+
+## 自定义标题
+
+<FrameworkBlock framework="react">
+`title` 支持传入文字或者 react 节点，支持各种场景的标题栏展示。
+</FrameworkBlock>
+
+<Demo name="modal/custom-title" />
+
+## 确认对话框
+
+使用 `Modal.confirm()`，可以快速弹出对话框。
+
+<Demo name="modal/confirm-dialog" />
+
+## 消息提示
+
+有 `info`、`success`、`warning`、`error` 四种类型的消息提示，仅提供一个确认按钮用于关闭消息提示对话框。
+
+<FrameworkBlock framework="vue">
+消息默认会开启 `simple` 和 `hideCancel`，如果想要取消可以再次设置。
+</FrameworkBlock>
+
+<Demo name="modal/message-tip" />
+
+## 函数调用
+
+<FrameworkBlock framework="vue">
+通过函数的方式使用对话框。
+</FrameworkBlock>
+
+<Demo name="modal/function-call" />
+
+## 定制按钮文字
+
+设置 `okText` 与 `cancelText` 以自定义按钮文字。
+
+<Demo name="modal/custom-button-text" />
+
+## 手动更新和移除
+
+<FrameworkBlock framework="react">
+手动更新和关闭通过 Modal 的方法创建的对话框。
+</FrameworkBlock>
+
+<Demo name="modal/manual-update" />
+
+## 自定义位置
+
+<FrameworkBlock framework="react">
+使用 `alignCenter` 结合 `style` 来设置对话框位置。
+</FrameworkBlock>
+
+<Demo name="modal/custom-position" />
+
+## 对话框的宽度
+
+<FrameworkBlock framework="vue">
+设置 `width="auto"` 可以让对话框自适应宽度。
+</FrameworkBlock>
+
+<Demo name="modal/dialog-width" />
+
+## 全屏
+
+<FrameworkBlock framework="vue">
+开启 `fullscreen` 属性，可以让对话框占满整个容器。
+</FrameworkBlock>
+
+<Demo name="modal/fullscreen" />
+
+## 数据请求加载
+
+<FrameworkBlock framework="react">
+对话框中显示 loading 效果。
+</FrameworkBlock>
+
+<Demo name="modal/data-loading" />
+
+## 带有通知对话框
+
+<FrameworkBlock framework="react">
+对话框中显示 Alert。
+</FrameworkBlock>
+
+<Demo name="modal/with-alert" />
+
+## 带有步骤条对话框
+
+<FrameworkBlock framework="react">
+带有横向步骤条的对话框。
+</FrameworkBlock>
+
+<Demo name="modal/with-steps" />
+
+## 自定义渲染对话框
+
+<FrameworkBlock framework="react">
+可以通过 `modalRender` 来自定义渲染对话框，配合 `react-draggable` 等第三方库可以实现拖拽功能。
+</FrameworkBlock>
+
+## 可拖动
+
+<FrameworkBlock framework="vue">
+开启 `draggable` 属性，允许用户拖动对话框。
+</FrameworkBlock>
+
+<Demo name="modal/draggable" />
+
+## Hooks 用法
+
+<FrameworkBlock framework="react">
+可以通过 `useModal` 去创建可以读取 `context` 的对话框。
+</FrameworkBlock>
+
+<Demo name="modal/hooks" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Modal
+
+| 参数名 | 描述 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| alignCenter | 弹出框垂直水平居中 | boolean | `true` | - |
+| autoFocus | 是否默认聚焦第一个可聚焦元素，只在 `focusLock` 开启时生效。 | boolean | `true` | - |
+| closable | 是否显示右上角的关闭按钮 | boolean | `-` | - |
+| confirmLoading | 确认按钮加载中 | boolean | `-` | - |
+| escToExit | 按 `ESC` 键关闭 | boolean | `true` | - |
+| focusLock | 是否将焦点锁定在弹出框内 | boolean | `true` | - |
+| mask | 是否显示遮罩 | boolean | `true` | - |
+| maskClosable | 点击蒙层是否可以关闭 | boolean | `true` | - |
+| mountOnEnter | 是否在初次打开对话框时才渲染 dom | boolean | `true` | - |
+| simple | 简洁模式的样式，没有分割线，底部按钮居中显示。默认通过方法调用的提示类型的弹窗会展示 `simple` 样式。设置为 true 时，默认不显示右上角关闭图标 | boolean | `-` | - |
+| unmountOnExit | 是否在隐藏之后销毁 DOM 结构 | boolean | `-` | - |
+| visible | 弹出框是否可见 | boolean | `-` | - |
+| cancelText | 取消按钮文案 | ReactNode | `-` | - |
+| closeIcon | 自定义右上角的关闭按钮节点 | ReactNode | `-` | 2.21.0 |
+| okText | 确认按钮文案 | ReactNode | `-` | - |
+| title | 弹出框的标题 | string \| ReactNode | `-` | - |
+| cancelButtonProps | 取消按钮的 props | ButtonProps | `-` | - |
+| className | 节点类名 | string \| string[] | `-` | - |
+| maskStyle | 蒙层的样式 | CSSProperties | `-` | 2.6.0 |
+| okButtonProps | 确认按钮的 props | ButtonProps | `-` | - |
+| onOk | 点击确认按钮的回调 | `(e?: MouseEvent) => Promise<any> \| void` | `-` | - |
+| style | 节点样式 | CSSProperties | `-` | - |
+| wrapClassName | 弹出框外层 dom 类名 | string \| string[] | `-` | - |
+| wrapStyle | 弹出框外层样式 | CSSProperties | `-` | 2.16.0 |
+| afterClose | 弹框关闭之后的回调 | `() => void` | `-` | - |
+| afterOpen | 弹框打开之后的回调 | `() => void` | `-` | - |
+| footer | 自定义页脚，传入 null 则不显示 | `ReactNode \| ((cancelButtonNode: ReactNode, okButtonNode: ReactNode) => ReactNode)` | `-` | 2.12.0 |
+| getChildrenPopupContainer | 对话框里的弹出框 `Select` `Tooltip` 等挂载的容器，默认挂载在对话框内。 | `(node: HTMLElement) => Element` | `-` | - |
+| getPopupContainer | 指定弹出框挂载的父节点 | `() => Element` | `() => document.body` | - |
+| modalRender | 自定义渲染对话框 | `(modalNode: ReactNode) => ReactNode` | `-` | 2.2.0 |
+| onCancel | 关闭弹出框的回调 | `() => void` | `-` | - |
+
+### Modal.method(config)
+
+包括以下几种：
+
+- `Modal.confirm(config)`
+- `Modal.info(config)`
+- `Modal.success(config)`
+- `Modal.warning(config)`
+- `Modal.error(config)`
+
+以上函数都会返回一个对象，可用来更新或者关闭对话框。如：
+
+```js
+const info = Modal.info({ title: 'Info' })
+info.update({ title: 'Updated Title' })
+info.close()
+```
+
+`config` 的具体参数如下所示（继承所有 Modal 的参数）：
+
+| 参数名  |     描述     |        类型         | 默认值 |
+| ------- | :----------: | :-----------------: | -----: |
+| content | 对话框的内容 |     `ReactNode`     |    `-` |
+| icon    |  自定义图标  | `ReactNode \| null` |    `-` |
+
+### Modal.config 方法
+
+全局设置 `Modal.confirm|success|info|error|warning` 的属性，类似 `Message.config` 方法，`<Modal />` 的使用方式会从 `ConfigProvider` 获取上下文配置。
+
+```js
+Modal.config({
+  // 自定义前缀
+  prefixCls: 'arco',
+  // 是否静态方法以简洁样式展示信息
+  simple: true
+})
+```
+
+### Modal.destroyAll 方法
+
+调用 `Modal.destroyAll`，会关闭所有弹出的确认框（包括 `Modal.confirm` `Modal.info` `Modal.success` `Modal.error` `Modal.warning`），一般用于路由改动时，关闭所有弹出。
+
+```js
+Modal.destroyAll()
+```
+
+### Modal.useModal 方法
+
+通过方法去使用对话框，像是 `Modal.confirm` `Modal.warning`，因为是通过 `ReactDOM.render` 直接渲染，所以不在上下文中，因此拿不到 `context`。如果希望获取上下文 `context`，那么可以通过 `useModal` 去通过 hook 的方法调用，将 `contextHolder` 放到上下文中。
+
+```js
+const [modal, contextHolder] = Modal.useModal()
+
+;<Context.Provider>
+  {contextHolder}
+  <Button onClick={() => modal.warning({ title: 'Title', content: 'content' })}>Open</Button>
+</Context.Provider>
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<modal>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|visible **(v-model)**|对话框是否可见|`boolean`|`-`||
+|default-visible|对话框默认是否可见（非受控状态）|`boolean`|`false`||
+|width|对话框的宽度，不设置的情况下会使用样式中的宽度值|`number\|string`|`-`|2.12.0|
+|top|对话框的距离顶部的高度，居中显示开启的情况下不生效|`number\|string`|`-`|2.12.0|
+|mask|是否显示遮罩层|`boolean`|`true`||
+|title|标题|`string`|`-`||
+|title-align|标题的水平对齐方向|`'start' \| 'center'`|`'center'`|2.17.0|
+|align-center|对话框是否居中显示|`boolean`|`true`||
+|unmount-on-close|关闭时是否卸载节点|`boolean`|`false`||
+|mask-closable|是否点击遮罩层可以关闭对话框|`boolean`|`true`||
+|hide-cancel|是否隐藏取消按钮|`boolean`|`false`||
+|simple|是否开启简单模式|`boolean`|`(props: any) => {  return props.notice;}`||
+|closable|是否显示关闭按钮|`boolean`|`true`||
+|ok-text|确认按钮的内容|`string`|`-`||
+|cancel-text|取消按钮的内容|`string`|`-`||
+|ok-loading|确认按钮是否为加载中状态|`boolean`|`false`||
+|ok-button-props|确认按钮的Props|`ButtonProps`|`-`||
+|cancel-button-props|取消按钮的Props|`ButtonProps`|`-`||
+|footer|是否展示页脚部分|`boolean`|`true`||
+|render-to-body|对话框是否挂载在 `body` 元素下|`boolean`|`true`||
+|popup-container|弹出框的挂载容器|`string \| HTMLElement`|`'body'`||
+|mask-style|蒙层的样式|`CSSProperties`|`-`||
+|modal-class|对话框的类名|`string \| any[]`|`-`||
+|modal-style|对话框的样式|`CSSProperties`|`-`||
+|on-before-ok|触发 ok 事件前的回调函数。如果返回 false 则不会触发后续事件，也可使用 done 进行异步关闭。|`(  done: (closed: boolean) => void) => void \| boolean \| Promise<void \| boolean>`|`-`|2.7.0|
+|on-before-cancel|触发 cancel 事件前的回调函数。如果返回 false 则不会触发后续事件。|`() => boolean`|`-`|2.7.0|
+|esc-to-close|是否支持 ESC 键关闭对话框|`boolean`|`true`|2.15.0|
+|draggable|是否支持拖动|`boolean`|`false`|2.19.0|
+|fullscreen|是否开启全屏|`boolean`|`false`|2.19.0|
+|mask-animation-name|遮罩层动画名字|`string`|`-`|2.24.0|
+|modal-animation-name|对话框动画名字|`string`|`-`|2.24.0|
+|body-class|对话框内容部分的类名|`string \| any[]`|`-`|2.31.0|
+|body-style|对话框内容部分的样式|`StyleValue`|`-`|2.31.0|
+|hide-title|是否隐藏标题|`boolean`|`false`|2.50.0|
+
+### `<modal>` Events
+
+|事件名|描述|参数|版本|
+|---|---|---|:---|
+|ok|点击确定按钮时触发|ev: `MouseEvent`||
+|cancel|点击取消、关闭按钮时触发|ev: `MouseEvent \| KeyboardEvent`||
+|open|对话框打开后（动画结束）触发|-||
+|close|对话框关闭后（动画结束）触发|-||
+|before-open|对话框打开前触发|-|2.16.0|
+|before-close|对话框关闭前触发|-|2.16.0|
+
+### `<modal>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|title|标题|-|
+|footer|页脚|-|
+
+### `<modal>` 全局方法
+
+Modal提供的全局方法，可以通过以下三种方法使用：
+
+1. 通过this.$modal调用
+2. 在Composition API中，通过getCurrentInstance().appContext.config.globalProperties.$modal调用
+3. 导入Modal，通过Modal本身调用
+
+当通过 import 方式使用时，组件没有办法获取当前的 Vue Context，如 i18n 或 route 等注入在 AppContext 上的内容无法在内部使用，需要在调用时手动传入 AppContext，或者为组件全局指定 AppContext
+
+```ts
+import { createApp } from 'vue'
+import { Modal } from '@sbux/starbucks-design-vue';
+
+const app = createApp(App);
+Modal._context = app._context;
+```
+
+### Modal.config
+
+设置通过全局方法打开对话框时的默认配置。
+
+```ts
+Modal.config({
+  simple: false,
+});
+```
+
+### Modal.destroyAll
+
+关闭所有通过全局方法打开的对话框。
+
+```ts
+Modal.destroyAll();
+```
+
+### ModalConfig
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|title|标题|`RenderContent`|`-`||
+|content|内容|`RenderContent`|`-`||
+|footer|页脚|`boolean \| RenderContent`|`true`||
+|closable|是否显示关闭按钮|`boolean`|`true`||
+|okText|确认按钮的内容|`string`|`-`||
+|cancelText|取消按钮的内容|`string`|`-`||
+|okButtonProps|确认按钮的Props|`ButtonProps`|`-`||
+|cancelButtonProps|取消按钮的Props|`ButtonProps`|`-`||
+|okLoading|确认按钮是否为加载中状态|`boolean`|`false`||
+|hideCancel|是否隐藏取消按钮|`boolean`|`false`||
+|mask|是否显示遮罩层|`boolean`|`true`||
+|simple|是否开启简单模式|`boolean`|`false`||
+|maskClosable|是否点击遮罩层可以关闭对话框|`boolean`|`true`||
+|maskStyle|蒙层的样式|`CSSProperties`|`-`||
+|alignCenter|对话框是否居中显示|`boolean`|`true`||
+|escToClose|是否支持 ESC 键关闭对话框|`boolean`|`true`|2.15.0|
+|draggable|是否支持拖动|`boolean`|`false`|2.19.0|
+|fullscreen|是否开启全屏|`boolean`|`false`|2.19.0|
+|onOk|点击确定按钮的回调函数|`(e?: Event) => void`|`-`||
+|onCancel|点击取消按钮的回调函数|`(e?: Event) => void`|`-`||
+|onBeforeOk|触发 ok 事件前的回调函数。如果返回 false 则不会触发后续事件，也可使用 done 进行异步关闭。|`(    done: (closed: boolean) => void  ) => void \| boolean \| Promise<void \| boolean>`|`-`|2.7.0|
+|onBeforeCancel|触发 cancel 事件前的回调函数。如果返回 false 则不会触发后续事件。|`() => boolean`|`-`|2.7.0|
+|onOpen|对话框打开后（动画结束）触发|`() => void`|`-`||
+|onClose|对话框关闭后（动画结束）触发|`() => void`|`-`||
+|onBeforeOpen|对话框打开前触发|`() => void`|`-`|2.16.0|
+|onBeforeClose|对话框关闭前触发|`() => void`|`-`|2.16.0|
+|width|对话框的宽度，不设置的情况下会使用样式中的宽度值|`number \| string`|`-`|2.12.0|
+|top|对话框的距离顶部的高度，居中显示开启的情况下不生效|`number \| string`|`-`|2.12.0|
+|titleAlign|标题的水平对齐方向|`'start' \| 'center'`|`'center'`|2.17.0|
+|renderToBody|对话框是否挂载在 `body` 元素下|`boolean`|`true`||
+|popupContainer|弹出框的挂载容器|`string \| HTMLElement`|`'body'`||
+|modalClass|对话框的类名|`string \| any[]`|`-`||
+|modalStyle|对话框的样式|`CSSProperties`|`-`||
+|maskAnimationName|遮罩层动画名字|`string`|`-`|2.24.0|
+|modalAnimationName|对话框动画名字|`string`|`-`|2.24.0|
+|hideTitle|是否隐藏标题|`boolean`|`false`|2.50.0|
+|bodyClass|对话框内容部分的类名|`string \| any[]`|`-`||
+|bodyStyle|对话框内容部分的样式|`StyleValue`|`-`||
+
+### ModalReturn
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|close|关闭对话框|`() => void`|`-`||
+|update|更新对话框|`(config: ModalUpdateConfig) => void`|`-`|2.43.2|
+
+### ModalGlobalConfig
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|simple|通过全局方法打开时，是否默认开启简单模式|`boolean`|`true`|
+
+### ModalMethod
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|open|打开对话框|`(config: ModalConfig, appContext?: AppContext) => ModalReturn`|`-`|
+|confirm|打开对话框（简单模式）|`(config: ModalConfig, appContext?: AppContext) => ModalReturn`|`-`|
+|info|打开信息对话框|`(config: ModalConfig, appContext?: AppContext) => ModalReturn`|`-`|
+|success|打开成功对话框|`(config: ModalConfig, appContext?: AppContext) => ModalReturn`|`-`|
+|warning|打开警告对话框|`(config: ModalConfig, appContext?: AppContext) => ModalReturn`|`-`|
+|error|打开错误对话框|`(config: ModalConfig, appContext?: AppContext) => ModalReturn`|`-`|
+|config|配置全局方法默认参数|`(config: ModalGlobalConfig) => void`|`-`|
+|destroyAll|关闭所有通过全局方法打开的对话框|`() => void`|`-`|
+
+</FrameworkBlock>

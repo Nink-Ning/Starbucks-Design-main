@@ -17,6 +17,20 @@
   background-color: var(--bg-color-secondarycomponent);
 }
 
+.arco-skeleton .arco-skeleton-line-row,
+.arco-skeleton .arco-skeleton-shape {
+  background-color: var(--bg-color-secondarycomponent);
+}
+
+.arco-skeleton .arco-skeleton-line-row {
+  height: 16px;
+  border-radius: var(--border-radius-md);
+}
+
+.arco-skeleton .arco-skeleton-line-row:not(:last-child) {
+  margin-bottom: var(--spacing-5);
+}
+
 .arco-skeleton-header .arco-skeleton-image {
   width: 48px;
   height: 48px;
@@ -66,8 +80,8 @@
   margin-bottom: var(--spacing-5);
 }
 
-.arco-skeleton-animate .arco-skeleton-image,
-.arco-skeleton-animate .arco-skeleton-text > li {
+.arco-skeleton-animation .arco-skeleton-shape,
+.arco-skeleton-animation .arco-skeleton-line-row {
   background: linear-gradient(
     90deg,
     var(--bg-color-secondarycomponent) 25%,

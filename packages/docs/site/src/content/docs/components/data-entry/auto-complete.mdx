@@ -1,0 +1,220 @@
+---
+title: 自动补全 AutoComplete
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+输入框或自定义输入控件的自动补全功能。
+
+## 基本用法
+
+根据当前输入展示输入建议。
+
+<FrameworkBlock framework="react">
+自动补全组件的值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+自动补全组件的值可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="auto-complete/basic" />
+
+## 自定义选项
+
+<FrameworkBlock framework="react">
+可以传入 `AutoComplete.Option` 作为组件的 `children`，而非使用 `data`。
+</FrameworkBlock>
+
+<Demo name="auto-complete/custom-option" />
+
+## 自定义输入组件
+
+<FrameworkBlock framework="react">
+通过 `triggerElement` 支持自定义输入组件。
+</FrameworkBlock>
+
+<Demo name="auto-complete/custom-input" />
+
+## 区分大小写
+
+使用 `strict` 属性来指明在匹配时严格区分大小写。
+
+<Demo name="auto-complete/case-sensitive" />
+
+## 复杂用法
+
+<FrameworkBlock framework="react">
+这个示例展示了：`1. 添加Tooltip`, `2. 自定义显示`, `3. 对值进行操控`。
+</FrameworkBlock>
+
+<Demo name="auto-complete/complex" />
+
+## 查询模式 确定类目
+
+<FrameworkBlock framework="react">
+根据查询结果补全输入内容（确定类目）。
+</FrameworkBlock>
+
+<Demo name="auto-complete/query-certain" />
+
+## 查询模式 不确定类目
+
+<FrameworkBlock framework="react">
+根据查询结果补全输入内容（不确定类目）。
+</FrameworkBlock>
+
+<Demo name="auto-complete/query-uncertain" />
+
+## 自定义过滤规则
+
+<FrameworkBlock framework="react">
+如果你依赖用户输入来动态更新选项，请通过 `filterOption` 属性来覆盖默认的选项过滤规则，或者将其设为 `false` 来关闭默认过滤规则。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+如果你依赖用户输入来动态更新选项，请通过 `filter-option` 属性来覆盖默认的选项过滤规则，或者将其设为 `false` 来关闭默认过滤规则。
+</FrameworkBlock>
+
+<Demo name="auto-complete/custom-filter" />
+
+## 弹出框的页脚
+
+<FrameworkBlock framework="vue">
+自定义弹出框的页脚。
+</FrameworkBlock>
+
+<Demo name="auto-complete/popup-footer" />
+
+## 下拉菜单滚动
+
+<FrameworkBlock framework="vue">
+可以通过 `dropdown-scroll` 监听下拉菜单的滚动事件。或者通过 `dropdown-reach-bottom` 监听下拉菜单滚动到底部的事件。
+</FrameworkBlock>
+
+<Demo name="auto-complete/dropdown-scroll" />
+
+## 虚拟列表
+
+虚拟列表的使用方法。
+
+<Demo name="auto-complete/virtual-list" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### AutoComplete
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|allowClear|是否允许一键清除|boolean |`-`|-|
+|defaultActiveFirstOption|是否默认高亮第一个选项|boolean |`true`|-|
+|disabled|是否禁用|boolean |`-`|-|
+|error|是否是错误状态。(废弃，下个大版本移除，使用 status='error' 替代)|boolean |`-`|-|
+|loading|是否处于加载状态。|boolean |`-`|2.10.0|
+|strict|`strict: true` 的时候大小写敏感|boolean |`-`|-|
+|defaultValue|自动补全组件的默认值|string |`-`|-|
+|placeholder|输入框提示|string |`-`|-|
+|value|自动补全组件的值（受控模式）|string |`-`|-|
+|status|状态|'error' \| 'warning' |`-`|2.45.0|
+|children|自定义输入框/数据源|ReactNode |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|data|自动完成的数据源|`(string \| { value: string; name: string; [key: string]: any } \| ReactNode)[]` |`-`|-|
+|inputProps|传递 Input 组件的属性。|`Partial<InputProps>` |`-`|2.10.0|
+|style|节点样式|CSSProperties |`-`|-|
+|triggerProps|可以接受所有 `Trigger` 的 `Props`|`Partial<TriggerProps>` |`-`|-|
+|virtualListProps|传递虚拟滚动属性。|AvailableVirtualListProps |`-`|2.2.0|
+|dropdownRender|自定义弹出内容。|`(menu: ReactNode) => ReactNode` |`-`|-|
+|filterOption|是否根据输入的值筛选数据。如果传入函数的话，接收 `inputValue` 和 `option` 两个参数，当option符合筛选条件时，返回 `true`，反之返回 `false`。|`boolean \| ((inputValue: string, option: ReactElement) => boolean)` |`true`|-|
+|getPopupContainer|弹出框挂载的父节点。|`(node: HTMLElement) => Element` |`-`|-|
+|onBlur|失去焦点的回调|`(event) => void` |`-`|-|
+|onChange|输入或者点击补全项，value 改变时的回调（仅在点击补全项时存在第二个参数）|`(value: string, option?: OptionInfo) => void` |`-`|-|
+|onFocus|聚焦时的回调|`(event) => void` |`-`|-|
+|onPressEnter|按下回车键的回调|`(event, activeOption?: OptionInfo) => void` |`-`|`activeOption` in 2.25.1|
+|onSearch|搜索补全时的回调|`(value: string) => void` |`-`|-|
+|onSelect|点击补全项时的回调|`(value: string, option: OptionInfo) => void` |`-`|-|
+|triggerElement|自定义触发元素|`ReactElement \| (({ value }) => ReactElement)` |`<Input />`|`() => ReactElement` in 2.31.0|
+
+### OptionInfo
+
+```js
+export interface OptionInfo extends PropsWithChildren<OptionProps> {
+  child?: ReactElement;
+  _valid: boolean;
+  _index: number;
+  _origin: "children" | "options" | "userCreatedOptions" | "userCreatingOption";
+}
+```
+
+### AvailableVirtualListProps
+
+```js
+export type AvailableVirtualListProps = Pick<
+  VirtualListProps<any>,
+  | "height"
+  | "itemHeight"
+  | "threshold"
+  | "isStaticItemHeight"
+  | "scrollOptions"
+  | "onScroll"
+  | "wrapperChild"
+>;
+```
+
+### AutoComplete.Option
+
+同 `Select.Option`, 参考 Select 文档 。
+
+### AutoComplete.OptGroup
+
+同 `Select.OptGroup`, 参考 Select 文档 。
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<auto-complete>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|model-value **(v-model)**|绑定值|`string`|`-`||
+|default-value|默认值（非受控模式）|`string`|`''`||
+|disabled|是否禁用|`boolean`|`false`||
+|data|用于自动提示的数据|`(string \| number \| SelectOptionData \| SelectOptionGroup)[]`|`[]`||
+|popup-container|弹出框的挂载容器|`string \| HTMLElement \| null \| undefined`|`-`||
+|strict|是否为严格校验模式|`boolean`|`false`||
+|filter-option|自定义选项过滤方法|`FilterOption`|`true`||
+|trigger-props|trigger 组件属性|`TriggerProps`|`-`|2.14.0|
+|allow-clear|是否允许清空输入框|`boolean`|`false`|2.23.0|
+|virtual-list-props|传递虚拟列表属性，传入此参数以开启虚拟滚动 VirtualListProps|`VirtualListProps`|`-`|2.50.0|
+
+### `<auto-complete>` Events
+
+|事件名|描述|参数|版本|
+|---|---|---|:---|
+|change|绑定值发生改变时触发|value: `string`||
+|search|用户搜索时触发|value: `string`||
+|select|选择选项时触发|value: `string`||
+|clear|用户点击清除按钮时触发|ev: `Event`|2.23.0|
+|dropdown-scroll|下拉菜单发生滚动时触发|ev: `Event`|2.52.0|
+|dropdown-reach-bottom|下拉菜单滚动到底部时触发|ev: `Event`|2.52.0|
+
+### `<auto-complete>` Methods
+
+|方法名|描述|参数|返回值|版本|
+|---|---|---|---|:---|
+|focus|使输入框获取焦点|-|-|2.40.0|
+|blur|使输入框失去焦点|-|-|2.40.0|
+
+### `<auto-complete>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|option|选项内容|data: `OptionInfo`|2.13.0|
+|footer|弹出框的页脚|-||
+
+</FrameworkBlock>

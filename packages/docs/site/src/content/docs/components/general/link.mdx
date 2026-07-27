@@ -1,0 +1,90 @@
+---
+title: 链接 Link
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+链接的基本样式。
+
+## 基本用法
+
+与按钮相比，链接不太突出，因此通常将其用作可选操作。
+
+<Demo name="link/basic" />
+
+## 链接的状态
+
+<FrameworkBlock framework="react">
+链接的状态分为 `error`（失败）、`success`（成功）、`warning`（警告）三种，不同状态呈现不同样式。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+链接的状态分为 `normal` - 正常（默认）、`success` - 成功、`warning` - 警告、`danger` - 危险 四种。
+</FrameworkBlock>
+
+<Demo name="link/link-status" />
+
+## 图标
+
+通过 `icon` 属性设置带图标的链接，设置为 `true` 时显示默认图标。
+
+<Demo name="link/icon" />
+
+## 加载中状态
+
+通过设置 `loading` 可以让链接处于加载中状态。处于加载中状态的链接不会触发点击事件。
+
+<Demo name="link/loading-state" />
+
+## 悬浮状态底色
+
+可以通过 `hoverable` 属性设置是否在悬浮状态时隐藏底色。
+
+<Demo name="link/hover-bg" />
+
+## 配合 dropdown 使用
+
+配合下拉菜单实现带下拉选择的链接。
+
+<Demo name="link/dropdown" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Link
+
+| 参数名 | 描述 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| disabled | 是否禁用 | boolean | `-` | - |
+| hoverable | 悬浮状态是否有底色 | boolean | `true` | 2.23.0 |
+| status | 不同状态 | 'error' \| 'success' \| 'warning' | `-` | - |
+| className | 节点类名 | string \| string[] | `-` | - |
+| icon | 显示图标，设置为 `true` 时展示默认图标。 | ReactNode \| boolean | `-` | - |
+| style | 节点样式 | CSSProperties | `-` | - |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<link>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|href|链接地址|`string`|`-`||
+|status|链接的状态|`'normal' \| 'warning' \| 'success' \| 'danger'`|`'normal'`||
+|hoverable|鼠标悬浮时存在底色|`boolean`|`true`|2.7.0|
+|icon|图标|`boolean`|`false`|2.7.0|
+|loading|链接是否为加载中状态|`boolean`|`false`|2.37.0|
+|disabled|链接是否禁用|`boolean`|`false`||
+
+### `<link>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|click|点击时触发|ev: `MouseEvent`|
+
+</FrameworkBlock>

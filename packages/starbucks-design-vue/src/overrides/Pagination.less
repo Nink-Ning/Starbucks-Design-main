@@ -251,3 +251,56 @@
   margin-right: 0;
   margin-left: var(--spacing-4);
 }
+
+// Vue DOM adapters
+.arco-pagination-options,
+.arco-pagination-total {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+
+.arco-pagination-options {
+  margin-left: var(--spacing-4);
+}
+
+.arco-pagination-item-next,
+.arco-pagination-item-previous {
+  color: var(--color-text-secondary);
+  background-color: transparent;
+}
+
+.arco-pagination-item-next:not(.arco-pagination-item-disabled):hover,
+.arco-pagination-item-previous:not(.arco-pagination-item-disabled):hover {
+  color: var(--color-primary);
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-pagination .arco-pagination-item-previous.arco-pagination-item-disabled {
+  color: var(--color-text-disabled);
+  background-color: transparent;
+  border-color: transparent;
+  cursor: not-allowed;
+}
+
+.arco-pagination-total {
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-pagination-size-mini .arco-pagination-total,
+.arco-pagination-size-mini .arco-pagination-options {
+  font-size: var(--fs-12);
+  line-height: 24px;
+}
+
+.arco-pagination-size-small .arco-pagination-total,
+.arco-pagination-size-small .arco-pagination-options {
+  line-height: 28px;
+}
+
+.arco-pagination-size-large .arco-pagination-total,
+.arco-pagination-size-large .arco-pagination-options {
+  line-height: 36px;
+}

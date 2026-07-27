@@ -1,0 +1,7 @@
+<template>
+  <Steps label-placement="vertical">
+    <Step description="This is a description">Succeeded</Step>
+    <Step description="This is a description">Processing</Step>
+    <Step description="This is a description">Pending</Step>
+  </Steps>
+</template>

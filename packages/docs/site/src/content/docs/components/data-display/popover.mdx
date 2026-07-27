@@ -1,0 +1,95 @@
+---
+title: 气泡卡片 Popover
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+鼠标悬停、聚焦或点击在某个组件时，弹出的气泡式的卡片浮层。可以对卡片上的元素进行操作。
+
+## 基本用法
+
+鼠标移入或点击，弹出气泡，可对浮层上元素进行操作，承载复杂内容和操作。
+
+<Demo name="popover/basic" />
+
+## 触发方式
+
+通过设置 `trigger`，可以指定不同的触发方式。
+
+<Demo name="popover/trigger" />
+
+## 弹出位置
+
+`Popover` 支持 12 个不同的方位。分别为：`上左` `上` `上右` `下左` `下` `下右` `左上` `左` `左下` `右上` `右` `右下`。
+
+<Demo name="popover/popup-position" />
+
+## 浮层内关闭
+
+控制浮层显示。更多示例可查看 Trigger 组件。
+
+<Demo name="popover/close" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Popover
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|blurToHide|是否在失去焦点的时候关闭弹出框|boolean|`true`|-|
+|defaultPopupVisible|默认的弹出框状态|boolean|`-`|-|
+|disabled|是否禁用|boolean|`-`|2.11.0|
+|popupHoverStay|鼠标移入弹出框的话，弹出框会保留而不销毁|boolean|`true`|-|
+|popupVisible|弹出框是打开还是关闭状态|boolean|`-`|-|
+|unmountOnExit|是否在隐藏的时候销毁 DOM 结构|boolean|`true`|-|
+|childrenPrefix|会在打开状态给元素加上一个类，格式为 `${childrenPrefix}-open`。|string|`-`|-|
+|color|弹出层背景色|string|`-`|2.22.0|
+|position|弹出框的方位，有 12 个方位可供选择|\| 'top'\| 'tl'\| 'tr'\| 'bottom'\| 'bl'\| 'br'\| 'left'\| 'lt'\| 'lb'\| 'right'\| 'rt'\| 'rb'|`top`|-|
+|trigger|触发方式|`TriggerProps['trigger']`|`hover`|-|
+|content|弹出的内容|ReactNode|`-`|-|
+|className|节点类名|string \| string[]|`-`|-|
+|style|节点样式|CSSProperties|`-`|-|
+|triggerProps|可以接受所有 `Trigger` 组件的参数|`Partial<TriggerProps>`|`-`|-|
+|getPopupContainer|弹出框挂载的节点|`(node: HTMLElement) => Element`|`-`|-|
+|onVisibleChange|显示或隐藏时触发的回调|`(visible: boolean) => void`|`-`|-|
+|title|标题.函数类型在 `2.48.0` 支持|`ReactNode \| (() => ReactNode)`|`-`|-|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<popover>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|popup-visible **(v-model)**|文字气泡是否可见|`boolean`|`-`|
+|default-popup-visible|文字气泡默认是否可见（非受控模式）|`boolean`|`false`|
+|title|标题|`string`|`-`|
+|content|内容|`string`|`-`|
+|trigger|触发方式|`'hover' \| 'click' \| 'focus' \| 'contextMenu'`|`'hover'`|
+|position|弹出位置|`'top' \| 'tl' \| 'tr' \| 'bottom' \| 'bl' \| 'br' \| 'left' \| 'lt' \| 'lb' \| 'right' \| 'rt' \| 'rb'`|`'top'`|
+|content-class|弹出框内容的类名|`ClassName`|`-`|
+|content-style|弹出框内容的样式|`CSSProperties`|`-`|
+|arrow-class|弹出框箭头的类名|`ClassName`|`-`|
+|arrow-style|弹出框箭头的样式|`CSSProperties`|`-`|
+|popup-container|弹出框的挂载容器|`string \| HTMLElement`|`-`|
+
+### `<popover>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|popup-visible-change|文字气泡显示状态改变时触发|visible: `boolean`|
+
+### `<popover>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|title|标题|-|
+|content|内容|-|
+
+</FrameworkBlock>

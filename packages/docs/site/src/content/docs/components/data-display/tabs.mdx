@@ -1,0 +1,247 @@
+---
+title: 标签页 Tabs
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+将内容组织同一视图中，一次可查看一个视图内容，查看其他内容可切换选项卡查看。
+
+## 基本用法
+
+标签页的基本用法。
+
+<Demo name="tabs/basic" />
+
+## 带图标的页签
+
+通过自定义标题，可以给页签加上图标。
+
+<Demo name="tabs/tab-with-icon" />
+
+## 位置
+
+<FrameworkBlock framework="react">
+通过 `tabPosition` 设置选项卡的位置。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `position` 属性可以自定义标签栏的位置。
+</FrameworkBlock>
+
+<Demo name="tabs/placement" />
+
+## 不同类型
+
+使用 `type` 属性设置不同类型的页签。
+
+<Demo name="tabs/variants" />
+
+## 附加内容
+
+<FrameworkBlock framework="react">
+通过 `extra` 属性可以在页签的右侧添加额外内容。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `extra` 插槽可以自定义额外显示内容。
+</FrameworkBlock>
+
+<Demo name="tabs/extra-content" />
+
+## 动态增减标签页
+
+<FrameworkBlock framework="react">
+通过 `editable` 开启动态增减页签，配合 `onAddTab` / `onDeleteTab` 回调使用。仅在 `type` 为 `card` 或 `card-gutter` 时候生效。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `:editable="true"` 可以开启动态增减标签页，配合 `add` / `delete` 事件使用。仅在 `line` | `card` | `card-gutter` 生效。
+</FrameworkBlock>
+
+<Demo name="tabs/dynamic-tabs" />
+
+## 受控模式
+
+<FrameworkBlock framework="react">
+通过 `activeTab` 与 `onChange` 受控使用，或通过 `defaultActiveTab` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `v-model:active-key`（即 `active-key` 配合 `change` 事件）双向绑定，或通过 `default-active-key` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="tabs/controlled" />
+
+## 嵌套使用
+
+组件可以嵌套使用。
+
+<Demo name="tabs/nested" />
+
+## 不同尺寸
+
+<FrameworkBlock framework="react">
+使用 `size` 属性设置不同尺寸的页签，有 `mini`、`small`、`default`、`large` 四种尺寸，默认为 `default`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+使用 `size` 属性设置不同尺寸的页签，有 `mini`、`small`、`medium`、`large` 四种尺寸，默认为 `medium`。
+</FrameworkBlock>
+
+<Demo name="tabs/size" />
+
+<FrameworkBlock framework="react">
+
+## 自定义选项卡头部
+
+使用 `react-sticky` 实现选项卡头部吸顶效果。
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="react">
+
+## 可拖拽页签
+
+通过 `react-dnd` 可以实现页签的拖拽。
+
+</FrameworkBlock>
+
+## 滚动
+
+支持通过滚轮或者触摸板进行滚动操作。
+
+<Demo name="tabs/scroll" />
+
+## 滚动偏移位置
+
+支持设置 `scrollPosition` 来改变选中的选项卡的滚动位置。
+
+<Demo name="tabs/scroll-position" />
+
+## 懒加载
+
+<FrameworkBlock framework="react">
+通过设置 `lazyload` 属性，可以让面板在首次激活时才渲染内容。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `lazy-load` 属性，可以让面板在首次激活时渲染。
+</FrameworkBlock>
+
+<Demo name="tabs/lazy-load" />
+
+## 触发方式
+
+通过 `trigger` 指定触发方式。
+
+<Demo name="tabs/trigger" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Tabs
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|destroyOnHide|是否销毁隐藏标签页的节点, `TabPane` 的该属性优先级高于 `Tabs`。|boolean |`-`|-|
+|editable|是否允许增减标签。只在 `type` 为 `card` 或 `card-gutter` 时候生效。|boolean |`-`|-|
+|headerPadding|选项卡头部是否存在水平边距。仅对 `type`等于 `line`、`text`类型的选项卡生效|boolean |`true`|2.6.0|
+|justify|高度撑满容器，只在水平模式下生效。（默认的高度是又撑起的。）|boolean |`-`|-|
+|lazyload|设置为 `true` 时，将不会在组件挂载的时候渲染被隐藏的标签页。|boolean |`true`|-|
+|showAddButton|是否显示新增按钮（仅在`editable`为`true`时生效）|boolean |`true`|-|
+|activeTab|当前选中的 tab 的 key|string |`-`|-|
+|defaultActiveTab|默认选中的标签选项卡，如不指定默认选择第一个|string |`-`|-|
+|direction|标签选项卡的方向是水平还是竖直，分别对应 `horizontal `和 `vertical`。** 注意： 已废弃，使用 tabPosition 替代。**|'horizontal' \| 'vertical' |`-`|-|
+|inkBarSize|定制下划线尺寸|`{ width?: CSSProperties['width']; height?: CSSProperties['height'] }` |`-`|2.54.0|
+|overflow|标签页较多时候，选择滚动/下拉菜单形式展示 tab|'scroll' \| 'dropdown' |`scroll`|-|
+|scrollPosition|被选中 tab 的滚动位置，默认 auto 即会将 activeTab 滚动到可见区域，但不会特意做位置调整|'start' \| 'end' \| 'center' \| 'auto' \| number |`auto`|2.25.0|
+|size|有四个尺寸供选择，分别为`mini`, `small`, `default`, `large`|'mini' \| 'small' \| 'default' \| 'large' |`-`|-|
+|tabPosition|选项卡位置|'left' \| 'right' \| 'top' \| 'bottom' |`top`|-|
+|type|标签选项卡的类型|'line' \| 'card' \| 'card-gutter' \| 'text' \| 'rounded' \| 'capsule' |`line`|-|
+|addButton|自定义新增按钮|ReactNode |`-`|2.16.0|
+|deleteButton|自定义删除按钮|ReactNode |`-`|2.16.0|
+|extra|显示在标签页右侧的附加|ReactNode |`-`|-|
+|animation|是否开启过渡效果|`boolean \| { tabPane?: boolean; inkBar?: boolean }` |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|icons|标签页头部 编辑/滚动/下拉 图标配置。对于不想展示的图标可以将其设置为`null`|`{add?: ReactNode;delete?: ReactNode;prev?: ReactNode;next?: ReactNode;dropdown?: ReactNode;}` |`-`|2.15.0, `prev`,`next`,`dropdown` in `2.47.0`|
+|scrollAfterEdit|是否在标签增减后，自动进行滚动调整(`editable`为`true`时生效）|`{delete?: boolean;add?: boolean;}` |`{ add: true, delete: true }`|2.25.0|
+|style|节点样式|CSSProperties |`-`|-|
+|onAddTab|点击新增 tab 按钮的回调|`() => void` |`-`|-|
+|onChange|`activeTab` 改变的回调|`(key: string) => void` |`-`|-|
+|onClickTab|点击选项卡的回调|`(key: string) => void` |`-`|-|
+|onDeleteTab|点击删除按钮的回调|`(key: string) => void` |`-`|-|
+|renderTabHeader|自定义选项卡头部|`(tabProps: TabsProps, DefaultTabHeader: typeof TabHeader) => ReactElement` |`-`|-|
+|renderTabTitle|自定义单个选项卡头部|`(tabTitle: ReactNode,info: {key: string \| number;isActive: boolean;disabled: boolean;editable: boolean;}) => ReactNode` |`-`|-|
+
+### Tabs.TabPane
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|closable|动态增减标签页时是否允许关闭当前标签页|boolean |`-`|
+|destroyOnHide|选项卡隐藏的时候是否销毁标签页内的DOM结构，优先级高于 `Tabs` 的 `destroyOnHide` 属性|boolean |`-`|
+|disabled|是否禁用|boolean |`-`|
+|title|选项卡的标题显示|string \| ReactNode  **(必填)**|`-`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<tabs>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|active-key **(v-model)**|当前选中的标签的 `key`|`string\|number`|`-`||
+|default-active-key|默认选中的标签的`key`（非受控状态，为空时选中第一个标签页）|`string\|number`|`-`||
+|position|选项卡的位置|`'left' \| 'right' \| 'top' \| 'bottom'`|`'top'`||
+|size|选项卡的大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`-`||
+|type|选项卡的类型|`'line' \| 'card' \| 'card-gutter' \| 'text' \| 'rounded' \| 'capsule'`|`'line'`||
+|direction|选项卡的方向|`'horizontal' \| 'vertical'`|`'horizontal'`||
+|editable|是否开启可编辑模式|`boolean`|`false`||
+|show-add-button|是否显示增加按钮（仅在可编辑模式可用）|`boolean`|`false`||
+|destroy-on-hide|是否在不显示标签时销毁内容|`boolean`|`false`|2.27.0|
+|lazy-load|是否在首次展示标签时挂载内容|`boolean`|`false`||
+|justify|高度撑满容器，只在水平模式下生效。|`boolean`|`false`||
+|animation|是否开启选项内容过渡动画|`boolean`|`false`||
+|header-padding|选项卡头部是否存在水平边距。仅对 `type` 等于 `line`、`text` 类型的选项卡生效|`boolean`|`true`|2.10.0|
+|auto-switch|创建标签后是否切换到新标签（最后一个）|`boolean`|`false`|2.18.0|
+|hide-content|是否隐藏内容|`boolean`|`false`|2.25.0|
+|trigger|触发方式|`'hover' \| 'click'`|`'click'`|2.34.0|
+|scroll-position|被选中 tab 的滚动位置，默认 auto 即会将 activeTab 滚动到可见区域，但不会特意做位置调整|`'start' \| 'end' \| 'center' \| 'auto' \| number`|`'auto'`||
+
+### `<tabs>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|change|当前标签值改变时触发|key: ` string \| number `|
+|tab-click|用户点击标签时触发|key: ` string \| number `|
+|add|用户点击增加按钮时触发|-|
+|delete|用户点击删除按钮时触发|key: ` string \| number `|
+
+### `<tabs>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|extra|选项卡额外内容|-|
+
+### `<tab-pane>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|title|选项卡的标题|`string`|`-`||
+|disabled|是否禁用|`boolean`|`false`||
+|closable|是否允许关闭此选项卡（仅在可编辑模式生效）|`boolean`|`true`||
+|destroy-on-hide|是否在不显示标签时销毁内容|`boolean`|`false`|2.27.0|
+
+### `<tab-pane>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|title|选项卡标题|-|
+
+</FrameworkBlock>

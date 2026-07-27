@@ -1,0 +1,24 @@
+---
+import config from 'virtual:starlight/user-config';
+import Search from 'virtual:starlight/components/Search';
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+
+const { sidebar } = Astro.locals.starlightRoute;
+const isGuideSection = Astro.url.pathname.includes('/guide/');
+const shouldRenderSearch =
+  !isGuideSection &&
+  (config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro');
+---
+
+{shouldRenderSearch && <div class="sb-sidebar-search"><Search /></div>}
+{!shouldRenderSearch && <div class="sb-sidebar-leading-space" aria-hidden="true"></div>}
+
+<SidebarPersister>
+  <SidebarSublist sublist={sidebar} />
+</SidebarPersister>
+
+<div class="md:sl-hidden">
+  <MobileMenuFooter />
+</div>

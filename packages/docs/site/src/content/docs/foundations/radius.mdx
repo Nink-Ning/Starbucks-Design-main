@@ -1,0 +1,27 @@
+---
+title: 圆角 Radius
+sidebar:
+  order: 2
+---
+
+import RadiusScale from '../../../components/foundations/RadiusScale.astro';
+
+圆角用于软化界面元素的边缘、传达层级与可点击性。系统提供六档圆角，从小元素到全圆逐级递进。点击任一档可复制其像素值。
+
+<RadiusScale
+  items={[
+    { name: 'radius-small', value: 2, note: 'Tag、Badge' },
+    { name: 'radius-default', value: 4, note: 'Button、Input' },
+    { name: 'radius-medium', value: 6, note: '中等容器' },
+    { name: 'radius-large', value: 8, note: '卡片、弹层' },
+    { name: 'radius-extralarge', value: 12, note: '大卡片、模态' },
+    { name: 'radius-round', value: 999, note: '全圆：Avatar、Switch' },
+  ]}
+/>
+
+## 使用建议
+
+- **小元素**（Tag、Badge、Checkbox）用 `radius-small`，保持紧凑。
+- **表单与按钮**（Button、Input、Select）统一 `radius-default`，是界面中最常见的圆角。
+- **卡片与浮层**（Card、Dropdown、Popover）用 `radius-large`；尺寸更大的模态、抽屉可用 `radius-extralarge`。
+- **需要全圆**的元素（头像、开关、胶囊标签、圆形按钮）用 `radius-round`（`999px`）。

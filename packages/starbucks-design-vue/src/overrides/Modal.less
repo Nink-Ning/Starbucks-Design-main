@@ -224,3 +224,38 @@
   right: initial;
   left: var(--spacing-8);
 }
+
+.arco-modal-body {
+  padding: var(--spacing-8);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-modal .arco-modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: var(--spacing-8);
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: 1;
+}
+
+.arco-modal .arco-modal-close-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.arco-modal .arco-modal-close-btn:hover::before {
+  background-color: var(--bg-color-secondarycontainer-hover);
+}
+
+.arco-modal-title.arco-modal-title-align-center {
+  justify-content: flex-start;
+}
+
+.arco-modal-simple .arco-modal-body {
+  padding: 0;
+  color: var(--color-text-secondary);
+}

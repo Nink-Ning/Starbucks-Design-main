@@ -1,0 +1,158 @@
+---
+title: 按钮 Button
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+按钮是一种命令组件，可发起一个即时操作。
+
+## 基本用法
+
+按钮分为主要按钮、次要按钮（默认）、虚线按钮、线形按钮、文本按钮五种类型。
+
+<Demo name="button/basic" />
+
+## 图标按钮
+
+按钮可以嵌入图标。在只设置图标而没有内容时，按钮的宽高相等。
+
+<Demo name="button/icon" />
+
+## 按钮形状
+
+按钮有多种形状：`square` - 长方形（默认）、`circle` - 圆形、`round` - 全圆角。
+
+<Demo name="button/shape" />
+
+## 按钮尺寸
+
+<FrameworkBlock framework="react">
+按钮分为 `mini`、`small`、`default`、`large` 四种尺寸。高度分别为：`24px`、`28px`、`32px`、`36px`。推荐及默认尺寸为 `default`（中）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+按钮分为 `mini`、`small`、`medium`、`large` 四种尺寸。高度分别为：`24px`、`28px`、`32px`、`36px`。推荐（默认）尺寸为 `medium`。
+</FrameworkBlock>
+
+可在不同场景及不同业务需求选择适合尺寸。
+
+<Demo name="button/button-size" />
+
+## 按钮状态
+
+按钮状态分为警告、危险、成功三种（默认为正常状态），可以与按钮类型同时生效，优先级高于按钮类型。
+
+<Demo name="button/button-status" />
+
+## 禁用状态
+
+按钮的禁用状态。
+
+<Demo name="button/disabled" />
+
+## 加载中状态
+
+通过设置 `loading` 可以让按钮处于加载中状态。处于加载中状态的按钮不会触发点击事件。
+
+<FrameworkBlock framework="react">
+通过设置 `loadingFixedWidth`，可以在加载中时保持按钮宽度不变。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `loading-fixed-width`，可以在加载中时保持按钮宽度不变。
+</FrameworkBlock>
+
+<Demo name="button/loading-state" />
+
+## 组合按钮
+
+可用在同级多项操作，以按钮组合方式出现。
+
+<FrameworkBlock framework="react">
+使用 `Button.Group` 包裹多个按钮即可组合。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+使用 `<a-button-group>` 组件包裹多个按钮即可组合。
+</FrameworkBlock>
+
+<Demo name="button/button-group" />
+
+## 长按钮
+
+通过设置 `long` 属性，按钮宽度随容器宽度进行适配。
+
+<Demo name="button/long" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Button
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| disabled | 是否禁用 | boolean | `-` |
+| iconOnly | 只有图标，按钮宽高相等。如果指定 `icon` 且没有 children，`iconOnly` 默认为 true | boolean | `-` |
+| loading | 按钮是否是加载状态 | boolean | `-` |
+| loadingFixedWidth | 当 loading 的时候，不改变按钮的宽度。 | boolean | `-` |
+| long | 按钮宽度随容器自适应。 | boolean | `-` |
+| href | 添加跳转链接，设置此属性，button表现跟a标签一致 | string | `-` |
+| target | a 链接的 target 属性，href 存在时生效 | string | `-` |
+| htmlType | 按钮原生的 html type 类型 | 'button' \| 'submit' \| 'reset' | `button` |
+| shape | 按钮形状，`circle` - 圆形， `round` - 全圆角， `square` - 长方形 | 'circle' \| 'round' \| 'square' | `square` |
+| size | 按钮的尺寸 | 'mini' \| 'small' \| 'default' \| 'large' | `default` |
+| status | 按钮状态 | 'warning' \| 'danger' \| 'success' \| 'default' | `default` |
+| type | 按钮主要分为六种按钮类型：主要按钮、次级按钮、虚框按钮、文字按钮、线性按钮，`default` 为次级按钮。 | 'default' \| 'primary' \| 'secondary' \| 'dashed' \| 'text' \| 'outline' | `default` |
+| icon | 设置按钮的图标 | ReactNode | `-` |
+| anchorProps | a 链接的原生属性，href 存在时生效 | `HTMLProps<HTMLAnchorElement>` | `-` |
+| className | 节点类名 | string \| string[] | `-` |
+| style | 节点样式 | CSSProperties | `-` |
+| onClick | 点击按钮的回调 | `(e: Event) => void` | `-` |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<button>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|type|按钮的类型，分为五种：次要按钮、主要按钮、虚框按钮、线性按钮、文字按钮。|`ButtonTypes`|`'secondary'`|
+|shape|按钮的形状|`BorderShape`|`-`|
+|status|按钮的状态|`'normal' \| 'warning' \| 'success' \| 'danger'`|`'normal'`|
+|size|按钮的尺寸|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`|
+|long|按钮的宽度是否随容器自适应。|`boolean`|`false`|
+|loading|按钮是否为加载中状态|`boolean`|`false`|
+|loading-fixed-width|当 loading 的时候，不改变按钮的宽度。|`boolean`|`false`|
+|disabled|按钮是否禁用|`boolean`|`false`|
+|html-type|设置 `button` 的原生 `type` 属性，可选值参考 HTML标准|`HTMLButtonElement['type']`|`'button'`|
+|autofocus|设置 `button` 的原生 `autofocus` 属性，可选值参考 HTML标准|`boolean`|`false`|
+|href|设置跳转链接。设置此属性时，按钮渲染为a标签。|`string`|`-`|
+
+### `<button>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|click|点击按钮时触发|ev: `MouseEvent`|
+
+### `<button>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|icon|图标|-|
+
+### `<button-group>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|type|按钮的类型，分为五种：次要按钮、主要按钮、虚框按钮、线性按钮、文字按钮。|`ButtonTypes`|`-`|
+|status|按钮的状态|`'normal' \| 'warning' \| 'success' \| 'danger'`|`-`|
+|shape|按钮的形状|`BorderShape`|`-`|
+|size|按钮的尺寸|`'mini' \| 'small' \| 'medium' \| 'large'`|`-`|
+|disabled|全部子按钮是否禁用|`boolean`|`false`|
+
+</FrameworkBlock>

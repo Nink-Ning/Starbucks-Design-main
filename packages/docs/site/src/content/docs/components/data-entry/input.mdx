@@ -1,0 +1,365 @@
+---
+title: 输入框 Input
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+基本表单组件，并在原生控件基础上进行了功能扩展，可以组合使用。
+
+## 基本用法
+
+通过鼠标或键盘输入内容。
+
+<FrameworkBlock framework="react">
+输入框的值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+输入框的值可以通过 `v-model`（即 `model-value` 配合 `input` / `change` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="input/basic" />
+
+## 输入框状态
+
+不同的输入框状态。
+
+<FrameworkBlock framework="react">
+通过 `status` 可以设置 `error`、`warning` 状态，通过 `disabled` 禁用输入框。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+输入框可以通过 `disabled` 设置禁用状态，通过 `error` 设置错误状态。
+</FrameworkBlock>
+
+<Demo name="input/input-status" />
+
+## 输入框尺寸
+
+<FrameworkBlock framework="react">
+输入框定义了四种默认尺寸（`mini`、`small`、`default`、`large`），分别为 24px，28px，32px，36px。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+输入框定义了四种默认尺寸（`mini`、`small`、`medium`、`large`），分别为 24px，28px，32px，36px。
+</FrameworkBlock>
+
+<Demo name="input/input-size" />
+
+## 前置、后置标签
+
+<FrameworkBlock framework="react">
+指定 `addBefore` 和 `addAfter` 在输入框前后添加元素。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过指定 `prepend` 和 `append` 插槽（或同名属性）在输入框前后添加元素。
+</FrameworkBlock>
+
+<Demo name="input/addon-tags" />
+
+## 前缀与后缀
+
+<FrameworkBlock framework="react">
+通过指定 `prefix` 和 `suffix` 来在输入框内添加前缀和后缀。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过指定 `prefix` 和 `suffix` 插槽来在输入框内添加前缀和后缀。
+</FrameworkBlock>
+
+<Demo name="input/prefix-suffix" />
+
+## 搜索框
+
+带有搜索按钮的输入框，用于内容检索。
+
+<Demo name="input/search-box" />
+
+## 搜索框（加载中）
+
+<FrameworkBlock framework="react">
+通过 `loading` 属性可以设置搜索框在 `onSearch` 的时候展示 `loading`。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `loading` 属性可以让搜索框展示加载中状态。
+</FrameworkBlock>
+
+<Demo name="input/search-box-loading" />
+
+## 自定义搜索按钮
+
+自定义搜索按钮的内容。
+
+<FrameworkBlock framework="react">
+`searchButton` 支持传入 `ReactNode`，自定义搜索按钮的内容。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `button-text` 属性或 `#button-icon`、`#button-default` 插槽自定义搜索按钮的内容。
+</FrameworkBlock>
+
+<Demo name="input/custom-search-button" />
+
+## 输入框组合
+
+<FrameworkBlock framework="react">
+通过 `Input.Group` 可以组合使用输入框。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `input-group` 可以组合使用输入框。
+</FrameworkBlock>
+
+<Demo name="input/input-group" />
+
+## 字数统计
+
+<FrameworkBlock framework="react">
+
+设置 `maxLength` 可以限制最大字数，配合 `showWordLimit` 可以显示字数统计。
+
+设置 `maxLength.errorOnly` 后不会限制用户输入字数，但是超过最大字数会展示错误状态。
+
+值得注意的是，如果配置了 `showWordLimit`，那么你将不能使用 `suffix`。
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+设置 `max-length` 可以限制最大字数，配合 `show-word-limit` 可以显示字数统计。
+</FrameworkBlock>
+
+<Demo name="input/word-count" />
+
+## 文本域
+
+可以用于多行输入。
+
+<FrameworkBlock framework="vue">
+Vue 版本中多行输入请使用独立的 Textarea 组件。
+</FrameworkBlock>
+
+<Demo name="input/textarea" />
+
+## 适应文本高度文本域
+
+<FrameworkBlock framework="react">
+指定 `autoSize`，文本域会自动根据输入的文本调整文本域的高度。如果指定 `autoSize={{ minRows, maxRows }}`，也能指定最小行数和最大行数。
+</FrameworkBlock>
+
+<Demo name="input/auto-size" />
+
+## 密码输入框
+
+用于密码的输入。
+
+<Demo name="input/password-input" />
+
+## 格式化输入值
+
+<FrameworkBlock framework="react">
+在指定时机对用户输入的值进行格式化处理，前后值不一致时，会触发 onChange。
+</FrameworkBlock>
+
+<Demo name="input/normalize" />
+
+## 宽度自适应
+
+<FrameworkBlock framework="react">
+通过 `autoWidth` 属性可以设置 `Input` 的宽度跟随文字自适应。
+</FrameworkBlock>
+
+<Demo name="input/auto-width" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Input
+
+**Input 接受所有原生的属性值**
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|allowClear|允许清空输入框|boolean |`-`|-|
+|disabled|是否禁用|boolean |`-`|-|
+|error|是否是错误状态.(废弃，下个大版本移除，使用 status='error' 替代)|boolean |`-`|-|
+|readOnly|是否只读|boolean |`-`|-|
+|showWordLimit|配合 `maxLength`，显示字数统计|boolean |`-`|-|
+|defaultValue|默认值|string |`-`|-|
+|placeholder|输入框提示文字|string |`-`|-|
+|value|输入框的值，受控模式|string |`-`|-|
+|autoWidth|设置宽度自适应。minWidth 默认为 0，maxWidth 默认为 100%|`\| boolean\| { minWidth?: CSSProperties['minWidth']; maxWidth?: CSSProperties['maxWidth'] }` |`-`|2.54.0|
+|normalizeTrigger|指定 normalize 执行的时机|('onBlur' \| 'onPressEnter')[] |`['onBlur']`|2.50.0|
+|size|输入框的尺寸|'mini' \| 'small' \| 'default' \| 'large' |`default`|-|
+|status|状态|'error' \| 'warning' |`-`|2.45.0|
+|addAfter|输入框后添加元素|ReactNode |`-`|-|
+|addBefore|输入框前添加元素|ReactNode |`-`|-|
+|clearIcon|`allowClear` 时配置清除按钮的图标。|ReactNode |`-`|2.50.0|
+|prefix|添加前缀文字或者图标|ReactNode |`-`|-|
+|suffix|添加后缀文字或者图标|ReactNode |`-`|-|
+|afterStyle|输入框后添加元素的样式|object |`-`|-|
+|beforeStyle|输入框前添加元素的样式|object |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|height|自定义输入框高度|number \| string |`-`|-|
+|maxLength|输入框最大输入的长度；设置 `errorOnly`为 `true` 后，超过 `maxLength` 会展示 `error` 状态，并不限制用户输入。|`number \| { length: number; errorOnly?: boolean }` |`-`|`errorOnly` in 2.23.0|
+|style|节点样式|CSSProperties |`-`|-|
+|normalize|在指定时机对用户输入的值进行格式化处理。前后值不一致时，会触发 onChange|`(value: string) => string` |`-`|2.50.0|
+|onChange|输入时的回调|`(value: string, e) => void` |`-`|-|
+|onClear|点击清除按钮的回调|`() => void` |`-`|-|
+|onPressEnter|按下回车键的回调|`(e) => void` |`-`|-|
+
+### Input.TextArea
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|allowClear|允许清空输入框|boolean |`-`|2.2.0|
+|disabled|是否禁用|boolean |`-`|-|
+|error|是否是错误状态。(废弃，下个大版本移除，使用 status='error' 替代)|boolean |`-`|-|
+|defaultValue|默认值|string |`-`|-|
+|placeholder|输入框提示文字|string |`-`|-|
+|value|值|string |`-`|-|
+|status|状态|'error' \| 'warning' |`-`|2.45.0|
+|clearIcon|`allowClear` 时配置清除按钮的图标。|ReactNode |`-`|2.50.0|
+|autoSize|是否自动调整输入框的高度|`boolean \| { minRows?: number; maxRows?: number }` |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|maxLength|输入框最大输入的长度；设置 `errorOnly`为 `true` 后，超过 `maxLength` 会展示 `error` 状态，并不限制用户输入。|`number \| { length: number; errorOnly?: boolean }` |`-`|`errorOnly` in 2.23.0|
+|style|节点样式|CSSProperties |`-`|-|
+|wrapperStyle|开启字数统计之后，会在 `textarea` 标签外包一层 `div`，`wrapperStyle` 用来配置这个 `div` 的样式。|CSSProperties |`-`|-|
+|wordLimitPosition|字数统计的位置|`'inside' \| 'outside'` |`inside`| 2.66.14 |
+|onChange|输入时的回调|`(value: string, e) => void` |`-`|-|
+|onClear|点击清除按钮的回调|`() => void` |`-`|2.2.0|
+|onPressEnter|按下回车键的回调|`(e) => void` |`-`|-|
+
+### Input.Group
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|compact|是否使用紧凑模式|boolean |`-`|
+|className|节点类名|string \| string[] |`-`|
+|style|节点样式|CSSProperties |`-`|
+
+### Input.Search
+
+包含 Input 组件所有参数
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|loading|搜索时展示加载状态|boolean |`-`|2.6.0|
+|searchButton|搜索按钮|boolean \| ReactNode |`-`|`ReactNode` in 2.6.0|
+|onSearch|点击搜索按钮的回调|`(value: string) => void` |`-`|-|
+
+### Input.Password
+
+包含 Input 组件所有参数
+
+|参数名|描述|类型|默认值|
+|---|---|---|---|
+|defaultVisibility|初始是否显示|boolean |`-`|
+|visibility|是否显示|boolean |`-`|
+|visibilityToggle|是否显示切换密码可见状态的按钮|boolean |`-`|
+|onVisibilityChange|visibility 改变时触发|`(visibility: boolean) => void` |`-`|
+
+## 方法
+
+| 参数名 |     描述     |    类型    | 默认值 |
+| ------ | :----------: | :--------: | -----: |
+| focus  |   焦点事件   | `Function` |    `-` |
+| blur   | 失去焦点事件 | `Function` |    `-` |
+
+**示例**
+
+```js
+<Input ref={(ref) => (this.input = ref)} />;
+
+this.input.focus();
+this.input.blur();
+```
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<input>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|model-value **(v-model)**|绑定值|`string`|`-`||
+|default-value|默认值（非受控状态）|`string`|`''`||
+|size|输入框大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
+|allow-clear|是否允许清空输入框|`boolean`|`false`||
+|disabled|是否禁用|`boolean`|`false`||
+|readonly|是否为只读状态|`boolean`|`false`||
+|error|是否为错误状态|`boolean`|`false`||
+|placeholder|提示文字|`string`|`-`||
+|max-length|输入值的最大长度，errorOnly 属性在 2.12.0 版本添加|`number \| { length: number; errorOnly?: boolean }`|`0`||
+|show-word-limit|是否显示字数统计|`boolean`|`false`||
+|word-length|字符长度的计算方法|`(value: string) => number`|`-`||
+|word-slice|字符截取方法，同 wordLength 一起使用|`(value: string, maxLength: number) => string`|`-`|2.12.0|
+|input-attrs|内部 input 元素的属性|`object`|`-`|2.27.0|
+|prepend|前置标签|`string`|`-`|2.57.0|
+|append|后置标签|`string`|`-`|2.57.0|
+
+### `<input>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|input|用户输入时触发|value: `string`<br/>ev: `Event`|
+|change|仅在输入框失焦或按下回车时触发|value: `string`<br/>ev: `Event`|
+|press-enter|用户按下回车时触发|ev: `KeyboardEvent`|
+|clear|用户点击清除按钮时触发|ev: `MouseEvent`|
+|focus|输入框获取焦点时触发|ev: `FocusEvent`|
+|blur|输入框失去焦点时触发|ev: `FocusEvent`|
+
+### `<input>` Methods
+
+|方法名|描述|参数|返回值|
+|---|---|---|---|
+|focus|使输入框获取焦点|-|-|
+|blur|使输入框失去焦点|-|-|
+
+### `<input>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|append|后置标签|-|
+|prepend|前置标签|-|
+|suffix|后缀元素|-|
+|prefix|前缀元素|-|
+
+### `<input-password>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|visibility **(v-model)**|是否可见，受控属性|`boolean`|`-`|
+|default-visibility|默认是否可见，非受控|`boolean`|`true`|
+|invisible-button|是否显示可见按钮|`boolean`|`true`|
+
+### `<input-password>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|visibility-change|visibility 改变时触发|visible: `boolean`|
+
+### `<input-search>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|search-button|是否为后置按钮模式|`boolean`|`false`||
+|loading|是否为加载中状态|`boolean`|`false`||
+|disabled|是否禁用|`boolean`|`false`||
+|size|输入框大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
+|button-text|搜索按钮的文字，使用后会替换原本的图标|`string`|`-`|2.16.0|
+|button-props|搜索按钮的属性|`ButtonProps`|`-`||
+
+### `<input-search>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|search|单击搜索按钮时触发|value: `string`<br/>ev: `MouseEvent`|
+
+</FrameworkBlock>

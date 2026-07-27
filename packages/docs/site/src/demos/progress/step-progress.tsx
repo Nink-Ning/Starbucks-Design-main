@@ -1,0 +1,17 @@
+import { Progress } from '@sbux/starbucks-design-react';
+
+export default function Demo() {
+  return (
+    <div
+      style={{
+        display: 'inline-block',
+        width: '40%',
+        marginRight: '10%'
+      }}
+    >
+      <Progress steps={3} percent={30} style={{ marginBottom: 20 }} />
+      <Progress steps={5} percent={100} status="warning" style={{ marginBottom: 20 }} />
+      <Progress steps={5} size="small" percent={50} status="success" />
+    </div>
+  );
+}

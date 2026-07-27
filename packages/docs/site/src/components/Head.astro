@@ -1,0 +1,24 @@
+---
+/**
+ * Custom Head override — adds Astro's <ClientRouter /> so same-origin navigation
+ * swaps the DOM instead of doing a full document reload. Without it, every
+ * sidebar click tore down and rebuilt the entire document (chrome included),
+ * producing a very visible whole-page flash; client:only demo islands compounded
+ * it by re-hydrating from blank on each load.
+ *
+ * Registered via `components.Head` in astro.config.mjs. Renders Starlight's
+ * default Head unchanged, then appends the router.
+ *
+ * Cross-swap state caveat (handled by the head scripts in astro.config.mjs):
+ * the default swap copies <html> attributes from the incoming SSR document, so
+ * our JS-applied `data-framework` (on <html>) and `arco-theme` / `data-arco-theme`
+ * (on <body>) are dropped on every swap. Those scripts re-apply them on the
+ * `astro:after-swap` event (fires post-swap, pre-paint) to keep framework and
+ * dark-mode state stable without a flash.
+ */
+import Default from '@astrojs/starlight/components/Head.astro';
+import { ClientRouter } from 'astro:transitions';
+---
+
+<Default />
+<ClientRouter />

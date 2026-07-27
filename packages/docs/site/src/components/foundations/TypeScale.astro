@@ -1,0 +1,77 @@
+---
+/**
+ * Type specimens for the Foundations / Typography page. Each row renders sample
+ * text set at the token's size / line-height / weight, with its spec alongside.
+ */
+interface Item {
+  label: string;
+  size: number;
+  line: number;
+  weight: number;
+  sample: string;
+}
+const { items } = Astro.props as { items: Item[] };
+---
+
+<div class="fs-type not-content">
+  {
+    items.map((it) => (
+      <div class="fs-type-row">
+        <span
+          class="fs-type-sample"
+          style={`font-size:${it.size}px;line-height:${it.line}px;font-weight:${it.weight}`}
+        >
+          {it.sample}
+        </span>
+        <span class="fs-type-spec">
+          <span class="fs-type-label">{it.label}</span>
+          <span class="fs-type-nums">
+            {it.size} / {it.line} · {it.weight >= 500 ? 'Medium' : 'Regular'}
+          </span>
+        </span>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .fs-type {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0 1.75rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+  }
+  .fs-type-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1rem 0.15rem;
+    border-bottom: 1px solid var(--sl-color-gray-5);
+  }
+  .fs-type-sample {
+    color: var(--sl-color-white);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .fs-type-spec {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+    flex: none;
+    text-align: right;
+  }
+  .fs-type-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--sl-color-gray-2);
+  }
+  .fs-type-nums {
+    font-size: 0.74rem;
+    color: var(--sl-color-gray-3);
+    font-variant-numeric: tabular-nums;
+  }
+</style>

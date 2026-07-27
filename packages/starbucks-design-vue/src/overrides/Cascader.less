@@ -580,3 +580,60 @@
   background-color: var(--bg-color-container);
   border-top-color: var(--color-border-component);
 }
+
+// Vue's Cascader trigger uses the shared SelectView contract in Shared.less.
+// Its component-owned panel/option DOM is adapted here.
+.arco-cascader-panel {
+  box-sizing: border-box;
+  overflow: hidden;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.arco-cascader-panel .arco-cascader-panel-column {
+  box-sizing: border-box;
+  width: 212px;
+  min-height: 160px;
+  padding: var(--spacing-3);
+  background-color: var(--bg-color-container);
+}
+
+.arco-cascader-panel .arco-cascader-panel-column:not(:last-child) {
+  box-shadow: inset -1px 0 0 var(--color-border-1);
+}
+
+.arco-cascader-panel .arco-cascader-option {
+  box-sizing: border-box;
+  min-height: 28px;
+  margin: 0 0 var(--spacing-1);
+  padding: 3px var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  background-color: transparent;
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-cascader-panel .arco-cascader-option:not(.arco-cascader-option-disabled):hover {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container-hover);
+}
+
+.arco-cascader-panel .arco-cascader-option-active,
+.arco-cascader-panel .arco-cascader-option-checked {
+  color: var(--color-primary);
+  font-weight: var(--fw-medium);
+  background-color: var(--color-primary-light);
+}
+
+.arco-cascader-panel .arco-cascader-option-disabled {
+  color: var(--color-text-disabled);
+  font-weight: var(--fw-regular);
+  background-color: transparent;
+  cursor: not-allowed;
+}

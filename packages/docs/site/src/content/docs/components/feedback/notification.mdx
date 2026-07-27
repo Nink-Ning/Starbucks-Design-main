@@ -1,0 +1,182 @@
+---
+title: 通知提醒框 Notification
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+全局展示通知提醒，将信息及时有效的传达给用户。
+
+## 基本用法
+
+通知提醒框的基本用法。
+
+<Demo name="notification/basic" />
+
+## 消息类型
+
+通知提醒框有 5 种不同的类型，分别为：`info`、`success`、`warning`、`error`、`normal`。
+
+<Demo name="notification/message-type" />
+
+## 更新通知内容
+
+通过指定参数 `id`，可以更新已经存在的通知提醒框。
+
+<Demo name="notification/update-notification" />
+
+## 更新延迟
+
+通过指定参数 `id`，可以更新已经存在的通知提醒框。
+
+<Demo name="notification/update-delay" />
+
+## 自定义操作按钮
+
+<FrameworkBlock framework="react">
+通过指定 `btn` 字段，可以添加操作按钮。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过指定 `footer` 字段，可以添加操作按钮。
+</FrameworkBlock>
+
+<Demo name="notification/custom-action-button" />
+
+## 自定义关闭按钮
+
+需要设置 `closable: true`，自定义元素使用 `closeIconElement`，仅图标使用 `closeIcon` (会有 `hover` 样式)。
+
+<Demo name="notification/custom-close-button" />
+
+## 自定义图标
+
+设置 `icon` 来自定义图标。
+
+## 自定义样式
+
+<FrameworkBlock framework="react">
+可以设置 `style` 和 `className` 来定制样式。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+可以设置 `style` 和 `class` 来定制样式。
+</FrameworkBlock>
+
+<Demo name="notification/custom-style" />
+
+## 全局提示的位置
+
+通知提醒框有 4 种不同的弹出位置，分别为：`左上角`, `右上角 (默认)`, `左下角`, `右下角`。
+
+<Demo name="notification/notification-position" />
+
+## Hooks-用法
+
+可以通过 `useNotification`**(2.40.0)** 去创建可以读取 context 的对话框。
+
+<Demo name="notification/use-notification" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Notification
+
+| 参数名 | 描述 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| closable | 是否显示关闭按钮 | boolean | `true` | - |
+| showIcon | 是否显示图标 | boolean | `true` | - |
+| duration | 自动关闭的时间，单位为 `ms` | number | `3000` | - |
+| id | 当前通知的唯一标识，可以用来更新消息 | string | `-` | - |
+| position | 消息的位置，分为 `topLeft` 左上方、`topRight` 右上方、`bottomLeft` 左下方和 `bottomRight` 右下方 | 'topLeft' \| 'topRight' \| 'bottomLeft' \| 'bottomRight' | `-` | - |
+| btn | 添加操作按钮 | ReactNode | `-` | - |
+| closeIcon | 自定义右上角关闭按钮 | ReactNode | `-` | 2.50.0 |
+| icon | 自定义图标 | ReactNode | `-` | - |
+| className | 节点类名 | string \| string[] | `-` | - |
+| content | 通知内容 | ReactNode \| string **(必填)** | `-` | - |
+| style | 节点样式 | CSSProperties | `-` | - |
+| title | 通知标题 | ReactNode \| string | `-` | - |
+| onClose | 关闭时的回调 | `() => void` | `-` | - |
+
+### 使用方法
+
+- `Notification.info(config)`
+- `Notification.success(config)`
+- `Notification.warning(config)`
+- `Notification.error(config)`
+- `Notification.normal(config)`
+- `Notification.remove(id)`
+- `Notification.clear()`
+
+### 全局设置
+
+`Notification.config(options)`
+
+| 参数名       |        描述        |        类型         |                默认值 |
+| ------------ | :----------------: | :-----------------: | --------------------: |
+| maxCount     |    最大通知数量    |      `number`       |                   `-` |
+| getContainer |   放置通知的容器   | `() => HTMLElement` | `() => document.body` |
+| duration     | 通知自动关闭的时间 |      `number`       |                `3000` |
+| prefixCls    |      类名前缀      |      `string`       |                `arco` |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `Notification` 全局方法
+
+`Notification` 提供的全局方法，可以通过以下三种方法使用：
+1. 通过 `this.$notification` 调用
+2. 在 Composition API 中，通过 `getCurrentInstance().appContext.config.globalProperties.$notification` 调用
+3. 导入 `Notification`，通过 `Notification` 本身调用
+
+当通过 `import` 方式使用时，组件没有办法获取当前的 Vue Context，如 i18n 或 route 等注入在 AppContext 上的内容无法在内部使用，需要在调用时手动传入 AppContext，或者为组件全局指定 AppContext
+
+```ts
+import { createApp } from 'vue'
+import { Notification } from '@sbux/starbucks-design-vue';
+
+const app = createApp(App);
+Notification._context = app._context;
+```
+
+### NotificationMethod
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|info|显示信息提醒框|`(    config: string \| NotificationConfig,    appContext?: AppContext  ) => NotificationReturn`|`-`|
+|success|显示成功提醒框|`(    config: string \| NotificationConfig,    appContext?: AppContext  ) => NotificationReturn`|`-`|
+|warning|显示警告提醒框|`(    config: string \| NotificationConfig,    appContext?: AppContext  ) => NotificationReturn`|`-`|
+|error|显示错误提醒框|`(    config: string \| NotificationConfig,    appContext?: AppContext  ) => NotificationReturn`|`-`|
+|remove|清除对应 `id` 的提醒框|`(id: string) => void`|`-`|
+|clear|清除全部提醒框|`(position?: NotificationPosition) => void`|`-`|
+
+### NotificationConfig
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|content|内容|`RenderContent`|`-`||
+|title|标题|`RenderContent`|`-`||
+|icon|图标|`RenderFunction`|`-`||
+|id|唯一id|`string`|`-`||
+|style|样式|`CSSProperties`|`-`||
+|class|样式类名|`ClassName`|`-`||
+|position|位置|`'topLeft'\|'topRight'\|'bottomLeft'\|'bottomRight'`|`-`||
+|showIcon|是否显示图标|`boolean`|`true`||
+|closable|是否可关闭|`boolean`|`false`||
+|duration|显示的持续时间，单位为 `ms`|`number`|`3000`||
+|footer|底部内容|`RenderFunction`|`-`|2.25.0|
+|closeIcon|关闭按钮图标|`RenderFunction`|`-`||
+|closeIconElement|关闭按钮元素|`RenderFunction`|`-`||
+|onClose|关闭时的回调函数|`(id: number \| string) => void`|`-`||
+
+### NotificationReturn
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|close|关闭当前通知提醒框|`() => void`|`-`|
+
+</FrameworkBlock>

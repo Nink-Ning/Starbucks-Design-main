@@ -1,0 +1,143 @@
+---
+title: 警告提示 Alert
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+向用户显示警告的信息时，通过警告提示，展现需要关注的信息。
+
+## 基本用法
+
+展现需要关注的信息，适用于简短的警告提示。
+
+<Demo name="alert/basic" />
+
+## 提示类型
+
+<FrameworkBlock framework="react">
+警告提示的类型有 `info`、`success`、`warning`、`error` 四种。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+警告提示有 `info`、`success`、`warning`、`error` 四种类型。2.41.0 版本新增 `normal` 类型，此类型下默认不展示图标。
+</FrameworkBlock>
+
+<Demo name="alert/tip-type" />
+
+## 可关闭
+
+通过设置 `closable`，可开启关闭按钮。
+
+<Demo name="alert/closable" />
+
+## 自定义关闭元素
+
+<FrameworkBlock framework="react">
+指定 `closeElement`，自定义关闭元素。`closeElement` 可以接收 `onClick`，并且自带 `close` 参数，调用 `close()` 可以关闭。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+指定 `close-element` slot，自定义关闭元素。
+</FrameworkBlock>
+
+<Demo name="alert/custom-close-element" />
+
+## 提示标题
+
+<FrameworkBlock framework="react">
+通过设置 `title` 可以给警告提示添加标题，将 `content` 变为辅助性介绍文字。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `title` 可以给警告提示添加标题。
+</FrameworkBlock>
+
+<Demo name="alert/tip-title" />
+
+## 隐藏图标
+
+<FrameworkBlock framework="react">
+通过指定 `showIcon={false}` 来不显示图标。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过设置 `:show-icon="false"` 来隐藏图标。
+</FrameworkBlock>
+
+<Demo name="alert/hide-icon" />
+
+## 顶部公告
+
+通过设置 `banner`，可将警告提示作为顶部公告使用（去除边框和圆角）。
+
+<Demo name="alert/top-alert" />
+
+## 操作项
+
+<FrameworkBlock framework="react">
+通过 `action` 可以自定义右上角操作项。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+通过 `#action` 插槽自定义操作按钮。
+</FrameworkBlock>
+
+<Demo name="alert/actions" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Alert
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| banner | 是否用作顶部公告 | boolean | `-` |
+| closable | 是否可关闭 | boolean | `-` |
+| showIcon | 是否显示图标 | boolean | `true` |
+| type | 警告的类型 | 'info' \| 'success' \| 'warning' \| 'error' | `info` |
+| action | 自定义操作项 | ReactNode | `-` |
+| closeElement | 自定义关闭按钮 | ReactNode | `-` |
+| content | 内容 | ReactNode | `-` |
+| icon | 可以指定自定义图标，`showIcon` 为 `true` 时生效。 | ReactNode | `-` |
+| title | 标题 | ReactNode | `-` |
+| className | 节点类名 | string \| string[] | `-` |
+| style | 节点样式 | CSSProperties | `-` |
+| afterClose | 关闭动画结束后执行的回调 | `() => void` | `-` |
+| onClose | 关闭的回调 | `(e) => void` | `-` |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<alert>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|type|警告提示的类型。2.41.0 新增 `normal` 类型|`info \| success \| warning \| error \| normal`|`'info'`|
+|show-icon|是否展示图标|`boolean`|`true`|
+|closable|是否展示关闭按钮|`boolean`|`false`|
+|title|警告提示的标题|`string`|`-`|
+|banner|是否作为顶部公告使用（去除边框和圆角）|`boolean`|`false`|
+|center|内容是否居中显示|`boolean`|`false`|
+
+### `<alert>` Events
+
+|事件名|描述|参数|
+|---|---|---|
+|close|点击关闭按钮时触发|ev: `MouseEvent`|
+|after-close|关闭动画结束后触发|-|
+
+### `<alert>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|icon|图标|-||
+|title|标题|-||
+|action|操作项|-||
+|close-element|关闭元素|-|2.36.0|
+
+</FrameworkBlock>

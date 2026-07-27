@@ -1,0 +1,176 @@
+---
+/**
+ * A responsive grid of color swatches for the Foundations pages. Each swatch is
+ * filled from the design token's live CSS variable (`--sbux-<name>`, with the
+ * light hex as fallback), so it tracks the site's light/dark theme. A runtime
+ * script reads each swatch's rendered color to pick a legible overlay text
+ * color, print the current hex, and drive click-to-copy — re-running on every
+ * theme change so the values stay correct in both themes.
+ */
+interface Swatch {
+  name: string;
+  value: string;
+  note?: string;
+  /** Theme-reactive Arco var to fill from (e.g. '--color-bg-2'); the runtime
+      script then shows its live per-theme value. Omit for theme-independent
+      brand/functional tokens, which keep their canonical hex. */
+  cssVar?: string;
+}
+interface Props {
+  items: Swatch[];
+}
+const { items } = Astro.props;
+
+// SSR fallback overlay color (light theme) to avoid a flash before the script
+// recomputes from the live rendered color.
+function textOn(hex: string): string {
+  let h = hex.replace('#', '').trim();
+  if (h.length === 3) h = h.split('').map((c) => c + c).join('');
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  return lum > 0.62 ? 'var(--color-text-primary)' : 'var(--color-white-text-1)';
+}
+---
+
+<div class="fs-swatches not-content">
+  {
+    items.map((s) => (
+      <button
+        class="fs-swatch"
+        type="button"
+        data-copy={s.value}
+        style={`--sw-c:var(${s.cssVar ?? `--sbux-${s.name}`}, ${s.value});--sw-t:${textOn(s.value)}`}
+        title={`点击复制`}
+      >
+        <span class="fs-swatch-top">
+          {s.note && <span class="fs-swatch-note">{s.note}</span>}
+        </span>
+        <span class="fs-swatch-foot">
+          <span class="fs-swatch-name">{s.name}</span>
+          <span class="fs-swatch-val">{s.value}</span>
+        </span>
+      </button>
+    ))
+  }
+</div>
+
+<style>
+  .fs-swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+    gap: 0.6rem;
+    margin: 1rem 0 1.75rem;
+  }
+  .fs-swatch {
+    background: var(--sw-c);
+    color: var(--sw-t);
+    border: 1px solid var(--sb-docs-border-soft);
+    border-radius: 10px;
+    min-height: 92px;
+    padding: 0.6rem 0.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    transition:
+      transform 0.12s ease,
+      box-shadow 0.12s ease;
+  }
+  .fs-swatch:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+  .fs-swatch:focus-visible {
+    outline: 2px solid var(--sl-color-text-accent);
+    outline-offset: 2px;
+  }
+  .fs-swatch-top {
+    display: flex;
+    justify-content: flex-end;
+    min-height: 1em;
+  }
+  .fs-swatch-note {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+  .fs-swatch-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+  }
+  .fs-swatch-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .fs-swatch-val {
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .fs-swatch.copied .fs-swatch-val::after {
+    content: ' ✓ 已复制';
+    text-transform: none;
+  }
+</style>
+
+<script>
+  // Convert a computed color string to #RRGGBB(AA).
+  function toHex(color: string): string {
+    const m = color.match(/[\d.]+/g);
+    if (!m) return color;
+    const [r, g, b, a] = m.map(Number);
+    const h = (n: number) => Math.round(n).toString(16).padStart(2, '0');
+    const base = `#${h(r)}${h(g)}${h(b)}`;
+    return a !== undefined && a < 1 ? base + h(a * 255) : base;
+  }
+
+  // Repaint every swatch from its rendered color: legible overlay text, the live
+  // hex, and the copy value. Runs on load and whenever the theme changes.
+  function paintSwatches() {
+    document.querySelectorAll<HTMLElement>('.fs-swatch').forEach((el) => {
+      const bg = getComputedStyle(el).backgroundColor;
+      const m = bg.match(/[\d.]+/g);
+      if (m) {
+        const [r, g, b] = m.map(Number);
+        const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+        el.style.setProperty('--sw-t', lum > 0.62 ? 'var(--color-text-primary)' : 'var(--color-white-text-1)');
+      }
+      const hex = toHex(bg);
+      el.dataset.copy = hex;
+      const valEl = el.querySelector<HTMLElement>('.fs-swatch-val');
+      if (valEl && !el.classList.contains('copied')) valEl.textContent = hex;
+    });
+  }
+
+  paintSwatches();
+  // Theme toggles flip body[arco-theme] / <html data-theme>; watch both.
+  new MutationObserver(paintSwatches).observe(document.body, {
+    attributeFilter: ['arco-theme', 'data-arco-theme'],
+  });
+  new MutationObserver(paintSwatches).observe(document.documentElement, {
+    attributeFilter: ['data-theme'],
+  });
+  document.addEventListener('astro:after-swap', () => setTimeout(paintSwatches, 50));
+
+  // Click-to-copy (delegated, survives view-transition swaps).
+  document.addEventListener('click', async (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.fs-swatch');
+    if (!btn?.dataset.copy) return;
+    try {
+      await navigator.clipboard.writeText(btn.dataset.copy);
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        paintSwatches();
+      }, 1400);
+    } catch {}
+  });
+</script>

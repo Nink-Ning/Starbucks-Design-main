@@ -132,27 +132,48 @@
   height: 12px;
 }
 
-.arco-switch-large {
-  min-width: 39px;
-  height: 24px;
-  line-height: var(--lh-20);
+// Arco Vue renders `.arco-switch-handle` where React renders the dot.
+.arco-switch-handle {
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  color: var(--bg-color-secondarycomponent);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
 }
 
-.arco-switch-large:has(.arco-switch-text),
-.arco-switch-large:has(.arco-switch-dot-icon) {
-  min-width: 43px;
+.arco-switch-checked .arco-switch-handle {
+  top: 2.5px;
+  left: calc(100% - 15px - 2.5px);
+  width: 15px;
+  height: 15px;
+  color: var(--color-primary);
 }
 
-.arco-switch-large .arco-switch-dot {
-  top: 5px;
-  left: 5px;
-  width: 14px;
-  height: 14px;
+.arco-switch[disabled] .arco-switch-handle {
+  color: var(--color-text-disabled);
+  background-color: var(--color-white);
 }
 
-.arco-switch-large.arco-switch-checked .arco-switch-dot {
-  left: calc(100% - 18px - 3px);
+.arco-switch[disabled].arco-switch-checked .arco-switch-handle {
+  color: var(--color-primary-disabled);
+}
+
+.arco-switch-type-round .arco-switch-handle {
+  border-radius: var(--border-radius-round);
+}
+
+.arco-switch-small .arco-switch-handle {
   top: 3px;
-  width: 18px;
-  height: 18px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+}
+
+.arco-switch-small.arco-switch-checked .arco-switch-handle {
+  top: 2px;
+  left: calc(100% - 12px - 2px);
+  width: 12px;
+  height: 12px;
 }

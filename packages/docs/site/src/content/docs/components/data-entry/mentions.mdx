@@ -1,0 +1,125 @@
+---
+title: 提及 Mentions
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+用于在输入中提及某人或某事，常用于发布、聊天或评论功能。
+
+## 基本使用
+
+用于在输入中提及某人或某事，常用于发布、聊天或评论功能。
+
+<FrameworkBlock framework="react">
+输入框的值可以通过 `value` 与 `onChange` 受控使用，或通过 `defaultValue` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+输入框的值可以通过 `v-model`（即 `model-value` 配合 `change` 事件）双向绑定，或通过 `default-value` 指定默认值（非受控）。
+</FrameworkBlock>
+
+<Demo name="mentions/basic-usage" />
+
+## 自定义触发字符
+
+指定 `prefix` 来自定义触发字符。默认为 `@`，可以自定义为任意字符。
+
+<Demo name="mentions/custom-trigger-char" />
+
+## 受控模式
+
+<FrameworkBlock framework="react">
+`Mentions` 在 `Form` 中的使用。
+</FrameworkBlock>
+
+<Demo name="mentions/controlled" />
+
+## 无效或只读
+
+<FrameworkBlock framework="react">
+通过 `disabled` 设置是否禁用，通过 `readOnly` 属性设置是否只读。
+</FrameworkBlock>
+
+<Demo name="mentions/disabled-readonly" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Mentions
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|---|---|
+|alignTextarea|弹出框是否与输入框对齐|boolean |`true`|-|
+|allowClear|允许清空输入框|boolean |`-`|2.2.0|
+|disabled|是否禁用|boolean |`-`|-|
+|error|是否是错误状态。(废弃，下个大版本移除，使用 status='error' 替代)|boolean |`-`|-|
+|defaultValue|输入框默认值|string |`-`|-|
+|placeholder|输入框提示文字|string |`-`|-|
+|split|选中项前后分隔符|string |`-`|-|
+|value|输入框的值|string |`-`|-|
+|position|下拉框的弹出位置|'top' \| 'tl' \| 'tr' \| 'bottom' \| 'bl' \| 'br' |`bl`|-|
+|status|状态|'error' \| 'warning' |`-`|2.45.0|
+|clearIcon|`allowClear` 时配置清除按钮的图标。|ReactNode |`-`|2.50.0|
+|notFoundContent|下拉列表没有数据时显示的内容|ReactNode |`-`|-|
+|autoSize|是否自动调整输入框的高度|`boolean \| { minRows?: number; maxRows?: number }` |`-`|-|
+|className|节点类名|string \| string[] |`-`|-|
+|options|下拉框可选项|`(\| string\| number\| { label: ReactNode \| string; value: string \| number; disabled?: boolean })[]` |`-`|-|
+|prefix|触发关键字|string \| string[] |`@`|-|
+|style|节点样式|CSSProperties |`-`|-|
+|triggerProps|可以接受所有 Trigger 组件的 Props|`Partial<TriggerProps>` |`-`|-|
+|wrapperStyle|开启字数统计之后，会在 `textarea` 标签外包一层 `div`，`wrapperStyle` 用来配置这个 `div` 的样式。|CSSProperties |`-`|-|
+|filterOption|是否根据输入的值筛选数据，可传入函数自定义过滤逻辑。|`false \| ((inputValue: string, option) => boolean)` |`-`|-|
+|getPopupContainer|弹出框挂载的父节点|`(node: HTMLElement) => HTMLElement` |`-`|-|
+|onBlur|失焦时的回调|`(e) => void` |`-`|-|
+|onChange|输入改变时的回调|`(value: string) => void` |`-`|-|
+|onClear|点击清除按钮的回调|`() => void` |`-`|2.2.0|
+|onFocus|聚焦时的回调|`(e) => void` |`-`|-|
+|onPressEnter|按下回车键的回调|`(e) => void` |`-`|-|
+|onSearch|搜索时的回调|`(text: string, prefix: string) => void` |`-`|-|
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<mention>` Props
+
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|model-value **(v-model)**|绑定值|`string`|`-`||
+|default-value|默认值（非受控状态）|`string`|`''`||
+|data|用于自动补全的数据|`(string \| number \| SelectOptionData \| SelectOptionGroup)[]`|`[]`||
+|prefix|触发自动补全的关键字|`string \| string[]`|`'@'`||
+|split|选中项的前后分隔符|`string`|`' '`||
+|type|输入框或文本域|`'input' \| 'textarea'`|`'input'`||
+|disabled|是否禁用|`boolean`|`false`||
+|allow-clear|是否允许清空输入框|`boolean`|`false`|2.23.0|
+
+### `<mention>` Events
+
+|事件名|描述|参数|版本|
+|---|---|---|:---|
+|change|值发生改变时触发|value: `string`||
+|search|动态搜索时触发，2.47.0 版本增加 prefix 参数|value: `string`<br/>prefix: `string`||
+|select|选择下拉选项时触发|value: `string \| number \| Record<string, any> \| undefined`||
+|clear|用户点击清除按钮时触发|-|2.23.0|
+|focus|文本框获取焦点时触发|ev: `FocusEvent`|2.42.0|
+|blur|文本框失去焦点时触发|ev: `FocusEvent`|2.42.0|
+
+### `<mention>` Methods
+
+|方法名|描述|参数|返回值|版本|
+|---|---|---|---|:---|
+|focus|使输入框获取焦点|-|-|2.24.0|
+|blur|使输入框失去焦点|-|-|2.24.0|
+
+### `<mention>` Slots
+
+|插槽名|描述|参数|版本|
+|---|:---:|---|:---|
+|option|选项内容|data: `OptionInfo`|2.13.0|
+
+</FrameworkBlock>

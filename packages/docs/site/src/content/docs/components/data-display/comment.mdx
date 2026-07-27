@@ -1,0 +1,83 @@
+---
+title: 评论 Comment
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+展示评论信息
+
+## 基本用法
+
+一个基本的评论组件，带有作者、头像、时间和操作。
+
+<Demo name="comment/basic" />
+
+## 对齐
+
+通过 `align` 属性可以设置 `datetime` 和 `actions` 的对齐方式。
+
+<Demo name="comment/alignment" />
+
+## 嵌套评论
+
+评论可以嵌套使用。
+
+<Demo name="comment/nested-comment" />
+
+## 配合 List 使用
+
+配合 List 组件展现评论列表。
+
+<Demo name="comment/list" />
+
+## 回复框
+
+实现一个评论回复框。
+
+<Demo name="comment/reply-box" />
+
+## API
+
+<FrameworkBlock framework="react">
+
+### Comment
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| align | 靠左/靠右 展示 datetime 和 actions | `\| 'left'\| 'right'\| {datetime?: 'left' \| 'right';actions?: 'left' \| 'right';}` | `-` |
+| actions | 操作列表 | ReactNode | `-` |
+| author | 作者名 | ReactNode | `-` |
+| avatar | 头像 | ReactNode | `-` |
+| content | 评论内容 | ReactNode | `-` |
+| datetime | 时间描述 | ReactNode | `-` |
+| className | 节点类名 | string \| string[] | `-` |
+| style | 节点样式 | CSSProperties | `-` |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### `<comment>` Props
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|author|作者名|`string`|`-`|
+|avatar|头像|`string`|`-`|
+|content|评论内容|`string`|`-`|
+|datetime|时间描述|`string`|`-`|
+|align|靠左/靠右 展示 datetime 和 actions|`'left' \| 'right' \| { datetime?: "left" \| "right"; actions?: "left" \| "right" }`|`'left'`|
+
+### `<comment>` Slots
+
+|插槽名|描述|参数|
+|---|:---:|---|
+|avatar|头像|-|
+|author|作者|-|
+|datetime|时间描述|-|
+|content|评论内容|-|
+|actions|操作列表|-|
+
+</FrameworkBlock>

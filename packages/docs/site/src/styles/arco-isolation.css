@@ -1,0 +1,142 @@
+/**
+ * Arco / Starlight global-style isolation
+ * =========================================================================
+ *
+ * WHY THIS FILE EXISTS
+ * -------------------------------------------------------------------------
+ * The Starbucks React/Vue component packages ship Arco Design's full CSS
+ * (including a bundled copy of `normalize.css`, see
+ * node_modules/@arco-design/web-react/es/style/normalize.less) and inject it
+ * at RUNTIME via a JS-created `<style>` tag the first time any demo island
+ * on this page hydrates (client:only="react" / "vue"). That injected tag is
+ * appended to <head> *after* Astro/Starlight's own build-time stylesheet,
+ * and it is completely unlayered plain CSS (no `@layer`).
+ *
+ * You would expect Starlight's own component styles to safely win any bare
+ * `h1 {}` / `summary {}` / `body {}` rule from Arco because Starlight's
+ * selectors usually carry a class (e.g. `.sl-markdown-content h1`). That
+ * *is* true for markdown content — verified against the installed
+ * @astrojs/starlight 0.32 package: `style/markdown.css` is NOT wrapped in
+ * `@layer` and its selectors look like
+ * `.sl-markdown-content h1:not(:where(.not-content *))`, which resolves to
+ * specificity (0,1,1) — the `:where()` and `:not()` around `.not-content *`
+ * contribute zero specificity, but the leading `.sl-markdown-content` class
+ * still counts. That beats Arco's bare `h1` (0,0,1) regardless of DOM/CSS
+ * insertion order, so markdown headings/hr/pre/code inside
+ * `.sl-markdown-content` are already safe and are NOT re-countered here.
+ *
+ * BUT Starlight's *component chrome* (sidebar, page title, mobile TOC, …)
+ * is written as scoped Astro `<style>` blocks, and Astro 5's scoped-style
+ * compiler rewrites `summary { ... }` to `summary:where(.astro-HASH) { ... }`
+ * — and `:where()` always contributes ZERO specificity. So these compiled
+ * selectors have the exact same specificity as Arco's bare-element
+ * normalize rules (0,0,1). With equal specificity, plain CSS cascade order
+ * decides, and Arco's runtime-injected tag is inserted *later* in <head>,
+ * so it wins as soon as any demo hydrates — even though nothing here is in
+ * an explicit `@layer`. (Verified directly in the built output:
+ * `dist/_astro/*.css` contains e.g. `summary:where(.astro-6q73xw4r){display:
+ * flex...}` for the sidebar and `h1:where(.astro-gh2bl55d){...}` for the
+ * page title — no `@layer` keyword appears anywhere in the built CSS.)
+ *
+ * The rules below give Starlight's chrome selectors real specificity
+ * (ID / :root / attribute selectors) so they win unconditionally, and they
+ * mirror Starlight's own declarations verbatim (via its public CSS custom
+ * properties where possible) so behavior doesn't drift from stock
+ * Starlight. Do NOT "improve" these values without cross-checking the
+ * matching Starlight source file referenced above each block — the goal is
+ * byte-for-byte parity, not redesign.
+ */
+
+/* ---------------------------------------------------------------------
+ * 1) Site-wide body font / line-height
+ * Arco: node_modules/@arco-design/web-react/es/style/normalize.less
+ *   `html, body { line-height: 1.5; font-family: @font-family; ... }`
+ * Starlight: node_modules/@astrojs/starlight/style/reset.css
+ *   `body { font-family: var(--__sl-font); line-height: var(--sl-line-height); ... }`
+ * Both are bare-element selectors (specificity 0,0,1) so today Arco's
+ * runtime-injected copy wins purely on source order once a demo hydrates,
+ * silently swapping the whole site's font/line-height. `:root body` adds
+ * one pseudo-class of specificity (0,1,1) which always wins.
+ * --------------------------------------------------------------------- */
+:root body {
+  font-family: var(--__sl-font);
+  line-height: var(--sl-line-height);
+  -webkit-font-smoothing: antialiased;
+  color: var(--sl-color-text);
+  background-color: var(--sl-color-bg);
+}
+
+/* ---------------------------------------------------------------------
+ * 2) Sidebar group toggles (the caret / label rows for collapsible
+ *    sidebar sections)
+ * Arco: normalize.less → `summary { display: list-item; }`
+ * Starlight: node_modules/@astrojs/starlight/components/SidebarSublist.astro
+ *   scoped <style> block, compiled to `summary:where(.astro-HASH) {...}`
+ *   (zero added specificity) — ties with Arco's bare `summary` and loses
+ *   on source order once a demo hydrates, reverting to the browser's
+ *   native `list-item` disclosure triangle and breaking the flex layout
+ *   (caret position, label alignment).
+ * `#starlight__sidebar` is the real id Starlight renders on the sidebar
+ * scroll container (see components/PageFrame.astro), giving these rules
+ * ID specificity (1,0,1) that always wins.
+ * --------------------------------------------------------------------- */
+#starlight__sidebar summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2em var(--sl-sidebar-item-padding-inline, 0.5rem);
+  line-height: 1.4;
+  cursor: pointer;
+  user-select: none;
+}
+#starlight__sidebar summary::marker,
+#starlight__sidebar summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Same bug, same fix, for the mobile "On this page" table-of-contents
+ * toggle, which is also a bare `summary:where(.astro-HASH)` rule.
+ * Starlight: node_modules/@astrojs/starlight/components/MobileTableOfContents.astro */
+#starlight__mobile-toc summary {
+  gap: 0.5rem;
+  align-items: center;
+  height: var(--sl-mobile-toc-height);
+  border-bottom: 1px solid var(--sl-color-hairline-shade);
+  padding: 0.5rem 1rem;
+  font-size: var(--sl-text-xs);
+  outline-offset: var(--sl-outline-offset-inside);
+}
+#starlight__mobile-toc summary::marker,
+#starlight__mobile-toc summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------
+ * 3) Page title heading (`<h1 id="_top">`)
+ * Arco: normalize.less → `h1 { font-size: 2em; margin: 0.67em 0; }`
+ * Starlight renders this heading with the SAME id in two different
+ * scoped components depending on the page template, both bare `h1`
+ * selectors compiled to zero-specificity `h1:where(.astro-HASH)`:
+ *   - components/PageTitle.astro (normal doc pages)
+ *   - components/Hero.astro (frontmatter `template: splash`, used by this
+ *     site's homepage) — its <h1> carries an extra `data-page-title`
+ *     attribute that PageTitle.astro's does not, which is how the two
+ *     cases are told apart below.
+ * Once a demo hydrates, Arco's bare `h1` rule ties on specificity and
+ * wins on order, shrinking/relocating every page's title. `#_top` is
+ * Starlight's real PAGE_TITLE_ID constant (constants.ts), giving ID
+ * specificity that always wins.
+ * --------------------------------------------------------------------- */
+#_top:not([data-page-title]) {
+  margin-top: 1rem;
+  font-size: var(--sl-text-h1);
+  line-height: var(--sl-line-height-headings);
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+#_top[data-page-title] {
+  font-size: clamp(var(--sl-text-3xl), calc(0.25rem + 5vw), var(--sl-text-6xl));
+  line-height: var(--sl-line-height-headings);
+  font-weight: 600;
+  color: var(--sl-color-white);
+}

@@ -1,0 +1,292 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import test from 'node:test';
+
+const root = new URL('../../', import.meta.url);
+
+async function read(relativePath) {
+  return readFile(new URL(relativePath, root), 'utf8');
+}
+
+test('the site root lands on the existing quick-start documentation', async () => {
+  const [config, legacyLanding, gettingStarted] = await Promise.all([
+    read('../astro.config.mjs'),
+    read('content/docs/index.mdx'),
+    read('content/docs/guide/getting-started.mdx'),
+  ]);
+
+  assert.match(
+    config,
+    /redirects:\s*\{\s*['"]\/['"]:\s*['"]\/guide\/getting-started\/['"],?\s*\}/s,
+  );
+  assert.match(legacyLanding, /template:\s*splash/);
+  assert.match(gettingStarted, /^title:\s*快速开始$/m);
+  assert.match(gettingStarted, /^## 安装$/m);
+  assert.match(gettingStarted, /^## 引入即用$/m);
+  assert.match(gettingStarted, /^## UMD 用法$/m);
+});
+
+test('top-level docs rely on the shared Starlight page title only', async () => {
+  const [globalStyle, changelog, businessComponents] = await Promise.all([
+    read('content/docs/guide/global-style.mdx'),
+    read('content/docs/guide/changelog.mdx'),
+    read('content/docs/business-components.mdx'),
+  ]);
+
+  assert.doesNotMatch(globalStyle, /^# 全局样式$/m);
+  assert.doesNotMatch(changelog, /^# 更新日志$/m);
+  assert.doesNotMatch(businessComponents, /^# 业务组件$/m);
+  assert.doesNotMatch(businessComponents, /^tableOfContents:\s*false$/m);
+  assert.doesNotMatch(businessComponents, /^## 概述$/m);
+  assert.match(
+    businessComponents,
+    /^业务组件内容建设中，后续会在这里补充业务场景组件的使用说明与示例。$/m,
+  );
+});
+
+test('the weekly changelog summarizes docs and component work', async () => {
+  const changelog = await read('content/docs/guide/changelog.mdx');
+
+  assert.match(changelog, /^## 2026-07-24$/m);
+  assert.match(changelog, /Astro \+ Starlight 统一 Docs 引擎与组件体验升级/);
+  assert.match(changelog, /高分辨率屏幕下正文偏移和预览区留白不均/);
+  assert.match(changelog, /Upload 文件列表、头像上传、照片墙和图标列表/);
+  assert.match(changelog, /Starbucks Logo 在亮色、暗色和切换动画过程中均保持品牌绿色/);
+});
+
+test('multi-line page subtitles push the shared divider down', async () => {
+  const css = await read('styles/legacy-docs.css');
+
+  assert.doesNotMatch(
+    css,
+    /\.main-pane main > \.content-panel \+ \.content-panel::before\s*\{[\s\S]*?top:\s*43px;/,
+  );
+  assert.match(
+    css,
+    /\.main-pane main > \.content-panel \+ \.content-panel\s*\{[\s\S]*?container-type:\s*inline-size;/,
+  );
+  assert.match(
+    css,
+    /> p:first-child\s*\{[\s\S]*?position:\s*relative;[\s\S]*?padding-bottom:\s*24px;/,
+  );
+  assert.match(
+    css,
+    /> p:first-child::after\s*\{[\s\S]*?inset-inline-start:\s*50%;[\s\S]*?width:\s*calc\(100cqw \+ 2 \* var\(--sl-content-pad-x\)\);[\s\S]*?transform:\s*translateX\(-50%\);/,
+  );
+});
+
+test('wide desktop pages center content between the navigation rails', async () => {
+  const css = await read('styles/legacy-docs.css');
+
+  assert.match(
+    css,
+    /@media \(min-width:\s*72rem\)\s*\{[\s\S]*?html\[data-has-sidebar\]\[data-has-toc\] \.main-pane\s*\{[\s\S]*?--sl-content-margin-inline:\s*auto;/,
+  );
+});
+
+test('the Starbucks logo stays brand green in every page theme', async () => {
+  const css = await read('styles/legacy-docs.css');
+
+  assert.match(css, /\.sb-docs-logo-image\s*\{[\s\S]*?filter:\s*none;/);
+  assert.doesNotMatch(css, /data-theme=['"]dark['"][^{]*\.sb-docs-logo-image\s*\{/);
+  assert.doesNotMatch(css, /\.sb-docs-logo-image\s*\{[\s\S]*?brightness\(0\)\s+invert\(1\)/);
+});
+
+test('documentation asides reuse the global Alert geometry and semantic tokens', async () => {
+  const styles = await read('styles/legacy-docs.css');
+
+  assert.match(
+    styles,
+    /\.sl-markdown-content \.starlight-aside \{[\s\S]*?padding: var\(--spacing-6, 12px\) var\(--spacing-8, 16px\);[\s\S]*?background: var\(--sb-docs-aside-bg\);[\s\S]*?border: 1px solid var\(--sb-docs-aside-border\);[\s\S]*?border-radius: var\(--border-radius-md, var\(--sb-docs-radius\)\);/,
+  );
+  assert.match(
+    styles,
+    /\.starlight-aside--note \{[\s\S]*?--sb-docs-aside-bg: var\(--bg-color-component,[\s\S]*?--sb-docs-aside-accent: var\(--color-primary,/,
+  );
+  assert.match(
+    styles,
+    /\.starlight-aside--tip \{[\s\S]*?--sb-docs-aside-bg: var\(--color-success-focus,[\s\S]*?--sb-docs-aside-accent: var\(--color-success,/,
+  );
+  assert.match(
+    styles,
+    /\.starlight-aside--caution \{[\s\S]*?--sb-docs-aside-bg: var\(--color-warning-focus,[\s\S]*?--sb-docs-aside-accent: var\(--color-warning,/,
+  );
+  assert.match(
+    styles,
+    /\.starlight-aside--danger \{[\s\S]*?--sb-docs-aside-bg: var\(--color-danger-focus,[\s\S]*?--sb-docs-aside-accent: var\(--color-danger,/,
+  );
+});
+
+test('the global theme toggle uses the TDesign-style diagonal wipe', async () => {
+  const [component, css] = await Promise.all([
+    read('components/ThemeSelect.astro'),
+    read('styles/legacy-docs.css'),
+  ]);
+
+  assert.match(component, /async function transitionTheme/);
+  assert.match(component, /function waitForThemeCommit/);
+  assert.match(component, /const layer = page\.cloneNode\(true\)/);
+  assert.match(component, /element\.scrollTop = scrollPositions\[index\]/);
+  assert.match(component, /sb-theme-transition-to-\$\{nextTheme\}/);
+  assert.match(
+    component,
+    /querySelectorAll<HTMLElement>\('\.expressive-code'\)[\s\S]*?block\.dataset\.theme = nextTheme/,
+  );
+  assert.match(component, /classList\.add\('sb-theme-transition-commit'\)/);
+  assert.match(component, /applyTheme\(nextTheme, true\);\s*await waitForThemeCommit\(\);/);
+  assert.match(component, /layer\.remove\(\);\s*document\.documentElement\.classList\.remove\('sb-theme-transition-commit'\)/);
+  assert.match(component, /prefers-reduced-motion: reduce/);
+  assert.match(css, /html\.sb-theme-transition-commit[\s\S]*?transition:\s*none !important;/);
+  assert.match(css, /animation:\s*sb-theme-light-to-dark 750ms ease both/);
+  assert.match(css, /animation:\s*sb-theme-dark-to-light 750ms ease both/);
+  assert.match(css, /clip-path:\s*polygon\(\s*100% 0,\s*100% 0,/);
+  assert.match(css, /clip-path:\s*polygon\(\s*-14\.05408vh 0,\s*-14\.05408vh 0,\s*0 100%,\s*0 100%/);
+});
+
+test('the sidebar exposes the existing site search with component input styling', async () => {
+  const [config, header, sidebar, css] = await Promise.all([
+    read('../astro.config.mjs'),
+    read('components/Header.astro'),
+    read('components/Sidebar.astro'),
+    read('styles/legacy-docs.css'),
+  ]);
+
+  assert.match(config, /Sidebar:\s*'\.\/src\/components\/Sidebar\.astro'/);
+  assert.match(sidebar, /const isGuideSection = Astro\.url\.pathname\.includes\('\/guide\/'\)/);
+  assert.match(sidebar, /!isGuideSection &&/);
+  assert.match(sidebar, /<div class="sb-sidebar-search"><Search \/><\/div>/);
+  assert.match(
+    sidebar,
+    /\{!shouldRenderSearch && <div class="sb-sidebar-leading-space" aria-hidden="true"><\/div>\}/,
+  );
+  assert.doesNotMatch(header, /<Search \/>/);
+  assert.match(
+    css,
+    /#starlight__sidebar \.sidebar-content\s*\{[\s\S]*?gap:\s*0 !important;[\s\S]*?padding:\s*0 16px !important;/,
+  );
+  assert.match(
+    css,
+    /\.sb-sidebar-leading-space\s*\{[\s\S]*?flex:\s*0 0 24px;[\s\S]*?height:\s*24px;/,
+  );
+  assert.match(
+    css,
+    /\.sb-sidebar-search\s*\{[\s\S]*?position:\s*sticky;[\s\S]*?top:\s*0;[\s\S]*?margin-bottom:\s*0;[\s\S]*?padding-block:\s*24px;/,
+  );
+  assert.match(
+    css,
+    /\.sb-sidebar-search site-search > button\[data-open-modal\]\s*\{[\s\S]*?width:\s*100%;[\s\S]*?height:\s*36px;[\s\S]*?border:\s*1px solid var\(--color-border-component\);[\s\S]*?border-radius:\s*var\(--border-radius-sm\);[\s\S]*?background:\s*transparent;/,
+  );
+  assert.match(
+    css,
+    /\.sb-sidebar-search site-search > button\[data-open-modal\]:hover\s*\{[\s\S]*?background:\s*var\(--bg-color-container-hover\);/,
+  );
+  assert.match(
+    css,
+    /\.sb-sidebar-search site-search > button\[data-open-modal\]:focus-visible\s*\{[\s\S]*?border-color:\s*var\(--color-primary\);[\s\S]*?background:\s*var\(--bg-color-container\);[\s\S]*?box-shadow:\s*0 0 0 2px var\(--color-primary-focus\);/,
+  );
+  assert.match(
+    css,
+    /\.sb-sidebar-search site-search > button\[data-open-modal\] > svg\s*\{[\s\S]*?color:\s*var\(--color-text-secondary\);/,
+  );
+  assert.match(
+    css,
+    /\.sb-sidebar-search site-search > button\[data-open-modal\] > kbd > kbd\s*\{[\s\S]*?min-width:\s*0;[\s\S]*?height:\s*auto;[\s\S]*?border:\s*0;[\s\S]*?background:\s*transparent;[\s\S]*?font-family:[\s\S]*?"Segoe UI Symbol"[\s\S]*?"Noto Sans Symbols 2"[\s\S]*?"Apple Symbols"[\s\S]*?font-size:\s*14px;/,
+  );
+  assert.match(css, /margin-inline-start:\s*auto;/);
+});
+
+test('token preview uses the component-library button group', async () => {
+  const component = await read('components/TokenPreview.tsx');
+
+  assert.match(component, /import \{ Button \} from '@sbux\/starbucks-design-react'/);
+  assert.match(component, /<Button\.Group>/);
+  assert.match(component, /type=\{mode === 'light' \? 'primary' : 'default'\}/);
+  assert.match(component, /type=\{mode === 'dark' \? 'primary' : 'default'\}/);
+});
+
+test('token mode changes only the local preview scope, not the page theme', async () => {
+  const [component, globalStyle] = await Promise.all([
+    read('components/TokenPreview.tsx'),
+    read('content/docs/guide/global-style.mdx'),
+  ]);
+
+  assert.match(component, /applyTokenPreviewMode\(mode\)/);
+  assert.match(component, /applyPreviewScopeMode\(scope, mode\)/);
+  assert.match(component, /data-token-preview-swatch/);
+  assert.match(component, /restoreAttribute\(root, 'data-theme', previous\.rootTheme\)/);
+  assert.match(globalStyle, /<div data-token-preview-scope data-token-preview-mode="light">/);
+  assert.doesNotMatch(component, /localStorage\.setItem\(['"]starlight-theme/);
+});
+
+test('token mode reveals dark and light previews from opposite corners', async () => {
+  const [component, css] = await Promise.all([
+    read('components/TokenPreview.tsx'),
+    read('components/TokenPreview.module.css'),
+  ]);
+
+  assert.match(component, /scope\.cloneNode\(true\)/);
+  assert.match(component, /data-token-transition-layer/);
+  assert.match(component, /mode === 'dark' \? styles\.transitionToDark : styles\.transitionToLight/);
+  assert.match(component, /prefers-reduced-motion: reduce/);
+  assert.match(css, /animation:\s*token-preview-light-to-dark 1s ease both/);
+  assert.match(css, /animation:\s*token-preview-dark-to-light 1s ease both/);
+  assert.match(css, /clip-path:\s*polygon\(\s*100% 0,\s*100% 0,/);
+  assert.match(css, /clip-path:\s*polygon\(\s*-14\.05408vh 0,\s*-14\.05408vh 0,\s*0 100%,\s*0 100%/);
+});
+
+test('global style exposes every token group to the generated page outline', async () => {
+  const globalStyle = await read('content/docs/guide/global-style.mdx');
+  const headings = [
+    '主色',
+    '成功色',
+    '警告色',
+    '危险色',
+    '链接色',
+    '语义主色',
+    '文本色',
+    '背景色',
+    '字体',
+    '圆角',
+    '间距',
+    '更新 Token',
+  ];
+
+  for (const heading of headings) {
+    assert.match(globalStyle, new RegExp(`^## ${heading}$`, 'm'));
+  }
+});
+
+test('token tables opt out of the global table layer to avoid a double border', async () => {
+  const component = await read('components/TokenPreview.tsx');
+
+  assert.match(component, /className=\{`\$\{styles\.tableWrap\} not-content`\}/);
+});
+
+test('token color swatches render without an outline', async () => {
+  const css = await read('components/TokenPreview.module.css');
+  const swatchRule = css.match(/\.swatch\s*\{[\s\S]*?\}/)?.[0] ?? '';
+
+  assert.match(swatchRule, /border:\s*0;/);
+});
+
+test('token mode toolbar does not add a second page divider', async () => {
+  const css = await read('components/TokenPreview.module.css');
+  const toolbarRule = css.match(/\.toolbar\s*\{[\s\S]*?\}/)?.[0] ?? '';
+
+  assert.doesNotMatch(toolbarRule, /border-top/);
+});
+
+test('token mode toolbar removes spacing before the first token heading', async () => {
+  const css = await read('components/TokenPreview.module.css');
+  const toolbarRules = css.match(/\.toolbar\s*\{[\s\S]*?\}/g) ?? [];
+
+  for (const toolbarRule of toolbarRules) {
+    assert.doesNotMatch(toolbarRule, /margin-bottom/);
+    assert.doesNotMatch(toolbarRule, /padding-bottom/);
+  }
+
+  assert.match(
+    css,
+    /:global\(astro-island\):has\(\.toolbar\)\s*\+\s*:global\(h2\)\s*\{[\s\S]*?margin-top:\s*0;/,
+  );
+});
