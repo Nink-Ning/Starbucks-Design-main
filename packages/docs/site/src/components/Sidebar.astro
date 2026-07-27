@@ -21,32 +21,41 @@ const shouldRenderSearch =
 
 <script is:inline>
   (function () {
-    function keepCurrentSidebarItemVisible() {
-      if (!matchMedia('(min-width: 50rem)').matches) return;
+    var savedScrollTop;
+    var savedSection;
 
+    function getSidebarSection() {
+      var path = location.pathname;
+      if (path.indexOf('/components/') > -1) return 'components';
+      if (path.indexOf('/templates/') > -1) return 'templates';
+      if (path.indexOf('/business-components/') > -1) return 'business';
+      if (path.indexOf('/guide/ai-skills/') > -1) return 'skills';
+      return 'global';
+    }
+
+    function restoreSavedSidebarScroll() {
       var scroller = document.getElementById('starlight__sidebar');
-      var current = scroller && scroller.querySelector('a[aria-current="page"]');
-      if (!scroller || !current) return;
-
-      var scrollerRect = scroller.getBoundingClientRect();
-      var currentRect = current.getBoundingClientRect();
-      var stickySearch = scroller.querySelector('.sb-sidebar-search');
-      var stickySearchRect = stickySearch && stickySearch.getBoundingClientRect();
-      var visibleTop = Math.max(
-        scrollerRect.top + 24,
-        stickySearchRect ? stickySearchRect.bottom + 12 : scrollerRect.top + 24,
-      );
-      var visibleBottom = scrollerRect.bottom - 24;
-
-      if (currentRect.top < visibleTop) {
-        scroller.scrollTop -= visibleTop - currentRect.top;
-      } else if (currentRect.bottom > visibleBottom) {
-        scroller.scrollTop += currentRect.bottom - visibleBottom;
+      if (scroller && savedSection === getSidebarSection() && savedScrollTop !== undefined) {
+        scroller.scrollTop = savedScrollTop;
       }
     }
 
-    keepCurrentSidebarItemVisible();
-    document.addEventListener('astro:page-load', keepCurrentSidebarItemVisible);
+    document.addEventListener('astro:before-swap', function () {
+      var scroller = document.getElementById('starlight__sidebar');
+      if (!scroller || !matchMedia('(min-width: 50rem)').matches) return;
+      savedScrollTop = scroller.scrollTop;
+      savedSection = document.documentElement.dataset.docsSection || getSidebarSection();
+    });
+
+    document.addEventListener('astro:after-swap', function () {
+      restoreSavedSidebarScroll();
+    });
+
+    document.addEventListener('astro:page-load', function () {
+      restoreSavedSidebarScroll();
+      savedScrollTop = undefined;
+      savedSection = undefined;
+    });
   })();
 </script>
 
