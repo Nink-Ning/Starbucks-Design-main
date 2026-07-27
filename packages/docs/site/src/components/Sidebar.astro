@@ -19,6 +19,37 @@ const shouldRenderSearch =
   <SidebarSublist sublist={sidebar} />
 </SidebarPersister>
 
+<script is:inline>
+  (function () {
+    function keepCurrentSidebarItemVisible() {
+      if (!matchMedia('(min-width: 50rem)').matches) return;
+
+      var scroller = document.getElementById('starlight__sidebar');
+      var current = scroller && scroller.querySelector('a[aria-current="page"]');
+      if (!scroller || !current) return;
+
+      var scrollerRect = scroller.getBoundingClientRect();
+      var currentRect = current.getBoundingClientRect();
+      var stickySearch = scroller.querySelector('.sb-sidebar-search');
+      var stickySearchRect = stickySearch && stickySearch.getBoundingClientRect();
+      var visibleTop = Math.max(
+        scrollerRect.top + 24,
+        stickySearchRect ? stickySearchRect.bottom + 12 : scrollerRect.top + 24,
+      );
+      var visibleBottom = scrollerRect.bottom - 24;
+
+      if (currentRect.top < visibleTop) {
+        scroller.scrollTop -= visibleTop - currentRect.top;
+      } else if (currentRect.bottom > visibleBottom) {
+        scroller.scrollTop += currentRect.bottom - visibleBottom;
+      }
+    }
+
+    keepCurrentSidebarItemVisible();
+    document.addEventListener('astro:page-load', keepCurrentSidebarItemVisible);
+  })();
+</script>
+
 <div class="md:sl-hidden">
   <MobileMenuFooter />
 </div>
