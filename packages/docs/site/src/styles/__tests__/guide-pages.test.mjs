@@ -8,6 +8,20 @@ async function read(relativePath) {
   return readFile(new URL(relativePath, root), 'utf8');
 }
 
+test('the production site targets the current SCM Pages project', async () => {
+  const [config, landing, skills] = await Promise.all([
+    read('../astro.config.mjs'),
+    read('content/docs/index.mdx'),
+    read('content/docs/guide/ai-skills.mdx'),
+  ]);
+
+  assert.match(config, /base:\s*['"]\/kning\/starbucks-design-main\/['"]/);
+  assert.match(config, /['"]\/['"]:\s*['"]\/kning\/starbucks-design-main\/guide\/getting-started\/['"]/);
+  assert.match(landing, /\/kning\/starbucks-design-main\/guide\/getting-started\//);
+  assert.match(skills, /\/kning\/starbucks-design-main\/skills\/starbucks-design-react\.zip/);
+  assert.doesNotMatch(`${config}\n${landing}\n${skills}`, /\/china\/bopfui-starbucks-ui\//);
+});
+
 test('the site root lands on the existing quick-start documentation', async () => {
   const [config, legacyLanding, gettingStarted] = await Promise.all([
     read('../astro.config.mjs'),
@@ -17,7 +31,7 @@ test('the site root lands on the existing quick-start documentation', async () =
 
   assert.match(
     config,
-    /redirects:\s*\{\s*['"]\/['"]:\s*['"]\/guide\/getting-started\/['"],?\s*\}/s,
+    /redirects:\s*\{\s*['"]\/['"]:\s*['"]\/kning\/starbucks-design-main\/guide\/getting-started\/['"],?\s*\}/s,
   );
   assert.match(legacyLanding, /template:\s*splash/);
   assert.match(gettingStarted, /^title:\s*快速开始$/m);
@@ -204,34 +218,33 @@ test('token preview uses the component-library button group', async () => {
   assert.match(component, /type=\{mode === 'dark' \? 'primary' : 'default'\}/);
 });
 
-test('token mode changes only the local preview scope, not the page theme', async () => {
-  const [component, globalStyle] = await Promise.all([
+test('token mode changes only token values and swatches, not the page theme', async () => {
+  const [component, css, globalStyle] = await Promise.all([
     read('components/TokenPreview.tsx'),
+    read('components/TokenPreview.module.css'),
     read('content/docs/guide/global-style.mdx'),
   ]);
 
-  assert.match(component, /applyTokenPreviewMode\(mode\)/);
-  assert.match(component, /applyPreviewScopeMode\(scope, mode\)/);
+  assert.match(component, /applyTokenPreviewMode\(mode, scope\)/);
+  assert.match(component, /data-token-preview-value/);
   assert.match(component, /data-token-preview-swatch/);
   assert.match(component, /restoreAttribute\(root, 'data-theme', previous\.rootTheme\)/);
   assert.match(globalStyle, /<div data-token-preview-scope data-token-preview-mode="light">/);
+  assert.doesNotMatch(component, /previewVariableBindings|applyPreviewScopeMode/);
   assert.doesNotMatch(component, /localStorage\.setItem\(['"]starlight-theme/);
+  assert.doesNotMatch(css, /:global\(\[data-token-preview-scope\]\)/);
 });
 
-test('token mode reveals dark and light previews from opposite corners', async () => {
+test('token mode switches immediately without cloning the long preview page', async () => {
   const [component, css] = await Promise.all([
     read('components/TokenPreview.tsx'),
     read('components/TokenPreview.module.css'),
   ]);
 
-  assert.match(component, /scope\.cloneNode\(true\)/);
-  assert.match(component, /data-token-transition-layer/);
-  assert.match(component, /mode === 'dark' \? styles\.transitionToDark : styles\.transitionToLight/);
-  assert.match(component, /prefers-reduced-motion: reduce/);
-  assert.match(css, /animation:\s*token-preview-light-to-dark 1s ease both/);
-  assert.match(css, /animation:\s*token-preview-dark-to-light 1s ease both/);
-  assert.match(css, /clip-path:\s*polygon\(\s*100% 0,\s*100% 0,/);
-  assert.match(css, /clip-path:\s*polygon\(\s*-14\.05408vh 0,\s*-14\.05408vh 0,\s*0 100%,\s*0 100%/);
+  assert.match(component, /onClick=\{\(\) => setMode\('light'\)\}/);
+  assert.match(component, /onClick=\{\(\) => setMode\('dark'\)\}/);
+  assert.doesNotMatch(component, /cloneNode|data-token-transition-layer|setTimeout|animationend/);
+  assert.doesNotMatch(css, /token-preview-(?:light-to-dark|dark-to-light)|clip-path/);
 });
 
 test('global style exposes every token group to the generated page outline', async () => {

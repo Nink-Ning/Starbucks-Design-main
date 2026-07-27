@@ -4,64 +4,8 @@
   margin-top: 32px;
 }
 
-:global([data-token-preview-scope]) {
-  position: relative;
-  isolation: isolate;
-  background: var(--sb-docs-bg);
-  color: var(--sb-docs-text-1);
-}
-
-:global([data-token-preview-scope] > h2) {
-  color: var(--sb-docs-text-1);
-}
-
 :global(astro-island):has(.toolbar) + :global(h2) {
   margin-top: 0;
-}
-
-.transitionLayer {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  background: var(--sb-docs-bg);
-  will-change: clip-path;
-}
-
-.transitionToDark {
-  animation: token-preview-light-to-dark 1s ease both;
-}
-
-.transitionToLight {
-  animation: token-preview-dark-to-light 1s ease both;
-}
-
-@keyframes token-preview-light-to-dark {
-  from {
-    clip-path: polygon(
-      100% 0,
-      100% 0,
-      calc(100% + 14.05408vh) 100%,
-      calc(100% + 14.05408vh) 100%
-    );
-  }
-
-  to {
-    clip-path: polygon(-14.05408vh 0, 100% 0, calc(100% + 14.05408vh) 100%, 0 100%);
-  }
-}
-
-@keyframes token-preview-dark-to-light {
-  from {
-    clip-path: polygon(-14.05408vh 0, -14.05408vh 0, 0 100%, 0 100%);
-  }
-
-  to {
-    clip-path: polygon(-14.05408vh 0, 100% 0, calc(100% + 14.05408vh) 100%, 0 100%);
-  }
 }
 
 .tableWrap {

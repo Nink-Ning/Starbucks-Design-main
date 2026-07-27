@@ -5,9 +5,9 @@ import vue from '@astrojs/vue';
 
 export default defineConfig({
   site: 'https://pages.scm.starbucks.com',
-  base: '/china/bopfui-starbucks-ui/',
+  base: '/kning/starbucks-design-main/',
   redirects: {
-    '/': '/guide/getting-started/',
+    '/': '/kning/starbucks-design-main/guide/getting-started/',
   },
   integrations: [
     starlight({

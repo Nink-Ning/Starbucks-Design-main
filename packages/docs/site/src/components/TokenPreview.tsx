@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { flushSync } from 'react-dom';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@sbux/starbucks-design-react';
 import styles from './TokenPreview.module.css';
 
@@ -172,21 +171,7 @@ function getSampleStyle(row: TokenRow): React.CSSProperties {
   return {};
 }
 
-const colorVariableNames = groups.flatMap((group) =>
-  group.rows.filter((row) => row.sample === 'color').map((row) => row.cssVar),
-);
-
-const previewVariableBindings = [
-  ['--sb-docs-bg', '--bg-color-container'],
-  ['--sb-docs-surface', '--bg-color-secondarycontainer'],
-  ['--sb-docs-border', '--color-border-component'],
-  ['--sb-docs-border-soft', '--color-border-1'],
-  ['--sb-docs-text-1', '--color-text-primary'],
-  ['--sb-docs-text-2', '--color-text-secondary'],
-  ['--sl-color-white', '--color-text-primary'],
-  ['--sl-color-gray-1', '--color-text-primary'],
-  ['--sl-color-gray-2', '--color-text-secondary'],
-] as const;
+const tokenVariableNames = groups.flatMap((group) => group.rows.map((row) => row.cssVar));
 
 function restoreAttribute(element: HTMLElement, name: string, value: string | null) {
   if (value === null) element.removeAttribute(name);
@@ -204,8 +189,8 @@ function readThemeVariables(mode: Mode, variableNames: string[]) {
   };
 
   // Read the generated component-library variables in the requested mode, then
-  // restore the page before the browser paints. The values are copied onto the
-  // local Token preview scope; the Docs shell never changes theme.
+  // restore the page before the browser paints. Only the displayed Token values
+  // and swatches use this snapshot; the Docs shell keeps its current theme.
   root.setAttribute('data-theme', mode);
   body.setAttribute('data-theme', mode);
   if (mode === 'dark') {
@@ -227,76 +212,28 @@ function readThemeVariables(mode: Mode, variableNames: string[]) {
   return values;
 }
 
-function readThemeColors(mode: Mode) {
-  return readThemeVariables(mode, colorVariableNames);
-}
-
 function toCssColor(value: string) {
   return CSS.supports('color', value) ? value : `rgb(${value})`;
 }
 
+function formatTokenValue(row: HTMLElement, value: string) {
+  return row.dataset.tokenFormat === 'rgb' ? `rgb(${value})` : value;
+}
+
 function applyTokenPreviewMode(mode: Mode, root: ParentNode = document) {
-  const values = readThemeColors(mode);
+  const values = readThemeVariables(mode, tokenVariableNames);
+
+  root.querySelectorAll<HTMLElement>('[data-token-preview-value]').forEach((valueCell) => {
+    const variableName = valueCell.dataset.tokenVariable;
+    const value = variableName ? values.get(variableName) : undefined;
+    if (value) valueCell.textContent = formatTokenValue(valueCell, value);
+  });
+
   root.querySelectorAll<HTMLElement>('[data-token-preview-swatch]').forEach((swatch) => {
     const variableName = swatch.dataset.tokenVariable;
     const value = variableName ? values.get(variableName) : undefined;
     if (value) swatch.style.backgroundColor = toCssColor(value);
   });
-}
-
-function applyPreviewScopeMode(scope: HTMLElement, mode: Mode) {
-  const sourceVariableNames = Array.from(new Set(previewVariableBindings.map(([, source]) => source)));
-  const values = readThemeVariables(mode, sourceVariableNames);
-
-  previewVariableBindings.forEach(([target, source]) => {
-    const value = values.get(source);
-    if (value) scope.style.setProperty(target, toCssColor(value));
-  });
-  scope.dataset.tokenPreviewMode = mode;
-  applyTokenPreviewMode(mode, scope);
-}
-
-function waitForTransitionLayer(layer: HTMLElement) {
-  return new Promise<void>((resolve) => {
-    let settled = false;
-    const finish = () => {
-      if (settled) return;
-      settled = true;
-      resolve();
-    };
-
-    layer.addEventListener('animationend', finish, { once: true });
-    window.setTimeout(finish, 1100);
-  });
-}
-
-async function transitionTokenPreviewMode(mode: Mode, commitMode: () => void) {
-  const scope = document.querySelector<HTMLElement>('[data-token-preview-scope]');
-  if (!scope) {
-    flushSync(commitMode);
-    applyTokenPreviewMode(mode);
-    return;
-  }
-
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  flushSync(commitMode);
-  if (reduceMotion) {
-    applyPreviewScopeMode(scope, mode);
-    return;
-  }
-
-  scope.querySelector<HTMLElement>('[data-token-transition-layer]')?.remove();
-  const layer = scope.cloneNode(true) as HTMLElement;
-  layer.setAttribute('aria-hidden', 'true');
-  layer.setAttribute('data-token-transition-layer', '');
-  layer.querySelectorAll('[id]').forEach((element) => element.removeAttribute('id'));
-  layer.classList.add(styles.transitionLayer, mode === 'dark' ? styles.transitionToDark : styles.transitionToLight);
-  applyPreviewScopeMode(layer, mode);
-  scope.append(layer);
-
-  await waitForTransitionLayer(layer);
-  applyPreviewScopeMode(scope, mode);
-  layer.remove();
 }
 
 export function TokenTable({ title }: { title: string }) {
@@ -333,7 +270,14 @@ export function TokenTable({ title }: { title: string }) {
                   <span>{row.name}</span>
                 </span>
               </td>
-              <td className={styles.value}>{getDisplayValue(row)}</td>
+              <td
+                className={styles.value}
+                data-token-preview-value
+                data-token-variable={row.cssVar}
+                data-token-format={row.value.startsWith('rgb(var(') ? 'rgb' : undefined}
+              >
+                {getDisplayValue(row)}
+              </td>
               <td className={styles.cssVar}>{row.cssVar}</td>
               <td>{row.description}</td>
             </tr>
@@ -346,23 +290,14 @@ export function TokenTable({ title }: { title: string }) {
 
 export function TokenPreviewToolbar() {
   const [mode, setMode] = useState<Mode>('light');
-  const transitionInProgress = useRef(false);
 
   useEffect(() => {
     const scope = document.querySelector<HTMLElement>('[data-token-preview-scope]');
-    if (scope) applyPreviewScopeMode(scope, 'light');
-  }, []);
-
-  const selectMode = async (nextMode: Mode) => {
-    if (nextMode === mode || transitionInProgress.current) return;
-
-    transitionInProgress.current = true;
-    try {
-      await transitionTokenPreviewMode(nextMode, () => setMode(nextMode));
-    } finally {
-      transitionInProgress.current = false;
+    if (scope) {
+      scope.dataset.tokenPreviewMode = mode;
+      applyTokenPreviewMode(mode, scope);
     }
-  };
+  }, [mode]);
 
   return (
     <div className={styles.toolbar} role="group" aria-label="切换 Token 预览模式">
@@ -371,7 +306,7 @@ export function TokenPreviewToolbar() {
           type={mode === 'light' ? 'primary' : 'default'}
           size="small"
           aria-pressed={mode === 'light'}
-          onClick={() => void selectMode('light')}
+          onClick={() => setMode('light')}
         >
           Light
         </Button>
@@ -379,7 +314,7 @@ export function TokenPreviewToolbar() {
           type={mode === 'dark' ? 'primary' : 'default'}
           size="small"
           aria-pressed={mode === 'dark'}
-          onClick={() => void selectMode('dark')}
+          onClick={() => setMode('dark')}
         >
           Dark
         </Button>
