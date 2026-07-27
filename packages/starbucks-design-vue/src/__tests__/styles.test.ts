@@ -945,7 +945,7 @@ describe('stylesheet entry', () => {
     expect(skeleton).not.toContain('.arco-skeleton-animate')
   })
 
-  it('maps Vue Table large default DOM to React default density', () => {
+  it('maps Vue Table geometry and visual states to the Figma contract', () => {
     const table = readFileSync(resolve(srcDir, 'overrides/Table.less'), 'utf8')
 
     expectExactRule(table, '.arco-table', [
@@ -954,10 +954,44 @@ describe('stylesheet entry', () => {
       'font-size: var(--fs-14);',
       'line-height: var(--lh-22);',
     ])
-    expectExactRule(table, '.arco-table-size-large .arco-table-cell', [
-      'padding: 9px var(--spacing-7);',
+    expectExactRule(table, '.arco-table-th', [
+      'color: var(--color-text-secondary);',
+      'font-size: var(--fs-14);',
+      'font-weight: var(--fw-regular);',
+      'line-height: var(--lh-22);',
+      'vertical-align: middle;',
+      'background-color: var(--bg-color-container);',
+      'border-bottom-color: var(--color-border-1);',
     ])
-    expect(table).not.toContain('.arco-table-size-large .arco-table-td')
+    expectExactRule(
+      table,
+      '.arco-table-size-large .arco-table-th,\n' +
+        '.arco-table-size-large .arco-table-td',
+      ['height: 54px;'],
+    )
+    expectExactRule(table, '.arco-table-size-large .arco-table-cell', [
+      'padding: 0 var(--spacing-8);',
+    ])
+    expectExactRule(
+      table,
+      '.arco-table-size-medium .arco-table-th,\n' +
+        '.arco-table-size-medium .arco-table-td',
+      ['height: 46px;'],
+    )
+    expectExactRule(
+      table,
+      '.arco-table-size-small .arco-table-th,\n' +
+        '.arco-table-size-small .arco-table-td',
+      [
+        'height: 36px;',
+        'font-size: var(--fs-12);',
+        'line-height: var(--lh-20);',
+      ],
+    )
+    expect(table).toContain('background-color: var(--bg-color-container-hover);')
+    expect(table).toContain('border-color: var(--color-border-component);')
+    expect(table).toContain('box-shadow: var(--shadow-sm);')
+    expect(table).not.toContain('!important')
   })
 
   it('maps Vue Tabs nav and tab DOM to React tab states', () => {

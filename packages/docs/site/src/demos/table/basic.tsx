@@ -1,63 +1,63 @@
-import { Table } from '@sbux/starbucks-design-react';
-import type { TableColumnProps } from '@sbux/starbucks-design-react';
+import { Link, Space, Table, Tag } from '@sbux/starbucks-design-react'
+import type { TableColumnProps } from '@sbux/starbucks-design-react'
+
+type TableRecord = {
+  key: string
+  task: string
+  status: string
+  createdAt: string
+}
+
+const columns: TableColumnProps<TableRecord>[] = [
+  {
+    title: '任务名称',
+    dataIndex: 'task'
+  },
+  {
+    title: '状态',
+    dataIndex: 'status',
+    render: (_, record) => (
+      <Tag color="green" bordered size="large">
+        {record.status}
+      </Tag>
+    )
+  },
+  {
+    title: '创建时间',
+    dataIndex: 'createdAt'
+  },
+  {
+    title: '操作',
+    render: () => (
+      <Space size={24}>
+        <Link>管理</Link>
+        <Link status="error">删除</Link>
+      </Space>
+    )
+  }
+]
+
+const data: TableRecord[] = [
+  {
+    key: '1',
+    task: '门店库存盘点',
+    status: '已完成',
+    createdAt: '2026-07-24 10:30'
+  },
+  {
+    key: '2',
+    task: '夏季新品配置',
+    status: '已完成',
+    createdAt: '2026-07-23 15:20'
+  },
+  {
+    key: '3',
+    task: '伙伴培训计划',
+    status: '已完成',
+    createdAt: '2026-07-22 09:15'
+  }
+]
 
 export default function Demo() {
-
-  const columns: TableColumnProps[] = [
-    {
-      title: "Name",
-      dataIndex: "name",
-    },
-    {
-      title: "Salary",
-      dataIndex: "salary",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-    },
-  ];
-  const data = [
-    {
-      key: "1",
-      name: "Jane Doe",
-      salary: 23000,
-      address: "32 Park Road, London",
-      email: "jane.doe@example.com",
-    },
-    {
-      key: "2",
-      name: "Alisa Ross",
-      salary: 25000,
-      address: "35 Park Road, London",
-      email: "alisa.ross@example.com",
-    },
-    {
-      key: "3",
-      name: "Kevin Sandra",
-      salary: 22000,
-      address: "31 Park Road, London",
-      email: "kevin.sandra@example.com",
-    },
-    {
-      key: "4",
-      name: "Ed Hellen",
-      salary: 17000,
-      address: "42 Park Road, London",
-      email: "ed.hellen@example.com",
-    },
-    {
-      key: "5",
-      name: "William Smith",
-      salary: 27000,
-      address: "62 Park Road, London",
-      email: "william.smith@example.com",
-    },
-  ];
-
-  return <Table columns={columns} data={data} />;
+  return <Table columns={columns} data={data} pagination={false} />
 }

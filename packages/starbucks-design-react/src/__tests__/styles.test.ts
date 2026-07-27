@@ -109,4 +109,50 @@ describe('stylesheet entry', () => {
     ])
   })
 
+  it('maps React Table geometry and visual states to the Figma contract', () => {
+    const table = readFileSync(resolve(srcDir, 'overrides/Table.less'), 'utf8')
+
+    expectExactRule(table, '.arco-table', [
+      'color: var(--color-text-primary);',
+      'font-family: var(--font-family);',
+      'font-size: var(--fs-14);',
+      'line-height: var(--lh-22);',
+    ])
+    expectExactRule(table, '.arco-table-th', [
+      'color: var(--color-text-secondary);',
+      'font-size: var(--fs-14);',
+      'font-weight: var(--fw-regular);',
+      'line-height: var(--lh-22);',
+      'vertical-align: middle;',
+      'background-color: var(--bg-color-container);',
+      'border-bottom-color: var(--color-border-1);',
+    ])
+    expectExactRule(
+      table,
+      '.arco-table-size-default .arco-table-th,\n' +
+        '.arco-table-size-default .arco-table-td',
+      ['height: 54px;'],
+    )
+    expectExactRule(
+      table,
+      '.arco-table-size-middle .arco-table-th,\n' +
+        '.arco-table-size-middle .arco-table-td',
+      ['height: 46px;'],
+    )
+    expectExactRule(
+      table,
+      '.arco-table-size-small .arco-table-th,\n' +
+        '.arco-table-size-small .arco-table-td',
+      [
+        'height: 36px;',
+        'font-size: var(--fs-12);',
+        'line-height: var(--lh-20);',
+      ],
+    )
+    expect(table).toContain('background-color: var(--bg-color-container-hover);')
+    expect(table).toContain('border-color: var(--color-border-component);')
+    expect(table).toContain('box-shadow: var(--shadow-sm);')
+    expect(table).not.toContain('!important')
+  })
+
 })

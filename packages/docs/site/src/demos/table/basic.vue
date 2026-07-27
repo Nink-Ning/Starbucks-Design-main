@@ -1,63 +1,58 @@
 <template>
-  <Table :columns="columns" :data="data" />
+  <Table :columns="columns" :data="data" :pagination="false">
+    <template #status="{ record }">
+      <Tag color="green" bordered size="large">
+        {{ record.status }}
+      </Tag>
+    </template>
+    <template #operations>
+      <Space :size="24">
+        <Link>管理</Link>
+        <Link status="error">删除</Link>
+      </Space>
+    </template>
+  </Table>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
-
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
+    title: '任务名称',
+    dataIndex: 'task'
   },
   {
-    title: 'Salary',
-    dataIndex: 'salary',
+    title: '状态',
+    dataIndex: 'status',
+    slotName: 'status'
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
+    title: '创建时间',
+    dataIndex: 'createdAt'
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
-  },
-];
-const data = reactive([
+    title: '操作',
+    slotName: 'operations'
+  }
+]
+
+const data = [
   {
     key: '1',
-    name: 'Jane Doe',
-    salary: 23000,
-    address: '32 Park Road, London',
-    email: 'jane.doe@example.com',
+    task: '门店库存盘点',
+    status: '已完成',
+    createdAt: '2026-07-24 10:30'
   },
   {
     key: '2',
-    name: 'Alisa Ross',
-    salary: 25000,
-    address: '35 Park Road, London',
-    email: 'alisa.ross@example.com',
+    task: '夏季新品配置',
+    status: '已完成',
+    createdAt: '2026-07-23 15:20'
   },
   {
     key: '3',
-    name: 'Kevin Sandra',
-    salary: 22000,
-    address: '31 Park Road, London',
-    email: 'kevin.sandra@example.com',
-  },
-  {
-    key: '4',
-    name: 'Ed Hellen',
-    salary: 17000,
-    address: '42 Park Road, London',
-    email: 'ed.hellen@example.com',
-  },
-  {
-    key: '5',
-    name: 'William Smith',
-    salary: 27000,
-    address: '62 Park Road, London',
-    email: 'william.smith@example.com',
-  },
-]);
+    task: '伙伴培训计划',
+    status: '已完成',
+    createdAt: '2026-07-22 09:15'
+  }
+]
 </script>

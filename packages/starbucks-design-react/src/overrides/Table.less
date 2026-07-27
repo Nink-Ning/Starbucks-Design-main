@@ -1,16 +1,176 @@
-// Table.less
-// Auto-generated from Figma Design System V2.0
-// Generated: 2026-07-04
-// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+// Table — Figma Design System V2.0, node 540:34772
+// Component-scoped compatibility styles for Arco React Table.
 
-// ═══════════════════════════════════════════
-// Table — Figma Design Tokens
-// ═══════════════════════════════════════════
-//
-// All design tokens are GLOBAL — this component references
-// them through CSS custom properties defined in theme.css.
-// This file documents which tokens apply and adds any
-// component-specific overrides (focus shadows, effects, etc.).
-//
-// Component-specific style overrides:
-// (extend with CSS custom property overrides as needed)
+.arco-table {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-table-th {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  vertical-align: middle;
+  background-color: var(--bg-color-container);
+  border-bottom-color: var(--color-border-1);
+}
+
+.arco-table-td {
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  vertical-align: middle;
+  background-color: var(--bg-color-container);
+  border-bottom-color: var(--color-border-1);
+}
+
+.arco-table .arco-table-th,
+.arco-table .arco-table-td {
+  border-bottom-color: var(--color-border-1);
+}
+
+.arco-table thead > .arco-table-tr > .arco-table-th {
+  border-bottom-color: var(--color-border-1);
+}
+
+.arco-table-th.arco-table-col-sorted,
+.arco-table-td.arco-table-col-sorted,
+.arco-table-cell-mouseenter,
+.arco-table-cell-with-sorter:hover,
+.arco-table-filters:hover,
+.arco-table-filters-open {
+  background-color: var(--bg-color-container-hover);
+}
+
+.arco-table-stripe .arco-table-tr:nth-child(even) .arco-table-td,
+.arco-table-hover .arco-table-tr:not(.arco-table-empty-row):hover .arco-table-td,
+.arco-table-hover .arco-table-tr.arco-table-tr-hover .arco-table-td {
+  background-color: var(--bg-color-container-hover);
+}
+
+.arco-table-border-cell .arco-table-th,
+.arco-table-border-cell .arco-table-td,
+.arco-table-border-header-cell .arco-table-th,
+.arco-table-border-body-cell .arco-table-td {
+  border-color: var(--color-border-1);
+}
+
+.arco-table-border .arco-table-container {
+  border-color: var(--color-border-component);
+}
+
+.arco-table-border .arco-table-container::before {
+  background-color: var(--color-border-component);
+}
+
+.arco-table-border .arco-table-th.arco-table-col-first,
+.arco-table-border .arco-table-td.arco-table-col-first,
+.arco-table-border .arco-table-expand-fixed-row {
+  border-left-color: var(--color-border-component);
+}
+
+.arco-table-border .arco-table-footer {
+  border-color: var(--color-border-component);
+}
+
+.arco-table-size-default .arco-table-th,
+.arco-table-size-default .arco-table-td {
+  height: 54px;
+}
+
+.arco-table-size-default .arco-table-th-item {
+  padding: 0 var(--spacing-8);
+}
+
+.arco-table-size-default .arco-table-cell:not(.arco-table-cell-with-sorter),
+.arco-table-size-middle .arco-table-cell:not(.arco-table-cell-with-sorter),
+.arco-table-size-small .arco-table-cell:not(.arco-table-cell-with-sorter),
+.arco-table-size-mini .arco-table-cell:not(.arco-table-cell-with-sorter) {
+  padding: 0;
+}
+
+.arco-table-size-default .arco-table-col-has-sorter .arco-table-cell-with-sorter {
+  min-height: 54px;
+  padding: 0 var(--spacing-8);
+}
+
+.arco-table-size-default .arco-table-td:not(.arco-table-td-operation) {
+  padding: 0 var(--spacing-8);
+}
+
+.arco-table-size-middle .arco-table-th,
+.arco-table-size-middle .arco-table-td {
+  height: 46px;
+}
+
+.arco-table-size-middle .arco-table-th-item {
+  padding: 0 var(--spacing-6);
+}
+
+.arco-table-size-middle .arco-table-col-has-sorter .arco-table-cell-with-sorter {
+  min-height: 46px;
+  padding: 0 var(--spacing-6);
+}
+
+.arco-table-size-middle .arco-table-td:not(.arco-table-td-operation) {
+  padding: 0 var(--spacing-6);
+}
+
+.arco-table-size-small .arco-table-th,
+.arco-table-size-small .arco-table-td {
+  height: 36px;
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-table-size-small .arco-table-th-item {
+  padding: 0 var(--spacing-4);
+}
+
+.arco-table-size-small .arco-table-col-has-sorter .arco-table-cell-with-sorter {
+  min-height: 36px;
+  padding: 0 var(--spacing-4);
+}
+
+.arco-table-size-small .arco-table-td:not(.arco-table-td-operation) {
+  padding: 0 var(--spacing-4);
+}
+
+.arco-table .arco-table-th-operation .arco-table-th-item,
+.arco-table .arco-table-td-operation {
+  padding: 0;
+}
+
+.arco-table-th-item.arco-table-col-has-filter,
+.arco-table-col-has-sorter.arco-table-col-has-filter .arco-table-cell-with-sorter {
+  padding-right: 28px;
+}
+
+.arco-table-sorter-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.arco-table-filters svg {
+  width: 16px;
+  height: 16px;
+}
+
+.arco-table-scroll-position-right .arco-table-col-fixed-left-last::after,
+.arco-table-scroll-position-middle .arco-table-col-fixed-left-last::after,
+.arco-table-scroll-position-left .arco-table-col-fixed-right-first::after,
+.arco-table-scroll-position-middle .arco-table-col-fixed-right-first::after,
+.arco-table-scroll-position-right .arco-table-content-scroll::before,
+.arco-table-scroll-position-middle .arco-table-content-scroll::before,
+.arco-table-scroll-position-left .arco-table-content-scroll::after,
+.arco-table-scroll-position-middle .arco-table-content-scroll::after {
+  box-shadow: var(--shadow-sm);
+}
+
+.arco-table-pagination {
+  margin-top: var(--spacing-6);
+}

@@ -24,6 +24,13 @@
     <FormItem label="noData" field="noData">
       <Switch v-model="form.noData" />
     </FormItem>
+    <FormItem label="Size" field="size">
+      <RadioGroup
+        v-model="form.size"
+        type="button"
+        :options="['large', 'medium', 'small', 'mini']"
+      />
+    </FormItem>
   </Form>
   <Table
     :columns="columns"
@@ -34,11 +41,14 @@
     :loading="form.loading"
     :show-header="form.tableHeader"
     :row-selection="form.checkbox ? rowSelection : undefined"
+    :size="form.size"
   />
 </template>
 
 <script setup lang="ts">
 import { reactive } from 'vue';
+
+type TableSize = 'large' | 'medium' | 'small' | 'mini';
 
 const form = reactive({
   border: true,
@@ -49,6 +59,7 @@ const form = reactive({
   loading: false,
   tableHeader: true,
   noData: false,
+  size: 'large' as TableSize,
 });
 
 const rowSelection = reactive({
