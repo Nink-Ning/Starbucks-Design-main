@@ -31,19 +31,19 @@ export default function Demo() {
   const cascaderOptions = [
     {
       value: 'beijing',
-      label: 'Beijing',
+      label: '华东区',
       children: [
         {
           value: 'beijingshi',
-          label: 'Beijing',
+          label: '华东区',
           children: [
             {
               value: 'chaoyang',
-              label: 'Chaoyang',
+              label: '徐汇区',
               children: [
                 {
                   value: 'datunli',
-                  label: 'Datunli',
+                  label: '上海烘焙工坊',
                 },
               ],
             },
@@ -53,15 +53,15 @@ export default function Demo() {
     },
     {
       value: 'shanghai',
-      label: 'Shanghai',
+      label: '华南区',
       children: [
         {
           value: 'shanghaishi',
-          label: 'Shanghai',
+          label: '华南区',
           children: [
             {
               value: 'huangpu',
-              label: 'Huangpu',
+              label: '天河区',
             },
           ],
         },
@@ -70,16 +70,15 @@ export default function Demo() {
   ];
   const formItemLayout = {
     labelCol: {
-      span: 7,
+      style: { width: 96, maxWidth: 96, flex: '0 0 96px' },
     },
     wrapperCol: {
-      span: 17,
+      style: { flex: '1 1 0', maxWidth: 'none' },
     },
   };
   const noLabelLayout = {
     wrapperCol: {
-      span: 17,
-      offset: 7,
+      style: { flex: '1 1 0', maxWidth: 'none', marginLeft: 96 },
     },
   };
 
@@ -101,7 +100,7 @@ export default function Demo() {
         onValuesChange={onValuesChange}
         scrollToFirstError
       >
-        <Form.Item label="Form size">
+        <Form.Item label="表单尺寸">
           <Radio.Group type="button" value={size} onChange={setSize}>
             <Radio value="mini">mini</Radio>
             <Radio value="small">small</Radio>
@@ -109,14 +108,14 @@ export default function Demo() {
             <Radio value="large">large</Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="Username" field="name" rules={[{ required: true }]}>
-          <Input placeholder="please enter..." />
+        <Form.Item label="门店名称" field="name" rules={[{ required: true }]}>
+          <Input placeholder="请输入..." style={{ width: 350 }} />
         </Form.Item>
-        <Form.Item label="Age" field="age" rules={[{ type: 'number', required: true }]}>
-          <InputNumber placeholder="please enter" />
+        <Form.Item label="运营年限" field="age" rules={[{ type: 'number', required: true }]}>
+          <InputNumber placeholder="请输入" style={{ width: 160 }} />
         </Form.Item>
         <Form.Item
-          label="Province"
+          label="所属区域"
           field="province"
           rules={[
             {
@@ -129,14 +128,24 @@ export default function Demo() {
             },
           ]}
         >
-          <Cascader showSearch placeholder="please select" allowClear options={cascaderOptions} />
+          <Cascader
+            showSearch
+            placeholder="请选择"
+            allowClear
+            options={cascaderOptions}
+            style={{ width: 320 }}
+          />
         </Form.Item>
-        <Form.Item label="Auto-complete" field="autocomplete" rules={[{ required: true }]}>
-          <AutoComplete placeholder="please enter" data={['123', '234', '345', '456']} />
+        <Form.Item label="自动补全" field="autocomplete" rules={[{ required: true }]}>
+          <AutoComplete
+            placeholder="请输入"
+            data={['123', '234', '345', '456']}
+            style={{ width: 350 }}
+          />
         </Form.Item>
-        <Form.Item label="Post" field="post" rules={[{ required: true }]}>
+        <Form.Item label="岗位" field="post" rules={[{ required: true }]}>
           <Select
-            placeholder="please select"
+            placeholder="请选择"
             options={[
               {
                 label: 'one',
@@ -152,10 +161,11 @@ export default function Demo() {
               },
             ]}
             allowClear
+            style={{ width: 320 }}
           />
         </Form.Item>
         <Form.Item
-          label="Multiple Choice"
+          label="多选配置"
           required
           field="a.b[0].c"
           rules={[{ type: 'array', minLength: 1 }]}
@@ -163,29 +173,30 @@ export default function Demo() {
           <Select
             mode="multiple"
             allowCreate
-            placeholder="please select"
+            placeholder="请选择"
             options={['a', 'b', 'c', 'd', 'e']}
+            style={{ width: 320 }}
           />
         </Form.Item>
-        <Form.Item label="TreeSelect" field="treenode" rules={[{ required: true }]}>
-          <TreeSelect allowClear placeholder="please select">
-            <TreeSelect.Node key="node1" title="Trunk(node1)">
-              <TreeSelect.Node key="node2" title="Leaf(node2)" />
+        <Form.Item label="树选择" field="treenode" rules={[{ required: true }]}>
+          <TreeSelect allowClear placeholder="请选择" style={{ width: 320 }}>
+            <TreeSelect.Node key="node1" title="华东区">
+              <TreeSelect.Node key="node2" title="上海烘焙工坊" />
             </TreeSelect.Node>
-            <TreeSelect.Node key="node3" title="Trunk2(node3)">
-              <TreeSelect.Node key="node4" title="Leaf(node4)" />
-              <TreeSelect.Node key="node5" title="Leaf(node5)" />
+            <TreeSelect.Node key="node3" title="华南区">
+              <TreeSelect.Node key="node4" title="广州天河门店" />
+              <TreeSelect.Node key="node5" title="深圳臻选门店" />
             </TreeSelect.Node>
           </TreeSelect>
         </Form.Item>
-        <Form.Item label="Score" field="score" rules={[{ required: true, type: 'number' }]}>
+        <Form.Item label="评分" field="score" rules={[{ required: true, type: 'number' }]}>
           <Rate />
         </Form.Item>
-        <Form.Item label="Date" field="date" rules={[{ required: true }]}>
-          <DatePicker showTime />
+        <Form.Item label="日期" field="date" rules={[{ required: true }]}>
+          <DatePicker showTime style={{ width: 240 }} />
         </Form.Item>
         <Form.Item
-          label="Switch"
+          label="开关"
           field="switch"
           triggerPropName="checked"
           rules={[{ type: 'boolean', true: true }]}
@@ -193,13 +204,13 @@ export default function Demo() {
           <Switch />
         </Form.Item>
         <Form.Item
-          label="Radio"
+          label="单选"
           field="radio"
           rules={[
             {
               validator: (value, callback) => {
                 if (value !== 'b') {
-                  callback('you can only choose b');
+                  callback('只能选择 B');
                 }
               },
             },
@@ -215,28 +226,28 @@ export default function Demo() {
           </Radio.Group>
         </Form.Item>
         <Form.Item
-          label="Slide"
+          label="滑动条"
           field="slider"
           rules={[
             {
               validator: (value, callback) => {
                 if (value < 50) {
-                  callback('must be greater than 50!');
+                  callback('数值必须大于 50');
                 }
               },
             },
           ]}
         >
-          <Slider></Slider>
+          <Slider style={{ width: 280 }}></Slider>
         </Form.Item>
         <Form.Item
-          label="Upload"
+          label="上传附件"
           field="upload"
           triggerPropName="fileList"
           initialValue={[
             {
               uid: '-1',
-              url: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/e278888093bef8910e829486fb45dd69.png~tplv-uwbnlip3yd-webp.webp',
+              url: '/img/logo-icon.svg',
               name: '20200717',
             },
           ]}
@@ -248,7 +259,7 @@ export default function Demo() {
             action="/"
             onPreview={(file) => {
               Modal.info({
-                title: 'Preview',
+                title: '预览附件',
                 content: (
                   <img
                     src={file.url || URL.createObjectURL(file.originFile)}
@@ -267,7 +278,7 @@ export default function Demo() {
           triggerPropName="checked"
           rules={[{ type: 'boolean', true: true }]}
         >
-          <Checkbox>I have read the employee manual</Checkbox>
+          <Checkbox>我已阅读员工手册</Checkbox>
         </Form.Item>
         <Form.Item {...noLabelLayout}>
           <Button
@@ -283,24 +294,20 @@ export default function Demo() {
               }
             }}
             type="primary"
-            style={{ marginRight: 24 }}
-          >
-            Submit
-          </Button>
+            style={{ marginRight: 16 }}
+          >提交</Button>
           <Button
             onClick={() => {
               formRef.current.resetFields();
             }}
-          >
-            Reset
-          </Button>
+          >重置</Button>
           <Button
             type="text"
             onClick={() => {
               Message.info(`fields: ${formRef.current.getTouchedFields().join(',')}`);
             }}
           >
-            Get touched fields
+            获取已修改字段
           </Button>
         </Form.Item>
       </Form>
