@@ -8,13 +8,13 @@ export default function Demo() {
     <div>
       <Form
         ref={formRef}
-        style={{ width: 600 }}
+        style={{ width: '100%' }}
         autoComplete="off"
         initialValues={{
           users: [
             {
-              username: 'aaa',
-              address: 'bbb',
+              username: '咖啡师 A',
+              address: '上海烘焙工坊',
             },
           ],
         }}
@@ -29,26 +29,28 @@ export default function Demo() {
                 {fields.map((item, index) => {
                   return (
                     <div key={item.key}>
-                      <Form.Item label={'User ' + index}>
+                      <Form.Item label={'门店人员 ' + (index + 1)}>
                         <Space>
                           <Form.Item
                             field={item.field + '.username'}
                             rules={[{ required: true }]}
                             noStyle
                           >
-                            <Input />
+                            <Input placeholder="请输入人员姓名" />
                           </Form.Item>
                           <Form.Item
                             field={item.field + '.address'}
                             rules={[{ required: true }]}
                             noStyle
                           >
-                            <Input />
+                            <Input placeholder="请输入所属门店" />
                           </Form.Item>
                           <Button
+                            aria-label="删除门店人员"
                             icon={<IconDelete />}
                             shape="circle"
                             status="danger"
+                            type="text"
                             onClick={() => remove(index)}
                           ></Button>
                         </Space>
@@ -62,7 +64,7 @@ export default function Demo() {
                       add();
                     }}
                   >
-                    Add User
+                    新增门店人员
                   </Button>
                 </Form.Item>
               </div>

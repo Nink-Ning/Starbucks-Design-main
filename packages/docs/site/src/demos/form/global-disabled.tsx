@@ -30,19 +30,19 @@ export default function Demo() {
   const cascaderOptions = [
     {
       value: 'beijing',
-      label: 'Beijing',
+      label: '华东区',
       children: [
         {
           value: 'beijingshi',
-          label: 'Beijing',
+          label: '华东区',
           children: [
             {
               value: 'chaoyang',
-              label: 'Chaoyang',
+              label: '徐汇区',
               children: [
                 {
                   value: 'datunli',
-                  label: 'Datunli',
+                  label: '上海烘焙工坊',
                 },
               ],
             },
@@ -52,15 +52,15 @@ export default function Demo() {
     },
     {
       value: 'shanghai',
-      label: 'Shanghai',
+      label: '华南区',
       children: [
         {
           value: 'shanghaishi',
-          label: 'Shanghai',
+          label: '华南区',
           children: [
             {
               value: 'huangpu',
-              label: 'Huangpu',
+              label: '天河区',
             },
           ],
         },
@@ -69,16 +69,15 @@ export default function Demo() {
   ];
   const formItemLayout = {
     labelCol: {
-      span: 7,
+      style: { width: 96, maxWidth: 96, flex: '0 0 96px' },
     },
     wrapperCol: {
-      span: 17,
+      style: { flex: '1 1 0', maxWidth: 'none' },
     },
   };
   const noLabelLayout = {
     wrapperCol: {
-      span: 17,
-      offset: 7,
+      style: { flex: '1 1 0', maxWidth: 'none', marginLeft: 96 },
     },
   };
 
@@ -101,7 +100,7 @@ export default function Demo() {
         onValuesChange={onValuesChange}
         scrollToFirstError
       >
-        <Form.Item label="Form size">
+        <Form.Item label="表单尺寸">
           <Radio.Group type="button" value={size} onChange={setSize}>
             <Radio value="mini">mini</Radio>
             <Radio value="small">small</Radio>
@@ -110,17 +109,17 @@ export default function Demo() {
           </Radio.Group>
         </Form.Item>
         <Form.Item
-          label="Username"
+          label="门店名称"
           field="name"
-          rules={[{ required: true, message: 'username is required' }]}
+          rules={[{ required: true, message: '请输入门店名称' }]}
         >
-          <Input placeholder="please enter..." />
+          <Input placeholder="请输入..." style={{ width: 350 }} />
         </Form.Item>
-        <Form.Item label="Age" field="age" rules={[{ type: 'number', required: true }]}>
-          <InputNumber placeholder="please enter" />
+        <Form.Item label="运营年限" field="age" rules={[{ type: 'number', required: true }]}>
+          <InputNumber placeholder="请输入" style={{ width: 160 }} />
         </Form.Item>
         <Form.Item
-          label="Province"
+          label="所属区域"
           field="province"
           rules={[
             {
@@ -134,14 +133,24 @@ export default function Demo() {
             },
           ]}
         >
-          <Cascader showSearch placeholder="please select" allowClear options={cascaderOptions} />
+          <Cascader
+            showSearch
+            placeholder="请选择"
+            allowClear
+            options={cascaderOptions}
+            style={{ width: 320 }}
+          />
         </Form.Item>
-        <Form.Item label="Auto-complete" field="autocomplete" rules={[{ required: true }]}>
-          <AutoComplete placeholder="please enter" data={['123', '234', '345', '456']} />
+        <Form.Item label="自动补全" field="autocomplete" rules={[{ required: true }]}>
+          <AutoComplete
+            placeholder="请输入"
+            data={['123', '234', '345', '456']}
+            style={{ width: 350 }}
+          />
         </Form.Item>
-        <Form.Item label="Post" field="post" rules={[{ required: true }]}>
+        <Form.Item label="岗位" field="post" rules={[{ required: true }]}>
           <Select
-            placeholder="please select"
+            placeholder="请选择"
             options={[
               {
                 label: 'one',
@@ -157,10 +166,11 @@ export default function Demo() {
               },
             ]}
             allowClear
+            style={{ width: 320 }}
           />
         </Form.Item>
         <Form.Item
-          label="Multiple Choice"
+          label="多选配置"
           required
           field="a.b[0].c"
           rules={[{ type: 'array', minLength: 1, message: 'choice is required' }]}
@@ -168,36 +178,37 @@ export default function Demo() {
           <Select
             mode="multiple"
             allowCreate
-            placeholder="please select"
+            placeholder="请选择"
             options={['a', 'b', 'c', 'd', 'e']}
+            style={{ width: 320 }}
           />
         </Form.Item>
-        <Form.Item label="Score" field="score" rules={[{ required: true, type: 'number' }]}>
+        <Form.Item label="评分" field="score" rules={[{ required: true, type: 'number' }]}>
           <Rate />
         </Form.Item>
         <Form.Item
-          label="Date"
+          label="日期"
           field="date"
           rules={[{ required: true, message: 'date is required' }]}
         >
-          <DatePicker showTime />
+          <DatePicker showTime style={{ width: 240 }} />
         </Form.Item>
         <Form.Item
-          label="Switch"
+          label="开关"
           field="switch"
           triggerPropName="checked"
-          rules={[{ type: 'boolean', true: true, message: 'must be true' }]}
+          rules={[{ type: 'boolean', true: true, message: '请确认该配置' }]}
         >
           <Switch />
         </Form.Item>
         <Form.Item
-          label="Radio"
+          label="单选"
           field="radio"
           rules={[
             {
               validator: (value, callback) => {
                 if (value !== 'b') {
-                  callback('you can only choose b');
+                  callback('只能选择 B');
                 }
               },
             },
@@ -213,28 +224,28 @@ export default function Demo() {
           </Radio.Group>
         </Form.Item>
         <Form.Item
-          label="Slide"
+          label="滑动条"
           field="slider"
           rules={[
             {
               validator: (value, callback) => {
                 if (value < 50) {
-                  callback('must be greater than 50!');
+                  callback('数值必须大于 50');
                 }
               },
             },
           ]}
         >
-          <Slider></Slider>
+          <Slider style={{ width: 280 }}></Slider>
         </Form.Item>
         <Form.Item
-          label="Upload"
+          label="上传附件"
           field="upload"
           triggerPropName="fileList"
           initialValue={[
             {
               uid: '-1',
-              url: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/e278888093bef8910e829486fb45dd69.png~tplv-uwbnlip3yd-webp.webp',
+              url: '/img/logo-icon.svg',
               name: '20200717',
             },
           ]}
@@ -246,7 +257,7 @@ export default function Demo() {
             action="/"
             onPreview={(file) => {
               Modal.info({
-                title: 'Preview',
+                title: '预览附件',
                 content: (
                   <img
                     src={file.url || URL.createObjectURL(file.originFile)}
@@ -267,47 +278,46 @@ export default function Demo() {
             {
               type: 'boolean',
               true: true,
-              message: 'must be true',
+              message: '请确认该配置',
             },
           ]}
         >
-          <Checkbox>I have read the employee manual</Checkbox>
+          <Checkbox>我已阅读员工手册</Checkbox>
         </Form.Item>
         <Form.Item {...noLabelLayout}>
-          <Button
-            onClick={async () => {
-              if (formRef.current) {
-                try {
-                  await formRef.current.validate();
-                  Message.info('pass verification, submit succeed!');
-                } catch (_) {
-                  console.log(formRef.current.getFieldsError());
-                  Message.error('verification failed, Please check the fields!');
+          <div style={{ display: 'flex', gap: 16 }}>
+            <Button
+              onClick={async () => {
+                if (formRef.current) {
+                  try {
+                    await formRef.current.validate();
+                    Message.info('pass verification, submit succeed!');
+                  } catch (_) {
+                    console.log(formRef.current.getFieldsError());
+                    Message.error('校验失败，请检查字段！');
+                  }
                 }
-              }
-            }}
-            type="primary"
-            style={{
-              marginRight: 24,
-            }}
-          >
-            Submit
-          </Button>
-          <Button
-            onClick={() => {
-              formRef.current.resetFields();
-            }}
-          >
-            Reset
-          </Button>
-          <Button
-            type="text"
-            onClick={() => {
-              Message.info(`fields: ${formRef.current.getTouchedFields().join(',')}`);
-            }}
-          >
-            Get touched fields
-          </Button>
+              }}
+              type="primary"
+            >
+              提交
+            </Button>
+            <Button
+              onClick={() => {
+                formRef.current.resetFields();
+              }}
+            >
+              重置
+            </Button>
+            <Button
+              type="text"
+              onClick={() => {
+                Message.info(`fields: ${formRef.current.getTouchedFields().join(',')}`);
+              }}
+            >
+              获取已修改字段
+            </Button>
+          </div>
         </Form.Item>
       </Form>
     </div>

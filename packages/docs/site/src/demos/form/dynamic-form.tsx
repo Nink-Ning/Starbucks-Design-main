@@ -11,10 +11,10 @@ export default function Demo() {
     <div>
       <Form
         form={form}
-        style={{ width: 600 }}
+        style={{ width: '100%' }}
         autoComplete="off"
         initialValues={{
-          users: ['Username'],
+          users: ['门店名称'],
           posts: ['post1'],
         }}
         onSubmit={(v) => {
@@ -24,7 +24,7 @@ export default function Demo() {
           console.log(_, v);
         }}
       >
-        <Form.Item label="Username" field="username" style={{ width: 370 }}>
+        <Form.Item label="门店名称" field="username" style={{ width: 370 }}>
           <Input />
         </Form.Item>
         <Form.Item>
@@ -49,7 +49,7 @@ export default function Demo() {
                       <Grid.Row key={item.key}>
                         <Form.Item
                           field={item.field}
-                          label={'Post-' + index}
+                          label={'岗位-' + index}
                           style={{
                             width: 370,
                           }}
@@ -102,16 +102,16 @@ export default function Demo() {
           </Form.List>
         </Form.Item>
         <Form.Item style={{ marginTop: 20 }}>
-          <Space size={20}>
+          <div style={{ display: 'flex', gap: 16 }}>
             <Button type="primary" htmlType="submit">
-              Submit
+              提交
             </Button>
             <Button
               onClick={() => {
-                form.resetFields()
+                form.resetFields();
               }}
             >
-              Reset
+              重置
             </Button>
             <Button
               status="danger"
@@ -125,9 +125,9 @@ export default function Demo() {
                 });
               }}
             >
-              Set `Post-0` to error state
+              设置 `岗位-0` 为错误状态
             </Button>
-          </Space>
+          </div>
         </Form.Item>
       </Form>
     </div>
