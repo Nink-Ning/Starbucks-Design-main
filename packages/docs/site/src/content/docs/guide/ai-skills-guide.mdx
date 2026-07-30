@@ -1,0 +1,587 @@
+---
+title: AI Skill 使用指南
+description: 使用 Starbucks Design Skill 快速生成产品 Demo、React/Vue 页面和设计系统实现。
+sidebar:
+  order: 1
+---
+
+<div class="sb-ai-skill-hero">
+  <div>
+    <span class="sb-ai-skill-kicker">Starbucks Design AI Skill</span>
+    <h2>把产品需求、Figma 设计和业务场景转换为可验证的设计系统产物</h2>
+    <div class="sb-ai-skill-hero-copy">
+      面向产品、设计和研发的 AI 设计生产规则。它会根据任务自动选择总控 Skill、框架 Skill、
+      Preview Skill、设计决策规则和组件 API，帮助团队更快生成 Demo、Docs 示例和正式工程实现。
+    </div>
+  </div>
+  <div class="sb-ai-skill-hero-panel" aria-label="AI Skill 工作边界">
+    <span>分析</span>
+    <span>生成</span>
+    <span>检查</span>
+    <span>报告</span>
+  </div>
+</div>
+
+:::caution[边界说明]
+AI Skill 不是自动发布工具。它负责分析、生成、检查和报告，不会在未经授权的情况下自动提交 Git、创建 PR、升级版本或发布组件包。
+:::
+
+## 1. AI Skill 能做什么
+
+<div class="sb-ai-skill-feature-grid">
+  <section>
+    <span>01</span>
+    <h3>生成产品 Demo</h3>
+    <p>根据产品需求生成后台产品 Demo，包含页面结构、核心交互、本地 Mock 数据和主要状态。</p>
+  </section>
+  <section>
+    <span>02</span>
+    <h3>还原设计实现</h3>
+    <p>根据 Figma 设计生成 React 或 Vue 页面，并完成组件映射、Token 对齐和视觉差异说明。</p>
+  </section>
+  <section>
+    <span>03</span>
+    <h3>沉淀 Docs 示例</h3>
+    <p>生成真实 React / Vue Docs Demo、测试计划、源码查看入口和实施文件清单。</p>
+  </section>
+  <section>
+    <span>04</span>
+    <h3>审查设计系统规则</h3>
+    <p>检查 React / Vue 公共 API、行为一致性、样式覆盖、Popup/Portal 风险和验收状态。</p>
+  </section>
+</div>
+
+当前可以支持以下任务：
+
+- 根据产品需求生成后台产品 Demo；
+- 根据 Figma 设计生成 React 或 Vue 页面；
+- 生成无需安装依赖的单文件 HTML Preview；
+- 复用已有基础组件和业务组件；
+- 判断 Modal、Drawer、侧栏或新页面等容器形式；
+- 设计筛选、表格、批量操作、表单和详情页结构；
+- 优化已有组件与 Figma 的视觉一致性；
+- 检查 React / Vue 公共 API 和行为是否一致；
+- 生成 Docs Demo、测试计划和实施文件清单；
+- 审查 AI 生成代码是否符合设计系统规则。
+
+AI Skill 会优先复用已有资产，避免重复创建相似组件。
+
+## 2. 谁可以使用
+
+<div class="sb-ai-skill-role-grid">
+  <section>
+    <h3>产品经理和业务人员</h3>
+    <p>适合快速验证需求、页面结构和业务流程。不要求具备编程能力，也不要求安装 Node.js。</p>
+    <ul>
+      <li>单文件 HTML Preview</li>
+      <li>页面方案分析</li>
+      <li>交互流程 Demo</li>
+      <li>需求评审 Demo</li>
+    </ul>
+  </section>
+  <section>
+    <h3>体验设计师</h3>
+    <p>适合完成设计决策、组件映射、Figma 还原和设计验收。</p>
+    <ul>
+      <li>页面结构分析</li>
+      <li>设计决策审查</li>
+      <li>Figma 到组件映射</li>
+      <li>视觉一致性检查</li>
+    </ul>
+  </section>
+  <section>
+    <h3>前端研发</h3>
+    <p>适合完成正式工程实现、测试和构建。</p>
+    <ul>
+      <li>React 或 Vue 工程代码</li>
+      <li>公共 API 对齐</li>
+      <li>组件测试</li>
+      <li>Docs 接入和构建检查</li>
+    </ul>
+  </section>
+</div>
+
+## 3. 三种使用模式
+
+<div class="sb-ai-skill-mode-stack">
+  <section>
+    <div class="sb-ai-skill-mode-title">
+      <span>模式一</span>
+      <h3>快速 Preview</h3>
+    </div>
+    <p>适用于产品经理、业务人员和早期方案评审。最终产物通常为一个可直接打开的单文件 HTML。</p>
+
+```text
+产品需求
+→ 页面类型识别
+→ 设计决策
+→ 选择 React Preview 或 Vue Preview
+→ 读取真实组件 API
+→ 生成 HTML Demo
+```
+
+    <ul>
+      <li>不需要安装 Node.js；</li>
+      <li>不修改正式组件库源码；</li>
+      <li>适合快速确认页面结构和交互；</li>
+      <li>可以使用本地 Mock 数据；</li>
+      <li>不代表已经完成正式工程验收。</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sb-ai-skill-mode-title">
+      <span>模式二</span>
+      <h3>Docs Demo</h3>
+    </div>
+    <p>适用于设计系统站点展示和跨角色评审。</p>
+
+```text
+产品需求或 Figma
+→ 页面方案
+→ React / Vue Demo
+→ Docs 页面
+→ 双端一致性检查
+```
+
+    <ul>
+      <li>使用真实 React / Vue 组件；</li>
+      <li>可以切换框架查看效果；</li>
+      <li>适合沉淀业务组件和页面模板；</li>
+      <li>需要项目开发环境。</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sb-ai-skill-mode-title">
+      <span>模式三</span>
+      <h3>工程实现</h3>
+    </div>
+    <p>适用于正式研发交付。</p>
+
+```text
+确认后的页面方案
+→ React / Vue 工程实现
+→ 测试
+→ 构建
+→ 浏览器检查
+→ 人工验收
+```
+
+    <ul>
+      <li>使用正式组件 API；</li>
+      <li>按任务影响范围补充测试；</li>
+      <li>需要明确修改文件白名单；</li>
+      <li>版本、提交和发布必须单独授权。</li>
+    </ul>
+  </section>
+</div>
+
+## 4. 开始使用
+
+### 第一步：打开项目
+
+在 VS Code 或 Codex 中打开项目根目录：
+
+```text
+starbucks-design-main
+```
+
+建议每个新任务创建一个独立对话，避免旧任务上下文影响当前生成结果。
+
+### 第二步：明确调用总控 Skill
+
+在任务开头加入：
+
+```text
+请使用 skills/starbucks-design/SKILL.md 完成下面的任务。
+```
+
+也可以使用更自然的表达：
+
+```text
+请基于 Starbucks Design Skill 生成产品 Demo。
+```
+
+AI 会根据任务自动选择：
+
+- `starbucks-design-react`
+- `starbucks-design-vue`
+- `starbucks-design-react-preview`
+- `starbucks-design-vue-preview`
+- 对应设计决策和专项开发规范
+
+使用者不需要手动指定每个 reference 文件。
+
+### 第三步：提供业务信息
+
+建议至少提供：
+
+```text
+页面名称：
+使用角色：
+核心任务：
+页面类型：
+需要展示的数据：
+主要筛选条件：
+主要操作：
+是否有批量操作：
+是否需要新增或编辑：
+参考页面或 Figma：
+希望的交付形式：
+```
+
+不确定的内容可以留空，让 AI 先给出设计建议。
+
+## 5. 推荐的两阶段工作方式
+
+不要在需求尚未确认时直接要求 AI 完成全部代码。
+
+<div class="sb-ai-skill-process">
+  <section>
+    <span>阶段一</span>
+    <h3>方案分析</h3>
+    <p>产品、设计和研发先确认页面类型、页面结构、布局方式、容器选择、组件清单、核心操作、状态设计、响应式策略、预计修改文件和当前缺失信息。</p>
+  </section>
+  <section>
+    <span>阶段二</span>
+    <h3>生成 Demo 或代码</h3>
+    <p>确认后再要求 AI 按方案生成 Demo 或进入实施，并约束只修改已批准的文件白名单。</p>
+  </section>
+</div>
+
+两阶段方式可以减少错误组件、错误容器、无效代码和超范围修改。
+
+## 6. 产品经理快速 Demo 提示词
+
+```text
+请使用 skills/starbucks-design/SKILL.md 帮我生成一个产品 Demo。
+
+页面名称：门店标签管理
+使用角色：运营人员
+核心任务：创建标签、给门店添加标签、查看标签下的门店
+页面类型：后台管理列表页
+
+页面需要包括：
+1. 左侧标签分组；
+2. 右侧门店筛选；
+3. 门店表格；
+4. 新建标签；
+5. 编辑和删除标签；
+6. 批量给门店添加标签；
+7. 分页；
+8. Loading、Empty 和 Error 状态。
+
+请先进行设计决策，说明：
+- 为什么使用左右结构；
+- 新建和编辑使用 Modal 还是 Drawer；
+- 批量操作放在哪里；
+- 窄屏时如何处理。
+
+交付要求：
+- 使用 Starbucks Design 真实组件；
+- 生成无需安装依赖、可直接打开的单文件 HTML；
+- 使用本地 Mock 数据；
+- 不修改组件库源码；
+- 不执行 Git、提交或发布。
+```
+
+## 7. 设计师根据 Figma 生成 Demo
+
+```text
+请使用 Starbucks Design Skill，根据我提供的 Figma 节点完成页面方案分析。
+
+请输出：
+1. 页面类型；
+2. 布局与容器决策；
+3. Figma 元素与现有组件映射；
+4. Figma Variables 与 Design Token 映射；
+5. 可复用的基础组件和业务组件；
+6. 不应该重复创建的组件；
+7. React / Vue / Preview 交付方式建议；
+8. 预计修改文件；
+9. 当前无法确认的视觉信息。
+
+本轮只分析，不修改文件。等待我确认后再生成 Demo。
+```
+
+提供 Figma 时，建议同时附上：
+
+- 文件或页面链接；
+- 具体 Frame / Node；
+- Variables 或 Token 信息；
+- 桌面端和窄屏设计；
+- 弹层和交互状态；
+- 需要重点验收的视觉差异。
+
+## 8. 生成正式 React / Vue Docs Demo
+
+```text
+请使用 skills/starbucks-design/SKILL.md 创建“标签管理”页面 Demo。
+
+要求：
+1. 优先复用现有 FilterBar、Table、Pagination、Button、Drawer 等能力；
+2. 不创建通用 TagManagement 万能组件；
+3. React 和 Vue 可见行为保持一致；
+4. 使用确定性的本地 Mock 数据；
+5. 支持查询、重置、分页、选择和批量操作；
+6. 支持 Loading、Empty 和 Error；
+7. 支持窄屏；
+8. 接入 Docs Preview；
+9. 提供源码查看或复制能力。
+
+请先进行只读分析并输出实施计划，不要直接修改文件。
+```
+
+## 9. 优化现有页面或组件
+
+```text
+请使用 Starbucks Design Skill 对当前页面进行只读审查。
+
+目标：检查页面与 Figma 和设计系统的一致性。
+
+请输出：
+1. 当前页面使用的组件；
+2. 可以复用但尚未复用的组件；
+3. 布局、间距、层级和操作位置问题；
+4. 基础组件问题与页面布局问题的归属；
+5. React / Vue 差异；
+6. Popup / Portal / 样式权重风险；
+7. 修改文件白名单；
+8. 按影响范围制定的验证计划。
+
+本轮只分析，不修改文件。
+```
+
+## 10. AI 会如何选择组件和页面结构
+
+AI 会依次判断：
+
+```text
+这是什么任务
+→ 属于基础组件、业务组件、页面模板还是业务模块
+→ 使用 React、Vue 还是 Preview
+→ 是否已有可复用组件
+→ 需要哪些设计决策
+→ 允许修改哪些文件
+→ 需要执行哪些验证
+```
+
+常见判断示例：
+
+| 需求 | 通常选择 |
+| --- | --- |
+| 简单字段填写 | 基础表单页 |
+| 字段较多且有明确分组 | 分组表单页 |
+| 存在连续步骤和前后依赖 | 分步表单页 |
+| 搜索、筛选和表格查询 | FilterBar + Table |
+| 轻量确认或少量输入 | Modal |
+| 与当前页面强关联的复杂编辑 | Drawer |
+| 独立复杂流程 | 新页面 |
+| 批量操作 | 表格左上方或选择后工具栏 |
+| 详情信息较多 | 分区详情页或 Tabs |
+| 指标和趋势分析 | Dashboard |
+
+设计决策最终仍需结合实际业务目标，而不是只根据字段数量机械判断。
+
+## 11. 如何验收 AI 生成结果
+
+<div class="sb-ai-skill-check-grid">
+  <section>
+    <h3>产品验收</h3>
+    <ul>
+      <li>是否解决核心业务任务；</li>
+      <li>字段和流程是否完整；</li>
+      <li>主操作是否清晰；</li>
+      <li>是否存在多余步骤；</li>
+      <li>数据和文案是否符合业务定义。</li>
+    </ul>
+  </section>
+  <section>
+    <h3>设计验收</h3>
+    <ul>
+      <li>页面结构和信息层级；</li>
+      <li>Modal、Drawer、Tabs 等容器是否合理；</li>
+      <li>筛选、表格和批量操作位置；</li>
+      <li>组件是否来自设计系统；</li>
+      <li>Figma Variables 和 Token 是否正确；</li>
+      <li>桌面端和窄屏是否可用；</li>
+      <li>Loading、Empty、Error、Disabled 等状态是否完整。</li>
+    </ul>
+  </section>
+  <section>
+    <h3>研发验收</h3>
+    <ul>
+      <li>是否使用真实组件 API；</li>
+      <li>React / Vue 行为是否一致；</li>
+      <li>是否修改了公共 API；</li>
+      <li>是否存在私有 `.arco-*` 覆盖；</li>
+      <li>是否存在不必要的 `!important`；</li>
+      <li>Popup / Portal 是否正确；</li>
+      <li>未运行的验证是否被明确标记。</li>
+    </ul>
+  </section>
+</div>
+
+## 12. 结果状态说明
+
+<div class="sb-ai-skill-status-grid">
+  <section>
+    <strong>COMPLETE</strong>
+    <p>任务已完成，要求的实现和适用验证均已完成。</p>
+  </section>
+  <section>
+    <strong>CONDITIONAL</strong>
+    <p>主体内容已完成，但仍依赖 Figma、浏览器验证、环境或业务确认。</p>
+  </section>
+  <section>
+    <strong>BLOCKED</strong>
+    <p>缺少关键输入或环境，继续执行可能产生错误结果。</p>
+  </section>
+  <section>
+    <strong>UNVERIFIED</strong>
+    <p>代码或方案已经生成，但测试、构建或浏览器检查尚未执行。不要把它理解为“已经验收通过”。</p>
+  </section>
+</div>
+
+## 13. 当前支持范围
+
+当前总控 Skill 已经可以按需路由：
+
+- React 组件 API；
+- Vue 组件 API；
+- React Preview；
+- Vue Preview；
+- 基础组件样式优化；
+- 业务组件开发；
+- 页面模板和设计决策；
+- Docs、测试和代码审查。
+
+当前适合优先使用的页面场景：
+
+- 基础列表页；
+- 筛选列表页；
+- 标签管理页；
+- 基础表单页；
+- 分组表单页；
+- 分步表单页；
+- 基础详情页；
+- Dashboard。
+
+## 14. 当前限制
+
+### 黄金模板尚未全面开放
+
+`skills/starbucks-design/scripts/` 目前还没有完成验证的页面黄金模板。
+
+因此现阶段 AI 主要基于：
+
+- 总控规则；
+- 设计决策；
+- 现有组件；
+- 已有 Docs Demo；
+- 相似页面结构
+
+进行生成，而不是直接套用固定模板。
+
+### Figma 视觉还原需要设计证据
+
+没有 Figma Node、Variables、截图或视觉验收信息时，AI 可以生成符合设计系统的页面，但不能承诺与目标设计稿完全一致。
+
+### 未运行的验证不会自动视为通过
+
+HTML Preview 可用于方案评审，但不等同于正式 React/Vue 工程已经完成测试和构建。
+
+### 部分能力可能存在版本范围
+
+例如某些组件可能已经有逻辑实现，但尚未纳入当前视觉完成范围。使用前应以组件 Docs 和任务分析结果为准。
+
+## 15. 常见问题
+
+<div class="sb-ai-skill-faq-list">
+  <section>
+    <h3>使用 AI Skill 需要懂代码吗？</h3>
+    <p>生成单文件 HTML Preview 不需要。正式修改 React/Vue 工程时，建议由研发参与最终验收。</p>
+  </section>
+  <section>
+    <h3>必须安装 Node.js 吗？</h3>
+    <p>生成 Preview 通常不需要。运行 Docs、测试和正式构建需要项目规定的开发环境。</p>
+  </section>
+  <section>
+    <h3>必须把代码推送到 GitHub 才能使用吗？</h3>
+    <p>不需要。Codex 可以直接在本地项目中读取和使用 Skill。</p>
+  </section>
+  <section>
+    <h3>AI 会自动提交代码吗？</h3>
+    <p>不会。除非使用者明确授权，否则不应执行 <code>git add</code>、commit、push、创建 PR、版本升级或发布。</p>
+  </section>
+  <section>
+    <h3>产品经理只提供一句话需求可以吗？</h3>
+    <p>可以开始，但生成质量会受到限制。建议至少补充用户角色、核心任务、数据、操作和交付形式。</p>
+  </section>
+  <section>
+    <h3>应该选择 React 还是 Vue？</h3>
+    <p>已有项目使用哪个框架，就优先选择对应 Skill。只做快速评审时，可以选择 Preview。</p>
+  </section>
+  <section>
+    <h3>可以同时生成 React 和 Vue 吗？</h3>
+    <p>可以。需要明确要求双端可见行为一致，并分别检查 Props、Events、Slots、DOM 和 Popup 行为。</p>
+  </section>
+  <section>
+    <h3>AI 生成的 Demo 可以直接上线吗？</h3>
+    <p>不能直接等同于上线版本。正式上线前仍需完成业务、设计、研发、测试和发布流程。</p>
+  </section>
+</div>
+
+## 16. 推荐团队流程
+
+```text
+产品提供业务目标
+→ AI 生成页面方案
+→ 设计确认布局和组件
+→ AI 生成 Preview
+→ 产品与业务评审
+→ AI 生成 React / Vue 实现
+→ 研发检查和补充测试
+→ 设计进行视觉验收
+→ 人工授权提交和发布
+```
+
+| 角色 | 主要职责 |
+| --- | --- |
+| 产品经理 | 业务目标、字段、流程、验收标准 |
+| 体验设计师 | 页面结构、设计决策、Figma、视觉验收 |
+| 前端研发 | 工程实现、API、测试、构建和兼容性 |
+| AI Skill | 规则路由、组件选择、代码生成、检查和报告 |
+
+## 17. 最佳实践
+
+1. 一个对话尽量只处理一个明确任务；
+2. 先分析、后修改；
+3. 先确认页面结构，再生成完整代码；
+4. 明确 React、Vue 或 Preview 交付形式；
+5. 提供真实字段、数据和操作；
+6. 提供 Figma 节点而不是只提供文件首页；
+7. 明确允许修改的文件范围；
+8. 不让 AI 自动提交或发布；
+9. 不把未运行的测试描述为通过；
+10. 生成结果必须经过产品、设计和研发共同验收。
+
+## 18. 最简启动模板
+
+第一次使用时，可以直接复制：
+
+```text
+请使用 skills/starbucks-design/SKILL.md 完成下面的任务。
+
+我要设计的页面：
+主要使用者：
+使用者要完成的任务：
+需要展示的数据：
+需要执行的操作：
+参考页面或 Figma：
+交付形式：单文件 HTML Preview / React / Vue / React + Vue
+
+请先完成页面类型识别、设计决策、组件映射和实施计划。
+本轮不要修改文件，等待我确认后再继续。
+```

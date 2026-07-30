@@ -355,6 +355,20 @@ Select、Cascader、InputTag、Tabs、TableToolbar 等复合组件不得重新�
 
 React / Vue 的 `theme.css`、`components.less`、`overrides/*` 应尽量保持同源或语义等价。
 
+## 7.0 当前样式维护模式
+
+当前仓库不存在可执行的 Figma overrides 自动生成链路，不得假设 `scripts/generate-overrides.py` 存在。
+
+在恢复自动生成链路之前，标记为共享维护的 React / Vue override 文件按临时工程事实处理：
+
+- React / Vue 版本必须同步修改；
+- 优先使用共享 Design Token；
+- 修改后运行双端一致性测试；
+- 基础组件问题不得在业务组件 override 中私自修复；
+- 不得用业务组件 override 承担 Input、Select、DatePicker、RangePicker、Cascader、TreeSelect、Button 等基础控件视觉职责。
+
+恢复自动生成链路后，应重新更新本规则和相关文件头。本规则只描述当前阶段的维护事实，不代表永久放弃 Figma 自动同步。
+
 ## 7.1 `theme.css`
 
 用于：

@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 
 const srcDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const vueSrcDir = resolve(srcDir, '../../starbucks-design-vue/src')
 
 const expectExactRule = (styles: string, selector: string, declarations: string[]) => {
   expect(styles).toContain(
@@ -12,6 +13,15 @@ const expectExactRule = (styles: string, selector: string, declarations: string[
 }
 
 describe('stylesheet entry', () => {
+  it('maintains the FilterBar React/Vue override parity contract', () => {
+    const reactFilterBar = readFileSync(resolve(srcDir, 'overrides/FilterBar.less'), 'utf8')
+    const vueFilterBar = readFileSync(resolve(vueSrcDir, 'overrides/FilterBar.less'), 'utf8')
+
+    expect(reactFilterBar).toBe(vueFilterBar)
+    expect(reactFilterBar).not.toContain('scripts/generate-overrides.py')
+    expect(reactFilterBar).toContain('currently maintained manually with shared Design Tokens')
+  })
+
   it('loads the designer compile-time theme and overrides after Arco', () => {
     const entry = readFileSync(resolve(srcDir, 'components.less'), 'utf8')
     const arcoImport = "@import '@arco-design/web-react/es/Watermark/style/index.less';"

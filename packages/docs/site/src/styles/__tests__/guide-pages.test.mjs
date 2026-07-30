@@ -8,19 +8,25 @@ async function read(relativePath) {
   return readFile(new URL(relativePath, root), 'utf8');
 }
 
-test('the production site targets the current SCM Pages project', async () => {
-  const [config, rootPage, landing, skills] = await Promise.all([
+test('the production site targets the public GitHub Pages project', async () => {
+  const [config, header, rootPage, landing, skills] = await Promise.all([
     read('../astro.config.mjs'),
+    read('components/Header.astro'),
     read('pages/index.astro'),
     read('content/docs/index.mdx'),
     read('content/docs/guide/ai-skills.mdx'),
   ]);
 
-  assert.match(config, /base:\s*['"]\/kning\/starbucks-design-main\/['"]/);
+  assert.match(config, /site:\s*['"]https:\/\/nink1992\.github\.io['"]/);
+  assert.match(config, /base:\s*['"]\/Starbucks-Design-main\/['"]/);
+  assert.match(header, /https:\/\/github\.com\/Nink1992\/Starbucks-Design-main/);
   assert.match(rootPage, /import\.meta\.env\.BASE_URL/);
-  assert.match(landing, /\/kning\/starbucks-design-main\/guide\/getting-started\//);
-  assert.match(skills, /\/kning\/starbucks-design-main\/skills\/starbucks-design-react\.zip/);
-  assert.doesNotMatch(`${config}\n${rootPage}\n${landing}\n${skills}`, /\/china\/bopfui-starbucks-ui\//);
+  assert.match(landing, /\/Starbucks-Design-main\/guide\/getting-started\//);
+  assert.match(skills, /\/Starbucks-Design-main\/skills\/starbucks-design-react\.zip/);
+  assert.doesNotMatch(
+    `${config}\n${header}\n${rootPage}\n${landing}\n${skills}`,
+    /pages\.scm\.starbucks\.com|\/kning\/starbucks-design-main\/|\/china\/bopfui-starbucks-ui\//,
+  );
 });
 
 test('the site root lands on the existing quick-start documentation', async () => {

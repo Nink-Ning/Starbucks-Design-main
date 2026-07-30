@@ -1694,6 +1694,332 @@ footer:has(.pagination-links) .meta:empty {
   border-color: transparent;
 }
 
+/* ── AI Skill guide page ───────────────────────────────────────────── */
+
+.sb-ai-skill-hero,
+.sb-ai-skill-feature-grid,
+.sb-ai-skill-role-grid,
+.sb-ai-skill-mode-stack,
+.sb-ai-skill-process,
+.sb-ai-skill-check-grid,
+.sb-ai-skill-status-grid,
+.sb-ai-skill-faq-list {
+  margin-block: 24px;
+}
+
+.main-pane:has(.sb-ai-skill-hero) h1#_top {
+  font-size: 34px;
+  line-height: 42px;
+}
+
+.sl-markdown-content:has(.sb-ai-skill-hero) {
+  color: var(--sb-docs-text-2);
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.sb-ai-skill-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 22px;
+  align-items: stretch;
+  box-sizing: border-box;
+  padding: 22px;
+  background: var(--sb-docs-bg);
+  border: 1px solid var(--sb-docs-border-soft);
+  border-radius: 8px;
+  box-shadow: inset 4px 0 0 var(--sb-docs-brand);
+}
+
+:root[data-theme='dark'] .sb-ai-skill-hero {
+  background: var(--sb-docs-bg);
+  box-shadow: inset 4px 0 0 var(--sb-docs-brand);
+}
+
+.sb-ai-skill-kicker {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  margin-bottom: 12px;
+  padding: 0 10px;
+  color: var(--sb-docs-brand);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  background: var(--color-primary-light, rgba(0, 117, 74, 0.12));
+  border-radius: 4px;
+}
+
+.sb-ai-skill-hero h2 {
+  max-width: 720px;
+  margin: 0;
+  color: var(--sb-docs-text-1);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+.sb-ai-skill-hero-copy {
+  max-width: 720px;
+  margin: 14px 0 0;
+  color: var(--sb-docs-text-2);
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.sb-ai-skill-hero-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-content: center;
+}
+
+.sb-ai-skill-hero-panel span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  color: var(--sb-docs-text-1);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--sb-docs-bg);
+  border: 1px solid var(--sb-docs-border);
+  border-radius: 8px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.05);
+}
+
+.sb-ai-skill-feature-grid,
+.sb-ai-skill-role-grid,
+.sb-ai-skill-check-grid,
+.sb-ai-skill-status-grid,
+.sb-ai-skill-process,
+.sb-ai-skill-faq-list {
+  display: grid;
+  gap: 16px;
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+}
+
+.sb-ai-skill-feature-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sb-ai-skill-role-grid,
+.sb-ai-skill-check-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sb-ai-skill-status-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sb-ai-skill-process {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sb-ai-skill-feature-grid section,
+.sb-ai-skill-role-grid section,
+.sb-ai-skill-process section,
+.sb-ai-skill-check-grid section,
+.sb-ai-skill-status-grid section,
+.sb-ai-skill-mode-stack section,
+.sb-ai-skill-faq-list section {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  padding: 16px;
+  color: var(--sb-docs-text-2);
+  background: var(--sb-docs-bg);
+  border: 1px solid var(--sb-docs-border-soft);
+  border-radius: 8px;
+}
+
+.sl-markdown-content:has(.sb-ai-skill-hero) .sb-ai-skill-feature-grid > section,
+.sl-markdown-content:has(.sb-ai-skill-hero) .sb-ai-skill-role-grid > section,
+.sl-markdown-content:has(.sb-ai-skill-hero) .sb-ai-skill-process > section,
+.sl-markdown-content:has(.sb-ai-skill-hero) .sb-ai-skill-check-grid > section,
+.sl-markdown-content:has(.sb-ai-skill-hero) .sb-ai-skill-status-grid > section,
+.sl-markdown-content:has(.sb-ai-skill-hero) .sb-ai-skill-mode-stack > section,
+.sl-markdown-content:has(.sb-ai-skill-hero) .sb-ai-skill-faq-list > section {
+  align-self: stretch;
+  justify-self: stretch;
+  height: 100%;
+  margin: 0;
+}
+
+.sb-ai-skill-feature-grid section > :first-child,
+.sb-ai-skill-role-grid section > :first-child,
+.sb-ai-skill-process section > :first-child,
+.sb-ai-skill-check-grid section > :first-child,
+.sb-ai-skill-status-grid section > :first-child,
+.sb-ai-skill-mode-stack section > :first-child,
+.sb-ai-skill-faq-list section > :first-child {
+  margin-top: 0;
+}
+
+.sb-ai-skill-feature-grid section > :last-child,
+.sb-ai-skill-role-grid section > :last-child,
+.sb-ai-skill-process section > :last-child,
+.sb-ai-skill-check-grid section > :last-child,
+.sb-ai-skill-status-grid section > :last-child,
+.sb-ai-skill-mode-stack section > :last-child,
+.sb-ai-skill-faq-list section > :last-child {
+  margin-bottom: 0;
+}
+
+.sb-ai-skill-feature-grid section {
+  background: var(--sb-docs-surface);
+}
+
+.sb-ai-skill-feature-grid span,
+.sb-ai-skill-process span,
+.sb-ai-skill-mode-title span {
+  display: inline-flex;
+  margin-bottom: 10px;
+  color: var(--sb-docs-brand);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.sb-ai-skill-feature-grid h3,
+.sb-ai-skill-role-grid h3,
+.sb-ai-skill-process h3,
+.sb-ai-skill-check-grid h3,
+.sb-ai-skill-mode-title h3,
+.sb-ai-skill-faq-list h3 {
+  margin: 0;
+  color: var(--sb-docs-text-1);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.sb-ai-skill-feature-grid p,
+.sb-ai-skill-role-grid p,
+.sb-ai-skill-process p,
+.sb-ai-skill-status-grid p,
+.sb-ai-skill-mode-stack p,
+.sb-ai-skill-faq-list p {
+  margin: 8px 0 0;
+  color: var(--sb-docs-text-2);
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.sb-ai-skill-role-grid ul,
+.sb-ai-skill-check-grid ul,
+.sb-ai-skill-mode-stack ul {
+  margin: 14px 0 0;
+  padding-inline-start: 18px;
+}
+
+.sb-ai-skill-role-grid li,
+.sb-ai-skill-check-grid li,
+.sb-ai-skill-mode-stack li {
+  margin: 4px 0;
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.sb-ai-skill-mode-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.sb-ai-skill-mode-stack section {
+  position: relative;
+  overflow: hidden;
+}
+
+.sb-ai-skill-mode-stack section::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 4px;
+  background: var(--sb-docs-brand);
+}
+
+.sb-ai-skill-mode-title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sb-ai-skill-mode-title span {
+  margin-bottom: 0;
+}
+
+.sb-ai-skill-status-grid strong {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  color: var(--sb-docs-text-1);
+  font-size: 12px;
+  line-height: 20px;
+  background: var(--sb-docs-surface);
+  border: 1px solid var(--sb-docs-border);
+  border-radius: 4px;
+}
+
+.sb-ai-skill-status-grid section:first-child strong {
+  color: var(--sb-docs-success);
+  background: var(--sb-docs-success-bg);
+}
+
+.sb-ai-skill-status-grid section:nth-child(3) strong {
+  color: var(--sb-docs-danger);
+  background: var(--sb-docs-danger-bg);
+}
+
+.sl-markdown-content:has(.sb-ai-skill-hero) > h2 {
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--sb-docs-border-soft);
+  color: var(--sb-docs-text-1);
+  font-size: 26px;
+  line-height: 34px;
+}
+
+.sl-markdown-content:has(.sb-ai-skill-hero) > h2:first-of-type {
+  margin-top: 28px;
+}
+
+.sl-markdown-content:has(.sb-ai-skill-hero) > h3 {
+  margin-top: 26px;
+  color: var(--sb-docs-text-1);
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.sl-markdown-content:has(.sb-ai-skill-hero) table th,
+.sl-markdown-content:has(.sb-ai-skill-hero) table td {
+  text-align: left;
+}
+
+.sl-markdown-content:has(.sb-ai-skill-hero) table td:nth-child(2),
+.sl-markdown-content:has(.sb-ai-skill-hero) table th:nth-child(2) {
+  text-align: left;
+}
+
+.sb-ai-skill-faq-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sb-ai-skill-faq-list section {
+  background: var(--sb-docs-surface);
+}
+
+.sb-ai-skill-faq-list code {
+  font-size: 12px;
+}
+
 /* ── Responsive: keep content usable on small widths ───────────────── */
 
 @media (max-width: 72rem) {
@@ -1722,5 +2048,45 @@ footer:has(.pagination-links) .meta:empty {
   .sb-docs-topnav,
   .sb-docs-actions {
     display: none !important;
+  }
+}
+
+@media (max-width: 60rem) {
+  .sb-ai-skill-hero,
+  .sb-ai-skill-feature-grid,
+  .sb-ai-skill-role-grid,
+  .sb-ai-skill-process,
+  .sb-ai-skill-check-grid,
+  .sb-ai-skill-status-grid,
+  .sb-ai-skill-faq-list {
+    grid-template-columns: 1fr;
+  }
+
+  .sb-ai-skill-hero {
+    padding: 20px;
+  }
+
+  .sb-ai-skill-hero-panel {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .sb-ai-skill-hero-panel span {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 35rem) {
+  .sb-ai-skill-hero-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sb-ai-skill-feature-grid section,
+  .sb-ai-skill-role-grid section,
+  .sb-ai-skill-process section,
+  .sb-ai-skill-check-grid section,
+  .sb-ai-skill-status-grid section,
+  .sb-ai-skill-mode-stack section,
+  .sb-ai-skill-faq-list section {
+    padding: 16px;
   }
 }

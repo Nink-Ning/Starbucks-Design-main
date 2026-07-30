@@ -2,87 +2,80 @@
 
 ## 1. 文档目的
 
-本文用于指导 Codex、Claude Code、Cursor 等工程代理，在 Starbucks Design / DesignKit 仓库中接到任务后，正确完成以下判断：
+本文是 Starbucks Design / DesignKit 的详细任务执行中心，用于指导工程代理在接到任务后判断：
 
-- 当前任务属于哪一种类型；
-- 应读取哪些规则、代码和组件文档；
-- 应选择 React、Vue、双端还是 Preview；
-- 应修改基础组件、业务组件、页面模板、Docs 还是 Skill；
-- 是否需要 Figma、Design Token、AI Contract、Evaluator、Tests；
-- 是否允许新增公共 API、依赖、包导出或发布动作；
-- 最终应执行哪些验证；
-- 应如何报告完成状态和未验证风险。
+- 当前任务对象；
+- 当前动作类型；
+- React、Vue、双端或 Preview 交付形式；
+- 应读取的最小文件集；
+- 应修改的资产层级；
+- 是否涉及公共 API、依赖、包导出、Git 或发布动作；
+- 应按什么范围验证；
+- 如何报告完成状态和未验证风险。
 
-本文是任务执行路由表，不重复维护完整组件 API，也不替代：
+本文不替代：
 
 - 根目录及局部目录的 `AGENTS.md`；
+- 已发布公共 API、类型定义和兼容性约束；
+- 用户当前任务要求；
+- 已评审通过的 Figma 设计资产；
 - `agent-guidelines/` 中的专项规范；
-- `skills/starbucks-design/SKILL.md`；
-- `skills/starbucks-design/references/architecture.md`；
 - React / Vue 组件 Skill；
-- 已发布组件包类型定义；
-- 最新评审通过的 Figma 设计资产；
 - 实际测试、构建和浏览器验证结果。
 
----
+## 2. 读取总原则
 
-## 2. 路由总原则
+Skill 被触发后，`skills/starbucks-design/SKILL.md` 已经作为入口读取。后续不要重复全量读取完整 Skill、全部 references 或全部 `agent-guidelines/`。
 
-所有任务都必须先经过以下流程：
+正确流程：
 
 ```text
 理解用户目标
 ↓
 识别任务对象
 ↓
-识别任务类型
+识别动作类型
 ↓
 确认框架与交付形式
 ↓
-读取最高优先级规则
+命中具体路由
 ↓
-读取目标实现与可复用资产
+读取该路由的最小文件集
 ↓
-识别架构边界和风险
+读取目标代码和实际使用的组件 API
 ↓
-制定文件白名单与验证计划
+制定文件白名单与验证范围
 ↓
-实施
+实施或审查
 ↓
-验证与状态报告
+按证据报告完成状态
 ```
 
-禁止以下工作方式：
+按需读取规则：
+
+- `architecture.md` 只在涉及资产归属、组件封装、依赖方向、公共 API、包导出或 Skill 职责时读取；
+- `design-decisions.md` 只在涉及布局、容器、操作、筛选、表单、详情、Dashboard 或响应式选型时读取；
+- `agent-guidelines/` 只读取当前路由适用的专项文件；
+- React / Vue 组件 reference 只读取实际使用的组件；
+- 简单组件 API 查询不得读取全部 reference；
+- 验证项目按当前任务影响范围选择，未执行的验证必须明确标记，不得描述为已通过。
+
+禁止：
 
 ```text
-看到截图
-→ 直接写 CSS
-
-看到“做一个页面”
-→ 直接从零生成完整页面
-
-看到组件名
-→ 只读取单个组件文件，不检查 React / Vue、Docs、Tests
-
-看到样式不生效
-→ 直接增加选择器层级或 !important
-
-看到相似页面
-→ 直接封装成公共万能组件
-
-看到已有 Demo
-→ 未验证就复制进 scripts/
+看到截图 → 直接写 CSS
+看到页面需求 → 从零生成，不查现有能力
+看到组件名 → 只读单个文件，不查双端、Docs 或测试影响
+样式不生效 → 直接加选择器层级或 !important
+相似页面 → 直接封装公共万能组件
+已有 Demo → 未验证就复制进 scripts/
 ```
 
----
+## 3. 任务对象识别
 
-## 3. 第一步：识别任务对象
-
-先判断用户主要在操作哪一类对象。
+先判断用户主要操作哪类对象。
 
 ### 3.1 设计资产
-
-包括：
 
 - Figma 组件；
 - Figma Variables；
@@ -94,20 +87,22 @@
 
 ### 3.2 基础组件
 
-包括：
-
 ```text
 Button
 Input
+InputNumber
+InputTag
+MultiSelect
 Select
+Cascader
+TreeSelect
 Checkbox
 Radio
 Switch
 Tag
 DatePicker
+RangePicker
 TimePicker
-Cascader
-TreeSelect
 Table
 Pagination
 Tabs
@@ -123,8 +118,6 @@ Descriptions
 
 ### 3.3 业务组件
 
-包括：
-
 ```text
 FilterBar
 TableToolbar
@@ -132,6 +125,7 @@ BatchActions
 SelectionSummary
 ColumnSettings
 FormDrawer
+FormModal
 RiskConfirm
 ActivityTimeline
 ImportWizard
@@ -139,8 +133,6 @@ ExportPanel
 ```
 
 ### 3.4 页面模板
-
-包括：
 
 ```text
 基础列表
@@ -162,8 +154,6 @@ Dashboard
 
 ### 3.5 业务模块
 
-包括：
-
 ```text
 标签管理
 门店管理
@@ -175,8 +165,6 @@ Dashboard
 ```
 
 ### 3.6 文档与知识资产
-
-包括：
 
 - Docs 页面；
 - Demo；
@@ -190,8 +178,6 @@ Dashboard
 
 ### 3.7 工程与发布资产
 
-包括：
-
 - Tests；
 - Build；
 - Lint；
@@ -203,76 +189,45 @@ Dashboard
 - Commit；
 - Pull Request。
 
----
+## 4. 动作类型识别
 
-## 4. 第二步：识别任务类型
+### 4.1 新建
 
-任务对象确定后，再判断用户要求执行什么动作。
+典型表达：新增组件、新建页面模板、增加 Skill、建立业务能力、创建 Demo。
 
-## 4.1 新建
-
-典型表达：
-
-- 新增一个组件；
-- 新建一个页面模板；
-- 增加一个 Skill；
-- 建立一个业务能力；
-- 创建一个 Demo。
-
-必须先判断：
+先判断：
 
 - 是否已有相同或近似能力；
 - 应归属哪一层；
 - 是否需要公共 API；
 - 是否需要 React / Vue 双端；
-- 是否存在两个以上复用场景；
+- 是否有两个以上复用场景；
 - 是否应先做页面级组合，而不是公共封装。
 
-## 4.2 优化
+### 4.2 优化
 
-典型表达：
+典型表达：调整样式、对齐 Figma、优化交互、统一 React / Vue、优化响应式。
 
-- 调整样式；
-- 对齐 Figma；
-- 优化交互；
-- 统一 React / Vue；
-- 收敛间距和视觉；
-- 优化响应式。
+先确认：
 
-必须先确认：
-
-- 现有行为是否需要保持；
-- 优化属于基础组件还是布局层；
+- 现有行为是否保持；
+- 优化属于基础组件还是组合布局；
 - 是否涉及 Token；
 - 是否影响 Popup / Portal；
 - 是否会破坏公共 API；
 - 是否需要同步另一框架和 Docs。
 
-## 4.3 修复
+### 4.3 修复
 
-典型表达：
+典型表达：样式不生效、页面报错、组件行为异常、构建失败、React / Vue 表现不一致、Docs 无法渲染。
 
-- 样式不生效；
-- 页面报错；
-- 组件行为异常；
-- 构建失败；
-- React / Vue 表现不一致；
-- Docs 无法渲染；
-- 浮层错位。
+先定位根因，不得直接绕过问题。
 
-必须先定位根因，禁止直接绕过问题。
+### 4.4 生成
 
-## 4.4 生成
+典型表达：生成 React 页面、生成 Vue 页面、做 HTML Demo、根据需求搭建页面、根据设计稿生成代码。
 
-典型表达：
-
-- 生成 React 页面；
-- 生成 Vue 页面；
-- 做一个 HTML Demo；
-- 根据需求搭建页面；
-- 根据设计稿生成代码。
-
-必须确认：
+先确认：
 
 - 交付形式；
 - 框架；
@@ -282,56 +237,27 @@ Dashboard
 - 设计决策；
 - 是否需要真实工程代码。
 
-## 4.5 审查
+### 4.5 审查
 
-典型表达：
+典型表达：检查 Codex 代码、评估代码质量、看是否符合设计系统、检查是否可发布、检查 React / Vue 一致性。
 
-- 检查 Codex 代码；
-- 评估代码质量；
-- 看是否符合设计系统；
-- 检查是否可发布；
-- 检查 React / Vue 一致性；
-- 检查是否正确复用。
+审查必须使用证据分级，不得只给主观评价。
 
-必须使用证据分级，不得只给主观评价。
+### 4.6 重构
 
-## 4.6 重构
+典型表达：拆分组件、合并重复逻辑、优化目录、调整架构、抽取公共能力。
 
-典型表达：
+重构必须先确认影响范围、公共 API、无关本地改动和更小替代方案。
 
-- 拆分组件；
-- 合并重复逻辑；
-- 优化目录；
-- 调整架构；
-- 抽取公共能力。
+### 4.7 Git、PR 与发布
 
-重构必须先确认：
-
-- 用户是否明确要求；
-- 是否会扩大修改范围；
-- 是否影响公共 API；
-- 是否存在无关本地改动；
-- 是否需要版本升级；
-- 是否有更小的修复方案。
-
-## 4.7 发布
-
-典型表达：
-
-- 提交代码；
-- 推送 GitHub；
-- 创建 PR；
-- 升级版本；
-- 发布 npm 包；
-- 部署 Docs。
+典型表达：提交代码、推送 GitHub、创建 PR、升级版本、发布 npm 包、部署 Docs。
 
 只有用户明确要求时才能进入发布路由。
 
----
+## 5. 框架与交付形式
 
-## 5. 第三步：选择框架与交付形式
-
-## 5.1 React 工程代码
+### 5.1 React 工程代码
 
 选择条件：
 
@@ -341,15 +267,14 @@ Dashboard
 - 需要 React 类型、Hooks、JSX 或 TSX；
 - 需要使用 `@sbux/starbucks-design-react`。
 
-必须读取：
+读取：
 
 ```text
 skills/starbucks-design-react/SKILL.md
+实际使用组件的 React reference
 ```
 
-并按需读取实际组件 reference。
-
-## 5.2 Vue 工程代码
+### 5.2 Vue 工程代码
 
 选择条件：
 
@@ -359,15 +284,14 @@ skills/starbucks-design-react/SKILL.md
 - 需要 Vue SFC、Composition API、Props、Events 或 Slots；
 - 需要使用 `@sbux/starbucks-design-vue`。
 
-必须读取：
+读取：
 
 ```text
 skills/starbucks-design-vue/SKILL.md
+实际使用组件的 Vue reference
 ```
 
-并按需读取实际组件 reference。
-
-## 5.3 React + Vue 双端
+### 5.3 React + Vue 双端
 
 以下任务默认考虑双端：
 
@@ -382,37 +306,26 @@ skills/starbucks-design-vue/SKILL.md
 
 除非用户明确限定单端。
 
-## 5.4 React Preview
+### 5.4 Preview
 
 选择条件：
 
 - 用户需要单 HTML；
-- 不希望安装 Node.js；
+- 用户没有或不想使用 Node.js；
 - 需要双击打开；
 - 需要快速给产品经理或设计师查看；
-- 用户明确要求 React CDN 预览。
+- 用户明确要求 CDN 预览。
 
 读取：
 
 ```text
-skills/starbucks-design-react-preview/SKILL.md
+React Preview → skills/starbucks-design-react-preview/SKILL.md + 实际 React 组件 reference
+Vue Preview   → skills/starbucks-design-vue-preview/SKILL.md + 实际 Vue 组件 reference
 ```
 
-并同时读取对应 React 组件 reference。
+Preview 不自动等于工程级代码、正式页面模板或可发布组件。
 
-## 5.5 Vue Preview
-
-选择条件与 React Preview 相同，但用户指定 Vue 或当前上下文属于 Vue。
-
-读取：
-
-```text
-skills/starbucks-design-vue-preview/SKILL.md
-```
-
-并同时读取对应 Vue 组件 reference。
-
-## 5.6 用户未指定框架
+### 5.5 用户未指定框架
 
 按以下顺序判断：
 
@@ -426,29 +339,11 @@ skills/starbucks-design-vue-preview/SKILL.md
 
 只有当选择框架会显著改变交付结果且无法从上下文判断时，才提出澄清问题。
 
----
+## 6. 路由 A：基础组件样式调优
 
-## 6. 规则读取顺序
+### 6.1 触发条件
 
-所有任务先读取：
-
-```text
-1. 根目录 AGENTS.md
-2. 距离目标文件最近的局部 AGENTS.md
-3. skills/starbucks-design/SKILL.md
-```
-
-然后按任务类型继续读取。
-
----
-
-## 7. 路由 A：基础组件样式调优
-
-## 7.1 触发条件
-
-当任务涉及：
-
-- Arco Design 基础组件二次封装；
+- 基于 Arco Design 的基础组件二次封装；
 - Figma 视觉对齐；
 - 组件尺寸、边框、圆角、颜色、字体、间距；
 - Hover、Focus、Disabled、Error；
@@ -456,100 +351,61 @@ skills/starbucks-design-vue-preview/SKILL.md
 - Popup、Portal、Trigger；
 - CSS 权重、作用域、加载顺序；
 - `!important`；
-- Design Token；
-- 输入类、下拉类、选择类组件统一。
+- Design Token。
 
-## 7.2 必读文件
+### 6.2 最小读取集
 
 ```text
 AGENTS.md
 agent-guidelines/designkit-base-component-style-optimization-guideline.md
-skills/starbucks-design/references/architecture.md
-skills/starbucks-design/references/task-routing.md
+目标 React / Vue 实现
+目标样式
+目标 Docs 或 Preview
+目标 Tests
+相关 Token
+实际使用组件 reference
 ```
 
-涉及布局或选型时，再读：
+涉及资产归属、跨组件能力或公共 API 时，再读 `architecture.md`。
 
-```text
-skills/starbucks-design/references/design-decisions.md
-```
+涉及布局或交互选型时，再读 `design-decisions.md`。
 
-## 7.3 必查资产
+### 6.3 实施原则
 
-- React 组件实现；
-- Vue 组件实现；
-- React 样式；
-- Vue 样式；
-- 共享 Token；
-- Arco 原生 DOM 和类名；
-- Docs Demo；
-- Tests；
-- 组件被业务组件和模板引用的位置；
-- Popup / Portal 挂载方式；
-- Figma Variables 和主要变体。
+- 优先使用 Figma Variables 和 Design Token；
+- 优先修复基础组件公共能力；
+- 不在业务组件或页面模板中复制基础组件完整样式；
+- 不使用无作用域 `.arco-*` 覆盖；
+- 不在未定位根因前使用 `!important`；
+- React、Vue、Docs Preview 用户可见结果保持一致。
 
-## 7.4 实施原则
+### 6.4 验证范围
 
-```text
-Figma Variables
-→ Design Token
-→ 已优化基础组件能力
-→ 当前组件公共样式
-→ 当前组件局部样式
-→ Arco 原生样式
-```
+根据受影响组件验证适用状态，例如 Default、Hover、Focus、Active、Disabled、Error、Size、Prefix / Suffix、Popup、Portal、React / Vue、Docs、Build 和样式回归测试。
 
-不得：
+未执行项必须标记为未验证。
 
-- 在复合组件中复制 Input、Select、Tag 等完整样式；
-- 使用无作用域 `.arco-*` 覆盖；
-- 未定位原因就加 `!important`；
-- 只修 React 不检查 Vue；
-- 只修默认态不检查交互状态；
-- 只看截图不检查实际 DOM。
+## 7. 路由 B：新业务组件开发
 
-## 7.5 验证
-
-至少根据任务检查：
-
-- Default；
-- Hover；
-- Focus；
-- Active；
-- Disabled；
-- Error；
-- Size；
-- Prefix / Suffix；
-- Clear；
-- Popup；
-- Portal；
-- React / Vue；
-- Docs；
-- Build；
-- 样式回归测试。
-
----
-
-## 8. 路由 B：新业务组件开发
-
-## 8.1 触发条件
-
-当任务要求：
+### 7.1 触发条件
 
 - 新增稳定业务能力；
-- 新增 FilterBar、TableToolbar 等；
+- 新增 FilterBar、TableToolbar 等业务组件；
 - 定义 Schema、状态模型、事件；
 - React / Vue 双端封装；
 - 建设 Docs、AI Contract、Evaluator、Tests。
 
-## 8.2 必读文件
+### 7.2 最小读取集
 
 ```text
 AGENTS.md
 agent-guidelines/designkit-business-component-development-guideline.md
-skills/starbucks-design/references/architecture.md
-skills/starbucks-design/references/task-routing.md
-skills/starbucks-design/references/design-decisions.md
+architecture.md
+目标或相似业务组件
+可复用基础组件
+实际使用组件 reference
+React / Vue 实现结构
+Docs / AI Contract / Evaluator / Tests
 ```
 
 FilterBar 任务再读：
@@ -558,13 +414,11 @@ FilterBar 任务再读：
 agent-guidelines/designkit-filterbar-codex-master-prompt.md
 ```
 
-如果业务组件包含视觉调优或 Arco 覆盖，再读：
+涉及基础组件视觉调优或 Arco 覆盖时，再读基础组件 guideline。
 
-```text
-agent-guidelines/designkit-base-component-style-optimization-guideline.md
-```
+涉及布局、容器、筛选、表格或响应式选型时，再读 `design-decisions.md`。
 
-## 8.3 开发前必须定义
+### 7.3 开发前必须定义
 
 ```text
 业务任务
@@ -584,7 +438,7 @@ React / Vue 契约
 发布与兼容性影响
 ```
 
-## 8.4 封装门槛
+### 7.4 封装门槛
 
 至少满足：
 
@@ -598,42 +452,13 @@ React / Vue 契约
 
 不满足时，优先做页面模板或局部组合。
 
-## 8.5 交付资产
+### 7.5 验证范围
 
-通常包括：
+按组件影响范围验证状态模型、事件顺序、受控/非受控、Loading、Empty、Error、Disabled、Permission、React / Vue 契约、Docs 真实组件、API 兼容、Tests 和 Build。
 
-- React 实现；
-- Vue 实现；
-- Types / Schema；
-- 样式；
-- Docs；
-- 真实 Demo；
-- API；
-- AI Contract；
-- Evaluator；
-- Tests；
-- Changelog；
-- 必要时版本策略。
+## 8. 路由 C：已有业务组件视觉优化
 
-## 8.6 验证
-
-重点检查：
-
-- 状态模型；
-- 查询、重置、提交、取消；
-- 受控与非受控；
-- Loading、Empty、Error；
-- Disabled、Permission；
-- React / Vue 事件顺序；
-- Docs 使用真实组件；
-- API 向后兼容；
-- Build 和 Tests。
-
----
-
-## 9. 路由 C：已有业务组件视觉优化
-
-## 9.1 触发条件
+### 8.1 触发条件
 
 - 已有业务组件行为正确；
 - 只需视觉、布局或响应式优化；
@@ -641,16 +466,27 @@ React / Vue 契约
 - 需要修复内部基础组件样式；
 - 需要 React / Vue 视觉一致。
 
-## 9.2 必读文件
+### 8.2 最小读取集
 
 ```text
+AGENTS.md
 agent-guidelines/designkit-business-component-development-guideline.md
-agent-guidelines/designkit-base-component-style-optimization-guideline.md
-skills/starbucks-design/references/architecture.md
-skills/starbucks-design/references/task-routing.md
+目标业务组件 React / Vue 实现
+目标样式
+目标 Docs 和 Tests
+相关 Token
+实际使用基础组件 reference
 ```
 
-## 9.3 优先级
+涉及基础组件能力或 Arco 覆盖时，再读：
+
+```text
+agent-guidelines/designkit-base-component-style-optimization-guideline.md
+```
+
+涉及资产归属或公共 API 风险时，再读 `architecture.md`。
+
+### 8.3 优先级
 
 ```text
 现有公共 API
@@ -663,34 +499,21 @@ skills/starbucks-design/references/task-routing.md
 → Arco 默认样式
 ```
 
-## 9.4 根因归属判断
+不得为了匹配截图改变 submit、reset、cancel、query、permission、error recovery、受控或非受控行为。
 
-如果问题发生在业务组件内部，先判断：
+### 8.4 根因归属
 
 ```text
-基础组件本身有问题
-→ 修基础组件
-
-基础组件正常，但组合布局有问题
-→ 修业务组件布局
-
-Docs 容器造成问题
-→ 修 Docs
-
-Popup / Portal 作用域问题
-→ 修浮层挂载或专用作用域
-
-React / Vue DOM 差异
-→ 分别适配，但保持同源 Token
+基础组件本身有问题 → 修基础组件
+基础组件正常但组合布局有问题 → 修业务组件布局
+Docs 容器造成问题 → 修 Docs
+Popup / Portal 作用域问题 → 修浮层挂载或专用作用域
+React / Vue DOM 差异 → 分别适配，但保持同源 Token
 ```
 
-不得把基础组件问题用业务组件私有覆盖掩盖。
+## 9. 路由 D：页面模板开发
 
----
-
-## 10. 路由 D：页面模板开发
-
-## 10.1 触发条件
+### 9.1 触发条件
 
 - 做一个完整列表页；
 - 做标签管理页；
@@ -701,26 +524,31 @@ React / Vue DOM 差异
 - 做结果或异常页；
 - 将多个基础组件和业务组件组合成页面。
 
-## 10.2 必读文件
+### 9.2 最小读取集
 
 ```text
 AGENTS.md
-skills/starbucks-design/references/architecture.md
-skills/starbucks-design/references/task-routing.md
-skills/starbucks-design/references/design-decisions.md
+task-routing.md 当前路由
+最近似页面模板
+页面路由与 Demo 挂载
+所需业务组件
+实际使用基础组件 reference
+页面级样式
+页面模板测试
 ```
+
+涉及资产归属、页面模板是否应抽成公共组件、依赖方向或包导出时，再读 `architecture.md`。
+
+涉及布局、容器、操作、筛选、表单、详情、Dashboard 或响应式时，再读 `design-decisions.md`。
 
 只在以下情况读取专项 guideline：
 
 ```text
-修改基础组件
-→ 基础组件调优 guideline
-
-新增或修改业务组件
-→ 业务组件 guideline
+修改基础组件 → 基础组件 guideline
+新增或修改业务组件 → 业务组件 guideline
 ```
 
-## 10.3 开发前必须确认
+### 9.3 开发前确认
 
 - 页面模板路由；
 - 当前占位位置；
@@ -735,9 +563,9 @@ skills/starbucks-design/references/design-decisions.md
 - 页面级状态；
 - 响应式和溢出策略。
 
-## 10.4 页面模板默认规则
+### 9.4 默认规则
 
-- 是组合示例，不是公共万能组件；
+- 页面模板是组合示例，不是公共万能组件；
 - 默认不进入包导出；
 - 使用本地 Mock；
 - 页面级请求模拟留在模板；
@@ -747,99 +575,15 @@ skills/starbucks-design/references/design-decisions.md
 - 宽表格只在表格区域内部滚动；
 - 页面自身不出现异常横向滚动。
 
-## 10.5 页面模板常见结构
+### 9.5 验证范围
 
-### 基础列表
+根据模板能力验证正常态、Loading、Empty、Error、Query、Reset、Pagination、Selection、Batch Actions、Modal / Drawer、Column Settings、窄屏、页面溢出、表格内部滚动、Popup / Portal 和控制台错误。
 
-```text
-PageHeader
-+ Optional Description
-+ TableToolbar
-+ Table
-+ Pagination
-```
+只实现部分状态或部分框架时，完成状态应标记 `PARTIAL` 或 `CONDITIONAL`。
 
-### 筛选列表
+## 10. 路由 E：设计决策
 
-```text
-PageHeader
-+ FilterBar
-+ TableToolbar
-+ SelectionSummary
-+ Table
-+ Pagination
-```
-
-### 标签管理
-
-```text
-PageHeader
-+ Left Tag Group / Category
-+ Right FilterBar
-+ TableToolbar
-+ Table
-+ Pagination
-+ FormDrawer / Modal
-```
-
-### 基础表单
-
-```text
-PageHeader
-+ Form Container
-+ Form Sections
-+ Form Actions
-```
-
-### 详情页
-
-```text
-PageHeader
-+ Status / Summary
-+ Descriptions or Cards
-+ Tabs or Sections
-+ Activity Timeline
-```
-
-### Dashboard
-
-```text
-PageHeader
-+ Global Filters
-+ KPI Cards
-+ Trend Charts
-+ Dimension Analysis
-+ Detail Table
-```
-
-## 10.6 验证
-
-至少检查：
-
-- React Preview；
-- Vue Preview；
-- 正常态；
-- Loading；
-- Empty；
-- Error；
-- Query；
-- Reset；
-- Pagination；
-- Selection；
-- Batch Actions；
-- Modal / Drawer；
-- Column Settings；
-- 窄屏；
-- 页面溢出；
-- 表格内部滚动；
-- Popup / Portal；
-- 控制台错误。
-
----
-
-## 11. 路由 E：设计决策
-
-## 11.1 触发条件
+### 10.1 触发条件
 
 - 选择页面结构；
 - 选择 Modal、Drawer、侧栏或新页面；
@@ -850,17 +594,18 @@ PageHeader
 - 确定 Dashboard 信息层级；
 - 确定响应式策略。
 
-## 11.2 必读文件
+### 10.2 最小读取集
 
 ```text
 skills/starbucks-design/references/design-decisions.md
+仓库内最接近的已有模式
 ```
 
-同时检查仓库内最接近的已有模式。
+涉及资产归属或封装边界时，再读 `architecture.md`。
 
-## 11.3 输出格式
+### 10.3 输出要求
 
-设计决策输出至少包括：
+至少说明：
 
 ```text
 任务目标
@@ -878,36 +623,26 @@ skills/starbucks-design/references/design-decisions.md
 
 不得只输出“建议用 Drawer”而不说明依据。
 
----
+## 11. 路由 F：React / Vue 工程代码生成
 
-## 12. 路由 F：React / Vue 工程代码生成
-
-## 12.1 触发条件
+### 11.1 触发条件
 
 - 用户明确要求代码；
 - 需要组件 API；
 - 需要 TSX 或 Vue SFC；
 - 需要真实工程集成。
 
-## 12.2 路由步骤
+### 11.2 最小读取集
 
 ```text
-识别页面或组件所需能力
-↓
-读取 React 或 Vue Skill
-↓
-只读取实际使用组件的 reference
-↓
-确认 import、Props、Events、Slots、Types
-↓
-读取设计决策和最近似模板
-↓
-生成工程代码
-↓
-运行类型检查、测试和构建
+对应 React 或 Vue Skill
+实际使用组件 reference
+目标工程目录和最近似实现
+必要的设计决策 reference
+必要的架构 reference
 ```
 
-## 12.3 禁止事项
+### 11.3 禁止事项
 
 - 根据 Ant Design 习惯猜 Starbucks API；
 - React 中使用 Vue API；
@@ -918,11 +653,9 @@ skills/starbucks-design/references/design-decisions.md
 - 使用不存在的组件或 Props；
 - 为了演示绕过真实组件。
 
----
+## 12. 路由 G：零环境 HTML Preview
 
-## 13. 路由 G：零环境 HTML Preview
-
-## 13.1 触发条件
+### 12.1 触发条件
 
 - 无 Node.js；
 - 单文件 HTML；
@@ -930,46 +663,31 @@ skills/starbucks-design/references/design-decisions.md
 - 快速发给其他角色；
 - CDN 运行。
 
-## 13.2 路由步骤
+### 12.2 最小读取集
 
 ```text
-确定 React Preview 或 Vue Preview
-↓
-读取对应 Preview Skill
-↓
-读取开发版组件 Skill 的实际组件 reference
-↓
-读取 design-decisions.md
-↓
-生成完整 HTML
-↓
-检查 CDN 顺序、全局对象和组件 API
-↓
-浏览器打开验证
+对应 Preview Skill
+对应开发版组件 Skill
+实际使用组件 reference
+必要的 design-decisions.md
 ```
 
-## 13.3 Preview 限制
+### 12.3 限制
 
-Preview 适合：
-
-- 快速演示；
-- 需求沟通；
-- 无环境预览；
-- 单文件交付。
+Preview 适合快速演示、需求沟通、无环境预览和单文件交付。
 
 Preview 不自动等于：
 
 - 工程级代码；
 - 可发布组件；
 - 正式页面模板；
-- React / Vue 包实现；
 - 已通过完整测试的黄金模板。
 
----
+生成 Preview 后，应尽量用浏览器打开验证 CDN 顺序、全局对象、组件 API 和控制台错误。未验证时明确标记。
 
-## 14. 路由 H：质量审查
+## 13. 路由 H：质量审查
 
-## 14.1 触发条件
+### 13.1 触发条件
 
 - 审查 Codex 代码；
 - 检查设计系统一致性；
@@ -979,60 +697,27 @@ Preview 不自动等于：
 - 检查样式覆盖；
 - 检查架构越界。
 
-## 14.2 审查维度
+### 13.2 最小读取集
 
-### 架构
+```text
+AGENTS.md
+目标代码或 diff
+相关 guideline
+必要的 architecture.md
+必要的 task-routing.md 路由
+Tests / Build / Docs / Browser 证据
+```
 
-- 资产层级是否正确；
-- 是否重复封装；
-- 是否错误创建万能组件；
-- 依赖方向是否正确；
-- 页面模板是否进入包导出。
+### 13.3 审查维度
 
-### API
+- 架构：资产层级、依赖方向、页面模板是否误导出、是否重复封装；
+- API：公共 API 是否变化，Props / Events / Slots 是否真实存在；
+- 视觉：Token、Figma、状态、React / Vue 一致性；
+- 样式安全：`.arco-*` 作用域、`!important`、Popup / Portal、加载顺序；
+- 交互：Query、Reset、Submit、Cancel、Loading、Error、Permission、Pagination、Selection；
+- Docs 与测试：是否使用真实组件，是否有必要测试和构建证据。
 
-- 公共 API 是否变化；
-- React / Vue API 是否等价；
-- Props、Events、Slots 是否真实存在；
-- 是否破坏兼容性。
-
-### 视觉
-
-- 是否使用 Token；
-- 是否无理由硬编码；
-- 是否符合 Figma；
-- 状态是否完整；
-- React / Vue 是否一致。
-
-### 样式安全
-
-- 是否存在宽泛 `.arco-*`；
-- 是否滥用 `!important`；
-- 是否正确处理 Popup / Portal；
-- 是否存在样式加载顺序风险；
-- 是否污染 Docs 或其他组件。
-
-### 交互
-
-- Query、Reset、Submit、Cancel；
-- Loading、Empty、Error；
-- Permission；
-- Pagination；
-- Selection；
-- Batch Actions；
-- 异步失败；
-- 中断与恢复。
-
-### Docs 与测试
-
-- 是否使用真实组件；
-- 是否存在占位结构；
-- 是否有必要测试；
-- 是否运行构建；
-- 是否有浏览器证据；
-- 是否把未验证项描述为完成。
-
-## 14.3 证据等级
+### 13.4 证据等级
 
 ```text
 CONFIRMED
@@ -1051,24 +736,9 @@ BLOCKED
 受到环境、依赖、权限或外部条件阻塞
 ```
 
-## 14.4 审查输出
+## 14. 路由 I：Skill、reference 与模板建设
 
-```text
-结论
-证据
-主要问题
-风险等级
-影响范围
-推荐修复
-必要验证
-完成状态
-```
-
----
-
-## 15. 路由 I：Skill 与 references 建设
-
-## 15.1 触发条件
+### 14.1 触发条件
 
 - 新增 Skill；
 - 更新总控规则；
@@ -1077,11 +747,22 @@ BLOCKED
 - 更新 AI Contract；
 - 更新 Evaluator。
 
-## 15.2 目录职责
+### 14.2 最小读取集
+
+```text
+AGENTS.md
+目标 Skill 或 reference
+相关现有 Skill / reference
+必要的 architecture.md
+必要的 task-routing.md
+实际代码、Docs、Tests 或模板证据
+```
+
+### 14.3 目录职责
 
 ```text
 SKILL.md
-→ 触发条件、总控路由、总体规则
+→ 触发条件、总控路由、总体索引
 
 references/
 → 专项规则和设计知识
@@ -1096,107 +777,78 @@ Preview Skill
 → 零环境运行方式
 ```
 
-## 15.3 禁止重复
+不得在多个文件中维护同一套完整内容。
 
-不得在多个文件中分别维护同一套完整内容。
+### 14.4 scripts 策略
 
-推荐方式：
+`skills/starbucks-design/scripts/` 只允许存放经过验证的黄金模板。
+
+目录为空时：
 
 ```text
-SKILL.md
-引用 reference
-
-reference
-引用组件 Skill
-
-Preview Skill
-引用开发版组件 Skill
-
-scripts
-引用 reference 和真实组件
+读取对应 reference
+→ 查找仓库内最接近实现
+→ 读取所需组件 API
+→ 按现有架构生成
+→ 验证后再决定是否建议沉淀为模板
 ```
 
-## 15.4 scripts 进入门槛
+不得把未验证实验代码、占位页面、静态截图或绕过真实组件的模拟实现放入 `scripts/`。
 
-只有同时满足以下条件，才能放入 `scripts/`：
+## 15. 路由 J：Git、PR 与发布
 
-- 使用真实 Starbucks Design 组件；
-- 结构已评审；
-- 交互完整；
-- React / Vue 达到目标一致性；
-- 类型检查通过；
-- 测试通过；
-- 构建通过；
-- Docs 正常；
-- 浏览器验证完成；
-- 没有临时占位和明显硬编码。
+### 15.1 触发条件
 
----
+只有用户明确要求以下动作时进入本路由：
 
-## 16. 路由 J：Git、PR 与发布
-
-## 16.1 触发条件
-
-只有用户明确要求：
-
-- 创建分支；
+- 创建或切换分支；
+- `git add` 或 stage；
 - Commit；
 - Push；
-- PR；
+- 创建 PR；
 - 修改版本；
 - 发布；
 - 部署；
 - Release。
 
-## 16.2 发布前检查
+### 15.2 发布前检查
 
-- 工作区状态；
-- 无关改动；
+按根 `AGENTS.md` 和用户要求确认：
+
+- exact packages and scope；
+- 工作区状态和无关改动；
 - 文件白名单；
-- 测试；
-- 构建；
-- Docs；
+- 测试、构建、Docs 和浏览器验证结果；
+- 公共 API 和包导出影响；
 - 版本策略；
 - Changelog；
-- 公共 API；
-- 包导出；
 - 锁文件；
-- 发布权限；
-- 回滚方案。
+- 发布权限。
 
-## 16.3 默认停止点
+### 15.3 默认停止点
 
-如果用户只要求实现：
+如果用户只要求实现或验证：
 
 ```text
 完成代码
-→ 完成验证
+→ 完成适用验证
 → 报告结果
 → 停止
 ```
 
-不得自动：
+不得自动 commit、push、创建 PR、升级版本、发布或部署。
 
-- Commit；
-- Push；
-- 创建 PR；
-- 升级版本；
-- 发布；
-- 部署。
-
----
-
-## 17. 多任务混合路由
+## 16. 多任务混合路由
 
 一个请求可能同时包含多个任务。
 
-例如：
+示例：
 
 ```text
 “根据 Figma 优化 FilterBar，并更新 React / Vue Docs”
 ```
 
-应拆分为：
+拆分为：
 
 ```text
 1. 已有业务组件视觉优化
@@ -1223,7 +875,7 @@ scripts
 “做一个标签管理页面，同时缺少 TableToolbar”
 ```
 
-应拆分为：
+拆分为：
 
 ```text
 1. 页面模板
@@ -1234,9 +886,7 @@ scripts
 
 不得为了完成页面而直接在模板中复制一个私有 TableToolbar。
 
----
-
-## 18. 路由决策树
+## 17. 路由决策树
 
 ```text
 用户要修改的是现有基础组件吗？
@@ -1277,80 +927,7 @@ scripts
 └── 否 → 重新确认任务目标
 ```
 
----
-
-## 19. 文件读取最小集
-
-## 19.1 基础组件优化
-
-```text
-AGENTS.md
-基础组件 guideline
-architecture.md
-task-routing.md
-目标 React / Vue 实现
-目标样式
-目标 Docs
-目标 Tests
-相关 Token
-```
-
-## 19.2 新业务组件
-
-```text
-AGENTS.md
-业务组件 guideline
-architecture.md
-task-routing.md
-design-decisions.md
-相似业务组件
-所需基础组件 reference
-React / Vue 实现结构
-Docs / AI Contract / Evaluator / Tests
-```
-
-## 19.3 页面模板
-
-```text
-AGENTS.md
-architecture.md
-task-routing.md
-design-decisions.md
-最近似页面模板
-页面路由与 Demo 挂载
-所需业务组件
-所需基础组件 reference
-页面模板测试
-```
-
-## 19.4 Preview
-
-```text
-总控 Skill
-对应 Preview Skill
-对应开发版组件 Skill
-实际组件 reference
-design-decisions.md
-```
-
-## 19.5 质量审查
-
-```text
-AGENTS.md
-相关 guideline
-architecture.md
-task-routing.md
-目标代码
-Diff
-Tests
-Build 结果
-Docs 结果
-浏览器证据
-```
-
----
-
-## 20. 修改文件白名单
+## 18. 文件修改白名单
 
 实施前必须列出预计修改文件。
 
@@ -1382,9 +959,67 @@ Docs 结果
 
 不得静默扩大修改范围。
 
----
+## 19. 验证范围
 
-## 21. 完成状态路由
+根据当前任务影响范围选择适用验证，不要求所有任务运行所有状态和全部构建。
+
+常见验证项：
+
+- lint；
+- typecheck；
+- unit tests；
+- interaction tests；
+- style regression tests；
+- template tests；
+- React build；
+- Vue build；
+- Docs build；
+- browser smoke check；
+- `git diff --check`。
+
+常见状态和场景：
+
+- Default；
+- Hover；
+- Focus；
+- Active；
+- Disabled；
+- Loading；
+- Empty；
+- Error；
+- Permission；
+- Expand / Collapse；
+- Query / Reset；
+- Submit / Cancel；
+- Pagination；
+- Row Selection；
+- Batch Actions；
+- Popup / Portal；
+- Narrow Container；
+- Overflow；
+- React / Vue 一致性；
+- Figma 主要变体。
+
+页面模板常见场景：
+
+- React Preview；
+- Vue Preview；
+- Normal / Loading / Empty / Error；
+- Query / Reset；
+- Pagination；
+- Selection；
+- Batch Actions；
+- Column Settings；
+- Modal / Drawer；
+- 窄屏；
+- 页面溢出；
+- 表格内部滚动；
+- Popup / Portal；
+- Browser console。
+
+未执行的验证必须明确标记，不得描述为已通过。
+
+## 20. 完成状态
 
 ### COMPLETE
 
@@ -1393,8 +1028,8 @@ Docs 结果
 - 目标功能完成；
 - 必要双端完成；
 - Docs 完成；
-- 必要测试通过；
-- 构建通过；
+- 适用测试通过；
+- 适用构建通过；
 - 必要浏览器检查完成；
 - 无未解决高风险问题。
 
@@ -1402,7 +1037,7 @@ Docs 结果
 
 适用条件：
 
-- 代码已完成；
+- 代码或分析已完成；
 - 但缺少浏览器、完整测试或外部环境验证；
 - 风险可明确描述。
 
@@ -1435,11 +1070,9 @@ Docs 结果
 - 只有目录；
 - 只有占位文件。
 
----
+## 21. 最终交付报告模板
 
-## 22. 最终交付报告模板
-
-完成任务后，按以下结构报告：
+完成任务后，按任务复杂度报告以下内容。简单任务可以压缩，但不得省略验证结果和未验证项。
 
 ```text
 任务分类：
@@ -1448,6 +1081,7 @@ Docs 结果
 修改内容：
 保持不变的行为：
 修改文件：
+新增文件：
 复用的基础组件：
 复用的业务组件：
 使用的 Token：
@@ -1460,13 +1094,16 @@ Docs 结果：
 遗留风险：
 完成状态：
 发布影响：
+文件白名单：
+白名单外工作区变化：
+是否执行 Git / 发布动作：
+建议提交拆分：
+建议版本变化：
 ```
 
 不得省略未验证项和完成状态。
 
----
-
-## 23. 路由示例
+## 22. 路由示例
 
 ### 示例 1：Select 聚焦边框不生效
 
@@ -1543,21 +1180,19 @@ Docs 结果：
 - 状态等级
 ```
 
----
-
-## 24. 完成标准
+## 23. 路由完成标准
 
 任务路由只有满足以下条件时才算正确：
 
 1. 正确识别任务对象；
 2. 正确识别动作类型；
 3. 正确选择 React、Vue、双端或 Preview；
-4. 读取了最高优先级规则；
-5. 只读取必要文件；
+4. 读取了必要且足够的规则；
+5. 没有全量读取不相关文件；
 6. 没有跳过架构边界判断；
 7. 没有重复实现已有能力；
 8. 没有无授权扩大修改范围；
-9. 设定了验证计划；
+9. 设定了按影响范围选择的验证计划；
 10. 使用证据报告完成状态；
 11. 没有自动进入 Git 或发布流程；
 12. 未验证项被明确说明。

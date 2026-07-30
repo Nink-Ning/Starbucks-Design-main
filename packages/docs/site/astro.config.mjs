@@ -4,8 +4,8 @@ import react from '@astrojs/react';
 import vue from '@astrojs/vue';
 
 export default defineConfig({
-  site: 'https://pages.scm.starbucks.com',
-  base: '/kning/starbucks-design-main/',
+  site: 'https://nink1992.github.io',
+  base: '/Starbucks-Design-main/',
   integrations: [
     starlight({
       title: 'Starbucks Design',
@@ -85,7 +85,10 @@ export default defineConfig({
         },
         {
           label: 'Skills',
-          items: [{ label: 'Skills', slug: 'guide/ai-skills' }],
+          items: [
+            { label: '使用指南', slug: 'guide/ai-skills-guide' },
+            { label: 'Skills 下载', slug: 'guide/ai-skills' },
+          ],
         },
       ],
       components: {

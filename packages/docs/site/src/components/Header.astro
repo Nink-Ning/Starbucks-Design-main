@@ -4,13 +4,13 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 const base = import.meta.env.BASE_URL;
 const pathname = Astro.url.pathname;
 const logoSrc = `${base}img/logo-icon.svg`;
-const repositoryUrl = 'https://scm.starbucks.com/kning/starbucks-design-main';
+const repositoryUrl = 'https://github.com/Nink1992/Starbucks-Design-main';
 
 const navItems = [
   {
     label: '全局配置',
     href: `${base}guide/getting-started/`,
-    active: pathname.includes('/guide/') && !pathname.includes('/guide/ai-skills/'),
+    active: pathname.includes('/guide/') && !pathname.includes('/guide/ai-skills'),
   },
   {
     label: '基础组件',
@@ -29,8 +29,8 @@ const navItems = [
   },
   {
     label: 'Skills',
-    href: `${base}guide/ai-skills/`,
-    active: pathname.includes('/guide/ai-skills/'),
+    href: `${base}guide/ai-skills-guide/`,
+    active: pathname.includes('/guide/ai-skills'),
   },
 ];
 ---
@@ -76,7 +76,7 @@ const navItems = [
     function syncDocsSection() {
       var path = location.pathname;
       var section = 'global';
-      if (path.indexOf('/guide/ai-skills/') > -1) section = 'skills';
+      if (path.indexOf('/guide/ai-skills') > -1) section = 'skills';
       else if (path.indexOf('/components/') > -1) section = 'components';
       else if (path.indexOf('/templates/') > -1) section = 'templates';
       else if (path.indexOf('/business-components/') > -1) section = 'business';
