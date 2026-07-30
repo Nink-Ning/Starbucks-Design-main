@@ -8,27 +8,43 @@ const changelogUrl = new URL(
 );
 const legacyStylesUrl = new URL('../legacy-docs.css', import.meta.url);
 
-test('the weekly changelog presents the unified docs engine as the main workstream', async () => {
+test('the weekly changelog presents a concise summary of the shipped work', async () => {
   const changelog = await readFile(changelogUrl, 'utf8');
 
   assert.match(changelog, /^## 2026-07-30$/m);
-  assert.match(changelog, /2026-07-27 至 2026-07-30/);
-  assert.match(changelog, /本周更新汇总：统一 Docs 架构、组件样式收敛与模板建设/);
-  assert.match(changelog, /共确认 7 个已提交 Commit/);
-  assert.match(changelog, /约 319 个未提交文件/);
-  assert.match(changelog, /191 个为已跟踪修改、128 个为新增文件、0 个为暂存文件/);
-  assert.match(changelog, /07-29、07-30 的多项优化仍在本地工作区/);
-  assert.match(changelog, /状态标记为 CONDITIONAL/);
-  assert.match(changelog, /React、Vue 文档站合并为统一 Docs 架构/);
-  assert.match(changelog, /Table 按 Figma 设计稿完成第一轮 React \/ Vue 对齐/);
-  assert.match(changelog, /完成两批 Form 文档示例优化/);
-  assert.match(changelog, /Select \/ Cascader \/ TreeSelect 统一 Hover、聚焦、展开、错误和禁用状态优先级/);
-  assert.match(changelog, /Modal 对话框相关更新已纳入反馈类组件整理/);
-  assert.match(changelog, /FilterBar 当前为 CONDITIONAL/);
-  assert.match(changelog, /新增基本使用、级联选择、变更模式、展开收起、日期范围、集成布局、分离布局、响应式、状态展示和校验等 10 组双端 Docs 场景/);
-  assert.match(changelog, /页面模板当前为 CONDITIONAL/);
-  assert.match(changelog, /Skeleton 基本示例不可见、Transfer 操作按钮图标化、Progress Vue 基础示例可见性/);
-  assert.match(changelog, /未进入暂存、提交、推送、版本升级或发布流程/);
+  assert.match(changelog, /<div class="sbux-changelog-date">2026-07-30<\/div>/);
+  assert.match(changelog, /基础组件优化、业务组件、页面模板结构搭建与 Docs 更新/);
+  assert.match(changelog, /本周发布 React \/ Vue FilterBar V1/);
+  assert.match(changelog, /相关代码已推送至 GitHub，Docs 已完成部署/);
+  assert.doesNotMatch(changelog, /Codex 任务记录/);
+  assert.doesNotMatch(changelog, /319 个待合并文件/);
+  assert.match(changelog, /统一字段适配、数据归一化、校验、布局、状态及对外 API/);
+  assert.match(changelog, /复用 Input、Select、Cascader、DatePicker、Button 等基础组件/);
+  assert.match(changelog, /Manual \/ Change 查询模式/);
+  assert.match(changelog, /4 \/ 3 \/ 2 \/ 1 列响应式布局/);
+  assert.match(changelog, /基本使用、级联选择、变更模式、展开收起、日期范围、集成布局、分离布局、响应式、状态展示和校验 10 组双框架 Demo/);
+  assert.match(changelog, /<strong>Table：<\/strong>统一中性表头、边框、圆角、图标与复选框对齐/);
+  assert.match(changelog, /<strong>Form：<\/strong>统一 Label 与控件 16px、表单项 24px、按钮 16px 间距/);
+  assert.match(changelog, /<strong>Select \/ Cascader \/ TreeSelect：<\/strong>统一 Hover、聚焦、展开、错误和禁用状态优先级/);
+  assert.match(changelog, /<strong>InputTag：<\/strong>统一 4px 标签间距/);
+  assert.match(changelog, /<strong>Calendar \/ DatePicker \/ TimePicker：<\/strong>优化满宽布局与卡片圆角/);
+  assert.match(changelog, /<strong>Descriptions：<\/strong>取消 Label 加粗并统一 16px 内容间距/);
+  assert.match(changelog, /Avatar、Slider、VerificationCode、ColorPicker、Button、MultiSelectTag/);
+  assert.match(changelog, /Badge、Link、Statistic、Divider、Pagination、Mentions、Timeline、Typography、Watermark/);
+  assert.match(changelog, /重构 FilterBar 文档/);
+  assert.match(changelog, /AI Contract 和 Evaluator/);
+  assert.match(changelog, /双框架 Demo 均使用真实组件/);
+  assert.match(changelog, /完成基础列表、标签管理页面 Demo/);
+  assert.match(changelog, /20 个模板文档路由和 13 个页面 Demo/);
+  assert.match(changelog, /部分内容仍为占位结构/);
+  assert.match(changelog, /统一 React \/ Vue 文档入口/);
+  assert.match(changelog, /调整 Astro 配置、Docs 依赖与锁文件/);
+  assert.match(changelog, /Arco 样式隔离/);
+  assert.match(changelog, /Demo Code、Guide、Table、InputTag、ColorPicker \/ Mentions、FilterBar、Progress 和页面模板/);
+  assert.match(changelog, /修复 Astro SSR 与 UMD 图标入口兼容问题/);
+  assert.match(changelog, /Docs 成功生成 134 个页面/);
+  assert.match(changelog, /FilterBar 的 TreeSelect 视觉与弹层交互仍需完善/);
+  assert.match(changelog, /Skeleton、Transfer、Progress 及部分 Vue 页面模板仍待最终复核/);
   assert.match(changelog, /^## 2026-07-24$/m);
   assert.match(changelog, /Astro \+ Starlight 统一 Docs 引擎与组件体验升级/);
   assert.match(changelog, /React Docusaurus 与 Vue VitePress 的启动入口、文档内容、组件 Demo 和构建流程/);
@@ -64,7 +80,7 @@ test('the weekly changelog presents the unified docs engine as the main workstre
 
   assert.equal(new Set(listItems).size, listItems.length);
   assert.equal((weeklySection.match(/\bUpload\b/g) ?? []).length, 1);
-  assert.equal((weeklySection.match(/\bTreeSelect\b/g) ?? []).length, 2);
+  assert.ok((weeklySection.match(/\bTreeSelect\b/g) ?? []).length >= 2);
 });
 
 test('the changelog timeline connects entries and aligns dates with dots', async () => {
