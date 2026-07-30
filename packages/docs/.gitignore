@@ -1,0 +1,8 @@
+node_modules/
+react/.docusaurus/
+react/build/
+react/dist/
+vue/.vitepress/dist/
+vue/.vitepress/cache/
+react/static/skills/*.zip
+vue/public/skills/*.zip

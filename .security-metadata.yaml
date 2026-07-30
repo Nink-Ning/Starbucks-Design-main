@@ -1,0 +1,12 @@
+#Documentation: https://docs.starbucks.com/x/DoFIIQ
+
+#Please uncomment and add the FGID for the team responsible for this repository.
+FGID:
+# - 00000
+
+#Please uncomment all the tags below that apply to this repository.
+Tags:
+# - Regulatory or Compliance
+# - Internet Facing
+# - Handles L1 or L2 Data
+# - Tier 0 (Business Critical)

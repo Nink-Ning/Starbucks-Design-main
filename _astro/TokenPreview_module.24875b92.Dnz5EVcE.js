@@ -1,0 +1,1 @@
+const a="_toolbar_pt7l4_1",l="_tableWrap_pt7l4_11",t="_table_pt7l4_11",s="_nameCell_pt7l4_63",_="_swatch_pt7l4_70",e="_value_pt7l4_79",p="_cssVar_pt7l4_80",o="_radiusSample_pt7l4_88",c="_spacingSample_pt7l4_89",n="_fontSample_pt7l4_90",r={toolbar:a,tableWrap:l,table:t,nameCell:s,swatch:_,value:e,cssVar:p,radiusSample:o,spacingSample:c,fontSample:n};export{r as s};
