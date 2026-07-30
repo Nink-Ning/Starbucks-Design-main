@@ -4,8 +4,8 @@ import react from '@astrojs/react';
 import vue from '@astrojs/vue';
 
 export default defineConfig({
-  site: 'https://nink1992.github.io',
-  base: '/Starbucks-Design-main/',
+  site: 'https://pages.scm.starbucks.com',
+  base: '/kning/starbucks-design-main/',
   integrations: [
     starlight({
       title: 'Starbucks Design',

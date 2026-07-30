@@ -8,7 +8,7 @@ async function read(relativePath) {
   return readFile(new URL(relativePath, root), 'utf8');
 }
 
-test('the production site targets the public GitHub Pages project', async () => {
+test('the production site targets the internal SCM Pages project', async () => {
   const [config, header, rootPage, landing, skills] = await Promise.all([
     read('../astro.config.mjs'),
     read('components/Header.astro'),
@@ -17,15 +17,15 @@ test('the production site targets the public GitHub Pages project', async () => 
     read('content/docs/guide/ai-skills.mdx'),
   ]);
 
-  assert.match(config, /site:\s*['"]https:\/\/nink1992\.github\.io['"]/);
-  assert.match(config, /base:\s*['"]\/Starbucks-Design-main\/['"]/);
-  assert.match(header, /https:\/\/github\.com\/Nink1992\/Starbucks-Design-main/);
+  assert.match(config, /site:\s*['"]https:\/\/pages\.scm\.starbucks\.com['"]/);
+  assert.match(config, /base:\s*['"]\/kning\/starbucks-design-main\/['"]/);
+  assert.match(header, /https:\/\/scm\.starbucks\.com\/kning\/starbucks-design-main/);
   assert.match(rootPage, /import\.meta\.env\.BASE_URL/);
-  assert.match(landing, /\/Starbucks-Design-main\/guide\/getting-started\//);
-  assert.match(skills, /\/Starbucks-Design-main\/skills\/starbucks-design-react\.zip/);
+  assert.match(landing, /\/kning\/starbucks-design-main\/guide\/getting-started\//);
+  assert.match(skills, /\/kning\/starbucks-design-main\/skills\/starbucks-design-react\.zip/);
   assert.doesNotMatch(
     `${config}\n${header}\n${rootPage}\n${landing}\n${skills}`,
-    /pages\.scm\.starbucks\.com|\/kning\/starbucks-design-main\/|\/china\/bopfui-starbucks-ui\//,
+    /nink1992\.github\.io|\/Starbucks-Design-main\/|\/china\/bopfui-starbucks-ui\//,
   );
 });
 
