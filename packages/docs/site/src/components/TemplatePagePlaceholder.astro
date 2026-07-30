@@ -1,0 +1,38 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = '页面模板内容预留中，后续补充完整页面预览。' } = Astro.props;
+---
+
+<section class="sb-template-page-placeholder not-content" aria-label={`${title}预留位`}>
+  <div class="sb-template-page-placeholder__header">
+    <div>
+      <div class="sb-template-page-placeholder__eyebrow">页面模板</div>
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+    <span>预留位</span>
+  </div>
+
+  <div class="sb-template-page-placeholder__canvas">
+    <div class="sb-template-page-placeholder__panel">
+      <div class="sb-template-page-placeholder__line sb-template-page-placeholder__line--strong"></div>
+      <div class="sb-template-page-placeholder__line"></div>
+      <div class="sb-template-page-placeholder__line"></div>
+    </div>
+    <div class="sb-template-page-placeholder__grid">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="sb-template-page-placeholder__table">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</section>

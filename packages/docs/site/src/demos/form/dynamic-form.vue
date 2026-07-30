@@ -1,25 +1,23 @@
 <template>
-  <Form :model="form" :style="{ width: '600px' }">
-    <FormItem field="name" label="Username">
+  <Form :model="form" :style="{ width: '100%' }">
+    <FormItem field="name" label="门店名称">
       <Input
         v-model="form.name"
-        placeholder="please enter your username..."
+        placeholder="请输入门店名称..."
       />
     </FormItem>
     <FormItem
       v-for="(post, index) of form.posts"
       :field="`posts[${index}].value`"
-      :label="`Post-${index}`"
+      :label="`岗位-${index}`"
       :key="index"
     >
-      <Input v-model="post.value" placeholder="please enter your post..." />
-      <Button @click="handleDelete(index)" :style="{ marginLeft: '10px' }"
-        >Delete</Button
-      >
+      <Input v-model="post.value" placeholder="请输入岗位..." />
+      <Button @click="handleDelete(index)" :style="{ marginLeft: '10px' }">删除</Button>
     </FormItem>
   </Form>
   <div>
-    <Button @click="handleAdd">Add Post</Button>
+    <Button @click="handleAdd">新增岗位</Button>
   </div>
   {{ form }}
 </template>

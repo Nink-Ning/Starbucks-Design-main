@@ -30,12 +30,27 @@ describe('TreeSelect stylesheet', () => {
     expectExactRule(
       treeSelect,
       '.arco-tree-select-focused:not(.arco-tree-select-disabled) .arco-tree-select-view,\n' +
+        '.arco-tree-select-open:not(.arco-tree-select-disabled) .arco-tree-select-view,\n' +
+        '.arco-tree-select-popup-visible:not(.arco-tree-select-disabled) .arco-tree-select-view,\n' +
+        '.arco-tree-select:not(.arco-tree-select-disabled):active .arco-tree-select-view,\n' +
         '.arco-tree-select:not(.arco-tree-select-disabled) .arco-tree-select-view:focus-within',
       [
         'color: var(--color-text-primary);',
         'background-color: var(--bg-color-container);',
         'border-color: var(--color-primary);',
         'box-shadow: 0 0 0 2px var(--color-primary-focus);',
+      ],
+    )
+    expectExactRule(
+      treeSelect,
+      '.arco-tree-select-focused:not(.arco-tree-select-disabled):hover .arco-tree-select-view,\n' +
+        '.arco-tree-select-open:not(.arco-tree-select-disabled):hover .arco-tree-select-view,\n' +
+        '.arco-tree-select-popup-visible:not(.arco-tree-select-disabled):hover .arco-tree-select-view,\n' +
+        '.arco-tree-select:not(.arco-tree-select-disabled):active:hover .arco-tree-select-view,\n' +
+        '.arco-tree-select:not(.arco-tree-select-disabled) .arco-tree-select-view:focus-within:hover',
+      [
+        'background-color: var(--bg-color-container);',
+        'border-color: var(--color-primary);',
       ],
     )
     expectExactRule(treeSelect, '.arco-tree-select-popup', [

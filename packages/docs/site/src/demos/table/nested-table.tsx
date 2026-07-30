@@ -1,4 +1,5 @@
 import { Table } from '@sbux/starbucks-design-react';
+import { IconDownCircle, IconRightCircle } from '@sbux/starbucks-design-react/icon';
 
 export default function Demo() {
   const columns = [
@@ -62,6 +63,15 @@ export default function Demo() {
   }
 
   return (
-    <Table indentSize={60} expandedRowRender={expandedRowRender} columns={columns} data={data} />
+    <Table
+      indentSize={60}
+      expandedRowRender={expandedRowRender}
+      expandProps={{
+        icon: ({ expanded }) =>
+          expanded ? <IconDownCircle /> : <IconRightCircle />,
+      }}
+      columns={columns}
+      data={data}
+    />
   );
 }

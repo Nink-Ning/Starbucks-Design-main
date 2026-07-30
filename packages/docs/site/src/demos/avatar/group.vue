@@ -1,27 +1,27 @@
 <template>
   <Space :size="32">
     <AvatarGroup>
-      <Avatar :style="{ backgroundColor: '#7BC616' }">A</Avatar>
-      <Avatar :style="{ backgroundColor: '#14C9C9' }">B</Avatar>
-      <Avatar :style="{ backgroundColor: '#168CFF' }">C</Avatar>
-      <Avatar :style="{ backgroundColor: '#FF7D00' }">Arco</Avatar>
-      <Avatar :style="{ backgroundColor: '#FFC72E' }">Design</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-primary)' }">A</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-success)' }">B</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-warning)' }">C</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-danger)' }">Nink</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-primary-active)' }">Starbucks</Avatar>
     </AvatarGroup>
 
     <AvatarGroup :size="24">
-      <Avatar :style="{ backgroundColor: '#7BC616' }">A</Avatar>
-      <Avatar :style="{ backgroundColor: '#14C9C9' }">B</Avatar>
-      <Avatar :style="{ backgroundColor: '#168CFF' }">C</Avatar>
-      <Avatar :style="{ backgroundColor: '#FF7D00' }">Arco</Avatar>
-      <Avatar :style="{ backgroundColor: '#FFC72E' }">Design</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-primary)' }">A</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-success)' }">B</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-warning)' }">C</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-danger)' }">Nink</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-primary-active)' }">Starbucks</Avatar>
     </AvatarGroup>
 
     <AvatarGroup :size="24" :max-count="3">
-      <Avatar :style="{ backgroundColor: '#7BC616' }">A</Avatar>
-      <Avatar :style="{ backgroundColor: '#14C9C9' }">B</Avatar>
-      <Avatar :style="{ backgroundColor: '#168CFF' }">C</Avatar>
-      <Avatar :style="{ backgroundColor: '#FF7D00' }">Arco</Avatar>
-      <Avatar :style="{ backgroundColor: '#FFC72E' }">Design</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-primary)' }">A</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-success)' }">B</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-warning)' }">C</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-danger)' }">Nink</Avatar>
+      <Avatar :style="{ backgroundColor: 'var(--color-primary-active)' }">Starbucks</Avatar>
     </AvatarGroup>
   </Space>
 </template>

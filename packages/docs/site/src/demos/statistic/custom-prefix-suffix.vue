@@ -9,7 +9,7 @@
       title="User Growth Rate"
       :value="50.52"
       :precision="2"
-      :value-style="{ color: '#0fbf60' }"
+      :value-style="{ color: 'var(--color-success)' }"
     >
       <template #prefix>
         <icon-arrow-rise />

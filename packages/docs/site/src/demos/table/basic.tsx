@@ -16,18 +16,21 @@ const columns: TableColumnProps<TableRecord>[] = [
   {
     title: '状态',
     dataIndex: 'status',
+    width: 120,
     render: (_, record) => (
-      <Tag color="green" bordered size="large">
+      <Tag color="green">
         {record.status}
       </Tag>
     )
   },
   {
     title: '创建时间',
-    dataIndex: 'createdAt'
+    dataIndex: 'createdAt',
+    width: 200
   },
   {
     title: '操作',
+    width: 140,
     render: () => (
       <Space size={24}>
         <Link>管理</Link>
@@ -59,5 +62,14 @@ const data: TableRecord[] = [
 ]
 
 export default function Demo() {
-  return <Table columns={columns} data={data} pagination={false} />
+  return (
+    <div className="sb-table-demo-fill" style={{ width: '100%', minWidth: 0 }}>
+      <Table
+        style={{ width: '100%' }}
+        columns={columns}
+        data={data}
+        pagination={false}
+      />
+    </div>
+  )
 }

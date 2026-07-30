@@ -1,4 +1,5 @@
 import { Table } from '@sbux/starbucks-design-react';
+import { IconDownCircle, IconRightCircle } from '@sbux/starbucks-design-react/icon';
 
 export default function Demo() {
   const columns = [
@@ -71,6 +72,8 @@ export default function Demo() {
         console.log(expandedRows);
       }}
       expandProps={{
+        icon: ({ expanded }) =>
+          expanded ? <IconDownCircle /> : <IconRightCircle />,
         expandRowByClick: true,
         rowExpandable: (record) => record.key !== '4',
       }}

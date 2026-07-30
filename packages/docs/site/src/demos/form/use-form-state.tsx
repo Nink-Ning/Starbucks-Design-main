@@ -10,14 +10,14 @@ export default function Demo() {
     <div>
       <Form form={form} autoComplete="off">
 
-        <Form.Item label="Age" field="age" rules={[
+        <Form.Item label="运营年限" field="age" rules={[
           {required: true},
           {
             validator: async (value, callback) => {
               return new Promise((resolve) => {
                 if (value !== 20) {
                   setTimeout(() => {
-                    callback('Age must be 20');
+                    callback('运营年限必须为 20');
                     resolve();
                   }, 1000);
                 } else {
@@ -26,7 +26,7 @@ export default function Demo() {
               });
             },
           },]}>
-          <InputNumber placeholder="enter age" />
+          <InputNumber placeholder="请输入运营年限" />
         </Form.Item>
         <Form.Item label=" ">
           <div>
@@ -56,9 +56,9 @@ export default function Demo() {
         </Form.Item>
 
         <Form.Item label=" ">
-          <Space>
-            <Button type="primary" htmlType="submit">Submit</Button>
-            <Button onClick={() => form.resetFields()}>Reset</Button>
+          <Space size={16}>
+            <Button type="primary" htmlType="submit">提交</Button>
+            <Button onClick={() => form.resetFields()}>重置</Button>
           </Space>
         </Form.Item>
       </Form>

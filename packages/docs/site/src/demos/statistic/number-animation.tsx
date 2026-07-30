@@ -5,8 +5,8 @@ import { IconArrowRise, IconArrowFall } from '@sbux/starbucks-design-react/icon'
 export default class Demo extends React.Component {
   render() {
     return (
-      <Grid.Row>
-        <Grid.Col span={4}>
+      <Grid.Row gutter={48}>
+        <Grid.Col span={8}>
           <Statistic
             ref={(ref) => (this.refGrowth = ref)}
             title="User Growth Rate"
@@ -15,7 +15,7 @@ export default class Demo extends React.Component {
             prefix={<IconArrowRise />}
             suffix="%"
             countUp
-            styleValue={{ color: '#0fbf60' }}
+            styleValue={{ color: 'var(--color-success)' }}
           />
           <Button
             onClick={() => {
@@ -27,7 +27,7 @@ export default class Demo extends React.Component {
             Start
           </Button>
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={8}>
           <Statistic
             ref={(ref) => (this.refBugs = ref)}
             title="Population Growth Rate"
@@ -36,7 +36,7 @@ export default class Demo extends React.Component {
             prefix={<IconArrowFall />}
             suffix="%"
             countUp
-            styleValue={{ color: '#ee4d38' }}
+            styleValue={{ color: 'var(--color-danger)' }}
           />
           <Button
             onClick={() => {

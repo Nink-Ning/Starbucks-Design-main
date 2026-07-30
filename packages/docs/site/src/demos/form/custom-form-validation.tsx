@@ -16,14 +16,19 @@ export default function Demo() {
   const [status, setStatus] = React.useState('error');
   const [size, setSize] = React.useState('default');
   return (
-    <div style={{ maxWidth: 650 }}>
+    <div style={{ width: '100%' }}>
       <Form labelCol={{ span: 8 }} autoComplete="off" wrapperCol={{ span: 16 }} size={size}>
         <div>
           <Radio.Group
             value={status}
             type="button"
             onChange={setStatus}
-            options={['validating', 'success', 'error', 'warning']}
+            options={[
+              { label: '校验中', value: 'validating' },
+              { label: '成功', value: 'success' },
+              { label: '错误', value: 'error' },
+              { label: '预警', value: 'warning' },
+            ]}
           ></Radio.Group>
           <br />
           <br />
@@ -31,32 +36,37 @@ export default function Demo() {
           <Radio.Group
             type="button"
             onChange={setSize}
-            options={['mini', 'small', 'default', 'large']}
+            options={[
+              { label: '迷你', value: 'mini' },
+              { label: '小号', value: 'small' },
+              { label: '默认', value: 'default' },
+              { label: '大号', value: 'large' },
+            ]}
           ></Radio.Group>
         </div>
         <br />
         <Form.Item
           hasFeedback
           validateStatus={status}
-          help="This is custom message"
-          extra="This is extra text"
+          help="自定义校验提示"
+          extra="额外说明"
         >
-          <Input placeholder="Input... " />
+          <Input placeholder="请输入..." />
         </Form.Item>
         <Form.Item
           hasFeedback
           validateStatus={status}
-          help="This is custom message"
-          extra="This is extra text"
+          help="自定义校验提示"
+          extra="额外说明"
         >
           <div>
-            <Input placeholder="Input... " allowClear />
+            <Input placeholder="请输入..." allowClear />
           </div>
         </Form.Item>
-        <Form.Item hasFeedback validateStatus={status} help="Choose at least one">
+        <Form.Item hasFeedback validateStatus={status} help="至少选择一项">
           <AutoComplete
             style={{ width: '100%' }}
-            placeholder="AutoComplete..."
+            placeholder="请输入搜索内容..."
             data={['123', '234', '345', '456']}
           />
         </Form.Item>
@@ -67,12 +77,12 @@ export default function Demo() {
             onChange={(a) => {
               console.log(a);
             }}
-            placeholder={['Start Time', 'End Time']}
+            placeholder={['开始时间', '结束时间']}
           />
         </Form.Item>
-        <Form.Item help="Please select date" validateStatus={status} hasFeedback>
+        <Form.Item help="请选择日期" validateStatus={status} hasFeedback>
           <Input.Group>
-            <DatePicker style={{ width: '48%' }} placeholder="Select date" />
+            <DatePicker style={{ width: '48%' }} placeholder="请选择日期" />
             <span
               style={{
                 width: '4%',
@@ -82,25 +92,25 @@ export default function Demo() {
             >
               -
             </span>
-            <TimePicker placeholder="Select time" style={{ width: '48%' }}  />
+            <TimePicker placeholder="请选择时间" style={{ width: '48%' }}  />
           </Input.Group>
         </Form.Item>
-        <Form.Item hasFeedback validateStatus={status} help="Choose at least one">
-          <Cascader placeholder="Cascader..." allowClear options={[]} />
+        <Form.Item hasFeedback validateStatus={status} help="至少选择一项">
+          <Cascader placeholder="请选择区域..." allowClear options={[]} />
         </Form.Item>
         <Form.Item hasFeedback validateStatus={status}>
           <Select
             mode="multiple"
             allowCreate
-            placeholder="Select..."
+            placeholder="请选择..."
             options={['a', 'b', 'c', 'd', 'e']}
           />
         </Form.Item>
-        <Form.Item hasFeedback validateStatus={status} help="This is InputNumber">
-          <InputNumber placeholder="InputNumber..." />
+        <Form.Item hasFeedback validateStatus={status} help="这是数字输入框">
+          <InputNumber placeholder="请输入数值..." />
         </Form.Item>
-        <Form.Item help="Select tree node" hasFeedback validateStatus={status}>
-          <TreeSelect placeholder="TreeSelect...">
+        <Form.Item help="请选择树节点" hasFeedback validateStatus={status}>
+          <TreeSelect placeholder="请选择节点...">
             <TreeSelect.Node key="node1" title="Node 1">
               <TreeSelect.Node key="node2" title="Node 2" />
             </TreeSelect.Node>

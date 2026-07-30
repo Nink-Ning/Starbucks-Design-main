@@ -67,16 +67,28 @@
 }
 
 .arco-select:not(.arco-select-disabled):hover .arco-select-view {
-  background-color: var(--bg-color-container);
-  border-color: var(--color-primary);
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
 }
 
 .arco-select-focused:not(.arco-select-disabled) .arco-select-view,
+.arco-select-open:not(.arco-select-disabled) .arco-select-view,
+.arco-select-popup-visible:not(.arco-select-disabled) .arco-select-view,
+.arco-select:not(.arco-select-disabled):active .arco-select-view,
 .arco-select:not(.arco-select-disabled) .arco-select-view:focus-within {
   color: var(--color-text-primary);
   background-color: var(--bg-color-container);
   border-color: var(--color-primary);
   box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-select-focused:not(.arco-select-disabled):hover .arco-select-view,
+.arco-select-open:not(.arco-select-disabled):hover .arco-select-view,
+.arco-select-popup-visible:not(.arco-select-disabled):hover .arco-select-view,
+.arco-select:not(.arco-select-disabled):active:hover .arco-select-view,
+.arco-select:not(.arco-select-disabled) .arco-select-view:focus-within:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
 }
 
 .arco-select-error .arco-select-view,

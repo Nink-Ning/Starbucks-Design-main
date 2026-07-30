@@ -1,84 +1,84 @@
 <template>
   <Space direction="vertical" size="large">
     <RadioGroup v-model="status" type="button">
-      <Radio value="validating">validating</Radio>
-      <Radio value="success">success</Radio>
-      <Radio value="error">error</Radio>
-      <Radio value="warning">warning</Radio>
+      <Radio value="validating">校验中</Radio>
+      <Radio value="success">成功</Radio>
+      <Radio value="error">错误</Radio>
+      <Radio value="warning">预警</Radio>
     </RadioGroup>
     <RadioGroup v-model="size" type="button">
-      <Radio value="mini">mini</Radio>
-      <Radio value="small">small</Radio>
-      <Radio value="medium">medium</Radio>
-      <Radio value="large">large</Radio>
+      <Radio value="mini">迷你</Radio>
+      <Radio value="small">小号</Radio>
+      <Radio value="medium">默认</Radio>
+      <Radio value="large">大号</Radio>
     </RadioGroup>
   </Space>
   <Form
     :model="form"
-    :style="{ width: '600px', marginTop: '20px' }"
+    :style="{ width: '100%', marginTop: '20px' }"
     :size="size"
   >
     <FormItem
       field="name"
-      label="Username"
-      help="This is custom message"
-      extra="This is extra text"
+      label="门店名称"
+      help="自定义校验提示"
+      extra="额外说明"
       :validate-status="status"
       feedback
     >
       <Input
         v-model="form.name"
-        placeholder="please enter your username..."
+        placeholder="请输入门店名称..."
       />
     </FormItem>
     <FormItem
       field="post"
-      label="Post"
-      help="This is custom message"
-      extra="This is extra text"
+      label="岗位"
+      help="自定义校验提示"
+      extra="额外说明"
       :validate-status="status"
       feedback
     >
       <InputNumber
         v-model="form.post"
-        placeholder="please enter your post..."
+        placeholder="请输入岗位..."
       />
     </FormItem>
     <FormItem
       field="tags"
-      label="Tags"
-      help="This is custom message"
-      extra="This is extra text"
+      label="标签"
+      help="自定义校验提示"
+      extra="额外说明"
       :validate-status="status"
       feedback
     >
       <InputTag
         v-model="form.tags"
-        placeholder="please enter your post..."
+        placeholder="请输入岗位..."
       />
     </FormItem>
     <FormItem
       field="section"
-      label="Section"
-      :rules="[{ match: /section one/, message: 'must select one' }]"
+      label="区域"
+      :rules="[{ match: /section one/, message: '请选择配置一' }]"
       :validate-status="status"
       feedback
     >
-      <Select v-model="form.section" placeholder="Please select ...">
-        <Option value="section one">Section One</Option>
-        <Option value="section two">Section Two</Option>
-        <Option value="section three">Section Three</Option>
+      <Select v-model="form.section" placeholder="请选择...">
+        <Option value="section one">配置一</Option>
+        <Option value="section two">配置二</Option>
+        <Option value="section three">配置三</Option>
       </Select>
     </FormItem>
-    <FormItem label="DateRange" :validate-status="status" feedback>
+    <FormItem label="日期范围" :validate-status="status" feedback>
       <RangePicker></RangePicker>
     </FormItem>
 
-    <FormItem field="date" label="Date" :validate-status="status" feedback>
+    <FormItem field="date" label="日期" :validate-status="status" feedback>
       <DatePicker></DatePicker>
     </FormItem>
 
-    <FormItem field="time" label="Time" :validate-status="status" feedback>
+    <FormItem field="time" label="时间" :validate-status="status" feedback>
       <TimePicker></TimePicker>
     </FormItem>
   </Form>

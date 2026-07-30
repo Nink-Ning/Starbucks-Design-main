@@ -1,6 +1,6 @@
 <template>
   <Space>
-    <ColorPicker defaultValue="#165DFF" disabled />
-    <ColorPicker defaultValue="#165DFF" showText disabled />
+    <ColorPicker defaultValue="#00754A" disabled />
+    <ColorPicker defaultValue="#00754A" showText disabled />
   </Space>
 </template>

@@ -23,7 +23,7 @@ export default function Demo() {
         })}
       </Radio.Group>
       <div style={{ marginTop: 10 }} />
-      <ColorPicker defaultValue={'#165DFF'} showText format={format} />
+      <ColorPicker defaultValue={'#00754A'} showText format={format} />
     </div>
   );
 }

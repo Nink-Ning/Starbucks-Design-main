@@ -1,9 +1,19 @@
 <template>
-  <Table :columns="columns" :data="data" :load-more="loadMore" />
+  <Table
+    :columns="columns"
+    :data="data"
+    :expandable="expandable"
+    :load-more="loadMore"
+  />
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { h, reactive } from 'vue';
+import { IconDownCircle, IconRightCircle } from '@sbux/starbucks-design-vue/icon';
+
+const expandable = {
+  icon: (expanded: boolean) => h(expanded ? IconDownCircle : IconRightCircle),
+};
 
 const columns = [
   {

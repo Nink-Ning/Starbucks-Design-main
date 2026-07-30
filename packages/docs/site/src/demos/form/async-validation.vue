@@ -1,19 +1,19 @@
 <template>
-  <Form ref="formRef" :model="form" :style="{ width: '600px' }">
-    <FormItem field="name" label="Username" :rules="rules">
+  <Form ref="formRef" :model="form" :style="{ width: '100%' }">
+    <FormItem field="name" label="门店名称" :rules="rules">
       <Input
         v-model="form.name"
-        placeholder="please enter your username..."
+        placeholder="请输入门店名称..."
       />
     </FormItem>
-    <FormItem field="post" label="Post">
-      <Input v-model="form.post" placeholder="please enter your post..." />
+    <FormItem field="post" label="岗位">
+      <Input v-model="form.post" placeholder="请输入岗位..." />
     </FormItem>
     <FormItem field="isRead">
-      <Checkbox v-model="form.isRead"> I have read the manual </Checkbox>
+      <Checkbox v-model="form.isRead"> 我已确认门店信息准确 </Checkbox>
     </FormItem>
     <FormItem>
-      <Button @click="handleClick">Set Status</Button>
+      <Button @click="handleClick">设置状态</Button>
     </FormItem>
   </Form>
   {{ form }}
@@ -33,8 +33,8 @@ const rules = [
     validator: (value, cb) => {
       return new Promise((resolve) => {
         window.setTimeout(() => {
-          if (value !== 'admin') {
-            cb('name must be admin');
+          if (value !== '上海烘焙工坊') {
+            cb('门店名称必须为上海烘焙工坊');
           }
           resolve();
         }, 2000);
@@ -46,11 +46,11 @@ const handleClick = () => {
   formRef.value.setFields({
     name: {
       status: 'error',
-      message: 'async name error',
+      message: '门店名称异步校验失败',
     },
     post: {
       status: 'error',
-      message: 'valid post',
+      message: '请确认岗位信息',
     },
   });
 };

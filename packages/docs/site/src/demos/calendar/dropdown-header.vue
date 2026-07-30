@@ -1,6 +1,6 @@
 <template>
   <div style="width: 100%; overflow: auto">
-    <Calendar :default-value="defaultValue" header-type="select" />
+    <Calendar :default-value="defaultValue" header-type="select" style="width: 100%" />
   </div>
 </template>
 

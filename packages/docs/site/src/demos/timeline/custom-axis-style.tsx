@@ -4,8 +4,8 @@ export default function Demo() {
   return (
     <div>
       <Timeline>
-        <Timeline.Item label="2017-03-10" lineType="dashed">
-          The first milestone
+        <Timeline.Item label="2026-03-10" lineType="dashed">
+          春季拿铁配方确认
           <br />
           <Typography.Text
             type="secondary"
@@ -14,11 +14,11 @@ export default function Demo() {
               marginTop: 4,
             }}
           >
-            This is a descriptive message
+            完成门店试饮反馈整理。
           </Typography.Text>
         </Timeline.Item>
-        <Timeline.Item label="2018-05-12" lineType="dashed">
-          The second milestone
+        <Timeline.Item label="2026-05-12" lineType="dashed">
+          冷萃咖啡物料配送
           <br />
           <Typography.Text
             type="secondary"
@@ -27,11 +27,11 @@ export default function Demo() {
               marginTop: 4,
             }}
           >
-            This is a descriptive message
+            预计分批送达重点门店。
           </Typography.Text>
         </Timeline.Item>
-        <Timeline.Item label="2020-09-30" lineType="dashed">
-          The third milestone
+        <Timeline.Item label="2026-09-30" lineType="dashed">
+          秋季会员活动上线
           <br />
           <Typography.Text
             type="secondary"
@@ -40,7 +40,7 @@ export default function Demo() {
               marginTop: 4,
             }}
           >
-            This is a descriptive message
+            小程序与门店海报同步生效。
           </Typography.Text>
         </Timeline.Item>
       </Timeline>

@@ -1,11 +1,11 @@
 <template>
   <Space size="large">
     <Avatar>A</Avatar>
-    <Avatar :style="{ backgroundColor: '#3370ff' }">
+    <Avatar :style="{ backgroundColor: 'var(--color-primary-hover)' }">
       <IconUser />
     </Avatar>
-    <Avatar :style="{ backgroundColor: '#14a9f8' }">Arco</Avatar>
-    <Avatar :style="{ backgroundColor: '#00d0b6' }">Design</Avatar>
+    <Avatar :style="{ backgroundColor: 'var(--color-success)' }">Nink</Avatar>
+    <Avatar :style="{ backgroundColor: 'var(--color-warning)' }">Starbucks</Avatar>
     <Avatar>
       <img
         alt="avatar"

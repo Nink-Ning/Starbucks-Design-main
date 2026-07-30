@@ -7,6 +7,108 @@ sidebar:
 
 用于记录 Starbucks UI Docs 与组件库的设计、功能和文档更新。
 
+## 2026-07-30
+
+<div class="sbux-changelog">
+  <section class="sbux-changelog-item">
+    <div class="sbux-changelog-meta">
+      <div class="sbux-changelog-dot" />
+      <div class="sbux-changelog-date">2026-07-27 至 2026-07-30</div>
+      <div class="sbux-changelog-author">更新人：宁凯Nink</div>
+    </div>
+
+    <div class="sbux-changelog-content">
+      <div class="sbux-changelog-card">
+        <div class="sbux-changelog-card-header">
+          <h2>本周更新汇总：统一 Docs 架构、组件样式收敛与模板建设</h2>
+          <p>
+            本条按 Git 已提交记录与当前本地工作区变更整理。2026-07-27 至 2026-07-30 共确认 7 个已提交 Commit；按整理口径，当前本地仍有约 319 个未提交文件，其中 191 个为已跟踪修改、128 个为新增文件、0 个为暂存文件。07-29、07-30 的多项优化仍在本地工作区，涉及组件样式、业务组件、页面模板、Docs 站点与测试，状态标记为 CONDITIONAL，后续仍需拆分提交、完整测试和浏览器复核。
+          </p>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-feature">Complete</span>
+              已提交主线
+            </h3>
+            <ul>
+              <li>React、Vue 文档站合并为统一 Docs 架构，完成旧文档迁移、双框架示例接入和新站点目录重构。</li>
+              <li>修复主题 Token 预览的样式作用域，避免预览模式切换影响全站主题。</li>
+              <li>Table 按 Figma 设计稿完成第一轮 React / Vue 对齐，并补齐表格样式回归校验。</li>
+              <li>修复侧边栏当前菜单项不可见，以及页面跳转后侧边栏滚动位置丢失的问题。</li>
+              <li>完成两批 Form 文档示例优化，统一业务语境、布局间距和双端示例文案。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-style">Style</span>
+              基础组件样式收敛
+            </h3>
+            <ul>
+              <li>Table 统一表头中性填充、圆角衔接、排序筛选图标、复选框对齐、展开图标、嵌套表格、固定列阴影、分组表头、选中行、展开内容和汇总行样式。</li>
+              <li>Form 统一 Label 与输入组件 16px 间距、水平表单项 24px 垂直间距和按钮 16px 间距，修复 Label 异常换行，并补齐校验、禁用、上下文和滚动定位等示例布局。</li>
+              <li>Select / Cascader / TreeSelect 统一 Hover、聚焦、展开、错误和禁用状态优先级，修复聚焦描边延迟、前后置标签衔接、边框重复和圆角问题。</li>
+              <li>InputTag 统一标签 4px 间距，修复清除按钮位置、组合输入框 Hover 状态以及标签、输入区和清除图标的垂直对齐。</li>
+              <li>Calendar、DatePicker、TimePicker 优化满宽预览、卡片圆角、日期圆形选中态、范围圆角、月份年份选中态和时间列选中居中表现。</li>
+              <li>Descriptions 取消 Label 加粗，统一 Label 与内容 16px 间距，并补齐基础、左对齐、右对齐和顶部对齐模式的 React / Vue 样式。</li>
+              <li>Avatar、Badge、Link、Slider、Statistic、VerificationCode、Divider、Pagination、ColorPicker、Mentions、Timeline、Typography、Watermark、Button、MultiSelectTag 等组件继续补齐品牌色、业务语境、状态样式和示例布局。</li>
+              <li>Modal 对话框相关更新已纳入反馈类组件整理，覆盖普通对话框、提示对话框、关闭按钮、内容区域和 Vue 命令式调用的主题一致性约束。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-feature">Business</span>
+              FilterBar 业务组件
+            </h3>
+            <ul>
+              <li>FilterBar 当前为 CONDITIONAL：React、Vue 两套真实业务组件实现已在工作区，包含字段适配、数据归一化、校验、布局和状态管理，但尚未提交。</li>
+              <li>FilterBar 复用 Input、Select、Cascader、DatePicker、Button 等基础组件，保持双端 Props、事件和用户可见行为一致。</li>
+              <li>新增基本使用、级联选择、变更模式、展开收起、日期范围、集成布局、分离布局、响应式、状态展示和校验等 10 组双端 Docs 场景，并补充入口、逻辑和 Docs 测试。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-docs">Templates</span>
+              页面模板与 Docs 基础设施
+            </h3>
+            <ul>
+              <li>页面模板当前为 CONDITIONAL：新增或调整 Dashboard、数据列表、详情页、表单页、Login、结果与异常页等 Docs 页面级组合示例，不作为公共组件导出。</li>
+              <li>数据列表覆盖基础列表、卡片列表、筛选列表、标签列表、树筛选列表和树表格列表；详情页覆盖基础详情、卡片详情、数据详情和二级详情；表单页覆盖基础表单、分组表单和分步表单。</li>
+              <li>新增页面模板文档路由和页面 Demo 文件，部分模板仍是结构或占位内容，React / Vue 双端完整度尚未全部对齐。</li>
+              <li>Docs 站点继续优化 Header、Sidebar、菜单滚动、站点落地页、页面模板面包屑、占位组件、Astro 配置、依赖、锁文件、Demo 容器、代码展开区域、Arco 隔离样式、满宽预览、滚动和响应式行为。</li>
+              <li>新增或更新 Demo Code、Guide 页面、Table、InputTag、ColorPicker / Mentions、FilterBar、Progress 和页面模板等 Docs 测试。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-chore">Risk</span>
+              待复核与提交策略
+            </h3>
+            <ul>
+              <li>Skeleton 基本示例不可见、Transfer 操作按钮图标化、Progress Vue 基础示例可见性，以及部分页面模板的完整 Vue 实现或真实交互仍需最终复核，暂不计为完成。</li>
+              <li>当前本地工作区包含基础组件、业务组件、页面模板、Docs、测试和规则文件等多个范围；后续建议按基础组件样式与测试、基础组件 Docs、FilterBar 实现、FilterBar Docs 与测试、页面模板、Docs 站点与导航、规则与 QA 文档拆分提交。</li>
+              <li>截至本条整理时，未进入暂存、提交、推送、版本升级或发布流程；本地优化在完成验证前不作为正式发布能力描述。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
 ## 2026-07-24
 
 <div class="sbux-changelog">

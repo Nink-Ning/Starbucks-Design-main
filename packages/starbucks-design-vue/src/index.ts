@@ -3,6 +3,31 @@
 import './components.less'
 import './theme.css'
 
+export { FilterBar } from './business/filter-bar'
+export type {
+  CascaderFilterField,
+  CascaderOption,
+  DateFilterField,
+  DateRangeFilterField,
+  FilterActionSource,
+  FilterBarColumns,
+  FilterBarEmits,
+  FilterBarProps,
+  FilterEventMeta,
+  FilterFieldSchema,
+  FilterOption,
+  FilterRenderFieldContext,
+  FilterRule,
+  FilterSubmitMode,
+  FilterTexts,
+  FilterValidationError,
+  FilterValue,
+  InputFilterField,
+  MultiSelectFilterField,
+  SelectFilterField,
+  TreeSelectFilterField,
+  TreeSelectOption,
+} from './business/filter-bar'
 export * from '@arco-design/web-vue'
 
 // Arco's main entry only re-exports addI18nMessages, useLocale, getLocale from locale —

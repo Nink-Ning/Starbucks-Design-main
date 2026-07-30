@@ -1,0 +1,43 @@
+---
+const base = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname;
+
+const pages = new Map([
+  ['templates/data-list/basic-list', ['列表页', '基础列表']],
+  ['templates/data-list/card-list', ['列表页', '卡片列表']],
+  ['templates/data-list/filter-list', ['列表页', '筛选列表']],
+  ['templates/data-list/tree-filter-list', ['列表页', '树状筛选列表']],
+  ['templates/data-list/tag-list', ['列表页', '标签管理列表']],
+  ['templates/data-list/tree-table-list', ['列表页', '树表列表']],
+  ['templates/form/basic-form', ['表单页', '基础表单']],
+  ['templates/form/grouped-form', ['表单页', '分组表单']],
+  ['templates/form/step-form', ['表单页', '分步表单']],
+  ['templates/detail/basic-detail', ['详情页', '基础详情页']],
+  ['templates/detail/card-detail', ['详情页', '卡片详情页']],
+  ['templates/detail/data-detail', ['详情页', '数据详情页']],
+  ['templates/detail/secondary-detail', ['详情页', '二级详情页']],
+  ['templates/result/success', ['结果页', '成功页']],
+  ['templates/result/failure', ['结果页', '失败页']],
+  ['templates/result/network-error', ['结果页', '网络异常']],
+  ['templates/detail', [undefined, '详情页']],
+  ['templates/dashboard', [undefined, 'Dashboard']],
+  ['templates/login', [undefined, '登录页']],
+  ['templates/result-exception', [undefined, '结果与异常页']],
+]);
+
+const normalized = pathname
+  .replace(base, '')
+  .replace(/^\/+|\/+$/g, '');
+const [group, current] = pages.get(normalized) ?? [undefined, undefined];
+---
+
+<nav class="sb-template-page-breadcrumb not-content" aria-label="页面模板面包屑">
+  <a href={`${base}templates/data-list/basic-list/`}>页面模板</a>
+  {group && <span aria-hidden="true">/</span>}
+  {group && <span>{group}</span>}
+  <span aria-hidden="true">/</span>
+  <span aria-current="page">{current}</span>
+  {normalized === 'templates/data-list/basic-list' && (
+    <div class="sb-template-page-breadcrumb__actions" data-template-action-host="basic-list"></div>
+  )}
+</nav>

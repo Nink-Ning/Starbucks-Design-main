@@ -618,15 +618,28 @@
 }
 
 #starlight__sidebar .top-level > li > details > ul > li > details > summary::before {
-  content: '';
+  content: none;
+}
+
+.sb-sidebar-arco-icon {
+  display: inline-flex;
   flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
   width: 16px;
   height: 16px;
   margin-inline-end: 10px;
-  background: currentColor;
+  color: currentColor;
   opacity: 0.72;
-  mask: var(--sb-sidebar-category-icon) center / 16px 16px no-repeat;
-  -webkit-mask: var(--sb-sidebar-category-icon) center / 16px 16px no-repeat;
+}
+
+.sb-sidebar-arco-icon .arco-icon,
+.sb-sidebar-arco-icon__svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+  font-size: 16px;
 }
 
 #starlight__sidebar .top-level > li > details > ul > li > details > ul {
@@ -738,51 +751,6 @@
 
 #starlight__sidebar details[open] > summary .large {
   color: var(--sb-docs-text-2);
-}
-
-/* Semantic category icons, applied only to first-level items that own children. */
-#starlight__sidebar {
-  --sb-sidebar-icon-grid: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round'%3E%3Crect x='2' y='2' width='4' height='4' rx='1'/%3E%3Crect x='10' y='2' width='4' height='4' rx='1'/%3E%3Crect x='2' y='10' width='4' height='4' rx='1'/%3E%3Crect x='10' y='10' width='4' height='4' rx='1'/%3E%3C/g%3E%3C/svg%3E");
-  --sb-sidebar-icon-layout: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round'%3E%3Crect x='2' y='2.5' width='12' height='11' rx='1.4'/%3E%3Cpath d='M6.2 2.5v11M2 6.2h12'/%3E%3C/g%3E%3C/svg%3E");
-  --sb-sidebar-icon-navigation: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='8' cy='8' r='5.8'/%3E%3Cpath d='m10.4 5.6-1.2 3.6-3.6 1.2 1.2-3.6 3.6-1.2Z'/%3E%3C/g%3E%3C/svg%3E");
-  --sb-sidebar-icon-input: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='3' width='12' height='10' rx='1.4'/%3E%3Cpath d='M5 6h6M5 9h4'/%3E%3C/g%3E%3C/svg%3E");
-  --sb-sidebar-icon-chart: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='2' width='12' height='12' rx='1.4'/%3E%3Cpath d='M5 11V8M8 11V5M11 11V7'/%3E%3C/g%3E%3C/svg%3E");
-  --sb-sidebar-icon-feedback: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3.2h10a1.4 1.4 0 0 1 1.4 1.4v5.2A1.4 1.4 0 0 1 13 11.2H7l-3.6 2.4v-2.4H3a1.4 1.4 0 0 1-1.4-1.4V4.6A1.4 1.4 0 0 1 3 3.2Z'/%3E%3C/g%3E%3C/svg%3E");
-  --sb-sidebar-icon-more: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='black'%3E%3Ccircle cx='3.5' cy='8' r='1.2'/%3E%3Ccircle cx='8' cy='8' r='1.2'/%3E%3Ccircle cx='12.5' cy='8' r='1.2'/%3E%3C/g%3E%3C/svg%3E");
-  --sb-sidebar-icon-list: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 4h8M5.5 8h8M5.5 12h8'/%3E%3Ccircle cx='2.5' cy='4' r='.6' fill='black' stroke='none'/%3E%3Ccircle cx='2.5' cy='8' r='.6' fill='black' stroke='none'/%3E%3Ccircle cx='2.5' cy='12' r='.6' fill='black' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
-  --sb-sidebar-category-icon: var(--sb-sidebar-icon-grid);
-}
-
-:root[data-docs-section='components'] #starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(1) > details > summary {
-  --sb-sidebar-category-icon: var(--sb-sidebar-icon-grid);
-}
-
-:root[data-docs-section='components'] #starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(2) > details > summary {
-  --sb-sidebar-category-icon: var(--sb-sidebar-icon-layout);
-}
-
-:root[data-docs-section='components'] #starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(3) > details > summary {
-  --sb-sidebar-category-icon: var(--sb-sidebar-icon-navigation);
-}
-
-:root[data-docs-section='components'] #starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(4) > details > summary {
-  --sb-sidebar-category-icon: var(--sb-sidebar-icon-input);
-}
-
-:root[data-docs-section='components'] #starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(5) > details > summary {
-  --sb-sidebar-category-icon: var(--sb-sidebar-icon-chart);
-}
-
-:root[data-docs-section='components'] #starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(6) > details > summary {
-  --sb-sidebar-category-icon: var(--sb-sidebar-icon-feedback);
-}
-
-:root[data-docs-section='components'] #starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(7) > details > summary {
-  --sb-sidebar-category-icon: var(--sb-sidebar-icon-more);
-}
-
-:root[data-docs-section='templates'] #starlight__sidebar .top-level > li:nth-child(4) > details > ul > li > details > summary {
-  --sb-sidebar-category-icon: var(--sb-sidebar-icon-list);
 }
 
 /* The old Docusaurus docs used section-scoped sidebars. Starlight generates a
@@ -985,7 +953,7 @@ html.sb-theme-transition-commit *::after {
 
 .right-sidebar-panel :where(a) {
   border-radius: 6px;
-  padding: 4px 8px 4px 0;
+  padding: 4px 8px 4px calc(var(--depth, 0) * 16px);
   color: var(--sb-docs-text-2);
   font-size: 14px;
   line-height: 22px;
@@ -1191,7 +1159,7 @@ html.sb-theme-transition-commit *::after {
 }
 
 .sb-demo-code {
-  /* Keep the toggle anchored to this boundary when the details content grows. */
+  /* Keep the closed toggle anchored to the preview boundary. */
   position: relative;
   display: block;
   margin: 0 !important;
@@ -1243,6 +1211,12 @@ html.sb-theme-transition-commit *::after {
 }
 
 .sb-demo-code[open] summary {
+  position: static;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  order: 2;
+  align-self: flex-end;
   border-color: var(--sb-docs-border);
   border-top-color: var(--sb-docs-border);
 }
@@ -1254,7 +1228,8 @@ html.sb-theme-transition-commit *::after {
 }
 
 .sb-demo-code[open] {
-  display: block;
+  display: flex;
+  flex-direction: column;
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;

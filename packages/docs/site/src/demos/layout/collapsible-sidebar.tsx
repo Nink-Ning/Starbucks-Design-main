@@ -2,8 +2,8 @@ import { Layout } from '@sbux/starbucks-design-react';
 
 export default function Demo() {
   return (
-    <div className="layout-basic-demo">
-      <Layout>
+    <div className="sb-layout-demo sb-layout-demo--stack">
+      <Layout className="sb-layout-demo__frame sb-layout-demo__frame--compact">
         <Layout.Header>Header</Layout.Header>
         <Layout>
           <Layout.Sider

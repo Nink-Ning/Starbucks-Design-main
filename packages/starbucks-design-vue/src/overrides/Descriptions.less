@@ -16,20 +16,54 @@
 .arco-descriptions {
   color: var(--color-text-primary);
   font-family: var(--font-family);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-descriptions-title {
+  color: var(--color-text-primary);
+  font-weight: var(--fw-medium);
+}
+
+.arco-descriptions-item-label,
+.arco-descriptions-item-label-inline {
+  color: var(--color-text-secondary);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-descriptions-item-value,
+.arco-descriptions-item-value-inline {
+  color: var(--color-text-primary);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-descriptions:not(.arco-descriptions-border) .arco-descriptions-item-label-inline {
+  margin-right: var(--spacing-6);
+}
+
+.arco-descriptions-layout-inline-vertical:not(.arco-descriptions-border) .arco-descriptions-item-label-inline {
+  margin-right: 0;
+  margin-bottom: var(--spacing-1);
 }
 
 .arco-descriptions.arco-descriptions-size-medium .arco-descriptions-title {
-  margin-bottom: var(--spacing-6);
+  margin-bottom: var(--spacing-5);
 }
 
 .arco-descriptions.arco-descriptions-size-medium:not(.arco-descriptions-border) .arco-descriptions-item,
 .arco-descriptions.arco-descriptions-size-medium:not(.arco-descriptions-border) .arco-descriptions-item-label,
 .arco-descriptions.arco-descriptions-size-medium:not(.arco-descriptions-border) .arco-descriptions-item-value {
-  padding: 0 var(--spacing-2) var(--spacing-5) 0;
+  padding: var(--spacing-5) var(--spacing-2) var(--spacing-5) 0;
 }
 
 .arco-descriptions-border .arco-descriptions-body {
   overflow: hidden;
-  border-color: var(--color-border-1);
+  border-color: var(--color-border-component);
   border-radius: var(--border-radius-sm);
+}
+
+.arco-descriptions-border .arco-descriptions-item-label {
+  background-color: var(--bg-color-secondarycontainer);
 }

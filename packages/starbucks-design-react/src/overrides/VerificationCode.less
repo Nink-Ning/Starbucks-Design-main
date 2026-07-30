@@ -1,0 +1,115 @@
+// VerificationCode.less
+// Component-specific overrides using Starbucks global design variables.
+
+.arco-verification-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  column-gap: var(--spacing-2);
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+}
+
+.arco-verification-code .arco-input {
+  box-sizing: border-box;
+  flex: 0 0 30px;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  text-align: center;
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-verification-code .arco-input:not(.arco-input-disabled):not(.arco-input-error):hover {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-verification-code .arco-input:focus,
+.arco-verification-code .arco-input-focus {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-verification-code .arco-input:focus:hover,
+.arco-verification-code .arco-input-focus:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-verification-code .arco-input-error,
+.arco-verification-code .arco-input.arco-input-error {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger);
+}
+
+.arco-verification-code .arco-input-error:hover,
+.arco-verification-code .arco-input.arco-input-error:hover,
+.arco-verification-code .arco-input-error:focus,
+.arco-verification-code .arco-input.arco-input-error:focus,
+.arco-verification-code .arco-input-error.arco-input-focus,
+.arco-verification-code .arco-input.arco-input-error.arco-input-focus {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger);
+}
+
+.arco-verification-code .arco-input-error:focus,
+.arco-verification-code .arco-input.arco-input-error:focus,
+.arco-verification-code .arco-input-error.arco-input-focus,
+.arco-verification-code .arco-input.arco-input-error.arco-input-focus {
+  box-shadow: 0 0 0 2px var(--color-danger-focus);
+}
+
+.arco-verification-code .arco-input[disabled],
+.arco-verification-code .arco-input-disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.arco-verification-code .arco-input[disabled]:hover,
+.arco-verification-code .arco-input-disabled:hover {
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+}
+
+.arco-verification-code .arco-input[readonly]:not(.arco-input-disabled) {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  cursor: default;
+}
+
+.arco-verification-code .arco-input-size-mini,
+.arco-verification-code .arco-input-size-small {
+  flex-basis: 24px;
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-verification-code .arco-input-size-large {
+  flex-basis: 38px;
+  width: 38px;
+  min-width: 38px;
+  height: 38px;
+  font-size: var(--fs-16);
+  line-height: var(--lh-24);
+}

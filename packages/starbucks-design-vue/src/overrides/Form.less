@@ -1,0 +1,203 @@
+// Form.less
+// Starbucks Design form spacing overrides.
+
+.arco-form {
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+}
+
+.arco-form .arco-form-item {
+  margin-bottom: var(--spacing-8);
+}
+
+.arco-form .arco-form-item:last-child {
+  margin-bottom: 0;
+}
+
+.arco-form .arco-form-item-label-col {
+  padding-right: var(--spacing-6);
+  color: var(--color-text-primary);
+  line-height: 32px;
+  white-space: nowrap;
+}
+
+.arco-form .arco-form-item-label-col > .arco-form-item-label,
+.arco-form .arco-form-label-item {
+  max-width: none;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  line-height: 22px;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+.arco-form .arco-form-item-label-col > .arco-form-item-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.arco-form .arco-form-item-label-required-symbol,
+.arco-form .arco-form-label-item .arco-form-item-symbol {
+  flex: 0 0 auto;
+  margin-right: var(--spacing-1);
+  color: var(--color-danger);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.arco-form .arco-form-item-label-tooltip,
+.arco-form .arco-form-label-item .arco-form-item-tooltip {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--spacing-2);
+  color: var(--color-text-placeholder);
+  line-height: 1;
+}
+
+.arco-form .arco-form-item-label-tooltip .arco-icon,
+.arco-form .arco-form-label-item .arco-form-item-tooltip .arco-icon {
+  font-size: 14px;
+}
+
+.arco-form .arco-form-item-control-wrapper {
+  min-width: 0;
+}
+
+.arco-form .arco-form-item-control-children {
+  min-width: 0;
+}
+
+.arco-form .arco-form-item-control-children > .arco-input,
+.arco-form .arco-form-item-control-children > .arco-input-wrapper,
+.arco-form .arco-form-item-control-children > .arco-input-inner-wrapper,
+.arco-form .arco-form-item-control-children > .arco-input-number,
+.arco-form .arco-form-item-control-children > .arco-select,
+.arco-form .arco-form-item-control-children > .arco-picker,
+.arco-form .arco-form-item-control-children > .arco-cascader,
+.arco-form .arco-form-item-control-children > .arco-tree-select,
+.arco-form .arco-form-item-control-children > .arco-textarea {
+  width: 100%;
+}
+
+.arco-form .arco-form-item-message,
+.arco-form .arco-form-message,
+.arco-form .arco-form-item-extra,
+.arco-form .arco-form-extra {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.arco-form .arco-form-item-extra,
+.arco-form .arco-form-extra {
+  margin-top: var(--spacing-2);
+  color: var(--color-text-secondary);
+}
+
+.arco-form .arco-form-item-message,
+.arco-form .arco-form-message {
+  color: var(--color-danger);
+}
+
+.arco-form .arco-form-item-message-help,
+.arco-form .arco-form-message-help {
+  color: var(--color-text-secondary);
+}
+
+#form-validation-status(@status, @color, @focus-color) {
+  .arco-form .arco-form-item-status-@{status} {
+    .arco-input:not(.arco-input-disabled),
+    .arco-input-wrapper:not(.arco-input-disabled),
+    .arco-input-inner-wrapper:not(.arco-input-inner-wrapper-disabled),
+    .arco-input-number:not(.arco-input-number-disabled),
+    .arco-textarea:not(.arco-textarea-disabled),
+    .arco-textarea-wrapper:not(.arco-textarea-disabled),
+    .arco-select-view:not(.arco-select-view-disabled),
+    .arco-cascader-view:not(.arco-cascader-view-disabled),
+    .arco-tree-select-view:not(.arco-tree-select-view-disabled),
+    .arco-picker:not(.arco-picker-disabled),
+    .arco-input-tag:not(.arco-input-tag-disabled) {
+      background-color: var(--bg-color-container);
+      border-color: @color;
+    }
+
+    .arco-input:not(.arco-input-disabled):hover,
+    .arco-input-wrapper:not(.arco-input-disabled):hover,
+    .arco-input-inner-wrapper:not(.arco-input-inner-wrapper-disabled):hover,
+    .arco-input-number:not(.arco-input-number-disabled):hover,
+    .arco-textarea:not(.arco-textarea-disabled):hover,
+    .arco-textarea-wrapper:not(.arco-textarea-disabled):hover,
+    .arco-select-view:not(.arco-select-view-disabled):hover,
+    .arco-cascader-view:not(.arco-cascader-view-disabled):hover,
+    .arco-tree-select-view:not(.arco-tree-select-view-disabled):hover,
+    .arco-picker:not(.arco-picker-disabled):hover,
+    .arco-input-tag:not(.arco-input-tag-disabled):hover {
+      background-color: var(--bg-color-container);
+      border-color: @color;
+    }
+
+    .arco-input:focus,
+    .arco-input.arco-input-focus,
+    .arco-input-wrapper:focus-within,
+    .arco-input-wrapper.arco-input-focus,
+    .arco-input-inner-wrapper:focus-within,
+    .arco-input-inner-wrapper.arco-input-inner-wrapper-focus,
+    .arco-input-number:focus-within,
+    .arco-textarea:focus,
+    .arco-textarea.arco-textarea-focus,
+    .arco-textarea-wrapper:focus-within,
+    .arco-textarea-wrapper.arco-textarea-focus,
+    .arco-select-view.arco-select-view-focus,
+    .arco-select-view.arco-select-view-open,
+    .arco-cascader-view.arco-cascader-view-focus,
+    .arco-cascader-view.arco-cascader-view-open,
+    .arco-tree-select-view.arco-tree-select-view-focus,
+    .arco-tree-select-view.arco-tree-select-view-open,
+    .arco-picker-focused:not(.arco-picker-disabled),
+    .arco-input-tag.arco-input-tag-focus,
+    .arco-input-tag:focus-within {
+      background-color: var(--bg-color-container);
+      border-color: @color;
+      box-shadow: 0 0 0 2px @focus-color;
+    }
+
+    .arco-input-wrapper .arco-input,
+    .arco-input-wrapper .arco-input:hover,
+    .arco-input-wrapper .arco-input:focus,
+    .arco-input-inner-wrapper .arco-input,
+    .arco-input-inner-wrapper .arco-input:hover,
+    .arco-input-inner-wrapper .arco-input:focus {
+      background-color: transparent;
+      border-color: transparent;
+      box-shadow: none;
+    }
+
+    .arco-form-item-message-help,
+    .arco-form-message-help {
+      color: @color;
+    }
+
+    .arco-form-item-feedback,
+    .arco-form-item-feedback-@{status} {
+      color: @color;
+    }
+  }
+}
+
+#form-validation-status(validating, var(--color-primary), var(--color-primary-focus));
+#form-validation-status(success, var(--color-success), var(--color-success-focus));
+#form-validation-status(warning, var(--color-warning), var(--color-warning-focus));
+#form-validation-status(error, var(--color-danger), var(--color-danger-focus));
+
+.arco-form .arco-form-item-layout-vertical > .arco-form-item-label-col,
+.arco-form.arco-form-layout-vertical > .arco-form-label-item {
+  margin-bottom: var(--spacing-4);
+  padding-right: 0;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.arco-form .arco-form-item-control-children > .arco-btn + .arco-btn {
+  margin-left: var(--spacing-6);
+}

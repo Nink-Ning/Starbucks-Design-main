@@ -3,7 +3,7 @@ import { Avatar, Button, Space } from '@sbux/starbucks-design-react';
 
 export default function Demo() {
   const [index, setIndex] = useState(0);
-  const list = ['B', 'Arco', 'Design', 'Tom', 'AD'];
+  const list = ['B', 'Nink', 'Starbucks', 'Tom', 'NK'];
   return (
     <Space>
       <Avatar>{list[index]}</Avatar>

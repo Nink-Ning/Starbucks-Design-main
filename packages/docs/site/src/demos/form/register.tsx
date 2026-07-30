@@ -13,14 +13,14 @@ export default function Demo() {
       }}
       onSubmit={(v) => {
         console.log(v);
-        Message.success('success');
+        Message.success('注册成功');
       }}
     >
-      <Form.Item field="name" rules={[{ required: true, message: 'username is required' }]}>
-        <Input placeholder="please enter your username" />
+      <Form.Item field="name" rules={[{ required: true, message: '请输入门店名称' }]}>
+        <Input placeholder="请输入门店名称" />
       </Form.Item>
-      <Form.Item field="password" rules={[{ required: true, message: 'password is required' }]}>
-        <Input placeholder="please enter your password" />
+      <Form.Item field="password" rules={[{ required: true, message: '请输入密码' }]}>
+        <Input placeholder="请输入密码" />
       </Form.Item>
       <Form.Item
         field="confirm_password"
@@ -28,19 +28,19 @@ export default function Demo() {
         rules={[{
           validator: (v, cb) => {
             if (!v) {
-              return cb('confirm_password is required')
+              return cb('请再次输入密码')
             } else if (form.getFieldValue('password') !== v) {
-              return cb('confirm_password must be equal with password')
+              return cb('两次输入的密码不一致')
             }
             cb(null)
           }
         }]}
       >
-        <Input placeholder="please confirm your password" />
+        <Input placeholder="请再次输入密码" />
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit" long>
-          Register
+          注册
         </Button>
       </Form.Item>
     </Form>

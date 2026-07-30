@@ -23,16 +23,28 @@
 }
 
 .arco-tree-select:not(.arco-tree-select-disabled):hover .arco-tree-select-view {
-  background-color: var(--bg-color-container);
-  border-color: var(--color-primary);
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
 }
 
 .arco-tree-select-focused:not(.arco-tree-select-disabled) .arco-tree-select-view,
+.arco-tree-select-open:not(.arco-tree-select-disabled) .arco-tree-select-view,
+.arco-tree-select-popup-visible:not(.arco-tree-select-disabled) .arco-tree-select-view,
+.arco-tree-select:not(.arco-tree-select-disabled):active .arco-tree-select-view,
 .arco-tree-select:not(.arco-tree-select-disabled) .arco-tree-select-view:focus-within {
   color: var(--color-text-primary);
   background-color: var(--bg-color-container);
   border-color: var(--color-primary);
   box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-tree-select-focused:not(.arco-tree-select-disabled):hover .arco-tree-select-view,
+.arco-tree-select-open:not(.arco-tree-select-disabled):hover .arco-tree-select-view,
+.arco-tree-select-popup-visible:not(.arco-tree-select-disabled):hover .arco-tree-select-view,
+.arco-tree-select:not(.arco-tree-select-disabled):active:hover .arco-tree-select-view,
+.arco-tree-select:not(.arco-tree-select-disabled) .arco-tree-select-view:focus-within:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
 }
 
 .arco-tree-select-error .arco-tree-select-view,

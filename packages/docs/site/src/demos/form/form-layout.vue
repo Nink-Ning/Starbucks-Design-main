@@ -1,25 +1,33 @@
 <template>
-  <Space direction="vertical" size="large" :style="{ width: '600px' }">
+  <Space direction="vertical" size="large" :style="{ width: '100%' }">
     <RadioGroup v-model="layout" type="button">
-      <Radio value="horizontal">horizontal</Radio>
-      <Radio value="vertical">vertical</Radio>
-      <Radio value="inline">inline</Radio>
+      <Radio value="horizontal">水平</Radio>
+      <Radio value="vertical">垂直</Radio>
+      <Radio value="inline">行内</Radio>
     </RadioGroup>
-    <Form :model="form" :layout="layout">
-      <FormItem field="name" label="Username">
+    <Form
+      :model="form"
+      :layout="layout"
+      :label-col="layout === 'horizontal' ? horizontalLabelCol : undefined"
+      :wrapper-col="layout === 'horizontal' ? horizontalWrapperCol : undefined"
+    >
+      <FormItem field="name" label="输入框">
         <Input
           v-model="form.name"
-          placeholder="please enter your username..."
+          placeholder="请输入内容..."
         />
       </FormItem>
-      <FormItem field="post" label="Post">
-        <Input v-model="form.post" placeholder="please enter your post..." />
+      <FormItem field="post" label="输入框">
+        <Input v-model="form.post" placeholder="请输入内容..." />
       </FormItem>
-      <FormItem field="isRead">
-        <Checkbox v-model="form.isRead"> I have read the manual </Checkbox>
+      <FormItem
+        field="isRead"
+        :wrapper-col="layout === 'horizontal' ? horizontalNoLabelWrapperCol : undefined"
+      >
+        <Checkbox v-model="form.isRead"> 我已阅读门店配置说明 </Checkbox>
       </FormItem>
-      <FormItem>
-        <Button>Submit</Button>
+      <FormItem :wrapper-col="layout === 'horizontal' ? horizontalNoLabelWrapperCol : undefined">
+        <Button>提交</Button>
       </FormItem>
     </Form>
     <div>
@@ -37,4 +45,13 @@ const form = reactive({
   post: '',
   isRead: false,
 });
+const horizontalLabelCol = {
+  style: { width: '96px', maxWidth: '96px', flex: '0 0 96px' },
+};
+const horizontalWrapperCol = {
+  style: { flex: '1 1 0', maxWidth: 'none' },
+};
+const horizontalNoLabelWrapperCol = {
+  style: { flex: '1 1 0', maxWidth: 'none', marginLeft: '96px' },
+};
 </script>

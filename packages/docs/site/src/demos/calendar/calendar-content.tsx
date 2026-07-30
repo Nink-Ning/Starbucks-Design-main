@@ -12,6 +12,7 @@ export default function Demo() {
     <div style={{ width: '100%', overflow: 'auto' }}>
       <Calendar
         defaultValue="2020-03-04"
+        style={{ width: '100%' }}
         dateInnerContent={(currentDate) => {
           switch (currentDate.format('YYYY-MM-DD')) {
             case '2020-03-07':

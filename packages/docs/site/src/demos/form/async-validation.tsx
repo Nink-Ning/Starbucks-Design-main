@@ -1,4 +1,4 @@
-import { Form, Input, Button, Message } from '@sbux/starbucks-design-react';
+import { Form, Input, Button, Message, Space } from '@sbux/starbucks-design-react';
 
 export default function Demo() {
   const [form] = Form.useForm();
@@ -7,12 +7,12 @@ export default function Demo() {
       form={form}
       autoComplete="off"
       style={{
-        width: 600,
+        width: '100%',
       }}
 
     >
       <Form.Item
-        label="Username"
+        label="门店名称"
         field="name"
         required
         hasFeedback
@@ -20,9 +20,9 @@ export default function Demo() {
           {
             validator: async (value, callback) => {
               return new Promise((resolve) => {
-                if (value !== 'admin') {
+                if (value !== '上海烘焙工坊') {
                   setTimeout(() => {
-                    callback('Name must be admin');
+                    callback('门店名称必须为上海烘焙工坊');
                     resolve();
                   }, 1000);
                 } else {
@@ -33,24 +33,21 @@ export default function Demo() {
           },
         ]}
       >
-        <Input placeholder="please enter your username"  />
+        <Input placeholder="请输入门店名称"  />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 5 }}>
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{ marginRight: 24 }}
-        >
-          Submit
-        </Button>
-        <Button
-          style={{ marginRight: 24 }}
-          onClick={() => {
-            form.resetFields();
-          }}
-        >
-          Reset
-        </Button>
+        <Space size={16}>
+          <Button type="primary" htmlType="submit">
+            提交
+          </Button>
+          <Button
+            onClick={() => {
+              form.resetFields();
+            }}
+          >
+            重置
+          </Button>
+        </Space>
       </Form.Item>
     </Form>
   );

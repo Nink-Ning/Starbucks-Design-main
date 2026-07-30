@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import {
-  Grid,
   Watermark,
   Typography,
   Form,
@@ -14,7 +13,7 @@ import {
 
 export default function Demo() {
   const defaultValue = {
-    content: 'Arco Design',
+    content: 'Starbucks DesignKit',
     gapsX: 100,
     gapsY: 100,
     offsetX: undefined,
@@ -22,7 +21,7 @@ export default function Demo() {
     fontSize: 16,
     fontWeight: 'normal',
     fontFamily: 'sans-serif',
-    color: 'rgba(0,0,0,0.12)',
+    color: 'rgba(0,120,84,0.12)',
     rotate: 30,
     zIndex: 1
   };
@@ -48,38 +47,100 @@ export default function Demo() {
   }, [config]);
 
   return (
-    <Grid.Row style={{ color: 'var(--color-text-2)', flexWrap: 'nowrap' }}>
-      <Watermark content="机密！严禁外传！" {...wmProps}>
-        <div>
-          <Typography.Title heading={2}>ArcoDesign 的诞生</Typography.Title>
-          <Typography.Text bold>ArcoDesign</Typography.Text> 是一套设计系统的简称。
+    <div
+      style={{
+        color: 'var(--color-text-2)',
+        display: 'grid',
+        gridTemplateColumns: 'minmax(0, 1fr) minmax(220px, 264px)',
+        gap: 24,
+        alignItems: 'stretch',
+        width: '100%'
+      }}
+    >
+      <Watermark {...wmProps}>
+        <div style={{ minWidth: 0 }}>
+          <Typography.Title heading={2}>让设计经验，成为 AI 可执行的组织能力</Typography.Title>
+          <Typography.Text bold>DesignKit</Typography.Text> 将企业设计语言、业务知识、工程资产和设计决策连接成一条智能生成链路。
           <ul style={{ listStyleType: 'circle', paddingLeft: 20 }}>
             <li>
-              ArcoDesign 的目标, 即通过通用的设计系统去解决产品中的体验问题,
-              并为产品设计提供指导原则解决业务问题，同时它能够促进设计部门和研发部门之间协作, 成为开发者之间沟通的语言。
+              设计规范、业务语义与组件资产被结构化沉淀，帮助产品、设计、研发在统一标准下协作。
             </li>
             <li>
-              ArcoDesign 主要服务于字节跳动旗下中后台产品的体验设计和技术实现，主要由UED设计和开发同学共同构建及维护。
+              生成流程以证据为基础，把页面骨架、组件来源、质量检查和交付结果串联起来。
             </li>
           </ul>
-          <Typography.Title heading={2}> 设计语言 - 务实的浪漫主义</Typography.Title>
-          <img
-            src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/f50ceefbbf0946c894d492c961e9da8d~tplv-uwbnlip3yd-image.image"
-            width="600"
-            style={{ zIndex: 50, position: 'relative' }}
-          />
-          <Typography.Title heading={3}> ArcoDesign试图建立一种工作模式</Typography.Title>
-          务实=同理心 浪漫=想象力
+          <Typography.Title heading={2}>DesignKit Runtime</Typography.Title>
+          <div
+            style={{
+              width: '100%',
+              maxWidth: 600,
+              boxSizing: 'border-box',
+              padding: 24,
+              marginBottom: 24,
+              borderRadius: 12,
+              border: '1px solid var(--color-border-2)',
+              background:
+                'linear-gradient(135deg, rgba(0, 120, 84, 0.14), rgba(0, 120, 84, 0.04))',
+              position: 'relative',
+              zIndex: 50
+            }}
+          >
+            {[
+              ['01', 'Design Spec', '需求结构与验收条件已加载', 'LOADED'],
+              ['02', 'Domain Context', '企业业务语义与规则已匹配', 'MATCHED'],
+              ['03', 'Template + Components', '页面骨架与现有资产已解析', 'RESOLVED'],
+              ['04', 'Evaluator', '结构、视觉、行为与规则检查就绪', 'READY']
+            ].map(([index, title, desc, status]) => (
+              <div
+                key={index}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  padding: '12px 16px',
+                  marginBottom: 12,
+                  borderRadius: 8,
+                  border: '1px solid rgba(0, 120, 84, 0.18)',
+                  background: 'rgba(255, 255, 255, 0.72)'
+                }}
+              >
+                <span
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: 10,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--color-primary)',
+                    background: 'var(--color-primary-light)',
+                    fontWeight: 700
+                  }}
+                >
+                  {index}
+                </span>
+                <span style={{ flex: 1 }}>
+                  <Typography.Text bold>{title}</Typography.Text>
+                  <br />
+                  <Typography.Text type="secondary">{desc}</Typography.Text>
+                </span>
+                <Typography.Text style={{ color: 'var(--color-primary)' }} bold>
+                  {status}
+                </Typography.Text>
+              </div>
+            ))}
+          </div>
+          <Typography.Title heading={3}>不是让 AI 随机拼装页面，而是让 AI 在企业标准内工作</Typography.Title>
+          企业设计资产、业务模式与模板、Design Skill、工程组件复用、质量评估闭环。
           <ul style={{ listStyleType: 'circle', paddingLeft: 20 }}>
             <li>
-              首先在于务实能够通过设计系统去解决大部分需求极大提高效率解放双手。让设计师&开发能去做一些更"浪漫"即发挥创新&想象力的东西。
+              产品需求先转化为可验证的设计规格，再映射到稳定的组件和页面模板。
             </li>
             <li>
-              在产品侧我们不仅能够通过设计体系去务实的搭建基础功能，甚至可以通过它去配置一些能称得上浪漫的产品追求
+              组件来源保持可追溯，交付日期、资产状态和规则检查都能被记录。
             </li>
             <li>
-              浪漫与务实, 并非矛盾对立。通过对它们的定义得出设计语言的价值观, 这贯穿着整个设计语言。务实与浪漫相辅相成,
-              成为引导设计方向。
+              输出结果以 evidence-based 为原则，避免脱离品牌、业务和工程约束。
             </li>
           </ul>
         </div>
@@ -88,11 +149,10 @@ export default function Demo() {
         form={form}
         layout="vertical"
         style={{
-          width: '264px',
-          flexShrink: 0,
+          width: '100%',
+          minWidth: 0,
           borderLeft: '1px solid var(--color-border-2)',
-          paddingLeft: 24,
-          marginLeft: 24
+          paddingLeft: 24
         }}
         onValuesChange={() => {
           setConfig(form.getFieldsValue());
@@ -120,7 +180,7 @@ export default function Demo() {
           <Slider min={-1} max={100} />
         </Form.Item>
         <Form.Item label="间距">
-          <Space>
+          <Space wrap>
             <Form.Item noStyle field="gapsX" initialValue={defaultValue.gapsX}>
               <InputNumber placeholder="水平间距" />
             </Form.Item>
@@ -130,7 +190,7 @@ export default function Demo() {
           </Space>
         </Form.Item>
         <Form.Item label="偏移">
-          <Space>
+          <Space wrap>
             <Form.Item noStyle field="offsetX" initialValue={defaultValue.offsetX}>
               <InputNumber placeholder="水平偏移" />
             </Form.Item>
@@ -141,6 +201,6 @@ export default function Demo() {
           </Space>
         </Form.Item>
       </Form>
-    </Grid.Row>
+    </div>
   );
 }

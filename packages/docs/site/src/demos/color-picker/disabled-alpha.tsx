@@ -3,9 +3,9 @@ import { ColorPicker } from '@sbux/starbucks-design-react';
 export default function Demo() {
   return (
     <div>
-      <ColorPicker defaultValue={'#165DFF'} disabledAlpha />
+      <ColorPicker defaultValue={'#00754A'} disabledAlpha />
       <br />
-      <ColorPicker defaultValue={'#165DFF80'} disabledAlpha />
+      <ColorPicker defaultValue={'#00754A80'} disabledAlpha />
     </div>
   );
 }

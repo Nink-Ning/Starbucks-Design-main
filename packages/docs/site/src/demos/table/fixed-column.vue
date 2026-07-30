@@ -8,7 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { h, reactive } from 'vue';
+import { IconDownCircle, IconRightCircle } from '@sbux/starbucks-design-vue/icon';
 
 const columns = [
   {
@@ -34,6 +35,7 @@ const columns = [
 ];
 
 const expandable = {
+  icon: (expanded: boolean) => h(expanded ? IconDownCircle : IconRightCircle),
   title: 'Expand',
   width: 80,
 };

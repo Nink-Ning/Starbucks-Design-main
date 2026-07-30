@@ -3,7 +3,7 @@ import { ColorPicker } from '@sbux/starbucks-design-react';
 export default function Demo() {
   const defaultValue = [
     {
-      color: '#165DFFAA',
+      color: '#00754AAA',
       percent: 0,
     },
     {

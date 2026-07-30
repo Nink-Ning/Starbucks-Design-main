@@ -1,17 +1,24 @@
 <template>
-  <Table :columns="columns" :data="data" :pagination="false">
-    <template #status="{ record }">
-      <Tag color="green" bordered size="large">
-        {{ record.status }}
-      </Tag>
-    </template>
-    <template #operations>
-      <Space :size="24">
-        <Link>管理</Link>
-        <Link status="error">删除</Link>
-      </Space>
-    </template>
-  </Table>
+  <div class="sb-table-demo-fill" style="width: 100%; min-width: 0">
+    <Table
+      style="width: 100%"
+      :columns="columns"
+      :data="data"
+      :pagination="false"
+    >
+      <template #status="{ record }">
+        <Tag color="green">
+          {{ record.status }}
+        </Tag>
+      </template>
+      <template #operations>
+        <Space :size="24">
+          <Link>管理</Link>
+          <Link status="error">删除</Link>
+        </Space>
+      </template>
+    </Table>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -23,14 +30,17 @@ const columns = [
   {
     title: '状态',
     dataIndex: 'status',
+    width: 120,
     slotName: 'status'
   },
   {
     title: '创建时间',
-    dataIndex: 'createdAt'
+    dataIndex: 'createdAt',
+    width: 200
   },
   {
     title: '操作',
+    width: 140,
     slotName: 'operations'
   }
 ]

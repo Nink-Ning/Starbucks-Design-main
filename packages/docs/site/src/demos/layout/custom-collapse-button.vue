@@ -1,7 +1,7 @@
 <template>
-  <Layout class="layout-demo">
+  <Layout class="sb-layout-demo sb-layout-demo--shell">
     <LayoutSider hide-trigger collapsible :collapsed="collapsed">
-      <div class="logo" />
+      <div class="sb-layout-demo__logo" />
       <Menu
         :defaultOpenKeys="['1']"
         :defaultSelectedKeys="['0_3']"
@@ -47,14 +47,14 @@
       </Menu>
     </LayoutSider>
     <Layout>
-      <LayoutHeader style="padding-left: 20px;">
-        <Button shape="round" @click="handleCollapse">
+      <LayoutHeader>
+        <Button class="sb-layout-demo__trigger" shape="round" @click="handleCollapse">
           <IconCaretRight v-if="collapsed" />
           <IconCaretLeft v-else />
         </Button>
       </LayoutHeader>
-      <Layout style="padding: 0 24px;">
-        <Breadcrumb :style="{ margin: '16px 0' }">
+      <Layout class="sb-layout-demo__workspace">
+        <Breadcrumb class="sb-layout-demo__breadcrumb">
           <BreadcrumbItem>Home</BreadcrumbItem>
           <BreadcrumbItem>List</BreadcrumbItem>
           <BreadcrumbItem>App</BreadcrumbItem>
@@ -66,7 +66,7 @@
   </Layout>
 </template>
 <script setup lang="ts">
-import { defineComponent, ref, getCurrentInstance } from 'vue';
+import { ref, getCurrentInstance } from 'vue';
 import { Message } from '@sbux/starbucks-design-vue';
 import {
   IconCaretRight,
@@ -86,46 +86,3 @@ const handleClickMenuItem = (key: string) => {
   Message.info({ content: `You select ${key}`, showIcon: true }, appContext);
 };
 </script>
-<style scoped>
-.layout-demo {
-  height: 500px;
-  background: var(--color-fill-2);
-  border: 1px solid var(--color-border);
-}
-.layout-demo :deep(.arco-layout-sider) .logo {
-  height: 32px;
-  margin: 12px 8px;
-  background: rgba(255, 255, 255, 0.2);
-}
-.layout-demo :deep(.arco-layout-sider-light) .logo {
-  background: var(--color-fill-2);
-}
-.layout-demo :deep(.arco-layout-header) {
-  height: 64px;
-  line-height: 64px;
-  background: var(--color-bg-3);
-}
-.layout-demo :deep(.arco-layout-footer) {
-  height: 48px;
-  color: var(--color-text-2);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 48px;
-}
-.layout-demo :deep(.arco-layout-content) {
-  color: var(--color-text-2);
-  font-weight: 400;
-  font-size: 14px;
-  background: var(--color-bg-3);
-}
-.layout-demo :deep(.arco-layout-footer),
-.layout-demo :deep(.arco-layout-content) {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: var(--color-white);
-  font-size: 16px;
-  font-stretch: condensed;
-  text-align: center;
-}
-</style>

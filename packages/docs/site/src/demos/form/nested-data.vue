@@ -1,22 +1,22 @@
 <template>
-  <Form :model="form" :style="{ width: '600px' }">
+  <Form :model="form" :style="{ width: '100%' }">
     <FormItem
-      label="Username"
+      label="门店名称"
       :content-flex="false"
       :merge-props="false"
-      extra="Show error message together"
+      extra="错误提示合并展示"
     >
       <Row :gutter="8">
         <Col :span="12">
           <FormItem
             field="together.firstname"
             validate-trigger="input"
-            :rules="[{ required: true, message: 'firstname is required' }]"
+            :rules="[{ required: true, message: '请输入门店简称' }]"
             no-style
           >
             <Input
               v-model="form.together.firstname"
-              placeholder="please enter your firstname..."
+              placeholder="请输入门店简称..."
             />
           </FormItem>
         </Col>
@@ -24,30 +24,30 @@
           <FormItem
             field="together.lastname"
             validate-trigger="input"
-            :rules="[{ required: true, message: 'lastname is required' }]"
+            :rules="[{ required: true, message: '请输入门店编码' }]"
             no-style
           >
             <Input
               v-model="form.together.lastname"
-              placeholder="please enter your lastname..."
+              placeholder="请输入门店编码..."
             />
           </FormItem>
         </Col>
       </Row>
     </FormItem>
-    <FormItem label="Username" :content-flex="false" :merge-props="false">
+    <FormItem label="门店名称" :content-flex="false" :merge-props="false">
       <Row :gutter="8">
         <Col :span="12">
           <FormItem
             field="separate.firstname"
             validate-trigger="input"
-            extra="Show error message separate"
-            :rules="[{ required: true, message: 'firstname is required' }]"
+            extra="错误提示单独展示"
+            :rules="[{ required: true, message: '请输入门店简称' }]"
             hide-label
           >
             <Input
               v-model="form.separate.firstname"
-              placeholder="please enter your firstname..."
+              placeholder="请输入门店简称..."
             />
           </FormItem>
         </Col>
@@ -55,35 +55,35 @@
           <FormItem
             field="separate.lastname"
             validate-trigger="input"
-            :rules="[{ required: true, message: 'lastname is required' }]"
+            :rules="[{ required: true, message: '请输入门店编码' }]"
             hide-label
           >
             <Input
               v-model="form.separate.lastname"
-              placeholder="please enter your lastname..."
+              placeholder="请输入门店编码..."
             />
           </FormItem>
         </Col>
       </Row>
     </FormItem>
-    <FormItem label="Posts" :content-flex="false" :merge-props="false">
+    <FormItem label="岗位信息" :content-flex="false" :merge-props="false">
       <Space direction="vertical" fill>
-        <FormItem field="posts.post1" label="Post1">
+        <FormItem field="posts.post1" label="岗位 1">
           <Input
             v-model="form.posts.post1"
-            placeholder="please enter your post..."
+            placeholder="请输入岗位..."
           />
         </FormItem>
-        <FormItem field="posts.post2" label="Post2">
+        <FormItem field="posts.post2" label="岗位 2">
           <Input
             v-model="form.posts.post2"
-            placeholder="please enter your post..."
+            placeholder="请输入岗位..."
           />
         </FormItem>
       </Space>
     </FormItem>
     <FormItem field="isRead">
-      <Checkbox v-model="form.isRead"> I have read the manual </Checkbox>
+      <Checkbox v-model="form.isRead"> 我已阅读门店配置说明 </Checkbox>
     </FormItem>
   </Form>
   {{ form }}

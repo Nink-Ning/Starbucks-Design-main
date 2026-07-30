@@ -1,6 +1,6 @@
 <template>
   <ColorPicker
-    defaultValue="#165DFF"
+    defaultValue="#00754A"
     :historyColors="history"
     showHistory
     showPreset
@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const history = ref(['#165DFF']);
+const history = ref(['#00754A']);
 const handleAddHistory = (visible, color) => {
   if (!visible) {
     const index = history.value.indexOf(color);

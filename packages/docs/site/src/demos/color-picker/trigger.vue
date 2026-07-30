@@ -4,7 +4,7 @@
       <template #checked> ON </template>
       <template #unchecked>OFF</template>
     </Switch>
-    <ColorPicker defaultValue="#165DFF" :trigger-props="triggerProps" />
+    <ColorPicker defaultValue="#00754A" :trigger-props="triggerProps" />
   </Space>
 </template>
 

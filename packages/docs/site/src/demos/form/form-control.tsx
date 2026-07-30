@@ -23,7 +23,7 @@ export default class Demo extends React.Component {
       <Form
         ref={(ref) => (this.form = ref)}
         autoComplete="off"
-        style={{ maxWidth: 650 }}
+        style={{ width: '100%' }}
         onValuesChange={this.onValuesChange}
       >
         <Form.Item label="姓名" required extra="请输入长度在 1 - 10 的名字，注意不要使用特殊符号。">
@@ -39,7 +39,7 @@ export default class Demo extends React.Component {
               },
             ]}
           >
-            <Input placeholder="please enter..." />
+            <Input placeholder="请输入..." />
           </Form.Control>
         </Form.Item>
         <Form.Item label="数字" required>

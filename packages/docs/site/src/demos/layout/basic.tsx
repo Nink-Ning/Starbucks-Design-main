@@ -2,14 +2,13 @@ import { Layout } from '@sbux/starbucks-design-react';
 
 export default function Demo() {
   return (
-    <div className="layout-basic-demo">
-      <Layout style={{ height: '400px' }}>
+    <div className="sb-layout-demo sb-layout-demo--stack">
+      <Layout className="sb-layout-demo__frame">
         <Layout.Header>Header</Layout.Header>
         <Layout.Content>Content</Layout.Content>
         <Layout.Footer>Footer</Layout.Footer>
       </Layout>
-      <br />
-      <Layout style={{ height: '400px' }}>
+      <Layout className="sb-layout-demo__frame">
         <Layout.Header>Header</Layout.Header>
         <Layout>
           <Layout.Sider>Sider</Layout.Sider>
@@ -17,8 +16,7 @@ export default function Demo() {
         </Layout>
         <Layout.Footer>Footer</Layout.Footer>
       </Layout>
-      <br />
-      <Layout style={{ height: '400px' }}>
+      <Layout className="sb-layout-demo__frame">
         <Layout.Header>Header</Layout.Header>
         <Layout>
           <Layout.Content>Content</Layout.Content>
@@ -26,12 +24,11 @@ export default function Demo() {
         </Layout>
         <Layout.Footer>Footer</Layout.Footer>
       </Layout>
-      <br />
-      <Layout style={{ height: '400px' }}>
+      <Layout className="sb-layout-demo__frame">
         <Layout.Header>Header</Layout.Header>
         <Layout>
-          <Layout.Sider style={{ width: '64px' }}>Sider</Layout.Sider>
-          <Layout.Sider style={{ width: '206px', marginLeft: '1px' }}>Sider</Layout.Sider>
+          <Layout.Sider className="sb-layout-demo__sider--narrow">Sider</Layout.Sider>
+          <Layout.Sider className="sb-layout-demo__sider--wide">Sider</Layout.Sider>
           <Layout.Content>Content</Layout.Content>
         </Layout>
         <Layout.Footer>Footer</Layout.Footer>

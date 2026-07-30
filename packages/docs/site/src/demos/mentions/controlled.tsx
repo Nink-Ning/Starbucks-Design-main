@@ -16,8 +16,8 @@ export default function Demo() {
       </Form.Item>
       <Form.Item label="Name" field="name" rules={[{ required: true, message: 'Name is required' }]}>
         <Mentions
-          placeholder="You can use @ Plato to mention Platon"
-          options={['Jack', 'Steven', 'Platon', 'Mary']}
+          placeholder="输入 @Nink 提及用户"
+          options={['Nink', 'Zero', 'Kevin', 'Amy']}
           alignTextarea={false}
           rows={2}
         />

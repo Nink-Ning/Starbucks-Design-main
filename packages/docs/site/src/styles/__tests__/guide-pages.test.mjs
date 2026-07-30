@@ -9,30 +9,32 @@ async function read(relativePath) {
 }
 
 test('the production site targets the current SCM Pages project', async () => {
-  const [config, landing, skills] = await Promise.all([
+  const [config, rootPage, landing, skills] = await Promise.all([
     read('../astro.config.mjs'),
+    read('pages/index.astro'),
     read('content/docs/index.mdx'),
     read('content/docs/guide/ai-skills.mdx'),
   ]);
 
   assert.match(config, /base:\s*['"]\/kning\/starbucks-design-main\/['"]/);
-  assert.match(config, /['"]\/['"]:\s*['"]\/kning\/starbucks-design-main\/guide\/getting-started\/['"]/);
+  assert.match(rootPage, /import\.meta\.env\.BASE_URL/);
   assert.match(landing, /\/kning\/starbucks-design-main\/guide\/getting-started\//);
   assert.match(skills, /\/kning\/starbucks-design-main\/skills\/starbucks-design-react\.zip/);
-  assert.doesNotMatch(`${config}\n${landing}\n${skills}`, /\/china\/bopfui-starbucks-ui\//);
+  assert.doesNotMatch(`${config}\n${rootPage}\n${landing}\n${skills}`, /\/china\/bopfui-starbucks-ui\//);
 });
 
 test('the site root lands on the existing quick-start documentation', async () => {
-  const [config, legacyLanding, gettingStarted] = await Promise.all([
-    read('../astro.config.mjs'),
+  const [rootPage, legacyLanding, gettingStarted] = await Promise.all([
+    read('pages/index.astro'),
     read('content/docs/index.mdx'),
     read('content/docs/guide/getting-started.mdx'),
   ]);
 
   assert.match(
-    config,
-    /redirects:\s*\{\s*['"]\/['"]:\s*['"]\/kning\/starbucks-design-main\/guide\/getting-started\/['"],?\s*\}/s,
+    rootPage,
+    /const quickStartUrl = `\$\{import\.meta\.env\.BASE_URL\}guide\/getting-started\/`/,
   );
+  assert.match(rootPage, /return Astro\.redirect\(quickStartUrl\);/);
   assert.match(legacyLanding, /template:\s*splash/);
   assert.match(gettingStarted, /^title:\s*快速开始$/m);
   assert.match(gettingStarted, /^## 安装$/m);
@@ -52,10 +54,12 @@ test('top-level docs rely on the shared Starlight page title only', async () => 
   assert.doesNotMatch(businessComponents, /^# 业务组件$/m);
   assert.doesNotMatch(businessComponents, /^tableOfContents:\s*false$/m);
   assert.doesNotMatch(businessComponents, /^## 概述$/m);
-  assert.match(
-    businessComponents,
-    /^业务组件内容建设中，后续会在这里补充业务场景组件的使用说明与示例。$/m,
-  );
+  assert.match(businessComponents, /^业务组件用于沉淀高频业务场景中的复合交互模式/m);
+  assert.match(businessComponents, /^## 查询与查看$/m);
+  assert.match(businessComponents, /筛选栏 FilterBar/);
+  assert.match(businessComponents, /^## 新增与编辑$/m);
+  assert.match(businessComponents, /创建编辑弹窗 FormModal/);
+  assert.match(businessComponents, /^## 导入与导出$/m);
 });
 
 test('the weekly changelog summarizes docs and component work', async () => {
@@ -95,6 +99,15 @@ test('wide desktop pages center content between the navigation rails', async () 
   assert.match(
     css,
     /@media \(min-width:\s*72rem\)\s*\{[\s\S]*?html\[data-has-sidebar\]\[data-has-toc\] \.main-pane\s*\{[\s\S]*?--sl-content-margin-inline:\s*auto;/,
+  );
+});
+
+test('desktop table of contents preserves heading depth', async () => {
+  const css = await read('styles/legacy-docs.css');
+
+  assert.match(
+    css,
+    /\.right-sidebar-panel :where\(a\)\s*\{[\s\S]*?padding:\s*4px 8px 4px calc\(var\(--depth, 0\) \* 16px\);/,
   );
 });
 

@@ -6,6 +6,7 @@
   <Table
     :columns="columns"
     :data="data"
+    :expandable="expandable"
     v-model:expandedKeys="expandedKeys"
     :row-selection="rowSelection"
     show-empty-tree
@@ -14,9 +15,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { h, ref, reactive } from 'vue';
+import { IconDownCircle, IconRightCircle } from '@sbux/starbucks-design-vue/icon';
 
 const expandedKeys = ref([]);
+
+const expandable = {
+  icon: (expanded: boolean) => h(expanded ? IconDownCircle : IconRightCircle),
+};
 
 const rowSelection = reactive({
   type: 'checkbox',

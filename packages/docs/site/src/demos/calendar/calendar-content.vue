@@ -3,6 +3,7 @@
     <Calendar
       :default-value="new Date('2020-03-04')"
       :date-inner-content="dateInnerContent"
+      style="width: 100%"
     />
   </div>
 </template>

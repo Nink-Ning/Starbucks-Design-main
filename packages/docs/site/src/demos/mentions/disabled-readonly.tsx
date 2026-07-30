@@ -6,14 +6,14 @@ export default function Demo() {
       <Mentions
         style={{ width: 154 }}
         readOnly
-        defaultValue="Bytedance"
-        options={['Bytedance', 'Bytedesign', 'Bytenumner']}
+        defaultValue="@Nink"
+        options={['Nink', 'Zero', 'Kevin']}
       />
       <Mentions
         style={{ width: 154 }}
         disabled
-        defaultValue="Bytedance"
-        options={['Bytedance', 'Bytedesign', 'Bytenumner']}
+        defaultValue="@Nink"
+        options={['Nink', 'Zero', 'Kevin']}
       />
     </Space>
   );

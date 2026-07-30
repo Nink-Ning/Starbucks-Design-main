@@ -13,4 +13,253 @@
 // component-specific overrides (focus shadows, effects, etc.).
 //
 // Component-specific style overrides:
-// (extend with CSS custom property overrides as needed)
+// FilterBar owns only business layout, field arrangement, and local text rhythm.
+// Base control visuals remain owned by Input/Select/DatePicker/Cascader/TreeSelect/Button.
+
+.sbux-filter-bar {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  container-type: inline-size;
+}
+
+.sbux-filter-bar,
+.sbux-filter-bar__fields,
+.sbux-filter-bar__field,
+.sbux-filter-bar__label,
+.sbux-filter-bar__control,
+.sbux-filter-bar__help,
+.sbux-filter-bar__error,
+.sbux-filter-bar__actions,
+.sbux-filter-bar__hidden-summary,
+.sbux-filter-bar__buttons {
+  box-sizing: border-box;
+}
+
+.sbux-filter-bar__fields {
+  --sbux-filter-bar-columns: 4;
+
+  display: grid;
+  grid-template-columns: repeat(var(--sbux-filter-bar-columns), minmax(0, 1fr));
+  column-gap: var(--spacing-8);
+  row-gap: var(--spacing-8);
+  align-items: start;
+  width: 100%;
+  min-width: 0;
+}
+
+.sbux-filter-bar__field {
+  --sbux-filter-bar-field-span: 1;
+
+  grid-column: span var(--sbux-filter-bar-field-span);
+  min-width: 0;
+}
+
+.sbux-filter-bar__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  max-width: 100%;
+  padding-bottom: var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: 400;
+  line-height: var(--lh-22);
+  cursor: default;
+}
+
+.sbux-filter-bar__label-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sbux-filter-bar__required {
+  flex: 0 0 auto;
+  color: rgb(var(--danger-5));
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.sbux-filter-bar__control {
+  width: 100%;
+  min-width: 0;
+  outline: none;
+}
+
+.sbux-filter-bar__control > * {
+  width: 100%;
+  min-width: 0;
+}
+
+.sbux-filter-bar__help,
+.sbux-filter-bar__error {
+  margin-top: var(--spacing-2);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.sbux-filter-bar__help {
+  color: var(--color-text-placeholder);
+}
+
+.sbux-filter-bar__error {
+  color: rgb(var(--danger-5));
+}
+
+.sbux-filter-bar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4) var(--spacing-8);
+  width: 100%;
+  min-width: 0;
+  padding-top: var(--spacing-6);
+}
+
+.sbux-filter-bar__hidden-summary {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.sbux-filter-bar__buttons {
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-4);
+  min-width: 0;
+  margin-left: auto;
+}
+
+.sbux-filter-bar__buttons:empty {
+  display: none;
+}
+
+.sbux-filter-bar__fields[data-columns-xxl='1'] { --sbux-filter-bar-columns: 1; }
+.sbux-filter-bar__fields[data-columns-xxl='2'] { --sbux-filter-bar-columns: 2; }
+.sbux-filter-bar__fields[data-columns-xxl='3'] { --sbux-filter-bar-columns: 3; }
+.sbux-filter-bar__fields[data-columns-xxl='4'] { --sbux-filter-bar-columns: 4; }
+.sbux-filter-bar__fields[data-columns-xxl='5'] { --sbux-filter-bar-columns: 5; }
+.sbux-filter-bar__fields[data-columns-xxl='6'] { --sbux-filter-bar-columns: 6; }
+.sbux-filter-bar__fields[data-columns-xxl='7'] { --sbux-filter-bar-columns: 7; }
+.sbux-filter-bar__fields[data-columns-xxl='8'] { --sbux-filter-bar-columns: 8; }
+.sbux-filter-bar__fields[data-columns-xxl='9'] { --sbux-filter-bar-columns: 9; }
+.sbux-filter-bar__fields[data-columns-xxl='10'] { --sbux-filter-bar-columns: 10; }
+.sbux-filter-bar__fields[data-columns-xxl='11'] { --sbux-filter-bar-columns: 11; }
+.sbux-filter-bar__fields[data-columns-xxl='12'] { --sbux-filter-bar-columns: 12; }
+
+.sbux-filter-bar-apply-field-spans(@attribute, @span: 1) when (@span <= 12) {
+  .sbux-filter-bar__field[@{attribute}='@{span}'] {
+    --sbux-filter-bar-field-span: @span;
+  }
+
+  .sbux-filter-bar-apply-field-spans(@attribute, (@span + 1));
+}
+
+.sbux-filter-bar-apply-field-spans(data-span);
+
+@container (max-width: 1599px) {
+  .sbux-filter-bar__fields[data-columns-xl='1'] { --sbux-filter-bar-columns: 1; }
+  .sbux-filter-bar__fields[data-columns-xl='2'] { --sbux-filter-bar-columns: 2; }
+  .sbux-filter-bar__fields[data-columns-xl='3'] { --sbux-filter-bar-columns: 3; }
+  .sbux-filter-bar__fields[data-columns-xl='4'] { --sbux-filter-bar-columns: 4; }
+  .sbux-filter-bar__fields[data-columns-xl='5'] { --sbux-filter-bar-columns: 5; }
+  .sbux-filter-bar__fields[data-columns-xl='6'] { --sbux-filter-bar-columns: 6; }
+  .sbux-filter-bar__fields[data-columns-xl='7'] { --sbux-filter-bar-columns: 7; }
+  .sbux-filter-bar__fields[data-columns-xl='8'] { --sbux-filter-bar-columns: 8; }
+  .sbux-filter-bar__fields[data-columns-xl='9'] { --sbux-filter-bar-columns: 9; }
+  .sbux-filter-bar__fields[data-columns-xl='10'] { --sbux-filter-bar-columns: 10; }
+  .sbux-filter-bar__fields[data-columns-xl='11'] { --sbux-filter-bar-columns: 11; }
+  .sbux-filter-bar__fields[data-columns-xl='12'] { --sbux-filter-bar-columns: 12; }
+
+  .sbux-filter-bar-apply-field-spans(data-span-xl);
+}
+
+@container (max-width: 1199px) {
+  .sbux-filter-bar__fields[data-columns-lg='1'] { --sbux-filter-bar-columns: 1; }
+  .sbux-filter-bar__fields[data-columns-lg='2'] { --sbux-filter-bar-columns: 2; }
+  .sbux-filter-bar__fields[data-columns-lg='3'] { --sbux-filter-bar-columns: 3; }
+  .sbux-filter-bar__fields[data-columns-lg='4'] { --sbux-filter-bar-columns: 4; }
+  .sbux-filter-bar__fields[data-columns-lg='5'] { --sbux-filter-bar-columns: 5; }
+  .sbux-filter-bar__fields[data-columns-lg='6'] { --sbux-filter-bar-columns: 6; }
+  .sbux-filter-bar__fields[data-columns-lg='7'] { --sbux-filter-bar-columns: 7; }
+  .sbux-filter-bar__fields[data-columns-lg='8'] { --sbux-filter-bar-columns: 8; }
+  .sbux-filter-bar__fields[data-columns-lg='9'] { --sbux-filter-bar-columns: 9; }
+  .sbux-filter-bar__fields[data-columns-lg='10'] { --sbux-filter-bar-columns: 10; }
+  .sbux-filter-bar__fields[data-columns-lg='11'] { --sbux-filter-bar-columns: 11; }
+  .sbux-filter-bar__fields[data-columns-lg='12'] { --sbux-filter-bar-columns: 12; }
+
+  .sbux-filter-bar-apply-field-spans(data-span-lg);
+}
+
+@container (max-width: 991px) {
+  .sbux-filter-bar__fields[data-columns-md='1'] { --sbux-filter-bar-columns: 1; }
+  .sbux-filter-bar__fields[data-columns-md='2'] { --sbux-filter-bar-columns: 2; }
+  .sbux-filter-bar__fields[data-columns-md='3'] { --sbux-filter-bar-columns: 3; }
+  .sbux-filter-bar__fields[data-columns-md='4'] { --sbux-filter-bar-columns: 4; }
+  .sbux-filter-bar__fields[data-columns-md='5'] { --sbux-filter-bar-columns: 5; }
+  .sbux-filter-bar__fields[data-columns-md='6'] { --sbux-filter-bar-columns: 6; }
+  .sbux-filter-bar__fields[data-columns-md='7'] { --sbux-filter-bar-columns: 7; }
+  .sbux-filter-bar__fields[data-columns-md='8'] { --sbux-filter-bar-columns: 8; }
+  .sbux-filter-bar__fields[data-columns-md='9'] { --sbux-filter-bar-columns: 9; }
+  .sbux-filter-bar__fields[data-columns-md='10'] { --sbux-filter-bar-columns: 10; }
+  .sbux-filter-bar__fields[data-columns-md='11'] { --sbux-filter-bar-columns: 11; }
+  .sbux-filter-bar__fields[data-columns-md='12'] { --sbux-filter-bar-columns: 12; }
+
+  .sbux-filter-bar-apply-field-spans(data-span-md);
+}
+
+@container (max-width: 767px) {
+  .sbux-filter-bar__fields[data-columns-sm='1'] { --sbux-filter-bar-columns: 1; }
+  .sbux-filter-bar__fields[data-columns-sm='2'] { --sbux-filter-bar-columns: 2; }
+  .sbux-filter-bar__fields[data-columns-sm='3'] { --sbux-filter-bar-columns: 3; }
+  .sbux-filter-bar__fields[data-columns-sm='4'] { --sbux-filter-bar-columns: 4; }
+  .sbux-filter-bar__fields[data-columns-sm='5'] { --sbux-filter-bar-columns: 5; }
+  .sbux-filter-bar__fields[data-columns-sm='6'] { --sbux-filter-bar-columns: 6; }
+  .sbux-filter-bar__fields[data-columns-sm='7'] { --sbux-filter-bar-columns: 7; }
+  .sbux-filter-bar__fields[data-columns-sm='8'] { --sbux-filter-bar-columns: 8; }
+  .sbux-filter-bar__fields[data-columns-sm='9'] { --sbux-filter-bar-columns: 9; }
+  .sbux-filter-bar__fields[data-columns-sm='10'] { --sbux-filter-bar-columns: 10; }
+  .sbux-filter-bar__fields[data-columns-sm='11'] { --sbux-filter-bar-columns: 11; }
+  .sbux-filter-bar__fields[data-columns-sm='12'] { --sbux-filter-bar-columns: 12; }
+
+  .sbux-filter-bar-apply-field-spans(data-span-sm);
+}
+
+@container (max-width: 575px) {
+  .sbux-filter-bar__fields[data-columns-xs='1'] { --sbux-filter-bar-columns: 1; }
+  .sbux-filter-bar__fields[data-columns-xs='2'] { --sbux-filter-bar-columns: 2; }
+  .sbux-filter-bar__fields[data-columns-xs='3'] { --sbux-filter-bar-columns: 3; }
+  .sbux-filter-bar__fields[data-columns-xs='4'] { --sbux-filter-bar-columns: 4; }
+  .sbux-filter-bar__fields[data-columns-xs='5'] { --sbux-filter-bar-columns: 5; }
+  .sbux-filter-bar__fields[data-columns-xs='6'] { --sbux-filter-bar-columns: 6; }
+  .sbux-filter-bar__fields[data-columns-xs='7'] { --sbux-filter-bar-columns: 7; }
+  .sbux-filter-bar__fields[data-columns-xs='8'] { --sbux-filter-bar-columns: 8; }
+  .sbux-filter-bar__fields[data-columns-xs='9'] { --sbux-filter-bar-columns: 9; }
+  .sbux-filter-bar__fields[data-columns-xs='10'] { --sbux-filter-bar-columns: 10; }
+  .sbux-filter-bar__fields[data-columns-xs='11'] { --sbux-filter-bar-columns: 11; }
+  .sbux-filter-bar__fields[data-columns-xs='12'] { --sbux-filter-bar-columns: 12; }
+
+  .sbux-filter-bar-apply-field-spans(data-span-xs);
+
+  .sbux-filter-bar__actions {
+    align-items: stretch;
+  }
+
+  .sbux-filter-bar__hidden-summary {
+    flex-basis: 100%;
+  }
+
+  .sbux-filter-bar__buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

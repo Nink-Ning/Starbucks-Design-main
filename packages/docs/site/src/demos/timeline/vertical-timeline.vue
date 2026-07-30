@@ -9,48 +9,30 @@
       </RadioGroup>
     </Row>
     <Timeline :mode="mode" labelPosition="relative">
-      <TimelineItem label="2012-08">
+      <TimelineItem label="2026-03">
         <Row :style="{ display: 'inline-flex', alignItems: 'center' }">
-          <img
-            width="40"
-            :style="{ marginRight: '16px', marginBottom: '12px' }"
-            src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/b5d834b83708a269b4562924436eac48.png~tplv-uwbnlip3yd-png.png"
-          />
+          <div :style="coffeeIconStyle">☕</div>
           <div :style="{ marginBottom: '12px' }">
-            Toutiao
-            <div :style="{ fontSize: '12px', color: '#4E5969' }">
-              Founded in 2012
-            </div>
+            经典拿铁
+            <div :style="descStyle">春季主推饮品上新</div>
           </div>
         </Row>
       </TimelineItem>
-      <TimelineItem label="2017-05">
+      <TimelineItem label="2026-05">
         <Row :style="{ display: 'inline-flex', alignItems: 'center' }">
-          <img
-            width="40"
-            :style="{ marginRight: '16px', marginBottom: '12px' }"
-            src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/385ed540c359ec8a9b9ce2b5fe89b098.png~tplv-uwbnlip3yd-png.png"
-          />
+          <div :style="{ ...coffeeIconStyle, background: 'var(--bg-color-component)' }">🧊</div>
           <div :style="{ marginBottom: '12px' }">
-            Xigua Video
-            <div :style="{ fontSize: '12px', color: '#4E5969' }">
-              Founded in 2017
-            </div>
+            冷萃咖啡
+            <div :style="descStyle">夏季冰饮物料到店</div>
           </div>
         </Row>
       </TimelineItem>
-      <TimelineItem label="2018-07">
+      <TimelineItem label="2026-09">
         <Row :style="{ display: 'inline-flex', alignItems: 'center' }">
-          <img
-            width="40"
-            :style="{ marginRight: '16px', marginBottom: '12px' }"
-            src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/385ed540c359ec8a9b9ce2b5fe89b098.png~tplv-uwbnlip3yd-png.png"
-          />
+          <div :style="{ ...coffeeIconStyle, background: 'var(--bg-color-secondarycomponent-active)' }">🍵</div>
           <div :style="{ marginBottom: '12px' }">
-            Pipidance
-            <div :style="{ fontSize: '12px', color: '#4E5969' }">
-              Founded in 2018
-            </div>
+            抹茶星冰乐
+            <div :style="descStyle">会员日限定活动开启</div>
           </div>
         </Row>
       </TimelineItem>
@@ -62,6 +44,26 @@
 import { ref } from 'vue';
 
 const mode = ref('left');
+
+const coffeeIconStyle = {
+  width: '40px',
+  height: '40px',
+  margin: '0 12px 12px 12px',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '12px',
+  boxSizing: 'border-box',
+  background: 'var(--color-primary-light)',
+  color: 'var(--color-primary)',
+  fontSize: '20px',
+  lineHeight: '40px',
+};
+
+const descStyle = {
+  fontSize: '12px',
+  color: 'var(--color-text-secondary)',
+};
 
 const handleChange = (_mode) => {
   mode.value = _mode;

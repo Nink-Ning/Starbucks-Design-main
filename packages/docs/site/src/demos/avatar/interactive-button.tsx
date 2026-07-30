@@ -7,12 +7,12 @@ export default function Demo() {
       <Avatar
         triggerIcon={<IconCamera />}
         triggerIconStyle={{
-          color: '#3491FA'
+          color: 'var(--color-primary)'
         }}
         onClick={() => Message.info('Upload...')}
         autoFixFontSize={false}
         style={{
-          backgroundColor: '#168CFF'
+          backgroundColor: 'var(--color-primary)'
         }}
       >
         A
@@ -20,7 +20,7 @@ export default function Demo() {
       <Avatar
         triggerIcon={<IconEdit />}
         onClick={() => Message.info('Upload...')}
-        style={{ backgroundColor: '#14C9C9' }}
+        style={{ backgroundColor: 'var(--color-success)' }}
       >
         <IconUser />
       </Avatar>
@@ -28,7 +28,7 @@ export default function Demo() {
         shape="square"
         triggerIcon={<IconEdit />}
         onClick={() => Message.info('Upload...')}
-        style={{ backgroundColor: '#FFC72E' }}
+        style={{ backgroundColor: 'var(--color-warning)' }}
       >
         <IconUser />
       </Avatar>

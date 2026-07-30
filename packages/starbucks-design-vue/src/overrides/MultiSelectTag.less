@@ -1,0 +1,31 @@
+// Shared selected-tag treatment for components backed by InputTag.
+// Cascader, Select, TreeSelect, and standalone InputTag all render the same
+// Arco tag structure, so keep their filled appearance in one place.
+
+.arco-input-tag
+  .arco-input-tag-inner
+  .arco-input-tag-tag.arco-tag-checked {
+  margin: 0;
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-component);
+  border-color: transparent;
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-input-tag
+  .arco-input-tag-inner
+  .arco-input-tag-tag.arco-tag-checked:hover {
+  background-color: var(--bg-color-component-hover);
+  border-color: transparent;
+}
+
+.arco-input-tag-disabled
+  .arco-input-tag-inner
+  .arco-input-tag-tag.arco-tag-checked,
+.arco-input-tag-disabled
+  .arco-input-tag-inner
+  .arco-input-tag-tag.arco-tag-checked:hover {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: transparent;
+}

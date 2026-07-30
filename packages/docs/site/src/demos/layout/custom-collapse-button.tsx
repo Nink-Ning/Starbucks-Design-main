@@ -14,9 +14,9 @@ export default class Demo extends React.Component {
 
   render() {
     return (
-      <Layout className="layout-collapse-demo">
+      <Layout className="sb-layout-demo sb-layout-demo--shell">
         <Layout.Sider collapsed={this.state.collapsed} collapsible trigger={null} breakpoint="xl">
-          <div className="logo" />
+          <div className="sb-layout-demo__logo" />
           <Menu
             defaultOpenKeys={['1']}
             defaultSelectedKeys={['0_3']}
@@ -78,12 +78,12 @@ export default class Demo extends React.Component {
         </Layout.Sider>
         <Layout>
           <Layout.Header>
-            <Button shape="round" className="trigger" onClick={this.handleCollapsed}>
+            <Button shape="round" className="sb-layout-demo__trigger" onClick={this.handleCollapsed}>
               {this.state.collapsed ? <IconCaretRight /> : <IconCaretLeft />}
             </Button>
           </Layout.Header>
-          <Layout style={{ padding: '0 24px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
+          <Layout className="sb-layout-demo__workspace">
+            <Breadcrumb className="sb-layout-demo__breadcrumb">
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>List</Breadcrumb.Item>
               <Breadcrumb.Item>App</Breadcrumb.Item>

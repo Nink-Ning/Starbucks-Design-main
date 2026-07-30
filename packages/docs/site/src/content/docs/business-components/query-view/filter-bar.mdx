@@ -1,0 +1,269 @@
+---
+title: 筛选栏 FilterBar
+description: 用于列表页常驻条件筛选的业务组件。
+sidebar:
+  order: 1
+---
+
+import Demo from '../../../../components/Demo.astro';
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro';
+
+筛选栏用于列表、表格或数据内容区域上方的高频条件筛选。
+
+## 基本用法
+
+基本用法只展示 FilterBar 的核心行为：`manual` 模式、Draft / Active 区分、查询、重置、展开与收起。
+
+<Demo name="business-components/filter-bar/basic" />
+
+## 容器样式
+
+样式 A / B 使用完全相同的字段 Schema、默认值、查询结果和 `manual` 模式，只改变页面容器结构。
+
+### 样式 A：一体化白底卡片式
+
+筛选区和内容区使用两个连续的白色卡片，卡片间距、Padding 和圆角由 Docs Preview 承接。
+
+<Demo name="business-components/filter-bar/layout-integrated" />
+
+### 样式 B：模块分离式
+
+白色页面容器内，筛选区使用填充底色，下方内容区保持白色并通过间距和边界形成分区。
+
+<Demo name="business-components/filter-bar/layout-separated" />
+
+## 响应式分栏
+
+响应式 Demo 使用相同宽度的预览容器，通过 `columns` 配置分别展示 4 / 3 / 2 / 1 列；字段控件随列数自动分配可用宽度。
+
+<Demo name="business-components/filter-bar/responsive" />
+
+## 展开与收起
+
+收起态按 `priority` 选择可见字段，展示顺序仍保持 Schema 原始顺序。折叠隐藏字段保留 draft、参与 active snapshot，并通过 Hidden Active Summary 显示已生效隐藏条件数量。
+
+<Demo name="business-components/filter-bar/collapsible" />
+
+## Manual / Change 模式
+
+`manual` 模式下，字段变化只更新 Draft，点击查询后才更新 Active。基本用法 Demo 已覆盖该模式。
+
+`change` 模式下，字段变化立即更新 Draft，随后经过 debounce 更新 Active 并提交；默认不展示查询按钮。
+
+<Demo name="business-components/filter-bar/change-mode" />
+
+## Validation
+
+V1 校验只支持 `required` 和单字段同步 `validator`。同一字段按 rules 顺序校验，遇到第一条错误后停止。
+
+<Demo name="business-components/filter-bar/validation" />
+
+## Loading / Disabled
+
+`loading` 禁用字段、查询和重置，但允许展开收起。`disabled` 禁用字段和全部操作，包括展开收起。
+
+<Demo name="business-components/filter-bar/states" />
+
+## DateRange / Cascader
+
+`date` 对外值为 `string | undefined`，`dateRange` 对外值为 `[string, string] | undefined`，默认 `valueFormat` 为 `YYYY-MM-DD`。不完整 dateRange 不进入 active snapshot。
+
+<Demo name="business-components/filter-bar/date-range" />
+
+Cascader 对外值为路径数组，空路径默认不进入 active snapshot。
+
+<Demo name="business-components/filter-bar/cascader" />
+
+## 适用场景
+
+- 页面主体是列表、表格或数据内容区域。
+- 常用筛选条件通常为 2 到 6 个。
+- 完整条件通常不超过 12 个。
+- 条件字段稳定，主要是简单并列关系。
+- 低频条件可以通过展开显示。
+
+## 不适用场景
+
+- AND / OR 条件组、嵌套查询或完整 QueryBuilder。
+- 保存筛选方案、共享筛选方案。
+- 表格请求、分页、导出和跨页面筛选管理。
+- UserPicker 等当前基础能力尚未闭环的复杂业务字段。
+
+## 行为模型
+
+FilterBar 区分两类值：
+
+- `draftValues`：当前填写值，字段变化立即更新。
+- `activeValues`：已生效查询值，只在 submit、change debounce 或 reset 提交成功后更新。
+
+收起字段仍保留值、参与查询，并计入隐藏生效条件数量。`visible: false` 字段不渲染、不校验、不提交，也不计入隐藏生效条件。
+
+## 字段类型
+
+| 类型 | 描述 | 主要配置 |
+| --- | --- | --- |
+| `input` | 文本输入 | `placeholder`, `allowClear`, `maxLength` |
+| `select` | 单选 | `options`, `placeholder`, `allowClear`, `loading` |
+| `multiSelect` | 多选 | `options`, `placeholder`, `allowClear`, `loading`, `maxTagCount` |
+| `date` | 日期 | `placeholder`, `format`, `valueFormat`, `allowClear` |
+| `dateRange` | 日期区间 | `placeholder`, `format`, `valueFormat`, `allowClear`, `span` |
+| `cascader` | 级联选择 | `options`, `placeholder`, `allowClear`, `loading` |
+| `treeSelect` | 树选择 | `treeData`, `placeholder`, `allowClear`, `loading` |
+
+TreeSelect 的逻辑和 adapter 已存在，但当前视觉 V1 不计入完成口径；原因是 Vue TreeSelect 基础样式和双端 Popup 视觉尚未闭环。
+
+## API
+
+<FrameworkBlock framework="react">
+
+### React API
+
+```tsx
+import { FilterBar } from '@sbux/starbucks-design-react';
+import type {
+  FilterFieldSchema,
+  FilterRenderFieldContext,
+  FilterValue,
+} from '@sbux/starbucks-design-react';
+```
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| fields | 字段 Schema，`name` 必须唯一 | `FilterFieldSchema[]` | `[]` |
+| value | 受控 draft values | `FilterValue` | `-` |
+| defaultValue | 非受控 draft 初始值，也参与 reset baseline | `FilterValue` | `-` |
+| activeValues | 受控 active values | `FilterValue` | `-` |
+| defaultActiveValues | 非受控 active 初始值 | `FilterValue` | `-` |
+| columns | 响应式列数 | `FilterBarColumns` | `{ xs: 1, sm: 1, md: 2, lg: 3, xl: 4, xxl: 4 }` |
+| defaultVisibleCount | 收起态默认展示字段数 | `number` | `4` |
+| collapsible | 是否允许展开收起 | `boolean` | eligible 字段数大于 `defaultVisibleCount` |
+| expanded | 受控展开状态 | `boolean` | `-` |
+| defaultExpanded | 非受控展开初始状态 | `boolean` | `false` |
+| submitMode | 查询模式 | `'manual' \| 'change'` | `'manual'` |
+| debounceMs | change 模式 debounce 时间 | `number` | `300` |
+| submitOnReset | reset 后是否提交 | `boolean` | `true` |
+| loading | 加载态，禁用字段、查询和重置 | `boolean` | `false` |
+| disabled | 禁用态 | `boolean` | `false` |
+| showSubmit | 是否显示查询按钮 | `boolean` | manual 为 true，change 为 false |
+| showReset | 是否显示重置按钮 | `boolean` | `true` |
+| texts | 文案覆盖 | `FilterTexts` | `-` |
+| className | FilterBar Root class | `string` | `-` |
+| style | FilterBar Root 行内样式 | `CSSProperties` | `-` |
+| renderField | 有限字段 control 渲染扩展 | `(context: FilterRenderFieldContext) => ReactNode` | `-` |
+
+`renderField` 只负责渲染字段 Control。Label、Help、Error、布局和可访问性由 FilterBar 统一管理。
+
+| FilterRenderFieldContext 字段 | 类型 | 说明 |
+| --- | --- | --- |
+| field | `FilterFieldSchema` | 当前字段 Schema |
+| value | `unknown` | 当前 draft 字段值 |
+| disabled | `boolean` | 合并后的字段禁用状态 |
+| error | `FilterValidationError \| undefined` | 当前字段第一条校验错误 |
+| controlId | `string` | FilterBar 生成的 Control ID |
+| onChange | `(value: unknown) => void` | 将 Control 值回传给 FilterBar |
+
+| 事件 | 描述 |
+| --- | --- |
+| onValuesChange(values, meta) | draft values 变化 |
+| onActiveValuesChange(activeValues, meta) | active values 变化 |
+| onSubmit(activeSnapshot, meta) | 提交查询 |
+| onReset(values, meta) | 重置 |
+| onExpandedChange(expanded, meta) | 展开收起 |
+| onValidateFailed(errors, meta) | 校验失败 |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### Vue API
+
+```ts
+import { FilterBar } from '@sbux/starbucks-design-vue';
+import type { FilterFieldSchema, FilterValue } from '@sbux/starbucks-design-vue';
+```
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| fields | 字段 Schema，`name` 必须唯一 | `FilterFieldSchema[]` | `[]` |
+| model-value | 受控 draft values | `FilterValue` | `-` |
+| default-value | 非受控 draft 初始值，也参与 reset baseline | `FilterValue` | `-` |
+| active-values | 受控 active values | `FilterValue` | `-` |
+| default-active-values | 非受控 active 初始值 | `FilterValue` | `-` |
+| columns | 响应式列数 | `FilterBarColumns` | `{ xs: 1, sm: 1, md: 2, lg: 3, xl: 4, xxl: 4 }` |
+| default-visible-count | 收起态默认展示字段数 | `number` | `4` |
+| collapsible | 是否允许展开收起 | `boolean` | eligible 字段数大于 `defaultVisibleCount` |
+| expanded | 受控展开状态 | `boolean` | `-` |
+| default-expanded | 非受控展开初始状态 | `boolean` | `false` |
+| submit-mode | 查询模式 | `'manual' \| 'change'` | `'manual'` |
+| debounce-ms | change 模式 debounce 时间 | `number` | `300` |
+| submit-on-reset | reset 后是否提交 | `boolean` | `true` |
+| loading | 加载态，禁用字段、查询和重置 | `boolean` | `false` |
+| disabled | 禁用态 | `boolean` | `false` |
+| show-submit | 是否显示查询按钮 | `boolean` | manual 为 true，change 为 false |
+| show-reset | 是否显示重置按钮 | `boolean` | `true` |
+| texts | 文案覆盖 | `FilterTexts` | `-` |
+
+| Emit | 描述 |
+| --- | --- |
+| update:modelValue(values) | draft values 受控更新 |
+| valuesChange(values, meta) | draft values 变化 |
+| update:activeValues(activeValues) | active values 受控更新 |
+| submit(activeSnapshot, meta) | 提交查询 |
+| reset(values, meta) | 重置 |
+| update:expanded(expanded) | expanded 受控更新 |
+| expandedChange(expanded, meta) | 展开收起 |
+| validateFailed(errors, meta) | 校验失败 |
+
+Vue 提供 `field` scoped slot 作为有限 control 渲染扩展；label、help、error、布局和可访问性仍由 FilterBar 统一管理。
+`class` 和 `style` 通过 Vue attrs fallthrough 传递到 FilterBar Root，不属于显式声明的 `FilterBarProps`。
+
+</FrameworkBlock>
+
+## AI Contract
+
+使用 FilterBar 时，AI 必须：
+
+- 只为稳定、并列、低复杂度的筛选条件生成 FilterBar。
+- 为每个字段提供唯一 `name`。
+- 使用 `defaultValue` 表达 reset baseline，不把 reset 当成无条件清空。
+- 将请求、分页、导出、保存筛选等逻辑放在外部页面或表格能力中。
+- 不生成 `treeSelect` 作为视觉 V1 完成示例。
+
+## Evaluator
+
+通过标准：
+
+- React / Vue 使用相同字段 Schema 和等价默认值。
+- `manual` 与 `change` 查询时机正确。
+- 收起字段保留值，并参与 active snapshot。
+- `visible: false` 不渲染、不校验、不提交。
+- Popup 不依赖无作用域 `.arco-*` 私有覆盖。
+- Docs Demo 调用真实组件，而不是静态 HTML 仿真。
+
+警告标准：
+
+- 示例只覆盖单端。
+- 示例把页面容器样式混入 FilterBar 组件 API。
+- 响应式只依赖正文窄宽度，没有展示 4 / 3 / 2 / 1 列。
+
+阻断标准：
+
+- React / Vue 行为不同。
+- 查询、重置或展开收起丢失值。
+- A/B 容器使用不同字段或不同数据。
+- Demo 中存在无作用域 `.arco-*` 覆盖或 `!important`。
+
+## 当前限制
+
+- V1 不实现 UserPicker。
+- TreeSelect 逻辑存在，但视觉 V1 不计入完成；Popup 视觉一致性仍依赖基础组件闭环。
+- 不支持动态字段编排、重命名或 QueryBuilder。
+- 不负责表格请求、分页、导出、保存筛选、AND / OR 条件组。
+
+## Change Log
+
+### V1（待发布）
+
+- React 展开与收起图标使用 Arco 公开图标包入口，兼容 Astro SSR。
+- React UMD 将显式图标入口映射到已有的 `window.arcoicon`，不增加浏览器全局依赖。
+- React / Vue 主入口公开导出 `FilterRenderFieldContext`。

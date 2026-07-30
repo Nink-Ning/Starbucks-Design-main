@@ -28,9 +28,9 @@ export default class Demo extends React.Component {
           />
         </div>
         <Timeline reverse={this.state.reverse}>
-          <Timeline.Item label="2017-03-10">The first milestone</Timeline.Item>
-          <Timeline.Item label="2018-05-12">The second milestone</Timeline.Item>
-          <Timeline.Item label="2020-09-30">The third milestone</Timeline.Item>
+          <Timeline.Item label="2026-03-10">春季拿铁配方确认</Timeline.Item>
+          <Timeline.Item label="2026-05-12">门店冷萃物料到店</Timeline.Item>
+          <Timeline.Item label="2026-09-30">秋季会员活动上线</Timeline.Item>
         </Timeline>
       </div>
     );

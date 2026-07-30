@@ -1,9 +1,9 @@
 <template>
   <Space>
-    <Button @click="formRef && formRef.validate()">Submit</Button>
-    <Button @click="formRef && formRef.resetFields()">Reset</Button>
+    <Button @click="formRef && formRef.validate()">提交</Button>
+    <Button @click="formRef && formRef.resetFields()">重置</Button>
     <Button @click="formRef && formRef.scrollToField('name19')"
-      >Scroll to the last field</Button
+      >滚动到最后一个字段</Button
     >
   </Space>
   <Form
@@ -16,7 +16,7 @@
       <FormItem
         :field="fieldName"
         :label="'user' + index"
-        :rules="[{ required: true, message: 'Name is required' }]"
+        :rules="[{ required: true, message: '请输入门店名称' }]"
       >
         <Input v-model="form[fieldName]" />
       </FormItem>

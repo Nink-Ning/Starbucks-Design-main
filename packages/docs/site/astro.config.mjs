@@ -6,9 +6,6 @@ import vue from '@astrojs/vue';
 export default defineConfig({
   site: 'https://pages.scm.starbucks.com',
   base: '/kning/starbucks-design-main/',
-  redirects: {
-    '/': '/kning/starbucks-design-main/guide/getting-started/',
-  },
   integrations: [
     starlight({
       title: 'Starbucks Design',
@@ -38,18 +35,52 @@ export default defineConfig({
         },
         {
           label: '业务组件',
-          items: [{ label: '业务组件', slug: 'business-components' }],
+          items: [
+            { label: '查询与查看', autogenerate: { directory: 'business-components/query-view' } },
+            { label: '新增与编辑', autogenerate: { directory: 'business-components/create-edit' } },
+            { label: '列表与批量操作', autogenerate: { directory: 'business-components/list-batch' } },
+            { label: '删除与风险操作', autogenerate: { directory: 'business-components/risk-actions' } },
+            { label: '流程与任务处理', autogenerate: { directory: 'business-components/workflow' } },
+            { label: '导入与导出', autogenerate: { directory: 'business-components/data-exchange' } },
+          ],
         },
         {
           label: '页面模板',
           items: [
             {
               label: '列表页',
-              items: [{ label: '客户标签页', slug: 'templates/list/tag-list' }],
+              items: [
+                { label: '基础列表', slug: 'templates/data-list/basic-list' },
+                { label: '卡片列表', slug: 'templates/data-list/card-list' },
+                { label: '筛选列表', slug: 'templates/data-list/filter-list' },
+                { label: '树状筛选列表', slug: 'templates/data-list/tree-filter-list' },
+                { label: '标签管理列表', slug: 'templates/data-list/tag-list' },
+              ],
             },
-            { label: '表单页', slug: 'templates/form' },
-            { label: '详情页', slug: 'templates/detail' },
-            { label: '结果页', slug: 'templates/result' },
+            {
+              label: '表单页',
+              items: [
+                { label: '基础表单', slug: 'templates/form/basic-form' },
+                { label: '分步表单', slug: 'templates/form/step-form' },
+              ],
+            },
+            {
+              label: '详情页',
+              items: [
+                { label: '基础详情页', slug: 'templates/detail/basic-detail' },
+                { label: '卡片详情页', slug: 'templates/detail/card-detail' },
+                { label: '数据详情页', slug: 'templates/detail/data-detail' },
+                { label: '二级详情页', slug: 'templates/detail/secondary-detail' },
+              ],
+            },
+            {
+              label: '结果页',
+              items: [
+                { label: '成功页', slug: 'templates/result/success' },
+                { label: '失败页', slug: 'templates/result/failure' },
+                { label: '网络异常', slug: 'templates/result/network-error' },
+              ],
+            },
           ],
         },
         {

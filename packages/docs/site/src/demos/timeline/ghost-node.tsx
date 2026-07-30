@@ -36,7 +36,7 @@ export default function Demo() {
           onChange={(v) => {
             setPendingProps({
               ...pendingProps,
-              pending: v ? 'This is a pending dot' : false,
+              pending: v ? '等待门店反馈' : false,
             });
           }}
         >
@@ -53,7 +53,7 @@ export default function Demo() {
               newProps.pendingDot = (
                 <IconFire
                   style={{
-                    color: '#e70a0a',
+                    color: 'var(--color-danger)',
                   }}
                 />
               );
@@ -66,13 +66,13 @@ export default function Demo() {
         </Checkbox>
       </Grid.Row>
       <Timeline pending {...pendingProps}>
-        <Timeline.Item label="2017-03-10" dotColor="#52C419">
-          The first milestone
+        <Timeline.Item label="2026-03-10" dotColor="var(--color-success)">
+          浓缩咖啡豆完成烘焙
         </Timeline.Item>
-        <Timeline.Item label="2018-05-12" dotColor="#F5222D">
-          The second milestone
+        <Timeline.Item label="2026-05-12" dotColor="var(--color-danger)">
+          冷萃桶配送延迟
         </Timeline.Item>
-        <Timeline.Item label="2020-09-30">The third milestone</Timeline.Item>
+        <Timeline.Item label="2026-09-30">门店活动复盘完成</Timeline.Item>
       </Timeline>
     </div>
   );

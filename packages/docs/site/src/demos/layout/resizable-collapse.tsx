@@ -24,7 +24,7 @@ export default function Demo() {
   };
 
   return (
-    <Layout className="byte-layout-collapse-demo">
+    <Layout className="sb-layout-demo sb-layout-demo--shell sb-layout-demo--resizable">
       <Layout.Sider
         collapsible
         theme="dark"
@@ -36,7 +36,7 @@ export default function Demo() {
           onMoving: handleMoving,
         }}
       >
-        <div className="logo" />
+        <div className="sb-layout-demo__logo" />
         <Menu theme="dark" autoOpen style={{ width: '100%' }}>
           <Menu.Item key="1" disabled>
             <IconHome />
@@ -64,8 +64,8 @@ export default function Demo() {
           </Menu.SubMenu>
         </Menu>
       </Layout.Sider>
-      <Layout.Content style={{ background: 'rgb(240,255,255)', textAlign: 'center', padding: '30px' }}>
-        <div style={{ width: '100%', height: '100%' }}>Content</div>
+      <Layout.Content>
+        <div className="sb-layout-demo__content-fill">Content</div>
       </Layout.Content>
     </Layout>
   );

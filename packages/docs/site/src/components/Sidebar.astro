@@ -1,9 +1,28 @@
 ---
+import { createRequire } from 'node:module';
 import config from 'virtual:starlight/user-config';
 import Search from 'virtual:starlight/components/Search';
 import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
 import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
 import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+
+const require = createRequire(import.meta.url);
+const {
+  IconApps,
+  IconBranch,
+  IconEdit,
+  IconExclamationCircle,
+  IconFile,
+  IconLaunch,
+  IconLayout,
+  IconMessage,
+  IconMore,
+  IconNav,
+  IconOrderedList,
+  IconSearch,
+  IconSelectAll,
+  IconStorage,
+} = require('@arco-design/web-react/icon');
 
 const { sidebar } = Astro.locals.starlightRoute;
 const isGuideSection = Astro.url.pathname.includes('/guide/');
@@ -19,10 +38,83 @@ const shouldRenderSearch =
   <SidebarSublist sublist={sidebar} />
 </SidebarPersister>
 
+<div id="sb-sidebar-arco-icons" hidden>
+  <template data-sb-sidebar-icon="components-general">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconApps className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="components-layout">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconLayout className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="components-navigation">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconNav className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="components-data-entry">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconEdit className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="components-data-display">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconStorage className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="components-feedback">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconMessage className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="components-other">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconMore className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="business-query-view">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconSearch className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="business-create-edit">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconFile className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="business-list-batch">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconSelectAll className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="business-risk-actions">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconExclamationCircle className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="business-workflow">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconBranch className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="business-data-exchange">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconLaunch className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="templates-list-page">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconOrderedList className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="templates-form-page">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconEdit className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="templates-detail-page">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconFile className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+  <template data-sb-sidebar-icon="templates-result-page">
+    <span class="sb-sidebar-arco-icon" aria-hidden="true"><IconExclamationCircle className="sb-sidebar-arco-icon__svg" /></span>
+  </template>
+</div>
+
 <script is:inline>
   (function () {
     var savedScrollTop;
     var savedSection;
+    var categoryIcons = [
+      ['#starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(1) > details > summary', 'components-general'],
+      ['#starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(2) > details > summary', 'components-layout'],
+      ['#starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(3) > details > summary', 'components-navigation'],
+      ['#starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(4) > details > summary', 'components-data-entry'],
+      ['#starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(5) > details > summary', 'components-data-display'],
+      ['#starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(6) > details > summary', 'components-feedback'],
+      ['#starlight__sidebar .top-level > li:nth-child(2) > details > ul > li:nth-child(7) > details > summary', 'components-other'],
+      ['#starlight__sidebar .top-level > li:nth-child(3) > details > ul > li:nth-child(1) > details > summary', 'business-query-view'],
+      ['#starlight__sidebar .top-level > li:nth-child(3) > details > ul > li:nth-child(2) > details > summary', 'business-create-edit'],
+      ['#starlight__sidebar .top-level > li:nth-child(3) > details > ul > li:nth-child(3) > details > summary', 'business-list-batch'],
+      ['#starlight__sidebar .top-level > li:nth-child(3) > details > ul > li:nth-child(4) > details > summary', 'business-risk-actions'],
+      ['#starlight__sidebar .top-level > li:nth-child(3) > details > ul > li:nth-child(5) > details > summary', 'business-workflow'],
+      ['#starlight__sidebar .top-level > li:nth-child(3) > details > ul > li:nth-child(6) > details > summary', 'business-data-exchange'],
+      ['#starlight__sidebar .top-level > li:nth-child(4) > details > ul > li:nth-child(1) > details > summary', 'templates-list-page'],
+      ['#starlight__sidebar .top-level > li:nth-child(4) > details > ul > li:nth-child(2) > details > summary', 'templates-form-page'],
+      ['#starlight__sidebar .top-level > li:nth-child(4) > details > ul > li:nth-child(3) > details > summary', 'templates-detail-page'],
+      ['#starlight__sidebar .top-level > li:nth-child(4) > details > ul > li:nth-child(4) > details > summary', 'templates-result-page'],
+    ];
 
     function getSidebarSection() {
       var path = location.pathname;
@@ -40,6 +132,23 @@ const shouldRenderSearch =
       }
     }
 
+    function applySidebarCategoryIcons() {
+      categoryIcons.forEach(function (entry) {
+        var summary = document.querySelector(entry[0]);
+        var template = document.querySelector('template[data-sb-sidebar-icon="' + entry[1] + '"]');
+        if (!summary || !template || !template.content.firstElementChild) return;
+
+        summary.querySelectorAll(':scope > .sb-sidebar-arco-icon').forEach(function (icon) {
+          icon.remove();
+        });
+
+        var icon = template.content.firstElementChild.cloneNode(true);
+        icon.dataset.sbSidebarIcon = entry[1];
+        var label = summary.querySelector(':scope > .group-label');
+        summary.insertBefore(icon, label || summary.firstChild);
+      });
+    }
+
     document.addEventListener('astro:before-swap', function () {
       var scroller = document.getElementById('starlight__sidebar');
       if (!scroller || !matchMedia('(min-width: 50rem)').matches) return;
@@ -48,14 +157,18 @@ const shouldRenderSearch =
     });
 
     document.addEventListener('astro:after-swap', function () {
+      applySidebarCategoryIcons();
       restoreSavedSidebarScroll();
     });
 
     document.addEventListener('astro:page-load', function () {
+      applySidebarCategoryIcons();
       restoreSavedSidebarScroll();
       savedScrollTop = undefined;
       savedSection = undefined;
     });
+
+    applySidebarCategoryIcons();
   })();
 </script>
 

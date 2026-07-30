@@ -1,4 +1,5 @@
 import { Table } from '@sbux/starbucks-design-react';
+import { IconDownCircle, IconRightCircle } from '@sbux/starbucks-design-react/icon';
 
 export default function Demo() {
   const columns = [
@@ -81,6 +82,10 @@ export default function Demo() {
       columns={columns}
       data={data}
       expandedRowRender={(record) => `${record.name}'s address is ${record.address}`}
+      expandProps={{
+        icon: ({ expanded }) =>
+          expanded ? <IconDownCircle /> : <IconRightCircle />,
+      }}
       rowSelection={{}}
       scroll={{
         x: 1600,

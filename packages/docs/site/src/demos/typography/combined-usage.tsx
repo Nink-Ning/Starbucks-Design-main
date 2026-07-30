@@ -3,49 +3,43 @@ import { Typography } from '@sbux/starbucks-design-react';
 export default function Demo() {
   return (
     <Typography style={{ marginTop: -40 }}>
-      <Typography.Title>Design system</Typography.Title>
+      <Typography.Title>Starbucks Design</Typography.Title>
       <Typography.Paragraph>
-        A design is a plan or specification for the construction of an object or system or for the implementation of an
-        activity or process, or the result of that plan or specification in the form of a prototype, product or process.
-        The verb to design expresses the process of developing a design.
+        Starbucks Design 用于沉淀品牌体验、组件资产和业务语境，让门店运营、会员增长和数字化触点保持一致的表达。
       </Typography.Paragraph>
       <Typography.Paragraph>
-        In some cases, the direct construction of an object without an explicit prior plan (such as in craftwork, some
-        engineering, coding, and graphic design) may also be considered
-        <Typography.Text bold>to be a design activity.</Typography.Text>
+        组件示例会优先使用真实业务语义，帮助设计、开发和内容同学在同一套
+        <Typography.Text bold>品牌语言</Typography.Text>下协作。
       </Typography.Paragraph>
-      <Typography.Title heading={2}>ArcoDesign</Typography.Title>
+      <Typography.Title heading={2}>Starbucks DesignKit</Typography.Title>
       <Typography.Paragraph>
-        The ArcoDesign component library defines a set of default particle variables, and a custom theme is to
-        <Typography.Text mark>customize</Typography.Text> and <Typography.Text underline>overwrite</Typography.Text> this variable list.
+        Starbucks DesignKit 基于品牌色、圆角、字号和间距变量进行封装，支持按业务场景
+        <Typography.Text mark>组合</Typography.Text>并<Typography.Text underline>复用</Typography.Text>组件能力。
       </Typography.Paragraph>
       <Typography.Paragraph blockquote>
-        A design is a plan or specification for the construction of an object or system or for the implementation of an
-        activity or process, or the result of that plan or specification in the form of a <Typography.Text code>prototype</Typography.Text>
-        <Typography.Text code>product</Typography.Text> or
-        <Typography.Text code>process</Typography.Text>. The verb to design expresses the process of developing a design.
+        设计规范需要连接 <Typography.Text code>design token</Typography.Text>、<Typography.Text code>component</Typography.Text> 和
+        <Typography.Text code>business context</Typography.Text>，确保体验从设计稿到交付链路稳定落地。
       </Typography.Paragraph>
       <Typography.Paragraph mark underline delete>
-        A design is a plan or specification for the construction of an object or system or for the implementation of an
-        activity or process.
+        旧版示例文案会逐步替换为 Starbucks 业务语境。
       </Typography.Paragraph>
       <Typography.Paragraph>
         <ul>
           <li>
-            Architectural blueprints
+            品牌体验规范
             <ul>
-              <li>Architectural blueprints</li>
+              <li>门店视觉与数字触点一致性</li>
             </ul>
           </li>
-          <li>Engineering drawings</li>
-          <li>Business processes</li>
+          <li>组件资产沉淀</li>
+          <li>运营流程协作</li>
         </ul>
       </Typography.Paragraph>
       <Typography.Paragraph>
         <ol>
-          <li>Architectural blueprints</li>
-          <li>Engineering drawings</li>
-          <li>Business processes</li>
+          <li>定义品牌变量</li>
+          <li>复用基础组件</li>
+          <li>完成业务交付</li>
         </ol>
       </Typography.Paragraph>
     </Typography>

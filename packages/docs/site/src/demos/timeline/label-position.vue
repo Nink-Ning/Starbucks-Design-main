@@ -16,18 +16,18 @@
       </RadioGroup>
     </Row>
     <Timeline :mode="mode" :labelPosition="pos">
-      <TimelineItem label="2017-03-10" dotColor="#52C419">
-        The first milestone
+      <TimelineItem label="2026-03-10" dotColor="var(--color-success)">
+        春季拿铁配方确认
       </TimelineItem>
       <TimelineItem
-        label="2018-05-12"
-        dotColor="#F5222D"
+        label="2026-05-12"
+        dotColor="var(--color-danger)"
         labelPosition="same"
       >
-        The second milestone
+        冷萃物料配送延迟
       </TimelineItem>
-      <TimelineItem label="2020-09-30" position="bottom">
-        The third milestone
+      <TimelineItem label="2026-09-30" position="bottom">
+        秋季会员活动上线
       </TimelineItem>
     </Timeline>
   </div>

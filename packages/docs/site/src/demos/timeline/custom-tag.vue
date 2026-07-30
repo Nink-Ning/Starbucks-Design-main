@@ -1,13 +1,13 @@
 <template>
   <Timeline>
     <TimelineItem>
-      Code Review
+      焦糖玛奇朵活动发布
       <template #label>
         <Tag>
           <template #icon>
             <icon-check-circle-fill />
           </template>
-          Passed
+          已上线
         </Tag>
       </template>
     </TimelineItem>

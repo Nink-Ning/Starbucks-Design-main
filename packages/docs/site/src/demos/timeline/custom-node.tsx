@@ -5,25 +5,25 @@ export default function Demo() {
   return (
     <Space size={40}>
       <Timeline>
-        <Timeline.Item label="2020-04-12" dotColor="#00B42A">
-          The first milestone
+        <Timeline.Item label="2026-03-10" dotColor="var(--color-success)">
+          拿铁配方确认
         </Timeline.Item>
-        <Timeline.Item label="2020-05-17">The second milestone</Timeline.Item>
+        <Timeline.Item label="2026-05-17">冷萃物料到店</Timeline.Item>
         <Timeline.Item
-          label="2020-06-22"
-          dot={<IconClockCircle style={{ fontSize: 12, color: '#F53F3F' }} />}
+          label="2026-06-22"
+          dot={<IconClockCircle style={{ fontSize: 12, color: 'var(--color-danger)' }} />}
         >
-          The third milestone
+          焦糖玛奇朵库存预警
         </Timeline.Item>
-        <Timeline.Item label="2020-06-22" dotColor="var(--color-fill-4)">
-          The third milestone
+        <Timeline.Item label="2026-09-30" dotColor="var(--bg-color-secondarycomponent-active)">
+          秋季会员活动准备
         </Timeline.Item>
       </Timeline>
 
       <Timeline
       >
         <Timeline.Item
-          label="2020-04-12"
+          label="2026-03-10"
           dot={
             <IconCheck
               style={{
@@ -31,15 +31,15 @@ export default function Demo() {
                 padding: 2,
                 boxSizing: 'border-box',
                 borderRadius: '50%',
-                backgroundColor: 'var(--color-primary-light-1)',
+                backgroundColor: 'var(--color-primary-light)',
               }}
             />
           }
         >
-          The first milestone
+          拿铁配方确认
         </Timeline.Item>
         <Timeline.Item
-          label="2020-05-17"
+          label="2026-05-17"
           dot={
             <IconCheck
               style={{
@@ -47,26 +47,26 @@ export default function Demo() {
                 padding: 2,
                 boxSizing: 'border-box',
                 borderRadius: '50%',
-                backgroundColor: 'var(--color-primary-light-1)',
+                backgroundColor: 'var(--color-primary-light)',
               }}
             />
           }
         >
-          The second milestone
+          冷萃物料到店
         </Timeline.Item>
-        <Timeline.Item label="2020-06-22">The third milestone</Timeline.Item>
-        <Timeline.Item label="2020-06-22" dotColor="var(--color-fill-4)">
-          The third milestone
+        <Timeline.Item label="2026-06-22">焦糖玛奇朵库存预警</Timeline.Item>
+        <Timeline.Item label="2026-09-30" dotColor="var(--bg-color-secondarycomponent-active)">
+          秋季会员活动准备
         </Timeline.Item>
       </Timeline>
 
       <Timeline>
-        <Timeline.Item label="2020-04-12">The first milestone</Timeline.Item>
-        <Timeline.Item label="2020-05-17" dotColor="var(--color-fill-4)">
-          The second milestone
+        <Timeline.Item label="2026-03-10">拿铁配方确认</Timeline.Item>
+        <Timeline.Item label="2026-05-17" dotColor="var(--bg-color-secondarycomponent-active)">
+          冷萃物料到店
         </Timeline.Item>
-        <Timeline.Item label="2020-06-22" dotColor="var(--color-fill-4)">
-          The third milestone
+        <Timeline.Item label="2026-09-30" dotColor="var(--bg-color-secondarycomponent-active)">
+          秋季会员活动准备
         </Timeline.Item>
       </Timeline>
     </Space>

@@ -13,7 +13,7 @@
           <span><icon-message />Reply</span>
         </template>
         <template #extra>
-          <div className="image-area">
+          <div class="image-area">
             <img alt="arco-design" :src="item.imageSrc" />
           </div>
         </template>

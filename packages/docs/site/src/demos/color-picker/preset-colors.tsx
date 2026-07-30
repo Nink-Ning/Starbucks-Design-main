@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ColorPicker } from '@sbux/starbucks-design-react';
 
 export default function Demo() {
-  const [color, setColor] = useState('#165DFF');
+  const [color, setColor] = useState('#00754A');
   const [history, setHistory] = useState([]);
 
   const addHistory = (visible) => {
@@ -15,7 +15,7 @@ export default function Demo() {
   return (
     <div>
       <div>Preset: </div>
-      <ColorPicker defaultValue={'#165DFF'} showPreset showText />
+      <ColorPicker defaultValue={'#00754A'} showPreset showText />
       <div style={{ marginTop: 10 }} />
       <div>History & Preset: </div>
       <ColorPicker

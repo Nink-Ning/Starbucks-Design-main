@@ -5,6 +5,30 @@ import './theme.css'
 
 export { Radio } from './radio'
 export type { RadioButtonVariant, StarbucksRadioGroupProps } from './radio'
+export { FilterBar } from './business/filter-bar'
+export type {
+  CascaderFilterField,
+  CascaderOption,
+  DateFilterField,
+  DateRangeFilterField,
+  FilterActionSource,
+  FilterBarColumns,
+  FilterBarProps,
+  FilterEventMeta,
+  FilterFieldSchema,
+  FilterOption,
+  FilterRenderFieldContext,
+  FilterRule,
+  FilterSubmitMode,
+  FilterTexts,
+  FilterValidationError,
+  FilterValue,
+  InputFilterField,
+  MultiSelectFilterField,
+  SelectFilterField,
+  TreeSelectFilterField,
+  TreeSelectOption,
+} from './business/filter-bar'
 export * from '@arco-design/web-react'
 
 // Locale type is not exported from @arco-design/web-react's main entry,

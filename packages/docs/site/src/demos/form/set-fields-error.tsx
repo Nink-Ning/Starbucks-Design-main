@@ -1,12 +1,12 @@
-import { Form, Input, InputNumber, Button } from '@sbux/starbucks-design-react';
+import { Form, Input, InputNumber, Button, Space } from '@sbux/starbucks-design-react';
 
 export default function Demo() {
   const [form] = Form.useForm();
   return (
     <Form
       form={form}
-      style={{ width: 600 }}
-      initialValues={{ name: 'admin' }}
+      style={{ width: '100%' }}
+      initialValues={{ name: '上海烘焙工坊' }}
       autoComplete="off"
       onValuesChange={(v, vs) => {
         console.log(v, vs);
@@ -15,44 +15,45 @@ export default function Demo() {
         console.log(v);
       }}
     >
-      <Form.Item label="Username" field="name" rules={[{ required: true }]}>
-        <Input placeholder="please enter your username" />
+      <Form.Item label="门店名称" field="name" rules={[{ required: true }]}>
+        <Input placeholder="请输入门店名称" />
       </Form.Item>
       <Form.Item
-        label="Age"
+        label="运营年限"
         field="age"
         rules={[{ required: true, type: 'number', min: 0, max: 99 }]}
       >
-        <InputNumber placeholder="please enter your age" />
+        <InputNumber placeholder="请输入运营年限" />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 5 }}>
-        <Button type="primary" htmlType="submit" style={{ marginRight: 24 }}>
-          Submit
-        </Button>
-        <Button
-          style={{ marginRight: 24 }}
-          onClick={() => {
-            form.resetFields();
-          }}
-        >
-          Reset
-        </Button>
-        <Button
-          type="text"
-          onClick={() => {
-            form.setFields({
-              age: {
-                value: 200,
-                error: {
-                  message: 'Maximum is 200',
+        <Space size={16}>
+          <Button type="primary" htmlType="submit">
+            提交
+          </Button>
+          <Button
+            onClick={() => {
+              form.resetFields();
+            }}
+          >
+            重置
+          </Button>
+          <Button
+            type="text"
+            onClick={() => {
+              form.setFields({
+                age: {
+                  value: 200,
+                  error: {
+                    message: '运营年限不能超过 99',
+                  },
+                  warning: <div>预警信息...</div>,
                 },
-                warning: <div>warning info ...</div>,
-              },
-            });
-          }}
-        >
-          Set Error Age
-        </Button>
+              });
+            }}
+          >
+            设置运营年限错误
+          </Button>
+        </Space>
       </Form.Item>
     </Form>
   );

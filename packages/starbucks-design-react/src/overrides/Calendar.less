@@ -1,0 +1,190 @@
+// Calendar.less
+// Component-specific style overrides for the Starbucks DesignKit Calendar.
+
+.arco-calendar {
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-border-component);
+  border-radius: var(--border-radius-md);
+}
+
+.arco-calendar:not(.arco-calendar-panel) {
+  width: 100%;
+  min-width: 640px;
+  overflow: hidden;
+}
+
+.arco-calendar-header {
+  align-items: center;
+  padding: var(--spacing-4) var(--spacing-6);
+  background-color: var(--bg-color-container);
+}
+
+.arco-calendar:not(.arco-calendar-panel).arco-calendar-mode-year .arco-calendar-header,
+.arco-calendar-week-list,
+.arco-calendar-month-row .arco-calendar-cell,
+.arco-calendar-mode-month:not(.arco-calendar-panel) .arco-calendar-cell:not(:last-child),
+.arco-calendar-year-row > .arco-calendar-cell:not(:last-child),
+.arco-calendar-year-row:not(:last-child) > .arco-calendar-cell {
+  border-color: var(--color-border-2);
+}
+
+.arco-calendar-header-value {
+  color: var(--color-text-primary);
+  font-size: var(--fs-18);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-26);
+}
+
+.arco-calendar-header-icon {
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.arco-calendar-header-icon:not(.arco-calendar-header-icon-hidden):hover {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container-hover);
+}
+
+.arco-calendar-header-icon:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-calendar-week-list {
+  background-color: var(--bg-color-secondarycontainer);
+}
+
+.arco-calendar-week-list-item {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-calendar-date-value {
+  color: var(--color-text-disabled);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-calendar-cell-in-view .arco-calendar-date-value {
+  color: var(--color-text-primary);
+}
+
+.arco-calendar-cell .arco-calendar-date-circle {
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.arco-calendar-cell-in-view:not(.arco-calendar-cell-disabled):not(.arco-calendar-cell-selected):hover
+  .arco-calendar-date-circle {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.arco-calendar-cell-today .arco-calendar-date-circle {
+  border-color: var(--color-primary);
+}
+
+.arco-calendar-mode-month .arco-calendar-cell-selected .arco-calendar-date-circle,
+.arco-calendar-mode-year .arco-calendar-cell-selected .arco-calendar-date-circle {
+  color: var(--color-white-text-1);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.arco-calendar-date-content {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  line-height: var(--lh-18);
+}
+
+.arco-calendar-panel {
+  overflow: hidden;
+  background-clip: padding-box;
+  border-color: var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-calendar-panel .arco-calendar-header {
+  padding: var(--spacing-2) var(--spacing-4);
+  border-color: var(--color-border-2);
+}
+
+.arco-calendar-panel .arco-calendar-header-value {
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  line-height: 24px;
+}
+
+.arco-calendar-panel .arco-calendar-body {
+  padding: 14px var(--spacing-4);
+}
+
+.arco-calendar-panel .arco-calendar-week-list {
+  background-color: var(--bg-color-container);
+}
+
+.arco-calendar-panel .arco-calendar-week-list-item {
+  height: 32px;
+  padding: 0;
+  line-height: 32px;
+}
+
+.arco-calendar-panel .arco-calendar-cell .arco-calendar-date-value {
+  min-width: 24px;
+  height: 24px;
+  font-size: var(--fs-14);
+  line-height: 24px;
+}
+
+.arco-calendar-panel .arco-calendar-cell-selected .arco-calendar-date-value,
+.arco-calendar-cell-range-start .arco-calendar-date-value,
+.arco-calendar-cell-range-end .arco-calendar-date-value {
+  color: var(--color-white-text-1);
+  background-color: var(--color-primary);
+}
+
+.arco-calendar-panel
+  .arco-calendar-cell:not(.arco-calendar-cell-selected):not(.arco-calendar-cell-range-start):not(.arco-calendar-cell-range-end):not(
+    .arco-calendar-cell-hover-range-start
+  ):not(.arco-calendar-cell-hover-range-end):not(.arco-calendar-cell-disabled):not(.arco-calendar-cell-week)
+  .arco-calendar-date-value:hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.arco-calendar-panel .arco-calendar-cell-today::after {
+  background-color: var(--color-primary);
+}
+
+.arco-calendar-cell-in-range .arco-calendar-date,
+.arco-calendar-cell-hover-in-range .arco-calendar-date {
+  background-color: var(--color-primary-light);
+}
+
+.arco-calendar-panel .arco-calendar-cell-disabled > .arco-calendar-date,
+.arco-calendar-panel .arco-calendar-cell-disabled > .arco-calendar-date > .arco-calendar-date-value {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+}
+
+.arco-calendar-panel .arco-calendar-footer-btn-wrapper {
+  color: var(--color-primary);
+  border-color: var(--color-border-2);
+}

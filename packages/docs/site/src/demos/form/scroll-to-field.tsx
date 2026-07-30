@@ -10,13 +10,11 @@ export default function Demo() {
         onClick={() => {
           formRef.current && formRef.current.scrollToField('users[9]');
         }}
-      >
-        Scroll to the last field
-      </Button>
+      >滚动到最后一个字段</Button>
       <Form
         ref={formRef}
         style={{
-          maxWidth: 500,
+          width: '100%',
           marginTop: 20,
           paddingRight: 16,
           height: 300,
@@ -29,8 +27,8 @@ export default function Demo() {
           {(fields, { add, remove }) => {
             return fields.map((field, index) => {
               return (
-                <Form.Item label={'user' + index} key={field.key} field={field.field}>
-                  <Input placeholder="user" />
+                <Form.Item label={'门店' + (index + 1)} key={field.key} field={field.field}>
+                  <Input placeholder="请输入门店信息" />
                 </Form.Item>
               );
             });

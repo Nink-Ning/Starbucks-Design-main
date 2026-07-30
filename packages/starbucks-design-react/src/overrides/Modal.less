@@ -55,21 +55,22 @@
 
 .arco-modal {
   box-sizing: border-box;
+  width: 480px;
   color: var(--color-text-primary);
   font-family: var(--font-family);
   line-height: var(--lh-22);
   background-color: var(--bg-color-container);
-  border: 0.5px solid var(--bg-color-secondarycomponent);
+  border: 1px solid var(--bg-color-component);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
 }
 
 .arco-modal-header {
   box-sizing: border-box;
-  height: 56px;
-  padding: 0 var(--spacing-8);
+  height: 72px;
+  padding: var(--spacing-8) var(--spacing-10);
   background-color: var(--bg-color-container);
-  border-bottom: 0.5px solid var(--bg-color-secondarycomponent);
+  border-bottom: 1px solid var(--bg-color-component);
   border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
 }
 
@@ -77,13 +78,19 @@
 .arco-modal-title {
   color: var(--color-text-primary);
   font-size: var(--fs-16);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-regular);
   line-height: var(--lh-24);
   text-align: left;
 }
 
+.arco-modal .arco-modal-header .arco-modal-title,
+.arco-modal-title.arco-modal-title-align-center {
+  justify-content: flex-start;
+  text-align: left;
+}
+
 .arco-modal-content {
-  padding: var(--spacing-8);
+  padding: var(--spacing-8) var(--spacing-10);
   color: var(--color-text-secondary);
   font-size: var(--fs-14);
   font-weight: var(--fw-regular);
@@ -101,9 +108,9 @@
 
 .arco-modal-footer {
   box-sizing: border-box;
-  padding: var(--spacing-6) var(--spacing-8);
+  padding: var(--spacing-8) var(--spacing-10);
   background-color: var(--bg-color-container);
-  border-top: 0.5px solid var(--bg-color-secondarycomponent);
+  border-top: 1px solid var(--bg-color-component);
   border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
   text-align: right;
 }
@@ -117,10 +124,10 @@
 }
 
 .arco-modal .arco-modal-close-icon {
-  top: 18px;
-  right: var(--spacing-8);
+  top: 28px;
+  right: var(--spacing-10);
   color: var(--color-text-secondary);
-  font-size: var(--fs-14);
+  font-size: var(--fs-16);
   line-height: 1;
 }
 

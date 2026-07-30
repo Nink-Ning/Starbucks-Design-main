@@ -4,19 +4,19 @@ export default function Demo() {
   return (
     <div>
       <Avatar.Group size={32} style={{ margin: 10 }}>
-        <Avatar style={{ backgroundColor: '#7BC616' }}>A</Avatar>
-        <Avatar style={{ backgroundColor: '#14C9C9' }}>B</Avatar>
-        <Avatar style={{ backgroundColor: '#168CFF' }}>C</Avatar>
-        <Avatar style={{ backgroundColor: '#FF7D00' }}>Arco</Avatar>
-        <Avatar style={{ backgroundColor: '#FFC72E' }}>Design</Avatar>
+        <Avatar style={{ backgroundColor: 'var(--color-primary)' }}>A</Avatar>
+        <Avatar style={{ backgroundColor: 'var(--color-success)' }}>B</Avatar>
+        <Avatar style={{ backgroundColor: 'var(--color-warning)' }}>C</Avatar>
+        <Avatar style={{ backgroundColor: 'var(--color-danger)' }}>Nink</Avatar>
+        <Avatar style={{ backgroundColor: 'var(--color-primary-active)' }}>Starbucks</Avatar>
       </Avatar.Group>
       <br />
       <Avatar.Group size={24} style={{ margin: 10 }}>
-        <Avatar style={{ backgroundColor: '#7BC616' }}>A</Avatar>
-        <Avatar style={{ backgroundColor: '#14C9C9' }}>B</Avatar>
-        <Avatar style={{ backgroundColor: '#168CFF' }}>C</Avatar>
-        <Avatar style={{ backgroundColor: '#FF7D00' }}>Arco</Avatar>
-        <Avatar style={{ backgroundColor: '#FFC72E' }}>Design</Avatar>
+        <Avatar style={{ backgroundColor: 'var(--color-primary)' }}>A</Avatar>
+        <Avatar style={{ backgroundColor: 'var(--color-success)' }}>B</Avatar>
+        <Avatar style={{ backgroundColor: 'var(--color-warning)' }}>C</Avatar>
+        <Avatar style={{ backgroundColor: 'var(--color-danger)' }}>Nink</Avatar>
+        <Avatar style={{ backgroundColor: 'var(--color-primary-active)' }}>Starbucks</Avatar>
       </Avatar.Group>
     </div>
   );

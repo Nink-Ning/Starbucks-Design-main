@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { Button, Descriptions, Form, Input, Space, Switch, Typography } from '@sbux/starbucks-design-react';
 
 export default function Demo() {
-  const defaultText = `A design is a plan or specification for the construction of an object or system or for the
-implementation of an activity or process. A design is a plan or specification for the
-construction of an object or system or for the implementation of an activity or process. `;
+  const defaultText = `Starbucks Design 将企业设计语言、业务知识、工程资产和设计决策连接成一条稳定链路。
+组件示例覆盖门店运营、会员增长、营销活动和交付协作等典型场景，帮助团队在同一套品牌规范下快速完成设计与研发交付。`;
   const defaultConfig = {
     ellipsisStr: '...'
   };

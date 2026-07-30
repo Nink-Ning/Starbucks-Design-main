@@ -3,35 +3,21 @@ import { Typography } from '@sbux/starbucks-design-react';
 export default function Demo() {
   return (
     <Typography>
-      <Typography.Title heading={5}>Default</Typography.Title>
+      <Typography.Title heading={5}>默认段落</Typography.Title>
       <Typography.Paragraph>
-        A design is a plan or specification for the construction of an object or system or for the implementation of an
-        activity or process, or the result of that plan or specification in the form of a prototype, product or process.
-        The verb to design expresses the process of developing a design. In some cases, the direct construction of an
-        object without an explicit prior plan (such as in craftwork, some engineering, coding, and graphic design) may
-        also be considered to be a design activity.
+        Starbucks Design 将品牌色、字体、圆角和组件状态沉淀为统一规范。业务页面可以通过这些规范快速搭建门店运营、会员触达和活动管理等场景。
       </Typography.Paragraph>
-      <Typography.Title heading={5}>Secondary</Typography.Title>
+      <Typography.Title heading={5}>辅助段落</Typography.Title>
       <Typography.Paragraph type="secondary">
-        A design is a plan or specification for the construction of an object or system or for the implementation of an
-        activity or process, or the result of that plan or specification in the form of a prototype, product or process.
-        The verb to design expresses the process of developing a design. In some cases, the direct construction of an
-        object without an explicit prior plan (such as in craftwork, some engineering, coding, and graphic design) may
-        also be considered to be a design activity.
+        辅助文本用于解释页面信息、补充操作说明或承载低优先级内容。它需要保持清晰可读，同时避免抢占主要信息的视觉层级。
       </Typography.Paragraph>
-      <Typography.Title heading={5}>Spacing default</Typography.Title>
+      <Typography.Title heading={5}>默认行距</Typography.Title>
       <Typography.Paragraph>
-        A design is a plan or specification for the construction of an object or system or for the implementation of an
-        activity or process, or the result of that plan or specification in the form of a prototype, product or process.
-        The verb to design expresses the process of developing a design. In some cases, the direct construction of an
-        object without an explicit prior plan (such as in craftwork, some engineering, coding, and graphic design) may
-        also be considered to be a design activity.
+        当段落内容较长时，默认行距能提供更稳定的阅读节奏。适用于说明文档、业务介绍、组件指南和页面级描述，让用户可以连续阅读多行文本。
       </Typography.Paragraph>
-      <Typography.Title heading={5}>Spacing close</Typography.Title>
+      <Typography.Title heading={5}>紧凑行距</Typography.Title>
       <Typography.Paragraph type="secondary" spacing="close">
-        A design is a plan or specification for the construction of an object or system or for the implementation of an
-        activity or process, or the result of that plan or specification in the form of a prototype, product or process.
-        The verb to design expresses the process of developing a design.
+        紧凑行距适合短说明，例如表单提示、卡片摘要或运营状态描述。
       </Typography.Paragraph>
     </Typography>
   );

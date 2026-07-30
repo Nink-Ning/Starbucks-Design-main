@@ -84,7 +84,7 @@
 .arco-picker-header {
   display: flex;
   align-items: center;
-  padding: var(--spacing-4) var(--spacing-6);
+  padding: var(--spacing-2) var(--spacing-4);
   color: var(--color-text-primary);
   background-color: var(--bg-color-container);
   border-bottom: 1px solid var(--color-border-2);
@@ -94,7 +94,7 @@
   color: var(--color-text-primary);
   font-size: var(--fs-14);
   font-weight: var(--fw-semibold);
-  line-height: var(--lh-22);
+  line-height: 24px;
 }
 
 .arco-picker-header-icon,
@@ -114,13 +114,13 @@
 }
 
 .arco-picker-body {
-  padding: var(--spacing-3) var(--spacing-5) var(--spacing-5);
+  padding: 14px var(--spacing-4);
   background-color: var(--bg-color-container);
 }
 
 .arco-picker-week-list {
   box-sizing: border-box;
-  padding: var(--spacing-4) var(--spacing-5) 0;
+  padding: 0 var(--spacing-4);
   background-color: var(--bg-color-container);
 }
 
@@ -145,22 +145,27 @@
 
 .arco-picker-cell .arco-picker-date {
   box-sizing: border-box;
-  padding: var(--spacing-1) var(--spacing-1);
+  padding: var(--spacing-1) 0;
   background-color: transparent;
 }
 
 .arco-picker-date-value {
+  display: inline-flex;
   box-sizing: border-box;
-  min-width: 28px;
-  height: 28px;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  padding-bottom: 1px;
   color: var(--color-text-disabled);
   font-size: var(--fs-14);
   font-weight: var(--fw-regular);
-  line-height: 26px;
+  line-height: 1;
   text-align: center;
   background-color: transparent;
   border: 1px solid transparent;
-  border-radius: var(--border-radius-sm) !important;
+  border-radius: var(--border-radius-round) !important;
   transition:
     color 0.12s ease,
     background-color 0.12s ease,
@@ -174,9 +179,10 @@
 
 .arco-picker-cell:not(.arco-picker-cell-disabled):not(.arco-picker-cell-selected):not(.arco-picker-cell-range-start):not(.arco-picker-cell-range-end):hover
   .arco-picker-date-value {
-  color: var(--color-primary);
-  background-color: var(--color-primary-light);
-  border-color: transparent;
+  color: var(--color-primary) !important;
+  background-color: var(--color-primary-light) !important;
+  border-color: transparent !important;
+  border-radius: var(--border-radius-round) !important;
 }
 
 .arco-picker-cell-today::after {
@@ -185,16 +191,18 @@
 
 .arco-picker-cell-today:not(.arco-picker-cell-selected):not(.arco-picker-cell-range-start):not(.arco-picker-cell-range-end)
   .arco-picker-date-value {
-  color: var(--color-text-primary);
-  background-color: transparent;
-  border-color: var(--color-primary);
+  color: var(--color-text-primary) !important;
+  background-color: transparent !important;
+  border-color: var(--color-primary) !important;
+  border-radius: var(--border-radius-round) !important;
 }
 
 .arco-picker-cell-today:not(.arco-picker-cell-selected):not(.arco-picker-cell-range-start):not(.arco-picker-cell-range-end):hover
   .arco-picker-date-value {
-  color: var(--color-primary);
-  background-color: var(--color-primary-light);
-  border-color: var(--color-primary);
+  color: var(--color-primary) !important;
+  background-color: var(--color-primary-light) !important;
+  border-color: var(--color-primary) !important;
+  border-radius: var(--border-radius-round) !important;
 }
 
 .arco-picker-cell-selected .arco-picker-date-value,
@@ -203,9 +211,10 @@
 .arco-picker-cell-range-start:hover .arco-picker-date-value,
 .arco-picker-cell-range-end .arco-picker-date-value,
 .arco-picker-cell-range-end:hover .arco-picker-date-value {
-  color: var(--color-white-text-1);
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
+  color: var(--color-white-text-1) !important;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  border-radius: var(--border-radius-round) !important;
 }
 
 .arco-picker-cell-in-range .arco-picker-date,
@@ -222,14 +231,38 @@
 
 .arco-picker-cell-hover-range-start .arco-picker-date,
 .arco-picker-cell-range-start .arco-picker-date {
-  border-top-left-radius: var(--border-radius-sm);
-  border-bottom-left-radius: var(--border-radius-sm);
+  border-top-left-radius: var(--border-radius-round);
+  border-bottom-left-radius: var(--border-radius-round);
 }
 
 .arco-picker-cell-hover-range-end .arco-picker-date,
 .arco-picker-cell-range-end .arco-picker-date {
-  border-top-right-radius: var(--border-radius-sm);
-  border-bottom-right-radius: var(--border-radius-sm);
+  border-top-right-radius: var(--border-radius-round);
+  border-bottom-right-radius: var(--border-radius-round);
+}
+
+.arco-panel-date:not(.arco-panel-week)
+  .arco-picker-row
+  .arco-picker-cell-in-range:first-child
+  .arco-picker-date,
+.arco-panel-date:not(.arco-panel-week)
+  .arco-picker-row
+  .arco-picker-cell-hover-in-range:first-child
+  .arco-picker-date {
+  border-top-left-radius: var(--border-radius-round);
+  border-bottom-left-radius: var(--border-radius-round);
+}
+
+.arco-panel-date:not(.arco-panel-week)
+  .arco-picker-row
+  .arco-picker-cell-in-range:last-child
+  .arco-picker-date,
+.arco-panel-date:not(.arco-panel-week)
+  .arco-picker-row
+  .arco-picker-cell-hover-in-range:last-child
+  .arco-picker-date {
+  border-top-right-radius: var(--border-radius-round);
+  border-bottom-right-radius: var(--border-radius-round);
 }
 
 .arco-picker-cell-disabled,
@@ -257,7 +290,7 @@
 .arco-panel-quarter .arco-picker-date-value,
 .arco-panel-year .arco-picker-date-value {
   width: 100%;
-  border-radius: var(--border-radius-sm) !important;
+  border-radius: var(--border-radius-round) !important;
 }
 
 .arco-panel-month .arco-picker-cell .arco-picker-date-value,
@@ -278,7 +311,7 @@
 .arco-panel-month .arco-picker-cell-range-end .arco-picker-date-value,
 .arco-panel-quarter .arco-picker-cell-range-end .arco-picker-date-value,
 .arco-panel-year .arco-picker-cell-range-end .arco-picker-date-value {
-  border-radius: var(--border-radius-sm) !important;
+  border-radius: var(--border-radius-round) !important;
 }
 
 .arco-panel-month
@@ -299,7 +332,7 @@
   color: var(--color-primary) !important;
   background-color: var(--color-primary-light) !important;
   border-color: transparent !important;
-  border-radius: var(--border-radius-sm) !important;
+  border-radius: var(--border-radius-round) !important;
 }
 
 .arco-panel-week .arco-picker-row-week .arco-picker-cell:not(.arco-picker-cell-week) .arco-picker-date {
@@ -310,13 +343,13 @@
 }
 
 .arco-panel-week .arco-picker-row-week .arco-picker-cell:nth-child(2) .arco-picker-date {
-  border-top-left-radius: var(--border-radius-sm) !important;
-  border-bottom-left-radius: var(--border-radius-sm) !important;
+  border-top-left-radius: var(--border-radius-round) !important;
+  border-bottom-left-radius: var(--border-radius-round) !important;
 }
 
 .arco-panel-week .arco-picker-row-week .arco-picker-cell:nth-child(8) .arco-picker-date {
-  border-top-right-radius: var(--border-radius-sm) !important;
-  border-bottom-right-radius: var(--border-radius-sm) !important;
+  border-top-right-radius: var(--border-radius-round) !important;
+  border-bottom-right-radius: var(--border-radius-round) !important;
 }
 
 .arco-panel-week .arco-picker-row-week .arco-picker-cell:not(.arco-picker-cell-week) .arco-picker-date-value {

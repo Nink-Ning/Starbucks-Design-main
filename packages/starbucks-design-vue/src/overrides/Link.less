@@ -70,6 +70,18 @@
   box-shadow: 0 0 0 2px var(--color-primary-focus);
 }
 
+.arco-link.arco-link-loading:not(.arco-link-disabled),
+.arco-link.arco-link-loading:not(.arco-link-disabled):hover,
+.arco-link.arco-link-loading:not(.arco-link-disabled):active {
+  color: var(--color-primary);
+  background-color: transparent;
+  cursor: default;
+}
+
+.arco-link.arco-link-loading:not(.arco-link-disabled) .arco-link-icon {
+  color: currentColor;
+}
+
 .arco-link.arco-link-hoverless {
   display: inline-flex;
   padding: 0;
@@ -163,6 +175,7 @@
   margin-right: var(--spacing-3);
   font-size: var(--fs-14);
   line-height: 1;
+  color: currentColor;
 }
 
 .arco-link-icon > svg,

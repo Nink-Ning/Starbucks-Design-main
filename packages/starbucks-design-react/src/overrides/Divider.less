@@ -2,19 +2,21 @@
 // Starbucks UI Divider overrides
 
 .arco-divider {
-  border-color: var(--bg-color-secondarycomponent);
+  border-color: var(--color-border-component, var(--color-border-2));
 }
 
 .arco-divider-horizontal {
-  border-top-color: var(--bg-color-secondarycomponent);
+  border-top-color: var(--color-border-component, var(--color-border-2));
 }
 
 .arco-divider-vertical {
-  border-left-color: var(--bg-color-secondarycomponent);
+  border-left-color: var(--color-border-component, var(--color-border-2));
 }
 
 .arco-divider-text {
   color: var(--color-text-secondary);
   font-family: var(--font-family);
   font-size: var(--fs-14);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: var(--line-height-base, 22px);
 }

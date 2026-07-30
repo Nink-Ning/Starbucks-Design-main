@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Space, Switch, Table } from '@sbux/starbucks-design-react';
+import { IconDownCircle, IconRightCircle } from '@sbux/starbucks-design-react/icon';
 
 export default function Demo() {
 
@@ -100,6 +101,10 @@ export default function Demo() {
         <Switch onChange={(checked) => setCheckStrictly(checked)} checked={checkStrictly} />
       </Space>
       <Table
+        expandProps={{
+          icon: ({ expanded }) =>
+            expanded ? <IconDownCircle /> : <IconRightCircle />,
+        }}
         rowSelection={{
           type: 'checkbox',
           onChange: (selectedRowKeys, selectedRows) => {

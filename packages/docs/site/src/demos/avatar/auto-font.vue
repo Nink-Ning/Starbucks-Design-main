@@ -3,7 +3,7 @@
     :style="{
       marginRight: '24px',
       verticalAlign: 'middle',
-      backgroundColor: '#14a9f8',
+      backgroundColor: 'var(--color-primary)',
     }"
   >
     {{ text }}
@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
-const list = ['B', 'Arco', 'Design', 'Tom', 'AD'];
+const list = ['B', 'Nink', 'Starbucks', 'Tom', 'NK'];
 
 const index = ref(0);
 const text = computed(() => list[index.value]);

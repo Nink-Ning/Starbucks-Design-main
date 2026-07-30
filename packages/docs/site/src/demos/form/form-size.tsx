@@ -17,20 +17,20 @@ export default function Demo() {
 
   const cascaderOptions = [
     {
-      value: 'beijing',
-      label: 'Beijing',
+      value: 'east',
+      label: '华东区',
       children: [
         {
-          value: 'beijingshi',
-          label: 'Beijing',
+          value: 'shanghai',
+          label: '上海市',
           children: [
             {
-              value: 'chaoyang',
-              label: 'Chaoyang',
+              value: 'xuhui',
+              label: '徐汇区',
               children: [
                 {
-                  value: 'datunli',
-                  label: 'Datunli',
+                  value: 'roastery',
+                  label: '上海烘焙工坊',
                 },
               ],
             },
@@ -39,16 +39,16 @@ export default function Demo() {
       ],
     },
     {
-      value: 'shanghai',
-      label: 'Shanghai',
+      value: 'south',
+      label: '华南区',
       children: [
         {
-          value: 'shanghaishi',
-          label: 'Shanghai',
+          value: 'guangzhou',
+          label: '广州市',
           children: [
             {
-              value: 'huangpu',
-              label: 'Huangpu',
+              value: 'tianhe',
+              label: '天河区',
             },
           ],
         },
@@ -75,7 +75,7 @@ export default function Demo() {
   };
 
   return (
-    <div style={{ maxWidth: 650 }}>
+    <div style={{ width: '100%' }}>
       <Form
         ref={formRef}
         {...formItemLayout}
@@ -84,7 +84,7 @@ export default function Demo() {
         onValuesChange={onValuesChange}
         scrollToFirstError
       >
-        <Form.Item label="Form size">
+        <Form.Item label="表单尺寸">
           <Radio.Group type="button" value={size} onChange={setSize}>
             <Radio value="mini">mini</Radio>
             <Radio value="small">small</Radio>
@@ -92,58 +92,58 @@ export default function Demo() {
             <Radio value="large">large</Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="Username">
-          <Input placeholder="please enter..." />
+        <Form.Item label="门店名称">
+          <Input placeholder="请输入..." />
         </Form.Item>
-        <Form.Item label="Age">
-          <InputNumber placeholder="please enter" />
+        <Form.Item label="运营年限">
+          <InputNumber placeholder="请输入" />
         </Form.Item>
-        <Form.Item label="Province">
-          <Cascader showSearch placeholder="please select" allowClear options={cascaderOptions} />
+        <Form.Item label="所属区域">
+          <Cascader showSearch placeholder="请选择" allowClear options={cascaderOptions} />
         </Form.Item>
-        <Form.Item label="Auto-complete">
-          <AutoComplete placeholder="please enter" data={['123', '234', '345', '456']} />
+        <Form.Item label="自动补全">
+          <AutoComplete placeholder="请输入" data={['123', '234', '345', '456']} />
         </Form.Item>
-        <Form.Item label="Post">
+        <Form.Item label="岗位">
           <Select
-            placeholder="please select"
+            placeholder="请选择"
             options={[
               {
-                label: 'one',
+                label: '值班经理',
                 value: 0,
               },
               {
-                label: 'two',
+                label: '咖啡师',
                 value: 1,
               },
               {
-                label: 'three',
+                label: '区域督导',
                 value: 2,
               },
             ]}
             allowClear
           />
         </Form.Item>
-        <Form.Item label="Multiple Choice">
+        <Form.Item label="多选配置">
           <Select
             mode="multiple"
             allowCreate
-            placeholder="please select"
+            placeholder="请选择"
             options={['a', 'b', 'c', 'd', 'e']}
           />
         </Form.Item>
-        <Form.Item label="TreeSelect">
-          <TreeSelect allowClear placeholder="please select">
-            <TreeSelect.Node key="node1" title="Trunk(node1)">
-              <TreeSelect.Node key="node2" title="Leaf(node2)" />
+        <Form.Item label="树选择">
+          <TreeSelect allowClear placeholder="请选择">
+            <TreeSelect.Node key="node1" title="华东区">
+              <TreeSelect.Node key="node2" title="上海烘焙工坊" />
             </TreeSelect.Node>
-            <TreeSelect.Node key="node3" title="Trunk2(node3)">
-              <TreeSelect.Node key="node4" title="Leaf(node4)" />
-              <TreeSelect.Node key="node5" title="Leaf(node5)" />
+            <TreeSelect.Node key="node3" title="华南区">
+              <TreeSelect.Node key="node4" title="广州天河门店" />
+              <TreeSelect.Node key="node5" title="深圳臻选门店" />
             </TreeSelect.Node>
           </TreeSelect>
         </Form.Item>
-        <Form.Item label="Date">
+        <Form.Item label="日期">
           <DatePicker showTime />
         </Form.Item>
       </Form>

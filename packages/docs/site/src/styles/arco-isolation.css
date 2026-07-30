@@ -140,3 +140,128 @@
   font-weight: 600;
   color: var(--sl-color-white);
 }
+
+/* ---------------------------------------------------------------------
+ * 4) React Table border model
+ * Arco React draws the outer left edge on the first column, while Arco
+ * Vue draws it on the table container. Both demo runtimes are hydrated on
+ * the same docs page, so Vue's global container rule otherwise adds a
+ * second left edge to visible React tables.
+ * --------------------------------------------------------------------- */
+html[data-framework='react'] .fw-react .arco-table-border .arco-table-container {
+  border-top-color: transparent;
+  border-left: 0;
+  border-bottom: 0;
+  border-right-color: transparent;
+}
+
+/* Arco React uses the container ::before as its bottom closing rule. Arco
+ * Vue uses the same pseudo-element for the left scroll shadow, so reset the
+ * Vue positioning when both framework styles are present on the docs page. */
+html[data-framework='react']
+  .fw-react
+  .arco-table-border
+  .arco-table-container::before {
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  border-radius: 0;
+  z-index: 2;
+}
+
+/* React renders its scroll shadows on .arco-table-content-scroll. Suppress
+ * the additional container shadow pseudo-element supplied by Arco Vue. */
+html[data-framework='react'] .fw-react .arco-table-container::after {
+  content: none;
+}
+
+html[data-framework='react']
+  .fw-react
+  .arco-table-border
+  thead
+  > .arco-table-tr:first-child
+  > .arco-table-th:first-child {
+  border-left-color: transparent;
+}
+
+html[data-framework='react']
+  .fw-react
+  .arco-table-border
+  tbody
+  > .arco-table-tr
+  > .arco-table-td.arco-table-col-first {
+  border-left-color: transparent;
+}
+
+/* React draws divided cells from their left edge. Vue's table stylesheet is
+ * also present on docs pages and draws the same dividers from the right edge,
+ * which otherwise produces a doubled separator in React demos. */
+html[data-framework='react'] .fw-react .arco-table-border-cell .arco-table-th,
+html[data-framework='react'] .fw-react .arco-table-border-cell .arco-table-td,
+html[data-framework='react']
+  .fw-react
+  .arco-table-border-header-cell
+  .arco-table-th,
+html[data-framework='react']
+  .fw-react
+  .arco-table-border-body-cell
+  .arco-table-td {
+  border-right: 0;
+}
+
+/* Vue uses the opposite border model. Prevent React's global table stylesheet
+ * from adding a second divider and outer left edge to visible Vue demos. */
+html[data-framework='vue'] .fw-vue .arco-table-border-cell .arco-table-th,
+html[data-framework='vue'] .fw-vue .arco-table-border-cell .arco-table-td,
+html[data-framework='vue']
+  .fw-vue
+  .arco-table-border-header-cell
+  .arco-table-th,
+html[data-framework='vue']
+  .fw-vue
+  .arco-table-border-body-cell
+  .arco-table-td,
+html[data-framework='vue']
+  .fw-vue
+  .arco-table-border
+  .arco-table-th.arco-table-col-first,
+html[data-framework='vue']
+  .fw-vue
+  .arco-table-border
+  .arco-table-td.arco-table-col-first,
+html[data-framework='vue']
+  .fw-vue
+  .arco-table-border
+  .arco-table-expand-fixed-row {
+  border-left: 0;
+}
+
+html[data-framework='vue'] .fw-vue .arco-table-border .arco-table-container {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+
+/* Arco Vue rounds the container but leaves the header cells square. Match
+ * the native React header treatment so the header fill follows both top
+ * corners without clipping the container or its scroll shadows. */
+html[data-framework='vue']
+  .fw-vue
+  .arco-table
+  table
+  thead
+  > .arco-table-tr:first-child
+  > .arco-table-th:first-child {
+  border-radius: var(--border-radius-medium) 0 0 0;
+}
+
+html[data-framework='vue']
+  .fw-vue
+  .arco-table
+  table
+  thead
+  > .arco-table-tr:first-child
+  > .arco-table-th:last-child {
+  border-radius: 0 var(--border-radius-medium) 0 0;
+}

@@ -11,6 +11,24 @@ const legacyStylesUrl = new URL('../legacy-docs.css', import.meta.url);
 test('the weekly changelog presents the unified docs engine as the main workstream', async () => {
   const changelog = await readFile(changelogUrl, 'utf8');
 
+  assert.match(changelog, /^## 2026-07-30$/m);
+  assert.match(changelog, /2026-07-27 至 2026-07-30/);
+  assert.match(changelog, /本周更新汇总：统一 Docs 架构、组件样式收敛与模板建设/);
+  assert.match(changelog, /共确认 7 个已提交 Commit/);
+  assert.match(changelog, /约 319 个未提交文件/);
+  assert.match(changelog, /191 个为已跟踪修改、128 个为新增文件、0 个为暂存文件/);
+  assert.match(changelog, /07-29、07-30 的多项优化仍在本地工作区/);
+  assert.match(changelog, /状态标记为 CONDITIONAL/);
+  assert.match(changelog, /React、Vue 文档站合并为统一 Docs 架构/);
+  assert.match(changelog, /Table 按 Figma 设计稿完成第一轮 React \/ Vue 对齐/);
+  assert.match(changelog, /完成两批 Form 文档示例优化/);
+  assert.match(changelog, /Select \/ Cascader \/ TreeSelect 统一 Hover、聚焦、展开、错误和禁用状态优先级/);
+  assert.match(changelog, /Modal 对话框相关更新已纳入反馈类组件整理/);
+  assert.match(changelog, /FilterBar 当前为 CONDITIONAL/);
+  assert.match(changelog, /新增基本使用、级联选择、变更模式、展开收起、日期范围、集成布局、分离布局、响应式、状态展示和校验等 10 组双端 Docs 场景/);
+  assert.match(changelog, /页面模板当前为 CONDITIONAL/);
+  assert.match(changelog, /Skeleton 基本示例不可见、Transfer 操作按钮图标化、Progress Vue 基础示例可见性/);
+  assert.match(changelog, /未进入暂存、提交、推送、版本升级或发布流程/);
   assert.match(changelog, /^## 2026-07-24$/m);
   assert.match(changelog, /Astro \+ Starlight 统一 Docs 引擎与组件体验升级/);
   assert.match(changelog, /React Docusaurus 与 Vue VitePress 的启动入口、文档内容、组件 Demo 和构建流程/);
@@ -46,7 +64,7 @@ test('the weekly changelog presents the unified docs engine as the main workstre
 
   assert.equal(new Set(listItems).size, listItems.length);
   assert.equal((weeklySection.match(/\bUpload\b/g) ?? []).length, 1);
-  assert.equal((weeklySection.match(/\bTreeSelect\b/g) ?? []).length, 1);
+  assert.equal((weeklySection.match(/\bTreeSelect\b/g) ?? []).length, 2);
 });
 
 test('the changelog timeline connects entries and aligns dates with dots', async () => {

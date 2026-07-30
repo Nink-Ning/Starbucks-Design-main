@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber, Button } from '@sbux/starbucks-design-react';
+import { Form, Input, InputNumber, Button, Space } from '@sbux/starbucks-design-react';
 
 export default function Demo() {
   const [form] = Form.useForm();
@@ -6,7 +6,7 @@ export default function Demo() {
     <Form
       form={form}
       autoComplete="off"
-      style={{ width: 600 }}
+      style={{ width: '100%' }}
       validateMessages={{
         required: (_, { label }) => `必须填写 ${label}`,
         string: {
@@ -20,7 +20,7 @@ export default function Demo() {
       }}
     >
       <Form.Item
-        label="Username"
+        label="门店名称"
         field="name"
         required
         rules={[
@@ -32,10 +32,10 @@ export default function Demo() {
           },
         ]}
       >
-        <Input placeholder="please enter your username" />
+        <Input placeholder="请输入门店名称" />
       </Form.Item>
       <Form.Item
-        label="Age"
+        label="运营年限"
         field="age"
         rules={[
           {
@@ -46,20 +46,17 @@ export default function Demo() {
           },
         ]}
       >
-        <InputNumber placeholder="please enter your age" />
+        <InputNumber placeholder="请输入运营年限" />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 5 }}>
-        <Button type="primary" htmlType="submit" style={{ marginRight: 24 }}>
-          Validate
-        </Button>
-        <Button
-          style={{ marginRight: 24 }}
-          onClick={() => {
-            form.resetFields();
-          }}
-        >
-          Reset
-        </Button>
+        <Space size={16}>
+          <Button type="primary" htmlType="submit">校验</Button>
+          <Button
+            onClick={() => {
+              form.resetFields();
+            }}
+          >重置</Button>
+        </Space>
       </Form.Item>
     </Form>
   );

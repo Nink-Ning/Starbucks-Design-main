@@ -15,7 +15,7 @@
     <Checkbox
       :checked="!!pendingProps.pending"
       @change="
-        (v) => onChange({ pending: v ? 'This is a pending dot' : false })
+        (v) => onChange({ pending: v ? '等待门店反馈' : false })
       "
     >
       pending &nbsp; &nbsp;
@@ -30,15 +30,15 @@
   </Row>
   <Timeline v-bind="pendingProps">
     <template v-if="pendingProps.hasPendingDot" #dot>
-      <IconFire :style="{ color: '#e70a0a' }" />
+      <IconFire :style="{ color: 'var(--color-danger)' }" />
     </template>
-    <TimelineItem label="2017-03-10" dotColor="#52C419">
-      The first milestone
+    <TimelineItem label="2026-03-10" dotColor="var(--color-success)">
+      浓缩咖啡豆完成烘焙
     </TimelineItem>
-    <TimelineItem label="2018-05-12" dotColor="#F5222D">
-      The second milestone
+    <TimelineItem label="2026-05-12" dotColor="var(--color-danger)">
+      冷萃桶配送延迟
     </TimelineItem>
-    <TimelineItem label="2020-09-30">The third milestone</TimelineItem>
+    <TimelineItem label="2026-09-30">门店活动复盘完成</TimelineItem>
   </Timeline>
 </template>
 

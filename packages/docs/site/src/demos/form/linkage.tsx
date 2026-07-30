@@ -7,24 +7,24 @@ export default function Demo() {
       <Form
         form={form}
         autoComplete="off"
-        style={{ maxWidth: 650 }}
+        style={{ width: '100%' }}
         onValuesChange={(_, vs) => {
           console.log(vs);
         }}
       >
-        <Form.Item field="type" label="Type">
-          <Radio.Group options={['A', 'B']}></Radio.Group>
+        <Form.Item field="type" label="门店类型">
+          <Radio.Group options={['臻选门店', '标准门店']}></Radio.Group>
         </Form.Item>
         <Form.Item shouldUpdate noStyle>
           {(values) => {
-            return values.type === 'A' ? (
-              <Form.Item field="Name A" label="Select A">
-                <Input placeholder="Please enter name A" />
+            return values.type === '臻选门店' ? (
+              <Form.Item field="reserveStore" label="臻选门店">
+                <Input placeholder="请输入臻选门店名称" />
               </Form.Item>
             ) : (
-              values.type === 'B' && (
-                <Form.Item field="B" label="Name B">
-                  <Select options={['B1', 'B2', 'B3']} placeholder="Please select name B" />
+              values.type === '标准门店' && (
+                <Form.Item field="standardStore" label="标准门店">
+                  <Select options={['门店 1', '门店 2', '门店 3']} placeholder="请选择标准门店" />
                 </Form.Item>
               )
             );
@@ -33,8 +33,8 @@ export default function Demo() {
         <Form.Item noStyle shouldUpdate={(prev, next) => prev.type !== next.type}>
           {(values) => {
             return values.type ? (
-              <Form.Item field="remark" label="Remark">
-                <Input.TextArea placeholder={values.type + ' remark'} />
+              <Form.Item field="remark" label="备注">
+                <Input.TextArea placeholder={`${values.type} 备注`} />
               </Form.Item>
             ) : null;
           }}
@@ -46,7 +46,7 @@ export default function Demo() {
               console.log(form.getFieldsValue());
             }}
           >
-            OK
+            查看表单值
           </Button>
         </Form.Item>
       </Form>

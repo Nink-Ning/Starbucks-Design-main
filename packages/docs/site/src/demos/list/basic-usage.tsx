@@ -3,7 +3,7 @@ import { List } from '@sbux/starbucks-design-react';
 export default function Demo() {
   return (
     <List
-      style={{ width: 622 }}
+      style={{ width: '100%' }}
       size="small"
       header="List title"
       dataSource={[

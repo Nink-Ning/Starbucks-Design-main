@@ -15,5 +15,5 @@
 import { ref } from 'vue';
 import { IconBgColors } from '@sbux/starbucks-design-vue/icon';
 
-const value = ref('#165DFF');
+const value = ref('#00754A');
 </script>

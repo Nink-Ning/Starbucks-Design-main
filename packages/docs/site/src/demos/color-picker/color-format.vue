@@ -3,7 +3,7 @@
     <RadioGroup type="button" v-model="format">
       <Radio v-for="item in formatList" :value="item">{{ item }}</Radio>
     </RadioGroup>
-    <ColorPicker defaultValue="#165DFF" :format="format" showText />
+    <ColorPicker defaultValue="#00754A" :format="format" showText />
   </Space>
 </template>
 

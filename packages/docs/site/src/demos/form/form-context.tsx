@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Form, Button, Switch, Input, InputNumber, Message } from '@sbux/starbucks-design-react';
+import { Form, Button, Switch, Input, InputNumber, Message, Space } from '@sbux/starbucks-design-react';
 
 export default function Demo() {
   const [form] = Form.useForm();
@@ -14,7 +14,7 @@ export default function Demo() {
         messageRef.current = 'id-' + Date.now()
         Message.loading({
           id: messageRef.current,
-          content: 'submitting',
+          content: '提交中',
           duration: 0
         });
       } else {
@@ -23,7 +23,7 @@ export default function Demo() {
 
           Message[isError ? 'error' : 'success']({
             id: messageRef.current,
-            content: isError ? 'validate failed' : 'submitted',
+            content: isError ? '校验失败' : '提交成功',
             duration: 3000
           });
         }
@@ -32,26 +32,24 @@ export default function Demo() {
     }, [isSubmitting])
 
     return (
-      <>
+      <Space size={16}>
         <Button
           type="primary"
           htmlType="submit"
           disabled={disabled}
           loading={isSubmitting}
-          style={{ marginRight: 24 }}
         >
-          Submit
+          提交
         </Button>
         <Button
           disabled={disabled}
-          style={{ marginRight: 24 }}
           onClick={() => {
             form.resetFields();
           }}
         >
-          Reset
+          重置
         </Button>
-      </>
+      </Space>
     );
   }
 
@@ -59,8 +57,8 @@ export default function Demo() {
     <Form
       form={form}
       autoComplete="off"
-      style={{ width: 600 }}
-      initialValues={{ name: 'admin' }}
+      style={{ width: '100%' }}
+      initialValues={{ name: '上海烘焙工坊' }}
       disabled={disabled}
       onValuesChange={(v, vs) => {
         console.log(v, vs);
@@ -73,18 +71,18 @@ export default function Demo() {
         })
       }}
     >
-      <Form.Item label="Disabled" disabled={false}>
+      <Form.Item label="禁用表单" disabled={false}>
         <Switch onChange={setDisabled}></Switch>
       </Form.Item>
-      <Form.Item label="Username" field="name" rules={[{ required: true }]}>
-        <Input placeholder="please enter your username" />
+      <Form.Item label="门店名称" field="name" rules={[{ required: true }]}>
+        <Input placeholder="请输入门店名称" />
       </Form.Item>
       <Form.Item
-        label="Age"
+        label="运营年限"
         field="age"
         rules={[{ required: true, type: 'number', min: 0, max: 99 }]}
       >
-        <InputNumber placeholder="please enter your age" />
+        <InputNumber placeholder="请输入运营年限" />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 5 }}>
         <DemoButton />

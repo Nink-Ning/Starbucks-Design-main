@@ -3,9 +3,25 @@ import { Grid, Typography, Radio, Timeline } from '@sbux/starbucks-design-react'
 
 export default function Demo() {
 
-  const imageStyle = {
-    margin: '0 12px 12px 12px'
-  }
+  const coffeeIconStyle: React.CSSProperties = {
+    width: 40,
+    height: 40,
+    margin: '0 12px 12px 12px',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 12,
+    boxSizing: 'border-box',
+    background: 'var(--color-primary-light)',
+    color: 'var(--color-primary)',
+    fontSize: 20,
+    lineHeight: '40px',
+  };
+
+  const descStyle: React.CSSProperties = {
+    fontSize: 12,
+    color: 'var(--color-text-secondary)',
+  };
 
   const [mode, setMode] = React.useState('left');
   return (
@@ -32,49 +48,30 @@ export default function Demo() {
         />
       </Grid.Row>
       <Timeline mode={mode} labelPosition="relative">
-        <Timeline.Item label="2012-08">
+        <Timeline.Item label="2026-03">
           <Grid.Row style={{ display: 'inline-flex', alignItems: 'center' }}>
-            <img
-              width="40"
-              style={imageStyle}
-              src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/b5d834b83708a269b4562924436eac48.png~tplv-uwbnlip3yd-png.png"
-            />
+            <div style={coffeeIconStyle}>☕</div>
             <div style={{ marginBottom: 12 }}>
-              Toutiao
-              <div style={{ fontSize: 12, color: '#4E5969' }}>Founded in 2012</div>
+              经典拿铁
+              <div style={descStyle}>春季主推饮品上新</div>
             </div>
           </Grid.Row>
         </Timeline.Item>
-        <Timeline.Item label="2017-05">
+        <Timeline.Item label="2026-05">
           <Grid.Row style={{ display: 'inline-flex', alignItems: 'center' }}>
-            <img
-              width="40"
-              style={imageStyle}
-              src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/385ed540c359ec8a9b9ce2b5fe89b098.png~tplv-uwbnlip3yd-png.png"
-            />
+            <div style={{ ...coffeeIconStyle, background: 'var(--bg-color-component)' }}>🧊</div>
             <div style={{ marginBottom: 12 }}>
-              Xigua Video
-              <div style={{ fontSize: 12, color: '#4E5969' }}>Founded in 2017</div>
+              冷萃咖啡
+              <div style={descStyle}>夏季冰饮物料到店</div>
             </div>
           </Grid.Row>
         </Timeline.Item>
-        <Timeline.Item label="2018-07">
+        <Timeline.Item label="2026-09">
           <Grid.Row style={{ display: 'inline-flex', alignItems: 'center' }}>
-            <img
-              width="40"
-              style={imageStyle}
-              src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/73a34d47f2885cf5182d755aa0c8a7d4.png~tplv-uwbnlip3yd-png.png"
-            />
+            <div style={{ ...coffeeIconStyle, background: 'var(--bg-color-secondarycomponent-active)' }}>🍵</div>
             <div style={{ marginBottom: 12 }}>
-              Pipidance
-              <div
-                style={{
-                  fontSize: 12,
-                  color: '#4E5969',
-                }}
-              >
-                Founded in 2018
-              </div>
+              抹茶星冰乐
+              <div style={descStyle}>会员日限定活动开启</div>
             </div>
           </Grid.Row>
         </Timeline.Item>

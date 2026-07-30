@@ -1,0 +1,68 @@
+// Statistic.less
+// Starbucks semantic typography and color adapter for Arco Vue Statistic.
+
+.arco-statistic {
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-statistic-title {
+  margin-bottom: var(--spacing-4);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+}
+
+.arco-statistic-content {
+  color: var(--color-text-primary);
+}
+
+.arco-statistic-content .arco-statistic-value {
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--color-text-primary);
+  font-size: var(--fs-28);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-36);
+  white-space: nowrap;
+}
+
+.arco-statistic-value-integer,
+.arco-statistic-value-decimal {
+  font-size: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.arco-statistic-prefix,
+.arco-statistic-suffix {
+  display: inline-flex;
+  align-items: center;
+  color: currentColor;
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-statistic-prefix {
+  margin-right: var(--spacing-2);
+}
+
+.arco-statistic-suffix {
+  margin-left: var(--spacing-2);
+}
+
+.arco-statistic-prefix > svg,
+.arco-statistic-suffix > svg {
+  width: 16px;
+  height: 16px;
+}
+
+.arco-statistic-extra {
+  margin-top: var(--spacing-4);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}

@@ -67,7 +67,7 @@ export default class Demo extends React.Component {
       );
     }
     return (
-      <Layout className="layout-collapse-demo">
+      <Layout className="sb-layout-demo sb-layout-demo--shell">
         <Layout.Sider
           theme="dark"
           breakpoint="lg"
@@ -76,7 +76,7 @@ export default class Demo extends React.Component {
           width={220}
           collapsible
         >
-          <div className="logo" />
+          <div className="sb-layout-demo__logo" />
           <BaseMenu
             onClickMenuItem={(key) =>
               Message.info({
@@ -92,8 +92,8 @@ export default class Demo extends React.Component {
           <Layout.Header>
             <BaseMenu mode="horizontal" />
           </Layout.Header>
-          <Layout style={{ padding: '0 24px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
+          <Layout className="sb-layout-demo__workspace">
+            <Breadcrumb className="sb-layout-demo__breadcrumb">
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>List</Breadcrumb.Item>
               <Breadcrumb.Item>App</Breadcrumb.Item>

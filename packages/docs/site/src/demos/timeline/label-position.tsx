@@ -46,14 +46,14 @@ export default function Demo() {
         />
       </Grid.Row>
       <Timeline mode={mode} labelPosition={pos}>
-        <Timeline.Item label="2017-03-10" dotColor="#52C419">
-          The first milestone
+        <Timeline.Item label="2026-03-10" dotColor="var(--color-success)">
+          春季拿铁配方确认
         </Timeline.Item>
-        <Timeline.Item label="2018-05-12" dotColor="#F5222D" labelPosition="same">
-          The second milestone
+        <Timeline.Item label="2026-05-12" dotColor="var(--color-danger)" labelPosition="same">
+          冷萃物料配送延迟
         </Timeline.Item>
-        <Timeline.Item label="2020-09-30">
-          The third milestone
+        <Timeline.Item label="2026-09-30">
+          秋季会员活动上线
         </Timeline.Item>
       </Timeline>
     </div>

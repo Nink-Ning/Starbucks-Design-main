@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Table } from '@sbux/starbucks-design-react';
+import { IconDownCircle, IconRightCircle } from '@sbux/starbucks-design-react/icon';
 
 export default function Demo() {
 
@@ -111,6 +112,10 @@ export default function Demo() {
         }
 
         return null;
+      }}
+      expandProps={{
+        icon: ({ expanded }) =>
+          expanded ? <IconDownCircle /> : <IconRightCircle />,
       }}
       rowSelection={{
         type: 'checkbox',

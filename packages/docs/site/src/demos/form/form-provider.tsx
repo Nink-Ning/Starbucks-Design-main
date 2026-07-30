@@ -20,10 +20,10 @@ export default function Demo() {
   const defaultData = [...new Array(5)].map((_, index) => {
     return {
       key: index,
-      name: 'Jane Doe ' + index,
+      name: '星巴克门店 ' + (index + 1),
       salary: 23000,
-      email: 'jane.doe@example.com',
-      gender: index % 2 > 0 ? 'male' : 'female',
+      email: 'store-' + (index + 1) + '@starbucks.example',
+      gender: index % 2 > 0 ? '华东区' : '华南区',
       age: 20 + index,
     };
   });
@@ -31,16 +31,16 @@ export default function Demo() {
   function ModalForm(props) {
     return (
       <div>
-        <Modal visible title="Add" footer={null} onCancel={props.onCancel}>
+        <Modal visible title="新增筛选条件" footer={null} onCancel={props.onCancel}>
           <Form id="modalForm" autoComplete="off">
-            <Form.Item field="email" label="Email">
+            <Form.Item field="email" label="邮箱">
               <Input />
             </Form.Item>
             <Form.Item wrapperCol={{ offset: 5 }} label="">
               <Space>
-                <Button onClick={props.onCancel}>Cancel</Button>
+                <Button onClick={props.onCancel}>取消</Button>
                 <Button htmlType="submit" type="primary">
-                  Submit
+                  提交
                 </Button>
               </Space>
             </Form.Item>
@@ -54,9 +54,9 @@ export default function Demo() {
     return (
       <Form id="refreshForm" layout="inline" style={{ width: 'auto' }}>
         <Form.Item field="keyword">
-          <Input.Search placeholder="enter keyword" />
+          <Input.Search placeholder="请输入门店关键词" />
         </Form.Item>
-        <Button htmlType="submit">Refresh</Button>
+        <Button htmlType="submit">刷新</Button>
       </Form>
     );
   }
@@ -81,7 +81,7 @@ export default function Demo() {
             icon: <span></span>,
             content: (
               <div style={{ textAlign: 'left' }}>
-                <span>form values:</span>
+                <span>表单数据：</span>
                 <pre>
                   {JSON.stringify(
                     {
@@ -100,39 +100,39 @@ export default function Demo() {
         <Form id="searchForm" layout="vertical">
           <Grid.Row gutter={24}>
             <Grid.Col span={8}>
-              <Form.Item label="Name" field="name">
-                <Input placeholder="enter name" />
+              <Form.Item label="门店名称" field="name">
+                <Input placeholder="请输入门店名称" />
               </Form.Item>
             </Grid.Col>
             <Grid.Col span={8}>
-              <Form.Item label="Gender" field="gender">
+              <Form.Item label="所属区域" field="gender">
                 <Select
-                  placeholder="select gender"
-                  options={['All', 'Female', 'Male', 'Unknown']}
+                  placeholder="请选择所属区域"
+                  options={['全部', '华东区', '华南区', '待确认']}
                 />
               </Form.Item>
             </Grid.Col>
             <Grid.Col span={8}>
-              <Form.Item label="Age" field="age">
-                <InputNumber placeholder="enter age" />
+              <Form.Item label="运营年限" field="age">
+                <InputNumber placeholder="请输入运营年限" />
               </Form.Item>
             </Grid.Col>
           </Grid.Row>
           <Space>
             <Form.Item field="email" shouldUpdate noStyle>
               {(values) => {
-                return <Tag color="arcoblue">email: {values.email || 'null'}</Tag>;
+                return <Tag color="green">邮箱：{values.email || '未填写'}</Tag>;
               }}
             </Form.Item>
             <Button htmlType="submit" type="primary">
-              Search
+              查询
             </Button>
             <Button
               onClick={() => {
                 setVisible(true);
               }}
             >
-              Add filter
+              新增筛选
             </Button>
           </Space>
         </Form>
@@ -141,7 +141,7 @@ export default function Demo() {
         <br />
         <Grid.Row justify="space-between" align="center">
           <Typography.Text style={{ fontSize: 18 }} bold>
-            Result
+            查询结果
           </Typography.Text>
           <RefreshForm />
         </Grid.Row>
@@ -157,23 +157,23 @@ export default function Demo() {
       <Table
         columns={[
           {
-            title: 'Name',
+            title: '门店名称',
             dataIndex: 'name',
           },
           {
-            title: 'Salary',
+            title: '销售额',
             dataIndex: 'salary',
           },
           {
-            title: 'Gender',
+            title: '所属区域',
             dataIndex: 'gender',
           },
           {
-            title: 'Age',
+            title: '运营年限',
             dataIndex: 'age',
           },
           {
-            title: 'Email',
+            title: '邮箱',
             dataIndex: 'email',
           },
         ]}

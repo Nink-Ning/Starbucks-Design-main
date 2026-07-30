@@ -7,16 +7,16 @@ export default function Demo() {
   return (
     <div>
       <Form form={form} autoComplete="off">
-        <Form.Item label="Name" field="name">
-          <Input placeholder="enter name" />
+        <Form.Item label="门店名称" field="name">
+          <Input placeholder="请输入门店名称" />
         </Form.Item>
 
-        <Form.Item label="Age" field="age">
-          <InputNumber placeholder="enter age" />
+        <Form.Item label="运营年限" field="age">
+          <InputNumber placeholder="请输入运营年限" />
         </Form.Item>
         <Form.Item label=" ">
           <Typography.Text code>
-            Name: {name}; Age: {age}
+            门店名称: {name}; 运营年限: {age}
           </Typography.Text>
         </Form.Item>
       </Form>

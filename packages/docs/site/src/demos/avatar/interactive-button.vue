@@ -1,17 +1,17 @@
 <template>
   <Space size="large">
     <Avatar
-      :trigger-icon-style="{ color: '#3491FA' }"
+      :trigger-icon-style="{ color: 'var(--color-primary)' }"
       :auto-fix-font-size="false"
       @click="handleToast"
-      :style="{ backgroundColor: '#168CFF' }"
+      :style="{ backgroundColor: 'var(--color-primary)' }"
     >
       A
       <template #trigger-icon>
         <IconCamera />
       </template>
     </Avatar>
-    <Avatar @click="handleToast" :style="{ backgroundColor: '#14C9C9' }">
+    <Avatar @click="handleToast" :style="{ backgroundColor: 'var(--color-success)' }">
       <IconUser />
       <template #trigger-icon>
         <IconEdit />
@@ -20,7 +20,7 @@
     <Avatar
       @click="handleToast"
       shape="square"
-      :style="{ backgroundColor: '#FFC72E' }"
+      :style="{ backgroundColor: 'var(--color-warning)' }"
     >
       <IconUser />
       <template #trigger-icon>

@@ -17,6 +17,7 @@ import {
   Button,
   Modal,
   Message,
+  Space,
 } from '@sbux/starbucks-design-react';
 
 export default function Demo() {
@@ -281,34 +282,35 @@ export default function Demo() {
           <Checkbox>我已阅读员工手册</Checkbox>
         </Form.Item>
         <Form.Item {...noLabelLayout}>
-          <Button
-            onClick={async () => {
-              if (formRef.current) {
-                try {
-                  await formRef.current.validate();
-                  Message.info('校验通过，提交成功！');
-                } catch (_) {
-                  console.log(formRef.current.getFieldsError());
-                  Message.error('校验失败，请检查字段！');
+          <Space size={16}>
+            <Button
+              onClick={async () => {
+                if (formRef.current) {
+                  try {
+                    await formRef.current.validate();
+                    Message.info('校验通过，提交成功！');
+                  } catch (_) {
+                    console.log(formRef.current.getFieldsError());
+                    Message.error('校验失败，请检查字段！');
+                  }
                 }
-              }
-            }}
-            type="primary"
-            style={{ marginRight: 16 }}
-          >提交</Button>
-          <Button
-            onClick={() => {
-              formRef.current.resetFields();
-            }}
-          >重置</Button>
-          <Button
-            type="text"
-            onClick={() => {
-              Message.info(`fields: ${formRef.current.getTouchedFields().join(',')}`);
-            }}
-          >
-            获取已修改字段
-          </Button>
+              }}
+              type="primary"
+            >提交</Button>
+            <Button
+              onClick={() => {
+                formRef.current.resetFields();
+              }}
+            >重置</Button>
+            <Button
+              type="text"
+              onClick={() => {
+                Message.info(`fields: ${formRef.current.getTouchedFields().join(',')}`);
+              }}
+            >
+              获取已修改字段
+            </Button>
+          </Space>
         </Form.Item>
       </Form>
     </div>

@@ -6,7 +6,7 @@ export default function Demo() {
   return (
     <div>
       <Form
-        style={{ maxWidth: 650 }}
+        style={{ width: '100%' }}
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 18 }}
         autoComplete="off"
@@ -15,20 +15,20 @@ export default function Demo() {
           setValues(values);
         }}
       >
-        <Form.Item label="Username" field="user.username" rules={[{ required: true }]}>
-          <Input placeholder="please enter your username" />
+        <Form.Item label="门店名称" field="user.username" rules={[{ required: true }]}>
+          <Input placeholder="请输入门店名称" />
         </Form.Item>
-        <Form.Item label="Post" field="user.post" rules={[{ required: true }]}>
-          <Input placeholder="please enter your post" />
+        <Form.Item label="岗位" field="user.post" rules={[{ required: true }]}>
+          <Input placeholder="请输入岗位" />
         </Form.Item>
 
-        <Form.Item label="Volunteers">
-          <Form.Item label="Volunteer1" field="user.volunteers[0]" rules={[{ required: true }]}>
-            <Input placeholder="please enter your post" />
+        <Form.Item label="协作人">
+          <Form.Item label="协作人1" field="user.volunteers[0]" rules={[{ required: true }]}>
+            <Input placeholder="请输入岗位" />
           </Form.Item>
 
-          <Form.Item label="Volunteer2" field="user.volunteers[1]" rules={[{ required: true }]}>
-            <Input placeholder="please enter your post" />
+          <Form.Item label="协作人2" field="user.volunteers[1]" rules={[{ required: true }]}>
+            <Input placeholder="请输入岗位" />
           </Form.Item>
         </Form.Item>
       </Form>

@@ -1,0 +1,98 @@
+// Slider.less
+// Component-specific overrides using Starbucks global design variables.
+
+.arco-slider {
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-weight: var(--fw-regular);
+}
+
+.arco-slider-track::before {
+  background-color: var(--bg-color-component);
+}
+
+.arco-slider-bar {
+  background-color: var(--color-primary);
+}
+
+.arco-slider-btn::after {
+  background: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-slider-btn:hover::after,
+.arco-slider-btn-active::after {
+  border-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.arco-slider-btn:focus-visible::after {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-slider-track-disabled::before {
+  background-color: var(--bg-color-component-disabled);
+}
+
+.arco-slider-track-disabled .arco-slider-bar {
+  background-color: var(--bg-color-component);
+}
+
+.arco-slider-track-disabled .arco-slider-btn::after {
+  background: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+}
+
+.arco-slider-track-disabled .arco-slider-btn:hover::after,
+.arco-slider-track-disabled .arco-slider-btn-active::after,
+.arco-slider-track-disabled .arco-slider-btn:focus-visible::after {
+  box-shadow: none;
+}
+
+.arco-slider-dot {
+  background-color: var(--bg-color-container);
+  border-color: var(--bg-color-component);
+}
+
+.arco-slider-dot-active {
+  border-color: var(--color-primary);
+}
+
+.arco-slider-track-disabled .arco-slider-dot {
+  border-color: var(--bg-color-component-disabled);
+}
+
+.arco-slider-track-disabled .arco-slider-dot-active {
+  border-color: var(--bg-color-component);
+}
+
+.arco-slider-tick {
+  background: var(--bg-color-component);
+}
+
+.arco-slider-tick-active {
+  background: var(--color-primary);
+}
+
+.arco-slider-track-disabled .arco-slider-tick {
+  background: var(--bg-color-component-disabled);
+}
+
+.arco-slider-track-disabled .arco-slider-tick-active {
+  background: var(--bg-color-component);
+}
+
+.arco-slider-mark {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-slider-track-disabled .arco-slider-mark {
+  color: var(--color-text-disabled);
+}
+
+.arco-slider-input-hyphens {
+  background: var(--color-text-secondary);
+}

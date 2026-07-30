@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext, useCallback, useEffect } from 'react';
 import { Button, Form, Input, Select, Table } from '@sbux/starbucks-design-react';
 import type { FormInstance } from '@sbux/starbucks-design-react';
+import { IconDelete } from '@sbux/starbucks-design-react/icon';
 
 export default function Demo() {
 
@@ -174,9 +175,15 @@ export default function Demo() {
       title: 'Operation',
       dataIndex: 'op',
       render: (_, record) => (
-        <Button onClick={() => removeRow(record.key)} type="primary" status="danger">
-          Delete
-        </Button>
+        <Button
+          aria-label="Delete row"
+          className="table-demo-delete-button"
+          icon={<IconDelete />}
+          onClick={() => removeRow(record.key)}
+          shape="circle"
+          status="danger"
+          type="text"
+        />
       ),
     },
   ];

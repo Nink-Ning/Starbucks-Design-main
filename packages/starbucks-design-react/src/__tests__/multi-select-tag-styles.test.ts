@@ -32,6 +32,53 @@ describe('shared multi-select tag styles', () => {
     expect(styles).toContain('margin: 0;')
   })
 
+  it('keeps InputTag states aligned with the shared Input shell', () => {
+    expect(inputTagStyles).toMatch(
+      /\.arco-input-tag\.arco-input-tag-error,[\s\S]*?background-color: var\(--bg-color-container\);[\s\S]*?border-color: var\(--color-danger\);/,
+    )
+    expect(inputTagStyles).toMatch(
+      /\.arco-input-tag\.arco-input-tag-disabled,[\s\S]*?background-color: var\(--bg-color-component-disabled\);[\s\S]*?border-color: var\(--color-border-component\);/,
+    )
+    expect(inputTagStyles).not.toContain('!important')
+  })
+
+  it('keeps addon hover neutral and reserves a centered clear-icon slot', () => {
+    expect(inputTagStyles).not.toMatch(
+      /:has\(> \.arco-input-tag-add(?:before|after)\) > \.arco-input-tag:hover/,
+    )
+    expect(inputTagStyles).toContain(
+      '.arco-input-tag.arco-input-tag-has-suffix {\n  padding-right: var(--spacing-3);',
+    )
+    expect(inputTagStyles).toContain(
+      '.arco-input-tag .arco-input-tag-suffix {\n  flex: 0 0 16px;',
+    )
+    expect(inputTagStyles).toContain('margin-left: var(--spacing-2);')
+  })
+
+  it('wins the native size rules without increasing the component height', () => {
+    expect(inputTagStyles).toContain(
+      '.arco-input-tag.arco-input-tag-size-mini .arco-input-tag-tag,',
+    )
+    expect(inputTagStyles).toContain(
+      '.arco-input-tag.arco-input-tag-size-large .arco-input-tag-tag,',
+    )
+    expect(inputTagStyles).toContain(
+      '.arco-input-tag.arco-input-tag-size-mini .arco-input-tag-view,',
+    )
+    expect(inputTagStyles).toContain(
+      '.arco-input-tag.arco-input-tag-size-large .arco-input-tag-view {',
+    )
+    expect(inputTagStyles).toMatch(
+      /\.arco-input-tag\.arco-input-tag-size-mini[\s\S]*?\.arco-input-tag-inner[\s\S]*?\.arco-input-tag-input,[\s\S]*?height: 20px;[\s\S]*?margin: 0;/,
+    )
+    expect(inputTagStyles).toMatch(
+      /\.arco-input-tag\.arco-input-tag-size-large[\s\S]*?\.arco-input-tag-inner[\s\S]*?\.arco-input-tag-input \{[\s\S]*?height: 24px;[\s\S]*?margin: 0;/,
+    )
+    expect(inputTagStyles).toMatch(
+      /\.arco-input-tag\.arco-input-tag-size-large \.arco-input-tag-tag,[\s\S]*?height: 24px;[\s\S]*?min-height: 24px;[\s\S]*?margin: 0;/,
+    )
+  })
+
   it('centers default and compact tags inside the Select content area', () => {
     expect(selectStyles).toContain(
       '.arco-select-multiple .arco-input-tag {\n  height: 24px;\n  min-height: 24px;',

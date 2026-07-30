@@ -60,16 +60,28 @@
 }
 
 .arco-cascader:not(.arco-cascader-disabled):hover .arco-cascader-view {
-  background-color: var(--bg-color-container);
-  border-color: var(--color-primary);
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
 }
 
 .arco-cascader-focused:not(.arco-cascader-disabled) .arco-cascader-view,
-.arco-cascader-open:not(.arco-cascader-disabled) .arco-cascader-view {
+.arco-cascader-open:not(.arco-cascader-disabled) .arco-cascader-view,
+.arco-cascader-popup-visible:not(.arco-cascader-disabled) .arco-cascader-view,
+.arco-cascader:not(.arco-cascader-disabled):active .arco-cascader-view,
+.arco-cascader:not(.arco-cascader-disabled) .arco-cascader-view:focus-within {
   color: var(--color-text-primary);
   background-color: var(--bg-color-container);
   border-color: var(--color-primary);
   box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-cascader-focused:not(.arco-cascader-disabled):hover .arco-cascader-view,
+.arco-cascader-open:not(.arco-cascader-disabled):hover .arco-cascader-view,
+.arco-cascader-popup-visible:not(.arco-cascader-disabled):hover .arco-cascader-view,
+.arco-cascader:not(.arco-cascader-disabled):active:hover .arco-cascader-view,
+.arco-cascader:not(.arco-cascader-disabled) .arco-cascader-view:focus-within:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
 }
 
 .arco-cascader-error .arco-cascader-view,
@@ -400,13 +412,11 @@
   border-bottom-right-radius: 0;
 }
 
-.arco-cascader-wrapper:has(> .arco-cascader-addbefore) > .arco-cascader:not(.arco-cascader-disabled):hover .arco-cascader-view,
 .arco-cascader-wrapper:has(> .arco-cascader-addbefore) > .arco-cascader-focused:not(.arco-cascader-disabled) .arco-cascader-view,
 .arco-cascader-wrapper:has(> .arco-cascader-addbefore) > .arco-cascader-open:not(.arco-cascader-disabled) .arco-cascader-view {
   border-left-color: var(--color-primary);
 }
 
-.arco-cascader-wrapper:has(> .arco-cascader-addafter) > .arco-cascader:not(.arco-cascader-disabled):hover .arco-cascader-view,
 .arco-cascader-wrapper:has(> .arco-cascader-addafter) > .arco-cascader-focused:not(.arco-cascader-disabled) .arco-cascader-view,
 .arco-cascader-wrapper:has(> .arco-cascader-addafter) > .arco-cascader-open:not(.arco-cascader-disabled) .arco-cascader-view {
   border-right-color: var(--color-primary);

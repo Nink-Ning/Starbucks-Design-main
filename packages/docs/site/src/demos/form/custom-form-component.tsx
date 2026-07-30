@@ -19,9 +19,9 @@ export default function Demo() {
           handleChange({ ...value, input: v });
         }}
         addBefore={
-          <Select // select component has defined error style
+          <Select // select component 已定义错误态样式
             error={props.error}
-            placeholder="Please select ..."
+            placeholder="请选择..."
             style={{ width: 100 }}
             value={value.select}
             options={['aaa', 'bbb']}
@@ -36,7 +36,7 @@ export default function Demo() {
 
   return (
     <div>
-      <Form ref={formRef} style={{ maxWidth: 650 }} autoComplete="off" onValuesChange={(_, v) => setValues(v)}>
+      <Form ref={formRef} style={{ width: '100%' }} autoComplete="off" onValuesChange={(_, v) => setValues(v)}>
         <Form.Item
           rules={[
             {
@@ -47,7 +47,7 @@ export default function Demo() {
                 console.log(val);
 
                 if (val.select !== 'bbb') {
-                  cb('Please select bbb');
+                  cb('请选择 B 选项');
                 }
 
                 cb();

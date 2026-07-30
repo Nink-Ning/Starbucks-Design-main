@@ -1,16 +1,16 @@
 <template>
   <Space direction="vertical" size="large" style="width: 100%">
     <Mention
-      :data="['Bytedance', 'Bytedesign', 'Bytenumner']"
-      placeholder="input @"
+      :data="['Nink', 'Zero', 'Kevin']"
+      placeholder="输入 @Nink"
     />
     <Mention
-      :data="['Bytedance', 'Bytedesign', 'Bytenumner']"
+      :data="['Nink', 'Zero', 'Kevin']"
       prefix="#"
       placeholder="input #"
     />
     <Mention
-      :data="['Bytedance', 'Bytedesign', 'Bytenumner']"
+      :data="['Nink', 'Zero', 'Kevin']"
       prefix="$"
       placeholder="input $"
     />

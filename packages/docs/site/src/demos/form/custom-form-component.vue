@@ -3,18 +3,18 @@
     <Switch v-model="disabled" />
     Disabled: {{ disabled }}
   </Space>
-  <Form :model="form" :disabled="disabled" :style="{ width: '600px' }">
+  <Form :model="form" :disabled="disabled" :style="{ width: '100%' }">
     <FormItem
       field="name"
-      label="Username"
+      label="门店名称"
       :rules="[
-        { required: true, message: 'name is required' },
-        { minLength: 5, message: 'must be greater than 5 characters' },
+        { required: true, message: '请输入门店名称' },
+        { minLength: 5, message: '至少输入 5 个字符' },
       ]"
     >
       <MyInput
         v-model="form.name"
-        placeholder="please enter your username..."
+        placeholder="请输入门店名称..."
       />
     </FormItem>
   </Form>

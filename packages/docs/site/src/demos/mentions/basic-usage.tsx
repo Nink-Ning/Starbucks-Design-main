@@ -4,8 +4,8 @@ export default function Demo() {
   return (
     <Mentions
       style={{ width: 154 }}
-      defaultValue="@Bytedance"
-      options={['Bytedance', 'Bytedesign', 'Bytenumner']}
+      defaultValue="@Nink"
+      options={['Nink', 'Zero', 'Kevin']}
     />
   );
 }

@@ -1,7 +1,7 @@
 <template>
   <Typography>
     <TypographyParagraph copyable>
-      Click the icon to copy this text.
+      点击复制图标，复制 Starbucks Design 文案。
     </TypographyParagraph>
     <TypographyParagraph editable v-model:editText="str">
       {{ str }}
@@ -9,7 +9,7 @@
   </Typography>
 </template>
 <script setup lang="ts">
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 
-const str = ref('Click the icon to edit this text.');
+const str = ref('点击编辑图标，更新门店公告内容。');
 </script>
