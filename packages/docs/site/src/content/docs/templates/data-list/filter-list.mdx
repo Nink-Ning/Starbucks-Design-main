@@ -7,8 +7,74 @@ tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="筛选列表" description="筛选列表模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/filter-list" />
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>面包屑右侧放置页面状态切换和主操作“新建门店”。</li>
+      <li>筛选区直接调用业务组件 <code>FilterBar</code>，支持关键词、营业状态、所在城市、门店类型和开业日期筛选。</li>
+      <li>表格工具栏组合选择数量、批量操作和表格操作，批量变更需二次确认。</li>
+      <li>数据表格展示门店信息、业务状态和行操作。</li>
+      <li>分页跟随筛选结果联动，并与表格处于同一内容区域。</li>
+      <li>顶部状态切换演示 Normal、Loading、Empty、Error。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>业务组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>FilterBar</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Button</code>
+        <code>Radio</code>
+        <code>Table</code>
+        <code>Pagination</code>
+        <code>Tag</code>
+        <code>Modal</code>
+        <code>Input</code>
+        <code>Select</code>
+        <code>Checkbox</code>
+        <code>Dropdown</code>
+        <code>Menu</code>
+        <code>Space</code>
+        <code>Tooltip</code>
+        <code>Empty</code>
+        <code>Result</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>图标</strong>
+      <div class="sb-template-docs-component-list">
+        <code>IconPlus</code>
+        <code>IconRefresh</code>
+        <code>IconSettings</code>
+        <code>IconDownload</code>
+        <code>IconMore</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>设计规则</h2>
+    <ol>
+      <li>页面主操作位于面包屑行右侧。</li>
+      <li>FilterBar 位于数据内容上方，查询提交后更新表格结果。</li>
+      <li>批量操作靠近表格选择区域左侧，并在执行前二次确认。</li>
+      <li>列设置、导出和刷新位于工具栏右侧。</li>
+      <li>分页与表格处于同一内容容器，并跟随 Active 筛选条件更新。</li>
+      <li>页面模板负责组合，不重复实现业务组件内部能力。</li>
+    </ol>
+  </section>
+</section>

@@ -1,0 +1,196 @@
+@import '../style/variables.less';
+
+// 表单页面布局只依赖公共 Arco/Figma CSS 变量;不修改基础组件的全局样式。
+.sbux-pro-form-page-layout {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: @sbux-pro-form-page-max-width;
+  margin: 0 auto;
+  padding: @sbux-pro-form-page-padding;
+  container-type: inline-size;
+}
+
+.sbux-pro-form-page-layout-description {
+  margin: 0 0 @sbux-pro-form-section-header-gap;
+  color: var(--color-text-2);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.sbux-pro-form-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--sbux-pro-form-grid-columns, 2), minmax(0, 1fr));
+  column-gap: @sbux-pro-form-grid-gap;
+  row-gap: @sbux-pro-form-grid-gap;
+  width: 100%;
+}
+
+.sbux-pro-form-grid-item {
+  min-width: 0;
+  grid-column: span var(--sbux-pro-form-grid-item-span, 1) / span var(--sbux-pro-form-grid-item-span, 1);
+
+  // Form.Item 自带的下边距由网格 row-gap 统一管理,只在本布局作用域内生效。
+  > .arco-form-item,
+  > .arco-v-form-item {
+    margin-bottom: 0;
+  }
+}
+
+.sbux-pro-form-section {
+  min-width: 0;
+  margin: 0 0 @sbux-pro-form-section-gap;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &-divider {
+    padding-bottom: @sbux-pro-form-section-gap;
+    border-bottom: 1px solid var(--color-border-1);
+  }
+
+  &-error {
+    scroll-margin-top: @sbux-pro-page-header-height + @sbux-pro-page-header-gap;
+  }
+}
+
+.sbux-pro-form-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: @sbux-pro-form-grid-gap;
+  margin-bottom: @sbux-pro-form-section-header-gap;
+}
+
+.sbux-pro-form-section-heading {
+  min-width: 0;
+}
+
+.sbux-pro-form-section-title {
+  margin: 0;
+  color: var(--color-text-1);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.sbux-pro-form-section-description {
+  margin: var(--spacing-2) 0 0;
+  color: var(--color-text-2);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.sbux-pro-form-section-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.sbux-pro-form-control-area {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: @sbux-pro-form-control-height;
+}
+
+.sbux-pro-form-control-area-align-center {
+  align-items: center;
+}
+
+.sbux-pro-form-control-area-align-start {
+  align-items: flex-start;
+}
+
+.sbux-pro-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
+  gap: var(--spacing-4);
+}
+
+.sbux-pro-form-actions-align-left {
+  justify-content: flex-start;
+}
+
+.sbux-pro-form-actions-align-center {
+  justify-content: center;
+}
+
+.sbux-pro-form-actions-align-right {
+  justify-content: flex-end;
+}
+
+.sbux-pro-form-actions-align-between {
+  justify-content: space-between;
+}
+
+.sbux-pro-form-actions-sticky {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  padding: @sbux-pro-form-step-actions-gap @sbux-pro-form-page-padding;
+  background: var(--bg-color-container);
+  border-top: 1px solid var(--color-border-1);
+}
+
+.sbux-pro-step-form-layout {
+  min-width: 0;
+}
+
+.sbux-pro-step-form-layout-steps {
+  margin-bottom: @sbux-pro-form-step-gap;
+}
+
+.sbux-pro-step-form-layout-content {
+  min-width: 0;
+}
+
+.sbux-pro-step-form-layout-actions {
+  display: flex;
+  align-items: center;
+  min-height: @sbux-pro-form-control-height;
+  margin-top: @sbux-pro-form-step-actions-gap;
+  padding-top: @sbux-pro-form-step-actions-gap;
+  border-top: 1px solid var(--color-border-1);
+}
+
+.sbux-pro-step-form-layout-sticky-actions .sbux-pro-step-form-layout-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  margin-right: -@sbux-pro-form-page-padding;
+  margin-bottom: -@sbux-pro-form-page-padding;
+  margin-left: -@sbux-pro-form-page-padding;
+  padding: @sbux-pro-form-step-actions-gap @sbux-pro-form-page-padding;
+  background: var(--bg-color-container);
+}
+
+#sbux-pro-form-responsive() {
+  .sbux-pro-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sbux-pro-form-grid-item {
+    grid-column: 1 / -1;
+  }
+
+  .sbux-pro-form-section-header {
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .sbux-pro-form-section-actions {
+    align-self: stretch;
+  }
+}
+
+// Media-query fallback keeps narrow viewport layouts usable when Container Queries are unavailable.
+@media (max-width: @sbux-pro-form-breakpoint) {
+  #sbux-pro-form-responsive();
+}
+
+@container (max-width: @sbux-pro-form-breakpoint) {
+  #sbux-pro-form-responsive();
+}

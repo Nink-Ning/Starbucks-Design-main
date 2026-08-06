@@ -26,8 +26,23 @@ export type {
   MultiSelectFilterField,
   SelectFilterField,
   TreeSelectFilterField,
-  TreeSelectOption,
+  TreeSelectOption
 } from './business/filter-bar'
+export { TagGroupManagement } from './business/tag-group-management'
+export type {
+  TagGroupContentContext,
+  TagGroupContentSlotContext,
+  TagGroupDeleteConfirm,
+  TagGroupDeleteConfirmOptions,
+  TagGroupEmptyContext,
+  TagGroupEmptySlotContext,
+  TagGroupEventMeta,
+  TagGroupEventSource,
+  TagGroupItem,
+  TagGroupManagementEmits,
+  TagGroupManagementProps,
+  TagGroupManagementTexts
+} from './business/tag-group-management'
 export * from '@arco-design/web-vue'
 
 // Arco's main entry only re-exports addI18nMessages, useLocale, getLocale from locale —

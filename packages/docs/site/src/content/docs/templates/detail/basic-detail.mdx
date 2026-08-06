@@ -7,8 +7,82 @@ tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="基础详情页" description="基础详情页模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/basic-detail" />
+<p>预览可切换 React / Vue；示例源码可在代码区域查看并复制。</p>
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>模板定义</h2>
+    <p>基础详情页用于查看和确认一个对象的键值信息，使用单一主要内容容器承载基本信息。</p>
+    <p>本模板是页面组合参考，不是公共 <code>BasicDetailTemplate</code> 组件。</p>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>适用场景</h2>
+    <ul>
+      <li>以键值信息展示为主，内容分组较少且结构稳定。</li>
+      <li>用户主要任务是查看和确认对象信息。</li>
+    </ul>
+    <h2>不适用场景</h2>
+    <ul>
+      <li>多个独立模块需要分别扫描时，使用卡片详情页。</li>
+      <li>指标、趋势和明细表格构成主要任务时，使用数据详情页。</li>
+      <li>需要保留父级对象上下文并查看下级对象时，使用二级详情页。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>页面级操作位于面包屑右侧，保持与页面模板导航同一层级。</li>
+      <li>基本信息位于唯一的主要内容容器中，保持内容聚焦。</li>
+      <li>详情字段使用 <code>DetailDescriptions</code>，长字段通过显式 span 跨列。</li>
+      <li>空字符串、null、undefined 和旧数据中的 <code>--</code> 在示例层统一显示为 <code>—</code>。</li>
+      <li>操作区最多保留一个视觉主操作，本示例为“编辑”。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>详情布局能力</strong>
+      <div class="sb-template-docs-component-list">
+        <code>DetailPageLayout</code>
+        <code>DetailSection</code>
+        <code>DetailDescriptions</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Descriptions</code>
+        <code>Button</code>
+        <code>Dropdown</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>详情页规则</h2>
+    <ol>
+      <li>基础详情页只保留基本信息，不把字段拆成独立 Card。</li>
+      <li>详情页布局宽度默认为流式宽度，不继承表单页的 1120px 最大宽度。</li>
+      <li>详情内容最大宽度与基础表单保持一致；桌面使用 2 列，小于等于 720px 自动收敛为 1 列。</li>
+      <li>长编号、英文名称和时间范围需要显式设置 span，并允许 value 自然换行。</li>
+      <li>页面模板只负责组合，不承担接口、权限、字段注册和数据状态管理。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用注意事项</h2>
+    <ul>
+      <li>详情字段应由页面示例根据业务数据组合，不把卡券字段写入公共布局组件。</li>
+      <li>需要多 Card、指标分析或父级上下文时，应选择其他详情页模板。</li>
+      <li>React 和 Vue 示例使用相同字段、默认值、空值规则和页面结构。</li>
+    </ul>
+  </section>
+</section>

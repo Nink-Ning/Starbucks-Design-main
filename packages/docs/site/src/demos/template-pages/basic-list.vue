@@ -16,21 +16,6 @@
   </Teleport>
 
   <div class="sb-basic-list-page">
-    <section class="sb-basic-list-page__module">
-      <FilterBar
-        :fields="fields"
-        :model-value="draftValues"
-        :active-values="activeValues"
-        :default-value="initialFilterValues"
-        :columns="filterColumns"
-        :default-visible-count="3"
-        submit-mode="manual"
-        :loading="isLoading"
-        @values-change="handleValuesChange"
-        @update:active-values="handleActiveValuesChange"
-      />
-    </section>
-
     <section class="sb-basic-list-page__module sb-basic-list-page__table-module">
       <div class="sb-basic-list-page__toolbar">
         <div class="sb-basic-list-page__toolbar-left">
@@ -40,6 +25,15 @@
           <Button :disabled="selectedRowKeys.length === 0" @click="selectedRowKeys = []">清除选择</Button>
         </div>
         <div class="sb-basic-list-page__toolbar-right">
+          <Input
+            v-model="keyword"
+            aria-label="搜索门店"
+            placeholder="搜索门店名称或编号"
+            allow-clear
+            :style="{ width: '240px' }"
+          >
+            <template #prefix><IconSearch /></template>
+          </Input>
           <Tooltip content="刷新">
             <Button aria-label="刷新" :loading="refreshing" @click="refreshData">
               <template #icon><IconRefresh /></template>
@@ -51,7 +45,7 @@
             </Button>
           </Tooltip>
           <Tooltip content="导出">
-            <Button aria-label="导出" @click="downloadCsv(filteredStores)">
+              <Button aria-label="导出" @click="downloadCsv(visibleStores)">
               <template #icon><IconDownload /></template>
             </Button>
           </Tooltip>
@@ -176,13 +170,13 @@
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, ref, watch } from 'vue';
-import { FilterBar, Modal } from '@sbux/starbucks-design-vue';
-import type { FilterFieldSchema, FilterValue } from '@sbux/starbucks-design-vue';
+import { Modal } from '@sbux/starbucks-design-vue';
 import {
   IconDownload,
   IconMore,
   IconPlus,
   IconRefresh,
+  IconSearch,
   IconSettings,
 } from '@sbux/starbucks-design-vue/icon';
 
@@ -255,17 +249,7 @@ const cityOptions = [
   },
 ];
 
-const fields: FilterFieldSchema[] = [
-  { type: 'input', name: 'keyword', label: '关键词', placeholder: '搜索门店名称或门店编号', allowClear: true, priority: 0 },
-  { type: 'select', name: 'status', label: '营业状态', placeholder: '请选择营业状态', allowClear: true, options: statusOptions, priority: 1 },
-  { type: 'cascader', name: 'city', label: '所在城市', placeholder: '请选择城市', allowClear: true, options: cityOptions, priority: 2 },
-  { type: 'multiSelect', name: 'storeType', label: '门店类型', placeholder: '请选择门店类型', allowClear: true, maxTagCount: 1, options: typeOptions, priority: 3 },
-  { type: 'dateRange', name: 'openingDate', label: '开业日期', placeholder: ['开始日期', '结束日期'], allowClear: true, priority: 4 },
-];
-
-const initialFilterValues: FilterValue = {};
-const filterColumns = { xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 3 };
-const pageSize = 8;
+const pageSize = 10;
 
 const initialStores: StoreRecord[] = [
   { id: '1', code: 'SH-001', name: '上海静安嘉里中心店', region: '华东', city: '上海', cityValue: 'shanghai', type: 'reserve', status: 'open', openedAt: '2020-05-18', manager: 'Nink', updatedAt: '2026-07-24 10:30' },
@@ -317,8 +301,7 @@ const cityByValue = new Map(
 );
 
 const stores = ref<StoreRecord[]>([...initialStores]);
-const draftValues = ref<FilterValue>({ ...initialFilterValues });
-const activeValues = ref<FilterValue>({ ...initialFilterValues });
+const keyword = ref('');
 const selectedRowKeys = ref<string[]>([]);
 const current = ref(1);
 const viewMode = ref<ViewMode>('normal');
@@ -340,42 +323,24 @@ const visibleColumns = computed(() =>
   allColumns.filter((_, index) => visibleColumnKeys.value.includes(columnOptions[index].key))
 );
 
-const filteredStores = computed(() => {
+const visibleStores = computed(() => {
   if (viewMode.value === 'empty') return [];
-  return filterStores(stores.value, activeValues.value);
+  const normalizedKeyword = keyword.value.trim().toLowerCase();
+  if (!normalizedKeyword) return stores.value;
+  return stores.value.filter(
+    (store) =>
+      store.name.toLowerCase().includes(normalizedKeyword) ||
+      store.code.toLowerCase().includes(normalizedKeyword)
+  );
 });
 
-const total = computed(() => filteredStores.value.length);
-const pageData = computed(() => filteredStores.value.slice((current.value - 1) * pageSize, current.value * pageSize));
+const total = computed(() => visibleStores.value.length);
+const pageData = computed(() => visibleStores.value.slice((current.value - 1) * pageSize, current.value * pageSize));
 
-watch([activeValues, viewMode], () => {
+watch([keyword, viewMode], () => {
   current.value = 1;
   selectedRowKeys.value = [];
 });
-
-function normalizeArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.map(String) : [];
-}
-
-function filterStores(source: StoreRecord[], filters: FilterValue) {
-  const keyword = String(filters.keyword ?? '').trim().toLowerCase();
-  const status = filters.status as StoreStatus | undefined;
-  const cityPath = normalizeArray(filters.city);
-  const city = cityPath[cityPath.length - 1];
-  const types = normalizeArray(filters.storeType);
-  const openingDate = normalizeArray(filters.openingDate);
-  const [startDate, endDate] = openingDate;
-
-  return source.filter((store) => {
-    const keywordMatched = !keyword || store.name.toLowerCase().includes(keyword) || store.code.toLowerCase().includes(keyword);
-    const statusMatched = !status || store.status === status;
-    const cityMatched = !city || store.cityValue === city;
-    const typeMatched = types.length === 0 || types.includes(store.type);
-    const startMatched = !startDate || store.openedAt >= startDate;
-    const endMatched = !endDate || store.openedAt <= endDate;
-    return keywordMatched && statusMatched && cityMatched && typeMatched && startMatched && endMatched;
-  });
-}
 
 function statusLabel(status: StoreStatus) {
   return statusOptions.find((option) => option.value === status)?.label ?? status;
@@ -389,14 +354,6 @@ function statusColor(status: StoreStatus) {
 
 function typeLabel(type: StoreType) {
   return typeOptions.find((option) => option.value === type)?.label ?? type;
-}
-
-function handleValuesChange(values: FilterValue) {
-  draftValues.value = values;
-}
-
-function handleActiveValuesChange(values: FilterValue) {
-  activeValues.value = values;
 }
 
 function handlePageChange(page: number) {

@@ -127,6 +127,17 @@ describe('stylesheet entry', () => {
     expect(existsSync(resolve(srcDir, 'theme'))).toBe(false)
   })
 
+  it('uses the compact spacing token for vertical Form items', () => {
+    const form = readFileSync(resolve(srcDir, 'overrides/Form.less'), 'utf8')
+
+    expectExactRule(
+      form,
+      '.arco-form .arco-form-layout-vertical,\n' +
+        '.arco-form .arco-form-item-layout-vertical',
+      ['margin-bottom: var(--spacing-6);'],
+    )
+  })
+
   it('centers TimePicker numbers inside their filled option surface', () => {
     const timePicker = readFileSync(resolve(srcDir, 'overrides/TimePicker.less'), 'utf8')
 
@@ -662,6 +673,57 @@ describe('stylesheet entry', () => {
     ])
   })
 
+  it('uses the Vue Textarea wrapper as the only visible field shell', () => {
+    const input = readFileSync(resolve(srcDir, 'overrides/Input.less'), 'utf8')
+
+    expectExactRule(input, '.arco-textarea-wrapper', [
+      'box-sizing: border-box;',
+      'min-height: 56px;',
+      'color: var(--color-text-primary);',
+      'background-color: var(--bg-color-container);',
+      'border: 1px solid var(--color-border-component);',
+      'border-radius: var(--border-radius-sm);',
+      'transition:',
+      '  color 0.2s ease,',
+      '  background-color 0.2s ease,',
+      '  border-color 0.2s ease,',
+      '  box-shadow 0.2s ease;',
+    ])
+    expectExactRule(
+      input,
+      '.arco-textarea-wrapper:focus-within,\n' +
+        '.arco-textarea-wrapper.arco-textarea-focus',
+      [
+        'background-color: var(--bg-color-container);',
+        'border-color: var(--color-primary);',
+        'box-shadow: 0 0 0 2px var(--color-primary-focus);',
+      ],
+    )
+    expect(input).toContain(
+      '.arco-textarea-wrapper:not(.arco-textarea-disabled, :has(> .arco-textarea-disabled), :focus-within):hover {',
+    )
+    expectExactRule(
+      input,
+      '.arco-textarea-wrapper .arco-textarea,\n' +
+        '.arco-textarea-wrapper .arco-textarea:hover,\n' +
+        '.arco-textarea-wrapper .arco-textarea:focus,\n' +
+        '.arco-textarea-wrapper .arco-textarea:focus:hover,\n' +
+        '.arco-textarea-wrapper .arco-textarea-focus,\n' +
+        '.arco-textarea-wrapper .arco-textarea-error,\n' +
+        '.arco-textarea-wrapper .arco-textarea-warning,\n' +
+        '.arco-textarea-wrapper .arco-textarea-disabled',
+      [
+        'height: 100%;',
+        'color: inherit;',
+        'background-color: transparent;',
+        'border: none;',
+        'border-radius: 0;',
+        'outline: none;',
+        'box-shadow: none;',
+      ],
+    )
+  })
+
   it('maps Vue InputSearch outer DOM to React joined-field metrics', () => {
     const inputSearch = readFileSync(resolve(srcDir, 'overrides/InputSearch.less'), 'utf8')
 
@@ -845,7 +907,7 @@ describe('stylesheet entry', () => {
   it('maps Vue Dropdown popup DOM to React menu metrics', () => {
     const dropdown = readFileSync(resolve(srcDir, 'overrides/Dropdown.less'), 'utf8')
 
-    expectExactRule(dropdown, '.arco-dropdown', [
+    expectExactRule(dropdown, '.arco-dropdown:not(.arco-trigger)', [
       'box-sizing: border-box;',
       'max-height: 240px;',
       'padding: var(--spacing-3);',
@@ -857,6 +919,7 @@ describe('stylesheet entry', () => {
       'border-radius: var(--border-radius-md);',
       'box-shadow: var(--shadow-md);',
     ])
+    expect(dropdown).not.toMatch(/^\.arco-dropdown\s*\{/m)
     expect(dropdown).not.toContain('.arco-dropdown .arco-dropdown-submenu')
     expectExactRule(dropdown, '.arco-dropdown .arco-dropdown-option', [
       'position: relative;',

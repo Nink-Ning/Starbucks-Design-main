@@ -7,8 +7,54 @@ tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="二级详情页" description="二级详情页模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/secondary-detail" />
+
+## 模板定义
+
+二级详情页用于从父级对象详情继续查看一个下级对象。示例以“卡券核销记录”为当前二级对象，页面在“二级内容”卡片的标签页上方保留父级卡券名称、QID 和状态，避免用户在二级内容中丢失上下文。
+
+## 适用场景
+
+- 从卡券详情继续查看核销记录、适用门店、发行批次或操作日志。
+- 四类内容属于同一父级对象下的同级二级信息。
+- 当前页面操作只针对正在查看的二级内容。
+
+## 不适用场景
+
+- 只需要展示单层属性信息时使用 Basic Detail。
+- 页面由多个独立信息模块组成时使用 Card Detail。
+- 页面主要用于指标和趋势分析时使用 Data Detail。
+- 不应因为路由嵌套两层就自动采用 Secondary Detail。
+
+## 页面结构
+
+`内容 Card（父级上下文 → Tabs）→ 当前 Tab 内容`
+
+父级上下文只保留识别当前对象所需的最小信息，并嵌入二级内容卡片、位于 Tabs 上方；Tabs 只切换核销记录、适用门店、发行批次和操作日志四个同级面板，不重复完整的父级基础信息。
+
+## 组件清单
+
+- `DetailPageLayout`：承载页面整体结构。
+- `Card`：承载父级上下文和 Tabs，不单独显示模块标题。
+- `DetailDescriptions`：展示父级摘要字段。
+- `Tabs`：切换同级二级内容。
+- `Table`：展示核销记录、适用门店和发行批次。
+- `Timeline`：展示操作日志。
+- `Button`、`Dropdown`、`Tag`：提供当前二级操作和状态表达。
+
+## 设计规则
+
+- 当前页标题必须明确表达二级对象，例如“卡券核销记录”。
+- 面包屑右侧的操作区和父级上下文均应让用户辨认当前内容属于哪张卡券。
+- 父级上下文嵌入二级内容卡片，并固定在 Tabs 上方，不单独占用卡片。
+- Tabs 只负责同级二级内容切换，不承载父级基础信息。
+- 操作按钮随当前 Tab 指向当前二级对象，不引入接口、权限或状态流转逻辑。
+- 页面模板只是 Docs 组合示例，不新增公共 Secondary Detail 组件或公共 API。
+
+## 响应式说明
+
+页面使用现有详情布局的流式宽度。Header 操作区可换行；表格在窄容器中只在自身区域横向滚动，父级上下文和 Tabs 不产生页面级横向溢出。

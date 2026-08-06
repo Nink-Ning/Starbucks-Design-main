@@ -253,7 +253,9 @@
 }
 
 // Vue DOM adapters
-.arco-dropdown {
+// React also uses `.arco-dropdown` on its Trigger popup wrapper. Exclude that
+// wrapper so loading React and Vue styles together does not draw two panels.
+.arco-dropdown:not(.arco-trigger) {
   box-sizing: border-box;
   max-height: 240px;
   padding: var(--spacing-3);

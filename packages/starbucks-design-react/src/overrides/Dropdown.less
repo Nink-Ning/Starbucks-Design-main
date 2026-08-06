@@ -34,6 +34,17 @@
 //   • Gray/White
 
 // Component-specific style overrides:
+// Vue's Dropdown panel and React's Trigger wrapper share `.arco-dropdown`.
+// Keep the React wrapper visual-free when both framework styles are loaded.
+.arco-trigger.arco-dropdown {
+  padding: 0;
+  overflow: visible;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 .arco-dropdown-menu {
   box-sizing: border-box;
   max-height: 240px;

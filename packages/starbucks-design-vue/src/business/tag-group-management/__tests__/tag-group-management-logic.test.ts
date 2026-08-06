@@ -1,0 +1,262 @@
+import { describe, expect, it } from 'vitest'
+import type { TagGroupItem } from '../interface'
+import { DEFAULT_TAG_GROUP_MANAGEMENT_TEXTS, resolveTagGroupManagementTexts } from '../constants'
+import { countNameCharacters, createNameComparisonKey, normalizeDisplayName, validateGroupName } from '../normalize'
+import {
+  createTagGroupEventMeta,
+  deriveEffectiveGroups,
+  deriveActiveGroup,
+  getNavigableGroupIds,
+  isActiveGroupControlled,
+  isGroupActivationKey,
+  resolveInitialActiveGroupId,
+  resolveKeyboardFocusTarget,
+  resolveGroupsUpdateFallback
+} from '../selection'
+import { filterTagGroups, resolveEmptyContext, resolveSearchTransition } from '../search'
+import { resolveCanCreate, resolveGroupPermissions } from '../permissions'
+
+const groups: TagGroupItem[] = [
+  { id: 'all', name: '全部' },
+  { id: 'store', name: '门店' },
+  { id: 'member', name: '会员', disabled: true }
+]
+
+describe('TagGroupManagement pure contract', () => {
+  it('keeps the first occurrence and returns duplicate warning data without side effects', () => {
+    const result = deriveEffectiveGroups([
+      { id: 'one', name: 'First' },
+      { id: 'two', name: 'Second' },
+      { id: 'one', name: 'Duplicate' },
+      { id: 'one', name: 'Duplicate again' }
+    ])
+
+    expect(result.effectiveGroups.map((group) => group.name)).toEqual(['First', 'Second'])
+    expect(result.duplicates).toEqual([{ id: 'one', indexes: [0, 2, 3] }])
+    expect(result.duplicateKey).toBe('one:0,2,3')
+  })
+
+  it('resolves initial selection only when loading becomes false', () => {
+    const pending = resolveInitialActiveGroupId(groups, {
+      loading: true,
+      initialResolution: 'pending',
+      activeGroupId: null,
+      defaultActiveGroupId: 'store'
+    })
+    expect(pending).toBeNull()
+
+    expect(
+      resolveInitialActiveGroupId(groups, {
+        loading: false,
+        initialResolution: 'pending',
+        activeGroupId: null,
+        defaultActiveGroupId: 'store'
+      })
+    ).toBe('store')
+
+    expect(
+      resolveInitialActiveGroupId(groups, {
+        loading: false,
+        initialResolution: 'pending',
+        activeGroupId: null,
+        defaultActiveGroupId: null
+      })
+    ).toBeNull()
+
+    expect(
+      resolveInitialActiveGroupId(groups, {
+        loading: false,
+        initialResolution: 'pending',
+        activeGroupId: null,
+        defaultActiveGroupId: 'missing'
+      })
+    ).toBe('all')
+
+    expect(
+      resolveInitialActiveGroupId([{ id: 'disabled', name: 'Disabled', disabled: true }], {
+        loading: false,
+        initialResolution: 'pending',
+        activeGroupId: null
+      })
+    ).toBeNull()
+  })
+
+  it('does not re-run initial selection after the state is resolved', () => {
+    expect(
+      resolveInitialActiveGroupId(groups, {
+        loading: false,
+        initialResolution: 'resolved',
+        activeGroupId: 'store',
+        defaultActiveGroupId: 'all'
+      })
+    ).toBe('store')
+  })
+
+  it('distinguishes controlled null from uncontrolled activeGroupId', () => {
+    expect(isActiveGroupControlled(undefined)).toBe(false)
+    expect(isActiveGroupControlled(null)).toBe(true)
+    expect(isActiveGroupControlled('store')).toBe(true)
+  })
+
+  it('derives the active group from effective groups while retaining disabled active groups', () => {
+    expect(deriveActiveGroup(groups, 'store')).toEqual(groups[1])
+    expect(deriveActiveGroup([{ id: 'store', name: 'Store', disabled: true }], 'store')).toEqual({
+      id: 'store',
+      name: 'Store',
+      disabled: true
+    })
+    expect(deriveActiveGroup(groups, 'missing')).toBeNull()
+  })
+
+  it('falls back to the next then previous available group when the active group disappears', () => {
+    const previous = [
+      { id: 'first', name: 'First' },
+      { id: 'current', name: 'Current' },
+      { id: 'next', name: 'Next' }
+    ]
+
+    expect(resolveGroupsUpdateFallback(previous, [previous[0], previous[2]], 'current')).toEqual({
+      activeGroupId: 'next',
+      changed: true
+    })
+    expect(resolveGroupsUpdateFallback(previous, [previous[0]], 'current')).toEqual({
+      activeGroupId: 'first',
+      changed: true
+    })
+    expect(resolveGroupsUpdateFallback(previous, [{ ...previous[2], disabled: true }, previous[0]], 'current')).toEqual(
+      { activeGroupId: 'first', changed: true }
+    )
+    expect(resolveGroupsUpdateFallback(previous, [], 'current')).toEqual({
+      activeGroupId: null,
+      changed: true
+    })
+  })
+
+  it('keeps the active group when it remains but becomes disabled', () => {
+    expect(
+      resolveGroupsUpdateFallback(groups, [groups[0], groups[1], { ...groups[2], disabled: false }], 'store')
+    ).toEqual({ activeGroupId: 'store', changed: false })
+    expect(resolveGroupsUpdateFallback(groups, [{ ...groups[1], disabled: true }], 'store')).toEqual({
+      activeGroupId: 'store',
+      changed: false
+    })
+  })
+
+  it('filters only by group name and restores all groups when searchable is disabled', () => {
+    expect(filterTagGroups(groups, ' 门 ')).toEqual([groups[1]])
+    expect(filterTagGroups(groups, '会')).toEqual([groups[2]])
+    expect(resolveSearchTransition(true, false, 'store', groups)).toEqual({
+      keyword: '',
+      filteredGroups: groups
+    })
+  })
+
+  it('matches trimmed English keys case-insensitively and preserves disabled groups', () => {
+    const marketingGroups: TagGroupItem[] = [
+      { id: 'title-case', name: 'Marketing' },
+      { id: 'upper-case', name: 'MARKETING', disabled: true },
+      { id: 'mixed', name: 'Marketing 标签' },
+      { id: 'chinese', name: '标签营销' }
+    ]
+    const original = [...marketingGroups]
+
+    expect(filterTagGroups(marketingGroups, ' marketing ')).toEqual(marketingGroups.slice(0, 3))
+    expect(filterTagGroups(marketingGroups, 'MARKETING')).toEqual(marketingGroups.slice(0, 3))
+    expect(filterTagGroups(marketingGroups, '标签')).toEqual([marketingGroups[2], marketingGroups[3]])
+    expect(filterTagGroups(marketingGroups, '营销')).toEqual([marketingGroups[3]])
+    expect(filterTagGroups(marketingGroups, 'does-not-exist')).toEqual([])
+    expect(filterTagGroups(marketingGroups, '   ')).toBe(marketingGroups)
+    expect(marketingGroups).toEqual(original)
+  })
+
+  it('returns separate empty and search-empty contexts', () => {
+    expect(resolveEmptyContext([], [], '')).toEqual({ type: 'empty', keyword: '' })
+    expect(resolveEmptyContext(groups, [], 'unknown')).toEqual({
+      type: 'searchEmpty',
+      keyword: 'unknown'
+    })
+    expect(resolveEmptyContext(groups, groups, '')).toBeNull()
+  })
+
+  it('normalizes names with stable trim, Unicode counting, and lowercase comparison', () => {
+    expect(normalizeDisplayName('  门店  ')).toBe('门店')
+    expect(countNameCharacters('A🙂中')).toBe(3)
+    expect(createNameComparisonKey('  Store ')).toBe('store')
+    expect(validateGroupName('  STORE  ', [{ id: 'store', name: 'Store' }])).toEqual({
+      value: 'STORE',
+      error: 'duplicate'
+    })
+    expect(validateGroupName('  Store  ', [{ id: 'store', name: 'Store' }], 'store')).toEqual({
+      value: 'Store'
+    })
+    expect(validateGroupName('   ', groups)).toEqual({ value: '', error: 'required' })
+    expect(validateGroupName('123456789012345678901', groups)).toEqual({
+      value: '123456789012345678901',
+      error: 'tooLong'
+    })
+  })
+
+  it('calculates operation visibility and disabled state by priority', () => {
+    expect(
+      resolveGroupPermissions(
+        { id: 'store', name: 'Store', allowDelete: false, deleteDisabledReason: '存在关联数据' },
+        { allowCreate: false, loading: true }
+      )
+    ).toEqual({
+      create: { visible: false, disabled: true },
+      rename: { visible: true, disabled: true },
+      delete: { visible: true, disabled: true, disabledReason: '存在关联数据' }
+    })
+    expect(resolveGroupPermissions({ id: 'store', name: 'Store', allowRename: false }, { disabled: true })).toEqual({
+      create: { visible: true, disabled: true },
+      rename: { visible: false, disabled: true },
+      delete: { visible: true, disabled: true }
+    })
+  })
+
+  it('calculates keyboard targets only among visible, enabled group buttons', () => {
+    expect(resolveKeyboardFocusTarget(groups, 'all', 'ArrowDown')).toBe('store')
+    expect(resolveKeyboardFocusTarget(groups, 'store', 'ArrowDown')).toBe('store')
+    expect(resolveKeyboardFocusTarget(groups, 'store', 'ArrowUp')).toBe('all')
+    expect(resolveKeyboardFocusTarget(groups, 'store', 'Home')).toBe('all')
+    expect(resolveKeyboardFocusTarget(groups, 'all', 'End')).toBe('store')
+    expect(resolveKeyboardFocusTarget(groups, 'member', 'ArrowDown')).toBe('all')
+    expect(isGroupActivationKey('Enter')).toBe(true)
+    expect(isGroupActivationKey(' ')).toBe(true)
+    expect(isGroupActivationKey('Escape')).toBe(false)
+  })
+
+  it('provides stable default texts and shallow overrides', () => {
+    expect(DEFAULT_TAG_GROUP_MANAGEMENT_TEXTS.nameTooLong).toBe('标签组名称不能超过20个字符')
+    expect(resolveTagGroupManagementTexts({ create: '添加' })).toEqual({
+      ...DEFAULT_TAG_GROUP_MANAGEMENT_TEXTS,
+      create: '添加'
+    })
+  })
+
+  it('keeps the final pure-function contract names available', () => {
+    const initialOptions = {
+      loading: false,
+      initialResolution: 'pending' as const,
+      activeGroupId: null,
+      defaultActiveGroupId: 'store'
+    }
+
+    expect(resolveInitialActiveGroupId(groups, initialOptions)).toBe('store')
+    expect(getNavigableGroupIds(groups)).toEqual(['all', 'store'])
+    expect(resolveKeyboardFocusTarget(groups, 'all', 'ArrowDown')).toBe('store')
+    expect(resolveEmptyContext(groups, [], 'unknown')).toEqual({
+      type: 'searchEmpty',
+      keyword: 'unknown'
+    })
+    expect(resolveGroupPermissions(groups[1], { loading: false })).toEqual(
+      resolveGroupPermissions(groups[1], { loading: false })
+    )
+    expect(resolveCanCreate()).toBe(true)
+    expect(resolveCanCreate({ disabled: true })).toBe(false)
+    expect(createTagGroupEventMeta('search', { keyword: 'store' })).toEqual({
+      source: 'search',
+      keyword: 'store'
+    })
+  })
+})

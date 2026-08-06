@@ -5,7 +5,6 @@ import {
   Checkbox,
   Dropdown,
   Empty,
-  FilterBar,
   Input,
   Menu,
   Modal,
@@ -18,16 +17,13 @@ import {
   Tag,
   Tooltip,
 } from '@sbux/starbucks-design-react';
-import type {
-  FilterFieldSchema,
-  FilterValue,
-  TableColumnProps,
-} from '@sbux/starbucks-design-react';
+import type { TableColumnProps } from '@sbux/starbucks-design-react';
 import {
   IconDownload,
   IconMore,
   IconPlus,
   IconRefresh,
+  IconSearch,
   IconSettings,
 } from '@sbux/starbucks-design-react/icon';
 
@@ -98,56 +94,7 @@ const cityOptions = [
   },
 ];
 
-const fields: FilterFieldSchema[] = [
-  {
-    type: 'input',
-    name: 'keyword',
-    label: '关键词',
-    placeholder: '搜索门店名称或门店编号',
-    allowClear: true,
-    priority: 0,
-  },
-  {
-    type: 'select',
-    name: 'status',
-    label: '营业状态',
-    placeholder: '请选择营业状态',
-    allowClear: true,
-    options: statusOptions,
-    priority: 1,
-  },
-  {
-    type: 'cascader',
-    name: 'city',
-    label: '所在城市',
-    placeholder: '请选择城市',
-    allowClear: true,
-    options: cityOptions,
-    priority: 2,
-  },
-  {
-    type: 'multiSelect',
-    name: 'storeType',
-    label: '门店类型',
-    placeholder: '请选择门店类型',
-    allowClear: true,
-    maxTagCount: 1,
-    options: typeOptions,
-    priority: 3,
-  },
-  {
-    type: 'dateRange',
-    name: 'openingDate',
-    label: '开业日期',
-    placeholder: ['开始日期', '结束日期'],
-    allowClear: true,
-    priority: 4,
-  },
-];
-
-const initialFilterValues: FilterValue = {};
-const filterColumns = { xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 3 };
-const pageSize = 8;
+const pageSize = 10;
 const columnModalTitle = <span className="sb-basic-list-page__modal-title">列设置</span>;
 const createModalTitle = <span className="sb-basic-list-page__modal-title">新建门店</span>;
 
@@ -202,33 +149,6 @@ function statusTag(status: StoreStatus) {
   return <Tag color="gray">已停业</Tag>;
 }
 
-function normalizeArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.map(String) : [];
-}
-
-function filterStores(stores: StoreRecord[], activeValues: FilterValue) {
-  const keyword = String(activeValues.keyword ?? '').trim().toLowerCase();
-  const status = activeValues.status as StoreStatus | undefined;
-  const cityPath = normalizeArray(activeValues.city);
-  const city = cityPath[cityPath.length - 1];
-  const types = normalizeArray(activeValues.storeType);
-  const openingDate = normalizeArray(activeValues.openingDate);
-  const [startDate, endDate] = openingDate;
-
-  return stores.filter((store) => {
-    const keywordMatched =
-      !keyword ||
-      store.name.toLowerCase().includes(keyword) ||
-      store.code.toLowerCase().includes(keyword);
-    const statusMatched = !status || store.status === status;
-    const cityMatched = !city || store.cityValue === city;
-    const typeMatched = types.length === 0 || types.includes(store.type);
-    const startMatched = !startDate || store.openedAt >= startDate;
-    const endMatched = !endDate || store.openedAt <= endDate;
-    return keywordMatched && statusMatched && cityMatched && typeMatched && startMatched && endMatched;
-  });
-}
-
 function toCsv(rows: StoreRecord[]) {
   const header = ['门店编号', '门店名称', '所在城市', '门店类型', '营业状态', '开业日期', '店长', '更新时间'];
   const body = rows.map((row) => [
@@ -259,8 +179,7 @@ function downloadCsv(rows: StoreRecord[]) {
 
 export default function Demo() {
   const [stores, setStores] = useState<StoreRecord[]>(initialStores);
-  const [draftValues, setDraftValues] = useState<FilterValue>(initialFilterValues);
-  const [activeValues, setActiveValues] = useState<FilterValue>(initialFilterValues);
+  const [keyword, setKeyword] = useState('');
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
   const [current, setCurrent] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>('normal');
@@ -276,21 +195,23 @@ export default function Demo() {
   });
 
   const isLoading = viewMode === 'loading' || refreshing;
-  const filteredStores = useMemo(() => {
+  const visibleStores = useMemo(() => {
     if (viewMode === 'empty') return [];
-    return filterStores(stores, activeValues);
-  }, [activeValues, stores, viewMode]);
-  const total = filteredStores.length;
-  const pageData = filteredStores.slice((current - 1) * pageSize, current * pageSize);
+    const normalizedKeyword = keyword.trim().toLowerCase();
+    if (!normalizedKeyword) return stores;
+    return stores.filter(
+      (store) =>
+        store.name.toLowerCase().includes(normalizedKeyword) ||
+        store.code.toLowerCase().includes(normalizedKeyword)
+    );
+  }, [keyword, stores, viewMode]);
+  const total = visibleStores.length;
+  const pageData = visibleStores.slice((current - 1) * pageSize, current * pageSize);
 
   useEffect(() => {
     setCurrent(1);
     setSelectedRowKeys([]);
-  }, [activeValues, viewMode]);
-
-  const setActiveSnapshot = (values: FilterValue) => {
-    setActiveValues(values);
-  };
+  }, [keyword, viewMode]);
 
   const changeStatusForSelected = (status: StoreStatus) => {
     if (selectedRowKeys.length === 0) return;
@@ -415,21 +336,6 @@ export default function Demo() {
           actionHost
         )}
     <div className="sb-basic-list-page">
-      <section className="sb-basic-list-page__module">
-        <FilterBar
-          fields={fields}
-          value={draftValues}
-          activeValues={activeValues}
-          defaultValue={initialFilterValues}
-          columns={filterColumns}
-          defaultVisibleCount={3}
-          submitMode="manual"
-          loading={isLoading}
-          onValuesChange={setDraftValues}
-          onActiveValuesChange={setActiveSnapshot}
-        />
-      </section>
-
       <section className="sb-basic-list-page__module sb-basic-list-page__table-module">
         <div className="sb-basic-list-page__toolbar">
           <div className="sb-basic-list-page__toolbar-left">
@@ -445,6 +351,15 @@ export default function Demo() {
             </Button>
           </div>
           <div className="sb-basic-list-page__toolbar-right">
+            <Input
+              aria-label="搜索门店"
+              prefix={<IconSearch />}
+              placeholder="搜索门店名称或编号"
+              allowClear
+              value={keyword}
+              onChange={setKeyword}
+              style={{ width: 240 }}
+            />
             <Tooltip content="刷新">
               <Button aria-label="刷新" icon={<IconRefresh />} loading={refreshing} onClick={refreshData} />
             </Tooltip>
@@ -452,7 +367,7 @@ export default function Demo() {
               <Button aria-label="列设置" icon={<IconSettings />} onClick={() => setColumnModalVisible(true)} />
             </Tooltip>
             <Tooltip content="导出">
-              <Button aria-label="导出" icon={<IconDownload />} onClick={() => downloadCsv(filteredStores)} />
+              <Button aria-label="导出" icon={<IconDownload />} onClick={() => downloadCsv(visibleStores)} />
             </Tooltip>
           </div>
         </div>

@@ -18,22 +18,15 @@ import Demo from '../../../../components/Demo.astro';
     <h2>页面结构</h2>
     <ul>
       <li>面包屑右侧放置页面状态切换和主操作“新建门店”。</li>
-      <li>筛选区直接调用业务组件 <code>FilterBar</code>。</li>
-      <li>表格工具栏组合选择数量、批量操作和表格操作，批量变更需二次确认。</li>
+      <li>表格工具栏左侧提供门店关键词搜索、选择数量和批量操作，批量变更需二次确认。</li>
       <li>数据表格展示门店信息、业务状态和行操作。</li>
-      <li>分页跟随筛选结果联动，并与表格处于同一内容区域。</li>
+      <li>分页与表格处于同一内容区域。</li>
       <li>顶部状态切换演示 Normal、Loading、Empty、Error。</li>
     </ul>
   </section>
 
   <section class="sb-template-docs-section">
     <h2>使用组件</h2>
-    <div class="sb-template-docs-component-group">
-      <strong>业务组件</strong>
-      <div class="sb-template-docs-component-list">
-        <code>FilterBar</code>
-      </div>
-    </div>
     <div class="sb-template-docs-component-group">
       <strong>基础组件</strong>
       <div class="sb-template-docs-component-list">
@@ -70,7 +63,7 @@ import Demo from '../../../../components/Demo.astro';
     <h2>设计规则</h2>
     <ol>
       <li>页面主操作位于面包屑行右侧。</li>
-      <li>FilterBar 位于数据内容上方。</li>
+      <li>基础列表不放置顶部筛选栏，轻量关键词搜索位于表格工具栏左侧。</li>
       <li>批量操作靠近表格选择区域左侧，并在执行前二次确认。</li>
       <li>列设置、导出和刷新位于工具栏右侧。</li>
       <li>分页与表格处于同一内容容器。</li>

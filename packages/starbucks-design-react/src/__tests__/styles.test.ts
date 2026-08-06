@@ -64,6 +64,19 @@ describe('stylesheet entry', () => {
     ])
   })
 
+  it('keeps the React Dropdown trigger wrapper visually neutral', () => {
+    const dropdown = readFileSync(resolve(srcDir, 'overrides/Dropdown.less'), 'utf8')
+
+    expectExactRule(dropdown, '.arco-trigger.arco-dropdown', [
+      'padding: 0;',
+      'overflow: visible;',
+      'background-color: transparent;',
+      'border: 0;',
+      'border-radius: 0;',
+      'box-shadow: none;',
+    ])
+  })
+
   it('keeps Progress line background on the track instead of the React root', () => {
     const progress = readFileSync(resolve(srcDir, 'overrides/Progress.less'), 'utf8')
 
@@ -75,6 +88,18 @@ describe('stylesheet entry', () => {
       'border-radius: 999px;',
     ])
     expect(progress).not.toMatch(/^\.arco-progress-line\s*\{/m)
+  })
+
+  it('keeps React vertical Form.Item layout block when Vue styles are also loaded', () => {
+    const form = readFileSync(resolve(srcDir, 'overrides/Form.less'), 'utf8')
+
+    expectExactRule(form, '.arco-form .arco-form-layout-vertical', ['display: block;'])
+    expectExactRule(
+      form,
+      '.arco-form .arco-form-layout-vertical,\n' +
+        '.arco-form .arco-form-item-layout-vertical',
+      ['margin-bottom: var(--spacing-6);'],
+    )
   })
 
   it('maps React List containers, rows, and meta text to shared tokens', () => {

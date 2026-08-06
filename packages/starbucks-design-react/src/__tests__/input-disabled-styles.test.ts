@@ -8,9 +8,23 @@ const readOverride = (name: string) =>
   readFileSync(resolve(overridesDir, `${name}.less`), 'utf8')
 
 describe('input disabled styles', () => {
-  it('removes the Textarea wrapper fill behind word limits', () => {
-    expect(readOverride('Input')).toContain(
-      '.arco-textarea-wrapper {\n  background-color: transparent;\n}',
+  it('uses one Textarea shell when word limits add a wrapper', () => {
+    const styles = readOverride('Input')
+
+    expect(styles).toContain('.arco-textarea-wrapper {')
+    expect(styles).toContain('border: 1px solid var(--color-border-component);')
+    expect(styles).toContain(
+      '.arco-textarea-wrapper:focus-within,\n.arco-textarea-wrapper.arco-textarea-focus {',
+    )
+    expect(styles).toContain(
+      '.arco-textarea-wrapper:not(.arco-textarea-disabled, :has(> .arco-textarea-disabled), :focus-within):hover {',
+    )
+    expect(styles).toContain(
+      '.arco-textarea-wrapper .arco-textarea,\n' +
+        '.arco-textarea-wrapper .arco-textarea:hover,',
+    )
+    expect(styles).toMatch(
+      /\.arco-textarea-wrapper \.arco-textarea,[\s\S]*?background-color: transparent;[\s\S]*?border: none;[\s\S]*?box-shadow: none;/,
     )
   })
 

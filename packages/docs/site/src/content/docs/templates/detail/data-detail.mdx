@@ -7,8 +7,106 @@ tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="数据详情页" description="数据详情页模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/data-detail" />
+<p>预览可切换 React / Vue；展开代码区可查看并复制当前框架示例。</p>
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>模板定义</h2>
+    <p>数据详情页用于围绕一个明确对象进行指标、趋势、分布和明细数据分析。页面先确认对象上下文，再通过轻量筛选缩小分析范围，最后沿着指标、趋势、分布和明细表格逐层验证数据。</p>
+    <p>这是页面组合参考和起始实现，不是公共 <code>DataDetailTemplate</code> 组件。</p>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>适用场景</h2>
+    <ul>
+      <li>页面主要任务是分析对象的运行或经营结果。</li>
+      <li>指标、时间趋势、渠道或城市分布需要相互验证。</li>
+      <li>用户需要从汇总结果继续追溯到明细记录。</li>
+    </ul>
+    <h2>不适用场景</h2>
+    <ul>
+      <li>以键值属性查看为主时，使用基础详情页。</li>
+      <li>多个独立信息模块需要分别扫描时，使用卡片详情页。</li>
+      <li>需要保留父级对象上下文并查看下级对象时，使用二级详情页。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>页面头部展示对象名称、状态、分析主题和页面级操作。</li>
+      <li>对象上下文确认当前卡券、QID、渠道和有效期。</li>
+      <li>轻量筛选区支持时间范围、核销渠道和数据状态切换。</li>
+      <li>核心指标区展示发券数量、领券人数、使用数量和核销率。</li>
+      <li>趋势区展示近 12 周发券与核销变化，分布区展示核销渠道和城市分布。</li>
+      <li>明细区使用 <code>Table</code> 展示核销时间、渠道、城市、门店和会员等记录。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>数据阅读路径</h2>
+    <ol>
+      <li>先确认对象上下文和当前筛选条件。</li>
+      <li>通过四项核心指标判断总体规模和核销效率。</li>
+      <li>观察近 12 周趋势，定位变化方向和异常区间。</li>
+      <li>对照渠道、城市分布，判断结果主要来自哪里。</li>
+      <li>下钻到核销明细，验证汇总数据对应的具体记录。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>详情布局能力</strong>
+      <div class="sb-template-docs-component-list">
+        <code>DetailPageLayout</code>
+        <code>DetailPageHeader</code>
+        <code>DetailDescriptions</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Card</code>
+        <code>Statistic</code>
+        <code>Select</code>
+        <code>Button</code>
+        <code>Dropdown</code>
+        <code>Table</code>
+        <code>Empty</code>
+        <code>Spin</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>Demo 内部可视化</strong>
+      <p>趋势图使用本示例内部的轻量 SVG，渠道和城市分布使用 CSS 进度条。它们只服务于 Docs 示例，不代表设计系统提供正式 Chart 公共能力。</p>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>数据详情页规则</h2>
+    <ol>
+      <li>指标、图表、分布和明细表格必须围绕同一个对象上下文展开。</li>
+      <li>图表标题需要说明时间范围和比较维度，图例使用文本说明颜色含义。</li>
+      <li>SVG 图表提供标题和描述；分布条使用可读文本和进度条语义。</li>
+      <li>空数据状态需要同时覆盖指标、趋势、分布和明细表格，不显示误导性的零值图形。</li>
+      <li>加载状态由页面示例控制，公共详情布局不承担请求和接口逻辑。</li>
+      <li>表格使用页面可用宽度，较宽内容只在表格容器内部滚动。</li>
+      <li>页面模板只负责组合，不承担动态 Schema、权限、接口和状态流转能力。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用注意事项</h2>
+    <ul>
+      <li>当前示例使用确定性的本地 Mock 数据，不接入真实数据服务。</li>
+      <li>“查询”“刷新数据”和导出操作仅用于演示页面级交互。</li>
+      <li>React 和 Vue 使用相同对象上下文、筛选项、指标、趋势、分布、明细和状态规则。</li>
+    </ul>
+  </section>
+</section>

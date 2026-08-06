@@ -7,8 +7,87 @@ tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="卡片详情页" description="卡片详情页模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/card-detail" />
+<p>预览可切换 React / Vue；展开代码区可查看并复制当前框架示例。</p>
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>模板定义</h2>
+    <p>卡片详情页适用于包含多个相对独立信息模块的详情场景。页面通过多个 Card 组织属性信息、适用范围和操作记录，让用户可以按模块快速扫描不同类型的内容。</p>
+    <p>这是页面组合参考和起始实现，不是公共 <code>CardDetailTemplate</code> 组件。</p>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>适用场景</h2>
+    <ul>
+      <li>页面同时包含属性信息、范围表格和操作记录。</li>
+      <li>不同信息模块需要独立的视觉边界和标题。</li>
+      <li>用户需要先定位模块，再阅读模块内的详情。</li>
+    </ul>
+    <h2>不适用场景</h2>
+    <ul>
+      <li>信息分组较少且主要是连续键值内容时，使用基础详情页。</li>
+      <li>指标、趋势和明细表格构成主要任务时，使用数据详情页。</li>
+      <li>需要保留父级对象上下文并查看下级对象时，使用二级详情页。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>页面级操作与模板面包屑保持同一层级，放置在面包屑右侧。</li>
+      <li>主要内容区域使用多个 Card，卡片之间保持统一间距。</li>
+      <li>基本信息使用 <code>DetailDescriptions</code>。</li>
+      <li>适用范围使用 <code>Table</code>，表格较宽时只在卡片内部横向滚动。</li>
+      <li>操作记录使用 <code>Timeline</code>，不把记录内容混入属性卡片。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>详情布局能力</strong>
+      <div class="sb-template-docs-component-list">
+        <code>DetailPageLayout</code>
+        <code>DetailPageHeader</code>
+        <code>DetailDescriptions</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Card</code>
+        <code>Tag</code>
+        <code>Button</code>
+        <code>Dropdown</code>
+        <code>Table</code>
+        <code>Timeline</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>卡片详情页规则</h2>
+    <ol>
+      <li>每张 Card 只承载一个清晰的信息模块，避免把不同内容类型塞入同一张卡片。</li>
+      <li>Card 标题表达模块语义，不重复页面标题或对象名称。</li>
+      <li>属性模块可以使用显式两列；容器变窄时由 <code>DetailDescriptions</code> 和页面网格自然收缩。</li>
+      <li>表格只在自己的容器内滚动，页面本身不产生横向溢出。</li>
+      <li>页面级操作最多保留一个视觉主操作，本示例为“编辑”。</li>
+      <li>页面模板只负责组合，不承担接口、权限、字段注册和状态流转能力。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用注意事项</h2>
+    <ul>
+      <li>需要多个独立模块时使用卡片详情页；不要为了视觉分隔在基础详情页中重复创建 Card。</li>
+      <li>卡片内容应由页面示例根据业务数据组合，不把卡券字段写入公共布局能力。</li>
+      <li>React 和 Vue 示例使用相同字段、Mock 数据、空值规则和页面结构。</li>
+    </ul>
+  </section>
+</section>

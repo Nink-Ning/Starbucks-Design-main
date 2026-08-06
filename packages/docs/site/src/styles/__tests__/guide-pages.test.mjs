@@ -29,18 +29,16 @@ test('the production site targets the internal SCM Pages project', async () => {
   );
 });
 
-test('the site root lands on the existing quick-start documentation', async () => {
+test('the site root renders the V1 landing page and keeps quick-start documentation available', async () => {
   const [rootPage, legacyLanding, gettingStarted] = await Promise.all([
     read('pages/index.astro'),
     read('content/docs/index.mdx'),
     read('content/docs/guide/getting-started.mdx'),
   ]);
 
-  assert.match(
-    rootPage,
-    /const quickStartUrl = `\$\{import\.meta\.env\.BASE_URL\}guide\/getting-started\/`/,
-  );
-  assert.match(rootPage, /return Astro\.redirect\(quickStartUrl\);/);
+  assert.match(rootPage, /renderLandingPage\(import\.meta\.env\.BASE_URL\)/);
+  assert.match(rootPage, /return new Response/);
+  assert.doesNotMatch(rootPage, /Astro\.redirect/);
   assert.match(legacyLanding, /template:\s*splash/);
   assert.match(gettingStarted, /^title:\s*快速开始$/m);
   assert.match(gettingStarted, /^## 安装$/m);

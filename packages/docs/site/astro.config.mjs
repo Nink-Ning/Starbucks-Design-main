@@ -61,6 +61,7 @@ export default defineConfig({
               label: '表单页',
               items: [
                 { label: '基础表单', slug: 'templates/form/basic-form' },
+                { label: '分组表单', slug: 'templates/form/grouped-form' },
                 { label: '分步表单', slug: 'templates/form/step-form' },
               ],
             },
