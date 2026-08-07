@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>门店列表 | DesignKit Starter V1</title>
+  <style>
+    :root {
+      --dk-page-max-width: 1280px;
+      --dk-page-gutter: 24px;
+      --dk-page-header-gap: 10px;
+      --dk-page-control-gap: 16px;
+      --dk-page-surface: #ffffff;
+      --dk-page-background: #f5f6f7;
+      --dk-page-text: #1d2129;
+      --dk-page-muted: #86909c;
+      --dk-page-border: #e5e6eb;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--dk-page-background);
+      color: var(--dk-page-text);
+      font-family: "Noto Sans SC", "Poppins", Roboto, sans-serif;
+    }
+
+    #root {
+      min-height: 100vh;
+    }
+
+    .dk-runtime-error {
+      box-sizing: border-box;
+      width: min(100% - 32px, 720px);
+      margin: 48px auto;
+      padding: 24px;
+      border: 1px solid #f3b7b7;
+      border-radius: 8px;
+      background: #fff7f7;
+      color: #8b1e1e;
+      line-height: 1.7;
+    }
+
+    .dk-runtime-error h1 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .dk-runtime-error p {
+      margin: 0;
+    }
+
+    .dk-demo-shell {
+      min-width: 0;
+      padding: 16px 0 40px;
+    }
+
+    .dk-demo-controls {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      width: min(calc(100% - 48px), var(--dk-page-max-width));
+      margin: 0 auto 16px;
+      padding: 12px 16px;
+      border: 1px solid var(--dk-page-border);
+      border-radius: 8px;
+      background: var(--dk-page-surface);
+    }
+
+    .dk-demo-controls__copy {
+      min-width: 160px;
+    }
+
+    .dk-demo-controls__title {
+      margin: 0;
+      color: var(--dk-page-text);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dk-demo-controls__description {
+      margin: 2px 0 0;
+      color: var(--dk-page-muted);
+      font-size: 12px;
+    }
+
+    .dk-page {
+      box-sizing: border-box;
+      width: min(calc(100% - 48px), var(--dk-page-max-width));
+      min-width: 0;
+      margin: 0 auto;
+      font-family: var(--font-family);
+    }
+
+    .dk-page__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: var(--dk-page-header-gap);
+    }
+
+    .dk-page__header-main {
+      min-width: 0;
+    }
+
+    .dk-page__title-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dk-page__title {
+      margin: 0;
+      color: var(--dk-page-text);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+    }
+
+    .dk-page__title-help {
+      display: inline-flex;
+      align-items: center;
+      color: var(--dk-page-muted);
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .dk-page__header-actions,
+    .dk-page__toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .dk-page__row-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dk-page__section {
+      display: grid;
+      gap: var(--spacing-4);
+      min-width: 0;
+      overflow: hidden;
+      padding: var(--dk-page-gutter);
+      border-radius: 8px;
+      background: var(--dk-page-surface);
+    }
+
+    .dk-page__table-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--dk-page-control-gap);
+      flex-wrap: wrap;
+      min-width: 0;
+      margin-bottom: 0;
+    }
+
+    .dk-page__toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: var(--dk-page-control-gap);
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .dk-page__toolbar-right {
+      justify-content: flex-end;
+      margin-inline-start: auto;
+      flex-wrap: nowrap;
+    }
+
+    .dk-page__toolbar-search {
+      display: flex;
+      flex: 0 1 320px;
+      min-width: 0;
+      width: 320px;
+    }
+
+    .dk-page__toolbar-icon {
+      display: inline-flex;
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    .dk-page__table-wrap {
+      min-width: 0;
+      overflow-x: auto;
+    }
+
+    .dk-page__pagination {
+      display: flex;
+      justify-content: flex-end;
+      min-width: 0;
+      margin-top: 0;
+      padding-top: var(--spacing-2);
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --dk-page-gutter: 16px;
+      }
+
+      .dk-demo-controls,
+      .dk-page {
+        width: min(calc(100% - 32px), var(--dk-page-max-width));
+      }
+
+      .dk-demo-controls {
+        align-items: stretch;
+      }
+
+      .dk-page__header {
+        gap: 16px;
+      }
+
+      .dk-page__header-actions,
+      .dk-page__header-actions > *,
+      .dk-page__toolbar-left,
+      .dk-page__toolbar-right,
+      .dk-page__toolbar-right > * {
+        width: 100%;
+      }
+
+      .dk-page__toolbar-right {
+        justify-content: flex-start;
+        margin-inline-start: 0;
+        flex-wrap: wrap;
+      }
+
+      .dk-page__toolbar-search {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: none;
+      }
+
+      .dk-page__toolbar-right > .dk-page__toolbar-icon {
+        width: auto;
+      }
+
+      .dk-page__pagination {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="dk-runtime-error" role="status">
+      <h1>正在加载门店列表 Demo</h1>
+      <p>正在加载 Starbucks Design 运行资源。如果页面长时间没有显示，请检查网络连接后刷新。</p>
+    </div>
+  </div>
+
+  <script>
+    window.__designKitStarterCdnErrors = [];
+    window.__designKitStarterRuntimeErrors = [];
+    window.addEventListener('error', function (event) {
+      if (event.target && event.target.tagName === 'SCRIPT' && event.target.src) {
+        window.__designKitStarterCdnErrors.push(event.target.src);
+      } else if (event.message) {
+        window.__designKitStarterRuntimeErrors.push(event.message);
+      }
+    }, true);
+  </script>
+
+  <!-- Fixed runtime: React 18.3.1 -->
+  <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <!-- Fixed runtime: Arco React 2.66.15 -->
+  <script src="https://cdn.jsdelivr.net/npm/@arco-design/web-react@2.66.15/dist/arco.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@arco-design/web-react@2.66.15/dist/arco-icon.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <!-- Starter local runtime: generated from the current React workspace build -->
+  <link rel="stylesheet" href="../runtime/starbucks-react.css" onerror="window.__designKitStarterCdnErrors.push(this.href)">
+  <script src="../runtime/starbucks-react.umd.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <!-- Fixed runtime: Babel Standalone 7.29.8 -->
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.29.8/babel.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+
+  <script type="text/babel">
+    if (!window.React || !window.ReactDOM || !window.StarbucksReact) {
+      window.__designKitStarterRuntimeErrors.push('Starbucks Design React 运行时未完整加载。');
+    } else {
+      const { useEffect, useMemo, useState } = React;
+      const {
+        Button,
+        Empty,
+        Input,
+        Message,
+        Pagination,
+        Result,
+        Select,
+        Table,
+        Tag,
+        Tooltip,
+      } = StarbucksReact;
+      const { IconInfoCircle, IconPlus, IconRefresh, IconSearch } = window.arcoicon || {};
+
+      const storeRows = [
+        { id: 'store-001', name: '上海淮海中路店', code: 'SH-001', region: '华东', city: '上海', type: '标准店', status: 'open', openedAt: '2020-05-18', manager: 'Nink', updatedAt: '2026-08-06 14:20' },
+        { id: 'store-002', name: '杭州湖滨店', code: 'HZ-018', region: '华东', city: '杭州', type: '臻选店', status: 'open', openedAt: '2021-09-12', manager: 'Kim', updatedAt: '2026-08-06 11:45' },
+        { id: 'store-003', name: '深圳万象城店', code: 'SZ-031', region: '华南', city: '深圳', type: '外送店', status: 'preparing', openedAt: '2026-08-10', manager: 'Alex', updatedAt: '2026-08-05 17:30' },
+        { id: 'store-004', name: '北京三里屯店', code: 'BJ-012', region: '华北', city: '北京', type: '标准店', status: 'open', openedAt: '2022-03-08', manager: 'Mia', updatedAt: '2026-08-05 09:18' },
+        { id: 'store-005', name: '苏州中心店', code: 'SZU-007', region: '华东', city: '苏州', type: '标准店', status: 'closed', openedAt: '2019-11-01', manager: 'Jade', updatedAt: '2026-08-04 16:05' },
+        { id: 'store-006', name: '广州天汇店', code: 'GZ-022', region: '华南', city: '广州', type: '臻选店', status: 'open', openedAt: '2018-06-21', manager: 'Owen', updatedAt: '2026-08-04 10:42' },
+        { id: 'store-007', name: '南京德基店', code: 'NJ-014', region: '华东', city: '南京', type: '标准店', status: 'preparing', openedAt: '2023-04-15', manager: 'Rita', updatedAt: '2026-08-03 15:12' },
+        { id: 'store-008', name: '成都太古里店', code: 'CD-026', region: '西南', city: '成都', type: '外送店', status: 'open', openedAt: '2024-12-06', manager: 'Luna', updatedAt: '2026-08-03 08:56' },
+        { id: 'store-009', name: '武汉天地店', code: 'WH-009', region: '华中', city: '武汉', type: '标准店', status: 'closed', openedAt: '2020-10-23', manager: 'Leo', updatedAt: '2026-08-02 18:10' },
+        { id: 'store-010', name: '厦门鹭江道店', code: 'XM-004', region: '华南', city: '厦门', type: '标准店', status: 'open', openedAt: '2021-12-19', manager: 'Ivy', updatedAt: '2026-08-02 13:27' },
+        { id: 'store-011', name: '青岛万象城店', code: 'QD-006', region: '华北', city: '青岛', type: '臻选店', status: 'preparing', openedAt: '2022-08-28', manager: 'Sean', updatedAt: '2026-08-01 12:34' },
+        { id: 'store-012', name: '重庆来福士店', code: 'CQ-011', region: '西南', city: '重庆', type: '标准店', status: 'open', openedAt: '2022-11-16', manager: 'Will', updatedAt: '2026-08-01 09:05' },
+      ];
+
+      const stateOptions = [
+        { label: 'Normal', value: 'normal' },
+        { label: 'Loading', value: 'loading' },
+        { label: 'Empty', value: 'empty' },
+        { label: 'Error', value: 'error' },
+      ];
+
+      const statusLabels = {
+        open: '营业中',
+        preparing: '筹备中',
+        closed: '已停业',
+      };
+
+      const statusColors = {
+        open: 'green',
+        preparing: 'arcoblue',
+        closed: 'gray',
+      };
+
+      const pageSize = 10;
+
+      function App() {
+        const [viewMode, setViewMode] = useState('normal');
+        const [keyword, setKeyword] = useState('');
+        const [currentPage, setCurrentPage] = useState(1);
+        const [isRefreshing, setIsRefreshing] = useState(false);
+
+        const filteredRows = useMemo(() => {
+          if (viewMode === 'empty') return [];
+
+          const normalizedKeyword = keyword.trim().toLowerCase();
+          return storeRows.filter((row) => {
+            return !normalizedKeyword || [row.name, row.code, row.city].some((value) => value.toLowerCase().includes(normalizedKeyword));
+          });
+        }, [keyword, viewMode]);
+
+        const pageCount = Math.max(1, Math.ceil(filteredRows.length / pageSize));
+        const pageRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+        const isLoading = viewMode === 'loading';
+        const isTableLoading = isLoading || isRefreshing;
+        const hasSearch = keyword.trim().length > 0;
+        const emptyDescription = hasSearch ? '没有匹配的门店，请清除关键词。' : '暂无门店数据。';
+
+        useEffect(() => {
+          setCurrentPage(1);
+        }, [keyword, viewMode]);
+
+        useEffect(() => {
+          if (currentPage > pageCount) setCurrentPage(pageCount);
+        }, [currentPage, pageCount]);
+
+        const refreshData = () => {
+          if (isRefreshing) return;
+          setIsRefreshing(true);
+          window.setTimeout(() => {
+            setIsRefreshing(false);
+            Message.success('本地 Mock 数据已刷新');
+          }, 450);
+        };
+
+        const showUnavailableState = (label) => {
+          Message.info(`这是本地 Mock Demo，${label}不会连接真实接口。`);
+        };
+
+        const columns = [
+          {
+            title: '门店编号',
+            dataIndex: 'code',
+            key: 'code',
+            width: 120,
+            fixed: 'left',
+          },
+          {
+            title: '门店名称',
+            dataIndex: 'name',
+            key: 'name',
+            width: 220,
+            fixed: 'left',
+            ellipsis: true,
+          },
+          {
+            title: '所在城市',
+            dataIndex: 'city',
+            key: 'city',
+            width: 140,
+            render: (_, record) => `${record.region} / ${record.city}`,
+          },
+          {
+            title: '门店类型',
+            dataIndex: 'type',
+            key: 'type',
+            width: 120,
+          },
+          {
+            title: '营业状态',
+            dataIndex: 'status',
+            key: 'status',
+            width: 120,
+            render: (value) => <Tag color={statusColors[value]}>{statusLabels[value]}</Tag>,
+          },
+          {
+            title: '开业日期',
+            dataIndex: 'openedAt',
+            key: 'openedAt',
+            width: 140,
+          },
+          {
+            title: '店长',
+            dataIndex: 'manager',
+            key: 'manager',
+            width: 120,
+          },
+          {
+            title: '更新时间',
+            dataIndex: 'updatedAt',
+            key: 'updatedAt',
+            width: 180,
+          },
+          {
+            title: '操作',
+            key: 'actions',
+            width: 180,
+            fixed: 'right',
+            render: (_, record) => (
+              <div className="dk-page__row-actions">
+                <Button type="text" size="small" onClick={() => Message.info(`查看 ${record.name}`)}>查看</Button>
+                <Button type="text" size="small" onClick={() => Message.success(`已打开 ${record.name} 的编辑示例`)}>编辑</Button>
+              </div>
+            ),
+          },
+        ];
+
+        return (
+          <div className="dk-demo-shell">
+            <section className="dk-demo-controls" aria-label="Demo 状态控制">
+              <div className="dk-demo-controls__copy">
+                <p className="dk-demo-controls__title">页面状态演示</p>
+                <p className="dk-demo-controls__description">仅用于验证模板状态，不属于正式页面结构。</p>
+              </div>
+              <Select
+                aria-label="选择页面状态"
+                value={viewMode}
+                options={stateOptions}
+                onChange={setViewMode}
+              />
+            </section>
+
+            <main className="dk-page">
+              <header className="dk-page__header">
+                <div className="dk-page__header-main">
+                  <div className="dk-page__title-row">
+                      <h1 className="dk-page__title">门店列表</h1>
+                      {Tooltip && IconInfoCircle && (
+                        <Tooltip mini content="查看和管理门店的基础信息、营业状态和最近更新时间。">
+                          <span className="dk-page__title-help" aria-label="页面说明"><IconInfoCircle /></span>
+                        </Tooltip>
+                      )}
+                    </div>
+                </div>
+                <div className="dk-page__header-actions">
+                  <Button type="primary" icon={IconPlus ? <IconPlus /> : null} onClick={() => showUnavailableState('新建门店')}>新建门店</Button>
+                </div>
+              </header>
+
+              <section className="dk-page__section" aria-label="门店数据列表">
+                <div className="dk-page__table-toolbar">
+                  <div className="dk-page__toolbar-left">
+                    <div className="dk-page__toolbar-search">
+                      <Input
+                        aria-label="搜索门店"
+                        prefix={IconSearch ? <IconSearch /> : null}
+                        placeholder="搜索门店名称、编号或城市"
+                        allowClear
+                        value={keyword}
+                        onChange={setKeyword}
+                      />
+                    </div>
+                  </div>
+                  <div className="dk-page__toolbar-right">
+                    <span className="dk-page__toolbar-icon">
+                      <Tooltip content="刷新">
+                        <Button
+                          aria-label="刷新门店数据"
+                          icon={IconRefresh ? <IconRefresh /> : null}
+                          loading={isRefreshing}
+                          onClick={refreshData}
+                        />
+                      </Tooltip>
+                    </span>
+                  </div>
+                </div>
+
+                {viewMode === 'error' ? (
+                  <Result
+                    status="error"
+                    title="门店数据加载失败"
+                    subTitle="当前为本地错误状态演示，可以切换页面状态或重试恢复。"
+                    extra={<Button type="primary" onClick={() => setViewMode('normal')}>返回正常状态</Button>}
+                  />
+                ) : (
+                  <div className="dk-page__table-wrap">
+                    <Table
+                      rowKey="id"
+                      columns={columns}
+                      data={pageRows}
+                      loading={isTableLoading}
+                      pagination={false}
+                      scroll={{ x: 1160 }}
+                      noDataElement={<Empty description={emptyDescription} />}
+                    />
+                  </div>
+                )}
+
+                {viewMode !== 'error' && (
+                  <div className="dk-page__pagination">
+                    <Pagination
+                      total={filteredRows.length}
+                      current={currentPage}
+                      pageSize={pageSize}
+                      showTotal
+                      showJumper
+                      onChange={setCurrentPage}
+                    />
+                  </div>
+                )}
+              </section>
+            </main>
+          </div>
+        );
+      }
+
+      if (!Tooltip || !IconInfoCircle || !IconPlus || !IconRefresh) {
+        window.__designKitStarterRuntimeErrors.push('Arco Icon 未完整加载，页面将继续使用无图标降级展示。');
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    }
+  </script>
+
+  <script>
+    (function showRuntimeStatus() {
+      var missing = [];
+      if (!window.React) missing.push('React 18.3.1');
+      if (!window.ReactDOM) missing.push('ReactDOM 18.3.1');
+      if (!window.StarbucksReact) missing.push('Starter 本地 Starbucks React Runtime');
+      if (!window.Babel) missing.push('Babel Standalone 7.29.8');
+
+      var messages = [];
+      if (missing.length) messages.push('未能加载：' + missing.join('、') + '。');
+      if (window.__designKitStarterCdnErrors && window.__designKitStarterCdnErrors.length) {
+        messages.push('请检查网络是否可以访问固定 CDN 地址。');
+      }
+      if (window.__designKitStarterRuntimeErrors && window.__designKitStarterRuntimeErrors.length) {
+        messages.push(window.__designKitStarterRuntimeErrors[0]);
+      }
+
+      if (!messages.length) return;
+
+      var root = document.getElementById('root');
+      root.innerHTML = '';
+      var panel = document.createElement('div');
+      panel.className = 'dk-runtime-error';
+      panel.setAttribute('role', 'alert');
+      var title = document.createElement('h1');
+      title.textContent = '门店列表 Demo 暂时无法加载';
+      var body = document.createElement('p');
+      body.textContent = messages.join(' ');
+      panel.appendChild(title);
+      panel.appendChild(body);
+      root.appendChild(panel);
+    }());
+  </script>
+</body>
+</html>

@@ -87,8 +87,7 @@ export default defineConfig({
         {
           label: 'Skills',
           items: [
-            { label: '使用指南', slug: 'guide/ai-skills-guide' },
-            { label: 'Skills 下载', slug: 'guide/ai-skills' },
+            { label: 'AI 协作指南', slug: 'guide/ai-skills-guide' },
           ],
         },
       ],

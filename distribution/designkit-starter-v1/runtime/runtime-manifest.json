@@ -1,0 +1,42 @@
+{
+  "packageName": "@sbux/starbucks-design-react",
+  "packageVersion": "1.1.22",
+  "sourceCommit": "d7f3496b13d0ef96ed48e0d4544de2ba3f378b81",
+  "workspaceDirty": true,
+  "buildTime": "2026-08-07T07:26:23.084Z",
+  "reactVersion": "18.3.1",
+  "reactDomVersion": "18.3.1",
+  "arcoVersion": "2.66.15",
+  "jsFile": "starbucks-react.umd.js",
+  "jsSize": 32843,
+  "jsSha256": "09e6d5ccc3b255d25473b8463a5e2943a6516c2fd6b1980ba3002c4e314d7bc3",
+  "cssFile": "starbucks-react.css",
+  "cssSize": 839623,
+  "cssSha256": "cdae16d0304a180c0c6606b3e35ce0def5487600121ac279ad7ba016e074f4ed",
+  "cssSources": [
+    "packages/starbucks-design-react/src/starter-runtime.ts",
+    "packages/starbucks-design-react/src/components.less",
+    "packages/starbucks-design-react/src/theme.css",
+    "packages/starbucks-design-react/src/figma-overrides.less",
+    "packages/starbucks-design-react/src/overrides/_index.less",
+    "packages/starbucks-design-react/src/pro/form-layout/style.less",
+    "packages/starbucks-design-react/src/pro/detail-layout/style.less",
+    "packages/starbucks-design-react/src/pro/style/variables.less",
+    "@arco-design/web-react/es/style/theme/global.less",
+    "@arco-design/web-react/es/style/index.less",
+    "@arco-design/web-react/es/*/style/index.less"
+  ],
+  "buildConfig": "packages/starbucks-design-react/vite.config.starter-runtime.ts",
+  "selectedProExports": [
+    "FormPageLayout",
+    "FormGrid",
+    "FormGridItem",
+    "FormControlArea",
+    "FormActions",
+    "DetailPageLayout",
+    "DetailSection",
+    "DetailDescriptions"
+  ],
+  "verificationStatus": "BROWSER_CONFIRMED_WITH_THREE_GOLDEN_EXAMPLES_REGRESSION",
+  "verificationNotes": "Runtime smoke confirmed the selected Form and Detail Pro exports, local CSS hit, Detail 1120 max width, desktop multi-column layout, narrow single-column layout, emptyValue normalization, and no blocking console errors. List, Form, and Detail Golden Examples were rechecked through local HTTP preview; Runtime JS/CSS hashes were unchanged."
+}

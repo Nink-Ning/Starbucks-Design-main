@@ -9,11 +9,12 @@ async function read(relativePath) {
 }
 
 test('the production site targets the internal SCM Pages project', async () => {
-  const [config, header, rootPage, landing, skills] = await Promise.all([
+  const [config, header, rootPage, landing, canonical, compatibility] = await Promise.all([
     read('../astro.config.mjs'),
     read('components/Header.astro'),
     read('pages/index.astro'),
     read('content/docs/index.mdx'),
+    read('content/docs/guide/ai-skills-guide.mdx'),
     read('content/docs/guide/ai-skills.mdx'),
   ]);
 
@@ -21,12 +22,50 @@ test('the production site targets the internal SCM Pages project', async () => {
   assert.match(config, /base:\s*['"]\/kning\/starbucks-design-main\/['"]/);
   assert.match(header, /https:\/\/scm\.starbucks\.com\/kning\/starbucks-design-main/);
   assert.match(rootPage, /import\.meta\.env\.BASE_URL/);
-  assert.match(landing, /\/kning\/starbucks-design-main\/guide\/getting-started\//);
-  assert.match(skills, /\/kning\/starbucks-design-main\/skills\/starbucks-design-react\.zip/);
+  assert.match(config, /label:\s*['"]AI 协作指南['"],\s*slug:\s*['"]guide\/ai-skills-guide['"]/);
+  assert.doesNotMatch(config, /slug:\s*['"]guide\/ai-skills['"]/);
+  assert.match(header, /label:\s*['"]AI 协作指南['"]/);
+  assert.match(landing, /href="guide\/ai-skills-guide\//);
+  assert.match(canonical, /^title:\s*AI 协作指南$/m);
+  assert.match(canonical, /### 产品经理/);
+  assert.match(canonical, /### 设计师/);
+  assert.match(canonical, /### React 开发者/);
+  assert.match(canonical, /### Vue 开发者/);
+  assert.match(canonical, /Starter V1 当前为\*\*内部试用版\*\*/);
+  assert.match(canonical, /href="\.\.\/\.\.\/downloads\/designkit-starter-v1\.zip" download="designkit-starter-v1\.zip"/);
+  assert.doesNotMatch(canonical, /下载即将开放|当前 ZIP 尚未创建/);
+  assert.match(canonical, /React 是当前的视觉基准/);
+  assert.match(canonical, /Vue 组件工程能力可用，视觉一致性仍在持续优化/);
+  assert.match(compatibility, /AI 协作指南.*统一维护/);
+  assert.match(compatibility, /\.\.\/ai-skills-guide\//);
+  assert.ok(compatibility.length < 500);
   assert.doesNotMatch(
-    `${config}\n${header}\n${rootPage}\n${landing}\n${skills}`,
-    /nink1992\.github\.io|\/Starbucks-Design-main\/|\/china\/bopfui-starbucks-ui\//,
+    `${landing}\n${canonical}\n${compatibility}`,
+    /\/kning\/starbucks-design-main\/|\/Starbucks-Design-main\/|nink1992\.github\.io|\/china\/bopfui-starbucks-ui\//,
   );
+  for (const source of [canonical, compatibility]) {
+    assert.doesNotMatch(source, /70 个组件|全部组件|双击即可预览|品牌主题自动注入/);
+  }
+});
+
+test('the canonical AI collaboration guide is the only full content source', async () => {
+  const [config, canonical, compatibility] = await Promise.all([
+    read('../astro.config.mjs'),
+    read('content/docs/guide/ai-skills-guide.mdx'),
+    read('content/docs/guide/ai-skills.mdx'),
+  ]);
+
+  assert.equal((config.match(/slug:\s*['"]guide\/ai-skills-guide['"]/g) || []).length, 1);
+  assert.doesNotMatch(config, /Skills 下载/);
+  assert.match(canonical, /^## 选择你的角色$/m);
+  assert.match(canonical, /^## 不同角色如何与 AI 协作$/m);
+  assert.match(canonical, /^## Starter 使用流程$/m);
+  assert.match(canonical, /^## Starter V1 支持范围$/m);
+  assert.match(canonical, /^## Starter V1 暂不支持$/m);
+  assert.match(canonical, /^## Preview Skill 边界$/m);
+  assert.match(canonical, /^## 使用建议$/m);
+  assert.match(canonical, /^## 版本与已知限制$/m);
+  assert.doesNotMatch(compatibility, /### 产品经理|### 设计师|### React 开发者|### Vue 开发者/);
 });
 
 test('the site root renders the V1 landing page and keeps quick-start documentation available', async () => {

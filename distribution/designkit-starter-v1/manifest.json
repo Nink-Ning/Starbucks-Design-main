@@ -1,0 +1,67 @@
+{
+  "name": "DesignKit Starter V1",
+  "releaseLine": "V1",
+  "status": "internal-trial",
+  "description": "DesignKit Starter V1 是一个面向产品经理的零工程环境 Demo 生成包。用户无需安装 Node.js 或前端工程环境，AI 最终生成可直接在浏览器打开的单文件 HTML Demo。HTML 内部允许使用固定版本的 React UMD/CDN、Babel 和少量 JavaScript。",
+  "defaultOutput": "single-html",
+  "visualBaseline": "starbucks-design-react",
+  "supportedTemplates": [
+    "basic-list",
+    "basic-form",
+    "basic-detail"
+  ],
+  "examples": [
+    "examples/list.html",
+    "examples/form.html",
+    "examples/detail.html"
+  ],
+  "templateFiles": [
+    "templates/list.md",
+    "templates/form.md",
+    "templates/detail.md"
+  ],
+  "unsupported": [
+    "vue-preview",
+    "dashboard",
+    "login",
+    "result",
+    "advanced-filter-bar",
+    "cross-page-selection",
+    "complex-batch-actions",
+    "real-api",
+    "permission-system",
+    "upload",
+    "export",
+    "react-project",
+    "vue-project"
+  ],
+  "runtime": {
+    "networkRequired": true,
+    "browserBaseline": "current Chrome or Edge",
+    "react": "18.3.1",
+    "reactDom": "18.3.1",
+    "arcoReact": "2.66.15",
+    "starbucksReactRuntime": "runtime/starbucks-react.umd.js + runtime/starbucks-react.css",
+    "starbucksReactPackageVersion": "1.1.22",
+    "babelStandalone": "7.29.8"
+  },
+  "output": {
+    "directory": "output",
+    "extension": ".html",
+    "singleFile": true,
+    "usesLocalMock": true
+  },
+  "validation": {
+    "examples": "BROWSER_CONFIRMED",
+    "browserSmoke": "BROWSER_CONFIRMED",
+    "cdnHttpReachability": "CHECKED",
+    "phase": "release-candidate-audit",
+    "localRuntime": "CONFIRMED"
+  },
+  "sourcePolicy": {
+    "mode": "adapted-not-copied",
+    "componentSourceIncluded": false,
+    "vueSourceIncluded": false,
+    "docsSourceIncluded": false
+  }
+}

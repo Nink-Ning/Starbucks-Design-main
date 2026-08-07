@@ -1,0 +1,17 @@
+{
+  "artifact": "designkit-starter-v1.zip",
+  "starterVersion": "V1",
+  "status": "internal-trial",
+  "canonicalPath": "distribution/releases/designkit-starter-v1.zip",
+  "docsPublicPath": "packages/docs/site/public/downloads/designkit-starter-v1.zip",
+  "zipSize": 151740,
+  "zipSha256": "a8f78e599fdd917d6a0910ed7d0995cb08aef87902d6cc7a54ded66d48f1436f",
+  "packageVersion": "1.1.22",
+  "sourceCommit": "d7f3496b13d0ef96ed48e0d4544de2ba3f378b81",
+  "workspaceDirty": true,
+  "runtime": {
+    "jsSha256": "09e6d5ccc3b255d25473b8463a5e2943a6516c2fd6b1980ba3002c4e314d7bc3",
+    "cssSha256": "cdae16d0304a180c0c6606b3e35ce0def5487600121ac279ad7ba016e074f4ed"
+  },
+  "generatedAt": "2026-08-07T08:16:04Z"
+}
