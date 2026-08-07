@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime.D3GSbgeI.js";import{a7 as r}from"./index.es.DxJtyaV1.js";import"./index.yBjzXJbu.js";import"./index.8H-kKAXM.js";import"./_commonjsHelpers.Cpj98o6Y.js";import"./index.sGmLo0nR.js";import"./quarterOfYear.QkQtW3xZ.js";function l(){return t.jsx(r,{style:{maxWidth:350},allowClear:!0,dragToSort:!0,defaultValue:["a","b","c","d"]})}export{l as default};
