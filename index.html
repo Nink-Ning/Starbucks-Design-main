@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="DesignKit 将企业设计语言、业务资产、设计决策与质量规则组织成 AI 可读取、可执行、可验证的工作系统。" />
+  <meta name="description" content="DesignKit 将企业设计语言、业务资产、设计决策与质量规则沉淀为AI可理解、可执行、可验证的设计能力，让团队从需求出发，快速生成符合企业标准、可持续交付的产品界面。" />
   <title>DesignKit — 让企业设计标准在 AI 工作流中自动执行</title>
   <style>
     :root{
@@ -122,7 +122,7 @@
       transition:background .22s ease,border-color .22s ease,backdrop-filter .22s ease;
     }
     .nav-wrap[data-theme="dark"]{
-      --nav-bg:rgba(0,34,21,0);--nav-line:rgba(255,255,255,.15);--nav-text:rgba(255,255,255,.84);--nav-strong:#fff;
+      --nav-bg:rgba(0,34,21,0);--nav-line:rgba(255,255,255,.08);--nav-text:rgba(255,255,255,.84);--nav-strong:#fff;
     }
     .nav-wrap[data-theme="dark"].scrolled{--nav-bg:rgba(0,38,24,.76);backdrop-filter:blur(18px) saturate(130%)}
     .nav-wrap[data-theme="light"]{
@@ -174,47 +174,65 @@
 
     .hero{
       min-height:100svh;padding:var(--nav-h) 0 0;color:#fff;overflow:hidden;position:relative;
-      background:
-        linear-gradient(
-          180deg,
-          #001C12 0%,
-          #003320 27%,
-          #005234 46%,
-          #00754A 64%,
-          #52B788 85%,
-          #C8F0D0 100%
-        );
+      background:radial-gradient(
+        201.67% 105.6% at 50% -6.34%,
+        #001C12 0%,
+        #002A1A 24.25%,
+        #00452C 40.62%,
+        #00754A 60.21%,
+        #77B99A 78.77%,
+        #F4F7F5 96.71%
+      );
     }
     .hero::after{
       content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-      background:
-        linear-gradient(180deg,rgba(0,0,0,.14) 0%,rgba(0,0,0,.05) 26%,rgba(0,0,0,0) 52%),
-        linear-gradient(90deg,rgba(0,20,13,.08) 0%,rgba(0,20,13,.03) 42%,rgba(0,20,13,0) 78%);
+      background:linear-gradient(90deg,rgba(0,20,13,.06) 0%,rgba(0,20,13,.018) 42%,rgba(0,20,13,0) 78%);
     }
     .hero-grid{display:none}
+    .hero>.floor-rails{--floor-rail:rgba(255,255,255,.075)}
     .hero-inner{min-height:calc(100svh - var(--nav-h));display:flex;flex-direction:column;position:relative;z-index:2}
     .hero-copy{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:76px 28px 58px}
-    .hero-badge{display:inline-flex;align-items:center;gap:9px;padding:9px 12px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.07);font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:rgba(255,255,255,.78)}
-    .hero-badge i{width:7px;height:7px;border-radius:50%;background:#9fe4bf;box-shadow:0 0 0 5px rgba(159,228,191,.10)}
+    .hero-badge{
+      position:relative;isolation:isolate;overflow:hidden;
+      display:inline-flex;align-items:center;justify-content:center;min-height:32px;padding:7px 14px;
+      border:0;border-radius:24px;
+      background:linear-gradient(180deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.08) 100%);
+      box-shadow:0 1px 2px rgba(0,0,0,.20),inset 0 0 4px rgba(255,255,255,.20),inset 0 1px 1px rgba(255,255,255,.10);
+      -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",Inter,"Segoe UI",Arial,sans-serif;
+      font-size:12px;font-weight:500;line-height:18px;letter-spacing:normal;color:rgba(239,244,255,.82);white-space:nowrap;
+      transition:background .2s ease,box-shadow .2s ease,transform .2s ease;
+    }
+    .hero-badge::before{
+      content:"";position:absolute;z-index:-1;
+      inset:29px -81% -83px 43%;
+      background:linear-gradient(270deg,#FFD4BE 14.2%,#AF75FF 43%,#76D0F4 69%,#4D90FD 84%,#8AD7B0 100%);
+      filter:blur(10px);opacity:.8;pointer-events:none;
+    }
     .hero h1{max-width:980px;margin:26px 0 0;font-size:56px;line-height:.92;letter-spacing:-.06em;font-weight:540}
-    .hero h1 span{display:block}.hero h1 span + span{margin-top:20px}.hero h1 span:last-child{color:#B8E9D6}
-    .hero-stroke-line{position:relative;isolation:isolate;color:#B8E9D6}
-    .hero-stroke-measure{display:block;color:#B8E9D6}
-    .hero-stroke-line.is-enhanced .hero-stroke-measure{visibility:hidden}
-    .hero-stroke-svg{position:absolute;inset:-.08em -.04em -.12em;width:calc(100% + .08em);height:calc(100% + .2em);overflow:visible;pointer-events:none}
-    .hero-stroke-svg text{font-family:inherit;font-size:1em;font-weight:540;letter-spacing:-.06em;text-rendering:geometricPrecision}
-    .hero-stroke-base{fill:none;stroke:rgba(200,240,208,.2);stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
-    .hero-stroke-draw{fill:none;stroke:url(#heroStrokeGradient);stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(82,183,136,.22))}
-    .hero-stroke-draw tspan{opacity:.2;stroke-dasharray:760;stroke-dashoffset:760}
-    .hero-stroke-fill{fill:url(#heroFillGradient);stroke:none;clip-path:url(#heroStrokeWipeClip)}
-    .hero-stroke-fill tspan{opacity:0}
-    .hero-stroke-wipe{transform-box:fill-box;transform-origin:left center;transform:scaleX(0)}
-    .hero-stroke-svg.is-playing .hero-stroke-draw tspan{animation:heroStrokeDraw 1.22s cubic-bezier(.22,1,.36,1) forwards;animation-delay:calc(140ms + var(--char-index) * 68ms)}
-    .hero-stroke-svg.is-playing .hero-stroke-fill tspan{animation:heroStrokeFill .5s ease-out forwards;animation-delay:calc(780ms + var(--char-index) * 54ms)}
-    .hero-stroke-svg.is-playing .hero-stroke-wipe{animation:heroStrokeWipe 1.08s cubic-bezier(.22,1,.36,1) .74s forwards}
-    @keyframes heroStrokeDraw{0%{stroke-dashoffset:760;opacity:.16}38%{opacity:1}100%{stroke-dashoffset:0;opacity:.92}}
-    @keyframes heroStrokeFill{from{opacity:0}to{opacity:1}}
-    @keyframes heroStrokeWipe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    .hero h1 > span{display:block}.hero h1 > span + span{margin-top:20px}.hero h1 > span:last-child{color:#B8E9D6}
+    .hero-title-first{
+      width:100%;margin-inline:auto;white-space:nowrap;word-spacing:normal;
+      text-align:justify;text-align-last:justify;
+    }
+    .hero-title-line{display:flex!important;align-items:baseline;justify-content:space-between;width:100%;white-space:nowrap}
+    .hero-title-second{color:#B8E9D6}
+    .hero-title-char{display:inline-block!important;min-width:0;white-space:pre}
+    .hero-copy.reveal{opacity:1;transform:none;transition:none}
+    .hero-copy.hero-sequence-ready{--hero-entry-blur:8px;--hero-entry-y:18px}
+    .hero-copy.hero-sequence-ready .hero-badge,
+    .hero-copy.hero-sequence-ready h1,
+    .hero-copy.hero-sequence-ready .hero-desc{
+      opacity:0;filter:blur(var(--hero-entry-blur));transform:translate3d(0,var(--hero-entry-y),0);
+      will-change:opacity,filter,transform;
+    }
+    .hero-copy.hero-sequence-playing .hero-badge{animation:heroSequenceIn .82s ease 0s forwards}
+    .hero-copy.hero-sequence-playing h1{animation:heroSequenceIn .82s ease .18s forwards}
+    .hero-copy.hero-sequence-playing .hero-desc{animation:heroSequenceIn .82s ease .52s forwards}
+    @keyframes heroSequenceIn{
+      0%{opacity:0;filter:blur(var(--hero-entry-blur));transform:translate3d(0,var(--hero-entry-y),0)}
+      100%{opacity:1;filter:blur(0);transform:none}
+    }
     .hero-desc{max-width:720px;margin:26px 0 0;color:#B8E9D6;font-size:16px;line-height:1.82}
     .hero-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:30px}
     .hero .btn.primary{background:#fff;color:#005c3a;box-shadow:none}
@@ -233,7 +251,7 @@
       width:100vw;
       height:1px;
       transform:translateX(-50%);
-      background:rgba(255,255,255,.32);
+      background:rgba(255,255,255,.12);
       pointer-events:none;
     }
     .hero-tech-label{
@@ -412,11 +430,13 @@
     }
     @media(max-width:680px){
       :root{--max:calc(100vw - 20px)}
-      section{padding:86px 0}.hero h1{font-size:clamp(42px,12vw,60px)}.hero-copy{padding:64px 18px 46px}.hero-tech{padding:22px 20px;min-height:162px;flex-basis:162px}.logo-marquee-group{gap:42px;padding-right:42px}.tool-logo svg{width:24px;height:24px}.tool-logo strong{font-size:12px}
+      .hero-badge{max-width:calc(100vw - 28px);padding-inline:12px;font-size:11px}
+      .hero-copy.hero-sequence-ready{--hero-entry-blur:6px;--hero-entry-y:12px}
+      section{padding:86px 0}.hero h1{width:max-content;max-width:calc(100vw - 36px);font-size:clamp(31px,8.8vw,36px);line-height:1;letter-spacing:-.045em}.hero h1 > span + span{margin-top:12px}.hero-title-first{width:auto;text-align:center;text-align-last:auto}.hero-desc{max-width:calc(100vw - 42px);margin-top:22px;font-size:14px;line-height:1.72}.hero-actions{margin-top:24px}.hero-copy{padding:58px 18px 42px}.hero-tech{padding:22px 20px;min-height:162px;flex-basis:162px}.logo-marquee-group{gap:42px;padding-right:42px}.tool-logo svg{width:24px;height:24px}.tool-logo strong{font-size:12px}
       .section-title{font-size:clamp(34px,10vw,50px)}.case-shell,.capability-shell,.asset-column,.role-shell,.cta-shell{border-radius:24px}.case-shell{padding:12px}.case-top{align-items:flex-start}.case-workspace{min-height:auto}.case-left{min-height:390px}.case-preview{padding:10px;min-height:520px}.app-body{padding:10px;min-height:430px}.layout-stage{grid-template-columns:76px 1fr;min-height:340px}.filter-demo{grid-template-columns:1fr 1fr}.filter-demo .demo-search{grid-column:1/-1}.drawer{width:70%}.case-controls{grid-template-columns:1fr}.case-steps{grid-template-columns:repeat(2,1fr)}.control-actions{justify-content:flex-end}
       .capability-shell{padding:18px}.assets-shell{gap:12px}.asset-column{padding:18px}.role-tabs{grid-template-columns:1fr}.role-content{padding:8px}.role-copy{padding:8px}.cta-shell{padding:30px}.cta-actions{display:grid}.cta-actions .btn{width:100%}.footer{flex-direction:column;align-items:flex-start}
     }
-    @media(prefers-reduced-motion:reduce){.logo-marquee{overflow:visible;mask-image:none;-webkit-mask-image:none}.logo-marquee-track{animation:none;transform:none}.logo-marquee-group[aria-hidden="true"]{display:none}*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.hero-stroke-svg{display:none}.hero-stroke-line.is-enhanced .hero-stroke-measure{visibility:visible}}
+    @media(prefers-reduced-motion:reduce){.logo-marquee{overflow:visible;mask-image:none;-webkit-mask-image:none}.logo-marquee-track{animation:none;transform:none}.logo-marquee-group[aria-hidden="true"]{display:none}*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.hero-copy.hero-sequence-ready .hero-badge,.hero-copy.hero-sequence-ready h1,.hero-copy.hero-sequence-ready .hero-desc{opacity:1;filter:none;transform:none}}
 
     /* Real generation case — dark floor */
     #case{
@@ -7280,9 +7300,9 @@
       <div class="hero-grid" aria-hidden="true"></div>
       <div class="container hero-inner">
         <div class="hero-copy reveal">
-          <div class="hero-badge"><i></i>AI-NATIVE ENTERPRISE DESIGN SYSTEM</div>
-          <h1><span>让 AI 理解你的业务</span><span class="hero-stroke-line" id="heroStrokeLine" data-text="让设计标准自动执行" aria-label="让设计标准自动执行"><span class="hero-stroke-measure" aria-hidden="true">让设计标准自动执行</span></span></h1>
-          <p class="hero-desc">DesignKit 将企业设计语言、业务资产、设计决策和质量规则组织成 AI 可读取、可执行、可验证的系统，帮助团队生成符合企业标准、可继续开发的产品页面。</p>
+          <div class="hero-badge">AI-READY DESIGN OPERATING SYSTEM</div>
+          <h1><span class="hero-title-first hero-title-line" data-hero-title-line="让 AI 理解企业业务">让 AI 理解企业业务</span><span class="hero-title-second hero-title-line" data-hero-title-line="让设计能力真正落地">让设计能力真正落地</span></h1>
+          <p class="hero-desc">DesignKit 将企业设计语言、业务资产、设计决策与质量规则沉淀为 AI 可理解、可执行、可验证的设计能力，让团队从需求出发，快速生成符合企业标准、可持续交付的产品界面。</p>
           <div class="hero-actions">
             <a class="btn primary" href="/Starbucks-Design-main/guide/ai-skills-guide/">查看使用指南 <span>↗</span></a>
             <button class="btn secondary js-download" type="button" aria-haspopup="dialog" aria-controls="downloadModal">下载DesignKit</button>
@@ -7753,65 +7773,29 @@
     }
     syncTheme();window.addEventListener('scroll',syncTheme,{passive:true});window.addEventListener('resize',syncTheme,{passive:true});
 
-    function initHeroStrokeText(){
-      const line=qs('#heroStrokeLine');
-      if(!line||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-      const text=line.dataset.text||line.textContent.trim();
-      const svgNS='http://www.w3.org/2000/svg';
-      const svg=document.createElementNS(svgNS,'svg');
-      svg.classList.add('hero-stroke-svg');
-      svg.setAttribute('aria-hidden','true');
-      svg.setAttribute('preserveAspectRatio','xMidYMid meet');
-      svg.innerHTML=`<defs>
-        <linearGradient id="heroStrokeGradient" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E0F7E9"/><stop offset=".52" stop-color="#8AD7B0"/><stop offset="1" stop-color="#00A862"/></linearGradient>
-        <linearGradient id="heroFillGradient" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C8F0D0"/><stop offset=".55" stop-color="#9FE4BF"/><stop offset="1" stop-color="#52B788"/></linearGradient>
-        <clipPath id="heroStrokeWipeClip"><rect class="hero-stroke-wipe"/></clipPath>
-      </defs>`;
-      const makeText=className=>{
-        const node=document.createElementNS(svgNS,'text');
-        node.setAttribute('x','0');node.setAttribute('y','0');node.setAttribute('class',className);
-        Array.from(text).forEach((character,index)=>{
-          const char=document.createElementNS(svgNS,'tspan');
-          char.textContent=character;
-          char.style.setProperty('--char-index',index);
-          node.appendChild(char);
+    function initHeroSequence(){
+      const copy=qs('.hero-copy');
+      const lines=qsa('[data-hero-title-line]',copy);
+      if(!copy||!lines.length)return;
+      const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      copy.classList.add('hero-sequence-ready');
+      if(reduceMotion)return;
+      lines.forEach((line,lineIndex)=>{
+        const text=line.dataset.heroTitleLine||line.textContent.trim();
+        line.textContent='';
+        line.setAttribute('aria-label',text);
+        const parts=(lineIndex===0?text.match(/AI|./gu):Array.from(text)).filter(part=>part!==' ');
+        parts.forEach(part=>{
+          const character=document.createElement('span');
+          character.className='hero-title-char';
+          character.textContent=part;
+          character.setAttribute('aria-hidden','true');
+          line.appendChild(character);
         });
-        svg.appendChild(node);
-        return node;
-      };
-      const base=makeText('hero-stroke-base');
-      const draw=makeText('hero-stroke-draw');
-      makeText('hero-stroke-fill');
-      line.appendChild(svg);
-      const prepare=()=>requestAnimationFrame(()=>{
-        const bounds=base.getBBox();
-        const pad=Math.max(1,bounds.height*.015);
-        svg.setAttribute('viewBox',`${bounds.x-pad} ${bounds.y-pad} ${bounds.width+pad*2} ${bounds.height+pad*2}`);
-        const wipe=qs('.hero-stroke-wipe',svg);
-        wipe.setAttribute('x',String(bounds.x-pad));wipe.setAttribute('y',String(bounds.y-pad));
-        wipe.setAttribute('width',String(bounds.width+pad*2));wipe.setAttribute('height',String(bounds.height+pad*2));
-        qsa('tspan',draw).forEach(char=>{
-          const length=Math.max(520,Math.ceil(char.getComputedTextLength()*12));
-          char.style.strokeDasharray=String(length);
-          char.style.strokeDashoffset=String(length);
-        });
-        line.classList.add('is-enhanced');
-        let replayCount=0;
-        const replay=()=>{
-          const lineBounds=line.getBoundingClientRect();
-          if(document.visibilityState!=='visible'||lineBounds.bottom<=0||lineBounds.top>=window.innerHeight)return;
-          svg.classList.remove('is-playing');
-          void svg.getBoundingClientRect();
-          line.dataset.replayCount=String(++replayCount);
-          requestAnimationFrame(()=>svg.classList.add('is-playing'));
-        };
-        replay();
-        window.setInterval(replay,4800);
       });
-      if(document.fonts?.ready)document.fonts.ready.then(prepare);else prepare();
+      requestAnimationFrame(()=>requestAnimationFrame(()=>copy.classList.add('hero-sequence-playing')));
     }
-    initHeroStrokeText();
-
+    initHeroSequence();
     const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
     qsa('.reveal').forEach(el=>revealObserver.observe(el));
     const caseFlowStages=[
