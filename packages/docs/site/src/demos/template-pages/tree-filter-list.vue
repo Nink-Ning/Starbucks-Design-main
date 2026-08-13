@@ -1,13 +1,12 @@
 <template>
   <Teleport to="[data-template-action-host='tree-filter-list']">
     <div class="sb-tree-filter-list-page__breadcrumb-actions">
-      <span>页面状态</span>
-      <RadioGroup v-model="viewMode" type="button">
-        <Radio value="normal">Normal</Radio>
-        <Radio value="loading">Loading</Radio>
-        <Radio value="empty">Empty</Radio>
-        <Radio value="error">Error</Radio>
-      </RadioGroup>
+      <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
+        <Option value="normal">Normal</Option>
+        <Option value="loading">Loading</Option>
+        <Option value="empty">Empty</Option>
+        <Option value="error">Error</Option>
+      </Select>
     </div>
   </Teleport>
 
@@ -109,7 +108,7 @@
             <div class="sb-tree-filter-list-page__toolbar-right">
               <Tooltip content="刷新">
                 <Button
-                  type="secondary"
+                  type="outline"
                   shape="square"
                   aria-label="刷新"
                   :loading="requestLoading"
@@ -221,7 +220,7 @@ import {
 type ViewMode = 'normal' | 'loading' | 'empty' | 'error';
 
 const initialFilterValues: FilterValue = {};
-const filterColumns = { xs: 1, sm: 2, md: 4, lg: 4, xl: 4, xxl: 4 };
+const filterColumns = { xs: 1, sm: 2, md: 3, lg: 3, xl: 3, xxl: 3 };
 const pageSize = 6;
 
 const fields: FilterFieldSchema[] = [
@@ -281,7 +280,7 @@ const fields: FilterFieldSchema[] = [
 ];
 
 const stores = ref<StoreRecord[]>(initialStoreRows);
-const filterVisibleCount = ref(4);
+const filterVisibleCount = ref(3);
 const filterModuleRef = ref<HTMLElement | null>(null);
 let filterResizeObserver: ResizeObserver | undefined;
 const draftFilterValues = ref<FilterValue>({ ...initialFilterValues });

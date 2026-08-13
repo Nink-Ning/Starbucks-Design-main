@@ -29,7 +29,7 @@ function DetailActions() {
           </Menu>
         }
       >
-        <Button>更多</Button>
+        <Button type="outline">更多</Button>
       </Dropdown>
       <Button type="primary" onClick={() => Message.success('进入卡券编辑')}>编辑</Button>
     </>

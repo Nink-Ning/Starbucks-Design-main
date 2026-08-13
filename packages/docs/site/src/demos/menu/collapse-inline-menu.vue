@@ -1,73 +1,79 @@
 <template>
   <div class="menu-demo">
-    <Button
-      :style="{
-        padding: '0 12px',
-        height: '30px',
-        lineHeight: '30px',
-        marginBottom: '4px',
-      }"
-      type="primary"
-      @click="handleToggleCollapse"
-    >
-      <icon-menu-unfold v-if="collapsed" />
-      <icon-menu-fold v-else />
-    </Button>
     <Menu
-      :style="{ width: '200px', borderRadius: '4px' }"
-      theme="dark"
-      :collapsed="collapsed"
-      :default-open-keys="['0']"
-      :default-selected-keys="['0_2']"
+      v-model:collapsed="collapsed"
+      :style="{
+        width: '260px',
+        height: '100%',
+        backgroundColor: 'var(--bg-color-container)',
+        borderRight: '1px solid var(--color-border-1)',
+      }"
+      :default-open-keys="['domains', 'analytics', 'compute']"
+      :default-selected-keys="['domains-overview']"
+      show-collapse-button
     >
-      <SubMenu key="0">
-        <template #icon><icon-apps></icon-apps></template>
-        <template #title>Navigation 1</template>
-        <MenuItem key="0_0">Menu 1</MenuItem>
-        <MenuItem key="0_1">Menu 2</MenuItem>
-        <MenuItem key="0_2">Menu 3</MenuItem>
-        <MenuItem key="0_3">Menu 4</MenuItem>
+      <MenuItem key="account-home">
+        <template #icon><icon-home /></template>
+        Account home
+      </MenuItem>
+
+      <SubMenu key="domains">
+        <template #icon><icon-apps /></template>
+        <template #title>Domains</template>
+        <MenuItem key="domains-overview">Overview</MenuItem>
+        <MenuItem key="domains-registrations">Registrations</MenuItem>
+        <MenuItem key="domains-transfers">Transfers</MenuItem>
       </SubMenu>
-      <SubMenu key="1">
-        <template #icon><icon-bug></icon-bug></template>
-        <template #title>Navigation 2</template>
-        <MenuItem key="1_0">Menu 1</MenuItem>
-        <MenuItem key="1_1">Menu 2</MenuItem>
-        <MenuItem key="1_2">Menu 3</MenuItem>
-      </SubMenu>
-      <SubMenu key="2">
-        <template #icon><icon-bulb></icon-bulb></template>
-        <template #title>Navigation 3</template>
-        <MenuItem key="2_0">Menu 1</MenuItem>
-        <MenuItem key="2_1">Menu 2</MenuItem>
-        <SubMenu key="2_2" title="Navigation 4">
-          <MenuItem key="2_2_0">Menu 1</MenuItem>
-          <MenuItem key="2_2_1">Menu 2</MenuItem>
+
+      <MenuItemGroup title="Observe">
+        <MenuItem key="investigate">
+          <template #icon><icon-bug /></template>
+          Investigate
+        </MenuItem>
+        <SubMenu key="analytics">
+          <template #icon><icon-bulb /></template>
+          <template #title>Analytics</template>
+          <MenuItem key="analytics-dashboards">Dashboards</MenuItem>
+          <MenuItem key="analytics-account">Account analytics</MenuItem>
+          <MenuItem key="analytics-web">Web analytics</MenuItem>
         </SubMenu>
-      </SubMenu>
+      </MenuItemGroup>
+
+      <MenuItemGroup title="Build">
+        <SubMenu key="compute">
+          <template #icon><icon-apps /></template>
+          <template #title>Compute</template>
+          <MenuItem key="compute-workers">Workers &amp; Pages</MenuItem>
+          <MenuItem key="compute-observability">Observability</MenuItem>
+        </SubMenu>
+        <MenuItem key="ai">
+          <template #icon><icon-robot /></template>
+          AI
+        </MenuItem>
+      </MenuItemGroup>
     </Menu>
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 import {
-  IconMenuFold,
-  IconMenuUnfold,
   IconApps,
   IconBug,
   IconBulb,
+  IconHome,
+  IconRobot,
 } from '@sbux/starbucks-design-vue/icon';
 
 const collapsed = ref(false);
-const handleToggleCollapse = () => {
-  collapsed.value = !collapsed.value;
-};
 </script>
+
 <style scoped>
 .menu-demo {
   box-sizing: border-box;
   width: 100%;
-  padding: 40px;
+  height: 680px;
+  padding: 24px;
   background-color: var(--color-neutral-2);
 }
 </style>

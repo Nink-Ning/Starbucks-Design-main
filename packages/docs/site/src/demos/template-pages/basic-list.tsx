@@ -9,7 +9,6 @@ import {
   Menu,
   Modal,
   Pagination,
-  Radio,
   Result,
   Select,
   Space,
@@ -322,13 +321,18 @@ export default function Demo() {
       {actionHost &&
         createPortal(
           <div className="sb-basic-list-page__breadcrumb-actions">
-            <span>页面状态</span>
-            <Radio.Group type="button" value={viewMode} onChange={setViewMode}>
-              <Radio value="normal">Normal</Radio>
-              <Radio value="loading">Loading</Radio>
-              <Radio value="empty">Empty</Radio>
-              <Radio value="error">Error</Radio>
-            </Radio.Group>
+            <Select
+              aria-label="页面状态"
+              style={{ width: 120 }}
+              value={viewMode}
+              options={[
+                { label: 'Normal', value: 'normal' },
+                { label: 'Loading', value: 'loading' },
+                { label: 'Empty', value: 'empty' },
+                { label: 'Error', value: 'error' },
+              ]}
+              onChange={(value) => setViewMode(value as ViewMode)}
+            />
             <Button type="primary" icon={<IconPlus />} onClick={() => setCreateModalVisible(true)}>
               新建门店
             </Button>
@@ -340,13 +344,13 @@ export default function Demo() {
         <div className="sb-basic-list-page__toolbar">
           <div className="sb-basic-list-page__toolbar-left">
             {selectedRowKeys.length > 0 && <span className="sb-basic-list-page__selection">已选择 {selectedRowKeys.length} 项</span>}
-            <Button disabled={selectedRowKeys.length === 0} onClick={() => openBatchConfirm('open')}>
+            <Button type="outline" disabled={selectedRowKeys.length === 0} onClick={() => openBatchConfirm('open')}>
               批量启用
             </Button>
-            <Button disabled={selectedRowKeys.length === 0} onClick={() => openBatchConfirm('closed')}>
+            <Button type="outline" disabled={selectedRowKeys.length === 0} onClick={() => openBatchConfirm('closed')}>
               批量停用
             </Button>
-            <Button disabled={selectedRowKeys.length === 0} onClick={() => setSelectedRowKeys([])}>
+            <Button type="outline" disabled={selectedRowKeys.length === 0} onClick={() => setSelectedRowKeys([])}>
               清除选择
             </Button>
           </div>
@@ -361,13 +365,13 @@ export default function Demo() {
               style={{ width: 240 }}
             />
             <Tooltip content="刷新">
-              <Button aria-label="刷新" icon={<IconRefresh />} loading={refreshing} onClick={refreshData} />
+              <Button type="outline" aria-label="刷新" icon={<IconRefresh />} loading={refreshing} onClick={refreshData} />
             </Tooltip>
             <Tooltip content="列设置">
-              <Button aria-label="列设置" icon={<IconSettings />} onClick={() => setColumnModalVisible(true)} />
+              <Button type="outline" aria-label="列设置" icon={<IconSettings />} onClick={() => setColumnModalVisible(true)} />
             </Tooltip>
             <Tooltip content="导出">
-              <Button aria-label="导出" icon={<IconDownload />} onClick={() => downloadCsv(visibleStores)} />
+              <Button type="outline" aria-label="导出" icon={<IconDownload />} onClick={() => downloadCsv(visibleStores)} />
             </Tooltip>
           </div>
         </div>

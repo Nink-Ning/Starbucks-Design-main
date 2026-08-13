@@ -56,7 +56,7 @@ export const treeTypeLabels: Record<TreeType, string> = {
 export const getFilterDefaultVisibleCount = (containerWidth: number) => {
   if (containerWidth < 576) return 1;
   if (containerWidth < 768) return 2;
-  return 4;
+  return 3;
 };
 
 export const statusOptions = [

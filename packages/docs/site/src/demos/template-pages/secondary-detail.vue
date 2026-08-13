@@ -2,7 +2,7 @@
   <Teleport to="[data-template-action-host='secondary-detail']">
     <div class="sb-secondary-detail-page__breadcrumb-actions">
       <Dropdown @select="handleMore">
-        <Button>更多</Button>
+        <Button type="outline">更多</Button>
         <template #content>
           <Doption value="copy">复制 QID</Doption>
           <Doption value="parent">查看父级卡券</Doption>
@@ -16,7 +16,7 @@
     <DetailPageLayout>
       <Card class="sb-secondary-detail-page__content">
         <div class="sb-secondary-detail-page__parent-summary">
-          <DetailDescriptions :data="secondaryParentSummary" :column="3" empty-value="—" />
+          <DetailDescriptions :data="secondaryParentSummary" empty-value="—" />
         </div>
         <Tabs v-model:active-key="activeTab">
           <template #extra>

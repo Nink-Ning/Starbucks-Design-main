@@ -1,76 +1,97 @@
 import { useState } from 'react';
-import { Button, Menu } from '@sbux/starbucks-design-react';
+import { Menu } from '@sbux/starbucks-design-react';
 import {
-  IconMenuUnfold,
-  IconMenuFold,
   IconApps,
   IconBug,
   IconBulb,
-  IconBook,
+  IconHome,
+  IconRobot,
 } from '@sbux/starbucks-design-react/icon';
 
 export default function Demo() {
   const [collapse, setCollapse] = useState(false);
+
   return (
-    <div className="menu-demo">
-      <Button
-        style={{
-          padding: '0 12px',
-          height: 30,
-          lineHeight: '30px',
-          marginBottom: 4,
-        }}
-        type="primary"
-        onClick={() => setCollapse(!collapse)}
-      >
-        {collapse ? <IconMenuUnfold /> : <IconMenuFold />}
-      </Button>
+    <div
+      className="menu-demo"
+      style={{
+        boxSizing: 'border-box',
+        width: '100%',
+        height: 680,
+        padding: 24,
+        backgroundColor: 'var(--color-neutral-2)',
+      }}
+    >
       <Menu
-        style={{ width: 200, borderRadius: 4 }}
-        theme="dark"
+        style={{
+          width: 260,
+          height: '100%',
+          backgroundColor: 'var(--bg-color-container)',
+          borderRight: '1px solid var(--color-border-1)',
+        }}
         collapse={collapse}
-        defaultOpenKeys={['0']}
-        defaultSelectedKeys={['0_2']}
+        hasCollapseButton
+        defaultOpenKeys={['domains', 'analytics', 'compute']}
+        defaultSelectedKeys={['domains-overview']}
+        onCollapseChange={setCollapse}
       >
-        <Menu.SubMenu
-          key="0"
-          title={
-            <>
-              <IconApps /> Navigation 1
-            </>
-          }
-        >
-          <Menu.Item key="0_0">Menu 1</Menu.Item>
-          <Menu.Item key="0_1">Menu 2</Menu.Item>
-          <Menu.Item key="0_2">Menu 3</Menu.Item>
-          <Menu.Item key="0_3">Menu 4</Menu.Item>
-        </Menu.SubMenu>
-        <Menu.SubMenu
-          key="1"
-          title={
-            <>
-              <IconBug /> Navigation 2
-            </>
-          }
-        >
-          <Menu.Item key="1_0">Menu 1</Menu.Item>
-          <Menu.Item key="1_1">Menu 2</Menu.Item>
-          <Menu.Item key="1_2">Menu 3</Menu.Item>
-        </Menu.SubMenu>
-        <Menu.SubMenu
-          key="2"
-          title={
-            <>
-              <IconBulb /> Navigation 3
-            </>
-          }
-        >
-          <Menu.Item key="2_0">Menu 1</Menu.Item>
-          <Menu.Item key="2_1">Menu 2</Menu.Item>
-        </Menu.SubMenu>
-        <Menu.Item renderItemInTooltip={() => 'NAVIGATION-4'}>
-          <IconBook /> Navigation 4
+        <Menu.Item key="account-home" renderItemInTooltip={() => 'Account home'}>
+          <IconHome />
+          <span>Account home</span>
         </Menu.Item>
+
+        <Menu.SubMenu
+          key="domains"
+          title={
+            <>
+              <IconApps />
+              <span>Domains</span>
+            </>
+          }
+        >
+          <Menu.Item key="domains-overview">Overview</Menu.Item>
+          <Menu.Item key="domains-registrations">Registrations</Menu.Item>
+          <Menu.Item key="domains-transfers">Transfers</Menu.Item>
+        </Menu.SubMenu>
+
+        <Menu.ItemGroup key="observe" title="Observe">
+          <Menu.Item key="investigate" renderItemInTooltip={() => 'Investigate'}>
+            <IconBug />
+            <span>Investigate</span>
+          </Menu.Item>
+          <Menu.SubMenu
+            key="analytics"
+            title={
+              <>
+                <IconBulb />
+                <span>Analytics</span>
+              </>
+            }
+          >
+            <Menu.Item key="analytics-dashboards">Dashboards</Menu.Item>
+            <Menu.Item key="analytics-account">Account analytics</Menu.Item>
+            <Menu.Item key="analytics-web">Web analytics</Menu.Item>
+          </Menu.SubMenu>
+        </Menu.ItemGroup>
+
+        <Menu.ItemGroup key="build" title="Build">
+          <Menu.SubMenu
+            key="compute"
+            title={
+              <>
+                <IconApps />
+                <span>Compute</span>
+              </>
+            }
+          >
+            <Menu.Item key="compute-workers">Workers &amp; Pages</Menu.Item>
+            <Menu.Item key="compute-observability">Observability</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Item key="ai" renderItemInTooltip={() => 'AI'}>
+            <IconRobot />
+            <span>AI</span>
+          </Menu.Item>
+        </Menu.ItemGroup>
       </Menu>
     </div>
   );

@@ -2,7 +2,7 @@
   <Teleport to="[data-template-action-host='basic-detail']">
     <div class="sb-basic-detail-page__breadcrumb-actions">
       <Dropdown @select="handleMore">
-        <Button>更多</Button>
+        <Button type="outline">更多</Button>
         <template #content>
           <Doption value="copy">复制卡券</Doption>
           <Doption value="export">导出卡券</Doption>

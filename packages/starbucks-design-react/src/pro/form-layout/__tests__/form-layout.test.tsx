@@ -34,7 +34,7 @@ describe('form layout primitives', () => {
         actions={<FormActions sticky><button>下一步</button></FormActions>}
         stickyActions
       >
-        <FormSection id="section" className="custom-section" style={{ marginTop: 4 }} title="基础信息" error>
+        <FormSection id="section" className="custom-section" style={{ marginTop: 4 }} title="基础信息" description="说明" error>
           <FormControlArea><span id="control">控件</span></FormControlArea>
         </FormSection>
       </StepFormLayout>
@@ -44,6 +44,8 @@ describe('form layout primitives', () => {
     expect(container.querySelector('#section')?.className).toContain('custom-section')
     expect(container.querySelector('#section')?.getAttribute('style')).toContain('margin-top: 4px')
     expect(container.querySelector('#control')).not.toBeNull()
+    expect(container.querySelector('.sbux-pro-form-section-tip')).not.toBeNull()
+    expect(container.querySelector('.sbux-pro-form-section-description')).toBeNull()
     expect(container.querySelector('.sbux-pro-form-section-error')).not.toBeNull()
     expect(container.querySelector('.sbux-pro-step-form-layout-sticky-actions')).not.toBeNull()
     expect(container.querySelector('.sbux-pro-form-actions-align-right')).not.toBeNull()

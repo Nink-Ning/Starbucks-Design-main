@@ -5,6 +5,7 @@ export interface FormPageLayoutProps {
   maxWidth?: string | number
   /** 页面内容内边距;通常由 PageContainer 提供,需要独立使用时可自定义 */
   padding?: string | number
+  /** 组标题后的辅助说明,默认通过 Tooltip 展示 */
   description?: string
   class?: string
   style?: StyleValue

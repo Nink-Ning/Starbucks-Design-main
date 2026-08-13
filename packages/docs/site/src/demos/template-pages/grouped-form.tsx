@@ -60,7 +60,7 @@ export default function Demo() {
           onSubmit={handleSubmit}
           onSubmitFailed={() => setSubmitSuccess(false)}
         >
-          <FormSection title="基础信息" description="用于识别和区分门店" divider>
+          <FormSection title="基础信息" description="用于识别和区分门店">
             <FormGrid>
               <FormGridItem>
                 <Form.Item label="门店名称" field="storeName" required rules={[{ required: true, message: FORM_TEMPLATE_MESSAGES.storeName }]}>
@@ -80,7 +80,7 @@ export default function Demo() {
             </FormGrid>
           </FormSection>
 
-          <FormSection title="营业信息" description="设置营业状态、开业日期和服务渠道" divider>
+          <FormSection title="营业信息" description="设置营业状态、开业日期和服务渠道">
             <FormGrid>
               <FormGridItem>
                 <Form.Item label="营业状态" field="businessStatus" required rules={[{ required: true, message: FORM_TEMPLATE_MESSAGES.businessStatus }]}>

@@ -117,7 +117,7 @@ export default function Demo() {
               </Menu>
             }
           >
-            <Button>更多</Button>
+            <Button type="outline">更多</Button>
           </Dropdown>
           <Button type="primary" onClick={() => Message.success(`已导出${activeTabLabel}`)}>
             导出{activeTabLabel}
@@ -130,7 +130,7 @@ export default function Demo() {
         <DetailPageLayout>
           <Card className="sb-secondary-detail-page__content">
             <div className="sb-secondary-detail-page__parent-summary">
-              <DetailDescriptions data={secondaryParentSummary} column={3} emptyValue="—" />
+              <DetailDescriptions data={secondaryParentSummary} emptyValue="—" />
             </div>
             <Tabs
               activeTab={activeTab}

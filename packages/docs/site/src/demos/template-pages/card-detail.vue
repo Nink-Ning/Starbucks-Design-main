@@ -2,7 +2,7 @@
   <Teleport to="[data-template-action-host='card-detail']">
     <div class="sb-card-detail-page__breadcrumb-actions">
       <Dropdown @select="handleMore">
-        <Button>更多</Button>
+        <Button type="outline">更多</Button>
         <template #content>
           <Doption value="copy">复制卡券</Doption>
           <Doption value="export">导出卡券</Doption>

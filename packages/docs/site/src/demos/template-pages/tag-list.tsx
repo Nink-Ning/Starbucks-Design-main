@@ -324,8 +324,8 @@ export default function Demo() {
 
           <div className="sb-tag-list-page__toolbar">
             <div className="sb-tag-list-page__toolbar-left">
-              <Button icon={<IconPlus />} onClick={() => setAddTagModalVisible(true)}>添加标签</Button>
-              <Button icon={<IconUpload />} onClick={() => Message.info('已触发标签导入')}>导入</Button>
+              <Button type="outline" icon={<IconPlus />} onClick={() => setAddTagModalVisible(true)}>添加标签</Button>
+              <Button type="outline" icon={<IconUpload />} onClick={() => Message.info('已触发标签导入')}>导入</Button>
               <Dropdown
                 droplist={
                   <Menu onClickMenuItem={(key) => Message.info(key === 'disable' ? '已批量停用' : '已导出标签')}>
@@ -334,7 +334,7 @@ export default function Demo() {
                   </Menu>
                 }
               >
-                <Button>更多 <IconDown /></Button>
+                <Button type="outline">更多 <IconDown /></Button>
               </Dropdown>
             </div>
             <div className="sb-tag-list-page__toolbar-right">
@@ -348,8 +348,8 @@ export default function Demo() {
                 placeholder="请输入标签名"
                 allowClear
               />
-              <Button aria-label="列设置" icon={<IconSettings />} onClick={() => Message.info('列设置')} />
-              <Button aria-label="刷新" loading={loading} icon={<IconRefresh />} onClick={refresh} />
+              <Button type="outline" aria-label="列设置" icon={<IconSettings />} onClick={() => Message.info('列设置')} />
+              <Button type="outline" aria-label="刷新" loading={loading} icon={<IconRefresh />} onClick={refresh} />
             </div>
           </div>
 

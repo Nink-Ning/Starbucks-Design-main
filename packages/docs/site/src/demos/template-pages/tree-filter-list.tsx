@@ -7,6 +7,7 @@ import {
   Pagination,
   Radio,
   Result,
+  Select,
   Space,
   Spin,
   Table,
@@ -52,7 +53,7 @@ import type {
 type ViewMode = 'normal' | 'loading' | 'empty' | 'error';
 
 const initialFilterValues: FilterValue = {};
-const filterColumns = { xs: 1, sm: 2, md: 4, lg: 4, xl: 4, xxl: 4 };
+const filterColumns = { xs: 1, sm: 2, md: 3, lg: 3, xl: 3, xxl: 3 };
 const pageSize = 6;
 
 const fields: FilterFieldSchema[] = [
@@ -151,7 +152,7 @@ export default function Demo() {
   });
   const [viewMode, setViewMode] = useState<ViewMode>('normal');
   const [requestLoading, setRequestLoading] = useState(false);
-  const [filterVisibleCount, setFilterVisibleCount] = useState(4);
+  const [filterVisibleCount, setFilterVisibleCount] = useState(3);
   const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>(['store-001']);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const resettingRef = useRef(false);
@@ -320,13 +321,18 @@ export default function Demo() {
       {actionHost &&
         createPortal(
           <div className="sb-tree-filter-list-page__breadcrumb-actions">
-            <span>页面状态</span>
-            <Radio.Group type="button" value={viewMode} onChange={setViewMode}>
-              <Radio value="normal">Normal</Radio>
-              <Radio value="loading">Loading</Radio>
-              <Radio value="empty">Empty</Radio>
-              <Radio value="error">Error</Radio>
-            </Radio.Group>
+            <Select
+              aria-label="页面状态"
+              style={{ width: 120 }}
+              value={viewMode}
+              options={[
+                { label: 'Normal', value: 'normal' },
+                { label: 'Loading', value: 'loading' },
+                { label: 'Empty', value: 'empty' },
+                { label: 'Error', value: 'error' },
+              ]}
+              onChange={(value) => setViewMode(value as ViewMode)}
+            />
           </div>,
           actionHost
         )}
@@ -432,7 +438,7 @@ export default function Demo() {
               <div className="sb-tree-filter-list-page__toolbar-right">
                 <Tooltip content="刷新">
                   <Button
-                    type="secondary"
+                    type="outline"
                     shape="square"
                     aria-label="刷新"
                     loading={requestLoading}

@@ -1,3 +1,5 @@
+import { Tooltip } from '@arco-design/web-react'
+import { IconQuestionCircle } from '@arco-design/web-react/icon'
 import { hasNode } from '../_utils/has-node'
 import type { FormSectionProps } from './interface'
 
@@ -34,7 +36,15 @@ export function FormSection(props: FormSectionProps) {
           <div className="sbux-pro-form-section-heading">
             {hasNode(title) && <h2 className="sbux-pro-form-section-title">{title}</h2>}
             {hasNode(description) && (
-              <p className="sbux-pro-form-section-description">{description}</p>
+              <Tooltip position="top" content={<span>{description}</span>}>
+                <span
+                  className="sbux-pro-form-section-tip"
+                  aria-label="查看分组说明"
+                  tabIndex={0}
+                >
+                  <IconQuestionCircle aria-hidden="true" />
+                </span>
+              </Tooltip>
             )}
           </div>
           {hasNode(actions) && <div className="sbux-pro-form-section-actions">{actions}</div>}

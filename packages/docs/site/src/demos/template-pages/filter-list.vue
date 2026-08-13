@@ -1,13 +1,12 @@
 <template>
   <Teleport to="[data-template-action-host='filter-list']">
     <div class="sb-filter-list-page__breadcrumb-actions">
-      <span>页面状态</span>
-      <RadioGroup v-model="viewMode" type="button">
-        <Radio value="normal">Normal</Radio>
-        <Radio value="loading">Loading</Radio>
-        <Radio value="empty">Empty</Radio>
-        <Radio value="error">Error</Radio>
-      </RadioGroup>
+      <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
+        <Option value="normal">Normal</Option>
+        <Option value="loading">Loading</Option>
+        <Option value="empty">Empty</Option>
+        <Option value="error">Error</Option>
+      </Select>
       <Button type="primary" @click="createModalVisible = true">
         <template #icon><IconPlus /></template>
         新建门店
@@ -35,23 +34,23 @@
       <div class="sb-filter-list-page__toolbar">
         <div class="sb-filter-list-page__toolbar-left">
           <span v-if="selectedRowKeys.length > 0" class="sb-filter-list-page__selection">已选择 {{ selectedRowKeys.length }} 项</span>
-          <Button :disabled="selectedRowKeys.length === 0" @click="openBatchConfirm('open')">批量启用</Button>
-          <Button :disabled="selectedRowKeys.length === 0" @click="openBatchConfirm('closed')">批量停用</Button>
-          <Button :disabled="selectedRowKeys.length === 0" @click="selectedRowKeys = []">清除选择</Button>
+          <Button type="outline" :disabled="selectedRowKeys.length === 0" @click="openBatchConfirm('open')">批量启用</Button>
+          <Button type="outline" :disabled="selectedRowKeys.length === 0" @click="openBatchConfirm('closed')">批量停用</Button>
+          <Button type="outline" :disabled="selectedRowKeys.length === 0" @click="selectedRowKeys = []">清除选择</Button>
         </div>
         <div class="sb-filter-list-page__toolbar-right">
           <Tooltip content="刷新">
-            <Button aria-label="刷新" :loading="refreshing" @click="refreshData">
+            <Button type="outline" aria-label="刷新" :loading="refreshing" @click="refreshData">
               <template #icon><IconRefresh /></template>
             </Button>
           </Tooltip>
           <Tooltip content="列设置">
-            <Button aria-label="列设置" @click="columnModalVisible = true">
+            <Button type="outline" aria-label="列设置" @click="columnModalVisible = true">
               <template #icon><IconSettings /></template>
             </Button>
           </Tooltip>
           <Tooltip content="导出">
-            <Button aria-label="导出" @click="downloadCsv(filteredStores)">
+            <Button type="outline" aria-label="导出" @click="downloadCsv(filteredStores)">
               <template #icon><IconDownload /></template>
             </Button>
           </Tooltip>

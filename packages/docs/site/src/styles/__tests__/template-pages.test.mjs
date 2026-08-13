@@ -91,6 +91,30 @@ test('page template docs render completed demos and keep unfinished pages as pla
   }
 })
 
+test('completed page templates document the shared header action rules', async () => {
+  const docsToCheck = [
+    'data-list/basic-list.mdx',
+    'data-list/filter-list.mdx',
+    'data-list/tree-filter-list.mdx',
+    'data-list/tag-list.mdx',
+    'form/basic-form.mdx',
+    'form/grouped-form.mdx',
+    'form/step-form.mdx',
+    'detail/basic-detail.mdx',
+    'detail/card-detail.mdx',
+    'detail/data-detail.mdx',
+    'detail/secondary-detail.mdx',
+  ]
+
+  const sources = await Promise.all(docsToCheck.map((path) => readFile(new URL(path, docsDir), 'utf8')))
+
+  for (const source of sources) {
+    assert.match(source, /左侧面包屑或页面标题、右侧业务核心操作或全局功能操作/)
+    assert.match(source, /最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单/)
+    assert.match(source, /最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式/)
+  }
+})
+
 test('page template docs hide document chrome and use filled content area', async () => {
   const [demoCss, breadcrumb, placeholder] = await Promise.all([
     readFile(new URL('../demo.css', import.meta.url), 'utf8'),
@@ -130,7 +154,8 @@ test('page template docs hide document chrome and use filled content area', asyn
   assert.match(demoCss, /\.sb-basic-list-page\s*\{[\s\S]*?gap:\s*12px;/)
   assert.match(demoCss, /\.sb-basic-list-page__module\s*\{[\s\S]*?overflow:\s*hidden;[\s\S]*?border-radius:\s*6px;/)
   assert.match(demoCss, /\.sb-basic-list-page__toolbar\s*\{[\s\S]*?justify-content:\s*space-between;/)
-  assert.match(demoCss, /\.sb-basic-list-page__toolbar-left \.arco-btn-disabled,[\s\S]*?\.sb-basic-list-page__toolbar-left \.arco-v-btn-disabled\s*\{[\s\S]*?color:\s*var\(--color-text-disabled\);[\s\S]*?background-color:\s*var\(--bg-color-component-disabled\);/)
+  assert.match(demoCss, /\.sb-basic-list-page \.sb-basic-list-page__toolbar-left \.arco-btn-outline\.arco-btn-disabled,[\s\S]*?\.sb-basic-list-page \.sb-basic-list-page__toolbar-left \.arco-v-btn-outline\.arco-v-btn-disabled\s*\{[\s\S]*?color:\s*var\(--color-text-disabled\);[\s\S]*?background-color:\s*var\(--bg-color-component-disabled\);[\s\S]*?border-color:\s*var\(--color-border-component\);/)
+  assert.match(demoCss, /\.sb-filter-list-page \.sb-filter-list-page__toolbar-left \.arco-btn-outline\.arco-btn-disabled,[\s\S]*?\.sb-filter-list-page \.sb-filter-list-page__toolbar-left \.arco-v-btn-outline\.arco-v-btn-disabled\s*\{[\s\S]*?color:\s*var\(--color-text-disabled\);[\s\S]*?background-color:\s*var\(--bg-color-component-disabled\);[\s\S]*?border-color:\s*var\(--color-border-component\);/)
   assert.match(demoCss, /\.sb-basic-list-page__row-actions \.arco-btn,[\s\S]*?\.sb-basic-list-page__row-actions \.arco-v-btn\s*\{[\s\S]*?padding-inline:\s*var\(--spacing-1\);/)
   assert.match(demoCss, /\.sb-basic-list-page__row-actions\s*\{[\s\S]*?gap:\s*4px;/)
   assert.match(demoCss, /\.sb-basic-list-page__row-actions \.arco-btn-text:not\(\.arco-btn-disabled\),[\s\S]*?\.sb-basic-list-page__row-actions \.arco-v-btn-text:not\(\.arco-v-btn-disabled\)\s*\{[\s\S]*?color:\s*var\(--color-text-brand\);[\s\S]*?font-size:\s*var\(--fs-14\);/)
@@ -226,8 +251,9 @@ test('tree filter list template keeps React and Vue query contracts equivalent',
     assert.match(source, /submitMode="manual"|submit-mode="manual"/)
     assert.match(source, /defaultVisibleCount=\{filterVisibleCount\}|default-visible-count="filterVisibleCount"/)
     assert.match(source, /getFilterDefaultVisibleCount/)
+    assert.match(source, /setFilterVisibleCount\(getFilterDefaultVisibleCount\(filterBar\.clientWidth\)\)|filterVisibleCount\.value = getFilterDefaultVisibleCount\(filterBar\.clientWidth\)/)
     assert.match(source, /ResizeObserver/)
-    assert.match(source, /const filterColumns = \{ xs: 1, sm: 2, md: 4, lg: 4, xl: 4, xxl: 4 \}/)
+    assert.match(source, /const filterColumns = \{ xs: 1, sm: 2, md: 3, lg: 3, xl: 3, xxl: 3 \}/)
     assert.match(source, /keyword/)
     assert.match(source, /businessStatus/)
     assert.match(source, /storeType/)
@@ -253,6 +279,9 @@ test('tree filter list template keeps React and Vue query contracts equivalent',
     assert.doesNotMatch(source, /Modal\.warning|批量启用|批量停用|清除选择/)
     assert.match(source, /门店列表/)
     assert.match(source, /Normal|Loading|Empty|Error/)
+    assert.match(source, /Select/)
+    assert.match(source, /aria-label="页面状态"/)
+    assert.doesNotMatch(source, /<span>页面状态<\/span>/)
     assert.match(source, /Spin|<Spin/)
     assert.match(source, /Result|<Result/)
     assert.match(source, /aria-label/)
@@ -424,6 +453,7 @@ test('grouped and step form templates use the shared layout contract', async () 
   assert.match(groupedVue, /show-word-limit/)
   for (const source of [groupedReact, groupedVue]) {
     assert.doesNotMatch(source, /按业务分组填写门店资料、营业规则和负责人信息/)
+    assert.doesNotMatch(source, /<FormSection[^>]*\bdivider(?:\s|>)/)
   }
 
   for (const source of [stepReact, stepVue]) {
@@ -478,7 +508,8 @@ test('step form keeps actions at the bottom of the page surface', async () => {
   assert.match(demoCss, /\.sb-step-form-page \.sbux-pro-step-form-layout-steps::after\s*\{[\s\S]*?left:\s*calc\(50% - 50cqw\);[\s\S]*?width:\s*100cqw;[\s\S]*?border-bottom:\s*1px solid var\(--color-border-1\);/)
   assert.match(demoCss, /\.sb-step-form-page \.sbux-pro-step-form-layout-actions\s*\{[\s\S]*?margin-top:\s*auto;[\s\S]*?border-top-color:\s*var\(--color-border-1\);/)
   assert.match(demoCss, /\.sb-step-form-page[\s\S]*?sbux-pro-step-form-layout-sticky-actions[\s\S]*?\.sbux-pro-step-form-layout-actions\s*\{[\s\S]*?margin-left:\s*calc\(50% - 50cqw\);[\s\S]*?padding-right:\s*0;[\s\S]*?padding-left:\s*0;/)
-  assert.match(demoCss, /\.sb-step-form-page \.sbux-pro-step-form-layout-actions > \.sbux-pro-form-actions\s*\{[\s\S]*?width:\s*calc\(100% - var\(--spacing-6\) - var\(--spacing-6\)\);[\s\S]*?max-width:\s*1120px;[\s\S]*?margin-right:\s*auto;[\s\S]*?margin-left:\s*auto;[\s\S]*?padding-right:\s*48px;[\s\S]*?padding-left:\s*48px;/)
+  assert.match(demoCss, /\.sb-step-form-page \.sbux-pro-step-form-layout-actions > \.sbux-pro-form-actions\s*\{[\s\S]*?padding-right:\s*var\(--spacing-6\);[\s\S]*?padding-left:\s*var\(--spacing-6\);/)
+  assert.match(demoCss, /\.sb-step-form-page \.sbux-pro-step-form-layout-actions > \.sbux-pro-form-actions\s*\{[\s\S]*?width:\s*calc\(100% - var\(--spacing-6\) - var\(--spacing-6\)\);[\s\S]*?max-width:\s*1120px;[\s\S]*?margin-right:\s*auto;[\s\S]*?margin-left:\s*auto;[\s\S]*?padding-right:\s*var\(--spacing-6\);[\s\S]*?padding-left:\s*var\(--spacing-6\);/)
 })
 
 test('shared form layout owns container responsiveness and theme-safe defaults', async () => {
@@ -496,6 +527,8 @@ test('shared form layout owns container responsiveness and theme-safe defaults',
     assert.match(style, /@container\s*\(max-width:\s*@sbux-pro-form-breakpoint\)/)
     assert.match(style, /@media\s*\(max-width:\s*@sbux-pro-form-breakpoint\)/)
     assert.match(style, /background:\s*var\(--bg-color-container\)/)
+    assert.match(style, /&-divider\s*\{[\s\S]*?\.sbux-pro-form-section-header\s*\{[\s\S]*?padding-bottom:\s*var\(--spacing-3\);[\s\S]*?border-bottom:\s*1px solid var\(--color-border-1\);/)
+    assert.doesNotMatch(style, /&-divider\s*\{\s*padding-bottom:/)
     assert.doesNotMatch(style, /--color-bg-2/)
   }
 
@@ -557,7 +590,17 @@ test('basic list template is a real React and Vue page composition', async () =>
     assert.match(source, /fixed:\s*'left'/)
     assert.match(source, /sb-basic-list-page__row-actions/)
     assert.match(source, /size=\{4\}|:size="4"/)
+    assert.match(source, /Select/)
+    assert.match(source, /aria-label="页面状态"/)
+    assert.doesNotMatch(source, /Radio\.Group|RadioGroup/)
+    assert.doesNotMatch(source, /<span>页面状态<\/span>/)
     assert.match(source, /Button/)
+    assert.match(source, /type="outline"[\s\S]*?批量启用/)
+    assert.match(source, /type="outline"[\s\S]*?批量停用/)
+    assert.match(source, /type="outline"[\s\S]*?清除选择/)
+    assert.match(source, /type="outline"[\s\S]*?aria-label="刷新"/)
+    assert.match(source, /type="outline"[\s\S]*?aria-label="列设置"/)
+    assert.match(source, /type="outline"[\s\S]*?aria-label="导出"/)
     assert.match(source, /Tooltip/)
     assert.match(source, /aria-label="刷新"/)
     assert.match(source, /aria-label="列设置"/)
@@ -609,6 +652,10 @@ test('filter list template keeps the current filter-enabled basic list compositi
     assert.match(source, /fixed:\s*'left'/)
     assert.match(source, /sb-filter-list-page__row-actions/)
     assert.match(source, /size=\{4\}|:size="4"/)
+    assert.match(source, /Select/)
+    assert.match(source, /aria-label="页面状态"/)
+    assert.doesNotMatch(source, /Radio\.Group|RadioGroup/)
+    assert.doesNotMatch(source, /<span>页面状态<\/span>/)
     assert.match(source, /Button/)
     assert.match(source, /Tooltip/)
     assert.match(source, /aria-label="刷新"/)

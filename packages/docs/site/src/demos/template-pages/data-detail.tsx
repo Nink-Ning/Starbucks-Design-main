@@ -132,9 +132,9 @@ function DetailActions({ onRefresh }: { onRefresh: () => void }) {
           </Menu>
         }
       >
-        <Button>更多</Button>
+        <Button type="outline">更多</Button>
       </Dropdown>
-      <Button onClick={onRefresh}>刷新数据</Button>
+      <Button type="outline" onClick={onRefresh}>刷新数据</Button>
       <Button type="primary" onClick={() => Message.info('报表导出仅为示例行为')}>导出报表</Button>
     </>
   )

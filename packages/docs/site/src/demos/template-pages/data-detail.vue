@@ -2,13 +2,13 @@
   <Teleport to="[data-template-action-host='data-detail']">
     <div class="sb-data-detail-page__breadcrumb-actions">
       <Dropdown @select="handleMore">
-        <Button>更多</Button>
+        <Button type="outline">更多</Button>
         <template #content>
           <Doption value="export">导出数据</Doption>
           <Doption value="share">复制分析链接</Doption>
         </template>
       </Dropdown>
-      <Button @click="refreshData">刷新数据</Button>
+      <Button type="outline" @click="refreshData">刷新数据</Button>
       <Button type="primary" @click="handleExport">导出报表</Button>
     </div>
   </Teleport>

@@ -88,14 +88,16 @@ test('Card Detail uses independent cards for mixed content modules', async () =>
     assert.doesNotMatch(demo, /DetailPageHeader/);
     assert.doesNotMatch(demo, /couponUsageRules|title="使用规则"/);
   }
-  assert.match(reactDemo, /DetailDescriptions data=\{couponBasicInfo\} column=\{2\}/);
+    assert.match(reactDemo, /DetailDescriptions data=\{couponBasicInfo\} column=\{2\}/);
   assert.match(vueDemo, /DetailDescriptions :data="couponBasicInfo" :column="2"/);
+  assert.match(reactDemo, /<Button type="outline">更多<\/Button>/);
+  assert.match(vueDemo, /<Button type="outline">更多<\/Button>/);
   const basicInfoBlock = shared.match(/export const couponBasicInfo:[\s\S]*?(?=\n\nexport const couponUsageRules)/)?.[0] ?? '';
   assert.doesNotMatch(basicInfoBlock, /span:\s*3/);
   assert.match(shared, /全国常规门店/);
   assert.match(source, /\.sb-demo\[data-demo='template-pages\/card-detail'\]/);
   assert.match(source, /\.sb-card-detail-page__cards\s*\{/);
-  assert.match(source, /\.sb-card-detail-page\s*\{[\s\S]*?padding:\s*0;/);
+  assert.match(source, /\.sb-card-detail-page\s*\{[\s\S]*?min-height:\s*0;[\s\S]*?padding:\s*0;/);
   assert.match(source, /\.sb-card-detail-page__table\s*\{[\s\S]*?overflow-x:\s*auto;/);
   assert.match(source, /\.sb-card-detail-page \.sb-card-detail-page__table \.arco-table-th,[\s\S]*?\.sb-card-detail-page \.sb-card-detail-page__table \.arco-table-td\s*\{[\s\S]*?border-left:\s*0;/);
   assert.match(source, /\.sb-card-detail-page__card\s*\{[\s\S]*?align-self:\s*start;[\s\S]*?height:\s*auto;/);
@@ -127,6 +129,10 @@ test('Data Detail keeps analysis context, lightweight charts, and detail states 
   }
   assert.match(reactDemo, /data-template-action-host[=:'\"]+data-detail/);
   assert.match(vueDemo, /data-template-action-host[=:'\"]+data-detail/);
+  assert.match(reactDemo, /<Button type="outline">更多<\/Button>/);
+  assert.match(reactDemo, /<Button type="outline" onClick=\{onRefresh\}>刷新数据<\/Button>/);
+  assert.match(vueDemo, /<Button type="outline">更多<\/Button>/);
+  assert.match(vueDemo, /<Button type="outline" @click="refreshData">刷新数据<\/Button>/);
   assert.match(shared, /126840/);
   assert.match(shared, /dataDetailWeeklyTrend/);
   assert.match(shared, /dataDetailRedemptionRows/);
@@ -160,6 +166,8 @@ test('Secondary Detail keeps parent context and same-level Tabs local to Docs', 
   }
   assert.match(reactDemo, /data-template-action-host[=:'\"]+secondary-detail/);
   assert.match(vueDemo, /data-template-action-host[=:'\"]+secondary-detail/);
+  assert.match(reactDemo, /<Button type="outline">更多<\/Button>/);
+  assert.match(vueDemo, /<Button type="outline">更多<\/Button>/);
   assert.match(shared, /全场满50减6元券/);
   assert.match(shared, /secondaryRedemptionRows/);
   assert.match(shared, /secondaryTabLabels/);
@@ -169,9 +177,17 @@ test('Secondary Detail keeps parent context and same-level Tabs local to Docs', 
   assert.match(source, /@media \(min-width: 1024px\)[\s\S]*?\.sb-secondary-detail-page__content\s*\{[\s\S]*?min-height:\s*calc\(100dvh - var\(--sb-docs-nav-height, 64px\) - 48px\);/);
   assert.match(source, /@media \(max-width: 1023px\)[\s\S]*?\.sb-secondary-detail-page__content\s*\{[\s\S]*?min-height:\s*0;/);
   const parentSummaryStyles = source.match(/\.sb-secondary-detail-page__parent-summary\s*\{[^}]*\}/)?.[0] ?? '';
-  assert.match(parentSummaryStyles, /padding-bottom:/);
+  assert.match(parentSummaryStyles, /padding:\s*16px;/);
+  assert.match(parentSummaryStyles, /background:\s*var\(--bg-color-secondarycontainer\);/);
+  assert.match(parentSummaryStyles, /border-radius:\s*6px;/);
+  assert.match(parentSummaryStyles, /margin-bottom:\s*16px;/);
   assert.doesNotMatch(parentSummaryStyles, /border-bottom:/);
+  assert.match(reactDemo, /<DetailDescriptions data=\{secondaryParentSummary\} emptyValue="—" \/>/);
+  assert.match(vueDemo, /<DetailDescriptions :data="secondaryParentSummary" empty-value="—" \/>/);
+  assert.doesNotMatch(reactDemo, /DetailDescriptions data=\{secondaryParentSummary\} column=\{3\}/);
+  assert.doesNotMatch(vueDemo, /DetailDescriptions :data="secondaryParentSummary" :column="3"/);
   assert.match(source, /\.sb-secondary-detail-page__table\s*\{[\s\S]*?overflow-x:\s*auto;/);
+  assert.match(source, /\.sb-secondary-detail-page \.sb-secondary-detail-page__table \.arco-table-th,[\s\S]*?\.sb-secondary-detail-page \.sb-secondary-detail-page__table \.arco-table-td\s*\{[\s\S]*?border-left:\s*0;/);
 });
 
 test('Data Detail metrics follow the confirmed container breakpoints', async () => {
@@ -187,6 +203,7 @@ test('all completed Detail docs use the shared template information card', async
     readFile(new URL('basic-detail.mdx', docs), 'utf8'),
     readFile(new URL('card-detail.mdx', docs), 'utf8'),
     readFile(new URL('data-detail.mdx', docs), 'utf8'),
+    readFile(new URL('secondary-detail.mdx', docs), 'utf8'),
   ]);
 
   for (const doc of docsToCheck) {
@@ -203,8 +220,9 @@ test('all completed Detail docs use the shared template information card', async
 test('completed Detail Cards use scoped surface tokens and content-sized layout', async () => {
   const source = await readFile(styles, 'utf8');
 
-  assert.match(source, /\.sb-card-detail-page \.arco-card,[\s\S]*?border-radius:\s*var\(--border-radius-md\);[\s\S]*?box-shadow:\s*none;/);
-  assert.match(source, /\.sb-data-detail-page \.arco-card,[\s\S]*?border-radius:\s*var\(--border-radius-md\);/);
+  assert.match(source, /\.sb-card-detail-page \.arco-card,[\s\S]*?border:\s*0;[\s\S]*?border-radius:\s*var\(--border-radius-md\);[\s\S]*?box-shadow:\s*none;/);
+  assert.match(source, /\.sb-data-detail-page \.arco-card,[\s\S]*?border:\s*0;[\s\S]*?border-radius:\s*var\(--border-radius-md\);/);
+  assert.match(source, /\.sb-secondary-detail-page \.arco-card,[\s\S]*?border:\s*0;/);
   assert.match(source, /\.sb-card-detail-page \.arco-card-header,[\s\S]*?min-height:\s*48px;[\s\S]*?border-bottom:/);
   assert.doesNotMatch(source, /\.sb-card-detail-page__card\s*\{[^}]*height:\s*100%;/);
 });

@@ -32,7 +32,7 @@ describe('form layout primitives', () => {
       props: { stickyActions: true },
       slots: {
         steps: '步骤',
-        default: () => h(FormSection, { id: 'section', class: 'custom-section', style: { marginTop: '4px' }, title: '基础信息', error: true }, {
+        default: () => h(FormSection, { id: 'section', class: 'custom-section', style: { marginTop: '4px' }, title: '基础信息', description: '说明', error: true }, {
           default: () => h(FormControlArea, {}, () => '控件'),
           extra: () => '操作',
         }),
@@ -44,6 +44,8 @@ describe('form layout primitives', () => {
     expect(wrapper.find('#section').classes()).toContain('custom-section')
     expect(wrapper.find('#section').attributes('style')).toContain('margin-top: 4px')
     expect(wrapper.find('.sbux-pro-form-section-actions').text()).toBe('操作')
+    expect(wrapper.find('.sbux-pro-form-section-tip').exists()).toBe(true)
+    expect(wrapper.find('.sbux-pro-form-section-description').exists()).toBe(false)
     expect(wrapper.find('.sbux-pro-form-section-error').exists()).toBe(true)
     expect(wrapper.find('.sbux-pro-form-control-area').text()).toBe('控件')
     expect(wrapper.find('.sbux-pro-step-form-layout-sticky-actions').exists()).toBe(true)

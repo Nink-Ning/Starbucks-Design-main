@@ -5,6 +5,7 @@ export interface FormPageLayoutProps {
   maxWidth?: CSSProperties['maxWidth']
   /** 页面内容内边距;通常由 PageContainer 提供,需要独立使用时可自定义 */
   padding?: CSSProperties['padding']
+  /** 组标题后的辅助说明,默认通过 Tooltip 展示 */
   description?: ReactNode
   children?: ReactNode
   className?: string

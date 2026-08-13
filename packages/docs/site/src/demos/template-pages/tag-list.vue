@@ -304,7 +304,7 @@ function handleTagSearch(value: string) {
               导入
             </a-button>
             <a-dropdown>
-              <a-button>更多 <IconDown /></a-button>
+              <a-button type="outline">更多 <IconDown /></a-button>
               <template #content>
                 <a-doption @click="Message.info('已批量停用')">批量停用</a-doption>
                 <a-doption @click="Message.info('已导出标签')">导出标签</a-doption>
@@ -320,10 +320,10 @@ function handleTagSearch(value: string) {
             >
               <template #prefix><IconSearch /></template>
             </a-input>
-            <a-button aria-label="列设置" @click="Message.info('列设置')">
+            <a-button type="outline" aria-label="列设置" @click="Message.info('列设置')">
               <template #icon><IconSettings /></template>
             </a-button>
-            <a-button aria-label="刷新" :loading="loading" @click="refresh">
+            <a-button type="outline" aria-label="刷新" :loading="loading" @click="refresh">
               <template #icon><IconRefresh /></template>
             </a-button>
           </div>
