@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime.D3GSbgeI.js";import"./index.es.DxJtyaV1.js";import{S as o}from"./index.DPe-9LDD.js";import"./index.yBjzXJbu.js";import"./index.8H-kKAXM.js";import"./_commonjsHelpers.Cpj98o6Y.js";import"./index.sGmLo0nR.js";import"./quarterOfYear.QkQtW3xZ.js";function u(){return t.jsx(o,{text:{rows:3,width:["100%",600,400]},image:!0})}export{u as default};

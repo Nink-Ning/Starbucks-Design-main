@@ -1,0 +1,1 @@
+import{j as r}from"./jsx-runtime.D3GSbgeI.js";import{Q as t}from"./index.es.Bp0z41hQ.js";import"./index.yBjzXJbu.js";import"./index.8H-kKAXM.js";import"./_commonjsHelpers.Cpj98o6Y.js";import"./index.sGmLo0nR.js";import"./quarterOfYear.QkQtW3xZ.js";function u(){return r.jsx(t.QuarterPicker,{style:{width:200}})}export{u as default};

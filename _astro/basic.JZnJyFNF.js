@@ -1,0 +1,1 @@
+import{j as o}from"./jsx-runtime.D3GSbgeI.js";import"./index.es.Bp0z41hQ.js";import{P as t}from"./pagination.Cg1fqNa0.js";import"./index.yBjzXJbu.js";import"./index.8H-kKAXM.js";import"./_commonjsHelpers.Cpj98o6Y.js";import"./index.sGmLo0nR.js";import"./quarterOfYear.QkQtW3xZ.js";import"./index.5EyJRluT.js";function u(){return o.jsx(t,{total:200})}export{u as default};
