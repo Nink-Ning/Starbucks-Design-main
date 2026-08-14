@@ -3,9 +3,18 @@ import starlight from '@astrojs/starlight';
 import react from '@astrojs/react';
 import vue from '@astrojs/vue';
 
+function normalizeBasePath(value) {
+  const path = value?.trim() || '/';
+  if (path === '/') return '/';
+  return `/${path.replace(/^\/+|\/+$/g, '')}/`;
+}
+
+const site = process.env.DOCS_SITE_URL || 'https://pages.scm.starbucks.com';
+const base = normalizeBasePath(process.env.DOCS_BASE_PATH || '/kning/starbucks-design-main/');
+
 export default defineConfig({
-  site: 'https://pages.scm.starbucks.com',
-  base: '/kning/starbucks-design-main/',
+  site,
+  base,
   integrations: [
     starlight({
       title: 'Starbucks Design',

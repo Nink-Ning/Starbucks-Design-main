@@ -8,7 +8,7 @@ async function read(relativePath) {
   return readFile(new URL(relativePath, root), 'utf8');
 }
 
-test('the production site targets the internal SCM Pages project', async () => {
+test('the production site uses the internal Pages target by default and supports deployment overrides', async () => {
   const [config, header, rootPage, landing, canonical, compatibility] = await Promise.all([
     read('../astro.config.mjs'),
     read('components/Header.astro'),
@@ -18,8 +18,14 @@ test('the production site targets the internal SCM Pages project', async () => {
     read('content/docs/guide/ai-skills.mdx'),
   ]);
 
-  assert.match(config, /site:\s*['"]https:\/\/pages\.scm\.starbucks\.com['"]/);
-  assert.match(config, /base:\s*['"]\/kning\/starbucks-design-main\/['"]/);
+  assert.match(config, /process\.env\.DOCS_SITE_URL\s*\|\|\s*['"]https:\/\/pages\.scm\.starbucks\.com['"]/);
+  assert.match(config, /process\.env\.DOCS_BASE_PATH\s*\|\|\s*['"]\/kning\/starbucks-design-main\/[\'"]/);
+  assert.match(config, /normalizeBasePath/);
+  assert.match(config, /path\.replace/);
+  assert.match(config, /DOCS_SITE_URL/);
+  assert.match(config, /DOCS_BASE_PATH/);
+  assert.match(config, /base,/);
+  assert.match(header, /PUBLIC_DOCS_REPOSITORY_URL/);
   assert.match(header, /https:\/\/scm\.starbucks\.com\/kning\/starbucks-design-main/);
   assert.match(rootPage, /import\.meta\.env\.BASE_URL/);
   assert.match(config, /label:\s*['"]AI 协作指南['"],\s*slug:\s*['"]guide\/ai-skills-guide['"]/);
