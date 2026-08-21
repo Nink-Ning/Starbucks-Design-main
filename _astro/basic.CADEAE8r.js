@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime.D3GSbgeI.js";import"./index.es.Bp0z41hQ.js";import{A as o}from"./index.VI5ADDmz.js";import"./index.yBjzXJbu.js";import"./index.8H-kKAXM.js";import"./_commonjsHelpers.Cpj98o6Y.js";import"./index.sGmLo0nR.js";import"./quarterOfYear.QkQtW3xZ.js";function x(){return t.jsx(o,{content:"Here is an example text"})}export{x as default};
