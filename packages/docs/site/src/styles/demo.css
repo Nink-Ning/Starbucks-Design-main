@@ -809,6 +809,162 @@ html[data-framework='vue']
   display: none;
 }
 
+.sb-demo[data-demo='template-pages/result-success'],
+.sb-demo[data-demo='template-pages/result-success'] > .sb-demo-preview,
+.sb-demo[data-demo='template-pages/result-failure'],
+.sb-demo[data-demo='template-pages/result-failure'] > .sb-demo-preview,
+.sb-demo[data-demo='template-pages/result-network-error'],
+.sb-demo[data-demo='template-pages/result-network-error'] > .sb-demo-preview {
+  overflow: visible;
+  background: var(--bg-color-page);
+}
+
+.sb-result-template-page {
+  display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  place-items: center;
+  padding: var(--spacing-13) var(--spacing-8);
+  color: var(--color-text-primary);
+  background: var(--bg-color-container);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-family);
+}
+
+.sb-result-template-page__content {
+  width: min(100%, 520px);
+  min-width: 0;
+}
+
+.sb-result-template-page__result.arco-result,
+.sb-result-template-page__result.arco-v-result {
+  width: 100%;
+  padding: 0;
+}
+
+.sb-result-template-page__result .arco-result-icon,
+.sb-result-template-page__result .arco-v-result-icon {
+  margin-bottom: var(--spacing-4);
+  font-size: inherit;
+  line-height: normal;
+}
+
+.sb-result-template-page__result .arco-result-icon-tip,
+.sb-result-template-page__result .arco-v-result-icon-tip {
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  color: inherit;
+  background: transparent;
+  line-height: normal;
+}
+
+.sb-result-template-page__status-icon {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  border-radius: var(--border-radius-round);
+}
+
+.sb-result-template-page__status-icon--success {
+  --sb-result-template-icon-shadow: rgba(0, 108, 69, 0.06);
+  background: linear-gradient(180deg, var(--color-success-light-hover), transparent);
+}
+
+.sb-result-template-page__status-icon--failure {
+  --sb-result-template-icon-shadow: rgba(173, 53, 47, 0.06);
+  background: linear-gradient(180deg, var(--color-danger-focus), transparent);
+}
+
+.sb-result-template-page__status-icon--network {
+  --sb-result-template-icon-shadow: rgba(0, 0, 0, 0.03);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bg-color-secondarycomponent-active) 10%, transparent),
+    color-mix(in srgb, var(--bg-color-page) 10%, transparent)
+  );
+}
+
+.sb-result-template-page__status-icon-inner {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  background: var(--bg-color-specialcomponent);
+  border-radius: var(--border-radius-round);
+  box-shadow:
+    0 4px 4px var(--sb-result-template-icon-shadow),
+    0 2px 2px var(--sb-result-template-icon-shadow),
+    0 1px 1px var(--sb-result-template-icon-shadow);
+}
+
+.sb-result-template-page__status-icon-inner img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.sb-result-template-page__result .arco-result-title,
+.sb-result-template-page__result .arco-v-result-title {
+  color: var(--color-text-primary);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-24);
+}
+
+.sb-result-template-page__result .arco-result-subtitle,
+.sb-result-template-page__result .arco-v-result-subtitle {
+  max-width: 100%;
+  margin: var(--spacing-2) auto 0;
+  overflow-wrap: anywhere;
+  color: var(--color-text-placeholder);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.sb-result-template-page__result .arco-result-extra,
+.sb-result-template-page__result .arco-v-result-extra {
+  margin-top: var(--spacing-8);
+}
+
+.sb-result-template-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+}
+
+.sb-result-template-page__actions > .arco-btn,
+.sb-result-template-page__actions > .arco-v-btn {
+  min-width: 88px;
+}
+
+:root[data-theme='dark'] .sb-result-template-page__status-icon--network img {
+  filter: invert(1);
+}
+
+@media (max-width: 480px) {
+  .sb-result-template-page {
+    min-height: 360px;
+    padding: var(--spacing-10) var(--spacing-6);
+  }
+
+  .sb-result-template-page__actions {
+    width: min(100%, 240px);
+    margin-inline: auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sb-result-template-page__actions > .arco-btn,
+  .sb-result-template-page__actions > .arco-v-btn {
+    width: 100%;
+  }
+}
+
 .sb-demo[data-demo='template-pages/basic-list'] {
   overflow: visible;
   background: var(--bg-color-page);

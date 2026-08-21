@@ -43,6 +43,31 @@ export type {
   TagGroupManagementProps,
   TagGroupManagementTexts
 } from './business/tag-group-management'
+export { TableToolbar } from './business/table-toolbar'
+export type {
+  TableToolbarAction,
+  TableToolbarButtonGroupFilter,
+  TableToolbarButtonType,
+  TableToolbarDateRangeFilter,
+  TableToolbarEmits,
+  TableToolbarOperationEventMeta,
+  TableToolbarOption,
+  TableToolbarPrimitiveValue,
+  TableToolbarProps,
+  TableToolbarQuickFilter,
+  TableToolbarQuickFilterBase,
+  TableToolbarQuickFilterEventMeta,
+  TableToolbarQuickFilterPlacement,
+  TableToolbarQuickFilterSource,
+  TableToolbarQuickFilterValues,
+  TableToolbarSearchFilter,
+  TableToolbarSelectFilter,
+  TableToolbarTexts,
+  TableToolbarToolConfig,
+  TableToolbarToolEventMeta,
+  TableToolbarToolName,
+  TableToolbarTools
+} from './business/table-toolbar'
 export * from '@arco-design/web-vue'
 
 // Arco's main entry only re-exports addI18nMessages, useLocale, getLocale from locale —

@@ -155,6 +155,16 @@
   overflow: visible;
 }
 
+/* Arco Vue always inserts an overflow wrapper for horizontal Menu. Keep that
+   framework-only node on the same 32px centering contract as React's direct
+   MenuItem layout. */
+.sb-top-nav-demo__menu--vue.arco-menu-horizontal .arco-menu-inner,
+.sb-top-nav-demo__menu--vue.arco-menu-horizontal .arco-menu-overflow-wrap {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
 .sb-top-nav-demo__menu.arco-menu-horizontal .arco-menu-overflow-hidden-menu-item {
   position: static;
   visibility: visible;

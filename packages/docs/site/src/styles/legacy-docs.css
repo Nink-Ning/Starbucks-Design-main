@@ -1290,7 +1290,6 @@ html.sb-theme-transition-commit *::after {
   margin: 0 !important;
   border: 0 !important;
   opacity: 1;
-  color: var(--sb-docs-code-text, var(--sb-docs-text-1)) !important;
   background: var(--sb-docs-demo-code-bg) !important;
   box-shadow: none !important;
 }
@@ -1299,7 +1298,13 @@ html.sb-theme-transition-commit *::after {
 .sb-demo-code code span,
 .sb-demo-code .astro-code span {
   opacity: 1;
-  color: inherit !important;
+  color: var(--shiki-light, var(--sb-docs-code-text, var(--sb-docs-text-1)));
+}
+
+:root[data-theme='dark'] .sb-demo-code code,
+:root[data-theme='dark'] .sb-demo-code code span,
+:root[data-theme='dark'] .sb-demo-code .astro-code span {
+  color: var(--shiki-dark, var(--sb-docs-code-text, var(--sb-docs-text-1)));
 }
 
 .sb-demo-code pre {

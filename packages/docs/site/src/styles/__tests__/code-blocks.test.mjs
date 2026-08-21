@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const legacyCss = await readFile(new URL('../legacy-docs.css', import.meta.url), 'utf8');
+const demoAstro = await readFile(new URL('../../components/Demo.astro', import.meta.url), 'utf8');
 
 test('code frames and component previews share the module radius', () => {
   assert.match(legacyCss, /--sb-docs-module-radius:\s*8px;/);
@@ -54,6 +55,27 @@ test('code scrollbars stay hidden until interaction', () => {
     legacyCss,
     /figure\.frame:hover pre,[\s\S]*?figure\.frame:focus-within pre\s*\{[\s\S]*?scrollbar-color:\s*var\(--ec-sbThumbCol\) transparent;/,
   );
+});
+
+test('component demo code uses named TSX and Vue grammars with light and dark themes', () => {
+  assert.match(demoAstro, /import githubLight from '@shikijs\/themes\/github-light-high-contrast';/);
+  assert.match(demoAstro, /import githubDark from '@shikijs\/themes\/github-dark-high-contrast';/);
+  assert.match(demoAstro, /const tsxLanguage = tsxLang\.find\(\(language\) => language\.name === 'tsx'\);/);
+  assert.match(demoAstro, /const vueLanguage = Object\.assign\(\[\.\.\.vueLang\], \{ name: 'vue' \}\)/);
+  assert.match(demoAstro, /lang=\{tsxLanguage\} themes=\{codeThemes\} defaultColor=\{false\}/);
+  assert.match(demoAstro, /lang=\{vueLanguage\} themes=\{codeThemes\} defaultColor=\{false\}/);
+});
+
+test('component demo tokens follow the active Shiki theme instead of inheriting one color', () => {
+  assert.match(
+    legacyCss,
+    /\.sb-demo-code code,[\s\S]*?color:\s*var\(--shiki-light, var\(--sb-docs-code-text, var\(--sb-docs-text-1\)\)\);/,
+  );
+  assert.match(
+    legacyCss,
+    /:root\[data-theme='dark'\] \.sb-demo-code code,[\s\S]*?color:\s*var\(--shiki-dark, var\(--sb-docs-code-text, var\(--sb-docs-text-1\)\)\);/,
+  );
+  assert.doesNotMatch(legacyCss, /\.sb-demo-code code span,[\s\S]{0,180}?color:\s*inherit\s*!important;/);
 });
 
 test('requirements lists use the shared module container', () => {

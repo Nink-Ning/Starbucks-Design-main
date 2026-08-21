@@ -7,8 +7,70 @@ tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="网络异常" description="网络异常页模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/result-network-error" />
+<p>预览可切换 React / Vue；两个版本使用相同内容、重新加载状态和操作反馈。</p>
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>模板定义</h2>
+    <p>网络异常页用于说明当前请求因网络连接不可用而无法继续，并提供重新检查连接的入口。</p>
+    <p>本模板是页面组合参考，不是公共 <code>NetworkErrorPage</code> 组件。</p>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>适用场景</h2>
+    <ul>
+      <li>客户端离线、连接中断或请求无法到达服务端。</li>
+      <li>当前页面依赖网络数据，无法通过已有缓存继续完成主要任务。</li>
+    </ul>
+    <h2>不适用场景</h2>
+    <ul>
+      <li>服务端已经返回业务失败结果，应使用失败页。</li>
+      <li>服务器返回 500 等明确状态时，应使用对应的服务器异常页。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>页面模板面包屑保留在内容区顶部，网络异常结果在剩余页面区域居中。</li>
+      <li>说明文案包含连接状态和可执行建议，不将网络异常描述成业务失败。</li>
+      <li>页面默认保留一个“重新加载”主操作，并在检测期间展示 Loading。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Result</code>
+        <code>Button</code>
+        <code>Message</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>结果页规则</h2>
+    <ol>
+      <li>网络异常图标和文案必须与业务失败保持明显区别。</li>
+      <li>重新加载需要 Loading 和重复点击保护，不能在网络请求期间重复触发。</li>
+      <li>需要展示错误码或排查建议时，将其作为次级信息，不与主要结果竞争。</li>
+      <li>桌面端结果块居中，窄屏保持安全边距并让操作占满可用宽度。</li>
+      <li>页面模板只演示网络重试状态，不实现真实网络检测、缓存和自动重连策略。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用注意事项</h2>
+    <ul>
+      <li>示例模拟网络仍不可用的结果，接入业务时应根据真实检测结果刷新或跳转。</li>
+      <li>React 和 Vue 示例使用相同 Loading 时长、状态文案和可访问语义。</li>
+    </ul>
+  </section>
+</section>

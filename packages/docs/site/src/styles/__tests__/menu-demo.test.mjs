@@ -26,8 +26,13 @@ test('React and Vue top navigation demos share the same system data and styles',
   assert.match(reactDemo, /<Cascader/)
   assert.match(vueDemo, /<CascaderPanel/)
   assert.match(reactDemo, /ellipsis=\{false\}/)
+  assert.match(vueDemo, /sb-top-nav-demo__menu--vue/)
   assert.match(css, /\.arco-menu-overflow-hidden-menu-item/)
   assert.match(css, /visibility:\s*visible/)
+  assert.match(
+    css,
+    /\.sb-top-nav-demo__menu--vue\.arco-menu-horizontal \.arco-menu-inner,[\s\S]*?\.arco-menu-overflow-wrap \{[\s\S]*?display:\s*flex;[\s\S]*?height:\s*100%;[\s\S]*?align-items:\s*center;/
+  )
 })
 
 test('the system switcher supports two-level cascading, direct search, and selection', () => {

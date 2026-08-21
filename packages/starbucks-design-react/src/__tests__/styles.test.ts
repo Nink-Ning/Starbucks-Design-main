@@ -103,6 +103,22 @@ describe('stylesheet entry', () => {
     ])
   })
 
+  it('keeps disabled outline and dashed buttons neutral at Arco type-selector specificity', () => {
+    const reactButton = readFileSync(resolve(srcDir, 'overrides/Button.less'), 'utf8')
+    const vueButton = readFileSync(resolve(vueSrcDir, 'overrides/Button.less'), 'utf8')
+
+    for (const button of [reactButton, vueButton]) {
+      expect(button).toContain(".arco-btn-outline[type='button'].arco-btn-disabled")
+      expect(button).toContain(".arco-btn-outline[type='submit'].arco-btn-disabled")
+      expect(button).toContain(".arco-btn-dashed[type='button'].arco-btn-disabled")
+      expect(button).toContain(".arco-btn-dashed[type='submit'].arco-btn-disabled")
+      expect(button).toContain('color: var(--color-text-disabled);')
+      expect(button).toContain('background-color: var(--bg-color-component-disabled);')
+      expect(button).toContain('border-color: var(--color-border-component);')
+      expect(button).not.toContain('!important')
+    }
+  })
+
   it('keeps the React Dropdown trigger wrapper visually neutral', () => {
     const dropdown = readFileSync(resolve(srcDir, 'overrides/Dropdown.less'), 'utf8')
 

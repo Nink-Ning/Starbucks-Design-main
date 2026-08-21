@@ -16,13 +16,13 @@ const pages = [
   ['detail/basic-detail.mdx', 'template-pages/basic-detail'],
   ['detail/card-detail.mdx', 'template-pages/card-detail'],
   ['detail/data-detail.mdx', 'template-pages/data-detail'],
+  ['result/success.mdx', 'template-pages/result-success'],
+  ['result/failure.mdx', 'template-pages/result-failure'],
+  ['result/network-error.mdx', 'template-pages/result-network-error'],
 ]
 
 const placeholderPages = [
   ['data-list/card-list.mdx', '卡片列表'],
-  ['result/success.mdx', '成功页'],
-  ['result/failure.mdx', '失败页'],
-  ['result/network-error.mdx', '网络异常'],
 ]
 
 test('page template sidebar follows the requested information architecture', async () => {

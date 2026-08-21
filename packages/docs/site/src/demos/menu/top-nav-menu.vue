@@ -74,7 +74,11 @@
         </div>
 
         <div class="sb-top-nav-demo__main">
-          <Menu class="sb-top-nav-demo__menu" mode="horizontal" :selectable="false">
+          <Menu
+            class="sb-top-nav-demo__menu sb-top-nav-demo__menu--vue"
+            mode="horizontal"
+            :selectable="false"
+          >
             <MenuItem key="workspace">菜单名称</MenuItem>
           </Menu>
 

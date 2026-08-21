@@ -7,8 +7,70 @@ tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="成功页" description="成功结果页模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/result-success" />
+<p>预览可切换 React / Vue；两个版本使用相同内容和操作反馈。</p>
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>模板定义</h2>
+    <p>成功页用于确认一项操作已经完成，并向用户提供清晰、有限的后续入口。</p>
+    <p>本模板是页面组合参考，不是公共 <code>SuccessResultPage</code> 组件。</p>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>适用场景</h2>
+    <ul>
+      <li>创建、提交、保存或审批操作已经得到明确成功结果。</li>
+      <li>用户需要确认完成状态，并返回首页或进入下一项任务。</li>
+    </ul>
+    <h2>不适用场景</h2>
+    <ul>
+      <li>操作仍在后台处理中，应使用进度或处理中状态。</li>
+      <li>只需要轻量确认且不打断当前任务时，应使用 Message 或 Notification。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>页面模板面包屑保留在内容区顶部，结果内容在剩余页面区域居中。</li>
+      <li>状态图标、标题、描述和操作区构成单一信息层级。</li>
+      <li>成功页默认只保留一个主操作，避免完成后出现过多决策。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Result</code>
+        <code>Button</code>
+        <code>Message</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>结果页规则</h2>
+    <ol>
+      <li>仅在操作得到明确成功响应后展示成功页，不提前表达成功。</li>
+      <li>标题描述结果，辅助文案说明后续影响，不重复标题内容。</li>
+      <li>操作区最多保留一个视觉主操作；需要第二个入口时使用描边按钮。</li>
+      <li>桌面端结果块水平、垂直居中，窄屏保持安全边距并允许按钮纵向排列。</li>
+      <li>页面模板只负责组合，不承担真实路由、接口、权限和持久化逻辑。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用注意事项</h2>
+    <ul>
+      <li>示例中的“返回首页”使用本地 Message 反馈，接入业务时替换为实际路由行为。</li>
+      <li>React 和 Vue 示例使用相同标题、说明、按钮顺序和反馈文案。</li>
+    </ul>
+  </section>
+</section>

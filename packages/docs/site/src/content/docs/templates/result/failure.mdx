@@ -7,8 +7,70 @@ tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="失败页" description="失败结果页模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/result-failure" />
+<p>预览可切换 React / Vue；两个版本使用相同内容、重试状态和操作反馈。</p>
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>模板定义</h2>
+    <p>失败页用于说明一次业务操作没有完成，并给出可执行的恢复路径。</p>
+    <p>本模板是页面组合参考，不是公共 <code>FailureResultPage</code> 组件。</p>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>适用场景</h2>
+    <ul>
+      <li>提交、创建或审批因业务校验或服务处理失败而终止。</li>
+      <li>用户需要修改输入、重新提交或返回上一任务。</li>
+    </ul>
+    <h2>不适用场景</h2>
+    <ul>
+      <li>网络不可用或请求超时，应使用网络异常页。</li>
+      <li>字段级错误可以在当前表单修复时，应优先使用表单校验而不是跳转结果页。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>页面模板面包屑保留在内容区顶部，失败结果在剩余页面区域居中。</li>
+      <li>描述优先说明可理解的失败原因和下一步建议，不暴露技术堆栈。</li>
+      <li>主操作用于重新提交，次操作用于返回修改；重试期间锁定重复操作。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Result</code>
+        <code>Button</code>
+        <code>Message</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>结果页规则</h2>
+    <ol>
+      <li>失败页必须提供明确的恢复路径，不能只展示错误状态。</li>
+      <li>业务失败、无权限、网络异常和服务器异常应保持语义边界。</li>
+      <li>操作区最多保留一个视觉主操作，其他入口使用描边按钮。</li>
+      <li>重试按钮需要 Loading 和重复点击保护；窄屏下按钮按主次顺序纵向排列。</li>
+      <li>页面模板只演示交互，不承载真实重试接口、错误恢复和路由逻辑。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用注意事项</h2>
+    <ul>
+      <li>示例使用确定性的本地延迟模拟重新提交，接入业务时替换为真实请求。</li>
+      <li>React 和 Vue 示例使用相同 Loading 时长、按钮状态和反馈文案。</li>
+    </ul>
+  </section>
+</section>
