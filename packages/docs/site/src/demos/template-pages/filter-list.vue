@@ -31,31 +31,20 @@
     </section>
 
     <section class="sb-filter-list-page__module sb-filter-list-page__table-module">
-      <div class="sb-filter-list-page__toolbar">
-        <div class="sb-filter-list-page__toolbar-left">
-          <span v-if="selectedRowKeys.length > 0" class="sb-filter-list-page__selection">已选择 {{ selectedRowKeys.length }} 项</span>
-          <Button type="outline" :disabled="selectedRowKeys.length === 0" @click="openBatchConfirm('open')">批量启用</Button>
-          <Button type="outline" :disabled="selectedRowKeys.length === 0" @click="openBatchConfirm('closed')">批量停用</Button>
-          <Button type="outline" :disabled="selectedRowKeys.length === 0" @click="selectedRowKeys = []">清除选择</Button>
-        </div>
-        <div class="sb-filter-list-page__toolbar-right">
-          <Tooltip content="刷新">
-            <Button type="outline" aria-label="刷新" :loading="refreshing" @click="refreshData">
-              <template #icon><IconRefresh /></template>
-            </Button>
-          </Tooltip>
-          <Tooltip content="列设置">
-            <Button type="outline" aria-label="列设置" @click="columnModalVisible = true">
-              <template #icon><IconSettings /></template>
-            </Button>
-          </Tooltip>
-          <Tooltip content="导出">
-            <Button type="outline" aria-label="导出" @click="downloadCsv(filteredStores)">
-              <template #icon><IconDownload /></template>
-            </Button>
-          </Tooltip>
-        </div>
-      </div>
+      <TableToolbar
+        :selected-count="selectedRowKeys.length"
+        :operation-actions="operationActions"
+        :more-actions="moreActions"
+        :table-tools="{
+          export: true,
+          columnSettings: true,
+          refresh: { loading: refreshing },
+        }"
+        @operation="handleToolbarOperation"
+        @export="downloadCsv(filteredStores)"
+        @column-settings="columnModalVisible = true"
+        @refresh="refreshData"
+      />
 
       <Result
         v-if="viewMode === 'error'"
@@ -175,14 +164,18 @@
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, ref, watch } from 'vue';
-import { FilterBar, Modal } from '@sbux/starbucks-design-vue';
-import type { FilterFieldSchema, FilterValue } from '@sbux/starbucks-design-vue';
+import { FilterBar, Modal, TableToolbar } from '@sbux/starbucks-design-vue';
+import type {
+  FilterFieldSchema,
+  FilterValue,
+  TableToolbarAction,
+} from '@sbux/starbucks-design-vue';
 import {
-  IconDownload,
+  IconCheckCircle,
+  IconCloseCircle,
   IconMore,
+  IconMinusCircle,
   IconPlus,
-  IconRefresh,
-  IconSettings,
 } from '@sbux/starbucks-design-vue/icon';
 
 type StoreStatus = 'open' | 'preparing' | 'closed';
@@ -265,6 +258,13 @@ const fields: FilterFieldSchema[] = [
 const initialFilterValues: FilterValue = {};
 const filterColumns = { xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 3 };
 const pageSize = 10;
+const operationActions: TableToolbarAction[] = [
+  { key: 'open', label: '启用', icon: IconCheckCircle, requiresSelection: true },
+  { key: 'closed', label: '停用', icon: IconMinusCircle, requiresSelection: true },
+];
+const moreActions: TableToolbarAction[] = [
+  { key: 'clear', label: '清除选择', icon: IconCloseCircle, requiresSelection: true },
+];
 
 const initialStores: StoreRecord[] = [
   { id: '1', code: 'SH-001', name: '上海静安嘉里中心店', region: '华东', city: '上海', cityValue: 'shanghai', type: 'reserve', status: 'open', openedAt: '2020-05-18', manager: 'Nink', updatedAt: '2026-07-24 10:30' },
@@ -424,6 +424,14 @@ function openBatchConfirm(status: BatchStatus) {
     },
     appContext
   );
+}
+
+function handleToolbarOperation(key: string) {
+  if (key === 'open' || key === 'closed') {
+    openBatchConfirm(key);
+    return;
+  }
+  if (key === 'clear') selectedRowKeys.value = [];
 }
 
 function refreshData() {

@@ -116,10 +116,22 @@ test('completed page templates document the shared header action rules', async (
 })
 
 test('page template docs hide document chrome and use filled content area', async () => {
-  const [demoCss, breadcrumb, placeholder] = await Promise.all([
+  const [
+    demoCss,
+    breadcrumb,
+    placeholder,
+    reactBasicList,
+    vueBasicList,
+    reactRowActionStyles,
+    vueRowActionStyles,
+  ] = await Promise.all([
     readFile(new URL('../demo.css', import.meta.url), 'utf8'),
     readFile(new URL('../../components/TemplatePageBreadcrumb.astro', import.meta.url), 'utf8'),
     readFile(new URL('../../components/TemplatePagePlaceholder.astro', import.meta.url), 'utf8'),
+    readFile(new URL('../../demos/template-pages/basic-list.tsx', import.meta.url), 'utf8'),
+    readFile(new URL('../../demos/template-pages/basic-list.vue', import.meta.url), 'utf8'),
+    readFile(new URL('../../../../../starbucks-design-react/src/overrides/TableRowActions.less', import.meta.url), 'utf8'),
+    readFile(new URL('../../../../../starbucks-design-vue/src/overrides/TableRowActions.less', import.meta.url), 'utf8'),
   ])
 
   assert.match(breadcrumb, /sb-template-page-breadcrumb/)
@@ -153,20 +165,25 @@ test('page template docs hide document chrome and use filled content area', asyn
   assert.doesNotMatch(demoCss, /\.sb-basic-list-page\s*\{[\s\S]*?min-height:\s*calc\(100dvh - var\(--sb-docs-nav-height, 64px\) - 48px\);/)
   assert.match(demoCss, /\.sb-basic-list-page\s*\{[\s\S]*?gap:\s*12px;/)
   assert.match(demoCss, /\.sb-basic-list-page__module\s*\{[\s\S]*?overflow:\s*hidden;[\s\S]*?border-radius:\s*6px;/)
-  assert.match(demoCss, /\.sb-basic-list-page__toolbar\s*\{[\s\S]*?justify-content:\s*space-between;/)
-  assert.match(demoCss, /\.sb-basic-list-page \.sb-basic-list-page__toolbar-left \.arco-btn-outline\.arco-btn-disabled,[\s\S]*?\.sb-basic-list-page \.sb-basic-list-page__toolbar-left \.arco-v-btn-outline\.arco-v-btn-disabled\s*\{[\s\S]*?color:\s*var\(--color-text-disabled\);[\s\S]*?background-color:\s*var\(--bg-color-component-disabled\);[\s\S]*?border-color:\s*var\(--color-border-component\);/)
-  assert.match(demoCss, /\.sb-filter-list-page \.sb-filter-list-page__toolbar-left \.arco-btn-outline\.arco-btn-disabled,[\s\S]*?\.sb-filter-list-page \.sb-filter-list-page__toolbar-left \.arco-v-btn-outline\.arco-v-btn-disabled\s*\{[\s\S]*?color:\s*var\(--color-text-disabled\);[\s\S]*?background-color:\s*var\(--bg-color-component-disabled\);[\s\S]*?border-color:\s*var\(--color-border-component\);/)
-  assert.match(demoCss, /\.sb-basic-list-page__row-actions \.arco-btn,[\s\S]*?\.sb-basic-list-page__row-actions \.arco-v-btn\s*\{[\s\S]*?padding-inline:\s*var\(--spacing-1\);/)
+  assert.doesNotMatch(demoCss, /\.sb-basic-list-page__toolbar\s*\{/)
+  assert.doesNotMatch(demoCss, /\.sb-filter-list-page__toolbar\s*\{/)
   assert.match(demoCss, /\.sb-basic-list-page__row-actions\s*\{[\s\S]*?gap:\s*4px;/)
-  assert.match(demoCss, /\.sb-basic-list-page__row-actions \.arco-btn-text:not\(\.arco-btn-disabled\),[\s\S]*?\.sb-basic-list-page__row-actions \.arco-v-btn-text:not\(\.arco-v-btn-disabled\)\s*\{[\s\S]*?color:\s*var\(--color-text-brand\);[\s\S]*?font-size:\s*var\(--fs-14\);/)
-  assert.match(demoCss, /\.sb-basic-list-page__row-actions \.arco-btn-text:not\(\.arco-btn-disabled\):not\(\.arco-btn-loading\):hover,[\s\S]*?background-color:\s*var\(--color-primary-light\);/)
-  assert.match(demoCss, /\.sb-basic-list-page__row-actions \.arco-btn-text:not\(\.arco-btn-disabled\):not\(\.arco-btn-loading\):active,[\s\S]*?background-color:\s*var\(--color-primary-light-hover\);/)
+  assert.doesNotMatch(demoCss, /\.sb-basic-list-page__row-actions \.arco-(?:v-)?btn/)
+  for (const source of [reactBasicList, vueBasicList]) {
+    assert.match(source, /sb-basic-list-page__row-actions sbux-table-row-actions/)
+  }
+  assert.equal(reactRowActionStyles, vueRowActionStyles)
+  assert.match(reactRowActionStyles, /\.sbux-table-row-actions/)
+  assert.match(reactRowActionStyles, /color:\s*var\(--color-text-brand\);/)
+  assert.match(reactRowActionStyles, /background-color:\s*var\(--color-primary-light\);/)
+  assert.match(reactRowActionStyles, /background-color:\s*var\(--color-primary-light-hover\);/)
+  assert.doesNotMatch(reactRowActionStyles, /!important/)
   assert.match(demoCss, /\.sb-tree-filter-list-page__breadcrumb-actions\s*\{[\s\S]*?gap:\s*16px;/)
   assert.match(demoCss, /\.sb-basic-list-page__modal-title\s*\{[\s\S]*?text-align:\s*left;/)
   assert.match(demoCss, /\.sb-template-docs-card\s*\{[\s\S]*?margin-top:\s*12px;[\s\S]*?background:\s*var\(--bg-color-container\);[\s\S]*?border-radius:\s*6px;/)
   assert.match(demoCss, /\.sl-markdown-content > \.sb-template-docs-card\s*\{[\s\S]*?margin-top:\s*12px;/)
-  assert.match(demoCss, /@media \(max-width:\s*860px\)[\s\S]*?\.sb-basic-list-page__toolbar\s*\{[\s\S]*?flex-direction:\s*column;/)
-  assert.match(demoCss, /@media \(max-width:\s*860px\)[\s\S]*?\.sb-filter-list-page__toolbar\s*\{[\s\S]*?flex-direction:\s*column;/)
+  assert.doesNotMatch(demoCss, /@media \(max-width:\s*860px\)[\s\S]*?\.sb-basic-list-page__toolbar\s*\{/)
+  assert.doesNotMatch(demoCss, /@media \(max-width:\s*860px\)[\s\S]*?\.sb-filter-list-page__toolbar\s*\{/)
 })
 
 test('tag management template is a real React and Vue page composition', async () => {
@@ -563,16 +580,22 @@ test('basic list template is a real React and Vue page composition', async () =>
   assert.match(doc, /<div class="sb-template-docs-component-list">/)
   assert.match(doc, /<\/section>/)
   assert.match(doc, /页面模板负责组合，不重复实现业务组件内部能力/)
+  assert.match(doc, /<code>TableToolbar<\/code>/)
   assert.doesNotMatch(doc, /TemplatePagePlaceholder/)
   assert.doesNotMatch(doc, /基础列表用于展示标准数据列表页面的组合方式/)
 
   for (const source of [reactDemo, vueDemo]) {
     assert.doesNotMatch(source, /FilterBar/)
-    assert.doesNotMatch(source, /FilterFieldSchema|FilterValue|filterStores|draftValues|activeValues/)
+    assert.doesNotMatch(source, /FilterFieldSchema|\bFilterValue\b|filterStores|draftValues|activeValues/)
     assert.match(source, /const initialStores: StoreRecord\[\]/)
     assert.match(source, /搜索门店/)
-    assert.match(source, /IconSearch/)
-    assert.match(source, /sb-basic-list-page__toolbar-right[\s\S]*?(?:prefix=\{<IconSearch \/>\}|#prefix><IconSearch)/)
+    assert.match(source, /TableToolbar/)
+    assert.match(source, /type:\s*['"]search['"]/)
+    assert.match(source, /onQuickFilterChange|@update:quick-filter-values/)
+    assert.match(source, /onOperation|@operation/)
+    assert.match(source, /onExport|@export/)
+    assert.match(source, /onColumnSettings|@column-settings/)
+    assert.match(source, /onRefresh|@refresh/)
     assert.match(source, /keyword/)
     assert.match(source, /visibleStores/)
     assert.match(source, /rowSelection|row-selection/)
@@ -595,16 +618,11 @@ test('basic list template is a real React and Vue page composition', async () =>
     assert.doesNotMatch(source, /Radio\.Group|RadioGroup/)
     assert.doesNotMatch(source, /<span>页面状态<\/span>/)
     assert.match(source, /Button/)
-    assert.match(source, /type="outline"[\s\S]*?批量启用/)
-    assert.match(source, /type="outline"[\s\S]*?批量停用/)
-    assert.match(source, /type="outline"[\s\S]*?清除选择/)
-    assert.match(source, /type="outline"[\s\S]*?aria-label="刷新"/)
-    assert.match(source, /type="outline"[\s\S]*?aria-label="列设置"/)
-    assert.match(source, /type="outline"[\s\S]*?aria-label="导出"/)
-    assert.match(source, /Tooltip/)
-    assert.match(source, /aria-label="刷新"/)
-    assert.match(source, /aria-label="列设置"/)
-    assert.match(source, /aria-label="导出"/)
+    assert.match(source, /operationActions|operation-actions/)
+    assert.match(source, /moreActions|more-actions/)
+    assert.match(source, /tableTools|table-tools/)
+    assert.match(source, /requiresSelection|requires-selection/)
+    assert.doesNotMatch(source, /sb-basic-list-page__toolbar-(?:left|right)/)
     assert.doesNotMatch(source, /<button[\s>]/)
     assert.doesNotMatch(source, /sb-basic-list-page__header/)
     assert.doesNotMatch(source, /sb-basic-list-page__feedback/)
@@ -625,10 +643,12 @@ test('filter list template keeps the current filter-enabled basic list compositi
 
   assert.match(doc, /<Demo name="template-pages\/filter-list" \/>/)
   assert.match(doc, /筛选区直接调用业务组件 <code>FilterBar<\/code>/)
+  assert.match(doc, /<code>TableToolbar<\/code>/)
   assert.doesNotMatch(doc, /TemplatePagePlaceholder/)
 
   for (const source of [reactDemo, vueDemo]) {
     assert.match(source, /FilterBar/)
+    assert.match(source, /TableToolbar/)
     assert.match(source, /submitMode="manual"|submit-mode="manual"/)
     assert.match(source, /defaultVisibleCount=\{3\}|default-visible-count="3"/)
     assert.match(source, /const fields: FilterFieldSchema\[\]/)
@@ -657,10 +677,14 @@ test('filter list template keeps the current filter-enabled basic list compositi
     assert.doesNotMatch(source, /Radio\.Group|RadioGroup/)
     assert.doesNotMatch(source, /<span>页面状态<\/span>/)
     assert.match(source, /Button/)
-    assert.match(source, /Tooltip/)
-    assert.match(source, /aria-label="刷新"/)
-    assert.match(source, /aria-label="列设置"/)
-    assert.match(source, /aria-label="导出"/)
+    assert.match(source, /onOperation|@operation/)
+    assert.match(source, /onExport|@export/)
+    assert.match(source, /onColumnSettings|@column-settings/)
+    assert.match(source, /onRefresh|@refresh/)
+    assert.match(source, /operationActions|operation-actions/)
+    assert.match(source, /moreActions|more-actions/)
+    assert.match(source, /tableTools|table-tools/)
+    assert.doesNotMatch(source, /sb-filter-list-page__toolbar-(?:left|right)/)
     assert.doesNotMatch(source, /<button[\s>]/)
     assert.doesNotMatch(source, /PagePreview/)
     assert.doesNotMatch(source, /from '@sbux\/starbucks-design-(?:react|vue)\/business/)

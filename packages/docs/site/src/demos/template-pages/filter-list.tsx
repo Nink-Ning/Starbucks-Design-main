@@ -14,20 +14,21 @@ import {
   Select,
   Space,
   Table,
+  TableToolbar,
   Tag,
-  Tooltip,
 } from '@sbux/starbucks-design-react';
 import type {
   FilterFieldSchema,
   FilterValue,
   TableColumnProps,
+  TableToolbarAction,
 } from '@sbux/starbucks-design-react';
 import {
-  IconDownload,
+  IconCheckCircle,
+  IconCloseCircle,
   IconMore,
+  IconMinusCircle,
   IconPlus,
-  IconRefresh,
-  IconSettings,
 } from '@sbux/starbucks-design-react/icon';
 
 type StoreStatus = 'open' | 'preparing' | 'closed';
@@ -147,6 +148,13 @@ const fields: FilterFieldSchema[] = [
 const initialFilterValues: FilterValue = {};
 const filterColumns = { xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 3 };
 const pageSize = 10;
+const operationActions: TableToolbarAction[] = [
+  { key: 'open', label: '启用', icon: <IconCheckCircle />, requiresSelection: true },
+  { key: 'closed', label: '停用', icon: <IconMinusCircle />, requiresSelection: true },
+];
+const moreActions: TableToolbarAction[] = [
+  { key: 'clear', label: '清除选择', icon: <IconCloseCircle />, requiresSelection: true },
+];
 const columnModalTitle = <span className="sb-filter-list-page__modal-title">列设置</span>;
 const createModalTitle = <span className="sb-filter-list-page__modal-title">新建门店</span>;
 
@@ -314,6 +322,14 @@ export default function Demo() {
     });
   };
 
+  const handleToolbarOperation = (key: string) => {
+    if (key === 'open' || key === 'closed') {
+      openBatchConfirm(key);
+      return;
+    }
+    if (key === 'clear') setSelectedRowKeys([]);
+  };
+
   const refreshData = () => {
     setRefreshing(true);
     window.setTimeout(() => {
@@ -435,31 +451,20 @@ export default function Demo() {
       </section>
 
       <section className="sb-filter-list-page__module sb-filter-list-page__table-module">
-        <div className="sb-filter-list-page__toolbar">
-          <div className="sb-filter-list-page__toolbar-left">
-            {selectedRowKeys.length > 0 && <span className="sb-filter-list-page__selection">已选择 {selectedRowKeys.length} 项</span>}
-            <Button type="outline" disabled={selectedRowKeys.length === 0} onClick={() => openBatchConfirm('open')}>
-              批量启用
-            </Button>
-            <Button type="outline" disabled={selectedRowKeys.length === 0} onClick={() => openBatchConfirm('closed')}>
-              批量停用
-            </Button>
-            <Button type="outline" disabled={selectedRowKeys.length === 0} onClick={() => setSelectedRowKeys([])}>
-              清除选择
-            </Button>
-          </div>
-          <div className="sb-filter-list-page__toolbar-right">
-            <Tooltip content="刷新">
-              <Button type="outline" aria-label="刷新" icon={<IconRefresh />} loading={refreshing} onClick={refreshData} />
-            </Tooltip>
-            <Tooltip content="列设置">
-              <Button type="outline" aria-label="列设置" icon={<IconSettings />} onClick={() => setColumnModalVisible(true)} />
-            </Tooltip>
-            <Tooltip content="导出">
-              <Button type="outline" aria-label="导出" icon={<IconDownload />} onClick={() => downloadCsv(filteredStores)} />
-            </Tooltip>
-          </div>
-        </div>
+        <TableToolbar
+          selectedCount={selectedRowKeys.length}
+          operationActions={operationActions}
+          moreActions={moreActions}
+          tableTools={{
+            export: true,
+            columnSettings: true,
+            refresh: { loading: refreshing },
+          }}
+          onOperation={handleToolbarOperation}
+          onExport={() => downloadCsv(filteredStores)}
+          onColumnSettings={() => setColumnModalVisible(true)}
+          onRefresh={refreshData}
+        />
 
         {viewMode === 'error' ? (
           <Result

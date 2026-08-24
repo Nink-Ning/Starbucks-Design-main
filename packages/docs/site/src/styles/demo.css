@@ -1253,46 +1253,7 @@ html[data-framework='vue']
 
 .sb-basic-list-page__table-module {
   display: grid;
-  gap: var(--spacing-4);
-}
-
-.sb-basic-list-page__toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-4);
-  min-width: 0;
-}
-
-.sb-basic-list-page__toolbar-left,
-.sb-basic-list-page__toolbar-right {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--spacing-3);
-  min-width: 0;
-}
-
-.sb-basic-list-page__toolbar-right {
-  justify-content: flex-end;
-  margin-inline-start: auto;
-}
-
-.sb-basic-list-page .sb-basic-list-page__toolbar-left .arco-btn-outline.arco-btn-disabled,
-.sb-basic-list-page .sb-basic-list-page__toolbar-left .arco-btn-outline.arco-v-btn-disabled,
-.sb-basic-list-page .sb-basic-list-page__toolbar-left .arco-v-btn-outline.arco-v-btn-disabled {
-  color: var(--color-text-disabled);
-  background-color: var(--bg-color-component-disabled);
-  border-color: var(--color-border-component);
-}
-
-.sb-basic-list-page__selection {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  color: var(--color-text-secondary);
-  font-size: var(--fs-14);
-  line-height: var(--lh-22);
+  gap: 0;
 }
 
 .sb-basic-list-page__pagination {
@@ -1302,36 +1263,10 @@ html[data-framework='vue']
   padding-top: var(--spacing-2);
 }
 
-.sb-basic-list-page__row-actions .arco-btn,
-.sb-basic-list-page__row-actions .arco-v-btn {
-  padding-inline: var(--spacing-1);
-}
-
 .sb-basic-list-page__row-actions {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-}
-
-.sb-basic-list-page__row-actions .arco-btn-text:not(.arco-btn-disabled),
-.sb-basic-list-page__row-actions .arco-v-btn-text:not(.arco-v-btn-disabled) {
-  color: var(--color-text-brand);
-  font-size: var(--fs-14);
-  line-height: var(--lh-22);
-}
-
-.sb-basic-list-page__row-actions .arco-btn-text:not(.arco-btn-disabled):not(.arco-btn-loading):hover,
-.sb-basic-list-page__row-actions .arco-v-btn-text:not(.arco-v-btn-disabled):not(.arco-v-btn-loading):hover,
-.sb-basic-list-page__row-actions .arco-btn-text:not(.arco-btn-disabled):focus-visible,
-.sb-basic-list-page__row-actions .arco-v-btn-text:not(.arco-v-btn-disabled):focus-visible {
-  color: var(--color-text-brand);
-  background-color: var(--color-primary-light);
-}
-
-.sb-basic-list-page__row-actions .arco-btn-text:not(.arco-btn-disabled):not(.arco-btn-loading):active,
-.sb-basic-list-page__row-actions .arco-v-btn-text:not(.arco-v-btn-disabled):not(.arco-v-btn-loading):active {
-  color: var(--color-text-brand);
-  background-color: var(--color-primary-light-hover);
 }
 
 .sb-basic-list-page__modal-title {
@@ -1397,46 +1332,7 @@ html[data-framework='vue']
 
 .sb-filter-list-page__table-module {
   display: grid;
-  gap: var(--spacing-4);
-}
-
-.sb-filter-list-page__toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-4);
-  min-width: 0;
-}
-
-.sb-filter-list-page__toolbar-left,
-.sb-filter-list-page__toolbar-right {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--spacing-3);
-  min-width: 0;
-}
-
-.sb-filter-list-page__toolbar-right {
-  justify-content: flex-end;
-  margin-inline-start: auto;
-}
-
-.sb-filter-list-page .sb-filter-list-page__toolbar-left .arco-btn-outline.arco-btn-disabled,
-.sb-filter-list-page .sb-filter-list-page__toolbar-left .arco-btn-outline.arco-v-btn-disabled,
-.sb-filter-list-page .sb-filter-list-page__toolbar-left .arco-v-btn-outline.arco-v-btn-disabled {
-  color: var(--color-text-disabled);
-  background-color: var(--bg-color-component-disabled);
-  border-color: var(--color-border-component);
-}
-
-.sb-filter-list-page__selection {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  color: var(--color-text-secondary);
-  font-size: var(--fs-14);
-  line-height: var(--lh-22);
+  gap: 0;
 }
 
 .sb-filter-list-page__pagination {
@@ -2553,16 +2449,6 @@ html[data-framework='vue']
     gap: 12px;
   }
 
-  .sb-basic-list-page__toolbar {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .sb-basic-list-page__toolbar-right {
-    justify-content: flex-start;
-    margin-inline-start: 0;
-  }
-
   .sb-basic-list-page__pagination {
     justify-content: flex-start;
     overflow-x: auto;
@@ -2570,16 +2456,6 @@ html[data-framework='vue']
 
   .sb-filter-list-page {
     gap: 12px;
-  }
-
-  .sb-filter-list-page__toolbar {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .sb-filter-list-page__toolbar-right {
-    justify-content: flex-start;
-    margin-inline-start: 0;
   }
 
   .sb-filter-list-page__pagination {

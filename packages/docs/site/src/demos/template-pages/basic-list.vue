@@ -16,40 +16,23 @@
 
   <div class="sb-basic-list-page">
     <section class="sb-basic-list-page__module sb-basic-list-page__table-module">
-      <div class="sb-basic-list-page__toolbar">
-        <div class="sb-basic-list-page__toolbar-left">
-          <span v-if="selectedRowKeys.length > 0" class="sb-basic-list-page__selection">已选择 {{ selectedRowKeys.length }} 项</span>
-          <Button type="outline" :disabled="selectedRowKeys.length === 0" @click="openBatchConfirm('open')">批量启用</Button>
-          <Button type="outline" :disabled="selectedRowKeys.length === 0" @click="openBatchConfirm('closed')">批量停用</Button>
-          <Button type="outline" :disabled="selectedRowKeys.length === 0" @click="selectedRowKeys = []">清除选择</Button>
-        </div>
-        <div class="sb-basic-list-page__toolbar-right">
-          <Input
-            v-model="keyword"
-            aria-label="搜索门店"
-            placeholder="搜索门店名称或编号"
-            allow-clear
-            :style="{ width: '240px' }"
-          >
-            <template #prefix><IconSearch /></template>
-          </Input>
-          <Tooltip content="刷新">
-            <Button type="outline" aria-label="刷新" :loading="refreshing" @click="refreshData">
-              <template #icon><IconRefresh /></template>
-            </Button>
-          </Tooltip>
-          <Tooltip content="列设置">
-            <Button type="outline" aria-label="列设置" @click="columnModalVisible = true">
-              <template #icon><IconSettings /></template>
-            </Button>
-          </Tooltip>
-          <Tooltip content="导出">
-              <Button type="outline" aria-label="导出" @click="downloadCsv(visibleStores)">
-              <template #icon><IconDownload /></template>
-            </Button>
-          </Tooltip>
-        </div>
-      </div>
+      <TableToolbar
+        :selected-count="selectedRowKeys.length"
+        :quick-filters="quickFilters"
+        :quick-filter-values="quickFilterValues"
+        :operation-actions="operationActions"
+        :more-actions="moreActions"
+        :table-tools="{
+          export: true,
+          columnSettings: true,
+          refresh: { loading: refreshing },
+        }"
+        @update:quick-filter-values="quickFilterValues = $event"
+        @operation="handleToolbarOperation"
+        @export="downloadCsv(visibleStores)"
+        @column-settings="columnModalVisible = true"
+        @refresh="refreshData"
+      />
 
       <Result
         v-if="viewMode === 'error'"
@@ -79,7 +62,7 @@
           <template #type="{ record }">{{ typeLabel(record.type) }}</template>
           <template #city="{ record }">{{ record.region }} / {{ record.city }}</template>
           <template #actions>
-            <Space class="sb-basic-list-page__row-actions" :size="4">
+            <Space class="sb-basic-list-page__row-actions sbux-table-row-actions" :size="4">
               <Button type="text" size="mini">查看</Button>
               <Button type="text" size="mini">编辑</Button>
               <Dropdown>
@@ -169,14 +152,18 @@
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, ref, watch } from 'vue';
-import { Modal } from '@sbux/starbucks-design-vue';
+import { Modal, TableToolbar } from '@sbux/starbucks-design-vue';
+import type {
+  TableToolbarAction,
+  TableToolbarQuickFilter,
+  TableToolbarQuickFilterValues,
+} from '@sbux/starbucks-design-vue';
 import {
-  IconDownload,
+  IconCheckCircle,
+  IconCloseCircle,
   IconMore,
+  IconMinusCircle,
   IconPlus,
-  IconRefresh,
-  IconSearch,
-  IconSettings,
 } from '@sbux/starbucks-design-vue/icon';
 
 type StoreStatus = 'open' | 'preparing' | 'closed';
@@ -249,6 +236,16 @@ const cityOptions = [
 ];
 
 const pageSize = 10;
+const quickFilters: TableToolbarQuickFilter[] = [
+  { type: 'search', name: 'keyword', placeholder: '搜索门店名称或编号' },
+];
+const operationActions: TableToolbarAction[] = [
+  { key: 'open', label: '启用', icon: IconCheckCircle, requiresSelection: true },
+  { key: 'closed', label: '停用', icon: IconMinusCircle, requiresSelection: true },
+];
+const moreActions: TableToolbarAction[] = [
+  { key: 'clear', label: '清除选择', icon: IconCloseCircle, requiresSelection: true },
+];
 
 const initialStores: StoreRecord[] = [
   { id: '1', code: 'SH-001', name: '上海静安嘉里中心店', region: '华东', city: '上海', cityValue: 'shanghai', type: 'reserve', status: 'open', openedAt: '2020-05-18', manager: 'Nink', updatedAt: '2026-07-24 10:30' },
@@ -300,7 +297,7 @@ const cityByValue = new Map(
 );
 
 const stores = ref<StoreRecord[]>([...initialStores]);
-const keyword = ref('');
+const quickFilterValues = ref<TableToolbarQuickFilterValues>({ keyword: '' });
 const selectedRowKeys = ref<string[]>([]);
 const current = ref(1);
 const viewMode = ref<ViewMode>('normal');
@@ -324,7 +321,7 @@ const visibleColumns = computed(() =>
 
 const visibleStores = computed(() => {
   if (viewMode.value === 'empty') return [];
-  const normalizedKeyword = keyword.value.trim().toLowerCase();
+  const normalizedKeyword = String(quickFilterValues.value.keyword ?? '').trim().toLowerCase();
   if (!normalizedKeyword) return stores.value;
   return stores.value.filter(
     (store) =>
@@ -336,7 +333,7 @@ const visibleStores = computed(() => {
 const total = computed(() => visibleStores.value.length);
 const pageData = computed(() => visibleStores.value.slice((current.value - 1) * pageSize, current.value * pageSize));
 
-watch([keyword, viewMode], () => {
+watch([() => quickFilterValues.value.keyword, viewMode], () => {
   current.value = 1;
   selectedRowKeys.value = [];
 });
@@ -381,6 +378,14 @@ function openBatchConfirm(status: BatchStatus) {
     },
     appContext
   );
+}
+
+function handleToolbarOperation(key: string) {
+  if (key === 'open' || key === 'closed') {
+    openBatchConfirm(key);
+    return;
+  }
+  if (key === 'clear') selectedRowKeys.value = [];
 }
 
 function refreshData() {

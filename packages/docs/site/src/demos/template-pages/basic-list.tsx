@@ -13,17 +13,21 @@ import {
   Select,
   Space,
   Table,
+  TableToolbar,
   Tag,
-  Tooltip,
 } from '@sbux/starbucks-design-react';
-import type { TableColumnProps } from '@sbux/starbucks-design-react';
+import type {
+  TableColumnProps,
+  TableToolbarAction,
+  TableToolbarQuickFilter,
+  TableToolbarQuickFilterValues,
+} from '@sbux/starbucks-design-react';
 import {
-  IconDownload,
+  IconCheckCircle,
+  IconCloseCircle,
   IconMore,
+  IconMinusCircle,
   IconPlus,
-  IconRefresh,
-  IconSearch,
-  IconSettings,
 } from '@sbux/starbucks-design-react/icon';
 
 type StoreStatus = 'open' | 'preparing' | 'closed';
@@ -94,6 +98,16 @@ const cityOptions = [
 ];
 
 const pageSize = 10;
+const quickFilters: TableToolbarQuickFilter[] = [
+  { type: 'search', name: 'keyword', placeholder: '搜索门店名称或编号' },
+];
+const operationActions: TableToolbarAction[] = [
+  { key: 'open', label: '启用', icon: <IconCheckCircle />, requiresSelection: true },
+  { key: 'closed', label: '停用', icon: <IconMinusCircle />, requiresSelection: true },
+];
+const moreActions: TableToolbarAction[] = [
+  { key: 'clear', label: '清除选择', icon: <IconCloseCircle />, requiresSelection: true },
+];
 const columnModalTitle = <span className="sb-basic-list-page__modal-title">列设置</span>;
 const createModalTitle = <span className="sb-basic-list-page__modal-title">新建门店</span>;
 
@@ -178,7 +192,7 @@ function downloadCsv(rows: StoreRecord[]) {
 
 export default function Demo() {
   const [stores, setStores] = useState<StoreRecord[]>(initialStores);
-  const [keyword, setKeyword] = useState('');
+  const [quickFilterValues, setQuickFilterValues] = useState<TableToolbarQuickFilterValues>({ keyword: '' });
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
   const [current, setCurrent] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>('normal');
@@ -196,21 +210,21 @@ export default function Demo() {
   const isLoading = viewMode === 'loading' || refreshing;
   const visibleStores = useMemo(() => {
     if (viewMode === 'empty') return [];
-    const normalizedKeyword = keyword.trim().toLowerCase();
+    const normalizedKeyword = String(quickFilterValues.keyword ?? '').trim().toLowerCase();
     if (!normalizedKeyword) return stores;
     return stores.filter(
       (store) =>
         store.name.toLowerCase().includes(normalizedKeyword) ||
         store.code.toLowerCase().includes(normalizedKeyword)
     );
-  }, [keyword, stores, viewMode]);
+  }, [quickFilterValues.keyword, stores, viewMode]);
   const total = visibleStores.length;
   const pageData = visibleStores.slice((current - 1) * pageSize, current * pageSize);
 
   useEffect(() => {
     setCurrent(1);
     setSelectedRowKeys([]);
-  }, [keyword, viewMode]);
+  }, [quickFilterValues.keyword, viewMode]);
 
   const changeStatusForSelected = (status: StoreStatus) => {
     if (selectedRowKeys.length === 0) return;
@@ -233,6 +247,14 @@ export default function Demo() {
       okText: '确定',
       onOk: () => changeStatusForSelected(status),
     });
+  };
+
+  const handleToolbarOperation = (key: string) => {
+    if (key === 'open' || key === 'closed') {
+      openBatchConfirm(key);
+      return;
+    }
+    if (key === 'clear') setSelectedRowKeys([]);
   };
 
   const refreshData = () => {
@@ -292,7 +314,7 @@ export default function Demo() {
       width: 180,
       fixed: 'right',
       render: () => (
-        <Space className="sb-basic-list-page__row-actions" size={4}>
+        <Space className="sb-basic-list-page__row-actions sbux-table-row-actions" size={4}>
           <Button type="text" size="mini">查看</Button>
           <Button type="text" size="mini">编辑</Button>
           <Dropdown
@@ -341,40 +363,23 @@ export default function Demo() {
         )}
     <div className="sb-basic-list-page">
       <section className="sb-basic-list-page__module sb-basic-list-page__table-module">
-        <div className="sb-basic-list-page__toolbar">
-          <div className="sb-basic-list-page__toolbar-left">
-            {selectedRowKeys.length > 0 && <span className="sb-basic-list-page__selection">已选择 {selectedRowKeys.length} 项</span>}
-            <Button type="outline" disabled={selectedRowKeys.length === 0} onClick={() => openBatchConfirm('open')}>
-              批量启用
-            </Button>
-            <Button type="outline" disabled={selectedRowKeys.length === 0} onClick={() => openBatchConfirm('closed')}>
-              批量停用
-            </Button>
-            <Button type="outline" disabled={selectedRowKeys.length === 0} onClick={() => setSelectedRowKeys([])}>
-              清除选择
-            </Button>
-          </div>
-          <div className="sb-basic-list-page__toolbar-right">
-            <Input
-              aria-label="搜索门店"
-              prefix={<IconSearch />}
-              placeholder="搜索门店名称或编号"
-              allowClear
-              value={keyword}
-              onChange={setKeyword}
-              style={{ width: 240 }}
-            />
-            <Tooltip content="刷新">
-              <Button type="outline" aria-label="刷新" icon={<IconRefresh />} loading={refreshing} onClick={refreshData} />
-            </Tooltip>
-            <Tooltip content="列设置">
-              <Button type="outline" aria-label="列设置" icon={<IconSettings />} onClick={() => setColumnModalVisible(true)} />
-            </Tooltip>
-            <Tooltip content="导出">
-              <Button type="outline" aria-label="导出" icon={<IconDownload />} onClick={() => downloadCsv(visibleStores)} />
-            </Tooltip>
-          </div>
-        </div>
+        <TableToolbar
+          selectedCount={selectedRowKeys.length}
+          quickFilters={quickFilters}
+          quickFilterValues={quickFilterValues}
+          operationActions={operationActions}
+          moreActions={moreActions}
+          tableTools={{
+            export: true,
+            columnSettings: true,
+            refresh: { loading: refreshing },
+          }}
+          onQuickFilterChange={setQuickFilterValues}
+          onOperation={handleToolbarOperation}
+          onExport={() => downloadCsv(visibleStores)}
+          onColumnSettings={() => setColumnModalVisible(true)}
+          onRefresh={refreshData}
+        />
 
         {viewMode === 'error' ? (
           <Result

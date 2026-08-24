@@ -18,7 +18,7 @@ import Demo from '../../../../components/Demo.astro';
     <h2>页面结构</h2>
     <ul>
       <li>面包屑右侧放置页面状态切换和主操作“新建门店”。</li>
-      <li>表格工具栏左侧提供门店关键词搜索、选择数量和批量操作，批量变更需二次确认。</li>
+      <li>表格工具栏直接调用业务组件 <code>TableToolbar</code>，左侧展示选择数量和批量操作，右侧提供关键词搜索与表格工具。</li>
       <li>数据表格展示门店信息、业务状态和行操作。</li>
       <li>分页与表格处于同一内容区域。</li>
       <li>顶部状态切换演示 Normal、Loading、Empty、Error。</li>
@@ -27,6 +27,12 @@ import Demo from '../../../../components/Demo.astro';
 
   <section class="sb-template-docs-section">
     <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>业务组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>TableToolbar</code>
+      </div>
+    </div>
     <div class="sb-template-docs-component-group">
       <strong>基础组件</strong>
       <div class="sb-template-docs-component-list">
@@ -51,9 +57,9 @@ import Demo from '../../../../components/Demo.astro';
       <strong>图标</strong>
       <div class="sb-template-docs-component-list">
         <code>IconPlus</code>
-        <code>IconRefresh</code>
-        <code>IconSettings</code>
-        <code>IconDownload</code>
+        <code>IconCheckCircle</code>
+        <code>IconMinusCircle</code>
+        <code>IconCloseCircle</code>
         <code>IconMore</code>
       </div>
     </div>
@@ -66,9 +72,10 @@ import Demo from '../../../../components/Demo.astro';
       <li>操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
       <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
       <li>页面主操作位于面包屑行右侧。</li>
-      <li>基础列表不放置顶部筛选栏，轻量关键词搜索位于表格工具栏左侧。</li>
-      <li>批量操作靠近表格选择区域左侧，并在执行前二次确认。</li>
+      <li>基础列表不放置顶部筛选栏，轻量关键词搜索位于表格工具栏右侧，按 Enter 后提交。</li>
+      <li>批量操作由 TableToolbar 按业务优先级响应式折叠，并在执行前二次确认。</li>
       <li>列设置、导出和刷新位于工具栏右侧。</li>
+      <li>“查看、编辑”等页面内行操作使用品牌色文字 Button，并通过共享 <code>sbux-table-row-actions</code> 作用域获得组件视觉，不在页面样式中覆盖 Button。</li>
       <li>分页与表格处于同一内容容器。</li>
       <li>页面模板负责组合，不重复实现业务组件内部能力。</li>
     </ol>
