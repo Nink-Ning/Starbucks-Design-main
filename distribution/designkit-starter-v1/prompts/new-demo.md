@@ -34,6 +34,9 @@
 - 页面自身不能出现无意义横向滚动；
 - 宽表格只能在表格容器内滚动；
 - 不自动添加 FilterBar、批量操作、导出、列设置、Upload、Card、Timeline、Tabs 或其他模板外能力；
+- 基础列表必须使用真实 `StarbucksReact.TableToolbar`：关键词 Search 配置为 `placement: 'start'`，右侧只启用 `tableTools.refresh`；不得用页面私有 Input 和 Button 重新拼装工具栏；
+- 页面需要状态演示时，将状态 Select 放在 Header 右侧操作区最左侧并标记为 Demo-only，不生成独立顶部状态卡片；
+- 表格查看、编辑等页面内行操作使用品牌色文字 Button 和 `sbux-table-row-actions`，不得为了颜色改用 Link 或在页面 CSS 中覆盖 `.arco-btn-text`；
 - 不修改 `runtime/`、`templates/`、`examples/` 或 Starter 规则文件。
 
 请将文件写入 output/<descriptive-name>.html，并在最后按 references/quality-checklist.md 自检。

@@ -16,6 +16,7 @@
 - [ ] CDN 顺序正确。
 - [ ] 不包含 `import`、`export`、TypeScript、npm 或构建入口。
 - [ ] 组件来自 `StarbucksReact`，图标来自 `window.arcoicon`。
+- [ ] Basic List 从 `StarbucksReact` 获取 `TableToolbar`，没有页面私有 `.dk-page__table-toolbar`、`.dk-page__toolbar-left` 或 `.dk-page__toolbar-right`。
 - [ ] JSX 位于 `script[type="text/babel"]`。
 - [ ] 输出只依赖 HTML、CSS、少量 JavaScript 和固定 CDN。
 - [ ] 页面 CSS 没有宽泛 `.arco-*` 或 `!important`。
@@ -33,7 +34,11 @@
 - [ ] 宽表格只在表格区域内滚动。
 - [ ] 三个 Golden Example 的页面背景、最大宽度、标题 Tooltip、标题区操作和页面字体继承保持同一 Starter Shell 方向。
 - [ ] 页面 Header 与正式内容区间距为 10px，标题与右侧核心操作在桌面端垂直对齐。
+- [ ] 存在页面状态演示时，状态 Select 位于 Header 右侧操作区最左侧，带有 `aria-label="页面状态"` 和 `data-demo-only="true"`，页面没有独立顶部状态卡片。
 - [ ] Mock 操作明确写成本地 Demo，不声称真实服务端成功。
+- [ ] List 的查看、编辑使用 `Button type="text"` 和 `sbux-table-row-actions`，页面 CSS 未覆盖 `.arco-btn-text` 的颜色、字号、背景、边框或状态。
+- [ ] List 的关键词 Search 由 `TableToolbar.quickFilters` 提供且使用 `placement: 'start'`，Refresh 由 `tableTools.refresh` 提供。
+- [ ] List 未向 `TableToolbar` 传入 `selectedCount`、`operationActions`、`moreActions`、`export` 或 `columnSettings`。
 - [ ] List 未出现 FilterBar、批量操作、导出或列设置。
 - [ ] Form 未出现 Upload、动态字段、Modal、Drawer 或 Step Form。
 - [ ] Detail 只使用 shared model 的 12 个字段、单 DetailSection 和 `emptyValue="—"`，未出现 Export、Card、Timeline、Table、Tabs 或 Pagination。
@@ -44,8 +49,11 @@
 - [ ] CDN 加载成功。
 - [ ] 页面无相关控制台错误；Babel Standalone 的开发提示如出现应单独记录，不得与页面错误混淆。
 - [ ] 本地 Runtime JS/CSS 文件存在，Manifest 中 JS/CSS hash 与实际文件一致。
+- [ ] `typeof StarbucksReact.TableToolbar === 'function'`，Runtime CSS 包含 `.sbux-table-toolbar`，Runtime Manifest 将 `TableToolbar` 记录在 `selectedBusinessExports`。
 - [ ] 不存在旧 Starbucks CDN，三页使用同一 Runtime 文件和版本。
 - [ ] 主要按钮、输入、表单提交或详情操作可用。
+- [ ] List 行操作 Normal 为品牌色，Hover、Active、Focus 来自 `starbucks-react.css`，不是页面内联或 Docs 样式。
+- [ ] List 实际渲染 `.sbux-table-toolbar`；无批量操作时 Search 位于 Start，Refresh 保持在 End。
 - [ ] 关键状态可以切换或演示。
 - [ ] 预览结果与 React 视觉基准一致。
 - [ ] 页面自身 `body` 无异常横向溢出；宽表格只在组件容器内滚动。

@@ -1,6 +1,6 @@
 # React Preview 组件目录
 
-本目录只收录 Starter V1 计划使用的 React 基础组件。属性、事件和子组件写法已根据以下内部 reference 查证：
+本目录只收录 Starter V1 计划使用的 React 基础组件、业务组件和精选 Pro Layout。属性、事件和子组件写法已根据当前 React 源码、公共入口和以下内部 reference 查证：
 
 ```text
 skills/starbucks-design-react/references/components/
@@ -12,9 +12,9 @@ skills/starbucks-design-react/references/components/
 
 | 组件 | V1 已查证用法 |
 | --- | --- |
-| `Button` | `type`、`status`、`size`、`disabled`、`loading`、`htmlType`、`onClick`、`icon` |
-| `Input` | `value`、`defaultValue`、`placeholder`、`allowClear`、`disabled`、`status`、`prefix`、`maxLength`、`onChange`、`onPressEnter` |
-| `Input.Search` | `placeholder`、`loading`、`onSearch` |
+| `TableToolbar` | `quickFilters`、`quickFilterValues`、`tableTools`、`disabled`、`ariaLabel`、`onQuickFilterChange`、`onSearchSubmit`、`onRefresh` |
+| `Button` | `type`、`status`、`size`、`disabled`、`loading`、`htmlType`、`onClick`、`icon`；行操作使用 `type="text"` |
+| `Input` | `value`、`defaultValue`、`placeholder`、`allowClear`、`disabled`、`status`、`prefix`、`maxLength`、`onChange`、`onPressEnter`；基础列表搜索不直接使用，由 `TableToolbar` 组合 |
 | `Select` | `value`、`options`、`aria-label`、`onChange` |
 | `Table` | `columns`、`data`、`rowKey`、`loading`、`noDataElement`、`pagination`、`scroll` |
 | `Table` 列 | `title`、`dataIndex`、`key`、`width`、`fixed`、`ellipsis`、`render` |
@@ -26,6 +26,52 @@ skills/starbucks-design-react/references/components/
 | `Message` | `success`、`info`、`warning`、`error`、`loading` |
 
 V1 列表页不默认使用 `rowSelection`、跨页选择、复杂批量操作、服务端分页或高级列筛选。
+
+### TableToolbar 精简契约
+
+Basic List 必须直接使用 `StarbucksReact.TableToolbar`，不得在页面内重新组合搜索框和 Refresh 图标按钮。当前 API 已根据 `packages/starbucks-design-react/src/business/table-toolbar/interface.ts`、公共入口和 Runtime 实际导出查证。
+
+```jsx
+<TableToolbar
+  ariaLabel="门店表格工具栏"
+  quickFilters={[
+    {
+      type: 'search',
+      name: 'keyword',
+      placement: 'start',
+      placeholder: '搜索门店名称、编号或城市',
+      ariaLabel: '搜索门店',
+      allowClear: true,
+    },
+  ]}
+  quickFilterValues={{ keyword }}
+  tableTools={{
+    refresh: {
+      loading: isRefreshing,
+      tooltip: '刷新',
+      ariaLabel: '刷新门店数据',
+    },
+  }}
+  onQuickFilterChange={handleQuickFilterChange}
+  onRefresh={refreshData}
+/>
+```
+
+- V1 无批量操作，因此搜索配置使用 `placement: 'start'`；Refresh 由 `tableTools.refresh` 保持在右侧。
+- Search 输入按 Enter 提交，`allowClear` 清空时立即提交空关键词；页面根据已提交的 `quickFilterValues.keyword` 过滤本地 Mock 数据。
+- V1 不传 `selectedCount`、`operationActions` 或 `moreActions`，也不启用 `tableTools.export`、`tableTools.columnSettings`。
+- 不使用页面私有 `.dk-page__table-toolbar`、`.dk-page__toolbar-left` 或 `.dk-page__toolbar-right` 复刻业务组件结构。
+
+表格“查看、编辑”等页面内操作保持 Button 语义，并使用 Runtime 的共享作用域，不在单页 CSS 中改写组件视觉：
+
+```jsx
+<div className="dk-page__row-actions sbux-table-row-actions">
+  <Button type="text" size="small" onClick={handleView}>查看</Button>
+  <Button type="text" size="small" onClick={handleEdit}>编辑</Button>
+</div>
+```
+
+`dk-page__row-actions` 只负责排列和间距；品牌色、Hover、Active 和 Focus 由 `starbucks-react.css` 中的 `sbux-table-row-actions` 提供。只有真实 URL 导航才使用 `Link`，不得为了获得绿色把页面内操作改成 Link。
 
 ## 表单页
 
@@ -101,6 +147,6 @@ Basic Detail Golden Example 的状态控制使用 `Select`，它属于 Demo 控�
 - 组件从 `StarbucksReact` 解构。
 - 图标从 `window.arcoicon` 解构。
 - React Hooks 从全局 `React` 解构。
-- 当前三个 Golden Example 实际使用的图标包括 `IconInfoCircle`、`IconPlus`、`IconRefresh` 和 `IconSearch`；仍必须从 `window.arcoicon` 解构。
+- 当前三个 Golden Example 直接使用的图标包括 `IconInfoCircle` 和 `IconPlus`；仍必须从 `window.arcoicon` 解构。`TableToolbar` 内部图标由 Runtime 提供，页面不得重复解构或实现。
 - 不从 `arco` 对象直接取组件，以免绕过 Starbucks 主题包。
 - 不因为某个 API 看起来符合直觉就自行添加；先查 reference。

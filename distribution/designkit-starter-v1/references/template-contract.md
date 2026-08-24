@@ -61,6 +61,27 @@
 - `!important`；
 - 用 CSS 复制 Button、Input、Table 或 Form 的内部样式。
 
+## 组件复用优先级
+
+页面生成必须按以下顺序选择能力：
+
+1. Starter Runtime 已提供的业务组件；
+2. Starter Runtime 已提供的基础组件；
+3. 页面级布局组合；
+4. 仅在前三者不能满足且没有扩大 V1 边界时，才允许增加页面私有结构。
+
+当真实业务组件已经覆盖所需任务时，不得为了减少 Props 或沿用旧页面代码而重新实现其内部布局、状态或响应式逻辑。
+
+Basic List 的搜索、工具按钮和响应式排列由 `StarbucksReact.TableToolbar` 负责。页面只能提供 `quickFilters`、`quickFilterValues`、`tableTools.refresh` 和相应回调，不生成 `.dk-page__table-toolbar`、`.dk-page__toolbar-left` 或 `.dk-page__toolbar-right`。
+
+## Header 与行操作结构契约
+
+- 存在页面状态演示时，状态 `Select` 必须位于页面 Header 的右侧操作容器内，并排在所有业务操作之前。
+- 状态 `Select` 使用 `aria-label="页面状态"` 和 `data-demo-only="true"` 标记；没有状态演示的模板不得为了占位新增控件。
+- 不生成独立的顶部 Demo 状态卡片、标题或说明段落。
+- 表格行操作使用 `Button type="text"`；普通页面内操作放入 `sbux-table-row-actions` 作用域。
+- 页面只维护行操作容器的 `display`、对齐、间距和换行，不维护 Button 的颜色、字号、背景、边框或交互状态。
+
 ## 验证状态
 
 只有实际使用浏览器打开 HTML、操作主要交互并检查控制台后，才可以标记为已验证。否则必须标记：

@@ -23,6 +23,9 @@
 9. 页面自身和表格容器的溢出是否合理；
 10. 是否混入真实数据、接口、权限、上传或导出逻辑；
 11. 是否自动加入当前模板未支持的 FilterBar、批量操作、列设置、Card、Timeline、Tabs 或复杂 Pro 能力。
+12. 页面状态 Select 是否位于 Header 右侧操作区最左侧，且没有独立顶部状态卡片；没有状态演示的模板是否避免了无意义占位。
+13. 表格查看、编辑是否使用品牌色文字 Button 和 `sbux-table-row-actions`，且页面 CSS 没有覆盖 `.arco-btn-text`。
+14. 基础列表是否使用真实 `StarbucksReact.TableToolbar`，Search 配置为 `placement: 'start'`、右侧只启用 Refresh，并且没有页面私有工具栏结构。
 
 请输出：
 - 通过项；

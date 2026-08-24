@@ -56,38 +56,6 @@
       padding: 16px 0 40px;
     }
 
-    .dk-demo-controls {
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      width: min(calc(100% - 48px), var(--dk-page-max-width));
-      margin: 0 auto 16px;
-      padding: 12px 16px;
-      border: 1px solid var(--dk-page-border);
-      border-radius: 8px;
-      background: var(--dk-page-surface);
-    }
-
-    .dk-demo-controls__copy {
-      min-width: 160px;
-    }
-
-    .dk-demo-controls__title {
-      margin: 0;
-      color: var(--dk-page-text);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .dk-demo-controls__description {
-      margin: 2px 0 0;
-      color: var(--dk-page-muted);
-      font-size: 12px;
-    }
-
     .dk-page {
       box-sizing: border-box;
       width: min(calc(100% - 48px), var(--dk-page-max-width));
@@ -165,7 +133,6 @@
     }
 
     @media (max-width: 720px) {
-      .dk-demo-controls,
       .dk-page {
         width: min(calc(100% - 32px), var(--dk-page-max-width));
       }
@@ -187,11 +154,6 @@
     @media (max-width: 420px) {
       .dk-demo-shell {
         padding-top: 8px;
-      }
-
-      .dk-demo-controls {
-        margin-bottom: 12px;
-        padding: 10px 12px;
       }
 
       .dk-page__header-actions {
@@ -370,20 +332,6 @@
 
           return (
             <div className="dk-demo-shell">
-              <section className="dk-demo-controls" aria-label="Demo 状态控制">
-                <div className="dk-demo-controls__copy">
-                  <p className="dk-demo-controls__title">页面状态演示</p>
-                  <p className="dk-demo-controls__description">仅用于验证详情状态，不属于正式页面结构。</p>
-                </div>
-                <Select
-                  aria-label="选择页面状态"
-                  options={stateOptions}
-                  value={viewMode}
-                  onChange={setViewMode}
-                  style={{ width: 240 }}
-                />
-              </section>
-
               <main className="dk-page">
                 <header className="dk-page__header">
                   <div className="dk-page__header-main">
@@ -397,6 +345,15 @@
                     </div>
                   </div>
                   <div className="dk-page__header-actions">
+                    <span data-demo-only="true">
+                      <Select
+                        aria-label="页面状态"
+                        options={stateOptions}
+                        value={viewMode}
+                        onChange={setViewMode}
+                        style={{ width: 120 }}
+                      />
+                    </span>
                     <Dropdown
                       droplist={(
                         <Menu onClickMenuItem={(key) => {

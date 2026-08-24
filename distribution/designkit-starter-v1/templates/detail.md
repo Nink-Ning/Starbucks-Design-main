@@ -21,8 +21,9 @@
 ## React Basic Detail 结构基准
 
 ```text
-Demo 状态控制（不属于正式页面）
-└── Page Header：标题 + Tooltip 说明 / 右侧操作
+Page Header
+├── 左侧：标题 + Tooltip 说明
+└── 右侧：Demo 状态 Select（Demo-only）/ 更多 / 编辑
 
 DetailPageLayout maxWidth=1120
 └── DetailSection
@@ -33,6 +34,7 @@ DetailPageLayout maxWidth=1120
 - 只使用一个 `DetailSection`。
 - 当前示例不显示额外的“基本信息”标题、Section 描述或 Card Header。
 - 页面标题使用 16px 标题和标题后的说明 Tooltip；右侧只放“更多 / 编辑”核心操作。
+- 页面状态 Select 位于右侧操作区最左侧，先于“更多 / 编辑”，使用 `aria-label="页面状态"` 和 `data-demo-only="true"`；不生成独立顶部状态卡片。
 - Header 与详情容器保持 10px 间距；Starter 单文件不依赖 Docs 面包屑。
 
 ## Starter Runtime Pro 能力

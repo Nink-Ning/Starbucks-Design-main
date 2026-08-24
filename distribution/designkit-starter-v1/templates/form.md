@@ -23,8 +23,7 @@
 ## 推荐结构
 
 ```text
-Demo 状态控制（不属于正式页面）
-→ 页面 Header：标题 + Tooltip 说明
+页面 Header：标题 + Tooltip 说明
 → 表单字段分组
 → 字段校验错误
 → 重置 / 保存
@@ -59,6 +58,7 @@ Message
 - 重置恢复明确的 baseline 值。
 - 保存成功使用本地反馈，不调用真实接口，不模拟服务端错误。
 - `Switch` 放入 `Form.Item` 时设置 `triggerPropName="checked"`。
+- Basic Form 默认不添加 Normal、Loading、Empty、Error 页面状态 Select；表单提交 Loading 属于表单交互状态，不为了统一外观增加无业务意义的页面状态控件。
 
 ## 响应式要求
 

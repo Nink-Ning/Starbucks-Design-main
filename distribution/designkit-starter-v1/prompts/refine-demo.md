@@ -17,6 +17,9 @@
 - 检查 Normal、Loading、Empty、Error 和窄屏结果；
 - 不把本地 Mock 反馈写成真实服务端成功；
 - 不添加对应模板范围外的 FilterBar、导出、列设置、批量、Upload、Card、Timeline 或 Tabs；
+- 基础列表保持使用真实 `StarbucksReact.TableToolbar`，Search 位于 Start、Refresh 位于 End，不恢复页面私有工具栏；
+- 已有页面状态演示时，状态 Select 保持在 Header 右侧操作区最左侧，不恢复独立顶部状态卡片；
+- 表格查看、编辑等页面内行操作保持品牌色文字 Button 和 `sbux-table-row-actions`，不通过 Link 或页面 CSS 改色；
 - 修改后按 references/quality-checklist.md 自检。
 
 请覆盖写回 output/<file-name>.html，并说明：

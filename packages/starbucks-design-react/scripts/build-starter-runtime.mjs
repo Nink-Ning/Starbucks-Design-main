@@ -49,6 +49,12 @@ function fail(message) {
   throw new Error(`[starter-runtime] ${message}`)
 }
 
+// Capture provenance before the build writes generated Runtime assets.
+// Release builds must start from a clean worktree so generated files do not
+// incorrectly mark the source workspace as dirty.
+const sourceCommit = runGit(['rev-parse', 'HEAD'])
+const workspaceDirty = Boolean(runGit(['status', '--porcelain', '--untracked-files=all']))
+
 try {
   const buildResult = spawnSync(
     process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm',
@@ -90,6 +96,8 @@ try {
     '.arco-message',
     '.sbux-filter-bar',
     '.sbux-tag-group-management',
+    '.sbux-table-toolbar',
+    '.sbux-table-row-actions',
     '.sbux-pro-form-page-layout',
     '.sbux-pro-form-grid',
     '.sbux-pro-form-grid-item',
@@ -132,6 +140,12 @@ try {
     fail(`UMD JS is missing selected Pro exports: ${missingProExports.join(', ')}`)
   }
 
+  const selectedBusinessExports = ['TableToolbar']
+  const missingBusinessExports = selectedBusinessExports.filter((exportName) => !js.includes(exportName))
+  if (missingBusinessExports.length) {
+    fail(`UMD JS is missing selected business exports: ${missingBusinessExports.join(', ')}`)
+  }
+
   const missingExternalMarkers = ['React', 'ReactDOM', 'arco', 'arcoicon'].filter(
     (marker) => !js.includes(marker),
   )
@@ -145,8 +159,6 @@ try {
   copyFileSync(jsPath, runtimeJs)
   copyFileSync(cssPath, runtimeCss)
 
-  const sourceCommit = runGit(['rev-parse', 'HEAD'])
-  const workspaceDirty = Boolean(runGit(['status', '--porcelain', '--untracked-files=all']))
   const buildTime = new Date().toISOString()
   const manifest = {
     packageName: packageJson.name,
@@ -177,9 +189,10 @@ try {
       '@arco-design/web-react/es/*/style/index.less',
     ],
     buildConfig: 'packages/starbucks-design-react/vite.config.starter-runtime.ts',
+    selectedBusinessExports,
     selectedProExports,
     verificationStatus: 'STATIC_CONFIRMED_BROWSER_PENDING',
-    verificationNotes: 'Selected Pro Form and Basic Detail Layout exports are statically confirmed; browser smoke and list/form regression are pending.',
+    verificationNotes: 'TableToolbar and selected Pro Form/Basic Detail Layout exports are statically confirmed; browser smoke for all Golden Examples is pending.',
   }
   writeFileSync(resolve(runtimeDir, 'runtime-manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`)
 

@@ -9,7 +9,6 @@
       --dk-page-max-width: 1280px;
       --dk-page-gutter: 24px;
       --dk-page-header-gap: 10px;
-      --dk-page-control-gap: 16px;
       --dk-page-surface: #ffffff;
       --dk-page-background: #f5f6f7;
       --dk-page-text: #1d2129;
@@ -59,38 +58,6 @@
       padding: 16px 0 40px;
     }
 
-    .dk-demo-controls {
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      width: min(calc(100% - 48px), var(--dk-page-max-width));
-      margin: 0 auto 16px;
-      padding: 12px 16px;
-      border: 1px solid var(--dk-page-border);
-      border-radius: 8px;
-      background: var(--dk-page-surface);
-    }
-
-    .dk-demo-controls__copy {
-      min-width: 160px;
-    }
-
-    .dk-demo-controls__title {
-      margin: 0;
-      color: var(--dk-page-text);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .dk-demo-controls__description {
-      margin: 2px 0 0;
-      color: var(--dk-page-muted);
-      font-size: 12px;
-    }
-
     .dk-page {
       box-sizing: border-box;
       width: min(calc(100% - 48px), var(--dk-page-max-width));
@@ -134,8 +101,7 @@
       line-height: 1;
     }
 
-    .dk-page__header-actions,
-    .dk-page__toolbar-right {
+    .dk-page__header-actions {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -158,43 +124,6 @@
       background: var(--dk-page-surface);
     }
 
-    .dk-page__table-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--dk-page-control-gap);
-      flex-wrap: wrap;
-      min-width: 0;
-      margin-bottom: 0;
-    }
-
-    .dk-page__toolbar-left {
-      display: flex;
-      align-items: center;
-      gap: var(--dk-page-control-gap);
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-
-    .dk-page__toolbar-right {
-      justify-content: flex-end;
-      margin-inline-start: auto;
-      flex-wrap: nowrap;
-    }
-
-    .dk-page__toolbar-search {
-      display: flex;
-      flex: 0 1 320px;
-      min-width: 0;
-      width: 320px;
-    }
-
-    .dk-page__toolbar-icon {
-      display: inline-flex;
-      flex: 0 0 auto;
-      width: auto;
-    }
-
     .dk-page__table-wrap {
       min-width: 0;
       overflow-x: auto;
@@ -213,13 +142,8 @@
         --dk-page-gutter: 16px;
       }
 
-      .dk-demo-controls,
       .dk-page {
         width: min(calc(100% - 32px), var(--dk-page-max-width));
-      }
-
-      .dk-demo-controls {
-        align-items: stretch;
       }
 
       .dk-page__header {
@@ -227,27 +151,8 @@
       }
 
       .dk-page__header-actions,
-      .dk-page__header-actions > *,
-      .dk-page__toolbar-left,
-      .dk-page__toolbar-right,
-      .dk-page__toolbar-right > * {
+      .dk-page__header-actions > * {
         width: 100%;
-      }
-
-      .dk-page__toolbar-right {
-        justify-content: flex-start;
-        margin-inline-start: 0;
-        flex-wrap: wrap;
-      }
-
-      .dk-page__toolbar-search {
-        flex-basis: 100%;
-        width: 100%;
-        max-width: none;
-      }
-
-      .dk-page__toolbar-right > .dk-page__toolbar-icon {
-        width: auto;
       }
 
       .dk-page__pagination {
@@ -291,23 +196,23 @@
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.29.8/babel.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
 
   <script type="text/babel">
-    if (!window.React || !window.ReactDOM || !window.StarbucksReact) {
+    if (!window.React || !window.ReactDOM || !window.StarbucksReact || !window.StarbucksReact.TableToolbar) {
       window.__designKitStarterRuntimeErrors.push('Starbucks Design React 运行时未完整加载。');
     } else {
       const { useEffect, useMemo, useState } = React;
       const {
         Button,
         Empty,
-        Input,
         Message,
         Pagination,
         Result,
         Select,
         Table,
+        TableToolbar,
         Tag,
         Tooltip,
       } = StarbucksReact;
-      const { IconInfoCircle, IconPlus, IconRefresh, IconSearch } = window.arcoicon || {};
+      const { IconInfoCircle, IconPlus } = window.arcoicon || {};
 
       const storeRows = [
         { id: 'store-001', name: '上海淮海中路店', code: 'SH-001', region: '华东', city: '上海', type: '标准店', status: 'open', openedAt: '2020-05-18', manager: 'Nink', updatedAt: '2026-08-06 14:20' },
@@ -331,6 +236,17 @@
         { label: 'Error', value: 'error' },
       ];
 
+      const quickFilters = [
+        {
+          type: 'search',
+          name: 'keyword',
+          placement: 'start',
+          placeholder: '搜索门店名称、编号或城市',
+          ariaLabel: '搜索门店',
+          allowClear: true,
+        },
+      ];
+
       const statusLabels = {
         open: '营业中',
         preparing: '筹备中',
@@ -347,9 +263,10 @@
 
       function App() {
         const [viewMode, setViewMode] = useState('normal');
-        const [keyword, setKeyword] = useState('');
+        const [quickFilterValues, setQuickFilterValues] = useState({ keyword: '' });
         const [currentPage, setCurrentPage] = useState(1);
         const [isRefreshing, setIsRefreshing] = useState(false);
+        const keyword = String(quickFilterValues.keyword || '');
 
         const filteredRows = useMemo(() => {
           if (viewMode === 'empty') return [];
@@ -448,7 +365,7 @@
             width: 180,
             fixed: 'right',
             render: (_, record) => (
-              <div className="dk-page__row-actions">
+              <div className="dk-page__row-actions sbux-table-row-actions">
                 <Button type="text" size="small" onClick={() => Message.info(`查看 ${record.name}`)}>查看</Button>
                 <Button type="text" size="small" onClick={() => Message.success(`已打开 ${record.name} 的编辑示例`)}>编辑</Button>
               </div>
@@ -458,19 +375,6 @@
 
         return (
           <div className="dk-demo-shell">
-            <section className="dk-demo-controls" aria-label="Demo 状态控制">
-              <div className="dk-demo-controls__copy">
-                <p className="dk-demo-controls__title">页面状态演示</p>
-                <p className="dk-demo-controls__description">仅用于验证模板状态，不属于正式页面结构。</p>
-              </div>
-              <Select
-                aria-label="选择页面状态"
-                value={viewMode}
-                options={stateOptions}
-                onChange={setViewMode}
-              />
-            </section>
-
             <main className="dk-page">
               <header className="dk-page__header">
                 <div className="dk-page__header-main">
@@ -484,37 +388,34 @@
                     </div>
                 </div>
                 <div className="dk-page__header-actions">
+                  <span data-demo-only="true">
+                    <Select
+                      aria-label="页面状态"
+                      value={viewMode}
+                      options={stateOptions}
+                      onChange={setViewMode}
+                      style={{ width: 120 }}
+                    />
+                  </span>
                   <Button type="primary" icon={IconPlus ? <IconPlus /> : null} onClick={() => showUnavailableState('新建门店')}>新建门店</Button>
                 </div>
               </header>
 
               <section className="dk-page__section" aria-label="门店数据列表">
-                <div className="dk-page__table-toolbar">
-                  <div className="dk-page__toolbar-left">
-                    <div className="dk-page__toolbar-search">
-                      <Input
-                        aria-label="搜索门店"
-                        prefix={IconSearch ? <IconSearch /> : null}
-                        placeholder="搜索门店名称、编号或城市"
-                        allowClear
-                        value={keyword}
-                        onChange={setKeyword}
-                      />
-                    </div>
-                  </div>
-                  <div className="dk-page__toolbar-right">
-                    <span className="dk-page__toolbar-icon">
-                      <Tooltip content="刷新">
-                        <Button
-                          aria-label="刷新门店数据"
-                          icon={IconRefresh ? <IconRefresh /> : null}
-                          loading={isRefreshing}
-                          onClick={refreshData}
-                        />
-                      </Tooltip>
-                    </span>
-                  </div>
-                </div>
+                <TableToolbar
+                  ariaLabel="门店表格工具栏"
+                  quickFilters={quickFilters}
+                  quickFilterValues={quickFilterValues}
+                  tableTools={{
+                    refresh: {
+                      loading: isRefreshing,
+                      tooltip: '刷新',
+                      ariaLabel: '刷新门店数据',
+                    },
+                  }}
+                  onQuickFilterChange={setQuickFilterValues}
+                  onRefresh={refreshData}
+                />
 
                 {viewMode === 'error' ? (
                   <Result
@@ -555,7 +456,7 @@
         );
       }
 
-      if (!Tooltip || !IconInfoCircle || !IconPlus || !IconRefresh) {
+      if (!Tooltip || !IconInfoCircle || !IconPlus) {
         window.__designKitStarterRuntimeErrors.push('Arco Icon 未完整加载，页面将继续使用无图标降级展示。');
       }
 
@@ -569,6 +470,7 @@
       if (!window.React) missing.push('React 18.3.1');
       if (!window.ReactDOM) missing.push('ReactDOM 18.3.1');
       if (!window.StarbucksReact) missing.push('Starter 本地 Starbucks React Runtime');
+      if (window.StarbucksReact && !window.StarbucksReact.TableToolbar) missing.push('Starter Runtime TableToolbar');
       if (!window.Babel) missing.push('Babel Standalone 7.29.8');
 
       var messages = [];
