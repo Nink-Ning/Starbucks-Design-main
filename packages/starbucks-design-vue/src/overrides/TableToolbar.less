@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: var(--spacing-6);
   width: 100%;
   min-width: 0;
@@ -172,13 +173,9 @@
 }
 
 @container (max-width: 720px) {
-  .sbux-table-toolbar {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
   .sbux-table-toolbar__start,
   .sbux-table-toolbar__controls {
+    flex: 1 1 100%;
     justify-content: flex-start;
     width: 100%;
     margin-inline-start: 0;
@@ -191,6 +188,10 @@
   .sbux-table-toolbar__quick-filters {
     flex: 1 1 auto;
     justify-content: flex-start;
+  }
+
+  .sbux-table-toolbar[data-has-start-content='true'] > .sbux-table-toolbar__controls {
+    justify-content: flex-end;
   }
 }
 
@@ -218,5 +219,9 @@
   .sbux-table-toolbar__quick-filter {
     flex-basis: 100%;
     width: 100%;
+  }
+
+  .sbux-table-toolbar[data-has-start-content='true'] > .sbux-table-toolbar__controls {
+    align-items: flex-end;
   }
 }
