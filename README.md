@@ -15,7 +15,7 @@ Starbucks Design 是一个面向企业级 B 端产品设计与开发协作的 AI
 
 Documentation Site:
 
-https://nink1992.github.io/Starbucks-Design-main/
+https://nink-Ning.github.io/Starbucks-Design-main/
 
 
 ---
