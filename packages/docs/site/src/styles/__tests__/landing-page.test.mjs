@@ -42,19 +42,19 @@ test('landing calls to action use real Docs destinations', async () => {
   assert.match(renderer, /\['\/components', 'components\/general\/button\/'\]/);
 });
 
-test('all AI collaboration landing aliases use the canonical guide route', async () => {
+test('AI collaboration landing aliases route to the matching guide or Starter management page', async () => {
   const renderer = await readSource('src/landing/renderLandingPage.ts');
 
-  for (const source of [
-    '/guide',
-    '/guide/product-manager',
-    '/guide/designer',
-    '/guide/developer',
-    '/guide/team-leader',
-    '/skills',
-    '/download',
+  for (const [source, target] of [
+    ['/guide', 'guide/ai-skills-guide/'],
+    ['/guide/product-manager', 'guide/ai-skills-releases/'],
+    ['/guide/designer', 'guide/ai-skills-starters/'],
+    ['/guide/developer', 'guide/ai-skills-developer/'],
+    ['/guide/team-leader', 'guide/ai-skills-starters/'],
+    ['/skills', 'guide/ai-skills-guide/'],
+    ['/download', 'guide/ai-skills-starters/'],
   ]) {
-    assert.match(renderer, new RegExp(`\\['${source.replace('/', '\\/')}', 'guide/ai-skills-guide/'\\]`));
+    assert.match(renderer, new RegExp(`\\['${source.replace('/', '\\/')}', '${target.replace('/', '\\/')}'\\]`));
   }
   assert.doesNotMatch(renderer, /\['\/download', 'guide\/ai-skills\/'\]/);
 });
@@ -96,8 +96,11 @@ test('the hero download action opens an accessible role starter modal', async ()
 test('only the product manager starter pack is available for download', async () => {
   const landing = await readSource('src/landing/designkit-landing.html');
 
-  assert.match(landing, /href="\/downloads\/designkit-starter-v1\.zip" download="designkit-starter-v1\.zip"/);
+  assert.match(landing, /href="\.\.\/\.\.\/public\/downloads\/designkit-starter-v1-r2\.zip" download="designkit-starter-v1-r2\.zip"/);
   assert.match(landing, /下载产品经理启动包/);
+  assert.match(landing, /前端开发启动包/);
+  assert.doesNotMatch(landing, /前端研发启动包/);
+  assert.match(landing, /角色化工程协作内容仍在建设中/);
   assert.match(landing, /下载解压后，无需复杂开发环境，即可生成并预览 HTML Demo，适合需求验证、评审和沟通。/);
   assert.equal((landing.match(/aria-disabled="true"/g) || []).length, 3);
   assert.match(landing, /当前仅开放产品经理启动包，其他角色内容正在准备中。/);
@@ -135,13 +138,14 @@ test('the available starter card keeps neutral icon and status colors', async ()
   assert.match(landing, /\.download-role-card\.is-available \.download-role-status\{color:#85858B;\}/);
 });
 
-test('the product manager starter pack URL is base-aware and not environment hardcoded', async () => {
+test('the product manager starter pack URL works from the source file and remains base-aware', async () => {
   const [landing, renderer] = await Promise.all([
     readSource('src/landing/designkit-landing.html'),
     readSource('src/landing/renderLandingPage.ts'),
   ]);
 
-  assert.match(renderer, /\['\/downloads\/designkit-starter-v1\.zip', 'downloads\/designkit-starter-v1\.zip'\]/);
+  assert.match(renderer, /\['\.\.\/\.\.\/public\/downloads\/designkit-starter-v1-r2\.zip', 'downloads\/designkit-starter-v1-r2\.zip'\]/);
+  await assert.doesNotReject(() => readSource('public/downloads/designkit-starter-v1-r2.zip'));
   assert.match(renderer, /normalizeBaseUrl\(baseUrl \|\| '\/'\)/);
   assert.doesNotMatch(`${landing}\n${renderer}`, /\/Starbucks-Design-main\/|\/kning\/starbucks-design-main\/|nink1992\.github\.io|pages\.scm\.starbucks\.com/);
   assert.doesNotMatch(`${landing}\n${renderer}`, /starbucks-design-react-preview\.zip/);

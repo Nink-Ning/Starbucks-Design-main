@@ -1,152 +1,141 @@
-# React Preview 组件目录
+# DesignKit Starter Component Capability Catalog
 
-本目录只收录 Starter V1 计划使用的 React 基础组件、业务组件和精选 Pro Layout。属性、事件和子组件写法已根据当前 React 源码、公共入口和以下内部 reference 查证：
+本目录只登记 Non-Developer Starter 可以在 Single HTML Demo 中使用的组件能力。它不提供工程接入、开发者接口或完整组件文档；具体页面结构读取对应 Template，业务组件规则读取对应 Business Component Knowledge。
 
-```text
-skills/starbucks-design-react/references/components/
-```
+## 1. Global boundary
 
-本文件不是完整 API 文档。使用未列出的属性前，必须回到对应内部 reference 查证，不得猜测。
+### Allowed capability
 
-## 列表页
+- 只使用 Starter Fixed Runtime 已批准且被当前 Template 明确需要的组件能力。
+- 组件负责自身的视觉、语义、交互状态和响应式能力。
+- 页面负责本地 Mock 数据、页面状态、对象范围、确认、反馈和错误恢复。
 
-| 组件 | V1 已查证用法 |
-| --- | --- |
-| `TableToolbar` | `quickFilters`、`quickFilterValues`、`tableTools`、`disabled`、`ariaLabel`、`onQuickFilterChange`、`onSearchSubmit`、`onRefresh` |
-| `Button` | `type`、`status`、`size`、`disabled`、`loading`、`htmlType`、`onClick`、`icon`；行操作使用 `type="text"` |
-| `Input` | `value`、`defaultValue`、`placeholder`、`allowClear`、`disabled`、`status`、`prefix`、`maxLength`、`onChange`、`onPressEnter`；基础列表搜索不直接使用，由 `TableToolbar` 组合 |
-| `Select` | `value`、`options`、`aria-label`、`onChange` |
-| `Table` | `columns`、`data`、`rowKey`、`loading`、`noDataElement`、`pagination`、`scroll` |
-| `Table` 列 | `title`、`dataIndex`、`key`、`width`、`fixed`、`ellipsis`、`render` |
-| `Pagination` | `total`、`current`、`defaultCurrent`、`pageSize`、`showTotal`、`showJumper`、`onChange` |
-| `Tag` | `color`、`size`、`closable`、`onClose` |
-| `Empty` | `icon`、`description`、`imgSrc` |
-| `Result` | `status`、`title`、`subTitle`、`icon`、`extra` |
-| `Tooltip` | `content`、`mini`；包裹图标或操作按钮 |
-| `Message` | `success`、`info`、`warning`、`error`、`loading` |
+### Unsupported capability
 
-V1 列表页不默认使用 `rowSelection`、跨页选择、复杂批量操作、服务端分页或高级列筛选。
+- 未登记组件、完整工程组件集、开发者扩展点或内部实现。
+- 真实接口、权限、上传、导出、跨页状态、服务端任务或生产部署。
+- 通过页面私有 DOM、样式或脚本复制已有组件能力。
 
-### TableToolbar 精简契约
+### Usage boundary
 
-Basic List 必须直接使用 `StarbucksReact.TableToolbar`，不得在页面内重新组合搜索框和 Refresh 图标按钮。当前 API 已根据 `packages/starbucks-design-react/src/business/table-toolbar/interface.ts`、公共入口和 Runtime 实际导出查证。
+- 先通过 [Capability Registry](capability-registry.md) 确认 `starter.*` Capability，再读取对应 Template。
+- 只采用 Template 和 Golden 已展示的批准能力组合，不从 Runtime 文件存在推断额外能力。
+- 未在本目录登记的能力视为 Starter 范围外，按 [Profile Router](profile-routing.md) 处理。
 
-```jsx
-<TableToolbar
-  ariaLabel="门店表格工具栏"
-  quickFilters={[
-    {
-      type: 'search',
-      name: 'keyword',
-      placement: 'start',
-      placeholder: '搜索门店名称、编号或城市',
-      ariaLabel: '搜索门店',
-      allowClear: true,
-    },
-  ]}
-  quickFilterValues={{ keyword }}
-  tableTools={{
-    refresh: {
-      loading: isRefreshing,
-      tooltip: '刷新',
-      ariaLabel: '刷新门店数据',
-    },
-  }}
-  onQuickFilterChange={handleQuickFilterChange}
-  onRefresh={refreshData}
-/>
-```
+## 2. TableToolbar business capability
 
-- V1 无批量操作，因此搜索配置使用 `placement: 'start'`；Refresh 由 `tableTools.refresh` 保持在右侧。
-- Search 输入按 Enter 提交，`allowClear` 清空时立即提交空关键词；页面根据已提交的 `quickFilterValues.keyword` 过滤本地 Mock 数据。
-- V1 不传 `selectedCount`、`operationActions` 或 `moreActions`，也不启用 `tableTools.export`、`tableTools.columnSettings`。
-- 不使用页面私有 `.dk-page__table-toolbar`、`.dk-page__toolbar-left` 或 `.dk-page__toolbar-right` 复刻业务组件结构。
+详细规则读取 [TableToolbar Business Component Knowledge](../business-components/table-toolbar.md)。
 
-表格“查看、编辑”等页面内操作保持 Button 语义，并使用 Runtime 的共享作用域，不在单页 CSS 中改写组件视觉：
+### Allowed capability
 
-```jsx
-<div className="dk-page__row-actions sbux-table-row-actions">
-  <Button type="text" size="small" onClick={handleView}>查看</Button>
-  <Button type="text" size="small" onClick={handleEdit}>编辑</Button>
-</div>
-```
+- Selection Summary。
+- Template 明确允许的轻量 Batch Actions。
+- 1～3 个基础 Quick Filters。
+- Refresh 等 Template 明确允许的工具。
+- Action State Display、可访问名称和组件自身的响应式排列。
 
-`dk-page__row-actions` 只负责排列和间距；品牌色、Hover、Active 和 Focus 由 `starbucks-react.css` 中的 `sbux-table-row-actions` 提供。只有真实 URL 导航才使用 `Link`，不得为了获得绿色把页面内操作改成 Link。
+### Unsupported capability
 
-## 表单页
+- 完整组件配置、工程级扩展或高级插槽。
+- Density Management、完整 FilterBar、真实导出、列设置持久化。
+- 跨页选择、权限工作流或服务端批量任务。
 
-| 组件 | V1 已查证用法 |
-| --- | --- |
-| `Form` | `form`、`layout`、`initialValues`、`autoComplete`、`requiredSymbol`、`scrollToFirstError`、`disabled`、`onValuesChange`、`onSubmit`、`onSubmitFailed` |
-| `Form.Item` | `field`、`label`、`rules`、`required`、`disabled`、`triggerPropName`、`extra` |
-| `Form.useForm` | `validate`、`resetFields`、`getFieldsValue`、`setFieldsValue` |
-| `Input.TextArea` | `value`、`placeholder`、`maxLength`、`showWordLimit`、`autoSize`、`style`、`wrapperStyle` |
-| `Select` | `value`、`defaultValue`、`options`、`placeholder`、`allowClear`、`showSearch`、`loading`、`disabled`、`onChange` |
-| `DatePicker` | `value`、`defaultValue`、`placeholder`、`allowClear`、`disabled`、`status`、`format`、`style`、`onChange` |
-| `Radio.Group` | `value`、`defaultValue`、`type`、`direction`、`options`、`onChange` |
-| `Checkbox` | `checked`、`defaultChecked`、`disabled`、`indeterminate`、`value`、`onChange` |
-| `Checkbox.Group` | `value`、`defaultValue`、`options`、`direction`、`onChange` |
-| `Switch` | `checked`、`defaultChecked`、`type`、`loading`、`disabled`、`checkedText`、`uncheckedText`、`onChange` |
-| `Message` | `success`、`info`、`warning`、`error`、`loading` |
+### Usage boundary
 
-在 `Form.Item` 中使用 `Switch` 时必须设置 `triggerPropName="checked"`。表单提交优先使用 `htmlType="submit"` 或已查证的 `Form` 提交方式，不自行复制表单状态管理。
+- Basic List 只使用 Search Quick Filter 与 Refresh，不启用选择或批量操作。
+- Card List 可以使用轻量筛选、Selection Summary、Batch Actions、More 和 Refresh。
+- 页面拥有筛选结果、Selection Set、确认、反馈和错误恢复；TableToolbar 不拥有业务数据。
 
-## 表单 Pro Layout
+## 3. Basic List capability set
 
-Basic Form Golden Example 实际使用 Starter Runtime 中精选的 Pro Form Layout：
+### Allowed capability
 
-| Pro 组件 | 已确认 API | Basic Form 用法 |
-| --- | --- | --- |
-| `FormPageLayout` | `children` | 包裹表单页面内容 |
-| `FormGrid` | `children` | 组织表单网格 |
-| `FormGridItem` | `span`、`className`、`children` | 基础字段占位和全宽备注/操作行 |
-| `FormControlArea` | `children` | 包裹 Radio、Checkbox、Switch 控件区域 |
-| `FormActions` | `children` | 包裹重置和保存按钮 |
+- TableToolbar：Search Quick Filter、Refresh。
+- Table：结构化数据展示与局部横向滚动。
+- Pagination：当前本地结果分页。
+- Button：页面核心操作和 Row Actions。
+- Tag：语义状态。
+- Empty、Result：空状态和错误状态。
+- Tooltip、Message：可访问说明和本地反馈。
 
-上述 API 已根据当前 React Pro Form Layout reference 和 Starter Runtime 实际构建入口查证。
+### Unsupported capability
 
-## 详情页
+- Selection、Batch Actions、Export、Column Settings 或 Advanced Filter。
+- 跨页选择、服务端分页或真实数据请求。
+- 用页面私有 Toolbar 代替 TableToolbar。
 
-| 组件 | V1 已查证用法 |
-| --- | --- |
-| `Descriptions` | `data`、`title`、`column`、`layout`、`size`、`border`、`labelStyle`、`valueStyle` |
-| `Dropdown` | `droplist`、`position`、`trigger`、`disabled`、`onVisibleChange` |
-| `Menu` | `defaultSelectedKeys`、`onClickMenuItem`；`Menu.Item` 使用 `key`、`disabled` |
-| `Button` | 复用列表页已查证用法 |
-| `Message` | 复用表单页已查证用法 |
-| `Select` | `value`、`options`、`aria-label`、`style`、`onChange`；仅用于 Demo 状态控制 |
-| `Empty` | `description`；Empty 状态 |
-| `Result` | `status`、`title`、`subTitle`、`extra`；Error 状态 |
-| `Skeleton` | `loading`、`animation`、`text`；Loading 状态 |
-| `Tooltip` | `content`、`mini`；标题后的页面说明 |
+### Usage boundary
 
-Basic Detail 使用 Starter Runtime 中精选的 React Pro Detail Layout。HTML 中从 `StarbucksReact` 获取，不从完整 Pro 包或 `arco` 对象获取：
+- 使用 [Basic List Template](../templates/list.md) 的固定 Search + Refresh 结构。
+- 行操作只作用于当前对象，不依赖 Selection Set。
+- 页面拥有 Normal、Loading、Empty、Error、查询结果和分页状态。
 
-```js
-const {
-  DetailPageLayout,
-  DetailSection,
-  DetailDescriptions,
-} = StarbucksReact;
-```
+## 4. Card List capability set
 
-| Pro 组件 | 已确认 API | Basic Detail 用法 |
-| --- | --- | --- |
-| `DetailPageLayout` | `maxWidth`、`gap`、`className`、`style`、`children` | `maxWidth={1120}` 包裹单一详情内容 |
-| `DetailSection` | `title`、`description`、`actions`、`divider`、`id`、`className`、`style`、`children` | 只传 `children`，不显示额外区块标题 |
-| `DetailDescriptions` | `data`、`column`、`emptyValue`、`className`、`style`；其余已查证的 Descriptions 属性透传 | `data={couponBasicInfo}`、`emptyValue="—"` |
+### Allowed capability
 
-Detail Layout 的实际样式来源是 `packages/starbucks-design-react/src/pro/detail-layout/style.less`。`DetailDescriptions` 在未提供 `column` 时按自身容器宽度自动使用 1/2/3 列：不大于 720px 为 1 列，不大于 1200px 为 2 列，否则为 3 列。`emptyValue` 会将空字符串、`null`、`undefined` 和 `--` 替换为传入占位值。
+- Checkbox：当前结果的单项选择、全选和半选。
+- TableToolbar：轻量 Search/Select、Selection Summary、Batch Actions、More 和 Refresh。
+- Dropdown、Menu：Card 的低频单对象操作。
+- Popconfirm：轻量危险操作确认。
+- Tag、Empty、Message：状态、空结果和本地反馈。
+- Template-local Card Pattern：视觉对象展示，不作为公共 Card 组件能力。
 
-Basic Detail Golden Example 的状态控制使用 `Select`，它属于 Demo 控制区，不属于正式详情业务结构。Loading、Empty 和 Error 分别使用 `Skeleton`、`Empty` 和 `Result` 的已查证用法。
+### Unsupported capability
 
-本 Starter 仅选择性导出 Basic Form 和 Basic Detail 实际用到的 Pro 能力，不导出完整 `pro` 包。Basic Detail 不默认使用 `Card`、`Tag`、`Table`、`Timeline`、`Tabs` 或 `Pagination`。
+- 跨页 Selection Set、真实导出、权限或服务端批处理。
+- 从 Golden 推断固定业务操作、默认选中项或公共 Card 组件。
+- Card Body 隐式改变选择。
 
-## API 使用纪律
+### Usage boundary
 
-- 组件从 `StarbucksReact` 解构。
-- 图标从 `window.arcoicon` 解构。
-- React Hooks 从全局 `React` 解构。
-- 当前三个 Golden Example 直接使用的图标包括 `IconInfoCircle` 和 `IconPlus`；仍必须从 `window.arcoicon` 解构。`TableToolbar` 内部图标由 Runtime 提供，页面不得重复解构或实现。
-- 不从 `arco` 对象直接取组件，以免绕过 Starbucks 主题包。
-- 不因为某个 API 看起来符合直觉就自行添加；先查 reference。
+- 使用 [Card List Template](../templates/card-list.md) 管理页面级 Selection Set。
+- Card Actions 只作用于当前对象；Batch Actions 只作用于 Selection Set。
+- Golden 中的商品、图片、默认选择和操作名称均为 Example Specific。
+
+## 5. Basic Form capability set
+
+### Allowed capability
+
+- Form 与基础字段容器。
+- Input、Text Area、Select、Date Picker、Radio、Checkbox、Switch。
+- Button、Message：重置、提交 Loading 和本地反馈。
+- Form Page Layout、Form Grid、Form Control Area、Form Actions：基础表单页面组合。
+
+### Unsupported capability
+
+- Step Form、动态字段、上传、自动保存、审批或复杂联动。
+- 真实提交服务、权限判断或生产数据写入。
+- 将页面模板包装成新的配置驱动公共组件。
+
+### Usage boundary
+
+- 使用 [Basic Form Template](../templates/form.md) 的基础创建或编辑流程。
+- 页面负责初始值、校验结果、提交状态、重置基线和本地反馈。
+- 只生成当前任务所需字段，不从其他表单变体推断能力。
+
+## 6. Basic Detail capability set
+
+### Allowed capability
+
+- Detail Page Layout、Detail Section、Detail Descriptions：单区块只读信息展示。
+- Dropdown、Menu、Button：页面级单对象操作。
+- Skeleton、Empty、Result：Loading、Empty、Error。
+- Tooltip、Message：说明和本地反馈。
+- Select：仅作为 Golden 中的 Demo 状态控制，不属于正式详情结构。
+
+### Unsupported capability
+
+- 多模块复杂详情、Tabs、Timeline、Table、Pagination 或真实导出。
+- 通过只读 Form 模拟 Detail。
+- 从其他详情变体推断更多区块或公共页面组件。
+
+### Usage boundary
+
+- 使用 [Basic Detail Template](../templates/detail.md) 的单对象只读结构。
+- 页面负责字段模型、空值表达、长文本和本地操作反馈。
+- Loading、Empty、Error 不改变 Basic Detail 的 Capability Boundary。
+
+## 7. Maintenance rule
+
+新增组件能力必须先完成 Capability Registry、Template、Golden Mapping、Validation 和 Evidence 链路。本目录只同步批准后的 Allowed Capability、Unsupported Capability 和 Usage Boundary，不记录工程路径或开发者接口。

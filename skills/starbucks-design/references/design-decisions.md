@@ -557,20 +557,20 @@ PageHeader
 建议结构：
 
 ```text
-左侧：
-主要新增
+Start：
+已选摘要
 批量操作
-已选数量
-状态摘要
+更多操作
+核心 Quick Filter（可选）
 
-右侧：
-筛选辅助
+Controls：
+常规 Quick Filter
 刷新
-密度
-列设置
-导出
-更多
+列设置入口
+导出入口
 ```
+
+新增、导入等创建数据的操作属于 Page Header 或对应业务流程，不属于 TableToolbar。密度管理不是当前 TableToolbar 的统一职责；只有未来公共 API 和对应 Profile Knowledge 明确登记后才可使用，不得从旧示例或页面私有配置推断。
 
 具体顺序应结合业务目标，但需保持：
 
@@ -808,22 +808,25 @@ Change
 
 TableToolbar 应统一处理：
 
-- 新增；
-- 批量操作；
 - 已选摘要；
-- 刷新；
-- 密度；
-- 列设置；
-- 导出；
-- 更多操作。
+- 批量操作的展示顺序、禁用、Loading 和响应式折叠；
+- 1～3 个轻量 Quick Filters 的容器和提交时机；
+- 操作状态展示；
+- 刷新、列设置、导出等已发布 Table Tools 的入口和语义事件；
+- 更多操作的合并与优先级。
 
 它不应承担：
 
+- 新增、导入等创建数据的页面级入口；
+- 密度管理；
 - FilterBar 的字段管理；
 - Table 的分页内部逻辑；
 - 页面路由；
 - 特定业务接口；
-- 行操作逻辑。
+- 行操作逻辑；
+- 危险操作确认、导出文件生成或列设置面板实现。
+
+Starter Profile 只使用当前页面模板批准的 TableToolbar 子集。Docs Full Profile 可以进行 React/Vue framework usage、公开 API integration 和公开扩展边界内的 advanced customization；两个 Profile 的 Capability ID 和边界读取 `profile-routing.md` 与 `capability-registry.md`。
 
 ---
 

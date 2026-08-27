@@ -8,7 +8,7 @@
 - `starbucks-react.css`：与上述 UMD JS 同一次构建生成的完整组件样式。
 - `runtime-manifest.json`：构建来源、版本、大小、hash 和验证状态。
 
-当前构建对应 `packageVersion=1.1.22`，固定外部运行时为 React/ReactDOM `18.3.1`、Arco React/Icon `2.66.15`。当前文件 hash 以 `runtime-manifest.json` 为准：UMD `09e6d5ccc3b255d25473b8463a5e2943a6516c2fd6b1980ba3002c4e314d7bc3`，CSS `cdae16d0304a180c0c6606b3e35ce0def5487600121ac279ad7ba016e074f4ed`。
+当前构建对应 `packageVersion=1.1.22`，固定外部运行时为 React/ReactDOM `18.3.1`、Arco React/Icon `2.66.15`。当前文件 hash 以 `runtime-manifest.json` 为准：UMD `b9bdcb4185b796a430144841de030959c5730c2a912cc58557134bca3448bddd`，CSS `f96f234dfb0768ffdcca74b7764ecc24a926fd078a5db74255e8d9780e9564a7`。
 
 ## 使用要求
 
@@ -19,7 +19,9 @@ Starter HTML 应先加载固定版本的 React、ReactDOM、Arco React 和 Arco 
 当前 Runtime 不包含 Pro 全量能力，仅选择性包含 Basic Form 所需的
 `FormPageLayout`、`FormGrid`、`FormGridItem`、`FormControlArea`、`FormActions`，
 以及 Basic Detail 所需的 `DetailPageLayout`、`DetailSection` 和
-`DetailDescriptions` 及其共享布局样式。列表页继续使用 Button、Input、Select、Table、Pagination、Tag、Empty、Result 和 Message 等基础能力。
+`DetailDescriptions` 及其共享布局样式。列表页继续使用 Button、Input、Select、Table、Pagination、Tag、Empty、Result 和 Message 等基础能力，并通过共享的 `sbux-table-row-actions` 作用域提供操作列品牌文字按钮视觉。
+
+本次构建已通过本地 HTTP 浏览器回归：三个 Golden Example 均可渲染，列表操作列命中当前 Runtime 品牌色，列表和详情的页面状态切换位于 Header 操作区且排在业务操作之前。
 
 ## 内部试用说明
 

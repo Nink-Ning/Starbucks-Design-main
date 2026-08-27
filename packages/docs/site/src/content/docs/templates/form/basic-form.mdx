@@ -17,7 +17,7 @@ import Demo from '../../../../components/Demo.astro';
 <section class="sb-template-docs-card">
   <section class="sb-template-docs-section">
     <h2>模板定义</h2>
-    <p>基础表单是单区块页面模板，用于组合真实 Form 和共用表单布局能力完成新建门店场景。</p>
+    <p>基础表单是完整的单区块 Page Template Family，用于组合真实 Form 和共用表单布局能力完成新建或编辑门店场景。</p>
     <p>本模板是页面组合参考，不是公共 <code>BasicFormPage</code> 组件。</p>
   </section>
 
@@ -37,10 +37,10 @@ import Demo from '../../../../components/Demo.astro';
   <section class="sb-template-docs-section">
     <h2>页面结构</h2>
     <ul>
-      <li>默认预览不在卡片内部重复展示页面标题，表单内容直接由布局能力承载。</li>
+      <li>页面保留 Page Header、Form Surface、Form Layout、字段区块和页面级 Actions；默认预览不在卡片内部重复展示页面标题。</li>
       <li><code>FormPageLayout</code> 将表单内容限制在 1120px 内。</li>
       <li>桌面端表单使用顶部标签和两列布局，窄屏通过公共断点切换为单列。</li>
-      <li>操作区位于表单内容末尾，顺序为“重置”和“保存”。</li>
+      <li>操作区位于表单内容末尾，保持同一 Create/Edit family 的 Cancel 与 Primary Submit/Save 层级。</li>
       <li>React 和 Vue 均使用真实 Form 管理字段值、校验、错误和重置。</li>
     </ul>
   </section>
@@ -82,11 +82,11 @@ import Demo from '../../../../components/Demo.astro';
       <li>页面模板头部统一采用“左侧面包屑或页面标题、右侧业务核心操作或全局功能操作”的两区结构；存在页面级操作时，操作区与面包屑保持同一层级。</li>
       <li>页面级操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
       <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
-      <li>表单使用 <code>FormGrid</code> 统一控制 24px 行列间距，复杂字段和操作区使用 <code>span=2</code> 占满整行。</li>
+      <li>表单使用 <code>FormGrid</code> 统一控制 24px 行列间距，复杂字段和操作区使用 <code>span=2</code> 占满整行；Create 与 Edit 共享该 anatomy。</li>
       <li>窄屏切换为单列，表单和控件占满可用宽度，操作按钮允许换行。</li>
       <li>必填、长度和格式校验交由真实 Form 执行，页面不复制错误展示逻辑。</li>
       <li>保存通过真实校验后进入 Loading，完成本地 Mock 保存并保留字段值。</li>
-      <li>重置调用真实 Form reset 能力，恢复 baseline 并清除反馈。</li>
+      <li>Cancel 调用真实 Form reset 能力，恢复 baseline 并清除反馈；独立 root workflow 不机械添加 Breadcrumb，作为 child workflow 时应提供有意义的父级 Breadcrumb。</li>
       <li>分组、分步和动态表单属于其他页面模板；当前模板不暴露新的公共页面组件。</li>
     </ol>
   </section>

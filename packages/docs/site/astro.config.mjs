@@ -94,9 +94,24 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Skills',
+          label: 'AI 协作指南',
           items: [
-            { label: 'AI 协作指南', slug: 'guide/ai-skills-guide' },
+            { label: '概览', slug: 'guide/ai-skills-guide' },
+            {
+              label: '使用指南',
+              items: [
+                { label: 'AI 使用指南', slug: 'guide/ai-skills-usage' },
+                { label: '如何选择启动包', slug: 'guide/ai-skills-selection' },
+              ],
+            },
+            {
+              label: '启动包管理',
+              items: [
+                { label: '启动包总览', slug: 'guide/ai-skills-starters' },
+                { label: '产品经理启动包', slug: 'guide/ai-skills-releases' },
+                { label: '前端开发启动包 · Coming Soon', slug: 'guide/ai-skills-developer' },
+              ],
+            },
           ],
         },
       ],

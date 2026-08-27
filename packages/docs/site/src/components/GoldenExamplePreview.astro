@@ -1,0 +1,117 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const previewUrl = `${import.meta.env.BASE_URL}golden-examples/card-list.html`;
+---
+
+<section class="sb-golden-example-preview not-content" aria-label={title}>
+  <iframe
+    title={title}
+    src={previewUrl}
+    loading="eager"
+    allow="clipboard-write"
+    data-golden-example-frame
+  ></iframe>
+</section>
+
+<script>
+  const GOLDEN_EXAMPLE_INITIAL_HEIGHT = 534;
+  const GOLDEN_EXAMPLE_VIEWPORT_GUTTER = 20;
+
+  function readDocsTheme(): 'light' | 'dark' {
+    return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+  }
+
+  function syncFrameTheme(frame: HTMLIFrameElement, theme = readDocsTheme()) {
+    const doc = frame.contentDocument;
+    if (!doc?.body) return;
+
+    doc.documentElement.dataset.theme = theme;
+    doc.body.dataset.theme = theme;
+    frame.style.colorScheme = theme;
+
+    ['arco-theme', 'data-arco-theme'].forEach((attribute) => {
+      if (theme === 'dark') doc.body.setAttribute(attribute, 'dark');
+      else doc.body.removeAttribute(attribute);
+    });
+  }
+
+  function bindGoldenExampleFrames() {
+    document.querySelectorAll<HTMLIFrameElement>('iframe[data-golden-example-frame]').forEach((frame) => {
+      if (frame.dataset.resizeBound === 'true') return;
+      frame.dataset.resizeBound = 'true';
+
+      const bindContent = () => {
+        const doc = frame.contentDocument;
+        if (!doc) return;
+
+        const content = doc.querySelector<HTMLElement>('#root') ?? doc.body;
+        let animationFrame = 0;
+
+        const resize = () => {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = window.requestAnimationFrame(() => {
+            const frameTop = frame.getBoundingClientRect().top + window.scrollY;
+            const minimumHeight = Math.max(
+              GOLDEN_EXAMPLE_INITIAL_HEIGHT,
+              Math.ceil(window.innerHeight - frameTop - GOLDEN_EXAMPLE_VIEWPORT_GUTTER),
+            );
+            doc.documentElement.style.setProperty('--dk-docs-preview-min-height', `${minimumHeight}px`);
+            const height = Math.max(
+              minimumHeight,
+              Math.ceil(content.getBoundingClientRect().height),
+              content.scrollHeight,
+            );
+            frame.style.height = `${height}px`;
+          });
+        };
+
+        syncFrameTheme(frame);
+        resize();
+
+        new ResizeObserver(resize).observe(content);
+        new ResizeObserver(resize).observe(frame.parentElement ?? frame);
+        window.addEventListener('resize', resize);
+        new MutationObserver(resize).observe(content, {
+          attributes: true,
+          childList: true,
+          characterData: true,
+          subtree: true,
+        });
+      };
+
+      if (frame.contentDocument?.readyState === 'complete') bindContent();
+      else frame.addEventListener('load', bindContent, { once: true });
+    });
+  }
+
+  bindGoldenExampleFrames();
+  document.addEventListener('astro:page-load', bindGoldenExampleFrames);
+  new MutationObserver(() => {
+    document
+      .querySelectorAll<HTMLIFrameElement>('iframe[data-golden-example-frame]')
+      .forEach((frame) => syncFrameTheme(frame));
+  }).observe(document.documentElement, {
+    attributeFilter: ['data-theme'],
+  });
+</script>
+
+<style>
+  .sb-golden-example-preview {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--bg-color-container, #ffffff);
+  }
+
+  .sb-golden-example-preview iframe {
+    display: block;
+    width: 100%;
+    height: 534px;
+    border: 0;
+    background: var(--bg-color-container, #ffffff);
+  }
+</style>

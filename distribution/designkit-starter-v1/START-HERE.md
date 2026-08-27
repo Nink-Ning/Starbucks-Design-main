@@ -1,4 +1,4 @@
-# START HERE
+# START HERE — Starter V1-r2 Preview Candidate
 
 ## 目标
 
@@ -18,6 +18,8 @@ references/design-rules.md
 references/component-catalog.md
 references/template-contract.md
 references/cdn-runtime.md
+references/template-usage-contract.md
+references/implementation-binding-contract.md
 templates/<对应页面类型>.md
 ```
 
@@ -30,7 +32,7 @@ templates/<对应页面类型>.md
 - 页面名称
 - 使用角色
 - 核心任务
-- 页面类型：列表、表单或详情
+- 页面类型：基础列表、卡片列表、表单或详情
 - 需要展示的字段
 - 主要操作
 - 需要的状态
@@ -66,6 +68,7 @@ http://127.0.0.1:8000/output/demo.html
 
 ```text
 http://127.0.0.1:8000/examples/list.html
+http://127.0.0.1:8000/examples/multi-select-card-list.html
 http://127.0.0.1:8000/examples/form.html
 http://127.0.0.1:8000/examples/detail.html
 ```
@@ -81,4 +84,4 @@ http://127.0.0.1:8000/examples/detail.html
 
 ## 试用边界
 
-Starter V1 适合产品方案验证、评审和沟通，不适合作为生产代码、真实接口实现或正式组件库源码。当前 `examples/` 中的三个 Golden Example 已完成本地浏览器验证；新生成的 `output/*.html` 仍需由使用者自行验证。
+Starter V1-r2 适合产品方案验证、评审和沟通，不适合作为生产代码、真实接口实现或正式组件库源码。R2 的 Visual Fidelity 仍需要真实截图和人工审查，不能由静态检查自动推导；新生成的 `output/*.html` 仍需由使用者自行验证。

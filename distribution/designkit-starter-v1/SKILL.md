@@ -1,83 +1,124 @@
 ---
 name: designkit-starter-v1
-description: "为产品经理生成 Starbucks Design 零工程环境 Demo。用户提出列表页、表单页或详情页需求，或要求生成可直接在浏览器打开的 HTML Demo 时使用。输出单文件 HTML，允许固定版本的 React UMD/CDN、Babel 和少量 JavaScript；不生成 React/Vue 工程，不使用 Node.js、npm、import、export 或 TypeScript。"
+description: "为产品经理生成 Starbucks Design 零工程环境 Demo。用户提出基础列表页、卡片列表页、表单页或详情页需求，或要求生成可直接在浏览器打开的 HTML Demo 时使用。输出单文件 HTML，允许固定版本的 React UMD/CDN、Babel 和少量 JavaScript；不生成 React/Vue 工程，不使用 Node.js、npm、import、export 或 TypeScript。"
 ---
 
 # DesignKit Starter V1
 
-## 任务目标
+## 1. Starter Identity
 
-生成符合 Starbucks Design React 视觉基准的单文件 HTML Demo，用于产品方案验证、评审和沟通。
+本 Skill 是 Non-Developer DesignKit Starter 的 AI 入口。它用于生成采用 Fixed Runtime、本地 Mock 数据和少量页面脚本的 Single HTML Demo，服务于产品方案验证、评审和沟通。
 
-将 HTML 作为最终交付物。允许在 HTML 内使用固定版本的 React UMD/CDN、Babel 和少量内联 JavaScript；不要把任务扩展为 React / Vue 工程开发。
+本入口只负责：
 
-## 支持范围
+- Starter 身份和交付边界；
+- Agent Workflow；
+- Package-local Reference Routing；
+- Validation Flow。
 
-只支持以下页面类型：
+组件规则、Template 结构、API、Golden 细节和验证清单只从对应 reference 读取，不在本文件重复定义。
 
-- 基础列表页
-- 基础表单页
-- 基础详情页
+## 2. Starter Boundary
 
-不支持 Vue Preview、Dashboard、登录页、结果页、高级 FilterBar、跨页选择、复杂批量操作、真实接口、权限系统、上传、导出或工程项目。
+支持的页面能力：
 
-## 执行流程
+- Basic List；
+- Card List；
+- Basic Form；
+- Basic Detail。
 
-1. 识别页面类型，只从列表、表单、详情中选择一个。
-2. 读取 `references/design-rules.md` 和 `references/template-contract.md`。
-3. 读取 `references/component-catalog.md`，只使用其中已查证的组件 API。
-4. 读取 `references/cdn-runtime.md`，严格使用固定 CDN 地址和加载顺序。
-5. 读取对应的 `templates/list.md`、`templates/form.md` 或 `templates/detail.md`。
-6. 读取对应的 `examples/list.html`、`examples/form.html` 或 `examples/detail.html`，将其作为结构和组合参考，不复制组件源码。
-7. 使用本地 Mock 数据完成正常态和要求的主要状态。
-8. 生成完整的 `<!DOCTYPE html>` 文件，并写入 `output/`。
-9. 按 `references/quality-checklist.md` 自检。
-10. 报告已完成、未完成和未验证的内容。
+不支持：
 
-## HTML 硬性约束
+- React/Vue 工程交付；
+- Engineering API 或完整组件接入；
+- Docs Full Templates。
 
-- 使用 `lang="zh-CN"`、viewport 和页面标题。
-- 按 `references/cdn-runtime.md` 的顺序加载 React、ReactDOM、Arco、Arco Icon、Starbucks React UMD 和 Babel。
-- 从 `StarbucksReact` 获取组件，从 `window.arcoicon` 获取图标。
-- JSX 放在 `<script type="text/babel">` 中。
-- 使用 React Hooks 时从全局 `React` 获取。
-- 不使用 `import`、`export`、TypeScript、npm、Vite、Webpack 或构建入口。
-- 不引用本地 React / Vue 组件源码。
-- 不调用真实后端，不写入真实业务数据，不加入密钥或内部接口地址。
-- 页面 CSS 必须是页面级布局样式，不复制组件内部样式。
-- 不使用宽泛 `.arco-*` 覆盖，不使用 `!important`。
+完整的范围确认、未支持处理和 Starter-safe 简化规则读取 [Profile Router](references/profile-routing.md)。Runtime、文档或组件能力存在，不代表已经进入 Starter；所有生成能力必须先通过 [Capability Registry](references/capability-registry.md)。
 
-## API 和状态约束
-
-- 任何组件属性、事件、回调或子组件用法都必须来自 `references/component-catalog.md` 或其标注的内部 React reference。
-- 不确定 API 时停止猜测，先说明需要查证。
-- 列表页至少考虑 Normal、Loading、Empty、Error。
-- 表单页至少考虑校验失败、提交 Loading、提交成功和重置。
-- 详情页至少考虑 Normal、Loading、Empty 或 Error。
-- Loading 时避免重复提交。
-- 宽表格只允许在表格容器内横向滚动，页面自身不得产生无意义横向滚动。
-
-## 文件输出
-
-默认输出：
+## 3. Agent Workflow
 
 ```text
-output/<descriptive-name>.html
+User Request
+    ↓
+Confirm Starter Scope
+    ↓
+Profile Routing
+    ↓
+Capability Registry Lookup
+    ↓
+    Template Decision
+    ↓
+    Template Usage Contract
+    ↓
+    Implementation Binding Contract
+    ↓
+    Interaction Decision
+    ↓
+Golden Example Reference
+    ↓
+Validation Contract
+    ↓
+Evidence Record
 ```
 
-保持 HTML 为单文件输出，但保留 Starter Runtime 的相对路径约束。预览时使用本地 HTTP 服务；Starter 不提供自动启动脚本，也不要求用户安装 Node.js、npm 或构建工具。
+执行顺序：
 
-如果尚未使用浏览器打开并检查控制台，不得声称已验证。请明确标记为 `UNVERIFIED`。
+1. 确认用户需要 Non-Developer Single HTML Demo；否则按 Profile Router 报告范围问题。
+2. 使用 Profile Router 确认 Starter 交付和 unsupported handling。
+3. 查询 Capability Registry 的 `starter.*` ID、Status、Boundary 和 Conflict。
+4. 页面请求读取 Template Selection；确定模板后再读取对应 Template。
+5. 读取 [Template Usage Contract](references/template-usage-contract.md)，确保 Selected、Used 和 Fidelity 不被混淆。
+6. 读取 [Implementation Binding Contract](references/implementation-binding-contract.md)，将已批准的 Runtime 和主题绑定到实际 HTML。
+7. 需要选择、批量操作、More 或操作范围判断时读取 Interaction Pattern。
+8. 读取 Golden Mapping 指向的同 Capability Golden，只作为只读组合参考。
+9. 按 Validation Contract 确定适用检查和 Pass Criteria。
+10. 按 Evidence Model 记录实际 Method、Evidence Location、Result 和未验证项。
 
-## 参考文件路由
+只加载当前 Capability 所需的 references，不一次性加载全部模板和组件知识。
 
-- 页面结构和视觉：`references/design-rules.md`
-- 组件 API：`references/component-catalog.md`
-- HTML 契约：`references/template-contract.md`
-- CDN 和浏览器：`references/cdn-runtime.md`
-- 验收：`references/quality-checklist.md`
-- 列表：`templates/list.md`
-- 表单：`templates/form.md`
-- 详情：`templates/detail.md`
+## 4. Reference Routing
 
-本 Skill 不复制完整组件库、完整组件 API、Vue 规则或内部工程发布流程。
+| Stage or question | Required reference |
+| --- | --- |
+| 请求是否属于 Non-Developer Starter？ | [Profile Router](references/profile-routing.md) |
+| Starter 是否登记并允许该能力？ | [Capability Registry](references/capability-registry.md) |
+| 应选择哪个页面模板？ | [Template Selection](references/decisions/template-selection.md) |
+| 单对象、批量、More 和 Selection 如何决策？ | [Interaction Pattern](references/decisions/interaction-pattern.md) |
+| Capability 对应哪个 Template、Golden 和 Validation？ | [Golden Example Mapping](references/golden-example-mapping.md) |
+| 已选 Template 如何保留页面结构和响应式关系？ | [Template Usage Contract](references/template-usage-contract.md) |
+| 输出如何绑定 Starter Runtime、组件和主题？ | [Implementation Binding Contract](references/implementation-binding-contract.md) |
+| 必须验证什么、怎样才算通过？ | [Validation Contract](references/validation/validation-contract.md) |
+| 如何记录方法、证据、结果和日期？ | [Evidence Model](references/validation/evidence-model.md) |
+| 页面结构和视觉遵循什么规则？ | [Design Rules](references/design-rules.md) |
+| 单文件 HTML 必须满足什么交付合同？ | [Template Contract](references/template-contract.md) |
+| 当前 Starter 允许使用哪些已查证能力？ | [Component Catalog](references/component-catalog.md) |
+| Fixed Runtime 如何加载？ | [CDN Runtime](references/cdn-runtime.md) |
+| 如何执行操作性自检？ | [Quality Checklist](references/quality-checklist.md) |
+
+Registry 和 Decision 确认后，只读取其指向的 `templates/`、`business-components/` 和 `examples/` 资产。不要从文件存在推断未登记能力。
+
+## 5. Validation Flow
+
+```text
+Capability and Boundary
+    ↓
+Validation Contract categories and Pass Criteria
+    ↓
+Quality Checklist operational checks
+    ↓
+Actual validation method
+    ↓
+Evidence Record
+    ↓
+PASS / FAIL / UNVERIFIED / BLOCKED / CONFLICTED
+```
+
+- Registry `READY` 表示知识链路可用，不等于当前输出已经验证通过。
+- 规则、测试文件、Golden 或 Manifest 状态存在，不等于实际 Evidence。
+- 未执行的检查记录为 `UNVERIFIED`，证据冲突记录为 `CONFLICTED`。
+- 只有完成实际浏览器操作和控制台检查后，才能记录对应 Browser Validation 结果。
+- 最终报告必须包含 Capability ID、实际 Method、Evidence Location、Result 和仍未验证的维度。
+
+## 6. Maintenance Boundary
+
+本文件保持轻量，只维护 Identity、Workflow、Reference Routing 和 Validation Flow。新增或修改组件规则、Template 细节、API、Golden 映射或验证标准时，更新其唯一责任 reference，不在本入口复制。

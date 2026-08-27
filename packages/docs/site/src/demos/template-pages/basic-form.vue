@@ -78,7 +78,7 @@
 
           <FormGridItem :span="2" class="sb-basic-form-page__full-row">
             <FormActions>
-              <Button :disabled="submitting" @click="handleReset">重置</Button>
+              <Button :disabled="submitting" @click="handleReset">取消</Button>
               <Button html-type="submit" type="primary" :loading="submitting">保存</Button>
             </FormActions>
           </FormGridItem>

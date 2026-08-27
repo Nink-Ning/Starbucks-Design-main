@@ -16,8 +16,10 @@ test('Basic Detail has real React and Vue demos with shared coupon data', async 
   ]);
 
   assert.match(doc, /<Demo name="template-pages\/basic-detail" \/>/);
+  assert.match(doc, /focused read-only object page template/);
   assert.doesNotMatch(doc, /TemplatePagePlaceholder/);
   for (const source of [reactDemo, vueDemo]) {
+    assert.match(source, /DetailPageHeader/);
     assert.match(source, /DetailPageLayout/);
     assert.match(source, /DetailSection/);
     assert.match(source, /DetailDescriptions/);
@@ -25,8 +27,6 @@ test('Basic Detail has real React and Vue demos with shared coupon data', async 
   }
   assert.match(shared, /PO20250605180337094976/);
   assert.match(shared, /2025-06-06 00:00:00～2026-08-30 23:59:59/);
-  assert.doesNotMatch(reactDemo, /DetailPageHeader/);
-  assert.doesNotMatch(vueDemo, /DetailPageHeader/);
   assert.doesNotMatch(reactDemo, /couponUsageRules|couponActivityTimeline|Timeline/);
   assert.doesNotMatch(vueDemo, /couponUsageRules|couponActivityTimeline|Timeline/);
   assert.match(reactDemo, /<DetailSection>/);

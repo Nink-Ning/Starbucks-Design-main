@@ -17,9 +17,10 @@ DesignKit Starter V1 当前仅用于内部试用、方案验证和设计评审�
 
 ## 试用边界
 
-- 只支持基础列表、基础表单和基础详情。
+- 只支持基础列表、卡片列表、基础表单和基础详情。
+- Card List 只支持当前页面内的本地 Mock 选择和轻量批量操作，不支持跨页选择、复杂服务端批量操作或权限工作流。
 - 不支持 Vue、真实接口、权限、上传、导出和工程项目。
 - AI 生成结果必须经过浏览器预览和人工检查。
-- `examples/list.html`、`examples/form.html` 和 `examples/detail.html` 是已完成本地浏览器回归的 Golden Example；`output/*.html` 不继承该验证状态。
+- `examples/list.html`、`examples/multi-select-card-list.html`、`examples/form.html` 和 `examples/detail.html` 是已完成本地浏览器回归的 Golden Example；`output/*.html` 不继承该验证状态。
 
 本文件是内部使用说明，不构成法律许可证、第三方依赖声明或正式发布条款。

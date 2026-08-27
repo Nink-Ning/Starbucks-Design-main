@@ -72,7 +72,15 @@
 
 当真实业务组件已经覆盖所需任务时，不得为了减少 Props 或沿用旧页面代码而重新实现其内部布局、状态或响应式逻辑。
 
+使用已注册业务组件时，必须读取 manifest 对应的 Business Component Knowledge。TableToolbar 的能力选择、状态所有权、生成规则和 Evaluator 读取 `business-components/table-toolbar.md`，再由当前页面模板限定实际可用的 Props 和场景。业务组件知识只指导组件选择和组合，不改变页面模板路由，也不扩大 Starter V1 支持范围。
+
 Basic List 的搜索、工具按钮和响应式排列由 `StarbucksReact.TableToolbar` 负责。页面只能提供 `quickFilters`、`quickFilterValues`、`tableTools.refresh` 和相应回调，不生成 `.dk-page__table-toolbar`、`.dk-page__toolbar-left` 或 `.dk-page__toolbar-right`。
+
+Card List 同样直接复用 `StarbucksReact.TableToolbar` 和已查证的基础组件。页面负责筛选结果、选择集合、Card Grid、单个对象内容和页面级事件；`TableToolbar` 负责筛选、选择摘要、批量操作及其组件状态。不得在页面中复制 Toolbar 的按钮、禁用、折叠菜单或响应式实现。
+
+Card List 可以使用页面专用语义类维护 Card 容器、媒体、内容、元数据、选择入口、操作区和响应式网格，但这些结构仍属于页面模板，不得声明或导出为公共 `CardListPage`、`CheckCard` 或 Card API。Card Body 不隐式改变选择；选择只能由具有明确可访问名称的 Selection Control 触发。
+
+`examples/multi-select-card-list.html` 是 Card List 的只读 Golden Example。生成结果只能参考其能力边界，不复制其中的商品数据、默认选择、页面私有素材或实现代码，也不得写回 Golden。
 
 ## Header 与行操作结构契约
 

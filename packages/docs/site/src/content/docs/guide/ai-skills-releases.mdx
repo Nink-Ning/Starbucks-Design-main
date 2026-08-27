@@ -1,0 +1,126 @@
+---
+title: 产品经理启动包
+description: 查看 DesignKit 产品经理启动包的当前能力、版本对比和可信下载记录。
+sidebar:
+  order: 5
+---
+
+产品经理启动包面向产品经理和非开发者，用于通过 AI Agent 生成单个 HTML Demo，支持页面方案验证、产品评审和交互沟通。
+
+<div class="sb-ai-skill-page-marker" aria-hidden="true"></div>
+
+## 当前版本
+
+<div class="sb-starter-current-version">
+  <div class="sb-starter-current-version__cover" aria-hidden="true">
+    <svg viewBox="0 0 48 48"><path d="M9 15.5 24 8l15 7.5v17L24 40 9 32.5v-17Z" /><path d="m9 15.5 15 7.7 15-7.7M24 23.2V40M16.5 11.8l15 7.6" /></svg>
+    <strong>V1-r2</strong>
+  </div>
+  <div class="sb-starter-current-version__content">
+    <div class="sb-starter-current-version__eyebrow">
+      <span class="sb-ai-skill-kicker">更新时间：2026-08-27</span>
+      <span class="sb-starter-current-version__status"><span aria-hidden="true"></span>internal-trial</span>
+    </div>
+    <div class="sb-starter-current-version__title"><h3>DesignKit Starter V1-r2</h3><span class="sb-starter-current-version__new">NEW</span></div>
+    <p>通过 AI Agent 使用 DesignKit 页面模板、Golden Example 和真实组件，快速生成和评审 HTML Demo，无需搭建前端工程环境。R2 让页面生成更稳定、更接近真正的 DesignKit，但没有扩展 R1 的能力范围。</p>
+    <a class="sb-ai-skill-download-button sb-ai-skill-download-button--primary" href="../../downloads/designkit-starter-v1-r2.zip" download="designkit-starter-v1-r2.zip"><svg class="sb-ai-skill-download-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v8m0 0 3-3m-3 3L5 6M2 12.5V14h12v-1.5" /></svg>下载当前版本</a>
+  </div>
+</div>
+
+:::caution[预览版本边界]
+V1-r2 用于页面方案验证、产品评审和沟通。AI 生成的 Demo 仍需在浏览器中检查，不应直接作为生产交付。
+:::
+
+## 支持能力
+
+| 能力分类 | 支持内容 |
+| --- | --- |
+| 页面能力 | 数据列表和卡片列表；<br />创建表单和编辑表单；<br />以信息展示为主的基础详情页。 |
+| 交互能力 | 本地搜索和轻量快捷筛选；<br />卡片列表当前结果内的多选、全选和本地批量操作；<br />行操作、卡片操作和危险操作确认。 |
+| 页面体验 | Light / Dark 基础规则；<br />响应式布局基础规则；<br />基础无障碍支持。 |
+| AI 生成能力 | 根据需求自动选择已批准的页面模板；<br />自动查找并参考对应的 Golden Example；<br />使用真实 DesignKit 组件，而不是自行模仿样式；<br />遵循模板结构并执行基础质量检查；<br />使用固定 Runtime、单 HTML Demo 和本地 Mock。 |
+
+其中主题、响应式、可访问性和视觉一致性仍需对每个生成页面实际验证；没有检查证据时不能标记为已通过。
+
+## 当前暂不支持
+
+以下项目明确不属于当前产品经理 Starter：
+
+- Dashboard；
+- Result Page；
+- Navigation Shell；
+- React/Vue 工程与组件 API 集成；
+- 真实 Export；
+- 真实后端/API、权限系统、上传和生产部署；
+- Capability Registry 中标记为 `OUT` 或未登记的能力。
+
+## 版本能力对比
+
+状态说明：**支持**表示已有明确能力证据；**基础支持**表示范围有限；**增强**表示在原能力边界内提高保真、绑定或验证；**暂不支持**表示明确不在范围内；**未知**表示历史证据不足。
+
+<div class="sb-ai-skill-table-scroll" role="region" aria-label="DesignKit Starter 版本能力对比" tabindex="0">
+  <table>
+    <thead><tr><th scope="col">能力</th><th scope="col">V1</th><th scope="col">V1-r1</th><th scope="col">V1-r2</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Basic List</th><td>基础支持</td><td>支持</td><td>支持 · 组合增强</td></tr>
+      <tr><th scope="row">Card List</th><td>暂不支持</td><td>支持</td><td>支持 · 保真增强</td></tr>
+      <tr><th scope="row">Basic Form Create</th><td>基础支持</td><td>支持</td><td>支持 · 保真增强</td></tr>
+      <tr><th scope="row">Basic Form Edit</th><td>基础支持</td><td>支持</td><td>支持 · 同模板族增强</td></tr>
+      <tr><th scope="row">Basic Detail</th><td>基础支持</td><td>支持</td><td>支持 · 只读约束增强</td></tr>
+      <tr><th scope="row">TableToolbar</th><td>暂不支持</td><td>支持</td><td>支持 · Runtime 绑定增强</td></tr>
+      <tr><th scope="row">Quick Filter / Search</th><td>基础支持 · 本地关键词</td><td>基础支持 · 轻量筛选</td><td>增强 · 仍限轻量筛选</td></tr>
+      <tr><th scope="row">Selection / Select All</th><td>暂不支持</td><td>基础支持 · Card List 当前结果</td><td>增强 · 边界不变</td></tr>
+      <tr><th scope="row">Batch Actions</th><td>暂不支持</td><td>基础支持 · 本地 Demo</td><td>增强 · 边界不变</td></tr>
+      <tr><th scope="row">Row / Card Actions</th><td>基础支持 · 行操作</td><td>支持</td><td>支持 · 组合增强</td></tr>
+      <tr><th scope="row">Danger Confirmation</th><td>未知</td><td>支持</td><td>支持 · 交互约束增强</td></tr>
+      <tr><th scope="row">Light / Dark</th><td>基础支持</td><td>基础支持</td><td>增强 · 仍需逐页验证</td></tr>
+      <tr><th scope="row">Responsive</th><td>基础支持</td><td>基础支持</td><td>增强 · 仍需逐页验证</td></tr>
+      <tr><th scope="row">Accessibility</th><td>未知</td><td>基础支持</td><td>基础支持 · 验证增强</td></tr>
+      <tr><th scope="row">AI Template Decision</th><td>未知</td><td>支持</td><td>支持 · 使用契约增强</td></tr>
+      <tr><th scope="row">Golden Example Mapping</th><td>基础支持</td><td>支持</td><td>支持 · 映射约束增强</td></tr>
+      <tr><th scope="row">Implementation / Runtime Binding</th><td>基础支持</td><td>基础支持</td><td>增强</td></tr>
+      <tr><th scope="row">Validation / Evidence</th><td>基础支持</td><td>支持</td><td>支持 · 验证矩阵增强</td></tr>
+      <tr><th scope="row">Dashboard / Result / Navigation</th><td>暂不支持</td><td>暂不支持</td><td>暂不支持</td></tr>
+      <tr><th scope="row">真实 Export / 后端 API / React/Vue 工程</th><td>暂不支持</td><td>暂不支持</td><td>暂不支持</td></tr>
+    </tbody>
+  </table>
+</div>
+
+R2 的“增强”表示更严格地复用模板结构、已批准组件和交互归属，并补充验证矩阵；它没有把 R1 未登记的能力变为可用。
+
+## 版本历史
+
+### DesignKit Starter V1-r2
+
+| 项目 | 内容 |
+| --- | --- |
+| 版本 | V1-r2 |
+| 状态 | `internal-trial` |
+| 更新时间 | 2026-08-27 |
+| 下载文件 | `designkit-starter-v1-r2.zip` <a class="sb-ai-skill-download-button" href="../../downloads/designkit-starter-v1-r2.zip" download="designkit-starter-v1-r2.zip"><svg class="sb-ai-skill-download-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v8m0 0 3-3m-3 3L5 6M2 12.5V14h12v-1.5" /></svg>立即下载</a> |
+| SHA-256 | `1fcebf2e53658c756c6e6d69eed45c67abb79c48a4800d60877b421c40729203` |
+| 本版重点 | 提升列表、卡片列表、表单和详情页的一致性；AI 会更严格使用真实 DesignKit 组件和批准的模板；创建与编辑保持同一模板逻辑；危险操作使用统一的确认规则，并增加更多一致性检查。 |
+
+### DesignKit Starter V1-r1
+
+| 项目 | 内容 |
+| --- | --- |
+| 版本 | V1-r1 |
+| 状态 | `internal-trial` |
+| 更新时间 | 2026-08-25 |
+| 下载文件 | `designkit-starter-v1-r1.zip` <a class="sb-ai-skill-download-button" href="../../downloads/designkit-starter-v1-r1.zip" download="designkit-starter-v1-r1.zip"><svg class="sb-ai-skill-download-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v8m0 0 3-3m-3 3L5 6M2 12.5V14h12v-1.5" /></svg>立即下载</a> |
+| SHA-256 | `6287895a54ebc0828f9e8250cb05d132ff7712c38fddceb891cfb0126a7302cf` |
+| 本版重点 | 建立统一的能力判断、使用者范围判断、模板与交互选择、Golden Example 对应关系，以及生成结果的验证和证据记录。 |
+
+### DesignKit Starter V1 · Initial Baseline
+
+| 项目 | 内容 |
+| --- | --- |
+| 版本 | V1 |
+| 状态 | `internal-trial` |
+| 更新时间 | 2026-08-07 |
+| 下载文件 | 历史原始包当前不可验证，不提供下载入口 |
+| SHA-256 | 未提供可信的当前校验值 |
+| 本版重点 | 建立基础列表、创建与编辑表单、基础详情页、固定 Runtime、单 HTML Demo 和本地验证清单。 |
+
+V1 仅保留由历史清单与模板确认的能力基线。当前工作区同名归档不能证明它仍是初始 V1，因此本页不展示可能误导的下载链接或 SHA。

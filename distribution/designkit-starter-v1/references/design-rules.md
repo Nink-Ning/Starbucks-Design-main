@@ -24,6 +24,14 @@
 - 优先使用上下结构；只有当左侧对象选择需要持续可见时才使用左右结构。
 - 页面容器、区块容器和控件内部间距保持稳定，不使用随机间距。
 
+## 列表模板选择
+
+- Basic List 用于以结构化字段扫描、列对齐和跨记录比较为核心的任务。
+- Card List 用于以图片、封面或其他明显视觉特征识别对象，并进行对象选择和管理的任务。
+- 批量操作本身不是选择 Card List 的依据；如果对象不依赖视觉识别，仍优先使用 Basic List。
+- 用户只提出“列表”而没有明确视觉对象需求时，默认使用 Basic List。
+- 当视觉识别与多字段比较同时重要时，先说明 Card List 与 Basic List 的取舍并请求确认。
+
 ## 组件和样式
 
 - 优先使用 `references/component-catalog.md` 中的组件。
@@ -38,9 +46,12 @@
 - 每个页面尽量只有一个视觉主操作。
 - 主操作放在页面标题区域或表单操作区。
 - 次要操作使用默认、文本或下拉操作。
-- Basic List 的搜索和表格工具按钮使用真实 `TableToolbar`；无批量操作时筛选器和 Search 位于 Start，表格工具保持在 End。Starter V1 当前只启用 Search + Refresh，不显示导出、列设置或批量操作占位入口。
+- 以下搜索、工具栏、内容容器和表格行操作规则只适用于 Basic List，不自动应用于 Card List。
+- Basic List 的搜索和表格工具按钮使用真实 `TableToolbar`；无批量操作时筛选器和 Search 位于 Start，表格工具保持在 End。Basic List 当前只启用 Search + Refresh，不显示导出、列设置或批量操作占位入口。
+- Basic List 的 Continuous Data Region 使用模板专属的 `4px 16px 16px`（上、横向、下）内边距；这不是 Universal List Spacing Token。Toolbar 与 Table 之间不附加页面级 gap。
 - 表格“查看、编辑”等页面内行操作使用 `Button type="text"`，并放入 Runtime 提供的 `sbux-table-row-actions` 作用域以获得品牌色；不得为了颜色改用 Link，也不得在页面 CSS 中覆盖 `.arco-btn-text`。
-- 危险操作使用明确文案和危险状态，不使用模糊的“确定”。
+- Card List 批量上架、移动、删除分别绑定 Starter Runtime 的 `IconPlus`、`IconSwap`、`IconDelete`；删除入口默认使用 neutral/default/secondary treatment 并保留确认。Card 外圆角遵循当前 Golden 的 12px 基线，内容区顶部/下方分别为 10px/12px；这些是模板几何关系，不是全局 Token。
+- 危险操作使用明确文案和确认流程，不使用模糊的“确定”；红色保留给 error/status 等语义状态。
 - Loading 时禁用重复提交，并保留用户已经输入的数据。
 - 操作反馈要说明成功、失败和下一步，而不只显示“操作失败”。
 
@@ -73,4 +84,4 @@
 - 权限和敏感数据；
 - 需要后端支持的操作；
 - 影响路由或状态恢复的容器选择；
-- 需求是否超出 V1 三类模板。
+- 需求是否超出 V1 的基础列表、卡片列表、基础表单和基础详情四类模板。

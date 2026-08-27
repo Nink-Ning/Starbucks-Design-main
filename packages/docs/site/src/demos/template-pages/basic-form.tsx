@@ -178,7 +178,7 @@ export default function Demo() {
 
             <FormGridItem span={2} className="sb-basic-form-page__full-row">
               <FormActions>
-                <Button disabled={submitting} onClick={handleReset}>重置</Button>
+                <Button disabled={submitting} onClick={handleReset}>取消</Button>
                 <Button type="primary" htmlType="submit" loading={submitting}>保存</Button>
               </FormActions>
             </FormGridItem>

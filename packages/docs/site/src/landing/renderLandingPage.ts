@@ -1,16 +1,16 @@
 import landingSource from './designkit-landing.html?raw';
 
 const linkTargets = [
-  ['/downloads/designkit-starter-v1.zip', 'downloads/designkit-starter-v1.zip'],
-  ['/guide/product-manager', 'guide/ai-skills-guide/'],
-  ['/guide/designer', 'guide/ai-skills-guide/'],
-  ['/guide/developer', 'guide/ai-skills-guide/'],
-  ['/guide/team-leader', 'guide/ai-skills-guide/'],
+  ['../../public/downloads/designkit-starter-v1-r2.zip', 'downloads/designkit-starter-v1-r2.zip'],
+  ['/guide/product-manager', 'guide/ai-skills-releases/'],
+  ['/guide/designer', 'guide/ai-skills-starters/'],
+  ['/guide/developer', 'guide/ai-skills-developer/'],
+  ['/guide/team-leader', 'guide/ai-skills-starters/'],
   ['/guide', 'guide/ai-skills-guide/'],
   ['/templates', 'templates/data-list/basic-list/'],
   ['/components', 'components/general/button/'],
   ['/skills', 'guide/ai-skills-guide/'],
-  ['/download', 'guide/ai-skills-guide/'],
+  ['/download', 'guide/ai-skills-starters/'],
 ] as const;
 
 const roleIconTargets = [

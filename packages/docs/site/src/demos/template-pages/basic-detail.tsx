@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom'
 import { Button, Dropdown, Menu, Message } from '@sbux/starbucks-design-react'
 import {
   DetailDescriptions,
+  DetailPageHeader,
   DetailPageLayout,
   DetailSection,
 } from '@sbux/starbucks-design-react/pro'
@@ -36,11 +37,15 @@ export default function Demo() {
 
       <div className="sb-basic-detail-page sb-template-page-surface">
         <DetailPageLayout maxWidth={1120}>
-        <div className="sb-basic-detail-page__content">
-          <DetailSection>
-            <DetailDescriptions data={couponBasicInfo} emptyValue={DETAIL_EMPTY_VALUE} />
-          </DetailSection>
-        </div>
+          <DetailPageHeader
+            title="卡券详情"
+            description="查看当前卡券的基本信息和状态。"
+          />
+          <div className="sb-basic-detail-page__content">
+            <DetailSection>
+              <DetailDescriptions data={couponBasicInfo} emptyValue={DETAIL_EMPTY_VALUE} />
+            </DetailSection>
+          </div>
         </DetailPageLayout>
       </div>
     </>

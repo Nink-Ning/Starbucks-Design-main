@@ -1,284 +1,102 @@
 ---
 title: AI 协作指南
-description: 根据你的角色，选择适合的 Starbucks DesignKit 使用方式。
+description: 了解 DesignKit 如何帮助 AI 判断能力、选择启动包并生成可验证的页面方案。
 sidebar:
   order: 1
 ---
 
 <div class="sb-ai-skill-hero">
   <div>
-    <span class="sb-ai-skill-kicker">Starbucks DesignKit AI 协作</span>
-    <h2>按角色选择 DesignKit 使用路径</h2>
+    <span class="sb-ai-skill-kicker">DesignKit AI Collaboration</span>
+    <h2>从需求到可验证的页面方案</h2>
     <div class="sb-ai-skill-hero-copy">
-      Starbucks DesignKit 为产品、设计和开发角色提供不同的规则、模板和工具。先明确目标和交付形式，再让 AI 选择合适的协作路径，减少错误入口和重复实现。
+      DesignKit 是面向 AI Agent 的设计系统协作体系。AI 不只是调用组件，而是先理解任务、确认已登记能力、选择模板，再生成并检查页面。
     </div>
-  </div>
-  <div class="sb-ai-skill-hero-panel" aria-label="AI 协作流程">
-    <span>选择角色</span>
-    <span>描述目标</span>
-    <span>生成结果</span>
-    <span>验证反馈</span>
+    <div class="sb-ai-skill-hero-panel" aria-label="DesignKit AI 协作关键环节">
+      <span class="sb-ai-skill-hero-tag"><span class="sb-ai-skill-hero-tag-icon" aria-hidden="true">✓</span>SKILL</span>
+      <span class="sb-ai-skill-hero-tag"><span class="sb-ai-skill-hero-tag-icon" aria-hidden="true">✓</span>Capability</span>
+      <span class="sb-ai-skill-hero-tag"><span class="sb-ai-skill-hero-tag-icon" aria-hidden="true">✓</span>Decision</span>
+      <span class="sb-ai-skill-hero-tag"><span class="sb-ai-skill-hero-tag-icon" aria-hidden="true">✓</span>Validation</span>
+    </div>
   </div>
 </div>
 
-:::caution[使用边界]
-AI 协作指南负责帮助你分析、生成和检查结果。版本升级、Git 提交、发布和部署都需要单独确认，不会因为使用本指南而自动发生。
-:::
-
-## 选择你的角色
-
-Starbucks DesignKit 不要求所有角色使用同一个入口。请选择最接近当前任务的角色，再按对应方式准备信息和检查结果。
-
-### 产品经理
-
-DesignKit Starter V1 是面向产品经理的零工程环境 Demo 生成包。你不需要安装 Node.js、npm、pnpm 或前端工程环境，就可以把 Starter 目录交给 AI，根据产品需求生成可在浏览器中预览的 HTML Demo。
-
-HTML Demo 内部允许使用固定版本的 React UMD/CDN、Babel 和少量 JavaScript。Starter V1 当前主要用于产品方案验证、评审和需求沟通，不是 React 或 Vue 工程代码生成包，也不是生产级代码。
-
-**适用场景**
-
-- 快速验证基础列表、基础表单和基础详情方案；
-- 准备需求评审或跨团队沟通用的交互 Demo；
-- 在没有前端工程环境的情况下，让 AI 根据本地 Mock 数据生成页面。
-
-**首批支持范围**
-
-- 基础列表页、基础表单页、基础详情页；
-- 本地 Mock 数据；
-- `Normal`、`Loading`、`Empty`、`Error` 状态；
-- 桌面和窄屏布局。
-
-**当前状态**
-
-Starter V1 当前为**内部试用版**。在 Starter Runtime 和浏览器验证完成前，不将其描述为正式发布包。
-
-**入口**
-
-- <a href="../../downloads/designkit-starter-v1.zip" download="designkit-starter-v1.zip">下载 DesignKit Starter V1</a>（内部试用版）；
-- 查看 10 分钟快速开始：**待接入**（Starter 专属 Docs 入口尚未确定）；
-- [查看 Starter V1 支持范围](#starter-v1-支持范围)。
-
-产品经理与 AI 协作时，应说明页面类型、使用角色、核心任务、字段、主要操作和需要验证的状态。先确认方案，再生成 Demo；不要把 Starter 输出当作正式工程代码。
-
-### 设计师
-
-设计师的主要入口是页面模板、设计规范、设计决策和本指南，不需要下载虚构的设计师安装包。
-
-**推荐入口**
-
-- [查看页面模板](../../templates/data-list/basic-list/)；
-- [查看设计规范](../global-style/)；
-- [查看快速开始](../getting-started/)。
-
-设计师可以让 AI 帮助完成：
-
-- 识别页面类型和主要任务；
-- 梳理页面结构、信息层级和核心操作；
-- 将 Figma 元素映射到现有基础组件和业务组件；
-- 判断弹窗、抽屉、侧栏或独立页面等容器形式；
-- 补充 Loading、Empty、Error 和窄屏布局方案；
-- 说明视觉差异、待确认信息和验收重点。
-
-提供 Figma 时，建议同时说明具体页面或节点、使用角色、主任务、关键状态、桌面和窄屏要求，以及需要重点检查的视觉关系。
-
-### React 开发者
-
-React 开发者继续使用 React Skill、React 组件文档、npm 包、Git 仓库和工程级模板，生成可以继续开发的正式 React 工程代码。
-
-React Skill 覆盖当前已发布组件的 API、事件、示例与工程约定。它用于帮助 AI 选择正确的组件和实现方式，能力范围以当前发布内容和真实组件文档为准。
-
-**推荐入口**
-
-- [下载 React Skill](../../skills/starbucks-design-react.zip)；
-- [查看安装与引入](../getting-started/)；
-- 从左侧“基础组件”和“业务组件”目录查看真实 API 与示例。
-
-React 是当前的视觉基准。需要对齐视觉结果时，优先以 Starbucks Design React 当前已完成视觉收敛的版本为准。
-
-### Vue 开发者
-
-Vue 开发者继续使用 Vue Skill、Vue 组件文档、Vue 3 工程规则和 Git 仓库，生成 Vue 3 工程代码。
-
-Vue 组件工程能力可用，视觉一致性仍在持续优化。需要跨框架对照时，请同时检查组件状态、布局细节和实际浏览器效果，不要默认 React 与 Vue 的视觉结果已经完全一致。
-
-**推荐入口**
-
-- [下载 Vue Skill](../../skills/starbucks-design-vue.zip)；
-- [查看安装与引入](../getting-started/)；
-- 从左侧“基础组件”和“业务组件”目录查看 Vue 组件用法与示例。
-
-Vue Preview 不作为产品经理 Starter V1 的主要入口。需要正式交付时，应使用 Vue 3 工程能力并进行实际验证。
-
-## 不同角色如何与 AI 协作
-
-### 先描述目标，再选择交付形式
-
-建议在任务开头提供以下信息：
-
-```text
-使用角色：产品经理 / 设计师 / React 开发者 / Vue 开发者
-页面或功能名称：
-核心任务：
-页面类型：列表 / 表单 / 详情 / 其他
-需要展示的数据：
-主要筛选条件和操作：
-需要验证的状态：Normal / Loading / Empty / Error
-参考页面或 Figma：
-希望的交付形式：Starter Demo / React 工程 / Vue 工程 / 只读分析
-```
-
-### 使用两阶段工作方式
-
-不要在需求尚未确认时直接要求 AI 完成全部实现。推荐先做方案分析，再生成 Demo 或工程代码。
-
-**阶段一：方案分析**
-
-- 识别页面类型和使用角色；
-- 说明页面结构、布局、容器和组件选择；
-- 列出核心操作、状态和响应式策略；
-- 说明已有可复用资产和当前不确定的信息；
-- 给出预计修改文件和验证计划。
-
-**阶段二：生成与验证**
-
-- 按已确认的方案生成 Starter Demo、React 或 Vue 实现；
-- 使用真实组件 API 和确定性的本地 Mock 数据；
-- 检查正常、加载、空数据、错误和窄屏状态；
-- 对照设计目标说明已完成、待确认和未验证的部分。
-
-### 产品经理提示词
-
-```text
-请使用 DesignKit Starter V1 帮我验证一个产品方案。
-页面名称：门店标签管理
-使用角色：运营人员
-核心任务：创建标签、给门店添加标签、查看标签下的门店
-页面类型：基础列表页
-需要展示：标签分组、门店筛选、门店表格、分页和主要操作
-需要验证：Normal、Loading、Empty、Error 和窄屏布局
-请先说明页面结构和关键交互，再生成 HTML Demo，并标记当前尚未完成的浏览器验证。
-```
-
-### 设计师 Figma 提示词
-
-```text
-请根据我提供的 Figma 页面完成只读方案分析。
-请输出页面类型、布局与容器决策、Figma 元素与现有组件的映射、
-页面状态、响应式策略、视觉差异、待确认信息和验收重点。
-本轮只分析，不修改文件；等待确认后再生成 Demo 或工程代码。
-```
-
-### 开发者提示词
-
-```text
-请根据当前 Starbucks Design 组件文档生成 React / Vue 工程页面。
-要求先确认页面结构和可复用组件，再生成实现；使用真实组件 API、
-本地 Mock 数据、明确的状态和响应式策略，并说明测试与浏览器验证计划。
-不要复制已有组件内部能力，也不要修改未批准的文件。
-```
-
-## AI 如何选择页面结构
-
-AI 会先判断页面任务、使用角色和交付形式，再匹配已有页面模板、基础组件和业务组件。常见判断可以参考：
-
-| 需求 | 通常选择 |
-| --- | --- |
-| 简单字段填写 | 基础表单页 |
-| 字段较多且有明确分组 | 分组表单页 |
-| 存在连续步骤和前后依赖 | 分步表单页 |
-| 只修改少量字段 | 优先使用弹窗或抽屉 |
-| 展示为主、编辑为辅 | 优先使用详情页编辑模式 |
-| 搜索、筛选和表格查询 | FilterBar + Table |
-| 独立复杂流程 | 新页面 |
-
-页面模板负责组合已有能力，不复制组件内部的状态、校验、Popup、Portal 或数据适配逻辑。
-
-## Starter 使用流程
-
-产品经理使用 Starter V1 时，建议按以下流程进行：
-
-1. 获取 DesignKit Starter V1 文件包；
-2. 解压并使用 AI 打开 Starter 目录；
-3. 阅读 `START-HERE.md`，了解页面类型、输入方式和输出约定；
-4. 输入产品需求，说明页面类型、字段、主要操作和需要验证的状态；
-5. 让 AI 生成 HTML Demo；
-6. 在浏览器中预览并检查布局、交互和状态；
-7. 根据反馈继续修改和验证。
-
-Starter Runtime 需要浏览器和网络条件。生成的 Demo 应在 Starter 目录约定的运行方式下验证，当前不要承诺 HTML 脱离 Starter 目录后可以独立传播，也不要承诺双击文件一定能够运行。
-
-## Starter V1 支持范围
-
-| 范围 | V1 支持内容 |
-| --- | --- |
-| 页面类型 | 基础列表页、基础表单页、基础详情页 |
-| 数据来源 | 本地 Mock 数据 |
-| 页面状态 | `Normal`、`Loading`、`Empty`、`Error` |
-| 布局 | 桌面布局、窄屏布局 |
-| 视觉基准 | Starbucks Design React 当前已完成视觉收敛的版本 |
-
-## Starter V1 暂不支持
-
-- Vue Preview；
-- React 或 Vue 工程项目；
-- Dashboard、登录页和结果页；
-- 高级 FilterBar；
-- 复杂批量操作和跨页选择；
-- 真实接口和权限系统；
-- 上传、导出和数据持久化；
-- 生产级代码交付。
-
-## Preview Skill 边界
-
-React Preview 和 Vue Preview 可以作为研发或评审时理解 CDN 单页运行方式的参考，但不再作为产品经理 Starter V1 的主要入口。Preview Skill 不能替代正式 React / Vue 工程能力，也不能把 Demo 直接视为生产代码。
-
-## 如何验收 AI 生成结果
-
-至少检查以下内容：
-
-- 页面是否仍然符合产品目标和信息层级；
-- 是否使用了真实的 Starbucks Design 组件和当前 API；
-- Normal、Loading、Empty、Error 是否有清晰表现；
-- 查询、重置、分页、主要操作和错误恢复是否符合预期；
-- 桌面与窄屏布局是否可用，表格滚动是否被限制在合理容器内；
-- React / Vue 实现是否保持等价的用户可见行为；
-- 浏览器控制台是否有相关错误或警告；
-- 哪些内容已验证、待确认或尚未运行。
-
-建议将结果标记为：
-
-- **已完成**：目标范围内的实现和验证均已完成；
-- **有条件完成**：存在已说明的限制或待确认项；
-- **未验证**：代码或 Demo 已生成，但尚未完成必要检查；
-- **阻塞**：缺少必要信息或外部条件，无法继续验证。
-
-## 使用建议
-
-- 产品经理使用 DesignKit Starter V1，聚焦方案验证、评审和需求沟通；
-- 设计师使用页面模板、设计规范和设计决策，聚焦结构、层级和交互方案；
-- React 开发者使用 React Skill、组件文档和 npm 工程能力；
-- Vue 开发者使用 Vue Skill、Vue 3 工程规则和组件文档；
-- 不同角色不要下载同一个包处理所有任务，应根据目标选择对应入口。
-
-## 版本与已知限制
-
-- DesignKit Starter V1 当前为内部试用版，尚未宣称正式发布；
-- Starter V1 当前以 React 视觉基准为准；
-- Vue 视觉一致性仍在持续优化；
-- Runtime 需要浏览器和网络条件，AI 生成结果需要经过浏览器预览和人工检查；
-- Starter V1 只面向产品方案验证、评审和需求沟通，不承诺生产级代码质量；
-- 运行结果以 Starter 目录中的文件、约定和依赖为准，不能把 Demo 当作可独立传播的通用 HTML 文件。
-
-## 常见问题
-
-### 使用 AI 协作需要懂代码吗？
-
-产品经理可以从 Starter V1 开始，不需要前端工程环境；设计师可以从页面模板和设计决策开始。React 和 Vue 工程实现仍需要开发者负责工程接入、测试和发布判断。
-
-### 什么时候使用 Preview Skill？
-
-Preview Skill 只适合作为单页运行方式的参考。产品经理的主要入口是 Starter V1；正式交付应使用 React 或 Vue 工程能力。
-
-### AI 会自动提交或发布吗？
-
-不会。AI 可以分析、生成、检查和报告，但 Git 操作、版本变更、发布和部署必须由用户单独授权。
+## 什么是 DesignKit Starter
+
+DesignKit Starter 是面向产品经理和非开发者的 AI 设计协作启动包。它提供固定 Runtime、页面模板、Capability Registry、Golden Example、设计规则和验证知识，帮助 AI 在已确认的范围内输出单个 HTML Demo。
+
+Starter 适合产品评审、页面探索和交互验证，不是 React/Vue 工程包，也不负责组件 API 集成、真实后端接入或生产部署。
+
+## 从哪里开始
+
+<div class="sb-ai-skill-feature-grid">
+  <section>
+    <span>01</span>
+    <h3>了解 AI 工作方式</h3>
+    <p>查看 AI 如何从请求开始，依次完成 Profile Routing、能力确认、模板决策和 Validation。</p>
+    <p><a href="../ai-skills-usage/">阅读 AI 使用指南</a></p>
+  </section>
+  <section>
+    <span>02</span>
+    <h3>选择启动包</h3>
+    <p>根据使用角色和期望交付物判断应使用产品经理启动包，还是等待后续角色包。</p>
+    <p><a href="../ai-skills-selection/">查看选择方法</a></p>
+  </section>
+  <section>
+    <span>03</span>
+    <h3>管理启动包</h3>
+    <p>集中查看已开放和建设中的启动包，避免从左侧导航按版本寻找入口。</p>
+    <p><a href="../ai-skills-starters/">打开启动包总览</a></p>
+  </section>
+  <section>
+    <span>04</span>
+    <h3>获取当前版本</h3>
+    <p>产品经理启动包当前推荐 V1-r2。页面内同时保留可信的版本能力对比和历史记录。</p>
+    <p><a href="../ai-skills-releases/">查看产品经理启动包</a></p>
+  </section>
+</div>
+
+## 协作链路
+
+<div class="sb-ai-skill-flow" aria-label="DesignKit AI 协作链路">
+  <div class="sb-ai-skill-flow-list" role="list">
+    <div class="sb-ai-skill-flow-item" role="listitem">
+      <span class="sb-ai-skill-flow-index">01</span>
+      <span class="sb-ai-skill-flow-name">SKILL</span>
+      <strong>读取规则</strong>
+      <p>理解 Starter 的范围和协作方式。</p>
+    </div>
+    <div class="sb-ai-skill-flow-item" role="listitem">
+      <span class="sb-ai-skill-flow-index">02</span>
+      <span class="sb-ai-skill-flow-name">Capability</span>
+      <strong>确认能力</strong>
+      <p>只使用 Registry 已登记的能力。</p>
+    </div>
+    <div class="sb-ai-skill-flow-item" role="listitem">
+      <span class="sb-ai-skill-flow-index">03</span>
+      <span class="sb-ai-skill-flow-name">Decision</span>
+      <strong>做出决策</strong>
+      <p>判断模板和页面内交互。</p>
+    </div>
+    <div class="sb-ai-skill-flow-item" role="listitem">
+      <span class="sb-ai-skill-flow-index">04</span>
+      <span class="sb-ai-skill-flow-name">Template</span>
+      <strong>组合页面</strong>
+      <p>按模板边界组织页面结构。</p>
+    </div>
+    <div class="sb-ai-skill-flow-item" role="listitem">
+      <span class="sb-ai-skill-flow-index">05</span>
+      <span class="sb-ai-skill-flow-name">Golden Example</span>
+      <strong>参考示例</strong>
+      <p>对照已确认的组合与层级。</p>
+    </div>
+    <div class="sb-ai-skill-flow-item" role="listitem">
+      <span class="sb-ai-skill-flow-index">06</span>
+      <span class="sb-ai-skill-flow-name">Validation</span>
+      <strong>检查结果</strong>
+      <p>验证功能、响应式和可访问性。</p>
+    </div>
+  </div>
+</div>
+
+如果需求超出 Starter 范围，AI 应先说明边界，不应根据 Golden Example 推断未登记能力，也不应把 HTML Demo 描述为生产交付。

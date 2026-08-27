@@ -4,14 +4,14 @@
   "status": "internal-trial",
   "canonicalPath": "distribution/releases/designkit-starter-v1.zip",
   "docsPublicPath": "packages/docs/site/public/downloads/designkit-starter-v1.zip",
-  "zipSize": 151740,
-  "zipSha256": "a8f78e599fdd917d6a0910ed7d0995cb08aef87902d6cc7a54ded66d48f1436f",
+  "zipSize": 223780,
+  "zipSha256": "cecf8002821d1cafceaf2c289a99d170b4193f0037aa4f73ddbd83b07eb04e8f",
   "packageVersion": "1.1.22",
-  "sourceCommit": "d7f3496b13d0ef96ed48e0d4544de2ba3f378b81",
+  "sourceCommit": "6d885b11262e6fd49d877cd70b60a49a3aee365e",
   "workspaceDirty": true,
   "runtime": {
-    "jsSha256": "09e6d5ccc3b255d25473b8463a5e2943a6516c2fd6b1980ba3002c4e314d7bc3",
-    "cssSha256": "cdae16d0304a180c0c6606b3e35ce0def5487600121ac279ad7ba016e074f4ed"
+    "jsSha256": "b9bdcb4185b796a430144841de030959c5730c2a912cc58557134bca3448bddd",
+    "cssSha256": "f96f234dfb0768ffdcca74b7764ecc24a926fd078a5db74255e8d9780e9564a7"
   },
-  "generatedAt": "2026-08-07T08:16:04Z"
+  "generatedAt": "2026-08-25T10:13:04Z"
 }

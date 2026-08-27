@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
@@ -22,6 +23,9 @@ const pages = [
 ]
 
 const placeholderPages = [
+]
+
+const goldenExamplePages = [
   ['data-list/card-list.mdx', '卡片列表'],
 ]
 
@@ -89,6 +93,135 @@ test('page template docs render completed demos and keep unfinished pages as pla
     assert.doesNotMatch(doc, /<Demo name="template-pages\//)
     assert.doesNotMatch(doc, /内容建设中|API|属性/)
   }
+
+  for (const [docPath, title] of goldenExamplePages) {
+    const doc = await readFile(new URL(docPath, docsDir), 'utf8')
+
+    assert.match(doc, /import TemplatePageBreadcrumb from/)
+    assert.match(doc, /import GoldenExamplePreview from/)
+    assert.match(doc, /<TemplatePageBreadcrumb \/>/)
+    assert.match(doc, new RegExp(`<GoldenExamplePreview title="${title} Golden Example" />`))
+    assert.match(doc, /multi-select-card-list\.html/)
+    assert.match(doc, /tableOfContents:\s*false/)
+    assert.doesNotMatch(doc, /TemplatePagePlaceholder|卡片列表模板预留中/)
+  }
+})
+
+test('card list docs loads the corrected Golden Example and runtime through same-origin preview routes', async () => {
+  const [preview, route, runtimeCssRoute, runtimeJsRoute] = await Promise.all([
+    readFile(new URL('../../components/GoldenExamplePreview.astro', import.meta.url), 'utf8'),
+    readFile(new URL('../../pages/golden-examples/card-list.html.ts', import.meta.url), 'utf8'),
+    readFile(new URL('../../pages/golden-examples/runtime/starbucks-react.css.ts', import.meta.url), 'utf8'),
+    readFile(new URL('../../pages/golden-examples/runtime/starbucks-react.umd.js.ts', import.meta.url), 'utf8'),
+  ])
+
+  assert.match(preview, /golden-examples\/card-list\.html/)
+  assert.match(preview, /data-golden-example-frame/)
+  assert.match(preview, /querySelector<HTMLElement>\('#root'\)/)
+  assert.match(preview, /new ResizeObserver\(resize\)\.observe\(content\)/)
+  assert.match(preview, /new ResizeObserver\(resize\)\.observe\(frame\.parentElement \?\? frame\)/)
+  assert.match(preview, /GOLDEN_EXAMPLE_VIEWPORT_GUTTER = 20/)
+  assert.match(preview, /window\.innerHeight - frameTop - GOLDEN_EXAMPLE_VIEWPORT_GUTTER/)
+  assert.match(preview, /--dk-docs-preview-min-height/)
+  assert.match(preview, /window\.addEventListener\('resize', resize\)/)
+  assert.match(preview, /new MutationObserver\(resize\)\.observe\(content/)
+  assert.match(preview, /doc\.body\.setAttribute\(attribute, 'dark'\)/)
+  assert.match(preview, /attributeFilter: \['data-theme'\]/)
+  assert.doesNotMatch(preview, /stopImmediatePropagation/)
+  assert.match(route, /distribution\/designkit-starter-v1\/examples\/multi-select-card-list\.html\?raw/)
+  assert.match(route, /runtime\/starbucks-react\.css/)
+  assert.match(route, /runtime\/starbucks-react\.umd\.js/)
+  assert.match(route, /designkit-docs-card-list-theme-bootstrap/)
+  assert.match(route, /closest\('\.sb-theme-transition-layer'\)/)
+  assert.match(route, /transitionTheme \|\| docsTheme/)
+  assert.match(route, /filter\(\(rule\) => !\(rule instanceof CSSFontFaceRule\)\)/)
+  assert.match(route, /\.join\('\\\\n'\)/)
+  assert.match(route, /sourceRoot\.outerHTML/)
+  assert.match(route, /window\.stop\(\)/)
+  assert.match(route, /replace\('<head>', `<head>\$\{docsThemeBootstrap\}`\)/)
+  assert.match(route, /replace\('<\/head>', `\$\{docsEmbedStyles\}<\/head>`\)\s*\.replace\('<head>', `<head>\$\{docsThemeBootstrap\}`\)/)
+  assert.match(route, /bodyObserver\.observe\(document\.documentElement, \{ childList: true \}\)/)
+  assert.match(route, /useState\(\(\) => new Set\(\)\)/)
+  assert.match(route, /designkit-docs-card-list-embed/)
+  assert.match(route, /--dk-page-max-width:\s*100%/)
+  assert.match(route, /--dk-card-min-width:\s*360px/)
+  assert.match(route, /--dk-page-gutter:\s*16px/)
+  assert.match(route, /repeat\([\s\S]*?auto-fill,[\s\S]*?minmax\(min\(100%, var\(--dk-card-min-width\)\), 1fr\)/)
+  assert.doesNotMatch(route, /repeat\([\s\S]*?auto-fit,[\s\S]*?minmax\(min\(100%, var\(--dk-card-min-width\)\), 1fr\)/)
+  assert.match(route, /\.dk-card-grid\s*\{[\s\S]*?align-content:\s*start;[\s\S]*?align-items:\s*start;[\s\S]*?grid-auto-rows:\s*max-content;/)
+  assert.match(route, /\.dk-page__section\s*\{[\s\S]*?align-content:\s*start;[\s\S]*?min-height:\s*var\(--dk-docs-preview-min-height, 0px\)/)
+  assert.match(route, /\.dk-card\s*\{[\s\S]*?border-radius:\s*12px;/)
+  assert.match(route, /\.dk-card__content\s*\{[\s\S]*?border-top-left-radius:\s*10px;[\s\S]*?border-top-right-radius:\s*10px;[\s\S]*?border-bottom-left-radius:\s*12px;[\s\S]*?border-bottom-right-radius:\s*12px;/)
+  assert.match(route, /body\[arco-theme='dark'\]\s+\.dk-card__price\s*\{[\s\S]*?color:\s*var\(--color-text-1/)
+  assert.doesNotMatch(route, /\.sbux-table-toolbar__operation-button\s*\{/)
+  assert.doesNotMatch(route, /docsArcoIcons/)
+  assert.doesNotMatch(route, /publishIcon|moveIcon|deleteIcon/)
+  assert.doesNotMatch(route, /\.dk-card-toolbar \.dk-toolbar-action-icon\s*\{/)
+  assert.match(route, /@media \(max-width: 920px\)[\s\S]*?\.dk-card-toolbar-row[\s\S]*?flex-wrap:\s*wrap/)
+  assert.doesNotMatch(route, /!important/)
+  assert.match(runtimeCssRoute, /distribution\/designkit-starter-v1\/runtime\/starbucks-react\.css\?raw/)
+  assert.match(runtimeJsRoute, /distribution\/designkit-starter-v1\/runtime\/starbucks-react\.umd\.js\?raw/)
+  assert.doesNotMatch(route, /TemplatePagePlaceholder/)
+})
+
+test('card list template documents its component boundary and responsive rules', async () => {
+  const doc = await readFile(new URL('data-list/card-list.mdx', docsDir), 'utf8')
+
+  const headings = [...doc.matchAll(/<h2>(.*?)<\/h2>/g)].map((match) => match[1])
+  assert.deepEqual(headings, ['页面结构', '使用组件', '设计规则', 'Golden Fidelity Contract'])
+  assert.doesNotMatch(doc, /<p>/)
+
+  assert.match(doc, /不是公共 <code>CardListPage<\/code> 或 <code>CheckCard<\/code> 组件/)
+  assert.match(doc, /Table \/ Basic List/)
+  assert.match(doc, /只有 Selection Control 改变选择状态/)
+  assert.match(doc, /首次进入时默认不选择任何 Card/)
+  assert.match(doc, /Card Actions 与 Batch Actions 独立配置/)
+  assert.match(doc, /More 本身计为一个入口/)
+  assert.match(doc, /至少 14 个中文字符/)
+  assert.match(doc, /当前模板校准值为 360px/)
+  assert.match(doc, /保留当前宽度已经能够容纳的列轨道/)
+  assert.match(doc, /1、2 或 5 张结果仍使用三列卡宽/)
+  assert.match(doc, /不根据当前筛选结果数量重新分配卡片宽度/)
+  assert.match(doc, /至少占满当前首屏剩余高度/)
+  assert.match(doc, /20px 底部 gutter/)
+  assert.match(doc, /首屏剩余空间保留在列表下方/)
+  assert.match(doc, /Card Grid 行高由卡片内容决定并保持顶对齐/)
+  assert.match(doc, /页面内容容器四周统一使用 16px padding/)
+  assert.match(doc, /标题优先单行展示/)
+  assert.match(doc, /Card 四周圆角和内容区下方圆角均为 12px/)
+  assert.match(doc, /内容区顶部圆角为 10px/)
+  assert.match(doc, /直接复用 TableToolbar/)
+  assert.match(doc, /内部 Button 处理启用、禁用和主题样式/)
+  assert.match(doc, /IconPlus/)
+  assert.match(doc, /IconSwap/)
+  assert.match(doc, /IconDelete/)
+  assert.match(doc, /IconMore/)
+  assert.match(doc, /图标按钮/)
+  assert.match(doc, /currentColor/)
+  assert.match(doc, /Toolbar 与 Grid 使用独立响应式策略/)
+  assert.match(doc, /跟随 Docs 亮色或暗色主题/)
+  assert.match(doc, /主题动画层使用已渲染内容的轻量快照/)
+  assert.match(doc, /\.dk-card.*不代表仓库已经发布公共/)
+})
+
+test('card list Golden Example keeps the corrected geometry and title overflow contract', async () => {
+  const golden = await readFile(
+    new URL('../../../../../../distribution/designkit-starter-v1/examples/multi-select-card-list.html', import.meta.url),
+  )
+  const source = golden.toString('utf8')
+  const digest = createHash('sha256').update(golden).digest('hex')
+
+  assert.equal(digest, 'e7cba2cc6976fb6fa7d3a78db2231459b61c28902f4ec5c3ef03e5e14be03dd5')
+  assert.match(source, /\.dk-card\s*\{[\s\S]*?border-radius:\s*12px;/)
+  assert.match(source, /\.dk-card__content\s*\{[\s\S]*?border-radius:\s*10px 10px 12px 12px;/)
+  assert.match(source, /const \{ IconPlus, IconSwap, IconDelete, IconMore \} = window\.arcoicon/)
+  assert.match(source, /key: 'publish',[\s\S]*?icon: <IconPlus \/>/)
+  assert.match(source, /key: 'move',[\s\S]*?icon: <IconSwap \/>/)
+  assert.match(source, /delete: \{ key: 'delete', label: '删除' \}/)
+  assert.doesNotMatch(source, /key: 'delete',[\s\S]*?status:\s*['"]danger['"]/)
+  assert.match(source, /<Popconfirm[\s\S]*?title="确认删除卡片"[\s\S]*?okText="删除"[\s\S]*?cancelText="取消"[\s\S]*?onOk=\{\(\) => removeProducts\(new Set\(\[product\.id\]\)\)\}/)
+  assert.match(source, /type=\{isSelected \? 'text' : 'secondary'\}/)
+  assert.match(source, /\.dk-card__title\s*\{[\s\S]*?overflow:\s*hidden;[\s\S]*?text-overflow:\s*ellipsis;[\s\S]*?white-space:\s*nowrap;/)
 })
 
 test('completed page templates document the shared header action rules', async () => {
@@ -109,7 +242,7 @@ test('completed page templates document the shared header action rules', async (
   const sources = await Promise.all(docsToCheck.map((path) => readFile(new URL(path, docsDir), 'utf8')))
 
   for (const source of sources) {
-    assert.match(source, /左侧面包屑或页面标题、右侧业务核心操作或全局功能操作/)
+    assert.match(source, /左侧(?:有意义的)?面包屑或页面标题、右侧业务核心操作或全局功能操作/)
     assert.match(source, /最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单/)
     assert.match(source, /最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式/)
   }
@@ -143,6 +276,7 @@ test('page template docs hide document chrome and use filled content area', asyn
   assert.match(breadcrumb, /data-template-action-host="basic-list"/)
   assert.match(breadcrumb, /data-template-action-host="filter-list"/)
   assert.match(breadcrumb, /data-template-action-host="tree-filter-list"/)
+  assert.match(breadcrumb, /data-template-action-host="tag-list"/)
   assert.match(breadcrumb, /data-template-action-host="basic-detail"/)
   assert.match(placeholder, /sb-template-page-placeholder/)
   assert.match(placeholder, /预留位/)
@@ -159,12 +293,31 @@ test('page template docs hide document chrome and use filled content area', asyn
   assert.match(demoCss, /\.sb-template-page-breadcrumb\s*\{[\s\S]*?width:\s*100%;/)
   assert.match(demoCss, /\.sb-basic-list-page__breadcrumb-actions\s*\{[\s\S]*?gap:\s*16px;/)
   assert.match(demoCss, /\.sb-filter-list-page__breadcrumb-actions\s*\{[\s\S]*?gap:\s*16px;/)
+  assert.match(demoCss, /\.sb-tag-list-page__breadcrumb-actions\s*\{[\s\S]*?gap:\s*16px;/)
   assert.match(demoCss, /\.sb-demo\[data-demo\^='template-pages\/'\] > \.sb-demo-code\s*\{[\s\S]*?display:\s*none;/)
   assert.match(demoCss, /\.sb-demo\[data-demo='template-pages\/basic-list'\]\s*\{[\s\S]*?background:\s*var\(--bg-color-page\);/)
   assert.match(demoCss, /\.sb-demo\[data-demo='template-pages\/basic-list'\] > \.sb-demo-preview\s*\{[\s\S]*?background:\s*var\(--bg-color-page\);/)
-  assert.doesNotMatch(demoCss, /\.sb-basic-list-page\s*\{[\s\S]*?min-height:\s*calc\(100dvh - var\(--sb-docs-nav-height, 64px\) - 48px\);/)
+  for (const source of [reactBasicList, vueBasicList]) {
+    assert.match(source, /sb-basic-list-page sb-template-page-surface/)
+  }
+  assert.match(demoCss, /\.sb-basic-list-page\.sb-template-page-surface,[\s\S]*?\.sb-tag-list-page\.sb-template-page-surface\s*\{[\s\S]*?align-content:\s*start;[\s\S]*?background:\s*var\(--bg-color-container\);[\s\S]*?border-radius:\s*var\(--border-radius-md\);[\s\S]*?padding-top:\s*var\(--spacing-2\);/)
   assert.match(demoCss, /\.sb-basic-list-page\s*\{[\s\S]*?gap:\s*12px;/)
-  assert.match(demoCss, /\.sb-basic-list-page__module\s*\{[\s\S]*?overflow:\s*hidden;[\s\S]*?border-radius:\s*6px;/)
+  const basicListModuleRule = demoCss.match(/\.sb-basic-list-page__module\s*\{([\s\S]*?)\n\}/)?.[1] ?? ''
+  assert.match(basicListModuleRule, /overflow:\s*hidden;/)
+  assert.doesNotMatch(basicListModuleRule, /background:\s*var\(--bg-color-container\);/)
+  assert.doesNotMatch(basicListModuleRule, /border-radius:\s*6px;/)
+  assert.match(demoCss, /\.sb-basic-list-page__module\s*\{[\s\S]*?padding:\s*0 var\(--spacing-6\) var\(--spacing-6\);/)
+  assert.doesNotMatch(demoCss, /\.sb-basic-list-page__table-module\s*\{[^}]*padding-(?:inline|top):/)
+  assert.match(demoCss, /\.sb-basic-list-page\.sb-template-page-surface\s*\{[\s\S]*?align-content:\s*stretch;/)
+  assert.match(demoCss, /@media \(min-width: 1024px\)[\s\S]*?\.sb-basic-list-page\.sb-template-page-surface\s*\{[\s\S]*?height:\s*calc\(100dvh - var\(--sb-docs-nav-height, 64px\) - 96px\);[\s\S]*?overflow:\s*hidden;/)
+  assert.match(demoCss, /\.sb-basic-list-page__table-module\s*\{[\s\S]*?display:\s*flex;[\s\S]*?flex-direction:\s*column;[\s\S]*?gap:\s*0;/)
+  assert.match(demoCss, /\.sb-basic-list-page__table-viewport\s*\{[\s\S]*?flex:\s*1 1 auto;[\s\S]*?min-height:\s*0;[\s\S]*?overflow:\s*hidden;/)
+  assert.doesNotMatch(demoCss, /\.sb-basic-list-page__table-module > \.arco-table thead/)
+  assert.match(demoCss, /\.sb-basic-list-page__pagination\s*\{[\s\S]*?margin-top:\s*auto;/)
+  assert.match(demoCss, /\.sb-filter-list-page\s*\{[\s\S]*?gap:\s*var\(--spacing-4\);/)
+  assert.match(demoCss, /\.sb-filter-list-page\.sb-template-page-surface\s*\{[\s\S]*?background:\s*var\(--bg-color-page\);[\s\S]*?border-radius:\s*0;[\s\S]*?padding-top:\s*0;/)
+  assert.match(demoCss, /\.sb-filter-list-page__module\s*\{[\s\S]*?background:\s*var\(--bg-color-container\);[\s\S]*?border-radius:\s*6px;/)
+  assert.match(demoCss, /\.sb-filter-list-page__table-module\s*\{[\s\S]*?padding-top:\s*var\(--spacing-2\);/)
   assert.doesNotMatch(demoCss, /\.sb-basic-list-page__toolbar\s*\{/)
   assert.doesNotMatch(demoCss, /\.sb-filter-list-page__toolbar\s*\{/)
   assert.match(demoCss, /\.sb-basic-list-page__row-actions\s*\{[\s\S]*?gap:\s*4px;/)
@@ -201,7 +354,11 @@ test('tag management template is a real React and Vue page composition', async (
   assert.match(doc, /页面模板只负责组合和本地交互，不新增公共标签管理业务组件/)
 
   for (const source of [reactDemo, vueDemo]) {
-    assert.match(source, /客户标签/)
+    assert.match(source, /sb-tag-list-page sb-template-page-surface/)
+    assert.match(source, /sb-tag-list-page__breadcrumb-actions/)
+    assert.match(source, /核心操作[\s\S]*?全局操作/)
+    assert.doesNotMatch(source, /sb-tag-list-page__header/)
+    assert.doesNotMatch(source, /客户标签/)
     assert.match(source, /基础属性/)
     assert.match(source, /会员等级/)
     assert.match(source, /系统标签/)
@@ -224,6 +381,8 @@ test('tag management template is a real React and Vue page composition', async (
 
   assert.match(demoCss, /\.sb-tag-list-page__card\s*\{[\s\S]*?grid-template-columns:\s*268px minmax\(0, 1fr\);[\s\S]*?border-radius:\s*6px;/)
   assert.match(demoCss, /\.sb-tag-list-page__table\s*\{[\s\S]*?overflow-x:\s*auto;/)
+  assert.match(demoCss, /\.sb-tag-list-page\.sb-template-page-surface\s*\{[\s\S]*?align-content:\s*stretch;/)
+  assert.match(demoCss, /\.sb-tag-list-page__pagination\s*\{[\s\S]*?margin-top:\s*auto;[\s\S]*?margin-inline:\s*calc\(-1 \* var\(--spacing-6\)\);[\s\S]*?margin-bottom:\s*calc\(-1 \* var\(--spacing-5\)\);[\s\S]*?padding:\s*var\(--spacing-6\) var\(--spacing-6\) var\(--spacing-5\);[\s\S]*?border-top:\s*1px solid var\(--color-border-1\);/)
   assert.match(demoCss, /\.sb-tag-list-page__group\.is-active\s*\{[\s\S]*?background:\s*var\(--color-primary-light\);/)
   assert.match(demoCss, /\.sb-tag-list-page \.sb-tag-list-page__group-actions \.sb-tag-list-page__group-action,[\s\S]*?background:\s*transparent;[\s\S]*?box-shadow:\s*none;/)
   assert.match(demoCss, /\.sb-tag-list-page__toolbar-right\s*\{[\s\S]*?flex-wrap:\s*nowrap;/)
@@ -263,6 +422,7 @@ test('tree filter list template keeps React and Vue query contracts equivalent',
   assert.doesNotMatch(shared, /from ['"]react['"]|from ['"]vue['"]|JSX|createElement|document\./)
 
   for (const source of [reactDemo, vueDemo]) {
+    assert.match(source, /sb-tree-filter-list-page sb-template-page-surface/)
     assert.match(source, /tree-filter-list\.shared/)
     assert.match(source, /FilterBar/)
     assert.match(source, /submitMode="manual"|submit-mode="manual"/)
@@ -535,7 +695,7 @@ test('shared form layout owns container responsiveness and theme-safe defaults',
     readFile(new URL('../../../../../starbucks-design-vue/src/pro/form-layout/style.less', import.meta.url), 'utf8'),
     readFile(new URL('../../../../../starbucks-design-react/src/pro/style/variables.less', import.meta.url), 'utf8'),
     readFile(new URL('../../../../../starbucks-design-vue/src/pro/style/variables.less', import.meta.url), 'utf8'),
-    readFile(new URL('../../content/docs/guide/ai-skills-guide.mdx', import.meta.url), 'utf8'),
+    readFile(new URL('../../content/docs/guide/ai-skills-selection.mdx', import.meta.url), 'utf8'),
   ])
 
   for (const style of [reactStyle, vueStyle]) {
@@ -563,8 +723,8 @@ test('shared form layout owns container responsiveness and theme-safe defaults',
     assert.match(reactVariables, new RegExp(variable.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
   }
 
-  assert.match(selectionGuide, /只修改少量字段\s*\|\s*优先使用弹窗或抽屉/)
-  assert.match(selectionGuide, /展示为主、编辑为辅\s*\|\s*优先使用详情页编辑模式/)
+  assert.match(selectionGuide, /页面方案、HTML Demo、模板选择或产品评审/)
+  assert.match(selectionGuide, /React\/Vue 工程、组件 API 集成和生产配置不能作为产品经理 Starter 的能力使用/)
 })
 
 test('basic list template is a real React and Vue page composition', async () => {
@@ -580,11 +740,16 @@ test('basic list template is a real React and Vue page composition', async () =>
   assert.match(doc, /<div class="sb-template-docs-component-list">/)
   assert.match(doc, /<\/section>/)
   assert.match(doc, /页面模板负责组合，不重复实现业务组件内部能力/)
+  assert.match(doc, /具体 List padding 依 Profile、Template 和已批准的 spacing evidence 决定/)
+  assert.match(doc, /连续 Data Region/)
+  assert.match(doc, /选择型筛选.*Search.*Utility Actions/)
+  assert.match(doc, /sbux-table-row-actions/)
   assert.match(doc, /<code>TableToolbar<\/code>/)
   assert.doesNotMatch(doc, /TemplatePagePlaceholder/)
   assert.doesNotMatch(doc, /基础列表用于展示标准数据列表页面的组合方式/)
 
   for (const source of [reactDemo, vueDemo]) {
+    assert.match(source, /sb-basic-list-page sb-template-page-surface/)
     assert.doesNotMatch(source, /FilterBar/)
     assert.doesNotMatch(source, /FilterFieldSchema|\bFilterValue\b|filterStores|draftValues|activeValues/)
     assert.match(source, /const initialStores: StoreRecord\[\]/)
@@ -609,9 +774,16 @@ test('basic list template is a real React and Vue page composition', async () =>
     assert.match(source, /downloadCsv/)
     assert.match(source, /viewMode/)
     assert.match(source, /createStore/)
-    assert.match(source, /const pageSize = 10/)
+    assert.match(source, /const pageSize = 20/)
+    const initialStoreBlock = source.match(/const initialStores: StoreRecord\[\] = \[([\s\S]*?)\n\];/)
+    assert.ok(initialStoreBlock)
+    assert.equal((initialStoreBlock[1].match(/\{ id:/g) ?? []).length, 20)
     assert.match(source, /fixed:\s*'left'/)
+    assert.match(source, /sb-basic-list-page__table-viewport/)
+    assert.match(source, /ResizeObserver/)
+    assert.match(source, /scroll=\{\{ x: 1160, y: tableBodyHeight \}\}|:scroll="\{ x: 1160, y: tableBodyHeight \}"/)
     assert.match(source, /sb-basic-list-page__row-actions/)
+    assert.match(source, /aria-label=.*record\.name|:aria-label=.*record\.name/)
     assert.match(source, /size=\{4\}|:size="4"/)
     assert.match(source, /Select/)
     assert.match(source, /aria-label="页面状态"/)
@@ -643,10 +815,12 @@ test('filter list template keeps the current filter-enabled basic list compositi
 
   assert.match(doc, /<Demo name="template-pages\/filter-list" \/>/)
   assert.match(doc, /筛选区直接调用业务组件 <code>FilterBar<\/code>/)
+  assert.match(doc, /筛选区卡片与顶部面包屑保持 16px 间距/)
   assert.match(doc, /<code>TableToolbar<\/code>/)
   assert.doesNotMatch(doc, /TemplatePagePlaceholder/)
 
   for (const source of [reactDemo, vueDemo]) {
+    assert.match(source, /sb-filter-list-page sb-template-page-surface/)
     assert.match(source, /FilterBar/)
     assert.match(source, /TableToolbar/)
     assert.match(source, /submitMode="manual"|submit-mode="manual"/)
@@ -717,6 +891,6 @@ test('detail and form demos share the desktop surface height rule', async () => 
     assert.match(source, /sb-template-page-surface/)
   }
   assert.match(styles, /\.sb-template-page-surface\s*\{[\s\S]*?min-height:\s*0;/)
-  assert.match(styles, /@media \(min-width: 1024px\)[\s\S]*?\.sb-template-page-surface\s*\{[\s\S]*?min-height:\s*calc\(100dvh - var\(--sb-docs-nav-height, 64px\) - 48px\);/)
+  assert.match(styles, /@media \(min-width: 1024px\)[\s\S]*?\.sb-template-page-surface\s*\{[\s\S]*?min-height:\s*calc\(100dvh - var\(--sb-docs-nav-height, 64px\) - 96px\);/)
   assert.doesNotMatch(styles, /\.sb-basic-list-page\s*\{[\s\S]*?min-height:\s*calc\(100dvh/)
 })

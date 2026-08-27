@@ -14,7 +14,7 @@
     </div>
   </Teleport>
 
-  <div class="sb-basic-list-page">
+  <div class="sb-basic-list-page sb-template-page-surface">
     <section class="sb-basic-list-page__module sb-basic-list-page__table-module">
       <TableToolbar
         :selected-count="selectedRowKeys.length"
@@ -46,38 +46,40 @@
       </Result>
 
       <template v-else>
-        <Table
-          row-key="id"
-          :columns="visibleColumns"
-          :data="pageData"
-          :loading="isLoading"
-          :pagination="false"
-          :scroll="{ x: 1160 }"
-          :row-selection="rowSelection"
-          v-model:selectedKeys="selectedRowKeys"
-        >
-          <template #status="{ record }">
-            <Tag :color="statusColor(record.status)">{{ statusLabel(record.status) }}</Tag>
-          </template>
-          <template #type="{ record }">{{ typeLabel(record.type) }}</template>
-          <template #city="{ record }">{{ record.region }} / {{ record.city }}</template>
-          <template #actions>
-            <Space class="sb-basic-list-page__row-actions sbux-table-row-actions" :size="4">
-              <Button type="text" size="mini">查看</Button>
-              <Button type="text" size="mini">编辑</Button>
-              <Dropdown>
-                <Button type="text" size="mini"><template #icon><IconMore /></template></Button>
-                <template #content>
-                  <Doption>复制门店</Doption>
-                  <Doption>停用门店</Doption>
-                </template>
-              </Dropdown>
-            </Space>
-          </template>
-          <template #empty>
-            <Empty description="暂无符合条件的门店" />
-          </template>
-        </Table>
+        <div ref="tableViewport" class="sb-basic-list-page__table-viewport">
+          <Table
+            row-key="id"
+            :columns="visibleColumns"
+            :data="pageData"
+            :loading="isLoading"
+            :pagination="false"
+            :scroll="{ x: 1160, y: tableBodyHeight }"
+            :row-selection="rowSelection"
+            v-model:selectedKeys="selectedRowKeys"
+          >
+            <template #status="{ record }">
+              <Tag :color="statusColor(record.status)">{{ statusLabel(record.status) }}</Tag>
+            </template>
+            <template #type="{ record }">{{ typeLabel(record.type) }}</template>
+            <template #city="{ record }">{{ record.region }} / {{ record.city }}</template>
+            <template #actions="{ record }">
+              <Space class="sb-basic-list-page__row-actions sbux-table-row-actions" :size="4">
+                <Button type="text" size="mini" :aria-label="`查看 ${record.name}`">查看</Button>
+                <Button type="text" size="mini" :aria-label="`编辑 ${record.name}`">编辑</Button>
+                <Dropdown @select="handleRowAction($event, record)">
+                  <Button type="text" size="mini" :aria-label="`${record.name} 更多操作`"><template #icon><IconMore /></template></Button>
+                  <template #content>
+                    <Doption>复制门店</Doption>
+                    <Doption>停用门店</Doption>
+                  </template>
+                </Dropdown>
+              </Space>
+            </template>
+            <template #empty>
+              <Empty description="暂无符合条件的门店" />
+            </template>
+          </Table>
+        </div>
         <div class="sb-basic-list-page__pagination">
           <Pagination
             :total="total"
@@ -151,7 +153,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, getCurrentInstance, ref, watch } from 'vue';
+import { computed, getCurrentInstance, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { Modal, TableToolbar } from '@sbux/starbucks-design-vue';
 import type {
   TableToolbarAction,
@@ -235,7 +237,7 @@ const cityOptions = [
   },
 ];
 
-const pageSize = 10;
+const pageSize = 20;
 const quickFilters: TableToolbarQuickFilter[] = [
   { type: 'search', name: 'keyword', placeholder: '搜索门店名称或编号' },
 ];
@@ -246,6 +248,17 @@ const operationActions: TableToolbarAction[] = [
 const moreActions: TableToolbarAction[] = [
   { key: 'clear', label: '清除选择', icon: IconCloseCircle, requiresSelection: true },
 ];
+
+const handleRowAction = (key: string, record: StoreRecord) => {
+  if (key === 'archive') {
+    Modal.warning({
+      title: '确认停用门店？',
+      content: `将停用“${record.name}”，该操作需要再次确认。`,
+      okText: '确认',
+      cancelText: '取消',
+    });
+  }
+};
 
 const initialStores: StoreRecord[] = [
   { id: '1', code: 'SH-001', name: '上海静安嘉里中心店', region: '华东', city: '上海', cityValue: 'shanghai', type: 'reserve', status: 'open', openedAt: '2020-05-18', manager: 'Nink', updatedAt: '2026-07-24 10:30' },
@@ -264,6 +277,10 @@ const initialStores: StoreRecord[] = [
   { id: '14', code: 'SU-018', name: '苏州工业园区店', region: '华东', city: '苏州', cityValue: 'suzhou', type: 'standard', status: 'open', openedAt: '2023-02-11', manager: 'Mark', updatedAt: '2026-07-13 15:02' },
   { id: '15', code: 'TJ-017', name: '天津滨海文化中心店', region: '华北', city: '天津', cityValue: 'tianjin', type: 'delivery', status: 'closed', openedAt: '2019-07-07', manager: 'Cora', updatedAt: '2026-07-12 13:25' },
   { id: '16', code: 'SH-033', name: '上海徐家汇港汇店', region: '华东', city: '上海', cityValue: 'shanghai', type: 'standard', status: 'open', openedAt: '2017-09-16', manager: 'Will', updatedAt: '2026-07-11 18:16' },
+  { id: '17', code: 'HZ-036', name: '杭州武林广场店', region: '华东', city: '杭州', cityValue: 'hangzhou', type: 'standard', status: 'open', openedAt: '2024-05-20', manager: 'Grace', updatedAt: '2026-07-10 16:42' },
+  { id: '18', code: 'BJ-035', name: '北京三里屯太古里店', region: '华北', city: '北京', cityValue: 'beijing', type: 'reserve', status: 'open', openedAt: '2020-08-08', manager: 'Eric', updatedAt: '2026-07-09 14:18' },
+  { id: '19', code: 'SZ-028', name: '深圳卓悦中心店', region: '华南', city: '深圳', cityValue: 'shenzhen', type: 'delivery', status: 'preparing', openedAt: '2026-11-12', manager: 'Fiona', updatedAt: '2026-07-08 11:36' },
+  { id: '20', code: 'GZ-041', name: '广州北京路店', region: '华南', city: '广州', cityValue: 'guangzhou', type: 'standard', status: 'open', openedAt: '2023-06-30', manager: 'Henry', updatedAt: '2026-07-07 09:54' },
 ];
 
 const columnOptions: Array<{ key: ColumnKey; label: string; fixed?: boolean }> = [
@@ -305,6 +322,9 @@ const refreshing = ref(false);
 const columnModalVisible = ref(false);
 const createModalVisible = ref(false);
 const visibleColumnKeys = ref<ColumnKey[]>(columnOptions.map((option) => option.key));
+const tableViewport = ref<HTMLElement | null>(null);
+const tableBodyHeight = ref(480);
+let tableResizeObserver: ResizeObserver | undefined;
 const newStore = ref<NewStoreForm>({
   code: '',
   name: '',
@@ -336,6 +356,29 @@ const pageData = computed(() => visibleStores.value.slice((current.value - 1) * 
 watch([() => quickFilterValues.value.keyword, viewMode], () => {
   current.value = 1;
   selectedRowKeys.value = [];
+});
+
+function updateTableBodyHeight() {
+  const viewport = tableViewport.value;
+  if (!viewport) return;
+  const headerHeight = Math.ceil(viewport.querySelector('thead')?.getBoundingClientRect().height ?? 41);
+  tableBodyHeight.value = Math.max(160, Math.floor(viewport.clientHeight - headerHeight));
+}
+
+function observeTableViewport() {
+  tableResizeObserver?.disconnect();
+  const viewport = tableViewport.value;
+  if (!viewport) return;
+  tableResizeObserver = new ResizeObserver(updateTableBodyHeight);
+  tableResizeObserver.observe(viewport);
+  updateTableBodyHeight();
+}
+
+onMounted(observeTableViewport);
+onBeforeUnmount(() => tableResizeObserver?.disconnect());
+watch(viewMode, async () => {
+  await nextTick();
+  observeTableViewport();
 });
 
 function statusLabel(status: StoreStatus) {

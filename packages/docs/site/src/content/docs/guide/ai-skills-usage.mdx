@@ -1,0 +1,82 @@
+---
+title: AI 使用指南
+description: 使用 DesignKit Starter V1-r2 与 AI 完成页面方案生成和验证。
+sidebar:
+  order: 2
+---
+
+DesignKit Starter 的目标不是让 AI 直接生成页面，而是先完成范围判断、能力确认和模板选择，再进入实现与验证。
+
+<div class="sb-ai-skill-page-marker" aria-hidden="true"></div>
+
+## 使用前准备
+
+1. 从[产品经理启动包](../ai-skills-releases/)下载当前推荐的 `designkit-starter-v1-r2.zip`。
+2. 解压后将完整目录交给 AI Agent，不要只复制某一个 Skill 或示例文件。
+3. 用自然语言说明页面目标、使用角色、要展示的数据和主要操作。
+
+如果你还不确定应该使用哪个启动包，请先阅读[如何选择启动包](../ai-skills-selection/)。
+
+## 使用流程
+
+<div class="sb-ai-skill-flow sb-ai-skill-flow--compact" aria-label="Starter Package 使用流程">
+  <div class="sb-ai-skill-flow-list" role="list">
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>用户需求</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>AI 判断 Profile</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>Capability Registry</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>Template Decision</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>Interaction Decision</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>Implementation</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>Validation</strong></div>
+  </div>
+</div>
+
+AI 只能实现 Capability Registry 中存在、且当前 Template 允许的能力。Golden Example 用于参考页面结构和交互组合，不能证明某项新能力已经发布。
+
+## 如何描述需求
+
+尽量同时告诉 AI 以下信息：
+
+- 目标：这次需要评审或验证什么；
+- 使用者：谁会使用这个页面；
+- 数据：页面中需要展示哪些关键字段；
+- 操作：用户需要搜索、选择、编辑或执行哪些动作；
+- 边界：是否只需要 HTML Demo，是否明确不需要真实接口。
+
+例如：
+
+> 帮我设计一个商品管理页面，用于产品评审。需要展示商品图片、名称和状态，并验证当前列表内的多选与批量操作。只需要本地 HTML Demo，不接真实接口。
+
+## 推荐场景
+
+### 产品评审
+
+> 帮我设计一个商品管理页面。
+
+适合快速形成可讨论的页面方案，并通过 HTML Demo 对齐信息结构和主要操作。
+
+### 页面探索
+
+> 我要一个运营后台列表方案。
+
+适合让 AI 先判断任务范围和页面模板，再给出符合 Starter 边界的方案。
+
+### 交互验证
+
+> 商品需要图片展示和批量操作。
+
+适合让 AI 判断视觉浏览、当前结果选择和本地批量操作应采用哪种已支持的模式，并在生成后执行 Validation 检查。
+
+## 结果检查
+
+生成完成后，至少确认：
+
+- 页面是否采用已登记模板；
+- 操作是否落在该模板允许的范围内；
+- HTML Demo 是否可以在浏览器中打开；
+- 明暗主题和不同宽度下是否仍然可用；
+- 未实际检查的项目是否明确标记为未验证。
+
+:::caution[Starter 边界]
+Starter 不提供 React/Vue 工程开发、组件 API 集成、真实导出、真实后端/API、权限系统或生产部署。超出范围时，AI 应说明边界并停止假设。
+:::

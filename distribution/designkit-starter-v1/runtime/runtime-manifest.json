@@ -1,18 +1,18 @@
 {
   "packageName": "@sbux/starbucks-design-react",
   "packageVersion": "1.1.22",
-  "sourceCommit": "d7f3496b13d0ef96ed48e0d4544de2ba3f378b81",
+  "sourceCommit": "f66b1d46e05ad295834759d113438c9f27a821dd",
   "workspaceDirty": true,
-  "buildTime": "2026-08-07T07:26:23.084Z",
+  "buildTime": "2026-08-24T09:49:59.378Z",
   "reactVersion": "18.3.1",
   "reactDomVersion": "18.3.1",
   "arcoVersion": "2.66.15",
   "jsFile": "starbucks-react.umd.js",
-  "jsSize": 32843,
-  "jsSha256": "09e6d5ccc3b255d25473b8463a5e2943a6516c2fd6b1980ba3002c4e314d7bc3",
+  "jsSize": 42006,
+  "jsSha256": "b9bdcb4185b796a430144841de030959c5730c2a912cc58557134bca3448bddd",
   "cssFile": "starbucks-react.css",
-  "cssSize": 839623,
-  "cssSha256": "cdae16d0304a180c0c6606b3e35ce0def5487600121ac279ad7ba016e074f4ed",
+  "cssSize": 858291,
+  "cssSha256": "f96f234dfb0768ffdcca74b7764ecc24a926fd078a5db74255e8d9780e9564a7",
   "cssSources": [
     "packages/starbucks-design-react/src/starter-runtime.ts",
     "packages/starbucks-design-react/src/components.less",
@@ -37,6 +37,6 @@
     "DetailSection",
     "DetailDescriptions"
   ],
-  "verificationStatus": "BROWSER_CONFIRMED_WITH_THREE_GOLDEN_EXAMPLES_REGRESSION",
-  "verificationNotes": "Runtime smoke confirmed the selected Form and Detail Pro exports, local CSS hit, Detail 1120 max width, desktop multi-column layout, narrow single-column layout, emptyValue normalization, and no blocking console errors. List, Form, and Detail Golden Examples were rechecked through local HTTP preview; Runtime JS/CSS hashes were unchanged."
+  "verificationStatus": "BROWSER_CONFIRMED",
+  "verificationNotes": "Local HTTP browser regression confirmed list, form, and detail rendering; list row actions use the shared brand text Button scope, and page-state controls are positioned in Header actions where applicable."
 }

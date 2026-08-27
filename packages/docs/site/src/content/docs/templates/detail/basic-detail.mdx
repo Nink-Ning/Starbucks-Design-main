@@ -17,7 +17,7 @@ import Demo from '../../../../components/Demo.astro';
 <section class="sb-template-docs-card">
   <section class="sb-template-docs-section">
     <h2>模板定义</h2>
-    <p>基础详情页用于查看和确认一个对象的键值信息，使用单一主要内容容器承载基本信息。</p>
+    <p>基础详情页是 focused read-only object page template，用于查看和确认一个对象的键值信息，使用单一主要内容容器承载基本信息。</p>
     <p>本模板是页面组合参考，不是公共 <code>BasicDetailTemplate</code> 组件。</p>
   </section>
 
@@ -38,7 +38,7 @@ import Demo from '../../../../components/Demo.astro';
   <section class="sb-template-docs-section">
     <h2>页面结构</h2>
     <ul>
-      <li>页面级操作位于面包屑右侧，保持与页面模板导航同一层级。</li>
+      <li>页面包含 DetailPageHeader；当详情页从父级列表或对象进入时，使用有意义的父级 Breadcrumb，不根据 URL 深度机械生成。</li>
       <li>基本信息位于唯一的主要内容容器中，保持内容聚焦。</li>
       <li>详情字段使用 <code>DetailDescriptions</code>，长字段通过显式 span 跨列。</li>
       <li>空字符串、null、undefined 和旧数据中的 <code>--</code> 在示例层统一显示为 <code>—</code>。</li>
@@ -51,6 +51,7 @@ import Demo from '../../../../components/Demo.astro';
     <div class="sb-template-docs-component-group">
       <strong>详情布局能力</strong>
       <div class="sb-template-docs-component-list">
+        <code>DetailPageHeader</code>
         <code>DetailPageLayout</code>
         <code>DetailSection</code>
         <code>DetailDescriptions</code>
@@ -73,10 +74,10 @@ import Demo from '../../../../components/Demo.astro';
       <li>操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
       <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
       <li>基础详情页只保留基本信息，不把字段拆成独立 Card。</li>
-      <li>详情页布局宽度默认为流式宽度，不继承表单页的 1120px 最大宽度。</li>
-      <li>详情内容最大宽度与基础表单保持一致；桌面使用 2 列，小于等于 720px 自动收敛为 1 列。</li>
+      <li>详情页保持 focused read-only object boundary；Starter Basic Detail 不因 Docs Full 的多区块详情扩展而升级为复杂 Detail variant。</li>
+      <li>详情内容使用模板批准的最大宽度和列策略；桌面使用 2 列，小于等于 720px 自动收敛为 1 列。</li>
       <li>长编号、英文名称和时间范围需要显式设置 span，并允许 value 自然换行。</li>
-      <li>页面模板只负责组合，不承担接口、权限、字段注册和数据状态管理。</li>
+      <li>页面模板只负责组合，不承担接口、权限、字段注册和数据状态管理；Edit 入口是 workflow transition，不改变 Detail 的只读契约。</li>
     </ol>
   </section>
 

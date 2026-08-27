@@ -1240,26 +1240,51 @@ html[data-framework='vue']
   font-family: var(--font-family);
 }
 
+.sb-basic-list-page.sb-template-page-surface {
+  align-content: stretch;
+  background: var(--bg-color-container);
+  border-radius: var(--border-radius-md);
+  padding-top: var(--spacing-2);
+}
+
+@media (min-width: 1024px) {
+  .sb-basic-list-page.sb-template-page-surface {
+    height: calc(100dvh - var(--sb-docs-nav-height, 64px) - 96px);
+    overflow: hidden;
+  }
+}
+
 .sb-basic-list-page__module {
   min-width: 0;
   overflow: hidden;
-  background: var(--bg-color-container);
-  border-radius: 6px;
 }
 
 .sb-basic-list-page__module {
-  padding: var(--spacing-6);
+  padding: 0 var(--spacing-6) var(--spacing-6);
 }
 
 .sb-basic-list-page__table-module {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 0;
+}
+
+.sb-basic-list-page__table-viewport {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sb-basic-list-page__table-viewport > .arco-table,
+.sb-basic-list-page__table-viewport > .arco-v-table {
+  min-height: 0;
 }
 
 .sb-basic-list-page__pagination {
   display: flex;
   justify-content: flex-end;
   min-width: 0;
+  margin-top: auto;
   padding-top: var(--spacing-2);
 }
 

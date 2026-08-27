@@ -14,6 +14,10 @@
 
   <div class="sb-basic-detail-page sb-template-page-surface">
     <DetailPageLayout :max-width="1120">
+      <DetailPageHeader
+        title="卡券详情"
+        description="查看当前卡券的基本信息和状态。"
+      />
       <div class="sb-basic-detail-page__content">
         <DetailSection>
           <DetailDescriptions :data="couponBasicInfo" :empty-value="DETAIL_EMPTY_VALUE" />
@@ -27,6 +31,7 @@
 import { Message } from '@sbux/starbucks-design-vue'
 import {
   DetailDescriptions,
+  DetailPageHeader,
   DetailPageLayout,
   DetailSection,
 } from '@sbux/starbucks-design-vue/pro'
