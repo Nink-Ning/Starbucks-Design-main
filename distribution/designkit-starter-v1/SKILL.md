@@ -74,7 +74,7 @@ Evidence Record
 6. 读取 [Default Application Shell Contract](references/application-shell.md)，在 Template Decision 后解析 `default`、`content-only` 或 `none`；没有用户覆盖时使用 `default`。
 7. 读取 [Implementation Binding Contract](references/implementation-binding-contract.md)，将已批准的 Runtime、图标和主题绑定到实际 HTML。
 8. 需要选择、批量操作、More 或操作范围判断时读取 Interaction Pattern。
-9. 读取 Golden Mapping；页面 Template 的 Golden 只作为只读组合参考，Default Application Shell 只使用 `IMPLEMENTATION REFERENCE` 和后续 test-only fixture strategy。
+9. 读取 Golden Mapping；页面 Template 的 Golden 只作为只读组合参考，Default Application Shell 只使用 `IMPLEMENTATION REFERENCE`、test-only fixture strategy 和 package-only clean-room evidence。
 10. 按 Validation Contract 确定适用检查和 Pass Criteria。
 11. 按 Evidence Model 记录实际 Method、Evidence Location、Result 和未验证项。
 

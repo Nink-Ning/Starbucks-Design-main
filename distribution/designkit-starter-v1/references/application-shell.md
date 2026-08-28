@@ -60,11 +60,10 @@ Brand Top Navigation
 
 ## 4. Top Navigation Binding
 
-Top 使用 Runtime `StarbucksReact.Menu` 并遵循 Docs Menu“品牌色模式导航”的批准结构。右侧顺序固定为：
+Top 使用 Runtime `StarbucksReact.Menu` 并遵循 Docs Menu“品牌色模式导航”的批准结构。左侧 Brand / System Region 包含真实 System Switch（Store / System Switch）；右侧顺序固定为：
 
 ```text
-Store / System Switch
-    → Notification
+Notification
     → Theme Toggle
     → Divider
     → Avatar / User
@@ -76,6 +75,8 @@ Theme Toggle 必须位于 Notification 右侧、Divider / User 左侧。
 - `OPTIONAL / EXAMPLE-ONLY`：secondary system-switch text、long menu labels、demo-specific utility text。
 
 窄宽度只允许截断 optional text 或隐藏 example-only label，不得隐藏 required identity/global actions，也不得改变 Menu 视觉模式。
+
+Default Shell 的 Brand / System Region 与 Side 使用同一份 collapsed state：expanded 时 Top 与 Side 均为 `260px`，collapsed 时均为 `56px`；collapsed 只保留 Logo，expanded 恢复 system name 和 System Switch。System Switch 使用批准的 Runtime `Cascader` / trigger 行为，不实现第二套导航状态。
 
 ## 5. Side Navigation Binding
 
@@ -130,7 +131,7 @@ Starter 的最小 localStorage contract：
 
 如果 Runtime component constraints 与受限 fallback 冲突，停止并标记 `RESPONSIVE CONTRACT BLOCKED`，不得发明新组件。
 
-后续 test-only composition fixture 必须验证 `1280px`、`768px`、`390px`，且 Light/Dark 下 document-level overflow 为 `NONE`，Top/Side/Main 可用。现有 Docs Demo clipping 不是 Starter `PASS` evidence。
+test-only composition fixture 和最终 Starter ZIP 的 package-only clean-room 必须验证 `1280px`、`768px`、`390px`，且 Light/Dark 下 document-level overflow 为 `NONE`，Top/Side/Main 可用。现有 Docs Demo clipping 不是 Starter `PASS` evidence。
 
 ## 10. Shell / Template Ownership
 
@@ -143,6 +144,8 @@ Starter 的最小 localStorage contract：
 | Shell responsive relationship | Pagination、page state、Mock data、page interaction |
 
 Shell wraps Template，不能改变 Template anatomy、internal spacing、Toolbar anatomy 或 Breadcrumb policy。Basic List 的 `4px / 16px / 16px` Continuous Data Region inset 仍由 Basic List Template 拥有。
+
+Default Shell Main outer layout uses fixed `24px` horizontal padding at `1280px`、`768px` 和 `390px`，并保持 `min-width: 0` 与 page `width: 100%`；不通过 max-width 缩窄可用内容区。Basic List 的 `4px / 16px / 16px` inset 仍由 Template 自身拥有。
 
 Root List 没有 meaningful IA 时不显示 Breadcrumb；Create / Edit / Detail 存在真实父级关系时可以显示。Side Navigation 存在不等于 Breadcrumb 必需。
 
@@ -174,7 +177,7 @@ Starter 仍不支持：
 
 分别验证：Shell Mode Decision、Shell Implementation Provenance、Top Menu Fidelity、Side Menu Fidelity、Theme Toggle Behavior、Theme Scope、Responsive Shell、Shell / Template Ownership、Accessibility、No Navigation Capability Leakage。
 
-本阶段只有 Knowledge / Projection contract tests，不创建或验证 Shell HTML。后续 fixture 完成前，Shell browser Theme、Responsive 和 Interaction evidence 为 `UNVERIFIED`。
+R2-R.4 已通过 test-only composition fixture 和最终 Starter ZIP 的 package-only clean-room 记录 Shell browser Theme、Responsive、Interaction 和 ownership evidence；该 fixture 仍不是 Golden。
 
 ## 14. Implementation References
 
@@ -182,6 +185,6 @@ Starter 仍不支持：
 - Side：Docs Menu / “缩起内嵌菜单”；
 - status：`IMPLEMENTATION REFERENCE`；
 - Golden：`None`；
-- validation：后续 test-only composition fixture。
+- validation：test-only composition fixture + final ZIP package-only clean-room evidence。
 
 Implementation Reference 不是 Starter Golden，不得修改或重新解释四个现有 Golden。

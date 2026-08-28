@@ -9,6 +9,7 @@
 请遵守 DesignKit Starter V1：
 - 先根据当前文件和对应模板确认页面类型，并在修改中保持该模板类型；
 - 读取 `references/application-shell.md`，保持当前 `default` / `content-only` / `none`；refinement 不得重新设计 Shell 或自行改变 Shell Mode；
+- 如果当前页面使用 `default`，保持 Top 的 System Switch 与 Side 的 collapse 共享状态：展开为 260px，收起为 56px 且顶部只保留 Logo；不得把已有 Shell 改成另一套导航；
 - 不得把 Basic List 与 Card List 自动互相转换；如果修改目标确实要求换模板，先说明结构和行为影响并等待确认；
 - 保持单文件 HTML 输出；
 - 保持固定 CDN 版本和加载顺序；

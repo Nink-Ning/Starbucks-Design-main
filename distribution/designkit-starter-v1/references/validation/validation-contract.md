@@ -89,7 +89,7 @@ Runtime Internal Validation
 
 **Check:** Shell Mode、Top action order、Side collapse、target-mode Theme Toggle、whole-page Theme Scope、Shell/Template ownership、Breadcrumb independence、Basic List `4px / 16px / 16px`、Accessibility、Navigation leakage，以及 1280/768/390 document overflow。390px 不得引入 Drawer、Hamburger、Bottom Navigation、Overlay Navigation 或 mobile-specific new pattern。
 
-**Evidence Required:** 本阶段只要求 Knowledge/Projection contract tests。后续实现必须使用 test-only composition fixture，完成 Light/Dark Browser Validation、1280/768/390 viewport/overflow records 和 keyboard walk-through。Fixture 不是 Golden，Docs clipping 不是 Starter evidence。
+**Evidence Required:** 需要 Knowledge/Projection contract tests、test-only composition fixture 和最终 Starter ZIP 的 package-only clean-room，完成 Light/Dark Browser Validation、1280/768/390 viewport/overflow records 和 keyboard walk-through。Fixture 不是 Golden，Docs clipping 不是 Starter evidence。
 
 **Pass Criteria:** 默认 `default`，显式 `content-only` / `none` 正确；Runtime Menu/icon/theme bindings 正确；Template ownership 未被 Shell 吸收；三个 viewport 无 document-level overflow；无 Navigation engineering leakage。现有组件限制冲突时标记 `RESPONSIVE CONTRACT BLOCKED`。
 

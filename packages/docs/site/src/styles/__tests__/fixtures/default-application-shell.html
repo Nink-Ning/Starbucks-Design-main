@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>商品管理 | Default Application Shell Fixture</title>
+    <script>
+      (function bootstrapStarterTheme() {
+        var storageKey = 'designkit-starter-theme'
+        var storedTheme = window.localStorage.getItem(storageKey)
+        var systemTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+        var initialTheme = storedTheme === 'light' || storedTheme === 'dark'
+          ? storedTheme
+          : systemTheme || 'light'
+
+        window.__designKitStarterThemeKey = storageKey
+        window.__applyDesignKitStarterTheme = function applyDesignKitStarterTheme(theme, persist) {
+          var nextTheme = theme === 'dark' ? 'dark' : 'light'
+          document.documentElement.setAttribute('data-theme', nextTheme)
+
+          if (document.body) {
+            if (nextTheme === 'dark') {
+              document.body.setAttribute('arco-theme', 'dark')
+              document.body.setAttribute('data-arco-theme', 'dark')
+            } else {
+              document.body.removeAttribute('arco-theme')
+              document.body.removeAttribute('data-arco-theme')
+            }
+          }
+
+          if (persist) window.localStorage.setItem(storageKey, nextTheme)
+          return nextTheme
+        }
+
+        document.documentElement.setAttribute('data-theme', initialTheme)
+        window.__designKitStarterInitialTheme = initialTheme
+      })()
+    </script>
+    <link rel="stylesheet" href="/distribution/designkit-starter-v1/runtime/starbucks-react.css" />
+    <link rel="stylesheet" href="./default-application-shell.css" />
+  </head>
+  <body>
+    <script>
+      window.__applyDesignKitStarterTheme(window.__designKitStarterInitialTheme, false)
+    </script>
+    <div id="root">
+      <div class="dk-shell-fixture__runtime-error" role="status">正在加载 Default Application Shell Fixture…</div>
+    </div>
+
+    <script>
+      window.__designKitStarterCdnErrors = []
+      window.__designKitStarterRuntimeErrors = []
+      window.addEventListener('error', function captureRuntimeError(event) {
+        if (event.target && event.target.tagName === 'SCRIPT' && event.target.src) {
+          window.__designKitStarterCdnErrors.push(event.target.src)
+        } else if (event.message) {
+          window.__designKitStarterRuntimeErrors.push(event.message)
+        }
+      }, true)
+
+      window.__starterShellCleanRoomDecisions = Object.freeze([
+        Object.freeze({
+          request: '帮我做一个商品管理列表页',
+          template: 'Basic List',
+          shellMode: 'default',
+          output: Object.freeze(['Brand Top Menu', 'Collapsible Side Menu', 'Basic List', 'Theme Toggle']),
+        }),
+        Object.freeze({
+          request: '我们系统已经有顶部和侧边导航，只生成商品列表内容区域。',
+          template: 'Basic List',
+          shellMode: 'content-only',
+          output: Object.freeze(['Basic List']),
+        }),
+        Object.freeze({
+          request: '生成一个独立的 Card List Demo，不需要系统框架。',
+          template: 'Card List',
+          shellMode: 'none',
+          output: Object.freeze(['Card List']),
+        }),
+      ])
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@arco-design/web-react@2.66.15/dist/arco.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@arco-design/web-react@2.66.15/dist/arco-icon.min.js"></script>
+    <script src="/distribution/designkit-starter-v1/runtime/starbucks-react.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.29.8/babel.min.js"></script>
+
+    <script type="text/babel">
+      if (!window.React || !window.ReactDOM || !window.StarbucksReact || !window.arcoicon) {
+        window.__designKitStarterRuntimeErrors.push('Default Application Shell 所需 Runtime 未完整加载。')
+      } else {
+        const { useEffect, useMemo, useState } = window.React
+        const {
+          Avatar,
+          Badge,
+          Button,
+          Cascader,
+          Dropdown,
+          Empty,
+          Input,
+          Menu,
+          Message,
+          Pagination,
+          Space,
+          Table,
+          TableToolbar,
+          Tag,
+        } = window.StarbucksReact
+        const {
+          IconApps,
+          IconDashboard,
+          IconDown,
+          IconHome,
+          IconMore,
+          IconMoon,
+          IconNotification,
+          IconOrderedList,
+          IconPlus,
+          IconPoweroff,
+          IconSearch,
+          IconSun,
+          IconUp,
+        } = window.arcoicon
+
+        const productRows = [
+          { id: 'sku-001', code: 'DRK-001', name: '经典美式咖啡', category: '现制饮品', price: '¥28.00', stock: 128, status: 'selling', updatedAt: '2026-08-28 09:32' },
+          { id: 'sku-002', code: 'DRK-002', name: '拿铁咖啡', category: '现制饮品', price: '¥33.00', stock: 96, status: 'selling', updatedAt: '2026-08-28 09:18' },
+          { id: 'sku-003', code: 'DRK-003', name: '焦糖玛奇朵', category: '现制饮品', price: '¥36.00', stock: 52, status: 'selling', updatedAt: '2026-08-28 08:55' },
+          { id: 'sku-004', code: 'FD-014', name: '鸡肉芝士三明治', category: '食品', price: '¥32.00', stock: 18, status: 'low', updatedAt: '2026-08-27 18:42' },
+          { id: 'sku-005', code: 'FD-020', name: '蓝莓麦芬', category: '食品', price: '¥22.00', stock: 0, status: 'soldout', updatedAt: '2026-08-27 17:36' },
+          { id: 'sku-006', code: 'BEAN-008', name: '派克市场烘焙咖啡豆', category: '咖啡豆', price: '¥98.00', stock: 43, status: 'selling', updatedAt: '2026-08-27 15:20' },
+          { id: 'sku-007', code: 'CUP-031', name: '经典绿色随行杯', category: '杯具', price: '¥159.00', stock: 25, status: 'selling', updatedAt: '2026-08-27 13:08' },
+          { id: 'sku-008', code: 'DRK-018', name: '冰摇柠檬茶', category: '现制饮品', price: '¥30.00', stock: 67, status: 'selling', updatedAt: '2026-08-27 11:46' },
+          { id: 'sku-009', code: 'FD-026', name: '纽约风浓郁重芝士蛋糕', category: '食品', price: '¥35.00', stock: 11, status: 'low', updatedAt: '2026-08-27 10:12' },
+          { id: 'sku-010', code: 'BEAN-012', name: '首选咖啡豆', category: '咖啡豆', price: '¥108.00', stock: 36, status: 'selling', updatedAt: '2026-08-26 19:30' },
+          { id: 'sku-011', code: 'CUP-045', name: '简约不锈钢保温杯', category: '杯具', price: '¥199.00', stock: 14, status: 'low', updatedAt: '2026-08-26 16:24' },
+          { id: 'sku-012', code: 'FD-031', name: '提拉米苏风味蛋糕', category: '食品', price: '¥38.00', stock: 0, status: 'soldout', updatedAt: '2026-08-26 14:05' },
+        ]
+
+        const statusLabels = { selling: '销售中', low: '库存紧张', soldout: '已售罄' }
+        const statusColors = { selling: 'green', low: 'orange', soldout: 'gray' }
+        const categoryOptions = [
+          { label: '现制饮品', value: '现制饮品' },
+          { label: '食品', value: '食品' },
+          { label: '咖啡豆', value: '咖啡豆' },
+          { label: '杯具', value: '杯具' },
+        ]
+        const systemCascaderOptions = [
+          {
+            value: 'product-center',
+            label: '商品中心',
+            searchText: 'Product Center 商品中心',
+            children: [{ value: 'product-center-system', label: 'Product Center', searchText: 'Product Center 商品中心 商品管理' }],
+          },
+          {
+            value: 'order-center',
+            label: '订单中心',
+            searchText: 'Order Center 订单中心',
+            children: [{ value: 'order-center-system', label: 'Order Center', searchText: 'Order Center 订单中心 订单管理' }],
+          },
+          {
+            value: 'member-center',
+            label: '会员中心',
+            searchText: 'Customer Center 会员中心',
+            children: [{ value: 'member-center-system', label: 'Customer Center', searchText: 'Customer Center 会员中心 会员管理' }],
+          },
+          {
+            value: 'data-center',
+            label: '数据中心',
+            searchText: 'Data Center 数据中心',
+            children: [{ value: 'data-center-system', label: 'Data Center', searchText: 'Data Center 数据中心 数据分析' }],
+          },
+        ]
+        const pageSize = 5
+
+        function ShellApp() {
+          const [viewportWidth, setViewportWidth] = useState(window.innerWidth)
+          const [collapsed, setCollapsed] = useState(window.innerWidth < 1024)
+          const [theme, setTheme] = useState(document.documentElement.getAttribute('data-theme') || 'light')
+          const [keywordValues, setKeywordValues] = useState({ keyword: '', category: undefined })
+          const [currentPage, setCurrentPage] = useState(1)
+          const [refreshing, setRefreshing] = useState(false)
+          const [currentSystemId, setCurrentSystemId] = useState('product-center-system')
+          const [systemQuery, setSystemQuery] = useState('')
+          const [switcherVisible, setSwitcherVisible] = useState(false)
+          const keyword = String(keywordValues.keyword || '')
+          const category = String(keywordValues.category || '')
+
+          useEffect(() => {
+            const handleResize = () => {
+              setViewportWidth(window.innerWidth)
+              setCollapsed(window.innerWidth < 1024)
+            }
+            window.addEventListener('resize', handleResize)
+            return () => window.removeEventListener('resize', handleResize)
+          }, [])
+
+          useEffect(() => {
+            setCurrentPage(1)
+          }, [keyword, category])
+
+          const filteredRows = useMemo(() => {
+            const normalizedKeyword = keyword.trim().toLocaleLowerCase()
+            return productRows.filter((row) => {
+              const matchesCategory = !category || row.category === category
+              const matchesKeyword = !normalizedKeyword || [row.code, row.name, row.category].some((value) =>
+                value.toLocaleLowerCase().includes(normalizedKeyword),
+              )
+              return matchesCategory && matchesKeyword
+            })
+          }, [category, keyword])
+
+          const pageCount = Math.max(1, Math.ceil(filteredRows.length / pageSize))
+          const pageRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+
+          useEffect(() => {
+            if (currentPage > pageCount) setCurrentPage(pageCount)
+          }, [currentPage, pageCount])
+
+          const toggleTheme = () => {
+            const nextTheme = theme === 'light' ? 'dark' : 'light'
+            window.__applyDesignKitStarterTheme(nextTheme, true)
+            setTheme(nextTheme)
+          }
+
+          const refreshData = () => {
+            if (refreshing) return
+            setRefreshing(true)
+            window.setTimeout(() => {
+              setRefreshing(false)
+              Message.success('本地商品数据已刷新')
+            }, 300)
+          }
+
+          const userMenu = (
+            <Menu onClickMenuItem={() => Message.info('这是 test-only 用户菜单。')}>
+              <Menu.Item key="logout"><IconPoweroff />退出登录</Menu.Item>
+            </Menu>
+          )
+
+          const currentSystemGroup = systemCascaderOptions.find((group) =>
+            group.children.some((system) => system.value === currentSystemId),
+          )
+          const currentSystem = currentSystemGroup?.children.find((system) => system.value === currentSystemId)
+          const currentSystemLabel = currentSystem?.label || 'Product Center'
+          const currentSystemPath = currentSystemGroup && currentSystem
+            ? [currentSystemGroup.value, currentSystem.value]
+            : []
+
+          const switchSystem = (value) => {
+            const systemId = Array.isArray(value) ? value[value.length - 1] : value
+            if (typeof systemId !== 'string') return
+            setCurrentSystemId(systemId)
+            setSystemQuery('')
+            setSwitcherVisible(false)
+          }
+
+          const systemSwitcher = (
+            <Cascader
+              className="dk-shell-fixture__system-cascader"
+              dropdownMenuClassName="dk-shell-fixture__system-cascader-popup"
+              options={systemCascaderOptions}
+              value={currentSystemPath}
+              popupVisible={switcherVisible}
+              trigger="click"
+              expandTrigger="click"
+              showSearch={{
+                renderOption: (_inputValue, option) => <span className="dk-shell-fixture__system-option-name">{option.label}</span>,
+              }}
+              inputValue={systemQuery}
+              triggerProps={{ blurToHide: false, position: 'bl', autoFitPosition: false }}
+              filterOption={(inputValue, option) =>
+                String(option.searchText || option.label)
+                  .toLocaleLowerCase()
+                  .includes(inputValue.trim().toLocaleLowerCase())
+              }
+              renderOption={(option, level) => (
+                <span className={level === 0 ? 'dk-shell-fixture__system-group' : undefined}>{option.label}</span>
+              )}
+              dropdownRender={(panel) => (
+                <div className="dk-shell-fixture__system-cascader-content">
+                  <div className="dk-shell-fixture__system-search-wrap">
+                    <Input
+                      className="dk-shell-fixture__system-search"
+                      value={systemQuery}
+                      placeholder="搜索系统名称或描述"
+                      prefix={<IconSearch />}
+                      allowClear
+                      aria-label="搜索系统"
+                      onChange={setSystemQuery}
+                    />
+                  </div>
+                  {panel}
+                </div>
+              )}
+              onInputValueChange={setSystemQuery}
+              onChange={switchSystem}
+              onVisibleChange={setSwitcherVisible}
+            >
+              <button
+                type="button"
+                className={`dk-shell-fixture__system-trigger${switcherVisible ? ' is-open' : ''}`}
+                aria-label={`当前系统：${currentSystemLabel}`}
+                aria-haspopup="menu"
+                aria-expanded={switcherVisible}
+              >
+                <span className="dk-shell-fixture__system-copy">
+                  <span className="dk-shell-fixture__system-name">{currentSystemLabel}</span>
+                </span>
+                <span className="dk-shell-fixture__system-arrows" aria-hidden="true">
+                  <IconUp />
+                  <IconDown />
+                </span>
+              </button>
+            </Cascader>
+          )
+
+          const columns = [
+            { title: '商品编号', dataIndex: 'code', key: 'code', width: 120, fixed: 'left' },
+            { title: '商品名称', dataIndex: 'name', key: 'name', width: 220, fixed: 'left', ellipsis: true },
+            { title: '商品分类', dataIndex: 'category', key: 'category', width: 130 },
+            { title: '售价', dataIndex: 'price', key: 'price', width: 110 },
+            { title: '库存', dataIndex: 'stock', key: 'stock', width: 100 },
+            {
+              title: '状态',
+              dataIndex: 'status',
+              key: 'status',
+              width: 120,
+              render: (value) => <Tag color={statusColors[value]}>{statusLabels[value]}</Tag>,
+            },
+            { title: '更新时间', dataIndex: 'updatedAt', key: 'updatedAt', width: 180 },
+            {
+              title: '操作',
+              key: 'actions',
+              width: 140,
+              fixed: 'right',
+              render: (_, row) => (
+                <Space className="sbux-table-row-actions" size={4}>
+                  <Button type="text" size="mini" aria-label={`查看 ${row.name}`} onClick={() => Message.info(`查看 ${row.name}`)}>查看</Button>
+                  <Button type="text" size="mini" aria-label={`编辑 ${row.name}`} onClick={() => Message.success(`已打开 ${row.name} 的编辑 Mock`)}>编辑</Button>
+                  <Dropdown
+                    droplist={(
+                      <Menu onClickMenuItem={(key) => {
+                        if (key === 'copy') Message.success(`已复制 ${row.name} 的商品 Mock`)
+                        if (key === 'archive') Message.info(`已停用 ${row.name} 的商品 Mock`)
+                      }}>
+                        <Menu.Item key="copy">复制商品</Menu.Item>
+                        <Menu.Item key="archive">停用商品</Menu.Item>
+                      </Menu>
+                    )}
+                    trigger="click"
+                    position="br"
+                  >
+                    <Button type="text" size="mini" icon={<IconMore />} aria-label={`${row.name} 更多操作`} />
+                  </Dropdown>
+                </Space>
+              ),
+            },
+          ]
+
+          const themeLabel = theme === 'light' ? '切换到深色模式' : '切换到浅色模式'
+          const ThemeIcon = theme === 'light' ? IconMoon : IconSun
+
+          return (
+            <div className="dk-shell-fixture" data-shell-theme={theme}>
+              <header className="dk-shell-fixture__top" data-shell-region="top" aria-label="应用顶部导航">
+                <div
+                  className="dk-shell-fixture__identity"
+                  data-shell-action="system-switch"
+                  data-collapsed={String(collapsed)}
+                  style={{ width: collapsed ? 56 : 260, flexBasis: collapsed ? 56 : 260 }}
+                >
+                  <img className="dk-shell-fixture__logo" src="/packages/docs/site/public/img/starbucks-system-logo.svg" alt="" />
+                  {systemSwitcher}
+                </div>
+
+                <div className="dk-shell-fixture__top-main">
+                  <Menu className="dk-shell-fixture__top-menu" mode="horizontal" selectable={false} ellipsis={false}>
+                    <Menu.Item key="workspace">商品中心</Menu.Item>
+                  </Menu>
+
+                  <div className="dk-shell-fixture__actions" data-shell-actions>
+                    <div className="dk-shell-fixture__quick-actions">
+                      <span className="dk-shell-fixture__action-slot" data-shell-action="notification">
+                        <Badge className="dk-shell-fixture__notification" count={15} offset={[-6, 2]}>
+                          <Button className="dk-shell-fixture__action" type="text" icon={<IconNotification />} aria-label="消息" title="消息" />
+                        </Badge>
+                      </span>
+                      <span className="dk-shell-fixture__action-slot" data-shell-action="theme-toggle">
+                        <Button className="dk-shell-fixture__action" type="text" icon={<ThemeIcon />} aria-label={themeLabel} title={themeLabel} onClick={toggleTheme} />
+                      </span>
+                    </div>
+                    <span className="dk-shell-fixture__divider" data-shell-action="divider" aria-hidden="true" />
+                    <span className="dk-shell-fixture__user-slot" data-shell-action="user">
+                      <Dropdown droplist={userMenu} trigger="click" position="br">
+                        <button className="dk-shell-fixture__user" type="button" aria-label="用户菜单" aria-haspopup="menu">
+                          <Avatar className="dk-shell-fixture__avatar" size={32}>
+                            <img src="/packages/docs/site/public/landing/nink-avatar.jpg" alt="" />
+                          </Avatar>
+                          <span className="dk-shell-fixture__user-name">Hi！Nink</span>
+                          <IconDown aria-hidden="true" />
+                        </button>
+                      </Dropdown>
+                    </span>
+                  </div>
+                </div>
+              </header>
+
+              <div className="dk-shell-fixture__body">
+                <aside className="dk-shell-fixture__side" data-shell-region="side" data-collapsed={String(collapsed)} aria-label="应用侧边导航">
+                  <Menu
+                    className="dk-shell-fixture__side-menu"
+                    style={{ width: collapsed ? 56 : 260 }}
+                    collapse={collapsed}
+                    hasCollapseButton={viewportWidth >= 768}
+                    defaultOpenKeys={['products']}
+                    defaultSelectedKeys={['product-list']}
+                    onCollapseChange={(nextCollapsed) => {
+                      if (window.innerWidth >= 768) setCollapsed(nextCollapsed)
+                    }}
+                  >
+                    <Menu.Item key="home" renderItemInTooltip={() => '首页'}><IconHome /><span>首页</span></Menu.Item>
+                    <Menu.SubMenu key="products" title={<><IconApps /><span>商品管理</span></>}>
+                      <Menu.Item key="product-list">商品列表</Menu.Item>
+                      <Menu.Item key="category-list">分类管理</Menu.Item>
+                    </Menu.SubMenu>
+                    <Menu.Item key="orders" renderItemInTooltip={() => '订单管理'}><IconOrderedList /><span>订单管理</span></Menu.Item>
+                    <Menu.Item key="analytics" renderItemInTooltip={() => '数据分析'}><IconDashboard /><span>数据分析</span></Menu.Item>
+                  </Menu>
+                </aside>
+
+                <main className="dk-shell-fixture__main" data-shell-region="main">
+                  <div className="dk-shell-fixture__page">
+                    <header className="dk-shell-fixture__page-header">
+                      <h1 className="dk-shell-fixture__page-title">商品列表</h1>
+                      <div className="dk-shell-fixture__page-actions">
+                        <Button type="primary" icon={<IconPlus />} onClick={() => Message.info('这是 test-only 新建商品入口。')}>新建商品</Button>
+                      </div>
+                    </header>
+
+                    <section className="dk-shell-fixture__data-region" data-template="basic-list" aria-label="商品数据列表">
+                      <TableToolbar
+                        ariaLabel="商品表格工具栏"
+                        quickFilters={[
+                          {
+                            type: 'select',
+                            name: 'category',
+                            placeholder: '全部分类',
+                            ariaLabel: '商品分类',
+                            allowClear: true,
+                            options: categoryOptions,
+                            width: 120,
+                          },
+                          {
+                            type: 'search',
+                            name: 'keyword',
+                            placeholder: '搜索商品编号、名称或分类',
+                            ariaLabel: '搜索商品',
+                            allowClear: true,
+                            width: viewportWidth < 768 ? 180 : 250,
+                          },
+                        ]}
+                        quickFilterValues={keywordValues}
+                        tableTools={{ refresh: { loading: refreshing, tooltip: '刷新', ariaLabel: '刷新商品数据' } }}
+                        onQuickFilterChange={setKeywordValues}
+                        onRefresh={refreshData}
+                      />
+                      <div className="dk-shell-fixture__table-wrap">
+                        <Table
+                          rowKey="id"
+                          columns={columns}
+                          data={pageRows}
+                          loading={refreshing}
+                          pagination={false}
+                          scroll={{ x: 1120 }}
+                          noDataElement={<Empty description="没有匹配的商品" />}
+                        />
+                      </div>
+                      <div className="dk-shell-fixture__pagination">
+                        <Pagination total={filteredRows.length} current={currentPage} pageSize={pageSize} showTotal showJumper onChange={setCurrentPage} />
+                      </div>
+                    </section>
+                  </div>
+                </main>
+              </div>
+            </div>
+          )
+        }
+
+        const requiredRuntime = [Menu, Button, Badge, Cascader, Dropdown, Empty, Input, Space, Avatar, TableToolbar, Table, Pagination]
+        const requiredIcons = [IconNotification, IconMoon, IconSun, IconMore, IconSearch, IconUp]
+        if (requiredRuntime.some((value) => !value) || requiredIcons.some((value) => !value)) {
+          window.__designKitStarterRuntimeErrors.push('Default Application Shell 所需组件或图标未完整加载。')
+        } else {
+          window.ReactDOM.createRoot(document.getElementById('root')).render(<ShellApp />)
+        }
+      }
+    </script>
+
+    <script>
+      window.setTimeout(function showRuntimeFailure() {
+        if (!window.__designKitStarterRuntimeErrors.length && !window.__designKitStarterCdnErrors.length) return
+        var root = document.getElementById('root')
+        if (root && root.querySelector('[data-shell-region="top"]')) return
+        root.innerHTML = '<div class="dk-shell-fixture__runtime-error" role="alert">Default Application Shell Fixture 加载失败，请检查 Runtime 与固定 CDN。</div>'
+      }, 1200)
+    </script>
+  </body>
+</html>

@@ -123,7 +123,7 @@
 - [ ] 关键状态可以切换或演示。
 - [ ] 预览结果与 React 视觉基准一致。
 - [ ] 页面自身 `body` 无异常横向溢出；宽表格只在组件容器内滚动。
-- [ ] Default Shell 后续 fixture 在 1280/768/390 和 Light/Dark 下验证 Top/Side/Main 可用且 document-level overflow 为 `NONE`；未执行时标记 `UNVERIFIED`。
+- [ ] Default Shell test-only fixture 和最终 ZIP package-only smoke 在 1280/768/390 和 Light/Dark 下验证 Top/Side/Main 可用且 document-level overflow 为 `NONE`；未执行时标记 `UNVERIFIED`。
 - [ ] Default Shell 的 Top/Side/actions 支持键盘、可见 Focus 和可访问名称，Focus order 为 Top → Side → Main。
 - [ ] 失败状态提供恢复方向；Loading 不重复提交；Empty 文案与业务查询结果区分。
 - [ ] 已运行 `git diff --check`。

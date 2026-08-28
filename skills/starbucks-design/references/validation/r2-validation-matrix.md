@@ -1,6 +1,6 @@
 # DesignKit Starter V1-r2 Validation Matrix
 
-本矩阵汇总 R2-D 当前已执行的验证证据。它区分 Source/Template 结论、实际 Browser Evidence、预投影漂移和尚未完成的人工审查；任一列的 `PASS` 不会自动升级其他列。
+本矩阵汇总 R2-R.4 当前已执行的验证证据。它区分 Source/Template 结论、实际 Browser Evidence、预投影漂移和尚未完成的人工审查；任一列的 `PASS` 不会自动升级其他列。
 
 ## Result vocabulary
 
@@ -10,7 +10,7 @@
 - `BLOCKED`：已尝试但被环境或外部依赖阻断。
 - `OUT OF SCOPE`：不属于 Starter R2 能力边界。
 
-## Matrix (verified 2026-08-26)
+## Matrix (verified 2026-08-28)
 
 | Capability / Template | Decision | Template Usage | Provenance | Interaction | Theme | Responsive | Geometry | Accessibility | Visual | Release Ready |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -19,6 +19,7 @@
 | Basic Form Create | PASS | PASS (R2-B contract/tests) | UNVERIFIED | CONDITIONAL (static evidence; Docs Vue hydration blocked) | UNVERIFIED | BLOCKED for Vue Docs browser evidence | UNVERIFIED | CONDITIONAL | UNVERIFIED | CONDITIONAL |
 | Basic Form Edit | PASS | PASS (same Basic Form family) | PASS (Runtime-backed fixture) | PASS (prefill, Cancel, Save) | UNVERIFIED | PASS (1280/390 Light fixture) | PASS (same fixture anatomy) | CONDITIONAL | UNVERIFIED | CONDITIONAL |
 | Basic Detail | PASS | PASS (R2-B contract/tests) | UNVERIFIED | CONDITIONAL (static evidence; Docs Vue hydration blocked) | UNVERIFIED | BLOCKED for Vue Docs browser evidence | UNVERIFIED | CONDITIONAL (known DetailPageHeader aria-label dependency) | UNVERIFIED | CONDITIONAL |
+| Default Application Shell | PASS | PASS (fixed composition) | PASS (final package-only smoke) | PASS (system/side sync) | PASS (Light/Dark toggle and persistence) | PASS (1280/768/390, no document overflow) | PASS (Main 24px and template ownership) | PASS (core names, focus and keyboard checks) | PASS (human-approved visual review) | PASS |
 | TableToolbar | PASS (direct export/CSS evidence) | PASS within approved template subsets | PASS for C.3 Runtime | PASS (filter/selection/action browser checks) | CONDITIONAL (profile-specific evidence) | CONDITIONAL (indirect template evidence) | CONDITIONAL (no independent Golden) | CONDITIONAL | UNVERIFIED | CONDITIONAL |
 | Quick Filter | PASS | PASS within Basic/Card List profiles | PASS through TableToolbar | PASS | CONDITIONAL | PASS in Card List browser evidence | CONDITIONAL | CONDITIONAL | UNVERIFIED | CONDITIONAL |
 | Selection | PASS for Card List current-result scope | PASS | PASS | PASS (selection set, select-all state) | PASS in generated Runtime | PASS | PASS (anchored selection geometry) | CONDITIONAL | CONDITIONAL | CONDITIONAL |
@@ -38,10 +39,11 @@
 - Card List Error/Retry validation fixture: R2-D Card List state validation fixture.
 - Basic Form Edit validation fixture: R2-D Basic Form Edit validation fixture.
 - Product CRUD regression route: R2-D local browser regression evidence.
+- Default Application Shell: test-only composition fixture plus final ZIP package-only clean-room smoke and Browser Validation, including 1280/768/390 Light/Dark checks.
 
 ## Lifecycle and drift notes
 
 - `distribution/releases/designkit-starter-v1-r1.zip` remains the frozen R1 artifact and is validated independently.
-- The unversioned `designkit-starter-v1.zip` is tracked as the current R2-preparation artifact; it is not used to rewrite or overwrite R1.
+- `distribution/releases/designkit-starter-v1-r2.zip` is the final R2 artifact after formal Shell integration; the unversioned `designkit-starter-v1.zip` remains a separate R2-preparation artifact and is not used to rewrite or overwrite R1.
 - Frozen R1 checklist text containing `selectedBusinessExports` is expected pre-projection drift. R2 source validation uses direct Runtime export/CSS/Browser evidence instead.
 - A matrix `CONDITIONAL`, `UNVERIFIED` or `BLOCKED` result is not silently promoted by Registry `READY` status.

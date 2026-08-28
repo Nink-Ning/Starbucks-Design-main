@@ -38,7 +38,7 @@ Validation
 | `starter.template.basic-form` | 创建或编辑数据并完成校验、提交和重置 | [Template Selection](decisions/template-selection.md) Rule 5 | [Basic Form Template](../templates/form.md) | [Basic Form Golden](../examples/form.html) | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `READY` | Theme、Accessibility 和 Interaction 证据仍聚合在通用检查中 |
 | `starter.template.basic-detail` | 只读查看一个已有对象的信息、状态和元数据 | [Template Selection](decisions/template-selection.md) Rule 4 | [Basic Detail Template](../templates/detail.md) | [Basic Detail Golden](../examples/detail.html) | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `READY` | Theme、Accessibility 和 Interaction 证据仍聚合在通用检查中 |
 | `starter.component.table-toolbar` | 在批准的 Starter Template 中呈现选择摘要、轻量批量操作、基础筛选容器和操作状态 | [Interaction Pattern](decisions/interaction-pattern.md) Sections 2–5；[TableToolbar Knowledge](../business-components/table-toolbar.md) | [Basic List](../templates/list.md)、[Card List](../templates/card-list.md) | 间接映射：[Basic List Golden](../examples/list.html)、[Card List Golden](../examples/multi-select-card-list.html) | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `PARTIAL` | 没有独立 TableToolbar Golden；两个模板使用不同能力子集；静态契约为 `CONFLICTED`，6 条执行记录为 `UNVERIFIED` |
-| `starter.pattern.default-application-shell` | 以固定 Top + Side + Main outer composition 包裹已批准 Template | [Application Shell Contract](application-shell.md) Shell Mode Decision | 已选 Starter Template；Shell 只负责 outer wrapper | None；Docs Menu patterns 仅为 `IMPLEMENTATION REFERENCE` | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md)；后续 test-only composition fixture | `READY` | Support state `SUPPORTED`；本阶段无 Shell HTML，Browser Evidence 为 `UNVERIFIED` |
+| `starter.pattern.default-application-shell` | 以固定 Top + Side + Main outer composition 包裹已批准 Template | [Application Shell Contract](application-shell.md) Shell Mode Decision | 已选 Starter Template；Shell 只负责 outer wrapper | None；Docs Menu patterns 仅为 `IMPLEMENTATION REFERENCE` | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md)、[Default Application Shell Evidence](validation/evidence/starter-pattern-default-application-shell.md) | `READY` | Support state `SUPPORTED`；无独立 Shell Golden，Package-only clean-room evidence 单独记录 |
 | `starter.interaction.selection` | 通过显式 Selection Control 维护 Card List 页面级 Selection Set | [Interaction Pattern](decisions/interaction-pattern.md) Section 5 | [Card List Template](../templates/card-list.md) | 间接映射：[Card List Golden](../examples/multi-select-card-list.html) | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `PARTIAL` | 没有独立 Selection Golden；Golden 预置选择是 Example Specific；Functional、Accessibility、Interaction 为 `PASS`，Responsive、Theme、Visual Quality 为 `UNVERIFIED`（3 / 3） |
 | `starter.interaction.batch-actions` | 对 Card List 当前 Selection Set 执行轻量本地多对象操作 | [Interaction Pattern](decisions/interaction-pattern.md) Sections 2–4 | [Card List Template](../templates/card-list.md) | 间接映射：[Card List Golden](../examples/multi-select-card-list.html) | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `PARTIAL` | 没有独立 Batch Actions Golden；不覆盖跨页、服务端、权限或持久化能力；Functional、Accessibility、Interaction 为 `PASS`，Responsive、Theme、Visual Quality 为 `UNVERIFIED`（3 / 3） |
 
@@ -47,9 +47,9 @@ Validation
 - Top：Docs Menu / “品牌色模式导航”，status `IMPLEMENTATION REFERENCE`；
 - Side：Docs Menu / “缩起内嵌菜单”，status `IMPLEMENTATION REFERENCE`；
 - Starter Golden：`None`；
-- Validation：后续 test-only composition fixture，验证 1280/768/390、Light/Dark、document overflow、ownership 和 accessibility。
+- Validation：test-only composition fixture 负责批准实现证据；最终 Starter package 另以 package-only clean-room 验证 1280/768/390、Light/Dark、document overflow、ownership 和 accessibility。
 
-Implementation Reference 不是 Starter Golden，也不是当前 browser `PASS` evidence。
+Implementation Reference 不是 Starter Golden；实际 browser `PASS` evidence 读取独立 Evidence Record。
 
 ## 3. Destructive action visual policy
 
@@ -82,7 +82,7 @@ Golden Example 是 AI 输出参考样例，不是公共组件 API。
 
 ## 6. Maintenance rule
 
-新增能力通常必须同步 Capability Registry、Decision Rule、Template、Golden Example 和 Validation。所有链接必须指向 Starter 包内资产；不得引入包外实现、测试或知识路径。`starter.pattern.default-application-shell` 是经批准的 restricted composition exception，以 package-local contract、named implementation references 和 test-only fixture strategy 替代完整 Golden。
+新增能力通常必须同步 Capability Registry、Decision Rule、Template、Golden Example 和 Validation。所有链接必须指向 Starter 包内资产；不得引入包外实现、测试或知识路径。`starter.pattern.default-application-shell` 是经批准的 restricted composition exception，以 package-local contract、named implementation references、test-only fixture strategy 和 package-only clean-room evidence 替代完整 Golden。
 
 ## 7. Remaining knowledge
 

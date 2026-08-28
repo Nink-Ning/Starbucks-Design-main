@@ -120,4 +120,4 @@ starter.* Capability ID and approved Status
 
 Profile Router 只确认 Starter 交付和 Capability ID，不维护组件用法、模板源码或验证证据。
 
-`starter.pattern.default-application-shell` 是经批准的 contract-first restricted composition exception：它使用 `application-shell.md`、Docs implementation references 和 test-only fixture strategy，不创建完整 Starter Golden；实际 Browser Evidence 在后续实现阶段补录。
+`starter.pattern.default-application-shell` 是经批准的 contract-first restricted composition exception：它使用 `application-shell.md`、Docs implementation references、test-only fixture strategy 和 package-only clean-room evidence，不创建完整 Starter Golden。

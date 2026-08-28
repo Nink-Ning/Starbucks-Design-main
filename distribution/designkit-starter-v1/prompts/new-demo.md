@@ -32,6 +32,7 @@ Shell 模式：[default / content-only / none；未填写时为 default]
 请遵守：
 - 最终生成一个完整单文件 HTML；
 - 常规后台页默认使用 `default` Application Shell；只有用户明确已有系统框架时使用 `content-only`，明确 standalone 时使用 `none`；不得创建第四种模式；
+- 用户只说“帮我做一个商品管理列表页”且没有导航说明时，必须选择 Basic List + `default`，并生成 Brand Top Menu、Real System Switch、Collapsible Side Menu、Basic List、Notification、Theme Toggle 和 User access；
 - `default` 只使用批准的 Brand Top Menu + Collapsible Embedded Side Menu + Page Template；不得发明自定义导航；
 - Top action order 为 Store/System Switch → Notification → Theme Toggle → Divider → Avatar/User；Light 显示 `window.arcoicon.IconMoon` 和“切换到深色模式”，Dark 显示 `IconSun` 和“切换到浅色模式”；
 - Theme 使用 `html[data-theme]`、body `arco-theme` / `data-arco-theme` 和 `designkit-starter-theme`，作用于整个页面；不新增 Theme Provider；

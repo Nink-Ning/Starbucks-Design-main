@@ -42,6 +42,7 @@
 26. Shell 是否保持 Template anatomy、Breadcrumb independence 和 Basic List `4px / 16px / 16px` ownership。
 27. 1280/768/390 是否符合 Side 260/56/56、required global actions 和 document overflow contract；390 是否没有发明 Drawer、Hamburger、Bottom Navigation 或新 mobile pattern。
 28. 是否泄漏 Custom Navigation Shell、Navigation API、dynamic permission menu、backend-driven navigation、real router、permission routing、system switch backend logic 或 React/Vue project navigation integration。
+29. 如果需求是普通后台页且没有导航说明，是否解析为 Basic List 或其他已选 Template + `default` Shell；如果已有导航或明确 standalone，是否分别使用 `content-only` 或 `none`。
 
 请输出：
 - 通过项；

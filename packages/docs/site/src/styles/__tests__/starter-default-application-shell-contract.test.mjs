@@ -9,11 +9,13 @@ async function read(relativePath) {
 }
 
 test('canonical and Starter registries register only the narrow Default Application Shell capability', async () => {
-  const [canonical, sourceRegistry, starterRegistry, manifestSource] = await Promise.all([
+  const [canonical, sourceRegistry, starterRegistry, manifestSource, readme, startHere] = await Promise.all([
     read('skills/starbucks-design/references/application-shell.md'),
     read('skills/starbucks-design/references/capability-registry.md'),
     read('distribution/designkit-starter-v1/references/capability-registry.md'),
     read('distribution/designkit-starter-v1/manifest.json'),
+    read('distribution/designkit-starter-v1/README.md'),
+    read('distribution/designkit-starter-v1/START-HERE.md'),
   ])
   const manifest = JSON.parse(manifestSource)
 
@@ -28,6 +30,7 @@ test('canonical and Starter registries register only the narrow Default Applicat
   assert.deepEqual(manifest.patternCapabilityFiles, ['references/application-shell.md'])
   assert.equal(manifest.knowledge.capabilitySummary.total, 12)
   assert.equal(manifest.knowledge.capabilitySummary.categories.patterns, 1)
+  assert.equal(manifest.validation.phase, 'starter-v1-r2-formal-starter-integration')
   assert.equal(
     [...starterRegistry.matchAll(/^\| `starter\./gm)].length,
     manifest.knowledge.capabilitySummary.total,
@@ -50,6 +53,9 @@ test('canonical and Starter registries register only the narrow Default Applicat
   ]) {
     assert.ok(manifest.unsupported.includes(boundary), boundary)
   }
+  assert.match(readme, /企业系统框架[\s\S]*默认使用 DesignKit 标准顶部导航和可折叠侧边菜单[\s\S]*全局 Light \/ Dark/)
+  assert.match(startHere, /常规后台页面默认使用 `default`[\s\S]*已有系统框架[\s\S]*`content-only`[\s\S]*独立 Demo[\s\S]*`none`/)
+  assert.doesNotMatch(readme, /Navigation Shell\s*[：:：]\s*暂不支持/)
 })
 
 test('Shell modes and decision order are canonical and default is the Starter default', async () => {
@@ -121,6 +127,20 @@ test('Shell ownership preserves Breadcrumb and Basic List spacing', async () => 
 
   assert.match(canonical, /Root List[^\n]*不显示/)
   assert.match(canonical, /Create、Edit、Detail[^\n]*真实父级/)
+})
+
+test('human-approved Shell remediation decisions are projected without adding template capabilities', async () => {
+  const [canonical, projected] = await Promise.all([
+    read('skills/starbucks-design/references/application-shell.md'),
+    read('distribution/designkit-starter-v1/references/application-shell.md'),
+  ])
+
+  for (const source of [canonical, projected]) {
+    assert.match(source, /Brand \/ System Region[\s\S]*System Switch/)
+    assert.match(source, /(?:same|同一份).*collapsed state[\s\S]*260px[\s\S]*56px/i)
+    assert.match(source, /fixed `24px` horizontal padding[\s\S]*width: `?100%`?/i)
+    assert.doesNotMatch(source, /sbux-table-row-actions|QuickFilter.*row|row.*QuickFilter/i)
+  }
 })
 
 test('responsive contract closes 1280, 768, and 390 without inventing mobile navigation', async () => {

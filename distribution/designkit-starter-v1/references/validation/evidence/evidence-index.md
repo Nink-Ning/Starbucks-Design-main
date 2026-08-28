@@ -55,15 +55,23 @@
 | [`starter.interaction.batch-actions`](starter-interaction-batch-actions.md) | Accessibility | Browser Validation | `PASS` | [Card List Accessibility Evidence](starter-template-card-list.md)、[Browser confirmation](../../quality-checklist.md#golden-example-当前状态) | `2026-08-25` | 已验证 Keyboard、Focus、可访问名称及可感知确认与反馈。 |
 | [`starter.interaction.batch-actions`](starter-interaction-batch-actions.md) | Interaction | Browser Validation | `PASS` | [Card List Interaction Evidence](starter-template-card-list.md)、[Browser confirmation](../../quality-checklist.md#golden-example-当前状态) | `2026-08-25` | 已验证选择依赖、空/非空状态、危险操作确认和完成反馈。 |
 | [`starter.interaction.batch-actions`](starter-interaction-batch-actions.md) | Visual Quality | Manual Review | `UNVERIFIED` | None | `null` | 尚无主要、次要和危险操作层级审查记录。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell Mode Decision | Static Check | `PASS` | [Default Application Shell Evidence](starter-pattern-default-application-shell.md) | `2026-08-28` | 已确认 `default`、`content-only`、`none` 三种模式和 no-fourth-mode 约束。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell Implementation Provenance | Browser Validation | `UNVERIFIED` | None | `null` | 等待最终 R2 ZIP 的 package-only clean-room smoke。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | System / Side Sync | Browser Validation | `UNVERIFIED` | None | `null` | 等待 260px / 56px shared collapse 和 selection persistence 浏览器记录。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Theme Fidelity | Browser Validation | `UNVERIFIED` | None | `null` | 等待最终 ZIP Light/Dark、DOM attributes 和 persistence 浏览器记录。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Responsive Shell | Browser Validation | `UNVERIFIED` | None | `null` | 等待 1280/768/390、24px Main spacing 和 document overflow 浏览器记录。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell / Template Ownership | Browser Validation | `UNVERIFIED` | None | `null` | 等待 Basic List continuous data region、TableToolbar ownership 和 internal scrolling 浏览器记录。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Accessibility | Browser Validation | `UNVERIFIED` | None | `null` | 等待 semantic、keyboard、focus、accessible name 和 non-color state 浏览器记录。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Visual Fidelity | Manual Review | `PASS` | [Human-approved Shell visual review](starter-pattern-default-application-shell.md) | `2026-08-28` | `DEFAULT_APPLICATION_SHELL_VISUAL_REVIEW = PASS`；不创建独立 Shell Golden。 |
 
 ## 3. Coverage summary
 
 | Measure | Count |
 | --- | ---: |
-| Prioritized capabilities registered | 5 |
-| Evidence records | 35 |
-| `PASS` | 15 |
-| `UNVERIFIED` | 19 |
+| Prioritized capabilities registered | 6 |
+| Evidence records | 43 |
+| `PASS` | 17 |
+| `UNVERIFIED` | 25 |
 | `CONFLICTED` | 1 |
 | `FAIL` / `BLOCKED` / `NOT_APPLICABLE` | 0 |
 

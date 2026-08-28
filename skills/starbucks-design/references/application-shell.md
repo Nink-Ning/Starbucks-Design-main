@@ -69,11 +69,10 @@ Main Content Region containing the approved Page Template
 
 ## 5. Top Navigation Binding
 
-Top Navigation 复用 Docs Menu 的“品牌色模式导航”视觉和组件模式，并使用 Starter Runtime 的 `StarbucksReact.Menu`。右侧 action order 固定为：
+Top Navigation 复用 Docs Menu 的“品牌色模式导航”视觉和组件模式，并使用 Starter Runtime 的 `StarbucksReact.Menu`。左侧 Brand / System Region 包含真实 System Switch（Store / System Switch）；右侧 action order 固定为：
 
 ```text
-Store / System Switch
-    → Notification
+Notification
     → Theme Toggle
     → Divider
     → Avatar / User
@@ -87,6 +86,8 @@ Top minimum content 分为：
 - `OPTIONAL / EXAMPLE-ONLY`：secondary system-switch text、long menu labels、demo-specific utility text。
 
 窄宽度只允许截断 optional text 或隐藏 example-only label。不得改变批准的 Menu 视觉模式，不得隐藏 required identity 或 global actions。
+
+Default Shell 的 Brand / System Region 与 Side Navigation 使用同一份 collapsed state：展开时 Top 与 Side 均为 `260px`，收起时均为 `56px`；收起只保留 Logo，展开恢复 system name 和 System Switch。System Switch 使用批准的 Runtime `Cascader` / trigger 行为，不实现第二套导航状态。
 
 ## 6. Side Navigation Binding
 
@@ -157,6 +158,8 @@ Docs 的 `starlight-theme` key 属于 Starlight host；Starter 当前没有可�
 
 Shell wraps the selected Template and must not redefine template anatomy, internal spacing, Toolbar anatomy or Breadcrumb policy. Basic List 的 `4px / 16px / 16px` Continuous Data Region inset 继续由 `starter.template.basic-list` 拥有，不是 Shell spacing。
 
+Default Shell Main outer layout uses fixed `24px` horizontal padding at `1280px`、`768px` 和 `390px`，并保持 `min-width: 0` 与 page `width: 100%`；不通过 max-width 缩窄可用内容区。Basic List 的 `4px / 16px / 16px` inset 仍由 Template 自身拥有。
+
 Breadcrumb 继续按信息层级决定：Root List 在没有 meaningful IA 时不显示；Create、Edit、Detail 在存在真实父级关系时可以显示。Side Navigation 存在不等于 Breadcrumb 必需。
 
 ## 12. Accessibility
@@ -187,7 +190,7 @@ Default Application Shell 的固定组合不得被描述为完整 Navigation She
 
 该 Capability 的验证必须分别覆盖：Shell Mode Decision、Shell Implementation Provenance、Top Menu Fidelity、Side Menu Fidelity、Theme Toggle Behavior、Theme Scope、Responsive Shell、Shell / Template Ownership、Accessibility、No Navigation Capability Leakage。
 
-本阶段只使用 Knowledge / Projection contract tests，不创建或验证实际 Shell HTML。实际 browser Shell 结论必须等后续 test-only fixture 完成后记录；在此之前 Responsive、Theme 和 Interaction browser evidence 均为 `UNVERIFIED`。
+R2-R.4 使用 test-only composition fixture 锁定批准实现，并以最终 Starter ZIP 的 package-only clean-room evidence 验证生成边界；该 evidence 不创建独立 Shell Golden，也不改变本文的 fixed composition contract。
 
 ## 15. Implementation References
 
@@ -197,4 +200,4 @@ Default Application Shell 的固定组合不得被描述为完整 Navigation She
 - Side：同一 Menu Docs 的“缩起内嵌菜单”，以及 `packages/docs/site/src/demos/menu/collapse-inline-menu.tsx`；
 - Theme semantics：`packages/docs/site/src/components/ThemeSelect.astro` 的 host binding semantics；Starter 使用本文定义的独立 persistence key，不依赖 Starlight Theme Provider。
 
-Shell validation 使用后续 test-only composition fixture。不得新增完整 Application Shell Golden，也不得修改现有 Basic List、Card List、Basic Form 或 Basic Detail Golden。
+Shell validation 使用 test-only composition fixture 和最终 ZIP 的 package-only clean-room。不得新增完整 Application Shell Golden，也不得修改现有 Basic List、Card List、Basic Form 或 Basic Detail Golden。

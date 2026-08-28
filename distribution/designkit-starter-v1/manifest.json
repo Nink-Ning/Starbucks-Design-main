@@ -90,6 +90,10 @@
       {
         "id": "evidence-starter-interaction-batch-actions",
         "file": "references/validation/evidence/starter-interaction-batch-actions.md"
+      },
+      {
+        "id": "evidence-starter-pattern-default-application-shell",
+        "file": "references/validation/evidence/starter-pattern-default-application-shell.md"
       }
     ],
     "projectionBoundary": {
@@ -177,7 +181,7 @@
     "examples": "BROWSER_CONFIRMED_WITH_TEMP_SOURCE_RUNTIME",
     "browserSmoke": "BROWSER_CONFIRMED_WITH_TEMP_SOURCE_RUNTIME",
     "cdnHttpReachability": "CHECKED",
-    "phase": "starter-v1-r2-fidelity-projection-candidate",
+    "phase": "starter-v1-r2-formal-starter-integration",
     "localRuntime": "BROWSER_CONFIRMED"
   },
   "sourcePolicy": {
