@@ -21,6 +21,8 @@ Runtime Internal Validation
 
 ## 2. Validation categories
 
+每个维度独立判定；任一维度的 `PASS` 不会自动推导其他维度通过：`Capability Selection`、`Template Selection`、`Template Usage`、`Implementation Provenance`、`Shell Mode Decision`、`Shell Implementation Provenance`、`Icon Binding`、`Top Menu Fidelity`、`Side Menu Fidelity`、`Theme Toggle Behavior`、`Theme Scope`、`Responsive Shell`、`Shell / Template Ownership`、`No Navigation Capability Leakage`、`Component Fidelity`、`Brand Fidelity`、`Theme Fidelity`、`Structural Anatomy Fidelity`、`Geometry / Composition Fidelity`、`Interaction Fidelity`、`State Coverage`、`Responsive Fidelity`、`Accessibility`、`Visual Fidelity`、`Release / Package Integrity`。
+
 ### 2.1 Functional
 
 **Purpose:** 确认 Capability 在批准的 Template 和本地 Demo 边界内完成用户任务，并正确处理必需状态。
@@ -81,6 +83,16 @@ Runtime Internal Validation
 
 **Pass Criteria:** 无影响理解或操作的结构和样式偏差，无明显错位、裁切、重叠或未处理状态。
 
+### 2.7 Default Application Shell
+
+**Purpose:** 确认 `starter.pattern.default-application-shell` 只按 [Application Shell Contract](../application-shell.md) 包裹已选 Template。
+
+**Check:** Shell Mode、approved Brand Top Navigation subtree、当前菜单名称标题位、Top action order、Menu item/Notification/Badge/Theme Toggle/Divider/Avatar/User treatment、固定 Starbucks logo、头像默认填充对比、Side collapse、target-mode Theme Toggle、whole-page Theme Scope、Shell/Template ownership、Breadcrumb independence、Basic List `4px / 16px / 16px`、Icon Binding、Accessibility、Navigation leakage，以及 1280/768/390 document overflow。每个 Generic UI Icon 必须来自 `window.arcoicon` 并通过存在性检查；expanded rail、collapsed 56px rail 和 active item 的 Icon 必须可见。390px 不得引入 Drawer、Hamburger、Bottom Navigation、Overlay Navigation 或 mobile-specific new pattern。
+
+**Evidence Required:** 需要 Knowledge/Projection contract tests、test-only composition fixture 和最终 Starter ZIP 的 package-only clean-room，完成 Light/Dark Browser Validation、1280/768/390 viewport/overflow records 和 keyboard walk-through。Fixture 不是 Golden，Docs clipping 不是 Starter evidence。
+
+**Pass Criteria:** 默认 `default`，显式 `content-only` / `none` 正确；Runtime Menu/icon/theme bindings 正确；Template ownership 未被 Shell 吸收；三个 viewport 无 document-level overflow；无 Navigation engineering leakage。现有组件限制冲突时标记 `RESPONSIVE CONTRACT BLOCKED`。
+
 ## 3. Evidence semantics
 
 1. 每个 Capability 按适用 Validation Type 独立记录。
@@ -107,19 +119,9 @@ Evidence Model records actual verification
 - Checklist 与 Manifest 不一致时，不修改或臆造字段；对应证据记录为 `CONFLICTED` 或 `UNVERIFIED`。
 - 独立 Static Check 或 Browser Validation 可以证明 Capability 目标，但不能把缺失字段描述为已满足。
 
-### `selectedBusinessExports` conflict
+### `selectedBusinessExports` resolution
 
-当前 Quality Checklist 要求 Runtime Manifest 通过 `selectedBusinessExports` 登记 `TableToolbar`，而当前 Runtime Manifest 没有该字段。
-
-Canonical tracking entry：[TableToolbar `selectedBusinessExports` Conflict Record](conflicts/table-toolbar-selected-business-exports.md)。Current Status 为 `CONFLICTED`；在记录中的 Closure Criteria 满足前，不得删除该冲突或改为 `PASS`。
-
-1. 验证目标是确认 Fixed Runtime 提供真实 `TableToolbar`，并能在批准的 Starter Template 中工作。
-2. 缺失字段必须作为 Manifest Evidence 的 `CONFLICTED` 或 `UNVERIFIED` 项，不能静默 `PASS`。
-3. 可使用 `typeof StarbucksReact.TableToolbar === 'function'`、Runtime CSS 存在检查和实际 Starter 页面 Browser Validation 作为独立证据。
-4. 即使独立证据证明 Capability 目标，Checklist 的 Manifest 字段断言仍保持未满足，直到实现侧另行对齐。
-5. 本 Contract 不要求、授权或执行 Runtime Manifest 修改。
-
-推荐由后续单独授权的 Knowledge Layer 任务先确认正式 Manifest schema。若 `selectedBusinessExports` 不是正式字段，优先将 Quality Checklist 改为直接 export、CSS 和 Starter Browser Evidence；若 schema owner 确认该字段必须存在，则另开 Runtime 任务。两条路径都必须重新验证并同步 Conflict Record、TableToolbar Evidence 和 Evidence Index，本 Contract 不执行该变更。
+`selectedBusinessExports` 已移除为 Starter Validation requirement。当前 Runtime Manifest 和 Runtime build 没有该 authoritative schema；`selectedProExports` 也不能推导出它。TableToolbar 应以 `StarbucksReact.TableToolbar` export、`.sbux-table-toolbar` CSS、固定 Runtime 资源和实际 Starter 浏览器 DOM 作为实现证据。R1 archive 中的旧文字是 frozen pre-projection drift，不得修改或覆盖 R1。
 
 ## 5. Maintenance rule
 

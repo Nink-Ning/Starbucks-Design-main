@@ -1,8 +1,8 @@
 {
   "name": "DesignKit Starter V1",
   "releaseLine": "V1",
-  "releaseRevision": 1,
-  "releaseId": "designkit-starter-v1-r1",
+  "releaseRevision": 2,
+  "releaseId": "designkit-starter-v1-r2",
   "status": "internal-trial",
   "description": "DesignKit Starter V1 是一个面向产品经理的零工程环境 Demo 生成包。用户无需安装 Node.js 或前端工程环境，AI 最终生成可直接在浏览器打开的单文件 HTML Demo。HTML 内部允许使用固定版本的 React UMD/CDN、Babel 和少量 JavaScript。",
   "defaultOutput": "single-html",
@@ -13,12 +13,13 @@
     "projectionSchemaVersion": "1",
     "capabilityPrefix": "starter.",
     "capabilitySummary": {
-      "total": 11,
+      "total": 12,
       "categories": {
         "templates": 4,
         "businessComponents": 1,
         "interaction": 3,
-        "foundation": 3
+        "foundation": 3,
+        "patterns": 1
       }
     },
     "referenceInventory": [
@@ -31,8 +32,20 @@
         "file": "references/capability-registry.md"
       },
       {
+        "id": "default-application-shell",
+        "file": "references/application-shell.md"
+      },
+      {
         "id": "template-selection",
         "file": "references/decisions/template-selection.md"
+      },
+      {
+        "id": "template-usage-contract",
+        "file": "references/template-usage-contract.md"
+      },
+      {
+        "id": "implementation-binding-contract",
+        "file": "references/implementation-binding-contract.md"
       },
       {
         "id": "interaction-pattern",
@@ -49,6 +62,10 @@
       {
         "id": "evidence-model",
         "file": "references/validation/evidence-model.md"
+      },
+      {
+        "id": "r2-validation-matrix",
+        "file": "references/validation/r2-validation-matrix.md"
       },
       {
         "id": "evidence-index",
@@ -75,8 +92,16 @@
         "file": "references/validation/evidence/starter-interaction-batch-actions.md"
       },
       {
-        "id": "conflict-table-toolbar-selected-business-exports",
-        "file": "references/validation/conflicts/table-toolbar-selected-business-exports.md"
+        "id": "evidence-starter-pattern-default-application-shell",
+        "file": "references/validation/evidence/starter-pattern-default-application-shell.md"
+      },
+      {
+        "id": "reference-default-application-shell",
+        "file": "patterns/default-application-shell.html"
+      },
+      {
+        "id": "reference-basic-list",
+        "file": "patterns/basic-list.html"
       }
     ],
     "projectionBoundary": {
@@ -115,6 +140,12 @@
   "businessCapabilityFiles": [
     "business-components/table-toolbar.md"
   ],
+  "patternCapabilities": [
+    "starter.pattern.default-application-shell"
+  ],
+  "patternCapabilityFiles": [
+    "references/application-shell.md"
+  ],
   "unsupported": [
     "vue-preview",
     "dashboard",
@@ -128,8 +159,49 @@
     "upload",
     "export",
     "react-project",
-    "vue-project"
+    "vue-project",
+    "custom-navigation-shell",
+    "navigation-api",
+    "dynamic-permission-menu",
+    "backend-driven-navigation",
+    "real-router",
+    "permission-routing",
+    "system-switch-backend-logic",
+    "react-vue-project-navigation-integration"
   ],
+  "referenceImplementations": [
+    {
+      "id": "default-application-shell",
+      "capability": "starter.pattern.default-application-shell",
+      "path": "patterns/default-application-shell.html",
+      "status": "approved reference implementation",
+      "golden": false,
+      "mainSlot": "approved-template"
+    },
+    {
+      "id": "basic-list",
+      "capability": "starter.template.basic-list",
+      "path": "patterns/basic-list.html",
+      "status": "approved template reference",
+      "golden": false
+    }
+  ],
+  "iconBinding": {
+    "source": "window.arcoicon",
+    "catalog": "Arco Design Icons",
+    "fixedPatternIcons": {
+      "notification": "IconNotification",
+      "lightToDark": "IconMoon",
+      "darkToLight": "IconSun",
+      "create": "IconPlus",
+      "more": "IconMore",
+      "delete": "IconDelete"
+    },
+    "businessMenuIcons": "Semantic Arco icon names only; validate each name at runtime before render"
+  },
+  "brandAssets": {
+    "starbucksSystemLogo": "assets/starbucks-system-logo.svg"
+  },
   "runtime": {
     "networkRequired": true,
     "browserBaseline": "current Chrome or Edge",
@@ -150,7 +222,7 @@
     "examples": "BROWSER_CONFIRMED_WITH_TEMP_SOURCE_RUNTIME",
     "browserSmoke": "BROWSER_CONFIRMED_WITH_TEMP_SOURCE_RUNTIME",
     "cdnHttpReachability": "CHECKED",
-    "phase": "starter-v1-r2-card-list-release-preparation",
+    "phase": "starter-v1-r2-formal-starter-integration",
     "localRuntime": "BROWSER_CONFIRMED"
   },
   "sourcePolicy": {

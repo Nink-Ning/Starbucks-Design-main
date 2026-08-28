@@ -13,12 +13,13 @@
     "projectionSchemaVersion": "1",
     "capabilityPrefix": "starter.",
     "capabilitySummary": {
-      "total": 11,
+      "total": 12,
       "categories": {
         "templates": 4,
         "businessComponents": 1,
         "interaction": 3,
-        "foundation": 3
+        "foundation": 3,
+        "patterns": 1
       }
     },
     "referenceInventory": [
@@ -29,6 +30,10 @@
       {
         "id": "capability-registry",
         "file": "references/capability-registry.md"
+      },
+      {
+        "id": "default-application-shell",
+        "file": "references/application-shell.md"
       },
       {
         "id": "template-selection",
@@ -85,6 +90,18 @@
       {
         "id": "evidence-starter-interaction-batch-actions",
         "file": "references/validation/evidence/starter-interaction-batch-actions.md"
+      },
+      {
+        "id": "evidence-starter-pattern-default-application-shell",
+        "file": "references/validation/evidence/starter-pattern-default-application-shell.md"
+      },
+      {
+        "id": "reference-default-application-shell",
+        "file": "patterns/default-application-shell.html"
+      },
+      {
+        "id": "reference-basic-list",
+        "file": "patterns/basic-list.html"
       }
     ],
     "projectionBoundary": {
@@ -123,6 +140,12 @@
   "businessCapabilityFiles": [
     "business-components/table-toolbar.md"
   ],
+  "patternCapabilities": [
+    "starter.pattern.default-application-shell"
+  ],
+  "patternCapabilityFiles": [
+    "references/application-shell.md"
+  ],
   "unsupported": [
     "vue-preview",
     "dashboard",
@@ -136,8 +159,49 @@
     "upload",
     "export",
     "react-project",
-    "vue-project"
+    "vue-project",
+    "custom-navigation-shell",
+    "navigation-api",
+    "dynamic-permission-menu",
+    "backend-driven-navigation",
+    "real-router",
+    "permission-routing",
+    "system-switch-backend-logic",
+    "react-vue-project-navigation-integration"
   ],
+  "referenceImplementations": [
+    {
+      "id": "default-application-shell",
+      "capability": "starter.pattern.default-application-shell",
+      "path": "patterns/default-application-shell.html",
+      "status": "approved reference implementation",
+      "golden": false,
+      "mainSlot": "approved-template"
+    },
+    {
+      "id": "basic-list",
+      "capability": "starter.template.basic-list",
+      "path": "patterns/basic-list.html",
+      "status": "approved template reference",
+      "golden": false
+    }
+  ],
+  "iconBinding": {
+    "source": "window.arcoicon",
+    "catalog": "Arco Design Icons",
+    "fixedPatternIcons": {
+      "notification": "IconNotification",
+      "lightToDark": "IconMoon",
+      "darkToLight": "IconSun",
+      "create": "IconPlus",
+      "more": "IconMore",
+      "delete": "IconDelete"
+    },
+    "businessMenuIcons": "Semantic Arco icon names only; validate each name at runtime before render"
+  },
+  "brandAssets": {
+    "starbucksSystemLogo": "assets/starbucks-system-logo.svg"
+  },
   "runtime": {
     "networkRequired": true,
     "browserBaseline": "current Chrome or Edge",
@@ -158,7 +222,7 @@
     "examples": "BROWSER_CONFIRMED_WITH_TEMP_SOURCE_RUNTIME",
     "browserSmoke": "BROWSER_CONFIRMED_WITH_TEMP_SOURCE_RUNTIME",
     "cdnHttpReachability": "CHECKED",
-    "phase": "starter-v1-r2-fidelity-projection-candidate",
+    "phase": "starter-v1-r2-formal-starter-integration",
     "localRuntime": "BROWSER_CONFIRMED"
   },
   "sourcePolicy": {

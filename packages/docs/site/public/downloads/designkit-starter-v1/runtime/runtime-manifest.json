@@ -1,9 +1,9 @@
 {
   "packageName": "@sbux/starbucks-design-react",
   "packageVersion": "1.1.22",
-  "sourceCommit": "f66b1d46e05ad295834759d113438c9f27a821dd",
-  "workspaceDirty": true,
-  "buildTime": "2026-08-24T09:49:59.378Z",
+  "sourceCommit": "e7d8a3d3704a377b057558722a9379af6bfa28b9",
+  "workspaceDirty": false,
+  "buildTime": "2026-08-28T09:36:32.126Z",
   "reactVersion": "18.3.1",
   "reactDomVersion": "18.3.1",
   "arcoVersion": "2.66.15",

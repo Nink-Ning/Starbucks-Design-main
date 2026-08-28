@@ -36,7 +36,7 @@
 | [`starter.template.basic-list`](starter-template-basic-list.md) | Interaction | Static Check | `PASS` | [Basic List Static Check](starter-template-basic-list.md#static-check-evidence--2026-08-25)、[Basic List Golden](../../../examples/list.html) | `2026-08-25` | 已静态验证 Search/Clear、Refresh、Pagination、Row Actions 和本地反馈连接；TableToolbar 仅限 Search + Refresh。 |
 | [`starter.template.basic-list`](starter-template-basic-list.md) | Interaction | Browser Validation | `UNVERIFIED` | None | `null` | 缺少带步骤和结果的 Starter 浏览器交互记录。 |
 | [`starter.template.basic-list`](starter-template-basic-list.md) | Visual Quality | Manual Review | `UNVERIFIED` | None | `null` | 尚无带日期和审查人的 Golden 对比记录。 |
-| [`starter.component.table-toolbar`](starter-component-table-toolbar.md) | Functional | Static Check | `CONFLICTED` | [Conflict Record](../conflicts/table-toolbar-selected-business-exports.md)、[Quality Checklist](../../quality-checklist.md#浏览器检查) | `2026-08-25` | Canonical conflict 已登记；Checklist 要求 `selectedBusinessExports`，当前 Runtime Manifest 不包含该字段。 |
+| [`starter.component.table-toolbar`](starter-component-table-toolbar.md) | Implementation Provenance | Static Check | `PASS` | [Runtime Evidence Resolution](../conflicts/table-toolbar-selected-business-exports.md)、[Quality Checklist](../../quality-checklist.md#浏览器检查) | `2026-08-26` | Canonical R2 resolution uses Runtime export/CSS evidence; `selectedBusinessExports` is not a Runtime schema field. |
 | [`starter.component.table-toolbar`](starter-component-table-toolbar.md) | Functional | Browser Validation | `UNVERIFIED` | None | `null` | 尚无按 Basic List 与 Card List 能力子集分别记录的 Runtime 执行证据。 |
 | [`starter.component.table-toolbar`](starter-component-table-toolbar.md) | Responsive | Browser Validation | `UNVERIFIED` | None | `null` | 尚无 Toolbar 容器响应式和页面溢出记录。 |
 | [`starter.component.table-toolbar`](starter-component-table-toolbar.md) | Theme | Browser Validation | `UNVERIFIED` | None | `null` | 尚无 Light/Dark 和操作状态记录。 |
@@ -55,14 +55,22 @@
 | [`starter.interaction.batch-actions`](starter-interaction-batch-actions.md) | Accessibility | Browser Validation | `PASS` | [Card List Accessibility Evidence](starter-template-card-list.md)、[Browser confirmation](../../quality-checklist.md#golden-example-当前状态) | `2026-08-25` | 已验证 Keyboard、Focus、可访问名称及可感知确认与反馈。 |
 | [`starter.interaction.batch-actions`](starter-interaction-batch-actions.md) | Interaction | Browser Validation | `PASS` | [Card List Interaction Evidence](starter-template-card-list.md)、[Browser confirmation](../../quality-checklist.md#golden-example-当前状态) | `2026-08-25` | 已验证选择依赖、空/非空状态、危险操作确认和完成反馈。 |
 | [`starter.interaction.batch-actions`](starter-interaction-batch-actions.md) | Visual Quality | Manual Review | `UNVERIFIED` | None | `null` | 尚无主要、次要和危险操作层级审查记录。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell Mode Decision | Static Check | `PASS` | [Default Application Shell Evidence](starter-pattern-default-application-shell.md) | `2026-08-28` | 已确认 `default`、`content-only`、`none` 三种模式和 no-fourth-mode 约束。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell Implementation Provenance | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已在只含新 R2 ZIP 内容的 clean-room 中确认 package-local Runtime、Shell、Template、Logo 和 `window.arcoicon` 绑定；Runtime/icon errors 为空。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | System / Side Sync | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已验证 1280px 的 260px 展开、56px 收起、Top/Side 同步、Logo-only 和系统选择恢复。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Theme Fidelity | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已验证 6 个 viewport/theme 组合、Moon/Sun target-mode label、整页主题切换及 `designkit-starter-theme` reload persistence。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Responsive Shell | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已验证 1280/768/390、24px Main spacing、Notification → Theme → Divider → User 和无 document-level overflow。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell / Template Ownership | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已验证 Default Shell continuous data region、content-only Basic List 和 none Card List 的导航边界。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Accessibility | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已验证 semantic regions、icon-only names、Context Help、active icon、row-action confirmation 和非颜色状态表达。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Visual Fidelity | Manual Review | `PASS` | [Human-approved Shell visual review](starter-pattern-default-application-shell.md) | `2026-08-28` | `DEFAULT_APPLICATION_SHELL_VISUAL_REVIEW = PASS`；不创建独立 Shell Golden。 |
 
 ## 3. Coverage summary
 
 | Measure | Count |
 | --- | ---: |
-| Prioritized capabilities registered | 5 |
-| Evidence records | 35 |
-| `PASS` | 15 |
+| Prioritized capabilities registered | 6 |
+| Evidence records | 43 |
+| `PASS` | 23 |
 | `UNVERIFIED` | 19 |
 | `CONFLICTED` | 1 |
 | `FAIL` / `BLOCKED` / `NOT_APPLICABLE` | 0 |

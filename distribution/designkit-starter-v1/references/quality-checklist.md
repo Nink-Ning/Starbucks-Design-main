@@ -8,6 +8,7 @@
 - [ ] 所有组件属性和事件均来自已查证 API。
 - [ ] 已确认使用本地 Mock 数据。
 - [ ] 已确认不需要真实接口、权限、上传、导出或工程项目。
+- [ ] 已在 Template Decision 后选择 Shell Mode；常规后台页默认 `default`，只有用户明确要求时使用 `content-only` 或 `none`。
 
 ## 路由检查
 
@@ -24,6 +25,9 @@
 - [ ] CDN 顺序正确。
 - [ ] 不包含 `import`、`export`、TypeScript、npm 或构建入口。
 - [ ] 组件来自 `StarbucksReact`，图标来自 `window.arcoicon`。
+- [ ] Default Shell 使用 `window.arcoicon.IconNotification`、`IconMoon`、`IconSun`，没有从 `StarbucksReact` 解构 icon。
+- [ ] Generic UI / navigation Icon 全部来自 `window.arcoicon`；固定 Pattern Icon 保持 `IconNotification`、`IconMoon`、`IconSun`、`IconPlus`、`IconMore`、`IconDelete`，Side 业务 Icon 为真实语义 Arco Icon，并逐一通过 `typeof window.arcoicon[iconName] !== 'undefined'`。
+- [ ] 没有新增 Theme API、Theme Provider 或只作用于 Shell 的 theme state。
 - [ ] Basic List 从 `StarbucksReact` 获取 `TableToolbar`，没有页面私有 `.dk-page__table-toolbar`、`.dk-page__toolbar-left` 或 `.dk-page__toolbar-right`。
 - [ ] JSX 位于 `script[type="text/babel"]`。
 - [ ] 输出只依赖 HTML、CSS、少量 JavaScript 和固定 CDN。
@@ -44,6 +48,21 @@
 - [ ] Basic List、Basic Form 和 Basic Detail 的页面 Header 与正式内容区间距为 10px，标题与右侧核心操作在桌面端垂直对齐。
 - [ ] Basic List、Basic Form 或 Basic Detail 存在页面状态演示时，状态 Select 位于 Header 右侧操作区最左侧，带有 `aria-label="页面状态"` 和 `data-demo-only="true"`，页面没有独立顶部状态卡片。
 - [ ] Mock 操作明确写成本地 Demo，不声称真实服务端成功。
+
+### Default Application Shell
+
+- [ ] `default` 固定为 Brand Top Menu + Collapsible Embedded Side Menu + approved Page Template；`content-only` 和 `none` 只响应用户明确要求。
+- [ ] Top 整体绑定 approved Brand Top Navigation subtree；固定引用 `assets/starbucks-system-logo.svg`，右侧顺序为 Notification → Theme Toggle → Divider → Avatar/User，Menu item 与 quick-action surface 未被 composition 自定义。
+- [ ] Avatar 无图片时使用与品牌色背景有清晰对比的默认填充，User area 没有 white/dark card-like container。
+- [ ] Light 显示 `IconMoon` 和“切换到深色模式”；Dark 显示 `IconSun` 和“切换到浅色模式”；`aria-label` 与 `title` 一致表达 target mode。
+- [ ] Side 使用 `StarbucksReact.Menu`、`collapse`、`hasCollapseButton`、`Menu.ItemGroup`、`Menu.SubMenu`；expanded/collapsed 为 260px/56px，没有 Starter-specific sidebar。
+- [ ] Light 设置 `html[data-theme="light"]` 并移除 body 的 `arco-theme` / `data-arco-theme`；Dark 设置 `html[data-theme="dark"]` 和两个 body dark attributes。
+- [ ] `designkit-starter-theme` 只存 `light` / `dark`；优先级为 explicit local choice → `prefers-color-scheme` → light fallback。
+- [ ] Theme 同时作用于 Top、Side、Main 和所有组件。
+- [ ] Shell 没有吸收 Page Header、Breadcrumb、Toolbar/Filter、内容、Pagination、page state、Mock data、page interaction 或 Basic List `4px / 16px / 16px`。
+- [ ] Side Navigation 存在没有被当作 Breadcrumb 必需条件。
+- [ ] 390px 保留 Brand/system identity、Notification、Theme Toggle、User access；没有 Drawer、Hamburger、Bottom Navigation、Overlay Navigation 或新 mobile pattern。
+- [ ] 没有 Custom Navigation Shell、Navigation API、dynamic permission menu、backend-driven navigation、real router、permission routing、system switch backend logic 或 React/Vue navigation integration。
 
 ### Basic List
 
@@ -106,6 +125,8 @@
 - [ ] 关键状态可以切换或演示。
 - [ ] 预览结果与 React 视觉基准一致。
 - [ ] 页面自身 `body` 无异常横向溢出；宽表格只在组件容器内滚动。
+- [ ] Default Shell test-only fixture 和最终 ZIP package-only smoke 在 1280/768/390 和 Light/Dark 下验证 Top/Side/Main 可用且 document-level overflow 为 `NONE`；未执行时标记 `UNVERIFIED`。
+- [ ] Default Shell 的 Top/Side/actions 支持键盘、可见 Focus 和可访问名称，Focus order 为 Top → Side → Main。
 - [ ] 失败状态提供恢复方向；Loading 不重复提交；Empty 文案与业务查询结果区分。
 - [ ] 已运行 `git diff --check`。
 

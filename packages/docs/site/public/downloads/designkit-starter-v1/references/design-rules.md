@@ -48,9 +48,10 @@
 - 次要操作使用默认、文本或下拉操作。
 - 以下搜索、工具栏、内容容器和表格行操作规则只适用于 Basic List，不自动应用于 Card List。
 - Basic List 的搜索和表格工具按钮使用真实 `TableToolbar`；无批量操作时筛选器和 Search 位于 Start，表格工具保持在 End。Basic List 当前只启用 Search + Refresh，不显示导出、列设置或批量操作占位入口。
-- Basic List 内容容器遵循 Figma `2915:51892`：上、横向、下内边距为 `12px 24px 24px`；`TableToolbar` 控件顶部距容器顶部为 `24px`，控件底部距表格顶部为 `12px`，Toolbar 与 Table 之间不附加页面级 gap。
+- Basic List 的 Continuous Data Region 使用模板专属的 `4px 16px 16px`（上、横向、下）内边距；这不是 Universal List Spacing Token。Toolbar 与 Table 之间不附加页面级 gap。
 - 表格“查看、编辑”等页面内行操作使用 `Button type="text"`，并放入 Runtime 提供的 `sbux-table-row-actions` 作用域以获得品牌色；不得为了颜色改用 Link，也不得在页面 CSS 中覆盖 `.arco-btn-text`。
-- 危险操作使用明确文案和危险状态，不使用模糊的“确定”。
+- Card List 批量上架、移动、删除分别绑定 Starter Runtime 的 `IconPlus`、`IconSwap`、`IconDelete`；删除入口默认使用 neutral/default/secondary treatment 并保留确认。Card 外圆角遵循当前 Golden 的 12px 基线，内容区顶部/下方分别为 10px/12px；这些是模板几何关系，不是全局 Token。
+- 危险操作使用明确文案和确认流程，不使用模糊的“确定”；红色保留给 error/status 等语义状态。
 - Loading 时禁用重复提交，并保留用户已经输入的数据。
 - 操作反馈要说明成功、失败和下一步，而不只显示“操作失败”。
 

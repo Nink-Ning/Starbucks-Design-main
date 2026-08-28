@@ -21,7 +21,7 @@ Runtime Internal Validation
 
 ## 2. Validation categories
 
-每个维度独立判定；任一维度的 `PASS` 不会自动推导其他维度通过：`Capability Selection`、`Template Selection`、`Template Usage`、`Implementation Provenance`、`Component Fidelity`、`Brand Fidelity`、`Theme Fidelity`、`Structural Anatomy Fidelity`、`Geometry / Composition Fidelity`、`Interaction Fidelity`、`State Coverage`、`Responsive Fidelity`、`Accessibility`、`Visual Fidelity`、`Release / Package Integrity`。
+每个维度独立判定；任一维度的 `PASS` 不会自动推导其他维度通过：`Capability Selection`、`Template Selection`、`Template Usage`、`Implementation Provenance`、`Shell Mode Decision`、`Shell Implementation Provenance`、`Icon Binding`、`Top Menu Fidelity`、`Side Menu Fidelity`、`Theme Toggle Behavior`、`Theme Scope`、`Responsive Shell`、`Shell / Template Ownership`、`No Navigation Capability Leakage`、`Component Fidelity`、`Brand Fidelity`、`Theme Fidelity`、`Structural Anatomy Fidelity`、`Geometry / Composition Fidelity`、`Interaction Fidelity`、`State Coverage`、`Responsive Fidelity`、`Accessibility`、`Visual Fidelity`、`Release / Package Integrity`。
 
 ### 2.1 Functional
 
@@ -82,6 +82,16 @@ Runtime Internal Validation
 **Evidence Required:** 实际页面截图与 Manual Review；Browser Validation 提供 viewport、theme 和状态上下文。源码或 Golden 路径本身不是视觉证据。
 
 **Pass Criteria:** 无影响理解或操作的结构和样式偏差，无明显错位、裁切、重叠或未处理状态。
+
+### 2.7 Default Application Shell
+
+**Purpose:** 确认 `starter.pattern.default-application-shell` 只按 [Application Shell Contract](../application-shell.md) 包裹已选 Template。
+
+**Check:** Shell Mode、approved Brand Top Navigation subtree、当前菜单名称标题位、Top action order、Menu item/Notification/Badge/Theme Toggle/Divider/Avatar/User treatment、固定 Starbucks logo、头像默认填充对比、Side collapse、target-mode Theme Toggle、whole-page Theme Scope、Shell/Template ownership、Breadcrumb independence、Basic List `4px / 16px / 16px`、Icon Binding、Accessibility、Navigation leakage，以及 1280/768/390 document overflow。每个 Generic UI Icon 必须来自 `window.arcoicon` 并通过存在性检查；expanded rail、collapsed 56px rail 和 active item 的 Icon 必须可见。390px 不得引入 Drawer、Hamburger、Bottom Navigation、Overlay Navigation 或 mobile-specific new pattern。
+
+**Evidence Required:** 需要 Knowledge/Projection contract tests、test-only composition fixture 和最终 Starter ZIP 的 package-only clean-room，完成 Light/Dark Browser Validation、1280/768/390 viewport/overflow records 和 keyboard walk-through。Fixture 不是 Golden，Docs clipping 不是 Starter evidence。
+
+**Pass Criteria:** 默认 `default`，显式 `content-only` / `none` 正确；Runtime Menu/icon/theme bindings 正确；Template ownership 未被 Shell 吸收；三个 viewport 无 document-level overflow；无 Navigation engineering leakage。现有组件限制冲突时标记 `RESPONSIVE CONTRACT BLOCKED`。
 
 ## 3. Evidence semantics
 

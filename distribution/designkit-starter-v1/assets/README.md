@@ -2,6 +2,8 @@
 
 `base-page.css` 只提供 Starter V1 示例需要的页面级布局能力：容器、区块、工具栏、表单网格、响应式和表格局部溢出。
 
+`starbucks-system-logo.svg` 是 Default Application Shell 固定使用的 Starbucks DesignKit 品牌 Logo。它属于品牌资产例外，不是 Generic UI Icon；生成输出应继续引用该 package-local asset，不得用文字、Emoji 或占位形状替代。
+
 ## 可以使用
 
 - 页面级语义类名；
