@@ -434,7 +434,7 @@ export default function Demo() {
           </div>,
           actionHost
         )}
-    <div className="sb-filter-list-page">
+    <div className="sb-filter-list-page sb-template-page-surface">
       <section className="sb-filter-list-page__module">
         <FilterBar
           fields={fields}

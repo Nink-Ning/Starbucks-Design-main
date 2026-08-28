@@ -336,7 +336,7 @@ export default function Demo() {
           </div>,
           actionHost
         )}
-    <div className="sb-tree-filter-list-page">
+    <div className="sb-tree-filter-list-page sb-template-page-surface">
       <div className={`sb-tree-filter-list-page__layout${sidebarCollapsed ? ' is-sidebar-collapsed' : ''}`}>
         <aside className="sb-tree-filter-list-page__sidebar">
           <div className="sb-tree-filter-list-page__sidebar-header">

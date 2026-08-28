@@ -1,0 +1,162 @@
+{
+  "name": "DesignKit Starter V1",
+  "releaseLine": "V1",
+  "releaseRevision": 1,
+  "releaseId": "designkit-starter-v1-r1",
+  "status": "internal-trial",
+  "description": "DesignKit Starter V1 是一个面向产品经理的零工程环境 Demo 生成包。用户无需安装 Node.js 或前端工程环境，AI 最终生成可直接在浏览器打开的单文件 HTML Demo。HTML 内部允许使用固定版本的 React UMD/CDN、Babel 和少量 JavaScript。",
+  "defaultOutput": "single-html",
+  "visualBaseline": "starbucks-design-react",
+  "knowledge": {
+    "starterKnowledgeVersion": "1.0.0",
+    "sourceKnowledgeVersion": "1.0.0",
+    "projectionSchemaVersion": "1",
+    "capabilityPrefix": "starter.",
+    "capabilitySummary": {
+      "total": 11,
+      "categories": {
+        "templates": 4,
+        "businessComponents": 1,
+        "interaction": 3,
+        "foundation": 3
+      }
+    },
+    "referenceInventory": [
+      {
+        "id": "profile-routing",
+        "file": "references/profile-routing.md"
+      },
+      {
+        "id": "capability-registry",
+        "file": "references/capability-registry.md"
+      },
+      {
+        "id": "template-selection",
+        "file": "references/decisions/template-selection.md"
+      },
+      {
+        "id": "interaction-pattern",
+        "file": "references/decisions/interaction-pattern.md"
+      },
+      {
+        "id": "golden-example-mapping",
+        "file": "references/golden-example-mapping.md"
+      },
+      {
+        "id": "validation-contract",
+        "file": "references/validation/validation-contract.md"
+      },
+      {
+        "id": "evidence-model",
+        "file": "references/validation/evidence-model.md"
+      },
+      {
+        "id": "evidence-index",
+        "file": "references/validation/evidence/evidence-index.md"
+      },
+      {
+        "id": "evidence-starter-template-basic-list",
+        "file": "references/validation/evidence/starter-template-basic-list.md"
+      },
+      {
+        "id": "evidence-starter-template-card-list",
+        "file": "references/validation/evidence/starter-template-card-list.md"
+      },
+      {
+        "id": "evidence-starter-component-table-toolbar",
+        "file": "references/validation/evidence/starter-component-table-toolbar.md"
+      },
+      {
+        "id": "evidence-starter-interaction-selection",
+        "file": "references/validation/evidence/starter-interaction-selection.md"
+      },
+      {
+        "id": "evidence-starter-interaction-batch-actions",
+        "file": "references/validation/evidence/starter-interaction-batch-actions.md"
+      },
+      {
+        "id": "conflict-table-toolbar-selected-business-exports",
+        "file": "references/validation/conflicts/table-toolbar-selected-business-exports.md"
+      }
+    ],
+    "projectionBoundary": {
+      "profile": "Starter",
+      "audience": "Non-Developer",
+      "output": "Single HTML",
+      "runtime": "Fixed Runtime",
+      "excluded": [
+        "React/Vue",
+        "Developer API",
+        "Docs Full"
+      ]
+    }
+  },
+  "supportedTemplates": [
+    "basic-list",
+    "card-list",
+    "basic-form",
+    "basic-detail"
+  ],
+  "examples": [
+    "examples/list.html",
+    "examples/multi-select-card-list.html",
+    "examples/form.html",
+    "examples/detail.html"
+  ],
+  "templateFiles": [
+    "templates/list.md",
+    "templates/card-list.md",
+    "templates/form.md",
+    "templates/detail.md"
+  ],
+  "businessCapabilities": [
+    "table-toolbar"
+  ],
+  "businessCapabilityFiles": [
+    "business-components/table-toolbar.md"
+  ],
+  "unsupported": [
+    "vue-preview",
+    "dashboard",
+    "login",
+    "result",
+    "advanced-filter-bar",
+    "cross-page-selection",
+    "complex-batch-actions",
+    "real-api",
+    "permission-system",
+    "upload",
+    "export",
+    "react-project",
+    "vue-project"
+  ],
+  "runtime": {
+    "networkRequired": true,
+    "browserBaseline": "current Chrome or Edge",
+    "react": "18.3.1",
+    "reactDom": "18.3.1",
+    "arcoReact": "2.66.15",
+    "starbucksReactRuntime": "runtime/starbucks-react.umd.js + runtime/starbucks-react.css",
+    "starbucksReactPackageVersion": "1.1.22",
+    "babelStandalone": "7.29.8"
+  },
+  "output": {
+    "directory": "output",
+    "extension": ".html",
+    "singleFile": true,
+    "usesLocalMock": true
+  },
+  "validation": {
+    "examples": "BROWSER_CONFIRMED_WITH_TEMP_SOURCE_RUNTIME",
+    "browserSmoke": "BROWSER_CONFIRMED_WITH_TEMP_SOURCE_RUNTIME",
+    "cdnHttpReachability": "CHECKED",
+    "phase": "starter-v1-r2-card-list-release-preparation",
+    "localRuntime": "BROWSER_CONFIRMED"
+  },
+  "sourcePolicy": {
+    "mode": "adapted-not-copied",
+    "componentSourceIncluded": false,
+    "vueSourceIncluded": false,
+    "docsSourceIncluded": false
+  }
+}

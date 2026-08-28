@@ -10,7 +10,7 @@
     </div>
   </Teleport>
 
-  <div class="sb-tree-filter-list-page">
+  <div class="sb-tree-filter-list-page sb-template-page-surface">
     <div :class="['sb-tree-filter-list-page__layout', { 'is-sidebar-collapsed': sidebarCollapsed }]">
       <aside class="sb-tree-filter-list-page__sidebar">
         <div class="sb-tree-filter-list-page__sidebar-header">

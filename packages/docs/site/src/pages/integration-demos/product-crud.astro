@@ -1,0 +1,50 @@
+---
+import ProductCrudDemo from '../../demos/integration/product-crud/ProductCrudDemo'
+
+export const prerender = true
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DesignKit Docs Full integration demo for an enterprise product operations CRUD workflow."
+    />
+    <title>Product Operations · DesignKit Integration Demo</title>
+  </head>
+  <body>
+    <ProductCrudDemo client:only="react" />
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    min-width: 320px;
+    min-height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: var(--bg-color-page);
+    color: var(--color-text-1);
+    font-family: var(--font-family);
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+</style>

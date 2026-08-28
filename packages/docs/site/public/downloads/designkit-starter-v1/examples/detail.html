@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>卡券详情 | DesignKit Starter V1</title>
+  <style>
+    :root {
+      --dk-page-max-width: 1280px;
+      --dk-page-background: #f5f6f7;
+      --dk-page-surface: #ffffff;
+      --dk-page-text: #1d2129;
+      --dk-page-muted: #86909c;
+      --dk-page-border: #e5e6eb;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--dk-page-background);
+      color: var(--dk-page-text);
+      font-family: "Noto Sans SC", "Poppins", Roboto, sans-serif;
+    }
+
+    #root {
+      min-height: 100vh;
+    }
+
+    .dk-runtime-error {
+      box-sizing: border-box;
+      width: min(calc(100% - 32px), 720px);
+      margin: 48px auto;
+      padding: 24px;
+      border: 1px solid #f3b7b7;
+      border-radius: 8px;
+      background: #fff7f7;
+      color: #8b1e1e;
+      line-height: 1.7;
+    }
+
+    .dk-runtime-error h1 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .dk-runtime-error p {
+      margin: 0;
+    }
+
+    .dk-demo-shell {
+      min-width: 0;
+      padding: 16px 0 40px;
+    }
+
+    .dk-page {
+      box-sizing: border-box;
+      width: min(calc(100% - 48px), var(--dk-page-max-width));
+      min-width: 0;
+      margin: 0 auto;
+      font-family: var(--font-family);
+    }
+
+    .dk-page__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .dk-page__header-main {
+      min-width: 0;
+    }
+
+    .dk-page__title-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dk-page__title {
+      margin: 0;
+      color: var(--dk-page-text);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+    }
+
+    .dk-page__title-help {
+      display: inline-flex;
+      align-items: center;
+      color: var(--dk-page-muted);
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .dk-page__header-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+
+    .dk-detail__surface {
+      box-sizing: border-box;
+      min-width: 0;
+      padding: 24px 32px 32px;
+      border-radius: 8px;
+      background: var(--dk-page-surface);
+    }
+
+    .dk-detail__normal,
+    .dk-detail__state {
+      min-width: 0;
+    }
+
+    .dk-detail__state {
+      display: flex;
+      justify-content: center;
+      min-height: 320px;
+      padding: 32px 0;
+    }
+
+    .dk-detail__state > * {
+      max-width: 100%;
+    }
+
+    @media (max-width: 720px) {
+      .dk-page {
+        width: min(calc(100% - 32px), var(--dk-page-max-width));
+      }
+
+      .dk-page__header {
+        gap: 16px;
+      }
+
+      .dk-page__header-actions {
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      .dk-detail__surface {
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .dk-demo-shell {
+        padding-top: 8px;
+      }
+
+      .dk-page__header-actions {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="dk-runtime-error" role="status">
+      <h1>正在加载卡券详情 Demo</h1>
+      <p>正在加载 Starbucks Design 运行资源。如果页面长时间没有显示，请检查网络连接后刷新。</p>
+    </div>
+  </div>
+
+  <script>
+    window.__designKitStarterCdnErrors = [];
+    window.__designKitStarterRuntimeErrors = [];
+    window.addEventListener('error', function (event) {
+      if (event.target && event.target.tagName === 'SCRIPT' && event.target.src) {
+        window.__designKitStarterCdnErrors.push(event.target.src);
+      } else if (event.message) {
+        window.__designKitStarterRuntimeErrors.push(event.message);
+      }
+    }, true);
+  </script>
+
+  <!-- Fixed runtime: React 18.3.1 -->
+  <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <!-- Fixed runtime: Arco React 2.66.15 -->
+  <script src="https://cdn.jsdelivr.net/npm/@arco-design/web-react@2.66.15/dist/arco.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@arco-design/web-react@2.66.15/dist/arco-icon.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <!-- Starter local runtime: generated from the current React workspace build -->
+  <link rel="stylesheet" href="../runtime/starbucks-react.css" onerror="window.__designKitStarterCdnErrors.push(this.href)">
+  <script src="../runtime/starbucks-react.umd.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <!-- Fixed runtime: Babel Standalone 7.29.8 -->
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.29.8/babel.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+
+  <script type="text/babel">
+    const requiredRuntimeExports = [
+      'Button',
+      'Dropdown',
+      'Empty',
+      'Menu',
+      'Message',
+      'Result',
+      'Select',
+      'Skeleton',
+      'Tooltip',
+      'DetailPageLayout',
+      'DetailSection',
+      'DetailDescriptions',
+    ];
+
+    function showRuntimeError(messages) {
+      const root = document.getElementById('root');
+      root.innerHTML = `
+        <div class="dk-runtime-error" role="alert">
+          <h1>Starter Runtime 加载失败</h1>
+          <p>${messages.join('<br>')}</p>
+          <p>请确认使用本地 HTTP 服务打开此文件，并检查固定 CDN 和 Starter runtime 是否可访问。</p>
+        </div>
+      `;
+    }
+
+    const runtimeProblems = [];
+    if (!window.React || !window.ReactDOM || !window.StarbucksReact) {
+      runtimeProblems.push('React、ReactDOM 或 Starbucks Design React Runtime 未完整加载。');
+    }
+    if (window.__designKitStarterCdnErrors.length) {
+      runtimeProblems.push(`资源加载失败：${window.__designKitStarterCdnErrors.join('、')}`);
+    }
+
+    if (runtimeProblems.length) {
+      showRuntimeError(runtimeProblems);
+    } else {
+      const missingRuntimeExports = requiredRuntimeExports.filter((name) => !StarbucksReact[name]);
+      if (missingRuntimeExports.length) {
+        showRuntimeError([`Starter Runtime 缺少详情能力：${missingRuntimeExports.join('、')}`]);
+      } else {
+        const { useState } = React;
+        const {
+          Button,
+          DetailDescriptions,
+          DetailPageLayout,
+          DetailSection,
+          Dropdown,
+          Empty,
+          Menu,
+          Message,
+          Result,
+          Select,
+          Skeleton,
+          Tooltip,
+        } = StarbucksReact;
+        const { IconInfoCircle } = window.arcoicon || {};
+
+        const couponBasicInfo = [
+          { label: 'ID', value: '15008867' },
+          { label: 'BPM工单号', value: 'PO20250605180337094976' },
+          { label: '领券链路要求', value: '会员通' },
+          { label: '券中文名称', value: '全场满50减6元券' },
+          { label: '券英文名称', value: '6rmb off for ordering over 50rmb' },
+          { label: '非预付费券编号/SKU', value: 'SKU_0000102229' },
+          { label: 'QID', value: 'QID_0000102229' },
+          { label: '发行商户', value: '2088-高德MOP(码)' },
+          { label: '券类型', value: '电子' },
+          { label: '预热券', value: 'N' },
+          { label: '门店查看名称', value: '' },
+          { label: '门店查看描述', value: '' },
+        ];
+
+        const stateOptions = [
+          { label: 'Normal', value: 'normal' },
+          { label: 'Loading', value: 'loading' },
+          { label: 'Empty', value: 'empty' },
+          { label: 'Error', value: 'error' },
+        ];
+
+        function DetailDemo() {
+          const [viewMode, setViewMode] = useState('normal');
+
+          const copyCoupon = () => {
+            const copyText = `ID：15008867；券中文名称：全场满50减6元券`;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              void navigator.clipboard.writeText(copyText)
+                .then(() => Message.success('已复制卡券信息（Starter V1 Demo）'))
+                .catch(() => Message.info('复制能力不可用，已模拟复制卡券信息（Starter V1 Demo）'));
+            } else {
+              Message.info('复制能力不可用，已模拟复制卡券信息（Starter V1 Demo）');
+            }
+          };
+
+          const renderState = () => {
+            if (viewMode === 'loading') {
+              return (
+                <div className="dk-detail__state" data-state="loading">
+                  <Skeleton loading animation text={{ rows: 6 }} />
+                </div>
+              );
+            }
+
+            if (viewMode === 'empty') {
+              return (
+                <div className="dk-detail__state" data-state="empty">
+                  <Empty description="暂无详情数据。" />
+                </div>
+              );
+            }
+
+            if (viewMode === 'error') {
+              return (
+                <div className="dk-detail__state" data-state="error">
+                  <Result
+                    status="error"
+                    title="详情数据加载失败"
+                    subTitle="当前为 Starter V1 本地错误状态演示。"
+                    extra={<Button type="primary" onClick={() => setViewMode('normal')}>恢复正常状态</Button>}
+                  />
+                </div>
+              );
+            }
+
+            return (
+              <div className="dk-detail__normal" data-state="normal">
+                <DetailPageLayout maxWidth={1120}>
+                  <DetailSection>
+                    <DetailDescriptions data={couponBasicInfo} emptyValue="—" />
+                  </DetailSection>
+                </DetailPageLayout>
+              </div>
+            );
+          };
+
+          return (
+            <div className="dk-demo-shell">
+              <main className="dk-page">
+                <header className="dk-page__header">
+                  <div className="dk-page__header-main">
+                    <div className="dk-page__title-row">
+                      <h1 className="dk-page__title">卡券详情</h1>
+                      {Tooltip && IconInfoCircle && (
+                        <Tooltip mini content="查看和确认卡券基础信息，用于验证产品方案。">
+                          <span className="dk-page__title-help" aria-label="页面说明"><IconInfoCircle /></span>
+                        </Tooltip>
+                      )}
+                    </div>
+                  </div>
+                  <div className="dk-page__header-actions">
+                    <span data-demo-only="true">
+                      <Select
+                        aria-label="页面状态"
+                        options={stateOptions}
+                        value={viewMode}
+                        onChange={setViewMode}
+                        style={{ width: 120 }}
+                      />
+                    </span>
+                    <Dropdown
+                      droplist={(
+                        <Menu onClickMenuItem={(key) => {
+                          if (key === 'copy') copyCoupon();
+                        }}>
+                          <Menu.Item key="copy">复制卡券</Menu.Item>
+                        </Menu>
+                      )}
+                    >
+                      <Button>更多</Button>
+                    </Dropdown>
+                    <Button type="primary" onClick={() => Message.info('这是 Starter V1 编辑入口 Mock，未进入真实编辑页面。')}>
+                      编辑
+                    </Button>
+                  </div>
+                </header>
+
+                <section className="dk-detail__surface">
+                  {renderState()}
+                </section>
+              </main>
+            </div>
+          );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<DetailDemo />);
+      }
+    }
+  </script>
+
+  <script>
+    window.setTimeout(function () {
+      const root = document.getElementById('root');
+      const loadingPanel = root && root.querySelector('.dk-runtime-error');
+      if (!loadingPanel || (!window.__designKitStarterCdnErrors.length && window.React && window.ReactDOM && window.StarbucksReact && window.Babel)) {
+        return;
+      }
+      const errors = window.__designKitStarterCdnErrors.length
+        ? `资源加载失败：${window.__designKitStarterCdnErrors.join('、')}`
+        : 'Babel、React 或 Starbucks Design React Runtime 未完整加载。';
+      loadingPanel.setAttribute('role', 'alert');
+      loadingPanel.innerHTML = `<h1>Starter Runtime 加载失败</h1><p>${errors}</p><p>请确认使用本地 HTTP 服务打开此文件，并检查固定 CDN 和 Starter runtime 是否可访问。</p>`;
+    }, 0);
+  </script>
+</body>
+</html>

@@ -14,7 +14,7 @@
     </div>
   </Teleport>
 
-  <div class="sb-filter-list-page">
+  <div class="sb-filter-list-page sb-template-page-surface">
     <section class="sb-filter-list-page__module">
       <FilterBar
         :fields="fields"

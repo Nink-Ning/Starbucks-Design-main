@@ -1,18 +1,6 @@
 // Tag.less
-// Auto-generated from Figma Design System V2.0
-// Generated: 2026-07-04
-// DO NOT EDIT MANUALLY — edit scripts/generate-overrides.py instead.
+// Maintained manually with shared Design Tokens and the approved Figma Tag contract.
 
-// ═══════════════════════════════════════════
-// Tag — Figma Design Tokens
-// ═══════════════════════════════════════════
-//
-// All design tokens are GLOBAL — this component references
-// them through CSS custom properties defined in theme.css.
-// This file documents which tokens apply and adds any
-// component-specific overrides (focus shadows, effects, etc.).
-//
-// Component-specific style overrides:
 .arco-tag {
   display: inline-flex;
   align-items: center;
@@ -24,8 +12,8 @@
   font-size: var(--fs-12);
   font-weight: var(--fw-regular);
   line-height: var(--lh-20);
-  background-color: transparent;
-  border: 1px solid var(--color-border-component);
+  background-color: var(--bg-color-container-hover);
+  border: 1px solid transparent;
   border-radius: var(--border-radius-sm);
 }
 
@@ -49,16 +37,77 @@
 }
 
 .arco-tag-size-large {
-  height: 32px;
+  height: 30px;
   padding: 0 var(--spacing-5);
-  font-size: var(--fs-14);
-  line-height: var(--lh-22);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
 }
 
-.arco-tag-bordered {
-  border-color: var(--color-border-component);
+// Standard tags map to Figma's light treatment. The supported Starbucks
+// semantic colors intentionally consolidate Arco's compatible color aliases.
+.arco-tag.arco-tag-checked:is(
+    .arco-tag-arcoblue,
+    .arco-tag-blue,
+    .arco-tag-green,
+    .arco-tag-lime
+  ) {
+  color: var(--color-primary);
+  background-color: var(--color-success-focus);
+  border-color: transparent;
 }
 
+.arco-tag.arco-tag-checked:is(
+    .arco-tag-orange,
+    .arco-tag-orangered,
+    .arco-tag-gold
+  ) {
+  color: var(--color-warning);
+  background-color: var(--color-warning-light);
+  border-color: transparent;
+}
+
+.arco-tag.arco-tag-checked:is(.arco-tag-red, .arco-tag-magenta) {
+  color: var(--color-danger);
+  background-color: var(--color-danger-light);
+  border-color: transparent;
+}
+
+.arco-tag.arco-tag-checked.arco-tag-gray {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container-hover);
+  border-color: transparent;
+}
+
+// A bordered standard tag maps to Figma's light-outline treatment.
+.arco-tag.arco-tag-bordered:not(.arco-tag-checkable) {
+  border-color: var(--color-border-1);
+}
+
+.arco-tag.arco-tag-checked.arco-tag-bordered:is(
+    .arco-tag-arcoblue,
+    .arco-tag-blue,
+    .arco-tag-green,
+    .arco-tag-lime
+  ):not(.arco-tag-checkable) {
+  border-color: var(--color-primary);
+}
+
+.arco-tag.arco-tag-checked.arco-tag-bordered:is(
+    .arco-tag-orange,
+    .arco-tag-orangered,
+    .arco-tag-gold
+  ):not(.arco-tag-checkable) {
+  border-color: var(--color-warning);
+}
+
+.arco-tag.arco-tag-checked.arco-tag-bordered:is(
+    .arco-tag-red,
+    .arco-tag-magenta
+  ):not(.arco-tag-checkable) {
+  border-color: var(--color-danger);
+}
+
+// Checkable tags use outline when unselected and dark when selected.
 .arco-tag-checkable {
   cursor: pointer;
 }
@@ -66,106 +115,161 @@
 .arco-tag-checkable:not(.arco-tag-checked) {
   color: var(--color-text-primary);
   background-color: transparent;
-  border-color: var(--color-border-component);
+  border-color: var(--color-border-1);
 }
 
 .arco-tag-checkable:not(.arco-tag-checked):hover {
   background-color: var(--bg-color-container-hover);
 }
 
-.arco-tag-checked {
+.arco-tag-checkable.arco-tag-checked {
   color: var(--color-text-primary);
-  background-color: transparent;
-  border-color: var(--color-border-component);
-}
-
-.arco-tag-checked:hover,
-.arco-tag-checkable.arco-tag-checked:hover {
-  background-color: var(--bg-color-container-hover);
-}
-
-.arco-tag-checked.arco-tag-bordered {
-  border-color: var(--color-border-component);
-}
-
-.arco-tag-checked.arco-tag-arcoblue,
-.arco-tag-checked.arco-tag-blue {
-  color: var(--color-primary);
-  background-color: var(--color-primary-light);
+  background-color: var(--color-border-1);
   border-color: transparent;
 }
 
-.arco-tag-checked.arco-tag-arcoblue.arco-tag-bordered,
-.arco-tag-checked.arco-tag-blue.arco-tag-bordered {
+.arco-tag-checkable.arco-tag-checked:hover {
+  background-color: var(--bg-color-component-hover);
+  border-color: transparent;
+}
+
+.arco-tag.arco-tag-checkable:not(.arco-tag-checked):is(
+    .arco-tag-arcoblue,
+    .arco-tag-blue,
+    .arco-tag-green,
+    .arco-tag-lime
+  ) {
+  color: var(--color-primary);
+  background-color: transparent;
   border-color: var(--color-primary);
 }
 
-.arco-tag-checked.arco-tag-orange,
-.arco-tag-checked.arco-tag-orangered,
-.arco-tag-checked.arco-tag-gold {
-  color: var(--color-warning-hover);
-  background-color: var(--color-warning-light);
+.arco-tag.arco-tag-checkable:not(.arco-tag-checked):is(
+    .arco-tag-arcoblue,
+    .arco-tag-blue,
+    .arco-tag-green,
+    .arco-tag-lime
+  ):hover {
+  background-color: var(--color-success-focus);
+}
+
+.arco-tag.arco-tag-checkable.arco-tag-checked:is(
+    .arco-tag-arcoblue,
+    .arco-tag-blue,
+    .arco-tag-green,
+    .arco-tag-lime
+  ) {
+  color: var(--color-white-text-1);
+  background-color: var(--color-primary);
   border-color: transparent;
 }
 
-.arco-tag-checked.arco-tag-orange.arco-tag-bordered,
-.arco-tag-checked.arco-tag-orangered.arco-tag-bordered,
-.arco-tag-checked.arco-tag-gold.arco-tag-bordered {
-  border-color: var(--color-warning-hover);
+.arco-tag.arco-tag-checkable.arco-tag-checked:is(
+    .arco-tag-arcoblue,
+    .arco-tag-blue,
+    .arco-tag-green,
+    .arco-tag-lime
+  ):hover {
+  background-color: var(--color-primary-hover);
 }
 
-.arco-tag-checked.arco-tag-red,
-.arco-tag-checked.arco-tag-magenta {
-  color: var(--color-danger-hover);
-  background-color: var(--color-danger-light);
-  border-color: transparent;
-}
-
-.arco-tag-checked.arco-tag-red.arco-tag-bordered,
-.arco-tag-checked.arco-tag-magenta.arco-tag-bordered {
-  border-color: var(--color-danger-hover);
-}
-
-.arco-tag-checked.arco-tag-green,
-.arco-tag-checked.arco-tag-lime {
-  color: var(--color-success-hover);
-  background-color: var(--color-success-light);
-  border-color: transparent;
-}
-
-.arco-tag-checked.arco-tag-green.arco-tag-bordered,
-.arco-tag-checked.arco-tag-lime.arco-tag-bordered {
-  border-color: var(--color-success-hover);
-}
-
-.arco-tag-checked.arco-tag-gray {
-  color: var(--color-text-primary);
+.arco-tag.arco-tag-checkable:not(.arco-tag-checked):is(
+    .arco-tag-orange,
+    .arco-tag-orangered,
+    .arco-tag-gold
+  ) {
+  color: var(--color-warning);
   background-color: transparent;
-  border-color: var(--color-border-component);
+  border-color: var(--color-warning);
 }
 
-.arco-tag-checked.arco-tag-gray.arco-tag-bordered {
-  border-color: var(--color-border-component);
+.arco-tag.arco-tag-checkable:not(.arco-tag-checked):is(
+    .arco-tag-orange,
+    .arco-tag-orangered,
+    .arco-tag-gold
+  ):hover {
+  background-color: var(--color-warning-light);
+}
+
+.arco-tag.arco-tag-checkable.arco-tag-checked:is(
+    .arco-tag-orange,
+    .arco-tag-orangered,
+    .arco-tag-gold
+  ) {
+  color: var(--color-white-text-1);
+  background-color: var(--color-warning);
+  border-color: transparent;
+}
+
+.arco-tag.arco-tag-checkable.arco-tag-checked:is(
+    .arco-tag-orange,
+    .arco-tag-orangered,
+    .arco-tag-gold
+  ):hover {
+  background-color: var(--color-warning-hover);
+}
+
+.arco-tag.arco-tag-checkable:not(.arco-tag-checked):is(
+    .arco-tag-red,
+    .arco-tag-magenta
+  ) {
+  color: var(--color-danger);
+  background-color: transparent;
+  border-color: var(--color-danger);
+}
+
+.arco-tag.arco-tag-checkable:not(.arco-tag-checked):is(
+    .arco-tag-red,
+    .arco-tag-magenta
+  ):hover {
+  background-color: var(--color-danger-light);
+}
+
+.arco-tag.arco-tag-checkable.arco-tag-checked:is(
+    .arco-tag-red,
+    .arco-tag-magenta
+  ) {
+  color: var(--color-white-text-1);
+  background-color: var(--color-danger);
+  border-color: transparent;
+}
+
+.arco-tag.arco-tag-checkable.arco-tag-checked:is(
+    .arco-tag-red,
+    .arco-tag-magenta
+  ):hover {
+  background-color: var(--color-danger-hover);
 }
 
 .arco-tag-custom-color {
-  color: #fff;
+  color: var(--color-white-text-1);
 }
 
 .arco-tag-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
   margin-right: var(--spacing-2);
   color: inherit;
-  font-size: inherit;
+  font-size: var(--fs-14);
+  line-height: 1;
+}
+
+.arco-tag-size-large .arco-tag-icon {
+  margin-right: var(--spacing-4);
+  font-size: var(--fs-16);
 }
 
 .arco-tag .arco-tag-close-btn,
 .arco-tag-loading-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
   margin-left: var(--spacing-4);
   color: var(--color-text-secondary);
   font-size: var(--fs-14);
-}
-
-.arco-tag .arco-tag-close-btn {
   line-height: 1;
 }
 
@@ -178,54 +282,66 @@
 .arco-tag .arco-tag-close-btn:hover::before,
 .arco-tag .arco-icon-hover::before,
 .arco-tag .arco-icon-hover:hover::before {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
-.arco-tag-arcoblue .arco-tag-close-btn,
-.arco-tag-blue .arco-tag-close-btn {
+.arco-tag:is(
+    .arco-tag-arcoblue,
+    .arco-tag-blue,
+    .arco-tag-green,
+    .arco-tag-lime
+  ) :is(.arco-tag-close-btn, .arco-tag-loading-icon) {
   color: var(--color-primary);
 }
 
-.arco-tag-arcoblue .arco-tag-close-btn:hover,
-.arco-tag-blue .arco-tag-close-btn:hover {
+.arco-tag:is(
+    .arco-tag-arcoblue,
+    .arco-tag-blue,
+    .arco-tag-green,
+    .arco-tag-lime
+  ) .arco-tag-close-btn:hover {
   color: var(--color-primary-hover);
 }
 
-.arco-tag-green .arco-tag-close-btn,
-.arco-tag-lime .arco-tag-close-btn {
-  color: var(--color-success);
-}
-
-.arco-tag-green .arco-tag-close-btn:hover,
-.arco-tag-lime .arco-tag-close-btn:hover {
-  color: var(--color-success-hover);
-}
-
-.arco-tag-orange .arco-tag-close-btn,
-.arco-tag-orangered .arco-tag-close-btn,
-.arco-tag-gold .arco-tag-close-btn {
+.arco-tag:is(
+    .arco-tag-orange,
+    .arco-tag-orangered,
+    .arco-tag-gold
+  ) :is(.arco-tag-close-btn, .arco-tag-loading-icon) {
   color: var(--color-warning);
 }
 
-.arco-tag-orange .arco-tag-close-btn:hover,
-.arco-tag-orangered .arco-tag-close-btn:hover,
-.arco-tag-gold .arco-tag-close-btn:hover {
+.arco-tag:is(
+    .arco-tag-orange,
+    .arco-tag-orangered,
+    .arco-tag-gold
+  ) .arco-tag-close-btn:hover {
   color: var(--color-warning-hover);
 }
 
-.arco-tag-red .arco-tag-close-btn,
-.arco-tag-magenta .arco-tag-close-btn {
+.arco-tag:is(.arco-tag-red, .arco-tag-magenta)
+  :is(.arco-tag-close-btn, .arco-tag-loading-icon) {
   color: var(--color-danger);
 }
 
-.arco-tag-red .arco-tag-close-btn:hover,
-.arco-tag-magenta .arco-tag-close-btn:hover {
+.arco-tag:is(.arco-tag-red, .arco-tag-magenta) .arco-tag-close-btn:hover {
   color: var(--color-danger-hover);
 }
 
-.arco-tag-custom-color .arco-tag-close-btn,
+.arco-tag.arco-tag-checkable.arco-tag-checked:is(
+    .arco-tag-arcoblue,
+    .arco-tag-blue,
+    .arco-tag-green,
+    .arco-tag-lime,
+    .arco-tag-orange,
+    .arco-tag-orangered,
+    .arco-tag-gold,
+    .arco-tag-red,
+    .arco-tag-magenta
+  ) :is(.arco-tag-close-btn, .arco-tag-loading-icon),
+.arco-tag-custom-color :is(.arco-tag-close-btn, .arco-tag-loading-icon),
 .arco-tag-custom-color .arco-tag-close-btn:hover {
-  color: var(--color-white);
+  color: var(--color-white-text-1);
 }
 
 .arco-tag.add-tag {
@@ -247,11 +363,11 @@
 .arco-tag-size-small .arco-tag-close-btn,
 .arco-tag-size-small .arco-tag-loading-icon {
   margin-left: var(--spacing-2);
-  font-size: var(--fs-12);
+  font-size: var(--fs-14);
 }
 
 .arco-tag-size-large .arco-tag-close-btn,
 .arco-tag-size-large .arco-tag-loading-icon {
-  margin-left: var(--spacing-4);
+  margin-left: var(--spacing-5);
   font-size: var(--fs-16);
 }

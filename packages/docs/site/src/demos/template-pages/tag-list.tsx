@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Button,
   Dropdown,
@@ -201,24 +202,27 @@ export default function Demo() {
     },
   ];
 
+  const actionHost =
+    typeof document === 'undefined'
+      ? null
+      : document.querySelector<HTMLElement>('[data-template-action-host="tag-list"]');
+
   return (
-    <div className="sb-tag-list-page">
-      <header className="sb-tag-list-page__header">
-        <div className="sb-tag-list-page__title">
-          <span>客户标签</span>
-          <Tooltip content="用于维护客户标签组和标签数据">
-            <IconInfoCircle aria-label="客户标签说明" />
-          </Tooltip>
-        </div>
-        <div className="sb-tag-list-page__header-actions">
-          <Button type="primary" icon={<IconUpload />} onClick={() => Message.info('已触发全局操作')}>
-            全局操作
-          </Button>
-          <Button type="outline" icon={<IconUpload />} onClick={() => Message.info('已触发核心操作')}>
-            核心操作
-          </Button>
-        </div>
-      </header>
+    <>
+      {actionHost &&
+        createPortal(
+          <div className="sb-tag-list-page__breadcrumb-actions">
+            <Button type="outline" icon={<IconUpload />} onClick={() => Message.info('已触发核心操作')}>
+              核心操作
+            </Button>
+            <Button type="primary" icon={<IconUpload />} onClick={() => Message.info('已触发全局操作')}>
+              全局操作
+            </Button>
+          </div>,
+          actionHost
+        )}
+
+      <div className="sb-tag-list-page sb-template-page-surface">
 
       <section className="sb-tag-list-page__card">
         <aside className="sb-tag-list-page__sidebar">
@@ -403,6 +407,7 @@ export default function Demo() {
           </label>
         </div>
       </Modal>
-    </div>
+      </div>
+    </>
   );
 }

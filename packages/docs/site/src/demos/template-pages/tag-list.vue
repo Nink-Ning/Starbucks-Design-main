@@ -172,26 +172,20 @@ function handleTagSearch(value: string) {
 </script>
 
 <template>
-  <div class="sb-tag-list-page">
-    <header class="sb-tag-list-page__header">
-      <div class="sb-tag-list-page__title">
-        <span>客户标签</span>
-        <a-tooltip content="用于维护客户标签组和标签数据">
-          <IconInfoCircle aria-label="客户标签说明" />
-        </a-tooltip>
-      </div>
-      <div class="sb-tag-list-page__header-actions">
-        <a-button type="primary" @click="Message.info('已触发全局操作')">
-          <template #icon><IconUpload /></template>
-          全局操作
-        </a-button>
-        <a-button type="outline" @click="Message.info('已触发核心操作')">
-          <template #icon><IconUpload /></template>
-          核心操作
-        </a-button>
-      </div>
-    </header>
+  <Teleport to="[data-template-action-host='tag-list']">
+    <div class="sb-tag-list-page__breadcrumb-actions">
+      <a-button type="outline" @click="Message.info('已触发核心操作')">
+        <template #icon><IconUpload /></template>
+        核心操作
+      </a-button>
+      <a-button type="primary" @click="Message.info('已触发全局操作')">
+        <template #icon><IconUpload /></template>
+        全局操作
+      </a-button>
+    </div>
+  </Teleport>
 
+  <div class="sb-tag-list-page sb-template-page-surface">
     <section class="sb-tag-list-page__card">
       <aside class="sb-tag-list-page__sidebar">
         <h2>标签组</h2>
