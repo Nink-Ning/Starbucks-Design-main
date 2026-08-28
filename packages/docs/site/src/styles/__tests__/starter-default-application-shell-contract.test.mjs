@@ -179,6 +179,6 @@ test('Starter prompts default, preserve, and review the approved Shell contract'
   assert.match(newDemo, /未填写时为 default/)
   assert.match(newDemo, /常规后台页默认使用 `default`/)
   assert.match(refineDemo, /refinement 不得重新设计 Shell/)
-  assert.match(reviewDemo, /是否使用批准.*Top\/Side Menu|是否使用批准的 Brand Top Menu/)
+  assert.match(reviewDemo, /是否使用批准.*Top\/Side Menu|是否使用批准的 Brand Top Menu|是否整体复用批准的 Brand Top Navigation subtree/)
   assert.match(reviewDemo, /是否泄漏 Custom Navigation Shell/)
 })

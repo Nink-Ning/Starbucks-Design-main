@@ -37,9 +37,6 @@ const [group, current] = pages.get(normalized) ?? [undefined, undefined];
   {group && <span>{group}</span>}
   <span aria-hidden="true">/</span>
   <span aria-current="page">{current}</span>
-  {normalized === 'templates/data-list/basic-list' && (
-    <div class="sb-template-page-breadcrumb__actions" data-template-action-host="basic-list"></div>
-  )}
   {normalized === 'templates/data-list/filter-list' && (
     <div class="sb-template-page-breadcrumb__actions" data-template-action-host="filter-list"></div>
   )}

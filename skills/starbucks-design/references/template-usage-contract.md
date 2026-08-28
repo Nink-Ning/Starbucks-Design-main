@@ -87,6 +87,10 @@ Continuous Data Region
     └── Pagination
 ```
 
+Basic List 的 approved template reference 是 `distribution/designkit-starter-v1/patterns/basic-list.html`，authoritative Docs implementation 是 `packages/docs/site/src/demos/template-pages/basic-list.tsx` 与 `basic-list.vue`。Shell 组合必须把该完整 subtree mount 到 Shell Main Slot；不得拆开后重新生成 Page Header、Toolbar、Table、Row Actions 或 Pagination。
+
+Page Header 的稳定结构为 `Page Title + optional Context Help + Header Actions`。`CONTEXT_HELP` 存在时使用 title-adjacent、keyboard-accessible Help control 展示说明，禁止生成 persistent page subtitle。Basic List 的 structural signature 为 `Page Header → TableToolbar(Filter Region + Action Region) → Table → Pagination`。
+
 ### Continuous Data Region
 
 Toolbar、Table 和 Pagination 必须作为一个连续的数据管理区域工作。默认禁止生成：

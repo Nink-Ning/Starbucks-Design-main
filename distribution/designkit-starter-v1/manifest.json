@@ -94,6 +94,14 @@
       {
         "id": "evidence-starter-pattern-default-application-shell",
         "file": "references/validation/evidence/starter-pattern-default-application-shell.md"
+      },
+      {
+        "id": "reference-default-application-shell",
+        "file": "patterns/default-application-shell.html"
+      },
+      {
+        "id": "reference-basic-list",
+        "file": "patterns/basic-list.html"
       }
     ],
     "projectionBoundary": {
@@ -161,6 +169,39 @@
     "system-switch-backend-logic",
     "react-vue-project-navigation-integration"
   ],
+  "referenceImplementations": [
+    {
+      "id": "default-application-shell",
+      "capability": "starter.pattern.default-application-shell",
+      "path": "patterns/default-application-shell.html",
+      "status": "approved reference implementation",
+      "golden": false,
+      "mainSlot": "approved-template"
+    },
+    {
+      "id": "basic-list",
+      "capability": "starter.template.basic-list",
+      "path": "patterns/basic-list.html",
+      "status": "approved template reference",
+      "golden": false
+    }
+  ],
+  "iconBinding": {
+    "source": "window.arcoicon",
+    "catalog": "Arco Design Icons",
+    "fixedPatternIcons": {
+      "notification": "IconNotification",
+      "lightToDark": "IconMoon",
+      "darkToLight": "IconSun",
+      "create": "IconPlus",
+      "more": "IconMore",
+      "delete": "IconDelete"
+    },
+    "businessMenuIcons": "Semantic Arco icon names only; validate each name at runtime before render"
+  },
+  "brandAssets": {
+    "starbucksSystemLogo": "assets/starbucks-system-logo.svg"
+  },
   "runtime": {
     "networkRequired": true,
     "browserBaseline": "current Chrome or Edge",

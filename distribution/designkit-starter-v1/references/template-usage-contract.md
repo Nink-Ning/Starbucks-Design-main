@@ -29,6 +29,10 @@ Continuous Data Region
     └── Pagination
 ```
 
+The approved Basic List template reference is `patterns/basic-list.html`; the composition layer must mount the complete subtree into the Shell Main Slot instead of reconstructing Page Header, Toolbar, Table, Row Actions or Pagination. Its stable signature is `Page Header → TableToolbar (Filter Region + Action Region) → Table → Pagination`.
+
+When `CONTEXT_HELP` exists, keep a title-adjacent, keyboard-accessible Context Help control for the explanation. Do not generate a persistent page subtitle. Header actions remain in the template-owned Header Actions region.
+
 Toolbar, Table and Pagination are one continuous region. Do not add a default Toolbar Card, Summary Card and Table Card stack, duplicate borders/radii/shadows or unnecessary page-level gaps. The page owns the composition and state; each component owns only its internal layout.
 
 Card List preserves the approved compact horizontal media/content relationship, title and metadata hierarchy, selection anchor, compact footer, action relationship, grid relationship and responsive column behavior. Do not invent a tall media banner, marketing-card hierarchy, new chrome, selected badge, card-body selection or a different density model.

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
 import {
   Button,
   Checkbox,
@@ -15,6 +14,7 @@ import {
   Table,
   TableToolbar,
   Tag,
+  Tooltip,
 } from '@sbux/starbucks-design-react';
 import type {
   TableColumnProps,
@@ -27,6 +27,7 @@ import {
   IconCloseCircle,
   IconMore,
   IconMinusCircle,
+  IconInfoCircle,
   IconPlus,
 } from '@sbux/starbucks-design-react/icon';
 
@@ -365,35 +366,40 @@ export default function Demo() {
   ];
 
   const columns = allColumns.filter((column, index) => visibleColumnKeys.includes(columnOptions[index].key));
-  const actionHost =
-    typeof document === 'undefined'
-      ? null
-      : document.querySelector<HTMLElement>('[data-template-action-host="basic-list"]');
-
   return (
-    <>
-      {actionHost &&
-        createPortal(
-          <div className="sb-basic-list-page__breadcrumb-actions">
-            <Select
-              aria-label="页面状态"
-              style={{ width: 120 }}
-              value={viewMode}
-              options={[
-                { label: 'Normal', value: 'normal' },
-                { label: 'Loading', value: 'loading' },
-                { label: 'Empty', value: 'empty' },
-                { label: 'Error', value: 'error' },
-              ]}
-              onChange={(value) => setViewMode(value as ViewMode)}
-            />
-            <Button type="primary" icon={<IconPlus />} onClick={() => setCreateModalVisible(true)}>
-              新建门店
-            </Button>
-          </div>,
-          actionHost
-        )}
     <div className="sb-basic-list-page sb-template-page-surface">
+      <header className="sb-basic-list-page__header">
+        <div className="sb-basic-list-page__title">
+          <h1>门店列表</h1>
+          <Tooltip content="用于维护门店信息、营业状态和门店类型" trigger={['hover', 'focus']}>
+            <span
+              className="sb-basic-list-page__title-help"
+              role="button"
+              tabIndex={0}
+              aria-label="门店列表说明"
+            >
+              <IconInfoCircle aria-hidden="true" />
+            </span>
+          </Tooltip>
+        </div>
+        <div className="sb-basic-list-page__header-actions">
+          <Select
+            aria-label="页面状态"
+            style={{ width: 120 }}
+            value={viewMode}
+            options={[
+              { label: 'Normal', value: 'normal' },
+              { label: 'Loading', value: 'loading' },
+              { label: 'Empty', value: 'empty' },
+              { label: 'Error', value: 'error' },
+            ]}
+            onChange={(value) => setViewMode(value as ViewMode)}
+          />
+          <Button type="primary" icon={<IconPlus />} onClick={() => setCreateModalVisible(true)}>
+            新建门店
+          </Button>
+        </div>
+      </header>
       <section className="sb-basic-list-page__module sb-basic-list-page__table-module">
         <TableToolbar
           selectedCount={selectedRowKeys.length}
@@ -512,6 +518,5 @@ export default function Demo() {
         </div>
       </Modal>
     </div>
-    </>
   );
 }

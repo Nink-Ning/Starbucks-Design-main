@@ -258,8 +258,8 @@ body {
 .dk-shell-fixture__user {
   min-width: 0;
   height: var(--spacing-10);
-  padding: 0 var(--spacing-2);
-  gap: var(--spacing-2);
+  padding: var(--spacing-1) var(--spacing-2);
+  gap: var(--spacing-4);
   color: var(--color-white-text-1);
   font: inherit;
   background: transparent;
@@ -283,6 +283,21 @@ body {
   width: var(--spacing-10);
   height: var(--spacing-10);
   flex: 0 0 var(--spacing-10);
+  color: var(--color-primary);
+  background-color: rgb(243 247 244);
+}
+
+.dk-shell-fixture__user-slot {
+  min-width: 0;
+  gap: var(--spacing-2);
+}
+
+.dk-shell-fixture__user-arrow {
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+  flex: 0 0 var(--spacing-6);
+  color: var(--color-white-text-1);
+  font-size: var(--fs-14);
 }
 
 .dk-shell-fixture__user-name {
@@ -347,12 +362,35 @@ body {
   flex-wrap: wrap;
 }
 
+.dk-shell-fixture__page-header-main,
+.dk-shell-fixture__page-title-row,
+.dk-shell-fixture__page-title-help {
+  display: flex;
+  align-items: center;
+}
+
+.dk-shell-fixture__page-title-row {
+  gap: var(--spacing-2);
+}
+
 .dk-shell-fixture__page-title {
   margin: 0;
   color: var(--color-text-primary);
   font-size: var(--fs-16);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-24);
+}
+
+.dk-shell-fixture__page-title-help {
+  color: var(--color-text-secondary);
+  cursor: help;
+  font-size: var(--fs-16);
+  line-height: 1;
+}
+
+.dk-shell-fixture__page-title-help:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .dk-shell-fixture__page-actions {

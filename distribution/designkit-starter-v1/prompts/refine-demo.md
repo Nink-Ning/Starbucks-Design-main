@@ -9,6 +9,7 @@
 请遵守 DesignKit Starter V1：
 - 先根据当前文件和对应模板确认页面类型，并在修改中保持该模板类型；
 - 读取 `references/application-shell.md`，保持当前 `default` / `content-only` / `none`；refinement 不得重新设计 Shell 或自行改变 Shell Mode；
+- 读取 manifest 的 `referenceImplementations`，保持当前 Shell reference、Template reference、Main Slot 和完整 template subtree；只修改允许的 business slots/data，不重写 Page Header、Toolbar、Table、Row Actions 或 Pagination；
 - 如果当前页面使用 `default`，保持 Top 的 System Switch 与 Side 的 collapse 共享状态：展开为 260px，收起为 56px 且顶部只保留 Logo；不得把已有 Shell 改成另一套导航；
 - 不得把 Basic List 与 Card List 自动互相转换；如果修改目标确实要求换模板，先说明结构和行为影响并等待确认；
 - 保持单文件 HTML 输出；
@@ -19,12 +20,14 @@
 - 不复制组件源码；
 - 不添加宽泛 .arco-* 覆盖或 !important；
 - Default Shell 保持批准的 Top/Side Menu、action order、`window.arcoicon`、whole-page Theme DOM binding 和 `designkit-starter-theme` persistence；不新增 Theme Provider；
+- 保持 Reference 中的 Icon Binding：固定 Pattern Icon 不重新选择；Side 业务菜单 Icon 必须是可在 `window.arcoicon` 上访问的真实语义 Icon；逐一执行 `typeof window.arcoicon[iconName] !== 'undefined'`，不得留下 undefined 或空白 Icon slot；
 - Shell 继续只拥有 outer layout，不吸收 Breadcrumb、Toolbar、Template spacing 或 Basic List `4px / 16px / 16px`；
 - 390px 不引入 Drawer、Hamburger、Bottom Navigation、Overlay Navigation 或其他新 mobile navigation；
 - 检查 Normal、Loading、Empty、Error 和窄屏结果；
 - 不把本地 Mock 反馈写成真实服务端成功；
 - 不添加对应模板范围外的 FilterBar、导出、列设置、批量、Upload、Card、Timeline 或 Tabs；Card List 仅保留其模板内的页面选择和轻量批量操作；
 - 基础列表保持使用真实 `StarbucksReact.TableToolbar`，Search 位于 Start、Refresh 位于 End，不恢复页面私有工具栏；
+- Basic List 保持 `Page Title + optional Context Help + Header Actions`，不得把 contextual explanation 回退为 persistent page subtitle；Quick Filter 继续属于 TableToolbar Filter Region；
 - 卡片列表保持 Selection Control 是唯一选择入口，Card Actions 与 Batch Actions 独立，Toolbar 与 Grid 独立响应，标题省略且暗色模式和可访问状态完整；
 - 已有页面状态演示时，状态 Select 保持在 Header 右侧操作区最左侧，不恢复独立顶部状态卡片；
 - 表格查看、编辑等页面内行操作保持品牌色文字 Button 和 `sbux-table-row-actions`，不通过 Link 或页面 CSS 改色；

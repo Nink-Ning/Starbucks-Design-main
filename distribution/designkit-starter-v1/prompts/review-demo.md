@@ -11,6 +11,7 @@
 - references/quality-checklist.md
 - references/application-shell.md
 - references/implementation-binding-contract.md
+- manifest.json 中 `referenceImplementations` 指向的 Shell 和 Template reference
 - 对应的页面模板
 
 请按以下顺序检查：
@@ -36,13 +37,17 @@
 20. Card List 的暗色语义色和 Selected、Hover、Focus、Disabled 是否可读且不只依赖颜色或透明度。
 21. Checkbox、Card Actions、Batch Actions、More Menu 和图标按钮是否支持键盘、可见 Focus 和可访问名称。
 22. Shell Mode 是否只为 `default` / `content-only` / `none`，且常规后台页默认 `default`。
-23. Default Shell 是否使用批准的 Brand Top Menu 和 Collapsible Embedded Side Menu，Top action order 是否为 Store/System Switch → Notification → Theme Toggle → Divider → Avatar/User。
+23. Default Shell 是否整体复用批准的 Brand Top Navigation subtree，固定使用 Starbucks logo，当前菜单名称是否作为标题展示，且 Top action order 是否为 Notification → Theme Toggle → Divider → Avatar/User。
 24. Theme Toggle 是否用 `window.arcoicon.IconMoon` / `IconSun` 表达 target mode，Notification 是否用 `IconNotification`，且没有 Theme Provider。
-25. Theme 是否通过 html/body attributes 作用于 Top、Side、Main 和所有组件，localStorage 是否使用 `designkit-starter-theme` 的批准优先级。
-26. Shell 是否保持 Template anatomy、Breadcrumb independence 和 Basic List `4px / 16px / 16px` ownership。
-27. 1280/768/390 是否符合 Side 260/56/56、required global actions 和 document overflow contract；390 是否没有发明 Drawer、Hamburger、Bottom Navigation 或新 mobile pattern。
-28. 是否泄漏 Custom Navigation Shell、Navigation API、dynamic permission menu、backend-driven navigation、real router、permission routing、system switch backend logic 或 React/Vue project navigation integration。
-29. 如果需求是普通后台页且没有导航说明，是否解析为 Basic List 或其他已选 Template + `default` Shell；如果已有导航或明确 standalone，是否分别使用 `content-only` 或 `none`。
+25. 所有 Generic UI / navigation Icon 是否来自 `window.arcoicon`，固定 Pattern Icon 是否保持 `IconNotification`、`IconMoon`、`IconSun`、`IconPlus`、`IconMore`、`IconDelete`；是否不存在 Emoji、手绘 SVG、CSS Icon、第三方 Icon 或虚构 Icon 名称；每个使用的 Icon 是否通过 `typeof window.arcoicon[iconName] !== 'undefined'`。
+26. Theme 是否通过 html/body attributes 作用于 Top、Side、Main 和所有组件，localStorage 是否使用 `designkit-starter-theme` 的批准优先级。
+27. Shell 是否保持 Template anatomy、Breadcrumb independence 和 Basic List `4px / 16px / 16px` ownership。
+28. 1280/768/390 是否符合 Side 260/56/56、required global actions 和 document overflow contract；390 是否没有发明 Drawer、Hamburger、Bottom Navigation 或新 mobile pattern；展开、收起和 active item 的 Side Icon 是否可见。
+29. 是否泄漏 Custom Navigation Shell、Navigation API、dynamic permission menu、backend-driven navigation、real router、permission routing、system switch backend logic 或 React/Vue project navigation integration。
+30. 如果需求是普通后台页且没有导航说明，是否解析为 Basic List 或其他已选 Template + `default` Shell；如果已有导航或明确 standalone，是否分别使用 `content-only` 或 `none`。
+31. 是否实际使用 approved Shell Reference 和 Template Reference；是否通过 Shell Main Slot 挂载完整 Template subtree，而不是重新创建 Template chrome。
+32. Basic List 是否保持 Page Title + Context Help（无 persistent subtitle）、TableToolbar Filter Region、approved Row Actions 和 `TableToolbar → Table → Pagination` structural signature。
+33. Approved Top Nav reference 与 Composed Shell Top Nav 是否对齐 Menu item treatment、Notification/Badge、Theme Toggle、Divider、Avatar/User；头像无图片默认填充是否与品牌色背景有清晰对比，差异是否仅为业务 label/data。
 
 请输出：
 - 通过项；

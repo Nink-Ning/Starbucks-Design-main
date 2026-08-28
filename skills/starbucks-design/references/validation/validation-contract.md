@@ -31,6 +31,7 @@ Runtime Internal Validation
 | Implementation Provenance | Runtime resources + approved exports + Runtime-backed DOM |
 | Shell Mode Decision | User intent + resolved `default` / `content-only` / `none` trace |
 | Shell Implementation Provenance | Application Shell contract + Runtime Menu/icon/theme binding evidence |
+| Icon Binding | `window.arcoicon` source + fixed mapping + per-icon runtime existence and visibility evidence |
 | Top Menu Fidelity | Approved composition/order + rendered Top evidence |
 | Side Menu Fidelity | Approved collapse/width/state + rendered Side evidence |
 | Theme Toggle Behavior | target-mode icon/label + actual Light/Dark transition |
@@ -143,7 +144,7 @@ Card List 的 `Normal`、`Loading`、`Empty`、`Error` 和 `Retry` 属于状态�
 
 **Purpose:** 确认 `starter.pattern.default-application-shell` 只按 [Default Application Shell Contract](../application-shell.md) 包裹已选 Template，并且没有泄漏完整 Navigation engineering capability。
 
-**Check:** 分别检查 Shell Mode Decision、Top action order、Side collapse binding、target-mode Theme Toggle、whole-page Theme Scope、Shell/Template ownership、Breadcrumb independence、Basic List `4px / 16px / 16px` ownership、Accessibility，以及 1280/768/390 下的 document overflow。390px 不得引入 Drawer、Hamburger、Bottom Navigation、Overlay Navigation 或 mobile-specific new pattern。
+**Check:** 分别检查 Shell Mode Decision、Top action order、Side collapse binding、target-mode Theme Toggle、whole-page Theme Scope、Shell/Template ownership、Breadcrumb independence、Basic List `4px / 16px / 16px` ownership、Icon Binding、Accessibility，以及 1280/768/390 下的 document overflow。每个 Generic UI Icon 必须来自 `window.arcoicon` 并通过存在性检查；expanded rail、collapsed 56px rail 和 active item 的 Icon 必须可见。390px 不得引入 Drawer、Hamburger、Bottom Navigation、Overlay Navigation 或 mobile-specific new pattern。
 
 **Evidence Required:** 本阶段需要 Source/Projection contract tests。后续实现阶段必须使用独立 test-only composition fixture，提供 Static provenance、Light/Dark Browser Validation、1280/768/390 viewport/overflow records、keyboard walk-through 和必要截图。Docs Demo clipping 不是 Starter evidence，fixture 也不是 Starter Golden。
 

@@ -21,6 +21,8 @@ references/cdn-runtime.md
 references/template-usage-contract.md
 references/implementation-binding-contract.md
 references/application-shell.md
+patterns/default-application-shell.html
+patterns/<对应模板 reference>.html
 templates/<对应页面类型>.md
 ```
 
@@ -46,6 +48,8 @@ templates/<对应页面类型>.md
 - 常规后台页面默认使用 `default`：DesignKit 标准顶部导航 + 可折叠侧边菜单 + 已选页面模板，并支持全局 Light / Dark 切换。
 - 如果已有系统框架并且系统已经有顶部和侧边导航，请明确要求 `content-only`，只生成页面模板内容区。
 - 如果需要独立 Demo，请明确要求 `none`，不生成顶部导航或侧边菜单。
+
+Shell 与 Template 组合时，必须从 manifest 的 `referenceImplementations` 加载 approved reference；先将完整模板 subtree 放入 Shell Main Slot，再只替换允许的业务 slots。Reference asset 不是 Golden，也不是公共 API。
 
 不需要在需求中重复描述批准的导航样式；如果需要自定义导航体系、真实路由或权限菜单，该需求超出当前 Starter 边界。
 

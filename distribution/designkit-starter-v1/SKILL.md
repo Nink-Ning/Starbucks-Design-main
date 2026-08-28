@@ -53,7 +53,13 @@ Capability Registry Lookup
     ↓
     Shell Mode Decision
     ↓
+    Shell Reference Binding
+    ↓
+    Template Reference Binding
+    ↓
     Implementation Binding Contract
+    ↓
+    Icon Binding Validation
     ↓
     Interaction Decision
     ↓
@@ -72,11 +78,12 @@ Evidence Record
 4. 页面请求读取 Template Selection；确定模板后再读取对应 Template。
 5. 读取 [Template Usage Contract](references/template-usage-contract.md)，确保 Selected、Used 和 Fidelity 不被混淆。
 6. 读取 [Default Application Shell Contract](references/application-shell.md)，在 Template Decision 后解析 `default`、`content-only` 或 `none`；没有用户覆盖时使用 `default`。
-7. 读取 [Implementation Binding Contract](references/implementation-binding-contract.md)，将已批准的 Runtime、图标和主题绑定到实际 HTML。
-8. 需要选择、批量操作、More 或操作范围判断时读取 Interaction Pattern。
-9. 读取 Golden Mapping；页面 Template 的 Golden 只作为只读组合参考，Default Application Shell 只使用 `IMPLEMENTATION REFERENCE`、test-only fixture strategy 和 package-only clean-room evidence。
-10. 按 Validation Contract 确定适用检查和 Pass Criteria。
-11. 按 Evidence Model 记录实际 Method、Evidence Location、Result 和未验证项。
+7. 按 manifest 的 `referenceImplementations` 绑定 approved Shell reference 和已选 Template reference；先加载完整 approved subtree，再执行允许的 business slot/data substitution。
+8. 读取 [Implementation Binding Contract](references/implementation-binding-contract.md)，将已批准的 Runtime、图标和主题绑定到实际 HTML，并记录 Reference Used；Generic UI Icon 必须从 `window.arcoicon` 绑定，固定 Pattern Icon 和 Side 业务 Icon 逐一做 runtime existence validation。
+9. 需要选择、批量操作、More 或操作范围判断时读取 Interaction Pattern。
+10. 读取 Golden Mapping；页面 Template 的 Golden 只作为只读组合参考，Default Application Shell 只使用 approved reference、test-only fixture strategy 和 package-only clean-room evidence。
+11. 按 Validation Contract 确定适用检查和 Pass Criteria。
+12. 按 Evidence Model 记录实际 Method、Evidence Location、Result 和未验证项。
 
 只加载当前 Capability 所需的 references，不一次性加载全部模板和组件知识。
 
@@ -88,6 +95,7 @@ Evidence Record
 | Starter 是否登记并允许该能力？ | [Capability Registry](references/capability-registry.md) |
 | 应选择哪个页面模板？ | [Template Selection](references/decisions/template-selection.md) |
 | 已选模板使用哪种 Shell Mode？ | [Default Application Shell Contract](references/application-shell.md) |
+| Shell 和已选模板如何保持批准实现？ | `manifest.json` 的 `referenceImplementations`、`patterns/default-application-shell.html`、`patterns/basic-list.html` |
 | 单对象、批量、More 和 Selection 如何决策？ | [Interaction Pattern](references/decisions/interaction-pattern.md) |
 | Capability 对应哪个 Template、Golden 和 Validation？ | [Golden Example Mapping](references/golden-example-mapping.md) |
 | 已选 Template 如何保留页面结构和响应式关系？ | [Template Usage Contract](references/template-usage-contract.md) |

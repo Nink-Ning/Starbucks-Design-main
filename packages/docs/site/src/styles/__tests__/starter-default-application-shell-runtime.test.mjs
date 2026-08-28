@@ -18,7 +18,7 @@ test('runtime-backed fixture binds real Runtime navigation and arco icons', asyn
   const fixture = await read('packages/docs/site/src/styles/__tests__/fixtures/default-application-shell.html')
 
   assert.match(fixture, /const \{[\s\S]*?Menu,[\s\S]*?\} = window\.StarbucksReact/)
-  assert.match(fixture, /<Menu className="dk-shell-fixture__top-menu" mode="horizontal"/)
+  assert.match(fixture, /<Menu className="dk-shell-fixture__top-menu"[\s\S]*?mode="horizontal"/)
   assert.match(fixture, /collapse=\{collapsed\}/)
   assert.match(fixture, /onCollapseChange=/)
   assert.match(fixture, /const \{[\s\S]*?IconMoon,[\s\S]*?IconNotification,[\s\S]*?IconSun,[\s\S]*?\} = window\.arcoicon/)
@@ -79,7 +79,8 @@ test('human-review remediation keeps Main spacing, Basic List row actions, and Q
   assert.match(fixture, /<Space className="sbux-table-row-actions" size=\{4\}>[\s\S]*?<Button type="text" size="mini"[\s\S]*?<Dropdown[\s\S]*?<IconMore \/>/)
   assert.doesNotMatch(`${fixture}\n${styles}`, /dk-shell-fixture__row-actions|size="small"|删除商品|color="red"/)
   assert.doesNotMatch(fixture, /<Select(?:\s|>)/)
-  assert.match(fixture, /<TableToolbar[\s\S]*?type: 'select'[\s\S]*?name: 'category'[\s\S]*?type: 'search'[\s\S]*?\/>[\s\S]*?<Table[\s\S]*?<Pagination/)
+  assert.match(fixture, /<TableToolbar[\s\S]*?type: 'search'[\s\S]*?placement: 'start'[\s\S]*?\/>[\s\S]*?<Table[\s\S]*?<Pagination/)
+  assert.doesNotMatch(fixture, /type: 'select'|name: 'category'|categoryOptions/)
 })
 
 test('fixture preserves shell ownership, Basic List anatomy, and responsive geometry', async () => {

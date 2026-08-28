@@ -13,6 +13,8 @@ Approved implementation identified
         +
 Runtime / CSS / theme provenance confirmed
         +
+Approved reference implementations bound
+        +
 Template-local composition preserved
 ```
 
@@ -27,7 +29,58 @@ Template-local composition preserved
 
 如果存在可用的 Runtime capability，不得用 native element、私有 DOM 或手写 CSS 重新实现其视觉或交互。
 
-## 3. Card List binding map
+## 3. Reference implementation binding
+
+Shell 与 Page Template 组合必须先绑定 approved reference implementations，再执行业务替换：
+
+```text
+Template Decision
+    ↓
+Shell Mode Decision
+    ↓
+Shell Reference Binding
+    ↓
+Template Reference Binding
+    ↓
+Business Slot / Data Substitution
+    ↓
+Composition through Shell Main Slot
+```
+
+当前 Starter reference assets：
+
+| Reference | Path | Status | Golden |
+| --- | --- | --- | --- |
+| Default Application Shell | `distribution/designkit-starter-v1/patterns/default-application-shell.html` | `approved reference implementation` | `NO` |
+| Basic List | `distribution/designkit-starter-v1/patterns/basic-list.html` | `approved template reference` | `NO` |
+
+Shell reference 提供完整 approved Brand Top Navigation subtree、Side、Main outer frame 和 `approved-template` Main Slot；Basic List reference 作为完整 subtree 进入该 slot。组合层不得根据业务文案重新创建 Top Menu item 或 quick-action treatment、Page Header、Toolbar、Table、Row Actions 或 Pagination。固定 Starbucks logo 与 Top action hierarchy 必须保留，只允许替换批准的业务 label/data。
+
+Basic List 的 authoritative Docs implementation 是：
+
+- React：`packages/docs/site/src/demos/template-pages/basic-list.tsx`；
+- Vue：`packages/docs/site/src/demos/template-pages/basic-list.vue`。
+
+Starter package 只携带 package-local reference asset，不携带 Docs source、测试文件或 Golden 的完整实现。允许的业务 slots 仅包括 `PAGE_TITLE`、`CONTEXT_HELP`、`PRIMARY_ACTION`、`QUICK_FILTER`、`SEARCH_PLACEHOLDER`、`TABLE_COLUMNS`、`TABLE_DATA`、`STATUS_DATA` 和 `ROW_ACTION_LABELS`；CSS、layout DOM、Toolbar regions 和 spacing 不是 free slots。`CONTEXT_HELP` 存在时必须渲染 Title adjacent Help control，不得生成 persistent page subtitle。
+
+## 4. Icon Binding
+
+Starter 中所有通用 UI、导航和 control Icon 必须绑定本地 Arco Icon Runtime：`window.arcoicon.IconXXX`。单 HTML 不依赖现场访问 `arco.design`，不得从 `window.StarbucksReact` 解构 icon，也不得使用 Emoji、AI 自绘 SVG、CSS 绘制 Icon、第三方 Icon library 或无来源 inline SVG。品牌 Logo 和特殊业务品牌图形继续使用 DesignKit Assets，不属于 Generic UI Icon。
+
+当前批准的固定 Pattern 映射不可在 composition 阶段重新选择：
+
+| Pattern | Fixed mapping |
+| --- | --- |
+| Notification | `IconNotification` |
+| Light → Dark | `IconMoon` |
+| Dark → Light | `IconSun` |
+| Create | `IconPlus` |
+| More | `IconMore` |
+| Delete | `IconDelete` |
+
+Side Navigation 的业务菜单项可以按语义选择 Arco Catalog 中最接近的真实 Icon，但每个名称必须满足 `typeof window.arcoicon[iconName] !== 'undefined'`，并且语义合理；禁止 `IconProductCenter`、`IconInventoryManagement` 等虚构名称。生成完成后逐一验证所有使用的 Icon，缺失即 `FAIL`，必须替换真实 Icon，不得留下空白 Icon slot。Icon Binding 与 Shell Reference、Template Reference 一起绑定，不能在 composition 中丢失。
+
+## 5. Card List binding map
 
 `starter.template.card-list` 使用以下实现边界：
 
@@ -49,7 +102,7 @@ Template-local composition preserved
 
 Card List 没有公共 Runtime Card API。允许使用 Template-local Card anatomy，但不得另造一套 `.card`、`.card-info`、`.card-bottom` 或等价层级并宣称已使用 Golden。
 
-## 4. Default Application Shell binding map
+## 6. Default Application Shell binding map
 
 `starter.pattern.default-application-shell` 使用 [Default Application Shell Contract](application-shell.md) 的固定组合：
 
@@ -64,7 +117,7 @@ Card List 没有公共 Runtime Card API。允许使用 Template-local Card anato
 
 Light mode 显示 `IconMoon` 并使用“切换到深色模式”；Dark mode 显示 `IconSun` 并使用“切换到浅色模式”。Icon 表达 target mode。Runtime capability 存在时不得使用 native substitute。
 
-## 5. Starter Runtime loading
+## 7. Starter Runtime loading
 
 Non-Developer Starter 不使用 npm imports。Single HTML 必须按实际 Starter example/runtime 的顺序加载：
 
@@ -80,7 +133,7 @@ React / ReactDOM
 
 具体版本和相对路径只能复用 Starter Runtime reference 与现有 Starter example，不得重新发明 CDN 地址、版本或 loader。
 
-## 6. Export provenance
+## 8. Export provenance
 
 生成 JSX 必须从真实 `window.StarbucksReact`（或当前 Runtime 明确暴露方式）读取 approved exports。Card List 至少检查：
 
@@ -91,7 +144,7 @@ Modal, Popconfirm, TableToolbar, Tag
 
 required export 缺失时结果为 `FAIL`，不得静默 fallback 到 native/custom implementation。Golden 中的 Export 仍是 Example Specific / non-Starter evidence。
 
-## 7. Native substitute failures
+## 9. Native substitute failures
 
 当对应 Runtime capability 存在时，以下均为 Implementation Provenance `FAIL`：
 
@@ -108,7 +161,7 @@ required export 缺失时结果为 `FAIL`，不得静默 fallback 到 native/cus
 
 `main`、`section`、`header`、`article` 等 semantic wrappers 仍可作为 Template-owned composition 使用。
 
-## 8. Golden copy boundary
+## 10. Golden copy boundary
 
 正确链路是：
 
@@ -126,6 +179,23 @@ Fresh implementation
 
 允许复用 approved class anatomy、Runtime bindings 和 theme mechanism；不得复制 Golden 的业务数据、默认选择、Example-specific Export 或完整页面实现。
 
-## 9. Maintenance boundary
+## 11. Composition fidelity validation
+
+组合验证必须分别记录 Shell Selected / Reference Used / Fidelity、Template Selected / Reference Used / Fidelity 和 Composition Fidelity。Basic List structural signature 至少包含：
+
+```text
+Page Header
+  └─ Page Title + optional Context Help
+Continuous Data Region
+  ├─ TableToolbar
+  │   ├─ Filter Region / Quick Filter
+  │   └─ Action Region / Refresh
+  ├─ Table / Row Actions
+  └─ Pagination
+```
+
+Standalone Basic List 与 Shell + Basic List 只允许在 outer ancestor、available width、theme 和 Shell offset 上不同；template subtree、Context Help 行为、Toolbar ownership、Row Actions、Pagination 和 `4px / 16px / 16px` relationships 必须保持等价。
+
+## 12. Maintenance boundary
 
 本文件只定义实现 provenance 和 binding priority，不新增 Capability、不登记 Runtime schema、不创建第二套 Component Registry。若 Runtime export、Manifest 或 Golden 与本 Contract 冲突，应记录 `RUNTIME EVIDENCE CONFLICT` 或 `DESIGN DECISION REQUIRED`，不得在生成页静默降级。

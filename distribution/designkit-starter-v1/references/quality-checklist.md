@@ -26,6 +26,7 @@
 - [ ] 不包含 `import`、`export`、TypeScript、npm 或构建入口。
 - [ ] 组件来自 `StarbucksReact`，图标来自 `window.arcoicon`。
 - [ ] Default Shell 使用 `window.arcoicon.IconNotification`、`IconMoon`、`IconSun`，没有从 `StarbucksReact` 解构 icon。
+- [ ] Generic UI / navigation Icon 全部来自 `window.arcoicon`；固定 Pattern Icon 保持 `IconNotification`、`IconMoon`、`IconSun`、`IconPlus`、`IconMore`、`IconDelete`，Side 业务 Icon 为真实语义 Arco Icon，并逐一通过 `typeof window.arcoicon[iconName] !== 'undefined'`。
 - [ ] 没有新增 Theme API、Theme Provider 或只作用于 Shell 的 theme state。
 - [ ] Basic List 从 `StarbucksReact` 获取 `TableToolbar`，没有页面私有 `.dk-page__table-toolbar`、`.dk-page__toolbar-left` 或 `.dk-page__toolbar-right`。
 - [ ] JSX 位于 `script[type="text/babel"]`。
@@ -51,7 +52,8 @@
 ### Default Application Shell
 
 - [ ] `default` 固定为 Brand Top Menu + Collapsible Embedded Side Menu + approved Page Template；`content-only` 和 `none` 只响应用户明确要求。
-- [ ] Top 使用 `StarbucksReact.Menu`，右侧顺序为 Store/System Switch → Notification → Theme Toggle → Divider → Avatar/User。
+- [ ] Top 整体绑定 approved Brand Top Navigation subtree；固定引用 `assets/starbucks-system-logo.svg`，右侧顺序为 Notification → Theme Toggle → Divider → Avatar/User，Menu item 与 quick-action surface 未被 composition 自定义。
+- [ ] Avatar 无图片时使用与品牌色背景有清晰对比的默认填充，User area 没有 white/dark card-like container。
 - [ ] Light 显示 `IconMoon` 和“切换到深色模式”；Dark 显示 `IconSun` 和“切换到浅色模式”；`aria-label` 与 `title` 一致表达 target mode。
 - [ ] Side 使用 `StarbucksReact.Menu`、`collapse`、`hasCollapseButton`、`Menu.ItemGroup`、`Menu.SubMenu`；expanded/collapsed 为 260px/56px，没有 Starter-specific sidebar。
 - [ ] Light 设置 `html[data-theme="light"]` 并移除 body 的 `arco-theme` / `data-arco-theme`；Dark 设置 `html[data-theme="dark"]` 和两个 body dark attributes。

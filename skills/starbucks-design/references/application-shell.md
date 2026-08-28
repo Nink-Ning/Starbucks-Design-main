@@ -28,6 +28,8 @@ Validation
 
 Page Template 必须先决定页面本身是什么；Shell Mode 只决定是否包裹该模板，不能把 Shell 变成万能 Page Template。
 
+Shell Selected 不等于 Shell Reimplemented。组合时必须绑定 approved Shell Reference Implementation，再将已绑定的 approved Page Template subtree 放入 Main Content Slot；Shell rules 不得与 Template rules 合并后重新绘制页面。
+
 ## 2. Capability ID
 
 | Field | Value |
@@ -69,7 +71,7 @@ Main Content Region containing the approved Page Template
 
 ## 5. Top Navigation Binding
 
-Top Navigation 复用 Docs Menu 的“品牌色模式导航”视觉和组件模式，并使用 Starter Runtime 的 `StarbucksReact.Menu`。左侧 Brand / System Region 包含真实 System Switch（Store / System Switch）；右侧 action order 固定为：
+Top Navigation 必须整体绑定 approved Brand Top Navigation subtree，复用 Docs Menu 的“品牌色模式导航”视觉和组件模式，并使用 Starter Runtime 的 `StarbucksReact.Menu`。左侧 Brand / System Region 包含固定的 Starbucks DesignKit logo 与真实 System Switch（Store / System Switch）；右侧 action order 固定为：
 
 ```text
 Notification
@@ -80,6 +82,8 @@ Notification
 
 Theme Toggle 必须位于 Notification 右侧、Divider / User 左侧。
 
+Top Menu item（当前菜单名称标题位）、Notification/Badge、Theme Toggle、Divider、Avatar/User 属于同一份 approved reference treatment。组合层只允许替换当前菜单名称、当前 active item、system name、mock user name/avatar data；不得重新定义 Menu item 的 background、border、radius、selected/hover surface，不得将 Theme Toggle 做成独立描边卡片，也不得创建 white/dark User block。Avatar 的无图片默认填充必须与品牌色背景有清晰对比，但不能改变 User action hierarchy。
+
 Top minimum content 分为：
 
 - `REQUIRED`：Brand / system identity、Notification、Theme Toggle、User access；
@@ -87,7 +91,7 @@ Top minimum content 分为：
 
 窄宽度只允许截断 optional text 或隐藏 example-only label。不得改变批准的 Menu 视觉模式，不得隐藏 required identity 或 global actions。
 
-Default Shell 的 Brand / System Region 与 Side Navigation 使用同一份 collapsed state：展开时 Top 与 Side 均为 `260px`，收起时均为 `56px`；收起只保留 Logo，展开恢复 system name 和 System Switch。System Switch 使用批准的 Runtime `Cascader` / trigger 行为，不实现第二套导航状态。
+Default Shell 的 Brand / System Region 与 Side Navigation 使用同一份 collapsed state：展开时 Top 与 Side 均为 `260px`，收起时均为 `56px`；收起只保留固定 Starbucks logo，展开恢复 system name 和 System Switch。System Switch 使用批准的 Runtime `Cascader` / trigger 行为，不实现第二套导航状态。
 
 ## 6. Side Navigation Binding
 
@@ -162,6 +166,18 @@ Default Shell Main outer layout uses fixed `24px` horizontal padding at `1280px`
 
 Breadcrumb 继续按信息层级决定：Root List 在没有 meaningful IA 时不显示；Create、Edit、Detail 在存在真实父级关系时可以显示。Side Navigation 存在不等于 Breadcrumb 必需。
 
+### Reference binding and Main Slot
+
+Default Shell 的正式 Starter reference implementation 为 `distribution/designkit-starter-v1/patterns/default-application-shell.html`，状态为 `approved reference implementation`，不是 Golden。它拥有完整 approved Brand Top Navigation subtree、Side、Main outer frame、shared collapse state、theme binding 和 `approved-template` Main Slot。
+
+Template Decision 完成后，必须依次执行 Shell Reference Binding 和 Template Reference Binding，再进行业务 slots/data substitution。Shell 不得拆开或重建 Top Menu item、Notification/Badge、Theme Toggle、Divider、Avatar/User treatment，也不得拆开或重建 Page Header、Context Help、Toolbar、Table、Row Actions、Pagination、Form 或 Detail anatomy。Basic List 的 approved template reference 为 `distribution/designkit-starter-v1/patterns/basic-list.html`；其 authoritative Docs source 为 `packages/docs/site/src/demos/template-pages/basic-list.tsx` 与 `basic-list.vue`。
+
+`CONTEXT_HELP` 存在时，Page Header 必须保持 Title adjacent Help control；不得因为组合进入 Shell 而重新生成 persistent page subtitle。Basic List 的 `TableToolbar → Table → Pagination` 必须作为一个完整 continuous Data Region subtree 进入 Main Slot。
+
+### Icon Binding
+
+Generic UI 和 navigation Icon 固定来自 `window.arcoicon`。Notification、Light → Dark、Dark → Light、Create、More、Delete 分别绑定 `IconNotification`、`IconMoon`、`IconSun`、`IconPlus`、`IconMore`、`IconDelete`；Side 业务菜单可选择语义最接近的真实 Arco Icon，但必须通过 `typeof window.arcoicon[iconName] !== 'undefined'`。禁止 Emoji、手绘 SVG、CSS Icon、第三方 Icon 和虚构名称；Icon Binding 随 Shell/Template Reference 一起保留。
+
 ## 12. Accessibility
 
 - 使用语义明确的 header、navigation 和 main regions；
@@ -188,7 +204,7 @@ Default Application Shell 的固定组合不得被描述为完整 Navigation She
 
 ## 14. Validation Requirements
 
-该 Capability 的验证必须分别覆盖：Shell Mode Decision、Shell Implementation Provenance、Top Menu Fidelity、Side Menu Fidelity、Theme Toggle Behavior、Theme Scope、Responsive Shell、Shell / Template Ownership、Accessibility、No Navigation Capability Leakage。
+该 Capability 的验证必须分别覆盖：Shell Mode Decision、Shell Reference Usage、Shell Implementation Provenance、Top Menu Fidelity、Side Menu Fidelity、Theme Toggle Behavior、Theme Scope、Responsive Shell、Shell / Template Reference Usage、Shell / Template Ownership、Composition Fidelity、Accessibility、No Navigation Capability Leakage。
 
 R2-R.4 使用 test-only composition fixture 锁定批准实现，并以最终 Starter ZIP 的 package-only clean-room evidence 验证生成边界；该 evidence 不创建独立 Shell Golden，也不改变本文的 fixed composition contract。
 

@@ -109,12 +109,14 @@
           Table,
           TableToolbar,
           Tag,
+          Tooltip,
         } = window.StarbucksReact
         const {
           IconApps,
           IconDashboard,
           IconDown,
           IconHome,
+          IconInfoCircle,
           IconMore,
           IconMoon,
           IconNotification,
@@ -143,12 +145,6 @@
 
         const statusLabels = { selling: '销售中', low: '库存紧张', soldout: '已售罄' }
         const statusColors = { selling: 'green', low: 'orange', soldout: 'gray' }
-        const categoryOptions = [
-          { label: '现制饮品', value: '现制饮品' },
-          { label: '食品', value: '食品' },
-          { label: '咖啡豆', value: '咖啡豆' },
-          { label: '杯具', value: '杯具' },
-        ]
         const systemCascaderOptions = [
           {
             value: 'product-center',
@@ -181,14 +177,13 @@
           const [viewportWidth, setViewportWidth] = useState(window.innerWidth)
           const [collapsed, setCollapsed] = useState(window.innerWidth < 1024)
           const [theme, setTheme] = useState(document.documentElement.getAttribute('data-theme') || 'light')
-          const [keywordValues, setKeywordValues] = useState({ keyword: '', category: undefined })
+          const [keywordValues, setKeywordValues] = useState({ keyword: '' })
           const [currentPage, setCurrentPage] = useState(1)
           const [refreshing, setRefreshing] = useState(false)
           const [currentSystemId, setCurrentSystemId] = useState('product-center-system')
           const [systemQuery, setSystemQuery] = useState('')
           const [switcherVisible, setSwitcherVisible] = useState(false)
           const keyword = String(keywordValues.keyword || '')
-          const category = String(keywordValues.category || '')
 
           useEffect(() => {
             const handleResize = () => {
@@ -201,18 +196,17 @@
 
           useEffect(() => {
             setCurrentPage(1)
-          }, [keyword, category])
+          }, [keyword])
 
           const filteredRows = useMemo(() => {
             const normalizedKeyword = keyword.trim().toLocaleLowerCase()
             return productRows.filter((row) => {
-              const matchesCategory = !category || row.category === category
               const matchesKeyword = !normalizedKeyword || [row.code, row.name, row.category].some((value) =>
                 value.toLocaleLowerCase().includes(normalizedKeyword),
               )
-              return matchesCategory && matchesKeyword
+              return matchesKeyword
             })
-          }, [category, keyword])
+          }, [keyword])
 
           const pageCount = Math.max(1, Math.ceil(filteredRows.length / pageSize))
           const pageRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize)
@@ -367,7 +361,7 @@
 
           return (
             <div className="dk-shell-fixture" data-shell-theme={theme}>
-              <header className="dk-shell-fixture__top" data-shell-region="top" aria-label="应用顶部导航">
+              <header className="dk-shell-fixture__top" data-shell-region="top" data-reference-subtree="approved-brand-top-navigation" aria-label="应用顶部导航">
                 <div
                   className="dk-shell-fixture__identity"
                   data-shell-action="system-switch"
@@ -379,7 +373,7 @@
                 </div>
 
                 <div className="dk-shell-fixture__top-main">
-                  <Menu className="dk-shell-fixture__top-menu" mode="horizontal" selectable={false} ellipsis={false}>
+                  <Menu className="dk-shell-fixture__top-menu" data-shell-slot="CURRENT_MENU_TITLE" aria-label="当前菜单：商品中心" mode="horizontal" selectable={false} ellipsis={false}>
                     <Menu.Item key="workspace">商品中心</Menu.Item>
                   </Menu>
 
@@ -396,13 +390,11 @@
                     </div>
                     <span className="dk-shell-fixture__divider" data-shell-action="divider" aria-hidden="true" />
                     <span className="dk-shell-fixture__user-slot" data-shell-action="user">
+                      <Avatar className="dk-shell-fixture__avatar" size={32}>N</Avatar>
                       <Dropdown droplist={userMenu} trigger="click" position="br">
                         <button className="dk-shell-fixture__user" type="button" aria-label="用户菜单" aria-haspopup="menu">
-                          <Avatar className="dk-shell-fixture__avatar" size={32}>
-                            <img src="/packages/docs/site/public/landing/nink-avatar.jpg" alt="" />
-                          </Avatar>
                           <span className="dk-shell-fixture__user-name">Hi！Nink</span>
-                          <IconDown aria-hidden="true" />
+                          <IconDown className="dk-shell-fixture__user-arrow" aria-hidden="true" />
                         </button>
                       </Dropdown>
                     </span>
@@ -436,7 +428,21 @@
                 <main className="dk-shell-fixture__main" data-shell-region="main">
                   <div className="dk-shell-fixture__page">
                     <header className="dk-shell-fixture__page-header">
-                      <h1 className="dk-shell-fixture__page-title">商品列表</h1>
+                      <div className="dk-shell-fixture__page-header-main">
+                        <div className="dk-shell-fixture__page-title-row">
+                          <h1 className="dk-shell-fixture__page-title">商品列表</h1>
+                          <Tooltip content="管理商品信息、分类和销售状态">
+                            <span
+                              className="dk-shell-fixture__page-title-help"
+                              role="button"
+                              tabIndex={0}
+                              aria-label="商品列表说明"
+                            >
+                              <IconInfoCircle aria-hidden="true" />
+                            </span>
+                          </Tooltip>
+                        </div>
+                      </div>
                       <div className="dk-shell-fixture__page-actions">
                         <Button type="primary" icon={<IconPlus />} onClick={() => Message.info('这是 test-only 新建商品入口。')}>新建商品</Button>
                       </div>
@@ -447,17 +453,9 @@
                         ariaLabel="商品表格工具栏"
                         quickFilters={[
                           {
-                            type: 'select',
-                            name: 'category',
-                            placeholder: '全部分类',
-                            ariaLabel: '商品分类',
-                            allowClear: true,
-                            options: categoryOptions,
-                            width: 120,
-                          },
-                          {
                             type: 'search',
                             name: 'keyword',
+                            placement: 'start',
                             placeholder: '搜索商品编号、名称或分类',
                             ariaLabel: '搜索商品',
                             allowClear: true,
@@ -492,8 +490,11 @@
         }
 
         const requiredRuntime = [Menu, Button, Badge, Cascader, Dropdown, Empty, Input, Space, Avatar, TableToolbar, Table, Pagination]
-        const requiredIcons = [IconNotification, IconMoon, IconSun, IconMore, IconSearch, IconUp]
-        if (requiredRuntime.some((value) => !value) || requiredIcons.some((value) => !value)) {
+        const requiredIconNames = ['IconApps', 'IconDashboard', 'IconDown', 'IconHome', 'IconInfoCircle', 'IconMore', 'IconMoon', 'IconNotification', 'IconOrderedList', 'IconPlus', 'IconPoweroff', 'IconSearch', 'IconSun', 'IconUp']
+        const missingIcons = requiredIconNames.filter((iconName) => typeof window.arcoicon[iconName] === 'undefined')
+        const requiredIcons = requiredIconNames.map((iconName) => window.arcoicon[iconName])
+        if (requiredRuntime.some((value) => !value) || requiredIcons.some((value) => !value) || missingIcons.length) {
+          window.__designKitStarterRuntimeErrors.push(`Missing Arco icons: ${missingIcons.join(', ')}`)
           window.__designKitStarterRuntimeErrors.push('Default Application Shell 所需组件或图标未完整加载。')
         } else {
           window.ReactDOM.createRoot(document.getElementById('root')).render(<ShellApp />)
