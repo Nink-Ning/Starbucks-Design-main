@@ -1,1 +1,0 @@
-import{r,o as t,c}from"./index.es.XEGKJHXq.js";import{_ as e}from"./VueDemoLoader.m6oJqcqR.js";import"./quarterOfYear.QkQtW3xZ.js";import"./_commonjsHelpers.Cpj98o6Y.js";import"./index.es.BS8qIsF-.js";import"./index.CNkk2f_z.js";import"./preload-helper.DQzEiIBX.js";const n={};function p(s,i){const o=r("Spin");return t(),c(o)}const x=e(n,[["render",p]]);export{x as default};

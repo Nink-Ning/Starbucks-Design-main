@@ -1,0 +1,1 @@
+import{j as o}from"./jsx-runtime.D3GSbgeI.js";import{a4 as r}from"./index.es.B3x9WfOA.js";import"./index.yBjzXJbu.js";import"./index.8H-kKAXM.js";import"./_commonjsHelpers.Cpj98o6Y.js";import"./index.sGmLo0nR.js";import"./quarterOfYear.QkQtW3xZ.js";function n(){return o.jsx("div",{children:o.jsx(r,{disabled:!0,children:"disabled Checkbox"})})}export{n as default};

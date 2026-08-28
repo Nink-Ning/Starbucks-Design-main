@@ -1,0 +1,120 @@
+/*
+ * Starter V1 页面级布局样式。
+ * 只负责页面容器、区块、工具栏、响应式和局部溢出。
+ * 不覆盖组件内部样式，不使用宽泛 .arco-* 选择器。
+ */
+
+:root {
+  --dk-page-max-width: 1200px;
+  --dk-page-gutter: 24px;
+  --dk-page-section-gap: 24px;
+  --dk-page-control-gap: 16px;
+  --dk-page-surface: #ffffff;
+  --dk-page-background: #f5f6f7;
+  --dk-page-text: #1d2129;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--dk-page-background);
+  color: var(--dk-page-text);
+  font-family: "Noto Sans SC", "Poppins", Roboto, sans-serif;
+}
+
+.dk-page {
+  box-sizing: border-box;
+  width: min(100%, var(--dk-page-max-width));
+  margin: 0 auto;
+  padding: var(--dk-page-gutter);
+}
+
+.dk-page__header,
+.dk-page__toolbar,
+.dk-page__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--dk-page-control-gap);
+}
+
+.dk-page__header {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: var(--dk-page-section-gap);
+}
+
+.dk-page__header-main,
+.dk-page__toolbar-main {
+  min-width: 0;
+}
+
+.dk-page__toolbar {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: var(--dk-page-control-gap);
+}
+
+.dk-page__section {
+  min-width: 0;
+  padding: var(--dk-page-gutter);
+  background: var(--dk-page-surface);
+  border-radius: 8px;
+}
+
+.dk-page__stack {
+  display: grid;
+  gap: var(--dk-page-section-gap);
+}
+
+.dk-page__table-scroll {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.dk-page__form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--dk-page-section-gap) var(--dk-page-control-gap);
+}
+
+.dk-page__form-grid-full {
+  grid-column: 1 / -1;
+}
+
+.dk-page__empty,
+.dk-page__error,
+.dk-page__loading {
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --dk-page-gutter: 16px;
+    --dk-page-section-gap: 16px;
+  }
+
+  .dk-page__header,
+  .dk-page__toolbar,
+  .dk-page__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .dk-page__actions > * {
+    width: 100%;
+  }
+
+  .dk-page__form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dk-page__form-grid-full {
+    grid-column: auto;
+  }
+}

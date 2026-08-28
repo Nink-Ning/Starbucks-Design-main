@@ -1,1 +1,0 @@
-import{j as r}from"./jsx-runtime.D3GSbgeI.js";import{Z as t}from"./index.es.BMi8OZI0.js";import"./index.yBjzXJbu.js";import"./index.8H-kKAXM.js";import"./_commonjsHelpers.Cpj98o6Y.js";import"./index.sGmLo0nR.js";import"./quarterOfYear.QkQtW3xZ.js";function f(){return r.jsx(t.YearPicker,{style:{width:200}})}export{f as default};

@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime.D3GSbgeI.js";import{Z as r}from"./index.es.BMi8OZI0.js";import"./index.yBjzXJbu.js";import"./index.8H-kKAXM.js";import"./_commonjsHelpers.Cpj98o6Y.js";import"./index.sGmLo0nR.js";import"./quarterOfYear.QkQtW3xZ.js";function n(){return t.jsx(r.MonthPicker,{style:{width:200}})}export{n as default};
