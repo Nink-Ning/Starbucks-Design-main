@@ -106,7 +106,7 @@ test('the product manager Starter page exposes capability boundaries, comparison
   assert.match(releasePage, /数据列表和卡片列表；<br \/>创建表单和编辑表单；<br \/>以信息展示为主的基础详情页。/)
   assert.match(releasePage, /DesignKit Starter V1-r2<\/h3><span class="sb-starter-current-version__new">NEW<\/span>/)
   assert.doesNotMatch(releasePage, /<dl>/)
-  assert.match(releasePage, /1fcebf2e53658c756c6e6d69eed45c67abb79c48a4800d60877b421c40729203/)
+  assert.match(releasePage, /65ab2f82b7192ed276bcddfee8ab8dbc07fd46338e5b960b1f8fa5321bc2fa20/)
   assert.match(releasePage, /href="\.\.\/\.\.\/downloads\/designkit-starter-v1-r1\.zip" download="designkit-starter-v1-r1\.zip"/)
   assert.match(releasePage, /6287895a54ebc0828f9e8250cb05d132ff7712c38fddceb891cfb0126a7302cf/)
   assert.match(releasePage, /Basic List[\s\S]*Card List[\s\S]*TableToolbar[\s\S]*Quick Filter \/ Search[\s\S]*Selection \/ Select All[\s\S]*Validation \/ Evidence/)

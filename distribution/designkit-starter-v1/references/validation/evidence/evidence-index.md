@@ -56,12 +56,12 @@
 | [`starter.interaction.batch-actions`](starter-interaction-batch-actions.md) | Interaction | Browser Validation | `PASS` | [Card List Interaction Evidence](starter-template-card-list.md)、[Browser confirmation](../../quality-checklist.md#golden-example-当前状态) | `2026-08-25` | 已验证选择依赖、空/非空状态、危险操作确认和完成反馈。 |
 | [`starter.interaction.batch-actions`](starter-interaction-batch-actions.md) | Visual Quality | Manual Review | `UNVERIFIED` | None | `null` | 尚无主要、次要和危险操作层级审查记录。 |
 | [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell Mode Decision | Static Check | `PASS` | [Default Application Shell Evidence](starter-pattern-default-application-shell.md) | `2026-08-28` | 已确认 `default`、`content-only`、`none` 三种模式和 no-fourth-mode 约束。 |
-| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell Implementation Provenance | Browser Validation | `UNVERIFIED` | None | `null` | 等待最终 R2 ZIP 的 package-only clean-room smoke。 |
-| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | System / Side Sync | Browser Validation | `UNVERIFIED` | None | `null` | 等待 260px / 56px shared collapse 和 selection persistence 浏览器记录。 |
-| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Theme Fidelity | Browser Validation | `UNVERIFIED` | None | `null` | 等待最终 ZIP Light/Dark、DOM attributes 和 persistence 浏览器记录。 |
-| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Responsive Shell | Browser Validation | `UNVERIFIED` | None | `null` | 等待 1280/768/390、24px Main spacing 和 document overflow 浏览器记录。 |
-| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell / Template Ownership | Browser Validation | `UNVERIFIED` | None | `null` | 等待 Basic List continuous data region、TableToolbar ownership 和 internal scrolling 浏览器记录。 |
-| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Accessibility | Browser Validation | `UNVERIFIED` | None | `null` | 等待 semantic、keyboard、focus、accessible name 和 non-color state 浏览器记录。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell Implementation Provenance | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已在只含新 R2 ZIP 内容的 clean-room 中确认 package-local Runtime、Shell、Template、Logo 和 `window.arcoicon` 绑定；Runtime/icon errors 为空。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | System / Side Sync | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已验证 1280px 的 260px 展开、56px 收起、Top/Side 同步、Logo-only 和系统选择恢复。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Theme Fidelity | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已验证 6 个 viewport/theme 组合、Moon/Sun target-mode label、整页主题切换及 `designkit-starter-theme` reload persistence。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Responsive Shell | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已验证 1280/768/390、24px Main spacing、Notification → Theme → Divider → User 和无 document-level overflow。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Shell / Template Ownership | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已验证 Default Shell continuous data region、content-only Basic List 和 none Card List 的导航边界。 |
+| [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Accessibility | Browser Validation | [Default Shell package-only browser record](starter-pattern-default-application-shell.md#package-only-browser-record--2026-08-28) | `PASS` | `2026-08-28` | 已验证 semantic regions、icon-only names、Context Help、active icon、row-action confirmation 和非颜色状态表达。 |
 | [`starter.pattern.default-application-shell`](starter-pattern-default-application-shell.md) | Visual Fidelity | Manual Review | `PASS` | [Human-approved Shell visual review](starter-pattern-default-application-shell.md) | `2026-08-28` | `DEFAULT_APPLICATION_SHELL_VISUAL_REVIEW = PASS`；不创建独立 Shell Golden。 |
 
 ## 3. Coverage summary
@@ -70,8 +70,8 @@
 | --- | ---: |
 | Prioritized capabilities registered | 6 |
 | Evidence records | 43 |
-| `PASS` | 17 |
-| `UNVERIFIED` | 25 |
+| `PASS` | 23 |
+| `UNVERIFIED` | 19 |
 | `CONFLICTED` | 1 |
 | `FAIL` / `BLOCKED` / `NOT_APPLICABLE` | 0 |
 

@@ -132,6 +132,6 @@ test('Golden, Runtime, and R2 ZIP protected artifacts remain byte-identical', as
   )
   assert.equal(
     await digest('distribution/releases/designkit-starter-v1-r2.zip'),
-    '1fcebf2e53658c756c6e6d69eed45c67abb79c48a4800d60877b421c40729203',
+    '65ab2f82b7192ed276bcddfee8ab8dbc07fd46338e5b960b1f8fa5321bc2fa20',
   )
 })
