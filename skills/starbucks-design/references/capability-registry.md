@@ -14,6 +14,7 @@ Starter Profile 面向 Non-Developer Edition AI Starter。它只生成使用固�
 - Card List；
 - Basic Form；
 - Basic Detail；
+- `starter.pattern.default-application-shell` 固定组合；
 - 上述模板明确允许的 TableToolbar、Quick Filter、本地选择和轻量批量操作子集。
 
 ### Docs Full Profile
@@ -35,7 +36,7 @@ AI 只有在能力的 `Profile` 包含 `Starter`，并且 Starter Skill、对应
 Capability Registry 是 Starter 能力范围的唯一授权层。Template、Golden、Runtime 或 Demo 中出现的额外入口，都不能单独扩大该范围。
 
 - Card List Golden 中出现的 Export 先按 `Example Specific` 处理；在 Registry 明确注册并完成独立验证前，Starter Card List 仍不支持真实 Export。
-- Navigation Shell 和 Result Page 保持 Docs Full 范围，不因 Docs Demo 或组件组合存在而进入 Starter。
+- `starter.pattern.default-application-shell` 只授权 [Default Application Shell Contract](application-shell.md) 的 fixed composition；完整 Navigation Shell engineering 和 Result Page 仍保持 Docs Full 范围。
 - Basic List、Card List、Basic Form 和 Basic Detail 的页面组合由 [Template Usage Contract](template-usage-contract.md) 约束；具体 spacing 数值仍待单独 design decision，不在 Registry 中隐式统一。
 - Runtime Manifest 不是 Registry schema 的来源。`selectedBusinessExports` 已按 [Validation Contract](validation/validation-contract.md) 从 R2 source validation requirement 中移除；冻结 R1 中的同名文字只代表 expected pre-projection drift。
 
@@ -82,7 +83,7 @@ Starter 行登记的是所有 Starter 模板可用能力的上限，不表示每
 
 | Status | Meaning | Starter generation rule |
 | --- | --- | --- |
-| `READY` | 当前声明的 Profile 内，Implementation、Docs、Skill、Golden 和 Validation 已形成一致链路。 | 只有 `Profile` 包含 `Starter` 时可直接用于 Starter。 |
+| `READY` | 当前声明的 Profile 内，Implementation / approved binding、Docs、Skill、Golden 或明确批准的 no-Golden strategy，以及 Validation 已形成一致链路。 | 只有 `Profile` 包含 `Starter` 时可直接用于 Starter；未执行的 Browser Evidence 仍为 `UNVERIFIED`。 |
 | `PARTIAL` | 能力存在，但一个或多个知识层、验证维度或发现路径不完整。 | 只能使用 Starter 模板已经明确允许的子集；缺失部分标记为未验证。 |
 | `CONFLICTED` | 两个或多个知识源对能力边界或职责给出不一致结论。 | 不合并冲突能力；按 Starter Skill 和 Starter 模板的更窄边界执行。 |
 | `DOCS_ONLY` | Docs Full Profile 已有可用能力，但未注册到 Starter。 | 不得用于 Starter。 |
@@ -100,6 +101,7 @@ Starter 行登记的是所有 Starter 模板可用能力的上限，不表示每
 | `starter.template.basic-detail` | Basic Detail | Starter | Template | `templates/detail.md`; `examples/detail.html` | `templates/detail/basic-detail.mdx` 和真实 React/Vue Demo | Starter `SKILL.md`、Detail template、component catalog | `examples/detail.html` | Starter checklist 和详情模板测试；Normal、Loading、Empty/Error 已定义 | `READY` | Docs Full 还有 Card/Data/Secondary Detail，不能从 Basic Detail 自动升级 | 在 Registry validation mapping 中补充各验证维度的证据位置 |
 | `starter.component.table-toolbar` | TableToolbar | Starter | Business Component | Starter Runtime 的真实 `StarbucksReact.TableToolbar`；页面只组合模板允许的 selection summary、batch actions、basic filtering container 和 action state display | `business-components/list-batch/table-toolbar.mdx` 只作为真实组件证据；Starter 边界由 Starter Knowledge 和模板决定 | `business-components/table-toolbar.md`、component catalog、Basic/Card List template | 由 Basic List 和 Card List Goldens 间接覆盖；无独立 Starter Golden | `starter-table-toolbar-integration.test.mjs`、Evaluator checklist、模板集成检查 | `READY` | None；冻结 R1 Checklist 的 `selectedBusinessExports` 是 expected pre-projection drift，不是当前 Runtime schema | 以真实 Runtime export、CSS 标记和 Browser Evidence 维护实现侧证据 |
 | `starter.pattern.quick-filter` | Quick Filter | Starter | Pattern | 由 TableToolbar `quickFilters` 提供 Search、Select、ButtonGroup、DateRange 的已查证子集 | TableToolbar Docs 的 QuickFilters/FilterBar 对比 | TableToolbar Starter Knowledge；模板决定允许的类型和位置 | Basic List 与 Card List Goldens 间接覆盖 | TableToolbar integration tests；提交时机和 1～3 个条件规则已登记 | `PARTIAL` | Docs Full TableToolbar API 范围大于各 Starter 模板子集 | 增加 Capability ID 到 Template Selection 知识，并保持 Quick Filter 与 Advanced FilterBar 的边界 |
+| `starter.pattern.default-application-shell` | Default Application Shell | Starter | Pattern | Starter Runtime `StarbucksReact.Menu` 的固定 Brand Top + Collapsible Side + Main outer composition；实际 Shell HTML 在后续实现阶段生成 | Menu Docs 的“品牌色模式导航”和“缩起内嵌菜单”只作为 `IMPLEMENTATION REFERENCE` | [Default Application Shell Contract](application-shell.md)、Starter Skill、Template/Binding contracts | None；经批准采用 contract + test-only composition fixture strategy，不创建 Starter Golden | Knowledge/projection contract tests；后续 fixture 验证 1280/768/390、Light/Dark、overflow、accessibility 和 capability leakage | `READY` | Support state 为 `SUPPORTED`，但只限 fixed composition；不得扩大为 `docs.pattern.navigation-shell` | R2-R.3 实现 test-only composition fixture 并补录 Browser Evidence |
 | `starter.interaction.selection` | Local Selection | Starter | Pattern | Card List 页面维护当前筛选结果的选择集合、全选和半选；TableToolbar 只接收选择摘要 | Card List Docs | Card List template、Interaction Pattern、TableToolbar Starter Knowledge | Card List Golden | Card List integration test 覆盖选择、全选、半选和依赖选择的操作 | `PARTIAL` | Golden 的预置选择是 Example Specific；生成页面默认不应由此推断预选 | 通过 Golden Example Mapping 保持 Example Specific 与 Template Default 的显式边界 |
 | `starter.interaction.batch-actions` | Batch Actions | Starter | Pattern | Card List + TableToolbar 支持当前选择集合上的轻量本地批量操作 | Card List 和 TableToolbar Docs | Card List template、Interaction Pattern、TableToolbar Starter Knowledge | Card List Golden | Card List/TableToolbar integration tests 和 quality checklist | `PARTIAL` | Docs Full 支持范围更广；Starter 明确不支持复杂批量、跨页选择、真实请求、权限和服务端任务 | 通过 Golden Example Mapping 维持 Light Batch Actions 的模板和验证边界 |
 | `starter.foundation.theme` | Theme | Starter | Foundation | Starter Runtime CSS、Design Tokens 和 Docs 主题壳层 | Docs ConfigProvider、组件和模板主题示例 | Starter design rules、quality checklist | 四个 Starter Goldens 可作为页面级主题检查对象 | Card List 有明确亮/暗规则；其他模板的 Theme 证据未统一映射 | `PARTIAL` | Manifest 验证状态不能替代逐能力 Theme 证据 | 为四个 Starter 模板登记 Light/Dark 的独立验证状态和证据 |
@@ -120,7 +122,7 @@ Starter 行登记的是所有 Starter 模板可用能力的上限，不表示每
 | `docs.template.result-page` | Result Page | Docs Full | Template | React/Vue Success、Failure、Network Error 模板 | 子页面完整；父 `templates/result.mdx` 仍显示建设中 | General architecture/inventory 提及，未标记完成状态 | None | `result-template.test.mjs` 覆盖跨框架、响应式和视觉契约 | `OUTDATED` | Starter Manifest 明确 `result` unsupported；父 Docs 状态落后于子页面实现 | 更新 Docs Full capability status 和父级知识索引；是否进入 Starter 必须另立提案 |
 | `docs.template.form-variants` | Form Variants | Docs Full | Template | React/Vue Basic、Grouped、Step Form | 子页面完整；父 `templates/form.mdx` 仍显示建设中 | General form knowledge，无完整变体选择矩阵 | 只有 Starter Basic Form Golden | Template page tests | `OUTDATED` | Starter 只支持 Basic Form；Grouped/Step 不得被同一“表单页”名称带入 Starter | 建立 Basic/Grouped/Step Form 决策知识和 Profile 标记 |
 | `docs.template.detail-variants` | Detail Variants | Docs Full | Template | React/Vue Basic、Card、Data、Secondary Detail | 子页面完整；父 `templates/detail.mdx` 仍为预留页 | General detail knowledge，无完整变体选择矩阵 | 只有 Starter Basic Detail Golden | `detail-template.test.mjs` 和模板测试 | `OUTDATED` | Starter 只支持 Basic Detail；其他变体不能从 Docs 自动推断 | 建立 Detail variant selection 和 Profile 标记 |
-| `docs.pattern.navigation-shell` | Navigation Shell | Docs Full | Pattern | Layout.Sider、Menu、Header、Docs Sidebar 和水平导航 Demo 的组合能力 | Layout/Menu Docs 与 Demo，尚无单一 Application Shell 模板 | General Knowledge 缺 Sidebar vs Horizontal、Flat vs Multi-level 决策 | None | `layout-demo.test.mjs`、`menu-demo.test.mjs`、`sidebar-scroll.test.mjs` | `PARTIAL` | 组件和 Docs Shell 存在不代表已发布独立 Navigation Shell 或 Starter 模板 | 定义为组合 Pattern，并补充 Navigation Selection；保持 Starter unsupported |
+| `docs.pattern.navigation-shell` | Navigation Shell | Docs Full | Pattern | Layout.Sider、Menu、Header、Docs Sidebar 和水平导航 Demo 的组合能力 | Layout/Menu Docs 与 Demo，尚无单一 Application Shell 模板 | General Knowledge 缺 Sidebar vs Horizontal、Flat vs Multi-level 决策 | None | `layout-demo.test.mjs`、`menu-demo.test.mjs`、`sidebar-scroll.test.mjs` | `PARTIAL` | 窄范围 Starter Default Application Shell 不授权 Custom Navigation、Navigation API、权限、真实路由或 React/Vue 工程集成 | 定义为 Docs Full 组合 Pattern，并保持完整 Navigation engineering 对 Starter unsupported |
 | `docs.business.advanced-filter-bar` | Advanced FilterBar | Docs Full | Business Component | React/Vue FilterBar 真实组件和 Demo | `business-components/query-view/filter-bar.mdx` | General Skill 和 business component knowledge 可发现 | None | 业务组件测试和多状态 Demo | `DOCS_ONLY` | Starter Manifest 明确 `advanced-filter-bar` unsupported；不得用多个 Quick Filters 伪造 | 保持 Docs Full；在决策知识中明确 Quick Filter vs FilterBar |
 | `docs.template.dashboard` | Dashboard | Docs Full | Template | 仅有部分 React `template-pages/dashboard.tsx` 资产 | `templates/dashboard.mdx` 为 Placeholder | General Skill/architecture Inventory 提及 | None | 无完整 React/Vue、响应式、主题、可访问性和视觉链路 | `OUTDATED` | Inventory 可能使 AI 将未完成资产理解为可用模板；Starter 明确 unsupported | 将 General Knowledge 标为 partial/proposed，完成全链路前不得进入 Starter |
 | `docs.template.login` | Login | Docs Full | Template | 仅有部分 React `template-pages/login.tsx` 资产 | `templates/login.mdx` 为 Placeholder | General Skill/architecture Inventory 提及 | None | 无完整跨框架和验证链路 | `OUTDATED` | Inventory 可能使 AI 将未完成资产理解为可用模板；Starter 明确 unsupported | 将 General Knowledge 标为 partial/proposed，完成全链路前不得进入 Starter |
@@ -148,3 +150,4 @@ Starter 行登记的是所有 Starter 模板可用能力的上限，不表示每
 5. Validation 必须区分静态检查、浏览器检查、Theme、Responsive、Accessibility 和 Visual Quality；未执行的维度写为未验证。
 6. `CONFLICTED` 能力先遵守 Starter Skill 和 Starter Template 的更窄边界，直到冲突知识被迁移修正。
 7. Registry 记录当前事实和迁移动作，不授权 Runtime、组件 API、Docs Demo、Golden、版本或发布变更。
+8. `starter.pattern.default-application-shell` 是经批准的 contract-first restricted composition exception：Support state 为 `SUPPORTED`，Registry 使用合法 `READY`；完整 Golden 由 implementation references + test-only fixture strategy 取代，Browser Evidence 在后续实现阶段补录。

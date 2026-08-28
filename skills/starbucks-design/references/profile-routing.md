@@ -1,6 +1,6 @@
 # DesignKit Profile Router
 
-本文件负责将用户需求路由到 Starter Profile 或 Docs Full Profile。选定 Profile 后，页面或模板请求先读取 [Template Selection](decisions/template-selection.md) 选择 Candidate Template，再读取 [Capability Registry](capability-registry.md) 判断具体能力是否可用；非模板请求可以直接查询 Registry。本文件不定义组件 API、模板结构或 Runtime 能力。
+本文件负责将用户需求路由到 Starter Profile 或 Docs Full Profile。选定 Profile 后先读取 [Capability Registry](capability-registry.md) 确认目标 Profile 的能力边界，再由 [Template Selection](decisions/template-selection.md) 选择该边界内的 Candidate Template；非模板请求可以直接查询 Registry。本文件不定义组件 API、模板结构或 Runtime 能力。
 
 ## 1. Profile Definition
 
@@ -24,7 +24,7 @@ Starter Profile 面向 Non-Developer 用户，适用于产品经理、设计评�
 - `starter.template.basic-form`；
 - `starter.template.basic-detail`。
 
-页面只能组合 Capability Registry 已登记的 Starter Business Component、Pattern 和 Foundation 子集。
+页面只能组合 Capability Registry 已登记的 Starter Business Component、Pattern 和 Foundation 子集。常规企业后台页默认可使用 `starter.pattern.default-application-shell` 的固定组合；这不授权完整 Navigation Shell engineering。
 
 ### Docs Full Profile
 
@@ -68,6 +68,17 @@ HTML Demo 不得路由到 `docs.template.basic-list`；React/Vue Basic List 不�
 Starter TableToolbar 允许 selection summary、模板允许的 batch actions、basic filtering container 和 action state display；禁止 component API customization、React/Vue integration、advanced slots、density management 和 engineering-only configuration。Docs Full TableToolbar 不受 Starter 模板子集限制，但仍不得使用未发布 API 或把页面业务职责放入组件。
 
 HTML Demo 或 Starter generation 不得路由到 `docs.component.table-toolbar`；React/Vue engineering 不得把 `starter.component.table-toolbar` 当作完整组件 API 参考。选择 Starter 后还必须读取页面模板，因为 Basic List 与 Card List 使用的 TableToolbar 子集不同。
+
+### Default Application Shell routing
+
+| User request | Selected Profile | Capability ID | Boundary |
+| --- | --- | --- | --- |
+| 产品经理常规后台页 + Single HTML Starter | Starter | `starter.pattern.default-application-shell` | 默认 `default`；只允许固定 Brand Top + Collapsible Side + approved Page Template |
+| 用户明确已有系统框架 | Starter | `starter.pattern.default-application-shell` | `content-only`；只生成已选 Template 内容区 |
+| standalone / 独立 Demo | Starter | `starter.pattern.default-application-shell` | `none`；不生成 Shell |
+| 自定义导航、真实路由、权限菜单或 React/Vue 导航工程 | Docs Full | `docs.pattern.navigation-shell` 或对应 Developer knowledge | Starter 不得承接完整 Navigation engineering |
+
+Starter Shell Mode 在 Template Decision 之后解析，具体规则只读取 [Default Application Shell Contract](application-shell.md)。不得因为窄能力已登记，就把 `docs.pattern.navigation-shell` 整体改为 Starter support。
 
 同义表达按相同规则处理：
 
@@ -185,7 +196,11 @@ Profile Selection
     ↓
 Capability Registry Lookup
     ↓
-Profile-specific Skill / Template / Validation
+Template Decision
+    ↓
+Shell Mode Decision
+    ↓
+Profile-specific Skill / Binding / Validation
 ```
 
 Router 只选择 Profile 和 Capability ID。页面结构、Props、状态和验证规则由 Registry 指向的 Profile-specific knowledge 决定。
@@ -200,9 +215,9 @@ Router 只选择 Profile 和 Capability ID。页面结构、Props、状态和验
 
 ### Navigation Shell
 
-- Starter：`UNSUPPORTED`。当前 Starter 只交付单页模板，没有已批准的 Application Shell 或多页面导航模板。
-- Docs Full：`docs.pattern.navigation-shell` 为 `PARTIAL`，现有 Layout、Menu、Header 和 Sidebar 只是组合证据。
-- 处理：对 Starter 请求保留单页结构，或请求用户确认是否切换到 Docs Full。不得因为 Menu、Layout.Sider 或 Docs Sidebar 已存在就声明 Starter 支持 Navigation Shell。
+- Starter：只支持 `starter.pattern.default-application-shell` 的 fixed approved composition，不支持 Custom Navigation Shell、Navigation API、dynamic permission menu、backend-driven navigation、real router、permission routing、system switch backend logic 或 React/Vue project navigation integration。
+- Docs Full：`docs.pattern.navigation-shell` 为 `PARTIAL`，继续承载更丰富的 Developer composition and engineering boundary。
+- 处理：常规 Starter 后台页按 [Default Application Shell Contract](application-shell.md) 选择三个 Shell Modes；超出固定组合时停止该部分并说明切换 Docs Full 的影响。不得从 Menu、Layout.Sider 或 Docs Sidebar 推断额外 Starter Navigation 能力。
 
 ### Advanced FilterBar
 
@@ -228,7 +243,7 @@ Router 只选择 Profile 和 Capability ID。页面结构、Props、状态和验
 
 ## 6. Maintenance Rule
 
-新能力只有在以下链路全部完成后，才能进入 Starter Profile：
+新能力通常只有在以下链路全部完成后，才能进入 Starter Profile：
 
 ```text
 Implementation
@@ -258,6 +273,7 @@ Starter Manifest and approved capability whitelist
 6. 能力进入 Starter 时新增或更新 `starter.*` Registry entry；不得直接把 `docs.*` entry 改名后视为迁移完成。
 7. Registry、Starter Skill、Template、Golden、Validation 和 Manifest 必须保持同一能力边界。
 8. Runtime、Docs 或组件新增能力不会自动触发 Starter 晋级；Starter 晋级需要独立 Knowledge Migration 和审批。
+9. `starter.pattern.default-application-shell` 是经批准的 contract-first restricted composition exception：完整 Golden 由 canonical contract + implementation references + test-only fixture strategy 取代；实际 Shell browser evidence 在后续实现阶段补录。
 
 ## Relationship to Capability Registry
 
@@ -270,11 +286,14 @@ SKILL.md
 profile-routing.md
     Select Profile from user intent and output requirement
                 ↓
-decisions/template-selection.md
-    Select a candidate template from business intent
-                ↓
 capability-registry.md
-    Confirm capability ID, Profile, Status, conflicts and evidence
+    Confirm Profile capability boundary, Status, conflicts and evidence
+                ↓
+decisions/template-selection.md
+    Select a candidate template inside the approved boundary
+                ↓
+application-shell.md
+    Resolve default / content-only / none after the Template Decision
                 ↓
 Profile-specific knowledge
     Apply the approved template, component subset and validation rules

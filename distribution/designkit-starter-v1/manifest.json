@@ -13,12 +13,13 @@
     "projectionSchemaVersion": "1",
     "capabilityPrefix": "starter.",
     "capabilitySummary": {
-      "total": 11,
+      "total": 12,
       "categories": {
         "templates": 4,
         "businessComponents": 1,
         "interaction": 3,
-        "foundation": 3
+        "foundation": 3,
+        "patterns": 1
       }
     },
     "referenceInventory": [
@@ -29,6 +30,10 @@
       {
         "id": "capability-registry",
         "file": "references/capability-registry.md"
+      },
+      {
+        "id": "default-application-shell",
+        "file": "references/application-shell.md"
       },
       {
         "id": "template-selection",
@@ -123,6 +128,12 @@
   "businessCapabilityFiles": [
     "business-components/table-toolbar.md"
   ],
+  "patternCapabilities": [
+    "starter.pattern.default-application-shell"
+  ],
+  "patternCapabilityFiles": [
+    "references/application-shell.md"
+  ],
   "unsupported": [
     "vue-preview",
     "dashboard",
@@ -136,7 +147,15 @@
     "upload",
     "export",
     "react-project",
-    "vue-project"
+    "vue-project",
+    "custom-navigation-shell",
+    "navigation-api",
+    "dynamic-permission-menu",
+    "backend-driven-navigation",
+    "real-router",
+    "permission-routing",
+    "system-switch-backend-logic",
+    "react-vue-project-navigation-integration"
   ],
   "runtime": {
     "networkRequired": true,

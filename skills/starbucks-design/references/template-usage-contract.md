@@ -201,9 +201,13 @@ Basic Detail 是完整的、聚焦单个对象的只读页面模板，不是 Gen
 
 Starter `starter.template.basic-detail` 的边界仍是 focused read-only object detail。Docs Full Integration Demo 可以有多个丰富 section 或额外业务动作，但这些扩展不能直接扩大 Starter Basic Detail，也不能被当成 Starter 默认 anatomy。
 
-## 9. Navigation and Result Page boundary
+## 9. Application Shell and Result Page boundary
 
-Brand-color horizontal navigation、collapsed inline vertical navigation 和 Application Shell 是 Docs Full integration references。它们不是 Starter capability，不进入本 Contract 的 Starter workflow。
+`starter.pattern.default-application-shell` 可以按 [Default Application Shell Contract](application-shell.md) 包裹已批准 Template。Shell 只拥有 Top、Side、Main outer layout、global theme binding 和 Shell responsive relationship；它不得改变 Template anatomy、Page Header、Toolbar、Filter、内容区、Pagination、page state、Mock data、interaction 或 spacing。
+
+Basic List 的 `4px / 16px / 16px` 继续是 Template-owned Continuous Data Region inset，不得被 Shell 覆盖或提升为 Shell spacing。Breadcrumb 继续按真实信息层级决定；Side Navigation 存在不等于 Breadcrumb 必需。
+
+Brand-color horizontal navigation和 collapsed inline vertical navigation 的 Docs Demo 只作为固定 Shell 的 `IMPLEMENTATION REFERENCE`。Custom Navigation Shell、Navigation API、权限菜单、真实路由和 React/Vue navigation integration 仍是 Docs Full / Developer boundary。
 
 Result Page 保持 Docs Full。Basic Detail、Basic Form 或其他 Starter Template 不得因为实现存在而替代或吸收 Result Page。
 

@@ -29,6 +29,16 @@ Runtime Internal Validation
 | Template Selection | Template Selection decision + selected Template reference |
 | Template Usage | Template anatomy/DOM evidence + implementation mapping |
 | Implementation Provenance | Runtime resources + approved exports + Runtime-backed DOM |
+| Shell Mode Decision | User intent + resolved `default` / `content-only` / `none` trace |
+| Shell Implementation Provenance | Application Shell contract + Runtime Menu/icon/theme binding evidence |
+| Top Menu Fidelity | Approved composition/order + rendered Top evidence |
+| Side Menu Fidelity | Approved collapse/width/state + rendered Side evidence |
+| Theme Toggle Behavior | target-mode icon/label + actual Light/Dark transition |
+| Theme Scope | html/body attributes + Top/Side/Main/component computed evidence |
+| Responsive Shell | 1280/768/390 viewport + document overflow and usability evidence |
+| Shell / Template Ownership | outer-shell mapping + unchanged Template anatomy/spacing evidence |
+| Shell Accessibility | semantics + keyboard/focus/name evidence |
+| No Navigation Capability Leakage | static and manual check against unsupported Navigation engineering |
 | Component Fidelity | Approved component/pattern mapping + DOM or static binding evidence |
 | Brand Fidelity | Approved brand/runtime theme binding + computed rendered evidence |
 | Theme Fidelity | Light/Dark browser state checks + computed tokens/state evidence |
@@ -129,6 +139,16 @@ Card List 的 `Normal`、`Loading`、`Empty`、`Error` 和 `Retry` 属于状态�
 
 **Pass Criteria:** Runtime 资源已按 Starter 顺序加载，approved implementation 已被实际引用和渲染，主题变量来自 Runtime/approved host mechanism，且不存在被禁止的 native/custom recreation。缺少可定位证据时为 `UNVERIFIED`。
 
+### 2.9 Default Application Shell
+
+**Purpose:** 确认 `starter.pattern.default-application-shell` 只按 [Default Application Shell Contract](../application-shell.md) 包裹已选 Template，并且没有泄漏完整 Navigation engineering capability。
+
+**Check:** 分别检查 Shell Mode Decision、Top action order、Side collapse binding、target-mode Theme Toggle、whole-page Theme Scope、Shell/Template ownership、Breadcrumb independence、Basic List `4px / 16px / 16px` ownership、Accessibility，以及 1280/768/390 下的 document overflow。390px 不得引入 Drawer、Hamburger、Bottom Navigation、Overlay Navigation 或 mobile-specific new pattern。
+
+**Evidence Required:** 本阶段需要 Source/Projection contract tests。后续实现阶段必须使用独立 test-only composition fixture，提供 Static provenance、Light/Dark Browser Validation、1280/768/390 viewport/overflow records、keyboard walk-through 和必要截图。Docs Demo clipping 不是 Starter evidence，fixture 也不是 Starter Golden。
+
+**Pass Criteria:** 三个 Shell Modes 解析正确且默认值为 `default`；Top/Side 使用批准 Runtime binding；Theme 作用于整个页面；Template anatomy、Breadcrumb policy 和 Basic List spacing 未被 Shell 吸收；三个 viewport 无 document-level overflow；不存在自定义导航、权限、真实路由或工程 API 泄漏。组件限制导致受限 390 fallback 无法成立时结果为 `RESPONSIVE CONTRACT BLOCKED`，不得自行发明替代模式。
+
 ## 3. Result and evidence rules
 
 1. 每个 Capability 按适用的 Validation Type 独立记录，使用 [Evidence Model](evidence-model.md) 的结果语义；Implementation Provenance 不得被 Structural 或 Visual Quality 结果替代。
@@ -202,6 +222,6 @@ A generated user-facing page should use one consistent interface language unless
 
 当前 Starter Basic List、Docs Full Basic List 和具体 Integration Demo 存在不同 spacing evidence。Validation Contract 不选择 universal value；页面组合关系可以先被验证，但数值 canonicalization 必须标记为 `DESIGN DECISION REQUIRED`，待正式 Page Spacing Contract 或 Token 决策后再更新对应 Template、Golden 和 Evidence。
 
-### Navigation Shell metrics
+### Default Application Shell responsive decision
 
-Navigation Shell 属于 Docs Full composition reference，不是 Starter capability。本 Contract 不选择不同 Demo 中出现的 header/sidebar 尺寸；Shell metrics 需要单独的 Docs Full design decision 和 validation。
+`starter.pattern.default-application-shell` 的 Starter responsive contract 已由 canonical reference 关闭：`>=1024px` Side 为 `260px` expanded；`768–1023px` 和 `<768px` 为 `56px` collapsed rail；390px 保留 required global actions 且不发明新导航模式。完整 `docs.pattern.navigation-shell` 的其他 metrics 和 engineering variants 仍属于 Docs Full，不得由该窄契约推断。

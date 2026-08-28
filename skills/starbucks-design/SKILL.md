@@ -53,9 +53,11 @@ User Request
     ↓
 5a. Apply Template Usage Contract
     ↓
-5b. Apply Implementation Binding Contract
+5b. Resolve Shell Mode
     ↓
-5c. Resolve Interaction Pattern
+5c. Apply Implementation Binding Contract
+    ↓
+5d. Resolve Interaction Pattern
     ↓
 6. Validate output
 ```
@@ -80,7 +82,7 @@ User Request
 
 Starter 进入 [DesignKit Starter V1 Skill](../../distribution/designkit-starter-v1/SKILL.md)，并使用 Registry 指向的 Starter Template 和允许的 Runtime 子集。Docs Full 根据框架进入 [React Skill](../starbucks-design-react/SKILL.md) 或 [Vue Skill](../starbucks-design-vue/SKILL.md)，再读取真实组件 reference。
 
-模板确定后，读取 [Template Usage Contract](references/template-usage-contract.md)，确认 Template Selected、Template Used 和 Template Fidelity 的实现基线；随后读取 [Implementation Binding Contract](references/implementation-binding-contract.md)，确认生成结果使用已批准的 Runtime、组件和主题绑定；再读取 [Interaction Pattern](references/decisions/interaction-pattern.md) 决定页面内部交互。不要只因低层组件存在就跳过模板组合规则，也不得用视觉仿制替代已批准实现。
+模板确定后，读取 [Template Usage Contract](references/template-usage-contract.md)，确认 Template Selected、Template Used 和 Template Fidelity 的实现基线。Starter 随后读取 [Default Application Shell Contract](references/application-shell.md) 决定 `default`、`content-only` 或 `none`；Shell Mode 只决定是否包裹已选模板。再读取 [Implementation Binding Contract](references/implementation-binding-contract.md) 确认生成结果使用已批准的 Runtime、组件和主题绑定，并读取 [Interaction Pattern](references/decisions/interaction-pattern.md) 决定页面内部交互。不要只因低层组件存在就跳过模板组合规则，也不得用视觉仿制替代已批准实现。
 
 ### 6. Validate output
 
@@ -94,6 +96,7 @@ Starter 在输出前读取 [Template Contract](../../distribution/designkit-star
 | 该 Profile 是否登记并支持此能力？ | [Capability Registry](references/capability-registry.md) |
 | 应选择什么页面模式、布局或操作位置？ | [Design Decisions](references/design-decisions.md) |
 | 已批准的 Page Template 如何实际使用？ | [Template Usage Contract](references/template-usage-contract.md) |
+| Starter 页面是否包裹固定 Application Shell？ | [Default Application Shell Contract](references/application-shell.md) |
 | 生成结果如何绑定已批准的 Runtime / 组件 / 主题实现？ | [Implementation Binding Contract](references/implementation-binding-contract.md) |
 | Starter 页面必须遵守什么交付契约？ | [Template Contract](../../distribution/designkit-starter-v1/references/template-contract.md) |
 | Starter 输出如何验收？ | [Quality Checklist](../../distribution/designkit-starter-v1/references/quality-checklist.md) |
@@ -118,4 +121,4 @@ Starter 在输出前读取 [Template Contract](../../distribution/designkit-star
 
 SKILL.md 保持轻量，只维护身份、Workflow 和 Reference Routing。新增具体组件规则、Template 细节、API 文档或长验证清单时，应更新其唯一责任 reference，而不是扩展本入口。
 
-新能力只有在 Implementation、Docs、Skill、Golden Example 和 Validation 全部完成并在 Capability Registry 注册后，才可进入 Starter Profile。Runtime、Components 或 Docs 的单独变化不会自动扩大 Starter 白名单。
+新能力通常只有在 Implementation、Docs、Skill、Golden Example 和 Validation 全部完成并在 Capability Registry 注册后，才可进入 Starter Profile。`starter.pattern.default-application-shell` 是经明确批准的 contract-first restricted composition exception：它使用 canonical contract、Docs implementation references 和 test-only composition fixture strategy，不创建完整 Starter Golden；注册不代表后续 Browser Validation 已完成。Runtime、Components 或 Docs 的单独变化不会自动扩大 Starter 白名单。

@@ -8,6 +8,7 @@
 
 请遵守 DesignKit Starter V1：
 - 先根据当前文件和对应模板确认页面类型，并在修改中保持该模板类型；
+- 读取 `references/application-shell.md`，保持当前 `default` / `content-only` / `none`；refinement 不得重新设计 Shell 或自行改变 Shell Mode；
 - 不得把 Basic List 与 Card List 自动互相转换；如果修改目标确实要求换模板，先说明结构和行为影响并等待确认；
 - 保持单文件 HTML 输出；
 - 保持固定 CDN 版本和加载顺序；
@@ -16,6 +17,9 @@
 - 不添加 import、export、TypeScript、npm、Vite 或真实接口；
 - 不复制组件源码；
 - 不添加宽泛 .arco-* 覆盖或 !important；
+- Default Shell 保持批准的 Top/Side Menu、action order、`window.arcoicon`、whole-page Theme DOM binding 和 `designkit-starter-theme` persistence；不新增 Theme Provider；
+- Shell 继续只拥有 outer layout，不吸收 Breadcrumb、Toolbar、Template spacing 或 Basic List `4px / 16px / 16px`；
+- 390px 不引入 Drawer、Hamburger、Bottom Navigation、Overlay Navigation 或其他新 mobile navigation；
 - 检查 Normal、Loading、Empty、Error 和窄屏结果；
 - 不把本地 Mock 反馈写成真实服务端成功；
 - 不添加对应模板范围外的 FilterBar、导出、列设置、批量、Upload、Card、Timeline 或 Tabs；Card List 仅保留其模板内的页面选择和轻量批量操作；

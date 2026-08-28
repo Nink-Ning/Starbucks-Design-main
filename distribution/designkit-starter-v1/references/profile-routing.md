@@ -22,6 +22,10 @@ Starter Profile 面向产品经理、设计评审参与者和没有前端工程�
 - `starter.template.basic-form`；
 - `starter.template.basic-detail`。
 
+批准的页面外层 Pattern：
+
+- `starter.pattern.default-application-shell`，仅限固定 Top + Side + approved Page Template。
+
 ## 2. Entry rules
 
 以下意图进入 Starter：
@@ -37,7 +41,7 @@ Starter Profile 面向产品经理、设计评审参与者和没有前端工程�
 
 - 工程项目或完整组件接入；
 - 完整组件 API、内部实现或高级扩展；
-- 多页面应用壳、复杂导航或未登记模板；
+- 自定义/多页面导航工程、真实路由、权限菜单或未登记模板；
 - 真实接口、权限、上传、导出或生产部署。
 
 命中范围外请求时，停止生成该部分并说明 Starter-safe 简化方案，不把工程知识混入 Single HTML Demo。
@@ -53,6 +57,10 @@ Capability Registry Lookup
     ↓
 Template Selection
     ↓
+Shell Mode Decision
+    ↓
+Implementation Binding
+    ↓
 Interaction Pattern
     ↓
 Template / Component Knowledge
@@ -62,7 +70,7 @@ Golden Mapping
 Validation Contract and Evidence
 ```
 
-页面请求先读取 [Template Selection](decisions/template-selection.md)，再由 Registry 确认 Capability ID 和 Status。组件或交互请求可以先查询 Registry，但仍必须读取承载它的模板边界。
+页面请求先由 Registry 确认 Capability Boundary，再读取 [Template Selection](decisions/template-selection.md) 选择边界内模板，并在模板后解析 Shell Mode。组件或交互请求可以直接查询 Registry，但仍必须读取承载它的模板边界。
 
 ## 4. Registry status handling
 
@@ -78,7 +86,8 @@ Validation Contract and Evidence
 | Request | Starter handling |
 | --- | --- |
 | Dashboard 或多模块分析页 | 报告不支持；可缩减为 Basic List、Card List 或 Basic Detail 单页任务 |
-| Navigation Shell 或多页面导航 | 报告不支持；保持单页结构，不用 Menu 或 Sidebar 拼装未登记能力 |
+| 常规企业后台 Application Shell | 使用 `starter.pattern.default-application-shell`；Template 后解析 `default` / `content-only` / `none` |
+| Custom Navigation Shell、Navigation API、多页面/权限/真实路由 | 报告不支持；不得把固定 Default Shell 扩大为完整 Navigation engineering |
 | Advanced FilterBar | 仅在 1～3 个无 Label、无校验、无复杂联动条件时建议 Quick Filter；否则报告超出范围 |
 | Result Page | 不用 Basic Detail 伪装操作结果；报告当前没有对应 Starter Template |
 | 复杂表单或详情变体 | 缩减为 Basic Form / Basic Detail 已批准边界，或报告无法满足 |
@@ -93,7 +102,7 @@ Validation Contract and Evidence
 
 ## 6. Maintenance rule
 
-新能力只有完成以下链路并出现在 Source Registry 后，才能进入 Starter Projection：
+新能力通常只有完成以下链路并出现在 Source Registry 后，才能进入 Starter Projection：
 
 ```text
 Implementation
@@ -110,3 +119,5 @@ starter.* Capability ID and approved Status
 ```
 
 Profile Router 只确认 Starter 交付和 Capability ID，不维护组件用法、模板源码或验证证据。
+
+`starter.pattern.default-application-shell` 是经批准的 contract-first restricted composition exception：它使用 `application-shell.md`、Docs implementation references 和 test-only fixture strategy，不创建完整 Starter Golden；实际 Browser Evidence 在后续实现阶段补录。

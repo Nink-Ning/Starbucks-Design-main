@@ -9,6 +9,8 @@
 - references/template-contract.md
 - references/cdn-runtime.md
 - references/quality-checklist.md
+- references/application-shell.md
+- references/implementation-binding-contract.md
 - 对应的页面模板
 
 请按以下顺序检查：
@@ -33,6 +35,13 @@
 19. Card List 是否按可用宽度决定 Grid 列数，Toolbar 是否独立换行，标题是否省略且页面无横向溢出。
 20. Card List 的暗色语义色和 Selected、Hover、Focus、Disabled 是否可读且不只依赖颜色或透明度。
 21. Checkbox、Card Actions、Batch Actions、More Menu 和图标按钮是否支持键盘、可见 Focus 和可访问名称。
+22. Shell Mode 是否只为 `default` / `content-only` / `none`，且常规后台页默认 `default`。
+23. Default Shell 是否使用批准的 Brand Top Menu 和 Collapsible Embedded Side Menu，Top action order 是否为 Store/System Switch → Notification → Theme Toggle → Divider → Avatar/User。
+24. Theme Toggle 是否用 `window.arcoicon.IconMoon` / `IconSun` 表达 target mode，Notification 是否用 `IconNotification`，且没有 Theme Provider。
+25. Theme 是否通过 html/body attributes 作用于 Top、Side、Main 和所有组件，localStorage 是否使用 `designkit-starter-theme` 的批准优先级。
+26. Shell 是否保持 Template anatomy、Breadcrumb independence 和 Basic List `4px / 16px / 16px` ownership。
+27. 1280/768/390 是否符合 Side 260/56/56、required global actions 和 document overflow contract；390 是否没有发明 Drawer、Hamburger、Bottom Navigation 或新 mobile pattern。
+28. 是否泄漏 Custom Navigation Shell、Navigation API、dynamic permission menu、backend-driven navigation、real router、permission routing、system switch backend logic 或 React/Vue project navigation integration。
 
 请输出：
 - 通过项；

@@ -37,10 +37,16 @@ Basic Form is a complete Create/Edit family: both states preserve the same heade
 
 Basic Detail is a focused read-only object page, not a generic information card or an enterprise workspace. Preserve its header, meaningful child breadcrumb, information hierarchy, surface/sections, action placement and responsive behavior.
 
+## Shell wrapping
+
+[Default Application Shell](application-shell.md) may wrap an approved Template after Template Selection. Shell owns Top, Side, Main outer layout, global Theme binding and Shell responsive relationship. Template still owns Page Header, Breadcrumb decision, Toolbar/Filter, Table/Card/Form/Detail, Pagination, page state, Mock data, page interactions and internal spacing.
+
+Shell MUST NOT alter Template anatomy. Basic List `4px / 16px / 16px` remains the Template-owned Continuous Data Region inset, not Shell spacing.
+
 ## Breadcrumb and help
 
 Hide Breadcrumb by default on a module root when the surrounding navigation already supplies clear position context. Show it for a meaningful child workflow or detail page. Breadcrumb represents information hierarchy, not technical URL depth. For root data-management pages, use contextual Help instead of a persistent explanatory subtitle when the explanation is supplementary; this does not prohibit subtitles where a template requires them.
 
 ## Scope
 
-This contract does not authorize Navigation Shell, Result Page, Dashboard, React/Vue project APIs, real Export, cross-page selection or other capabilities absent from the Capability Registry. Universal list padding remains a design decision; do not infer a package-wide value from one example.
+This contract authorizes only `starter.pattern.default-application-shell` fixed composition. It does not authorize Custom Navigation Shell, Navigation API, dynamic permissions, real routing, Result Page, Dashboard, React/Vue project APIs, real Export, cross-page selection or other capabilities absent from the Capability Registry. Side Navigation does not make Breadcrumb mandatory. Universal list padding remains a design decision; do not infer a package-wide value from one example.

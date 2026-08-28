@@ -28,9 +28,22 @@ Starter HTML remains single-file, browser-runtime based and non-npm. Load React/
 
 There is no public Runtime CardList component. Use the approved template-local anatomy without copying Golden business data or example-specific Export.
 
+## Approved Default Application Shell bindings
+
+| Region | Binding |
+| --- | --- |
+| Top Menu | `StarbucksReact.Menu` + approved brand top composition |
+| Side Menu | `StarbucksReact.Menu` + `collapse` + `hasCollapseButton` + `Menu.ItemGroup` + `Menu.SubMenu` |
+| Actions | Runtime `Button` / `Badge` / `Dropdown` / `Avatar` |
+| Icons | `window.arcoicon.IconNotification` / `IconMoon` / `IconSun` |
+| Theme | `html[data-theme]` + body `arco-theme` / `data-arco-theme` + existing Runtime tokens |
+| Main | semantic Template wrapper inside Shell-owned outer layout |
+
+Light shows `IconMoon` with “切换到深色模式”；Dark shows `IconSun` with “切换到浅色模式”。Icons express target mode and must not be destructured from `StarbucksReact`. Theme applies to Top, Side, Main and all components. Do not add a Theme API or Theme Provider.
+
 ## Provenance failures
 
-When an approved binding exists, native select/checkbox/dialog, custom status pills, private toolbars, custom More menus, handwritten button treatments or custom brand variables are Implementation Provenance failures. Semantic wrappers such as `main`, `section`, `article` and `header` remain allowed as template composition.
+When an approved binding exists, native select/checkbox/dialog, custom status pills, private toolbars, custom More menus, handwritten button treatments, custom brand variables, custom Top/Side navigation or private theme providers are Implementation Provenance failures. Semantic wrappers such as `main`, `section`, `article` and `header` remain allowed as template composition.
 
 ## Scope boundaries
 

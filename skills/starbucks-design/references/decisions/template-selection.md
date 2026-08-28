@@ -170,11 +170,15 @@ SKILL.md
     ↓
 Profile Router
     ↓
+Capability Boundary
+    ↓
 Template Decision
     ↓
-Capability Registry
-    ↓
 Template Usage Contract
+    ↓
+Shell Mode Decision
+    ↓
+Implementation Binding
     ↓
 Interaction Pattern Decision
     ↓
@@ -185,9 +189,11 @@ Profile-specific Template / Component references
 
 - `SKILL.md`：识别输出要求并启动 Agent Workflow；
 - [Profile Router](../profile-routing.md)：选择 Starter 或 Docs Full；
-- 本文件：根据业务意图选择 Candidate Template 和 Capability ID；
-- [Capability Registry](../capability-registry.md)：验证 Profile、Status、Conflict、Golden 和 Validation，决定是否允许实现；
+- [Capability Registry](../capability-registry.md)：先确认 Profile capability boundary、Status 和禁止扩展范围；
+- 本文件：在已确认边界内根据业务意图选择 Candidate Template 和 Capability ID；
 - [Template Usage Contract](../template-usage-contract.md)：确认已选 Template 是实现基线，并约束页面 anatomy、组合、spacing relationships 和 responsive behavior；
+- [Default Application Shell Contract](../application-shell.md)：Template 确定后选择 `default`、`content-only` 或 `none`；
+- [Implementation Binding Contract](../implementation-binding-contract.md)：绑定批准的 Runtime、组件、图标和主题实现；
 - [Interaction Pattern](interaction-pattern.md)：模板和能力确认后，选择 Single/Batch Action、More Menu、Selection Ownership 和交互验证要求；
 - [Design Decisions](../design-decisions.md)：模板确定后处理布局、容器、操作位置和其他页面级设计选择。
 
@@ -195,7 +201,27 @@ Template Decision 不能把 `DOCS_ONLY`、`OUTDATED`、`UNSUPPORTED` 或 `PROPOS
 
 Interaction decisions happen after template usage baseline is established。只有 Registry 确认 Candidate 的当前 Profile 和能力边界后，才使用 Interaction Pattern 选择页面内部交互；不得通过交互需求反向扩大 Template 或 Profile。
 
-## 6. Maintenance Rules
+## 6. Shell Mode Decision
+
+Template selection 与 Shell selection 是两个独立决定。先选择页面模板，再按 [Default Application Shell Contract](../application-shell.md) 解析：
+
+| Signal | Shell mode |
+| --- | --- |
+| Product Manager / Non-Developer Starter 的常规企业后台页，且用户没有覆盖 | `default` |
+| 用户明确说明页面将进入已有系统框架，只需要内容区 | `content-only` |
+| 用户明确要求 standalone / 独立 Demo | `none` |
+
+Shell Mode 只决定是否以固定 Top + Side + Main outer layout 包裹已选模板；不得改变 Template anatomy、Breadcrumb decision、Toolbar、state ownership 或 responsive internals。AI 不得创建第四种 Shell Mode。
+
+```text
+Template Decision
+    ↓
+Shell Mode Decision
+    ↓
+Implementation Binding
+```
+
+## 7. Maintenance Rules
 
 新增 Template 必须同步：
 

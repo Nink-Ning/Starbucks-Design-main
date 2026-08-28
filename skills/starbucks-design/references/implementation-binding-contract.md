@@ -49,7 +49,22 @@ Template-local composition preserved
 
 Card List 没有公共 Runtime Card API。允许使用 Template-local Card anatomy，但不得另造一套 `.card`、`.card-info`、`.card-bottom` 或等价层级并宣称已使用 Golden。
 
-## 4. Starter Runtime loading
+## 4. Default Application Shell binding map
+
+`starter.pattern.default-application-shell` 使用 [Default Application Shell Contract](application-shell.md) 的固定组合：
+
+| Region | Required binding | Prohibited substitute |
+| --- | --- | --- |
+| Top Menu | `StarbucksReact.Menu` + approved brand top composition | custom Header/navigation DOM |
+| Side Menu | `StarbucksReact.Menu` + `collapse` + `hasCollapseButton` + `Menu.ItemGroup` + `Menu.SubMenu` | Starter-specific sidebar component |
+| Actions | Runtime `Button` / `Badge` / `Dropdown` / `Avatar` | native button, custom badge/menu/avatar |
+| Icons | `window.arcoicon.IconNotification` / `IconMoon` / `IconSun` | icons destructured from `StarbucksReact`, handwritten SVG |
+| Theme | `html[data-theme]` + body `arco-theme` / `data-arco-theme` + existing Runtime tokens | Theme API, Theme Provider, shell-only theme state |
+| Main | semantic Template wrapper inside Shell-owned outer layout | Shell rewrite of Template anatomy or spacing |
+
+Light mode 显示 `IconMoon` 并使用“切换到深色模式”；Dark mode 显示 `IconSun` 并使用“切换到浅色模式”。Icon 表达 target mode。Runtime capability 存在时不得使用 native substitute。
+
+## 5. Starter Runtime loading
 
 Non-Developer Starter 不使用 npm imports。Single HTML 必须按实际 Starter example/runtime 的顺序加载：
 
@@ -65,7 +80,7 @@ React / ReactDOM
 
 具体版本和相对路径只能复用 Starter Runtime reference 与现有 Starter example，不得重新发明 CDN 地址、版本或 loader。
 
-## 5. Export provenance
+## 6. Export provenance
 
 生成 JSX 必须从真实 `window.StarbucksReact`（或当前 Runtime 明确暴露方式）读取 approved exports。Card List 至少检查：
 
@@ -76,7 +91,7 @@ Modal, Popconfirm, TableToolbar, Tag
 
 required export 缺失时结果为 `FAIL`，不得静默 fallback 到 native/custom implementation。Golden 中的 Export 仍是 Example Specific / non-Starter evidence。
 
-## 6. Native substitute failures
+## 7. Native substitute failures
 
 当对应 Runtime capability 存在时，以下均为 Implementation Provenance `FAIL`：
 
@@ -88,10 +103,12 @@ required export 缺失时结果为 `FAIL`，不得静默 fallback 到 native/cus
 - private toolbar DOM 替代 `TableToolbar`；
 - custom More menu 替代 `Dropdown` / `Menu`；
 - custom brand variables 替代 Runtime theme variables。
+- custom Top/Side navigation 替代 Default Application Shell 的 Runtime `Menu` binding；
+- Theme Provider 或私有 theme state 替代 approved DOM attribute binding。
 
 `main`、`section`、`header`、`article` 等 semantic wrappers 仍可作为 Template-owned composition 使用。
 
-## 7. Golden copy boundary
+## 8. Golden copy boundary
 
 正确链路是：
 
@@ -109,6 +126,6 @@ Fresh implementation
 
 允许复用 approved class anatomy、Runtime bindings 和 theme mechanism；不得复制 Golden 的业务数据、默认选择、Example-specific Export 或完整页面实现。
 
-## 8. Maintenance boundary
+## 9. Maintenance boundary
 
 本文件只定义实现 provenance 和 binding priority，不新增 Capability、不登记 Runtime schema、不创建第二套 Component Registry。若 Runtime export、Manifest 或 Golden 与本 Contract 冲突，应记录 `RUNTIME EVIDENCE CONFLICT` 或 `DESIGN DECISION REQUIRED`，不得在生成页静默降级。

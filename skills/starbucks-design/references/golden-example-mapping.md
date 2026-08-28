@@ -11,7 +11,7 @@
 | Intent | Yes | 用户希望完成的业务任务，不是组件或文件名称。 |
 | Decision Reference | Yes | 选择 Template 或 Interaction Pattern 的决策知识；可以包含多个 reference。 |
 | Template Reference | Yes | 约束页面结构、状态所有权和允许能力子集的 Profile-specific Template。 |
-| Golden Example | Yes | 只读 AI 输出参考样例；没有独立 Golden 时必须明确写为间接映射。 |
+| Golden Example | Yes | 只读 AI 输出参考样例；没有独立 Golden 时通常明确写为间接映射。经批准的 restricted composition exception 可以写 `None`，但必须登记 implementation references 和 test-only fixture strategy。 |
 | Validation Reference | Yes | Functional、Responsive、Theme、Accessibility、Interaction、Visual Quality、Geometry / Composition Fidelity 和 Implementation Provenance 的检查来源或证据入口；入口存在不等于已执行。 |
 | Status | Yes | 使用 Capability Registry 状态语义；本文件当前使用 `READY` 或 `PARTIAL`。 |
 | Missing Knowledge | Yes | 尚未形成直接链路、独立证据或明确状态的知识；没有时写 `None`。 |
@@ -27,12 +27,12 @@ Template
     ↓
 Template Usage Contract
     ↓
-Golden Example
+Golden Example or approved no-Golden strategy
     ↓
 Validation
 ```
 
-Mapping `READY` 表示上述五层已经可追踪，不代表所有验证在当前会话中实际运行。实际执行状态必须由验证报告单独记录。
+Mapping `READY` 表示上述层级或明确批准的 no-Golden strategy 已经可追踪，不代表所有验证在当前会话中实际运行。实际执行状态必须由验证报告单独记录。
 
 每个 `Template Reference` 都必须同时读取 [Template Usage Contract](template-usage-contract.md)，以区分 Template Selected、Template Used 和实际 Fidelity；Golden mapping 不得只凭模板文件存在而声明已使用。
 
@@ -45,10 +45,21 @@ Mapping `READY` 表示上述五层已经可追踪，不代表所有验证在当�
 | `starter.template.basic-form` | Starter | 创建或编辑数据并完成校验、提交和重置 | [Template Selection](decisions/template-selection.md) Rule 6 | [Basic Form Template](../../../distribution/designkit-starter-v1/templates/form.md) | [Basic Form Golden](../../../distribution/designkit-starter-v1/examples/form.html) | [Quality Checklist](../../../distribution/designkit-starter-v1/references/quality-checklist.md)、[Template Tests](../../../packages/docs/site/src/styles/__tests__/template-pages.test.mjs) | `READY` | P1：Form 的 Theme、Accessibility 和 Interaction 证据仍聚合在通用检查中 |
 | `starter.template.basic-detail` | Starter | 只读查看一个已有对象的信息、状态和元数据 | [Template Selection](decisions/template-selection.md) Rule 5 | [Basic Detail Template](../../../distribution/designkit-starter-v1/templates/detail.md) | [Basic Detail Golden](../../../distribution/designkit-starter-v1/examples/detail.html) | [Quality Checklist](../../../distribution/designkit-starter-v1/references/quality-checklist.md)、[Detail Tests](../../../packages/docs/site/src/styles/__tests__/detail-template.test.mjs) | `READY` | P1：Detail 的 Theme、Accessibility 和 Interaction 证据仍聚合在通用检查中 |
 | `starter.component.table-toolbar` | Starter | 在已选 Starter Template 中呈现选择摘要、模板允许的轻量批量操作、基础筛选容器和操作状态 | [Interaction Pattern](decisions/interaction-pattern.md) Sections 2–5；[Design Decisions](design-decisions.md) TableToolbar | [Basic List Template](../../../distribution/designkit-starter-v1/templates/list.md)、[Card List Template](../../../distribution/designkit-starter-v1/templates/card-list.md) | 间接映射：[Basic List Golden](../../../distribution/designkit-starter-v1/examples/list.html)、[Card List Golden](../../../distribution/designkit-starter-v1/examples/multi-select-card-list.html) | [Quality Checklist](../../../distribution/designkit-starter-v1/references/quality-checklist.md)、[TableToolbar Integration](../../../packages/docs/site/src/styles/__tests__/starter-table-toolbar-integration.test.mjs) | `PARTIAL` | P1：没有独立 TableToolbar Golden；两个模板使用不同 Starter capability subset，验证证据必须按模板区分 |
+| `starter.pattern.default-application-shell` | Starter | 以固定 Top + Side + Main outer composition 包裹已批准页面模板 | [Default Application Shell Contract](application-shell.md) Shell Mode Decision | 已选 Starter Template；Shell 只负责 outer wrapper | None；Docs Menu demos 状态为 `IMPLEMENTATION REFERENCE`，不是 Starter Golden | [Validation Contract](validation/validation-contract.md) Default Application Shell；Knowledge/projection contract test；后续 test-only composition fixture | `READY` | Support state `SUPPORTED`；本阶段无 Shell HTML，Responsive/Theme/Interaction Browser Evidence 为 `UNVERIFIED` |
 | `starter.interaction.selection` | Starter | 通过显式 Selection Control 维护当前 Card List 的页面级 Selection Set | [Interaction Pattern](decisions/interaction-pattern.md) Section 5 | [Card List Template](../../../distribution/designkit-starter-v1/templates/card-list.md) | 间接映射：[Card List Golden](../../../distribution/designkit-starter-v1/examples/multi-select-card-list.html) | [Quality Checklist](../../../distribution/designkit-starter-v1/references/quality-checklist.md)、[Card List Integration](../../../packages/docs/site/src/styles/__tests__/starter-card-list-integration.test.mjs) | `PARTIAL` | P1：没有独立 Selection Golden；Golden 预置选择是 Example Specific，不是生成默认值 |
 | `starter.interaction.batch-actions` | Starter | 对 Card List 当前 Selection Set 执行轻量本地多对象操作 | [Interaction Pattern](decisions/interaction-pattern.md) Sections 2–4 | [Card List Template](../../../distribution/designkit-starter-v1/templates/card-list.md) | 间接映射：[Card List Golden](../../../distribution/designkit-starter-v1/examples/multi-select-card-list.html) | [Quality Checklist](../../../distribution/designkit-starter-v1/references/quality-checklist.md)、[Card List Integration](../../../packages/docs/site/src/styles/__tests__/starter-card-list-integration.test.mjs)、[TableToolbar Integration](../../../packages/docs/site/src/styles/__tests__/starter-table-toolbar-integration.test.mjs) | `PARTIAL` | P1：没有独立 Batch Actions Golden；当前只覆盖本地 Mock 和当前选择集合，不覆盖跨页、服务端、权限或持久化能力 |
 
 Basic List 的 Starter projection 目前采用模板专属的 Continuous Data Region inset：top `4px`、inline `16px`（底部沿用模板实现）。这只是该模板的已核对 evidence，不是尚未解决的 universal list spacing contract；其他 Docs Full / template surfaces 仍需按各自 canonical evidence 判断。
+
+### Default Application Shell implementation references
+
+- Top implementation reference：Docs Menu / “品牌色模式导航”，`packages/docs/site/src/demos/menu/top-nav-menu.tsx`；
+- Side implementation reference：Docs Menu / “缩起内嵌菜单”，`packages/docs/site/src/demos/menu/collapse-inline-menu.tsx`；
+- mapping status：`IMPLEMENTATION REFERENCE`；
+- Golden status：`None`；不得创建或推断 Starter Application Shell Golden；
+- validation strategy：后续独立 test-only composition fixture，验证 1280/768/390、Light/Dark、overflow、ownership 和 accessibility。
+
+Implementation reference 只证明应复用的批准模式，不是当前 Starter browser `PASS` evidence。
 
 ## 3. Golden Rule
 
@@ -153,7 +164,7 @@ Validation
 1. Capability ID 必须先在 Registry 登记，再加入本映射；不得为不存在的能力创建孤立 Golden mapping。
 2. Decision Rule 必须说明用户为何选择该 Template 或 Interaction Pattern。
 3. Template Reference 必须属于同一 Profile，并明确能力子集和状态所有权。
-4. Golden Example 必须标明直接或间接映射，以及 Example Specific 状态。
+4. Golden Example 必须标明直接或间接映射，以及 Example Specific 状态。`starter.pattern.default-application-shell` 是经批准的 restricted composition exception，明确记录 `None`、implementation references 和 test-only fixture strategy，不把缺少完整 Golden 视为遗漏字段。
 5. Validation Reference 必须覆盖适用的 Functional、Responsive、Theme、Accessibility、Interaction、Visual Quality、Geometry / Composition Fidelity 和 Implementation Provenance；未执行的维度不得写为已通过。
 6. 任一映射字段缺失时，Status 不得标记为 `READY`。
 7. Golden、Template、Decision 或 Registry 状态变化时同步更新本文件；不能只更新其中一个路径。

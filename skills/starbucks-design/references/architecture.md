@@ -305,6 +305,28 @@ packages/starbucks-design-vue/src/index.ts
 
 除非用户明确批准建设公共页面框架，并有充分复用证据。
 
+### 5.1 Restricted composition pattern — Default Application Shell
+
+`starter.pattern.default-application-shell` 是 Non-Developer Starter 的受限页面外层组合：
+
+```text
+Brand Top Menu
+    + Collapsible Embedded Side Menu
+    + approved Page Template
+```
+
+它属于 Knowledge/Starter composition pattern，不是：
+
+- 新基础组件；
+- 新业务组件；
+- public Navigation API；
+- reusable all-in-one page component；
+- React/Vue project navigation integration。
+
+Shell 只拥有 Top、Side、Main outer layout、global theme binding 和 Shell responsive relationship。Page Template 继续拥有 Page Header、Breadcrumb、Toolbar/Filter、内容区、Pagination、page state、Mock data、page interactions 和模板内部 spacing。具体 Shell Modes、Theme 和 responsive contract 只读取 [Default Application Shell Contract](application-shell.md)。
+
+该 pattern 复用现有 Menu 和 approved Docs implementation references，不创建 Starter-specific Sidebar，不进入 React/Vue package exports，也不授权 Custom Navigation、权限菜单、真实路由或 backend-driven navigation。
+
 ## 6. 业务模块
 
 业务模块具有明确领域语义，通常由多个页面模板、业务组件和领域规则组成。
@@ -500,6 +522,8 @@ Vue 包依赖 React 包
 | 左侧标签组、右侧筛选和表格 | 页面模板或业务模块 |
 | 标签领域字段和接口 | 业务模块 |
 | 基础列表页面组合示例 | 页面模板 |
+| Starter 常规后台页的固定 Top + Side + Template 外层 | Restricted composition pattern `starter.pattern.default-application-shell` |
+| 自定义导航、真实路由、权限菜单或 Navigation API | Docs Full / Developer Navigation engineering，不属于 Starter Shell |
 | React 单文件 HTML 预览 | React Preview Skill |
 | Vue 单文件 HTML 预览 | Vue Preview Skill |
 | 组件 Props 与类型说明 | React / Vue 组件 Skill |
