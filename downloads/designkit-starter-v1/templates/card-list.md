@@ -66,6 +66,7 @@
 - **Hard Rule**：单张 Card 最多展示 3 个操作入口，More 本身计为一个入口；超过限制时保留优先级最高的 2 个，其余按原顺序进入 More Menu。
 - **Hard Rule**：危险对象操作必须在执行前确认，完成或失败后提供可感知反馈。
 - **Hard Rule**：More 触发器必须具有包含对象名称的可访问名称，菜单项保持键盘可操作。
+- **Hard Rule**：批量上架、移动和删除必须使用 Starter Runtime 暴露的 `IconPlus`、`IconSwap` 和 `IconDelete`；批量删除入口默认使用已批准的 neutral/default/secondary treatment，并保留确认流程。不得用手绘 SVG 或自定义图标/按钮样式替代 Runtime 绑定。
 - **Guideline**：按业务频率和任务优先级排列操作，不让低频操作挤占核心入口。
 - **Example Specific**：排到首位、编辑、复制、上架和删除是 Golden 的业务操作示例，不是所有 Card List 必须具备的固定操作。
 
@@ -87,6 +88,7 @@
 - **Guideline**：结果数量减少时保持当前可容纳的列轨道和 Card 可读宽度，不把最后一行少量 Card 拉伸填满整行。
 - **Guideline**：Card Grid 和 Card 内容保持顶对齐，Preview 或页面剩余高度不参与 Card 高度分配。
 - **Example Specific**：Golden 使用的 Card 最小宽度、Grid gap、容器 padding 和具体圆角是该示例的校准值，不是全局 DesignKit Token；其中 `360px` 不得作为所有 Card List 的统一最小宽度。
+- **Hard Rule**：当前批准的 Golden 几何基线使用 12px Card 外圆角、内容区顶部 10px 圆角和内容区下方 12px 圆角；该几何关系必须保留，但不得升级为全局圆角 Token。
 
 ## Theme rules
 

@@ -115,9 +115,13 @@ Avoid: 不合并成新的 all-in-one 页面。
 ```text
 Profile Router
     ↓
+Capability Registry
+    ↓
 Template Selection
     ↓
-Capability Registry
+Shell Mode Decision
+    ↓
+Implementation Binding
     ↓
 Interaction Pattern
     ↓
@@ -126,8 +130,20 @@ Template / Component Knowledge
 Golden Mapping and Validation
 ```
 
-模板确认后再读取 [Interaction Pattern](interaction-pattern.md)。交互需求不能反向扩大 Template Boundary。
+模板确认后先读取 [Default Application Shell Contract](../application-shell.md) 解析 Shell Mode，再读取 [Implementation Binding Contract](../implementation-binding-contract.md) 和 [Interaction Pattern](interaction-pattern.md)。Shell 或交互需求都不能反向扩大 Template Boundary。
 
-## 5. Maintenance rule
+## 5. Shell mode decision
+
+Template selection 不等于 Shell selection。模板确定后按以下规则解析：
+
+| Signal | Shell mode |
+| --- | --- |
+| 常规 Product Manager / Non-Developer Starter 后台页，用户没有覆盖 | `default` |
+| 用户明确已有系统框架，只需要内容区 | `content-only` |
+| 用户明确要求 standalone / 独立 Demo | `none` |
+
+Shell Mode 只决定是否包裹已选 Template；不得改变 Template anatomy、Breadcrumb、Toolbar、state ownership、Basic List `4px / 16px / 16px` 或 responsive internals。AI 不得创建第四种 Shell Mode。
+
+## 6. Maintenance rule
 
 新增 Template 必须同步 Capability Registry、Decision Rule、Template、Golden Example 和 Validation。缺少任一链路时不得登记为 Starter `READY`。

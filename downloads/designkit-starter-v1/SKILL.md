@@ -1,6 +1,6 @@
 ---
 name: designkit-starter-v1
-description: "为产品经理生成 Starbucks Design 零工程环境 Demo。用户提出基础列表页、卡片列表页、表单页或详情页需求，或要求生成可直接在浏览器打开的 HTML Demo 时使用。输出单文件 HTML，允许固定版本的 React UMD/CDN、Babel 和少量 JavaScript；不生成 React/Vue 工程，不使用 Node.js、npm、import、export 或 TypeScript。"
+description: "为产品经理生成 Starbucks Design 零工程环境 Demo。用户提出基础列表页、卡片列表页、表单页或详情页需求，或要求生成可直接在浏览器打开的 HTML Demo 时使用。常规后台页默认使用受限 Default Application Shell。输出单文件 HTML，允许固定版本的 React UMD/CDN、Babel 和少量 JavaScript；不生成 React/Vue 工程，不使用 Node.js、npm、import、export 或 TypeScript。"
 ---
 
 # DesignKit Starter V1
@@ -25,7 +25,8 @@ description: "为产品经理生成 Starbucks Design 零工程环境 Demo。用�
 - Basic List；
 - Card List；
 - Basic Form；
-- Basic Detail。
+- Basic Detail；
+- `starter.pattern.default-application-shell` 固定组合。
 
 不支持：
 
@@ -46,9 +47,21 @@ Profile Routing
     ↓
 Capability Registry Lookup
     ↓
-Template Decision
+    Template Decision
     ↓
-Interaction Decision
+    Template Usage Contract
+    ↓
+    Shell Mode Decision
+    ↓
+    Shell Reference Binding
+    ↓
+    Template Reference Binding
+    ↓
+    Implementation Binding Contract
+    ↓
+    Icon Binding Validation
+    ↓
+    Interaction Decision
     ↓
 Golden Example Reference
     ↓
@@ -63,10 +76,14 @@ Evidence Record
 2. 使用 Profile Router 确认 Starter 交付和 unsupported handling。
 3. 查询 Capability Registry 的 `starter.*` ID、Status、Boundary 和 Conflict。
 4. 页面请求读取 Template Selection；确定模板后再读取对应 Template。
-5. 需要选择、批量操作、More 或操作范围判断时读取 Interaction Pattern。
-6. 读取 Golden Mapping 指向的同 Capability Golden，只作为只读组合参考。
-7. 按 Validation Contract 确定适用检查和 Pass Criteria。
-8. 按 Evidence Model 记录实际 Method、Evidence Location、Result 和未验证项。
+5. 读取 [Template Usage Contract](references/template-usage-contract.md)，确保 Selected、Used 和 Fidelity 不被混淆。
+6. 读取 [Default Application Shell Contract](references/application-shell.md)，在 Template Decision 后解析 `default`、`content-only` 或 `none`；没有用户覆盖时使用 `default`。
+7. 按 manifest 的 `referenceImplementations` 绑定 approved Shell reference 和已选 Template reference；先加载完整 approved subtree，再执行允许的 business slot/data substitution。
+8. 读取 [Implementation Binding Contract](references/implementation-binding-contract.md)，将已批准的 Runtime、图标和主题绑定到实际 HTML，并记录 Reference Used；Generic UI Icon 必须从 `window.arcoicon` 绑定，固定 Pattern Icon 和 Side 业务 Icon 逐一做 runtime existence validation。
+9. 需要选择、批量操作、More 或操作范围判断时读取 Interaction Pattern。
+10. 读取 Golden Mapping；页面 Template 的 Golden 只作为只读组合参考，Default Application Shell 只使用 approved reference、test-only fixture strategy 和 package-only clean-room evidence。
+11. 按 Validation Contract 确定适用检查和 Pass Criteria。
+12. 按 Evidence Model 记录实际 Method、Evidence Location、Result 和未验证项。
 
 只加载当前 Capability 所需的 references，不一次性加载全部模板和组件知识。
 
@@ -77,8 +94,12 @@ Evidence Record
 | 请求是否属于 Non-Developer Starter？ | [Profile Router](references/profile-routing.md) |
 | Starter 是否登记并允许该能力？ | [Capability Registry](references/capability-registry.md) |
 | 应选择哪个页面模板？ | [Template Selection](references/decisions/template-selection.md) |
+| 已选模板使用哪种 Shell Mode？ | [Default Application Shell Contract](references/application-shell.md) |
+| Shell 和已选模板如何保持批准实现？ | `manifest.json` 的 `referenceImplementations`、`patterns/default-application-shell.html`、`patterns/basic-list.html` |
 | 单对象、批量、More 和 Selection 如何决策？ | [Interaction Pattern](references/decisions/interaction-pattern.md) |
 | Capability 对应哪个 Template、Golden 和 Validation？ | [Golden Example Mapping](references/golden-example-mapping.md) |
+| 已选 Template 如何保留页面结构和响应式关系？ | [Template Usage Contract](references/template-usage-contract.md) |
+| 输出如何绑定 Starter Runtime、组件和主题？ | [Implementation Binding Contract](references/implementation-binding-contract.md) |
 | 必须验证什么、怎样才算通过？ | [Validation Contract](references/validation/validation-contract.md) |
 | 如何记录方法、证据、结果和日期？ | [Evidence Model](references/validation/evidence-model.md) |
 | 页面结构和视觉遵循什么规则？ | [Design Rules](references/design-rules.md) |

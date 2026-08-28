@@ -6,6 +6,7 @@
 
 - [Profile Router](profile-routing.md)：确认请求是否属于 Starter。
 - [Template Selection](decisions/template-selection.md)：选择页面模板。
+- [Default Application Shell Contract](application-shell.md)：模板确定后选择 Shell Mode。
 - [Interaction Pattern](decisions/interaction-pattern.md)：选择页面内部交互。
 - [Golden Example Mapping](golden-example-mapping.md)：追踪 Template、Golden 和 Validation。
 - [Validation Contract](validation/validation-contract.md)：读取验证目标。
@@ -48,6 +49,8 @@ AI 只有在本 Registry 存在对应 `starter.*` Capability ID，并且当前 S
 
 本投影不包含范围外能力行。请求未登记能力时，由 Profile Router 的 Unsupported Handling 处理。
 
+`starter.pattern.default-application-shell` 的产品 Support state 为 `SUPPORTED`；本 Registry 使用既有合法 `READY` 表示可按固定 Boundary 生成。实际 Package-only Browser Evidence 读取 [Default Application Shell Evidence](validation/evidence/starter-pattern-default-application-shell.md)，不把 Registry 状态当作执行证据。
+
 ## 4. Starter capability projection
 
 | Capability ID | Capability Name | Type | Boundary | Package Assets | Golden Example | Validation | Status | Conflict | Next Action |
@@ -58,6 +61,7 @@ AI 只有在本 Registry 存在对应 `starter.*` Capability ID，并且当前 S
 | `starter.template.basic-detail` | Basic Detail | Template | 只读查看单个对象；使用批准的单区块详情结构、基础状态和本地操作反馈 | [Template](../templates/detail.md)、[Component Catalog](component-catalog.md) | [Basic Detail Golden](../examples/detail.html) | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `READY` | 不包含复杂模块、导出、表格、时间线、Tabs 或真实接口 | 补充逐维度 Evidence Records |
 | `starter.component.table-toolbar` | TableToolbar | Business Component | Non-Developer 页面支持；允许 selection summary、模板批准的轻量 batch actions、basic filtering container 和 action state display，不提供工程级配置或高级扩展 | [Business Component Knowledge](../business-components/table-toolbar.md)、[Component Catalog](component-catalog.md) | 由 [Basic List](../examples/list.html) 和 [Card List](../examples/multi-select-card-list.html) 间接覆盖 | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `READY` | Basic List 与 Card List 使用不同能力子集 | 按模板区分验证证据，不从 Runtime 扩大范围 |
 | `starter.pattern.quick-filter` | Quick Filter | Pattern | 仅允许 TableToolbar 已查证的 1～3 个轻量 Search、Select、ButtonGroup 或完整 DateRange；不含 Label、校验、复杂联动或查询面板 | [TableToolbar Knowledge](../business-components/table-toolbar.md)、[Component Catalog](component-catalog.md) | 由 Basic List 与 Card List Golden 间接覆盖 | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `PARTIAL` | 不得用多个 Quick Filters 伪造高级筛选 | 补充 Capability-specific Decision 和 Evidence |
+| `starter.pattern.default-application-shell` | Default Application Shell | Pattern | Product Manager / Non-Developer Starter；只允许固定 Brand Top + Collapsible Side + approved Page Template，支持 `default` / `content-only` / `none` | [Application Shell Contract](application-shell.md)、[Template Usage](template-usage-contract.md)、[Implementation Binding](implementation-binding-contract.md) | None；Docs Menu patterns 仅为 `IMPLEMENTATION REFERENCE`，不是 Starter Golden | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md)、[Default Application Shell Evidence](validation/evidence/starter-pattern-default-application-shell.md) | `READY` | Support state `SUPPORTED` 不等于完整 Navigation Shell engineering | 保持 fixed composition；Package-only clean-room 与 browser evidence 已独立记录 |
 | `starter.interaction.selection` | Local Selection | Pattern | Card List 页面拥有当前结果的 Selection Set、全选和半选；Card Body 不改变选择 | [Card List Template](../templates/card-list.md)、[Interaction Pattern](decisions/interaction-pattern.md) | [Card List Golden](../examples/multi-select-card-list.html) 间接覆盖 | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `PARTIAL` | Golden 的预置选择不是生成默认值 | 维持 Example Specific 与 Template Default 的边界 |
 | `starter.interaction.batch-actions` | Batch Actions | Pattern | 只对当前 Selection Set 执行轻量本地多对象操作；页面负责确认、Loading、反馈和恢复 | [Card List Template](../templates/card-list.md)、[TableToolbar Knowledge](../business-components/table-toolbar.md) | [Card List Golden](../examples/multi-select-card-list.html) 间接覆盖 | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `PARTIAL` | 不包含跨页、服务端、权限或持久化批处理 | 补充独立交互 Evidence Records |
 | `starter.foundation.theme` | Theme | Foundation | Starter 页面跟随批准的 Light/Dark 主题；状态、文本、背景、边框和图标保持可读 | [Design Rules](design-rules.md)、[Quality Checklist](quality-checklist.md) | 四个 Starter Golden 是页面级检查对象 | [Validation Contract](validation/validation-contract.md) | `PARTIAL` | Manifest 汇总状态不能代替逐能力 Theme Evidence | 登记每个模板的 Light/Dark 证据 |
@@ -70,4 +74,4 @@ AI 只有在本 Registry 存在对应 `starter.*` Capability ID，并且当前 S
 2. Projection 不得新增 Source 中不存在的 `starter.*` 能力，也不得升级 Status。
 3. 所有 Package Assets、Golden 和 Validation 链接必须是 Starter 包内相对路径。
 4. Runtime、组件或其他文档存在不自动扩大 Starter whitelist。
-5. 新能力必须完成 Registry、Decision、Template、Golden、Validation 和 Evidence 链路后再进入本投影。
+5. 新能力通常必须完成 Registry、Decision、Template、Golden、Validation 和 Evidence 链路后再进入本投影。`starter.pattern.default-application-shell` 是经批准的 restricted composition exception，以 Application Shell Contract、implementation references 和 test-only fixture strategy 替代完整 Golden；未执行 Browser Evidence 仍标记为 `UNVERIFIED`。

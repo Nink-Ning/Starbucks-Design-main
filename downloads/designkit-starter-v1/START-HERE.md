@@ -1,4 +1,4 @@
-# START HERE
+# START HERE — Starter V1-r2
 
 ## 目标
 
@@ -18,6 +18,11 @@ references/design-rules.md
 references/component-catalog.md
 references/template-contract.md
 references/cdn-runtime.md
+references/template-usage-contract.md
+references/implementation-binding-contract.md
+references/application-shell.md
+patterns/default-application-shell.html
+patterns/<对应模板 reference>.html
 templates/<对应页面类型>.md
 ```
 
@@ -37,6 +42,16 @@ templates/<对应页面类型>.md
 - 是否有参考页面或设计稿
 
 第一次建议从基础列表页开始。
+
+## Shell 默认行为
+
+- 常规后台页面默认使用 `default`：DesignKit 标准顶部导航 + 可折叠侧边菜单 + 已选页面模板，并支持全局 Light / Dark 切换。
+- 如果已有系统框架并且系统已经有顶部和侧边导航，请明确要求 `content-only`，只生成页面模板内容区。
+- 如果需要独立 Demo，请明确要求 `none`，不生成顶部导航或侧边菜单。
+
+Shell 与 Template 组合时，必须从 manifest 的 `referenceImplementations` 加载 approved reference；先将完整模板 subtree 放入 Shell Main Slot，再只替换允许的业务 slots。Reference asset 不是 Golden，也不是公共 API。
+
+不需要在需求中重复描述批准的导航样式；如果需要自定义导航体系、真实路由或权限菜单，该需求超出当前 Starter 边界。
 
 ## 第四步：要求 AI 输出
 
@@ -82,4 +97,4 @@ http://127.0.0.1:8000/examples/detail.html
 
 ## 试用边界
 
-Starter V1 适合产品方案验证、评审和沟通，不适合作为生产代码、真实接口实现或正式组件库源码。当前 `examples/` 中的四个 Golden Example 已完成本地浏览器验证；新生成的 `output/*.html` 仍需由使用者自行验证。
+Starter V1-r2 适合产品方案验证、评审和沟通，不适合作为生产代码、真实接口实现或正式组件库源码。R2 的 Visual Fidelity 仍需要真实截图和人工审查，不能由静态检查自动推导；新生成的 `output/*.html` 仍需由使用者自行验证。

@@ -7,7 +7,7 @@
 | Field | Required | Definition |
 | --- | --- | --- |
 | Capability ID | Yes | 与 [Capability Registry](../capability-registry.md) 完全一致的 `starter.*` ID。 |
-| Validation Type | Yes | `Functional`、`Responsive`、`Theme`、`Accessibility`、`Interaction` 或 `Visual Quality`。 |
+| Validation Type | Yes | `Capability Selection`、`Template Selection`、`Template Usage`、`Implementation Provenance`、`Component Fidelity`、`Brand Fidelity`、`Theme Fidelity`、`Structural Anatomy Fidelity`、`Geometry / Composition Fidelity`、`Interaction Fidelity`、`State Coverage`、`Responsive Fidelity`、`Accessibility`、`Visual Fidelity` 或 `Release / Package Integrity`；兼容旧记录的 Functional/Responsive/Theme/Interaction/Visual Quality。 |
 | Method | Yes | `Static Check`、`Browser Validation`、`Build Validation` 或 `Manual Review`。 |
 | Evidence Location | Conditional | 可复现的测试、命令结果、报告、截图或审查记录位置；`PASS` 和 `FAIL` 必填。 |
 | Result | Yes | `PASS`、`FAIL`、`UNVERIFIED`、`BLOCKED`、`NOT_APPLICABLE` 或 `CONFLICTED`。 |
@@ -51,6 +51,8 @@ Notes: <profile-template-runtime-theme-viewport-scenario-and-limitations>
 ```
 
 模板中的占位内容不是实际证据。只有执行验证并补全位置、结果、日期和上下文后，记录才能用于 Capability 状态判断。
+
+Geometry / Composition 记录必须保留同 viewport 的 Golden/generated measurements、relative relationships、responsive variables 和截图路径。Implementation Provenance 记录必须说明 Runtime resources、approved exports、实际 DOM/component evidence、theme binding 和 native substitute 检查。Visual Fidelity 只有真实截图加 Manual Review 才能通过；没有人工签收时保持 `CONDITIONAL` 或 `UNVERIFIED`。
 
 ## 5. Recording rules
 

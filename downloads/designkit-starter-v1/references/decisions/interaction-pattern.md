@@ -102,6 +102,12 @@ Page-owned Selection Set
 
 ## 6. Validation mapping
 
+### Destructive visual policy
+
+危险操作的行为语义与持久化视觉 treatment 是两个独立决策。Toolbar、Row、Card 或 More 中持续可见的危险入口，默认使用已批准的 neutral/default/secondary treatment，不因动作会删除、停用或移动对象就长期渲染为红色 danger 控件。入口仍须保留明确动作名称、Runtime/Arco icon binding、对象范围和可访问名称。
+
+确认流程必须保留 explicit target、consequence、Cancel、Confirm 和 result feedback；Confirm 遵循已批准的中性确认变体（若存在），Cancel 不得 mutation。若 Runtime 没有该变体，记录 `RUNTIME COMPONENT HIERARCHY GAP`，不得用页面私有 CSS 或臆造 variant 绕过。红色仍保留给 error/status 等语义状态，以及明确由既有 DesignKit pattern 授权的局部确认状态。
+
 | Dimension | Validate | Failure examples |
 | --- | --- | --- |
 | Accessibility | 操作有可访问名称，Selected 不只依赖颜色，不可用原因可理解 | 图标无名称；只用背景色表示选中 |

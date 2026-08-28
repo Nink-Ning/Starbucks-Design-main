@@ -66,7 +66,7 @@ Message
 - 不得把行操作改成 Link 来获取绿色，也不得在页面 CSS 中覆盖 `.arco-btn-text`。
 - 页面至少提供 Normal、Loading、Empty、Error 状态。
 - 页面状态 Select 放在 Header 右侧操作区最左侧，使用 `aria-label="页面状态"` 和 `data-demo-only="true"`；不生成独立顶部状态卡片。
-- 表格内容容器使用 `12px 24px 24px` 的上、横向、下内边距；结合 `TableToolbar` 自带的上下 `12px`，控件顶部距容器顶部为 `24px`，控件底部距表格顶部为 `12px`。
+- Basic List 的 Continuous Data Region 使用模板专属的 `4px 16px 16px`（上、横向、下）内边距；这不是 Universal List Spacing Token。Toolbar、Table 和 Pagination 仍处于同一个连续 surface 内。
 - `TableToolbar` 与表格容器之间不再增加页面级 `gap` 或 `margin`；不得把控件底部到表格顶部的距离扩成 `20px`。
 - Loading 时保留表格结构，避免重复刷新。
 - Empty 区分“没有数据”和“没有匹配结果”。
@@ -92,4 +92,4 @@ Message
 - [ ] 已明确主操作和行操作。
 - [ ] 行操作是品牌色文字 Button，视觉来自 `sbux-table-row-actions`，没有页面级组件覆盖。
 - [ ] 状态 Select 位于 Header 操作区最左侧并先于“新建门店”。
-- [ ] 工具栏控件顶部距内容容器顶部为 24px，控件底部距表格顶部为 12px，二者之间没有额外页面级 gap。
+- [ ] Data Region 的 top inset 为 4px、inline inset 为 16px；Toolbar、Table、Pagination 之间没有额外页面级 gap。
