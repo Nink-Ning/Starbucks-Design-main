@@ -1,19 +1,47 @@
 <template>
-  <Teleport to="[data-template-action-host='secondary-detail']">
-    <div class="sb-secondary-detail-page__breadcrumb-actions">
-      <Dropdown @select="handleMore">
-        <Button type="outline">更多</Button>
-        <template #content>
-          <Doption value="copy">复制 QID</Doption>
-          <Doption value="parent">查看父级卡券</Doption>
-        </template>
-      </Dropdown>
-      <Button type="primary" @click="handleExport">导出{{ activeTabLabel }}</Button>
-    </div>
-  </Teleport>
-
   <div class="sb-secondary-detail-page sb-template-page-surface">
+    <Teleport v-if="pageHeaderInDocs" :to="pageHeaderTarget">
+      <PageHeader
+        title="卡券核销记录"
+        help-text="查看卡券的下级核销记录"
+        backable
+        @back="handleBack"
+      >
+        <template #extra>
+          <div class="sb-secondary-detail-page__breadcrumb-actions">
+            <Dropdown @select="handleMore">
+              <Button type="outline">更多</Button>
+              <template #content>
+                <Doption value="copy">复制 QID</Doption>
+                <Doption value="parent">查看父级卡券</Doption>
+              </template>
+            </Dropdown>
+            <Button type="primary" @click="handleExport">导出{{ activeTabLabel }}</Button>
+          </div>
+        </template>
+      </PageHeader>
+    </Teleport>
     <DetailPageLayout>
+      <PageHeader
+        v-if="!pageHeaderInDocs"
+        title="卡券核销记录"
+        help-text="查看卡券的下级核销记录"
+        backable
+        @back="handleBack"
+      >
+        <template #extra>
+          <div class="sb-secondary-detail-page__breadcrumb-actions">
+            <Dropdown @select="handleMore">
+              <Button type="outline">更多</Button>
+              <template #content>
+                <Doption value="copy">复制 QID</Doption>
+                <Doption value="parent">查看父级卡券</Doption>
+              </template>
+            </Dropdown>
+            <Button type="primary" @click="handleExport">导出{{ activeTabLabel }}</Button>
+          </div>
+        </template>
+      </PageHeader>
       <Card class="sb-secondary-detail-page__content">
         <div class="sb-secondary-detail-page__parent-summary">
           <DetailDescriptions :data="secondaryParentSummary" empty-value="—" />
@@ -81,6 +109,7 @@ import { Message } from '@sbux/starbucks-design-vue'
 import {
   DetailDescriptions,
   DetailPageLayout,
+  PageHeader,
 } from '@sbux/starbucks-design-vue/pro'
 import {
   secondaryActivityTimeline,
@@ -123,4 +152,7 @@ const batchColumns = [
 const handleExport = () => Message.success(`已导出${activeTabLabel.value}`)
 const handleRefresh = () => Message.info(`刷新${activeTabLabel.value}`)
 const handleMore = (key: string) => Message.info(key === 'copy' ? '已复制 QID' : '返回父级卡券')
+const handleBack = () => Message.info('返回卡券列表')
+const pageHeaderTarget = '[data-template-page-header-host="secondary-detail"]'
+const pageHeaderInDocs = typeof document !== 'undefined' && Boolean(document.querySelector(pageHeaderTarget))
 </script>

@@ -1,5 +1,20 @@
 <template>
   <div class="sb-step-form-page sb-template-page-surface">
+    <PageHeader
+      v-if="!pageHeaderInDocs"
+      title="新建活动"
+      help-text="按步骤完成活动配置"
+      backable
+      @back="handleBack"
+    />
+    <Teleport v-if="pageHeaderInDocs" :to="pageHeaderTarget">
+      <PageHeader
+        title="新建活动"
+        help-text="按步骤完成活动配置"
+        backable
+        @back="handleBack"
+      />
+    </Teleport>
     <FormPageLayout>
       <Form ref="formRef" :model="form" layout="vertical" :rules="rules" :disabled="submitting">
         <StepFormLayout :sticky-actions="true">
@@ -190,7 +205,7 @@ import {
   Step,
   Steps,
 } from '@sbux/starbucks-design-vue'
-import { FormActions, FormControlArea, FormGrid, FormGridItem, FormPageLayout, FormSection, StepFormLayout } from '@sbux/starbucks-design-vue/pro'
+import { FormActions, FormControlArea, FormGrid, FormGridItem, FormPageLayout, FormSection, PageHeader, StepFormLayout } from '@sbux/starbucks-design-vue/pro'
 import {
   ACTIVITY_COUPON_SELECT_OPTIONS,
   ACTIVITY_COUPON_TYPE_OPTIONS,
@@ -267,4 +282,8 @@ const handleCancel = () => {
   currentStep.value = 1
   submitSuccess.value = false
 }
+
+const handleBack = () => Message.info('返回活动列表')
+const pageHeaderTarget = '[data-template-page-header-host="step-form"]'
+const pageHeaderInDocs = typeof document !== 'undefined' && Boolean(document.querySelector(pageHeaderTarget))
 </script>

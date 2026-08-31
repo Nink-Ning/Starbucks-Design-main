@@ -157,6 +157,10 @@ const previewDocument = goldenExampleHtml
     '../runtime/starbucks-react.umd.js',
     'runtime/starbucks-react.umd.js',
   )
+  .replace(
+    'https://unpkg.com/@arco-design/web-react-icon@2.66.15/dist/arco-icon.min.js',
+    'https://unpkg.com/@arco-design/web-react@2.66.15/dist/arco-icon.min.js',
+  )
   .replace('</head>', `${docsEmbedStyles}</head>`)
   .replace('<head>', `<head>${docsThemeBootstrap}`);
 

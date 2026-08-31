@@ -12,7 +12,10 @@ describe('PageHeader', () => {
     const wrapper = mount(PageHeader, { props: { title: 't' } })
     expect(wrapper.find('.sbux-pro-page-header-back').exists()).toBe(false)
     await wrapper.setProps({ backable: true })
-    expect(wrapper.find('.sbux-pro-page-header-back').exists()).toBe(true)
+    const back = wrapper.find('.sbux-pro-page-header-back')
+    expect(back.exists()).toBe(true)
+    expect(back.element.tagName).toBe('BUTTON')
+    expect(back.attributes('aria-label')).toBe('返回上一级')
   })
 
   it('emits back on arrow click', async () => {
@@ -26,6 +29,7 @@ describe('PageHeader', () => {
     expect(bare.find('.sbux-pro-page-header-help').exists()).toBe(false)
     const withHelp = mount(PageHeader, { props: { title: 't', helpText: '说明' } })
     expect(withHelp.find('.sbux-pro-page-header-help').exists()).toBe(true)
+    expect(withHelp.find('[aria-label="页面帮助"]').exists()).toBe(true)
   })
 
   it('renders extra slot in right area', () => {

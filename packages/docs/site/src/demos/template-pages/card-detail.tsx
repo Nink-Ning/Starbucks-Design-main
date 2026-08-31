@@ -3,6 +3,7 @@ import { Button, Card, Dropdown, Menu, Message, Table, Timeline } from '@sbux/st
 import {
   DetailDescriptions,
   DetailPageLayout,
+  PageHeader,
 } from '@sbux/starbucks-design-react/pro'
 import {
   couponActivityTimeline,
@@ -37,21 +38,30 @@ function DetailActions() {
 }
 
 export default function Demo() {
-  const actionHost = typeof document === 'undefined'
+  const pageHeader = (
+    <PageHeader
+      title="卡券详情"
+      helpText="查看卡券的基本信息、适用范围和操作记录"
+      backable
+      onBack={() => Message.info('返回卡券列表')}
+      extra={(
+        <div className="sb-card-detail-page__breadcrumb-actions">
+          <DetailActions />
+        </div>
+      )}
+    />
+  )
+  const pageHeaderHost = typeof document === 'undefined'
     ? null
-    : document.querySelector<HTMLElement>('[data-template-action-host="card-detail"]')
+    : document.querySelector<HTMLElement>('[data-template-page-header-host="card-detail"]')
 
   return (
     <>
-      {actionHost && createPortal(
-        <div className="sb-card-detail-page__breadcrumb-actions">
-          <DetailActions />
-        </div>,
-        actionHost,
-      )}
+      {pageHeaderHost && createPortal(pageHeader, pageHeaderHost)}
 
       <div className="sb-card-detail-page sb-template-page-surface">
         <DetailPageLayout>
+          {!pageHeaderHost && pageHeader}
           <div className="sb-card-detail-page__cards">
             <Card className="sb-card-detail-page__card sb-card-detail-page__card--wide" title="基本信息">
               <DetailDescriptions data={couponBasicInfo} column={2} emptyValue={DETAIL_EMPTY_VALUE} />

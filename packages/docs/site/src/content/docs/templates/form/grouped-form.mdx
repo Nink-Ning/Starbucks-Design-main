@@ -37,7 +37,7 @@ import Demo from '../../../../components/Demo.astro';
   <section class="sb-template-docs-section">
     <h2>页面结构</h2>
     <ul>
-      <li>默认预览不在卡片内部重复展示页面标题；页面根容器与基础表单共用同一套内边距、背景和圆角，<code>FormPageLayout</code> 控制最大宽度。</li>
+      <li>默认预览不在卡片内部重复展示页面标题；共享 Page Header 使用 20px 标题和二级 icon-only Back，Form Surface 填满可用 Main，Form Content 横向内边距至少为 32px，<code>FormPageLayout</code> 只保留 approved inner width。</li>
       <li>每个 <code>FormSection</code> 复用同一套 <code>FormGrid</code>，支持 1/2 列和跨列字段。</li>
       <li>分组之间使用统一间距和可选分割线，页面底部只保留一套操作区。</li>
       <li>React 和 Vue 使用真实 Form 管理字段值、校验、重置和本地 Mock 保存。</li>
@@ -76,7 +76,7 @@ import Demo from '../../../../components/Demo.astro';
   <section class="sb-template-docs-section">
     <h2>设计规则</h2>
     <ol>
-      <li>页面模板头部统一采用“左侧面包屑或页面标题、右侧业务核心操作或全局功能操作”的两区结构；存在页面级操作时，操作区与面包屑保持同一层级。</li>
+      <li>二级全页 Grouped Form 使用共享 Page Header 的 icon-only Back + 20px 标题 + 可选 Context Help；不显示 Breadcrumb 或文字 Back。depth &gt; 2 仅在信息架构需要时使用 approved Breadcrumb。</li>
       <li>页面级操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
       <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
       <li>分组间距为 32px，组标题与字段内容间距为 16px，组内网格行列间距为 24px。</li>

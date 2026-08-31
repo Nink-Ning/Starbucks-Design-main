@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link as ALink, Tooltip as ATooltip } from '@arco-design/web-vue'
+import { Button as AButton, Link as ALink, Tooltip as ATooltip } from '@arco-design/web-vue'
 import { IconLeft, IconQuestionCircle } from '@arco-design/web-vue/es/icon'
 import type { PageHeaderProps } from './interface'
 
@@ -13,11 +13,14 @@ const emit = defineEmits<{ back: [] }>()
 <template>
   <div class="sbux-pro-page-header">
     <div class="sbux-pro-page-header-main">
-      <span
+      <AButton
         v-if="backable"
         class="sbux-pro-page-header-back"
+        type="secondary"
+        shape="square"
+        aria-label="返回上一级"
         @click="emit('back')"
-      ><IconLeft /></span>
+      ><IconLeft /></AButton>
       <slot name="title">
         <span class="sbux-pro-page-header-title">{{ title }}</span>
       </slot>
@@ -31,7 +34,9 @@ const emit = defineEmits<{ back: [] }>()
             target="_blank"
           >查看更多</ALink>
         </template>
-        <IconQuestionCircle class="sbux-pro-page-header-help" />
+        <span class="sbux-pro-page-header-help-trigger" tabindex="0" role="img" aria-label="页面帮助">
+          <IconQuestionCircle class="sbux-pro-page-header-help" />
+        </span>
       </ATooltip>
     </div>
     <div v-if="$slots.extra" class="sbux-pro-page-header-extra">

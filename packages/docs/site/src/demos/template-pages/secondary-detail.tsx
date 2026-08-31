@@ -4,6 +4,7 @@ import { Button, Card, Dropdown, Menu, Message, Table, Tabs, Tag, Timeline } fro
 import {
   DetailDescriptions,
   DetailPageLayout,
+  PageHeader,
 } from '@sbux/starbucks-design-react/pro'
 import {
   secondaryActivityTimeline,
@@ -44,9 +45,34 @@ export default function Demo() {
   const [activeTab, setActiveTab] = useState<SecondaryTabKey>('redemptions')
   const activeTabLabel = secondaryTabLabels[activeTab]
 
-  const actionHost = typeof document === 'undefined'
+  const pageHeader = (
+    <PageHeader
+      title="卡券核销记录"
+      helpText="查看卡券的下级核销记录"
+      backable
+      onBack={() => Message.info('返回卡券列表')}
+      extra={(
+        <div className="sb-secondary-detail-page__breadcrumb-actions">
+          <Dropdown
+            droplist={
+              <Menu onClickMenuItem={(key) => Message.info(key === 'copy' ? '已复制 QID' : '返回父级卡券')}>
+                <Menu.Item key="copy">复制 QID</Menu.Item>
+                <Menu.Item key="parent">查看父级卡券</Menu.Item>
+              </Menu>
+            }
+          >
+            <Button type="outline">更多</Button>
+          </Dropdown>
+          <Button type="primary" onClick={() => Message.success(`已导出${activeTabLabel}`)}>
+            导出{activeTabLabel}
+          </Button>
+        </div>
+      )}
+    />
+  )
+  const pageHeaderHost = typeof document === 'undefined'
     ? null
-    : document.querySelector<HTMLElement>('[data-template-action-host="secondary-detail"]')
+    : document.querySelector<HTMLElement>('[data-template-page-header-host="secondary-detail"]')
 
   const panel = useMemo(() => {
     if (activeTab === 'redemptions') {
@@ -107,27 +133,11 @@ export default function Demo() {
 
   return (
     <>
-      {actionHost && createPortal(
-        <div className="sb-secondary-detail-page__breadcrumb-actions">
-          <Dropdown
-            droplist={
-              <Menu onClickMenuItem={(key) => Message.info(key === 'copy' ? '已复制 QID' : '返回父级卡券')}>
-                <Menu.Item key="copy">复制 QID</Menu.Item>
-                <Menu.Item key="parent">查看父级卡券</Menu.Item>
-              </Menu>
-            }
-          >
-            <Button type="outline">更多</Button>
-          </Dropdown>
-          <Button type="primary" onClick={() => Message.success(`已导出${activeTabLabel}`)}>
-            导出{activeTabLabel}
-          </Button>
-        </div>,
-        actionHost,
-      )}
+      {pageHeaderHost && createPortal(pageHeader, pageHeaderHost)}
 
       <div className="sb-secondary-detail-page sb-template-page-surface">
         <DetailPageLayout>
+          {!pageHeaderHost && pageHeader}
           <Card className="sb-secondary-detail-page__content">
             <div className="sb-secondary-detail-page__parent-summary">
               <DetailDescriptions data={secondaryParentSummary} emptyValue="—" />

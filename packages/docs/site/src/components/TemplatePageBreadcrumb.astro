@@ -29,30 +29,50 @@ const normalized = pathname
   .replace(base, '')
   .replace(/^\/+|\/+$/g, '');
 const [group, current] = pages.get(normalized) ?? [undefined, undefined];
+const pageHeaderTemplates = new Map([
+  ['templates/form/basic-form', ['basic-form', '新建门店', '填写门店基础信息后保存']],
+  ['templates/form/grouped-form', ['grouped-form', '门店设置', '按业务分组维护门店配置']],
+  ['templates/form/step-form', ['step-form', '新建活动', '按步骤完成活动配置']],
+  ['templates/detail/basic-detail', ['basic-detail', '卡券详情', '查看卡券的只读信息']],
+  ['templates/detail/card-detail', ['card-detail', '卡券详情', '查看卡券的基本信息、适用范围和操作记录']],
+  ['templates/detail/data-detail', ['data-detail', '卡券数据详情', '分析卡券指标、趋势和核销明细']],
+  ['templates/detail/secondary-detail', ['secondary-detail', '卡券核销记录', '查看卡券的下级核销记录']],
+]);
+const pageHeader = pageHeaderTemplates.get(normalized);
+const [pageHeaderId] = pageHeader ?? [];
 ---
 
-<nav class="sb-template-page-breadcrumb not-content" aria-label="页面模板面包屑">
-  <a href={`${base}templates/data-list/basic-list/`}>页面模板</a>
-  {group && <span aria-hidden="true">/</span>}
-  {group && <span>{group}</span>}
-  <span aria-hidden="true">/</span>
-  <span aria-current="page">{current}</span>
-  {normalized === 'templates/data-list/filter-list' && (
-    <div class="sb-template-page-breadcrumb__actions" data-template-action-host="filter-list"></div>
-  )}
-  {normalized === 'templates/data-list/tree-filter-list' && (
-    <div class="sb-template-page-breadcrumb__actions" data-template-action-host="tree-filter-list"></div>
-  )}
-  {normalized === 'templates/detail/basic-detail' && (
-    <div class="sb-template-page-breadcrumb__actions" data-template-action-host="basic-detail"></div>
-  )}
-  {normalized === 'templates/detail/card-detail' && (
-    <div class="sb-template-page-breadcrumb__actions" data-template-action-host="card-detail"></div>
-  )}
-  {normalized === 'templates/detail/data-detail' && (
-    <div class="sb-template-page-breadcrumb__actions" data-template-action-host="data-detail"></div>
-  )}
-  {normalized === 'templates/detail/secondary-detail' && (
-    <div class="sb-template-page-breadcrumb__actions" data-template-action-host="secondary-detail"></div>
-  )}
-</nav>
+{pageHeaderId ? (
+  <header class="sb-template-page-header not-content" data-template-page-header={pageHeaderId}>
+    <div data-template-page-header-host={pageHeaderId}></div>
+  </header>
+) : (
+  <nav class="sb-template-page-breadcrumb not-content" aria-label="页面模板面包屑">
+    <a href={`${base}templates/data-list/basic-list/`}>页面模板</a>
+    {group && <span aria-hidden="true">/</span>}
+    {group && <span>{group}</span>}
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{current}</span>
+    {normalized === 'templates/data-list/basic-list' && (
+      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="basic-list"></div>
+    )}
+    {normalized === 'templates/data-list/filter-list' && (
+      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="filter-list"></div>
+    )}
+    {normalized === 'templates/data-list/tree-filter-list' && (
+      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="tree-filter-list"></div>
+    )}
+    {normalized === 'templates/data-list/tag-list' && (
+      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="tag-list"></div>
+    )}
+    {normalized === 'templates/detail/card-detail' && (
+      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="card-detail"></div>
+    )}
+    {normalized === 'templates/detail/data-detail' && (
+      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="data-detail"></div>
+    )}
+    {normalized === 'templates/detail/secondary-detail' && (
+      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="secondary-detail"></div>
+    )}
+  </nav>
+)}

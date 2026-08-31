@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   Button,
   Checkbox,
@@ -18,6 +19,7 @@ import {
   FormGridItem,
   FormPageLayout,
   FormSection,
+  PageHeader,
   StepFormLayout,
 } from '@sbux/starbucks-design-react/pro'
 import {
@@ -80,6 +82,18 @@ export default function Demo() {
     setCurrentStep(1)
     setSubmitSuccess(false)
   }
+
+  const pageHeader = (
+    <PageHeader
+      title="新建活动"
+      helpText="按步骤完成活动配置"
+      backable
+      onBack={() => Message.info('返回活动列表')}
+    />
+  )
+  const pageHeaderHost = typeof document === 'undefined'
+    ? null
+    : document.querySelector('[data-template-page-header-host="step-form"]')
 
   const stepContent = () => {
     if (currentStep === 1) {
@@ -284,6 +298,7 @@ export default function Demo() {
 
   return (
     <div className="sb-step-form-page sb-template-page-surface">
+      {pageHeaderHost ? createPortal(pageHeader, pageHeaderHost) : pageHeader}
       <FormPageLayout>
         <Form form={form} layout="vertical" initialValues={createStepFormBaseline()} autoComplete="off" disabled={submitting}>
           <StepFormLayout

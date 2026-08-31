@@ -1,20 +1,49 @@
 <template>
-  <Teleport to="[data-template-action-host='data-detail']">
-    <div class="sb-data-detail-page__breadcrumb-actions">
-      <Dropdown @select="handleMore">
-        <Button type="outline">更多</Button>
-        <template #content>
-          <Doption value="export">导出数据</Doption>
-          <Doption value="share">复制分析链接</Doption>
-        </template>
-      </Dropdown>
-      <Button type="outline" @click="refreshData">刷新数据</Button>
-      <Button type="primary" @click="handleExport">导出报表</Button>
-    </div>
-  </Teleport>
-
   <div class="sb-data-detail-page sb-template-page-surface">
+    <Teleport v-if="pageHeaderInDocs" :to="pageHeaderTarget">
+      <PageHeader
+        title="卡券数据详情"
+        help-text="分析卡券指标、趋势和核销明细"
+        backable
+        @back="handleBack"
+      >
+        <template #extra>
+          <div class="sb-data-detail-page__breadcrumb-actions">
+            <Dropdown @select="handleMore">
+              <Button type="outline">更多</Button>
+              <template #content>
+                <Doption value="export">导出数据</Doption>
+                <Doption value="share">复制分析链接</Doption>
+              </template>
+            </Dropdown>
+            <Button type="outline" @click="refreshData">刷新数据</Button>
+            <Button type="primary" @click="handleExport">导出报表</Button>
+          </div>
+        </template>
+      </PageHeader>
+    </Teleport>
     <DetailPageLayout>
+      <PageHeader
+        v-if="!pageHeaderInDocs"
+        title="卡券数据详情"
+        help-text="分析卡券指标、趋势和核销明细"
+        backable
+        @back="handleBack"
+      >
+        <template #extra>
+          <div class="sb-data-detail-page__breadcrumb-actions">
+            <Dropdown @select="handleMore">
+              <Button type="outline">更多</Button>
+              <template #content>
+                <Doption value="export">导出数据</Doption>
+                <Doption value="share">复制分析链接</Doption>
+              </template>
+            </Dropdown>
+            <Button type="outline" @click="refreshData">刷新数据</Button>
+            <Button type="primary" @click="handleExport">导出报表</Button>
+          </div>
+        </template>
+      </PageHeader>
 
       <div class="sb-data-detail-page__body">
         <Card class="sb-data-detail-page__context" title="对象上下文">
@@ -134,6 +163,7 @@ import { Message } from '@sbux/starbucks-design-vue'
 import {
   DetailDescriptions,
   DetailPageLayout,
+  PageHeader,
 } from '@sbux/starbucks-design-vue/pro'
 import {
   dataDetailChannelDistribution,
@@ -198,6 +228,9 @@ const resetFilters = () => {
 }
 const handleExport = () => Message.info('报表导出仅为示例行为')
 const handleMore = (key: string) => Message.info(key === 'export' ? '数据导出仅为示例行为' : '已复制分析链接')
+const handleBack = () => Message.info('返回卡券列表')
+const pageHeaderTarget = '[data-template-page-header-host="data-detail"]'
+const pageHeaderInDocs = typeof document !== 'undefined' && Boolean(document.querySelector(pageHeaderTarget))
 
 onBeforeUnmount(() => {
   if (loadingTimer) clearTimeout(loadingTimer)

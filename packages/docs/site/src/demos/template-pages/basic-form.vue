@@ -1,6 +1,21 @@
 <template>
   <div class="sb-basic-form-page sb-template-page-surface">
-    <FormPageLayout>
+    <PageHeader
+      v-if="!pageHeaderInDocs"
+      title="新建门店"
+      help-text="填写门店基础信息后保存"
+      backable
+      @back="handleBack"
+    />
+    <Teleport v-if="pageHeaderInDocs" :to="pageHeaderTarget">
+      <PageHeader
+        title="新建门店"
+        help-text="填写门店基础信息后保存"
+        backable
+        @back="handleBack"
+      />
+    </Teleport>
+    <FormPageLayout max-width="none" :padding="0">
       <Form
         ref="formRef"
         :model="form"
@@ -107,7 +122,7 @@ import {
   Switch,
   Textarea,
 } from '@sbux/starbucks-design-vue'
-import { FormActions, FormControlArea, FormGrid, FormGridItem, FormPageLayout } from '@sbux/starbucks-design-vue/pro'
+import { FormActions, FormControlArea, FormGrid, FormGridItem, FormPageLayout, PageHeader } from '@sbux/starbucks-design-vue/pro'
 import {
   BASIC_FORM_MESSAGES,
   BUSINESS_STATUS_OPTIONS,
@@ -155,4 +170,8 @@ const handleReset = () => {
   submitting.value = false
   submitSuccess.value = false
 }
+
+const handleBack = () => Message.info('返回门店列表')
+const pageHeaderTarget = '[data-template-page-header-host="basic-form"]'
+const pageHeaderInDocs = typeof document !== 'undefined' && Boolean(document.querySelector(pageHeaderTarget))
 </script>

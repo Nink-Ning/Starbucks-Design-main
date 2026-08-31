@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   Button,
   Checkbox,
@@ -16,6 +17,7 @@ import {
   FormGrid,
   FormGridItem,
   FormPageLayout,
+  PageHeader,
 } from '@sbux/starbucks-design-react/pro'
 import {
   BASIC_FORM_MESSAGES,
@@ -48,9 +50,22 @@ export default function Demo() {
     setSubmitSuccess(false)
   }
 
+  const pageHeader = (
+    <PageHeader
+      title="新建门店"
+      helpText="填写门店基础信息后保存"
+      backable
+      onBack={() => Message.info('返回门店列表')}
+    />
+  )
+  const pageHeaderHost = typeof document === 'undefined'
+    ? null
+    : document.querySelector('[data-template-page-header-host="basic-form"]')
+
   return (
     <div className="sb-basic-form-page sb-template-page-surface">
-      <FormPageLayout>
+      {pageHeaderHost ? createPortal(pageHeader, pageHeaderHost) : pageHeader}
+      <FormPageLayout maxWidth="none" padding={0}>
         <Form
           form={form}
           layout="vertical"

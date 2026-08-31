@@ -4,6 +4,7 @@ import { Button, Card, Dropdown, Empty, Menu, Message, Select, Spin, Statistic, 
 import {
   DetailDescriptions,
   DetailPageLayout,
+  PageHeader,
 } from '@sbux/starbucks-design-react/pro'
 import {
   dataDetailChannelDistribution,
@@ -178,21 +179,30 @@ export default function Demo() {
       .map((item) => ({ ...item, percent: 100 }))
   }, [channel])
 
-  const actionHost = typeof document === 'undefined'
+  const pageHeader = (
+    <PageHeader
+      title="卡券数据详情"
+      helpText="分析卡券指标、趋势和核销明细"
+      backable
+      onBack={() => Message.info('返回卡券列表')}
+      extra={(
+        <div className="sb-data-detail-page__breadcrumb-actions">
+          <DetailActions onRefresh={refreshData} />
+        </div>
+      )}
+    />
+  )
+  const pageHeaderHost = typeof document === 'undefined'
     ? null
-    : document.querySelector<HTMLElement>('[data-template-action-host="data-detail"]')
+    : document.querySelector<HTMLElement>('[data-template-page-header-host="data-detail"]')
 
   return (
     <>
-      {actionHost && createPortal(
-        <div className="sb-data-detail-page__breadcrumb-actions">
-          <DetailActions onRefresh={refreshData} />
-        </div>,
-        actionHost,
-      )}
+      {pageHeaderHost && createPortal(pageHeader, pageHeaderHost)}
 
       <div className="sb-data-detail-page sb-template-page-surface">
         <DetailPageLayout>
+          {!pageHeaderHost && pageHeader}
 
           <div className="sb-data-detail-page__body">
           <Card className="sb-data-detail-page__context" title="对象上下文">

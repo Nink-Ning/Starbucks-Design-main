@@ -39,7 +39,7 @@ import Demo from '../../../../components/Demo.astro';
   <section class="sb-template-docs-section">
     <h2>页面结构</h2>
     <ul>
-      <li>页面头部展示对象名称、状态、分析主题和页面级操作。</li>
+      <li>页面头部使用共享 Page Header；二级页面使用左侧 icon-only Back + 20px 标题，页面级操作放在标题行右侧。</li>
       <li>对象上下文确认当前卡券、QID、渠道和有效期。</li>
       <li>轻量筛选区支持时间范围、核销渠道和数据状态切换。</li>
       <li>核心指标区展示发券数量、领券人数、使用数量和核销率。</li>
@@ -65,7 +65,7 @@ import Demo from '../../../../components/Demo.astro';
       <strong>详情布局能力</strong>
       <div class="sb-template-docs-component-list">
         <code>DetailPageLayout</code>
-        <code>DetailPageHeader</code>
+        <code>PageHeader</code>
         <code>DetailDescriptions</code>
       </div>
     </div>
@@ -91,7 +91,7 @@ import Demo from '../../../../components/Demo.astro';
   <section class="sb-template-docs-section">
     <h2>数据详情页规则</h2>
     <ol>
-      <li>页面模板头部统一采用“左侧面包屑或页面标题、右侧业务核心操作或全局功能操作”的两区结构；操作区与面包屑保持同一层级。</li>
+      <li>页面模板头部统一采用“左侧 icon-only Back + 20px 页面标题、右侧业务核心操作或全局功能操作”的两区结构。</li>
       <li>操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
       <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
       <li>指标、图表、分布和明细表格必须围绕同一个对象上下文展开。</li>

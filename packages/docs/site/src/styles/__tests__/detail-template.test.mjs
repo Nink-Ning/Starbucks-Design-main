@@ -19,7 +19,7 @@ test('Basic Detail has real React and Vue demos with shared coupon data', async 
   assert.match(doc, /focused read-only object page template/);
   assert.doesNotMatch(doc, /TemplatePagePlaceholder/);
   for (const source of [reactDemo, vueDemo]) {
-    assert.match(source, /DetailPageHeader/);
+    assert.match(source, /PageHeader/);
     assert.match(source, /DetailPageLayout/);
     assert.match(source, /DetailSection/);
     assert.match(source, /DetailDescriptions/);
@@ -33,8 +33,18 @@ test('Basic Detail has real React and Vue demos with shared coupon data', async 
   assert.match(vueDemo, /<DetailSection>/);
   assert.doesNotMatch(reactDemo, /title="基本信息"/);
   assert.doesNotMatch(vueDemo, /title="基本信息"/);
-  assert.match(reactDemo, /data-template-action-host=\"basic-detail\"/);
-  assert.match(vueDemo, /data-template-action-host='basic-detail'/);
+  assert.match(reactDemo, /PageHeader[\s\S]*helpText/);
+  assert.match(vueDemo, /PageHeader[\s\S]*help-text/);
+  assert.match(reactDemo, /couponBasicInfoColumns\.map/);
+  assert.match(vueDemo, /v-for="\(column, index\) in couponBasicInfoColumns"/);
+  for (const source of [reactDemo, vueDemo]) {
+    assert.match(source, /tableLayout="auto"|table-layout="auto"/);
+    assert.match(source, /labelStyle|label-style/);
+    assert.match(source, /DETAIL_LABEL_VALUE_GAP/);
+  }
+  assert.match(shared, /export const DETAIL_LABEL_VALUE_GAP = 24/);
+  assert.match(shared, /couponBasicInfo\.filter\(\(_, index\) => index % 2 === 0\)/);
+  assert.match(shared, /couponBasicInfo\.filter\(\(_, index\) => index % 2 === 1\)/);
 });
 
 test('Basic Detail uses one content container and scoped responsive styles', async () => {
@@ -44,10 +54,11 @@ test('Basic Detail uses one content container and scoped responsive styles', asy
   assert.match(source, /\.sb-basic-detail-page__content\s*\{/);
   assert.match(source, /\.sb-basic-detail-page \.sbux-pro-detail-descriptions/);
   assert.match(source, /\.sb-basic-detail-page\s*\{[\s\S]*?background:\s*var\(--bg-color-container\);[\s\S]*?border-radius:/);
-  assert.match(source, /\.sb-basic-detail-page\s*\{[\s\S]*?padding:\s*24px 32px 32px;/);
+  assert.match(source, /\.sb-basic-detail-page\s*\{[\s\S]*?padding:\s*32px;/);
   assert.match(source, /\.sb-basic-detail-page > \.sbux-pro-detail-page-layout\s*\{[\s\S]*?margin:\s*0;/);
   assert.match(source, /\.sb-basic-detail-page \.sbux-pro-detail-descriptions\s*\{[\s\S]*?text-align:\s*left;/);
-  assert.match(source, /\.sb-basic-detail-page\.sb-template-page-surface \.sbux-pro-detail-descriptions \.arco-descriptions-item-label,[\s\S]*?padding-right:\s*36px;/);
+  assert.match(source, /\.sb-basic-detail-page__wide-descriptions\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(source, /\.sb-basic-detail-page__label-probe\s*\{[\s\S]*?visibility:\s*hidden;/);
   assert.match(source, /@media \(min-width: 1024px\)[\s\S]*?\.sb-template-page-surface\s*\{[\s\S]*?min-height:\s*calc\(100dvh - var\(--sb-docs-nav-height, 64px\) - 48px\);/);
   assert.match(source, /\.sb-basic-detail-page__content\s*\{[\s\S]*?padding:\s*0;/);
 });
@@ -78,14 +89,16 @@ test('Card Detail uses independent cards for mixed content modules', async () =>
   assert.doesNotMatch(doc, /TemplatePagePlaceholder/);
   for (const demo of [reactDemo, vueDemo]) {
     assert.match(demo, /DetailPageLayout/);
+    assert.match(demo, /PageHeader/);
+    assert.match(demo, /backable/);
     assert.match(demo, /DetailDescriptions/);
     assert.match(demo, /Card/);
     assert.match(demo, /Table/);
     assert.match(demo, /Timeline/);
     assert.match(demo, /couponStoreScope/);
-    assert.match(demo, /data-template-action-host[=:'\"]+card-detail/);
+    assert.match(demo, /title="卡券详情"/);
+    assert.doesNotMatch(demo, /data-template-action-host/);
     assert.match(demo, /sb-card-detail-page__card sb-card-detail-page__card--wide[^"]*" title="基本信息"/);
-    assert.doesNotMatch(demo, /DetailPageHeader/);
     assert.doesNotMatch(demo, /couponUsageRules|title="使用规则"/);
   }
     assert.match(reactDemo, /DetailDescriptions data=\{couponBasicInfo\} column=\{2\}/);
@@ -118,6 +131,8 @@ test('Data Detail keeps analysis context, lightweight charts, and detail states 
   assert.doesNotMatch(doc, /TemplatePagePlaceholder/);
   for (const demo of [reactDemo, vueDemo]) {
     assert.match(demo, /DetailPageLayout/);
+    assert.match(demo, /PageHeader/);
+    assert.match(demo, /backable/);
     assert.match(demo, /DetailDescriptions/);
     assert.match(demo, /Statistic/);
     assert.match(demo, /Table/);
@@ -127,8 +142,10 @@ test('Data Detail keeps analysis context, lightweight charts, and detail states 
     assert.match(demo, /progressbar/);
     assert.doesNotMatch(demo, /(?:from\s+['"][^'"]*Chart|<Chart\b)/);
   }
-  assert.match(reactDemo, /data-template-action-host[=:'\"]+data-detail/);
-  assert.match(vueDemo, /data-template-action-host[=:'\"]+data-detail/);
+  assert.match(reactDemo, /title="卡券数据详情"/);
+  assert.match(vueDemo, /title="卡券数据详情"/);
+  assert.doesNotMatch(reactDemo, /data-template-action-host/);
+  assert.doesNotMatch(vueDemo, /data-template-action-host/);
   assert.match(reactDemo, /<Button type="outline">更多<\/Button>/);
   assert.match(reactDemo, /<Button type="outline" onClick=\{onRefresh\}>刷新数据<\/Button>/);
   assert.match(vueDemo, /<Button type="outline">更多<\/Button>/);
@@ -155,6 +172,8 @@ test('Secondary Detail keeps parent context and same-level Tabs local to Docs', 
   assert.doesNotMatch(doc, /TemplatePagePlaceholder/);
   for (const demo of [reactDemo, vueDemo]) {
     assert.match(demo, /DetailPageLayout/);
+    assert.match(demo, /PageHeader/);
+    assert.match(demo, /backable/);
     assert.match(demo, /DetailDescriptions/);
     assert.match(demo, /Tabs|TabPane/);
     assert.match(demo, /Table/);
@@ -164,8 +183,10 @@ test('Secondary Detail keeps parent context and same-level Tabs local to Docs', 
     assert.doesNotMatch(demo, /sb-secondary-detail-page__context|title="父级对象摘要"/);
     assert.doesNotMatch(demo, /title="二级内容"/);
   }
-  assert.match(reactDemo, /data-template-action-host[=:'\"]+secondary-detail/);
-  assert.match(vueDemo, /data-template-action-host[=:'\"]+secondary-detail/);
+  assert.match(reactDemo, /title="卡券核销记录"/);
+  assert.match(vueDemo, /title="卡券核销记录"/);
+  assert.doesNotMatch(reactDemo, /data-template-action-host/);
+  assert.doesNotMatch(vueDemo, /data-template-action-host/);
   assert.match(reactDemo, /<Button type="outline">更多<\/Button>/);
   assert.match(vueDemo, /<Button type="outline">更多<\/Button>/);
   assert.match(shared, /全场满50减6元券/);

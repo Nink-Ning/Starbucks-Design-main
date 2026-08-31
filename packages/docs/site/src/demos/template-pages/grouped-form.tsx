@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   Button,
   Checkbox,
@@ -17,6 +18,7 @@ import {
   FormGridItem,
   FormPageLayout,
   FormSection,
+  PageHeader,
 } from '@sbux/starbucks-design-react/pro'
 import {
   FORM_TEMPLATE_CHANNEL_OPTIONS,
@@ -46,8 +48,21 @@ export default function Demo() {
     setSubmitSuccess(false)
   }
 
+  const pageHeader = (
+    <PageHeader
+      title="门店设置"
+      helpText="按业务分组维护门店配置"
+      backable
+      onBack={() => Message.info('返回门店列表')}
+    />
+  )
+  const pageHeaderHost = typeof document === 'undefined'
+    ? null
+    : document.querySelector('[data-template-page-header-host="grouped-form"]')
+
   return (
     <div className="sb-grouped-form-page sb-template-page-surface">
+      {pageHeaderHost ? createPortal(pageHeader, pageHeaderHost) : pageHeader}
       <FormPageLayout>
         <Form
           form={form}

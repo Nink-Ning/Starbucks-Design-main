@@ -548,6 +548,7 @@ html[data-framework='vue']
  * demo 时去掉 720 上限,让它占满侧栏与右侧 TOC 之间的可用宽度。
  * ────────────────────────────────────────────────────────────── */
 .sl-container:has(.sb-template-page-breadcrumb),
+.sl-container:has(.sb-template-page-header),
 .sl-container:has(.sb-demo[data-demo^='template-']) {
   max-width: none;
 }
@@ -555,8 +556,12 @@ html[data-framework='vue']
 .main-pane:has(.sb-template-page-breadcrumb) main > .content-panel:first-child {
   display: none;
 }
+.main-pane:has(.sb-template-page-header) main > .content-panel:first-child {
+  display: none;
+}
 
-.main-pane:has(.sb-template-page-breadcrumb) main > .content-panel + .content-panel {
+.main-pane:has(.sb-template-page-breadcrumb) main > .content-panel + .content-panel,
+.main-pane:has(.sb-template-page-header) main > .content-panel + .content-panel {
   box-sizing: border-box;
   min-height: calc(100dvh - var(--sb-docs-nav-height, 64px));
   padding-inline: 20px;
@@ -564,11 +569,17 @@ html[data-framework='vue']
   background: var(--bg-color-page);
 }
 
-.main-pane:has(.sb-template-page-breadcrumb) main > .content-panel + .content-panel > .sl-container {
+.main-pane:has(.sb-template-page-breadcrumb) main > .content-panel + .content-panel > .sl-container,
+.main-pane:has(.sb-template-page-header) main > .content-panel + .content-panel > .sl-container {
   width: 100%;
   max-width: none;
   min-height: inherit;
   padding-inline: 0;
+}
+
+.main-pane:has(.sb-template-page-breadcrumb) > main,
+.main-pane:has(.sb-template-page-header) > main {
+  background: var(--bg-color-page);
 }
 
 .main-pane:has(.sb-template-page-breadcrumb)
@@ -581,11 +592,20 @@ html[data-framework='vue']
   min-height: inherit;
 }
 
-.main-pane:has(.sb-template-page-breadcrumb) main {
-  background: var(--bg-color-page);
+.main-pane:has(.sb-template-page-header)
+  main
+  > .content-panel
+  + .content-panel
+  > .sl-container
+  > .sl-markdown-content {
+  width: 100%;
+  min-height: inherit;
 }
 
 .main-pane:has(.sb-template-page-breadcrumb) footer.sl-flex {
+  display: none;
+}
+.main-pane:has(.sb-template-page-header) footer.sl-flex {
   display: none;
 }
 
@@ -599,6 +619,23 @@ html[data-framework='vue']
   color: var(--color-text-secondary);
   font-size: var(--fs-14);
   line-height: var(--lh-22);
+}
+
+.sb-template-page-header {
+  width: 100%;
+  margin: 0 0 16px;
+}
+
+.sb-template-page-header .sbux-pro-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  min-height: 32px;
+}
+
+.sb-template-page-header .sbux-pro-page-header-main {
+  min-width: 0;
 }
 
 .sb-template-page-breadcrumb__actions {
@@ -974,9 +1011,10 @@ html[data-framework='vue']
 
 .sb-basic-detail-page {
   box-sizing: border-box;
+  container-type: inline-size;
   width: 100%;
   min-width: 0;
-  padding: 24px 32px 32px;
+  padding: 32px;
   color: var(--color-text-primary);
   font-family: var(--font-family);
   background: var(--bg-color-container);
@@ -996,6 +1034,39 @@ html[data-framework='vue']
 .sb-basic-detail-page .sbux-pro-detail-descriptions {
   width: 100%;
   text-align: left;
+}
+
+.sb-basic-detail-page__label-probe {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.sb-basic-detail-page__label-probe > span {
+  display: block;
+  width: max-content;
+  white-space: nowrap;
+}
+
+.sb-basic-detail-page__wide-descriptions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.sb-basic-detail-page__narrow-descriptions {
+  display: none;
+}
+
+@container (max-width: 720px) {
+  .sb-basic-detail-page__wide-descriptions {
+    display: none;
+  }
+
+  .sb-basic-detail-page__narrow-descriptions {
+    display: block;
+  }
 }
 
 .sb-basic-detail-page__breadcrumb-actions {
@@ -1161,8 +1232,6 @@ html[data-framework='vue']
   gap: var(--spacing-6);
 }
 
-.sb-basic-detail-page.sb-template-page-surface .sbux-pro-detail-descriptions .arco-descriptions-item-label,
-.sb-basic-detail-page.sb-template-page-surface .sbux-pro-detail-descriptions .arco-v-descriptions-item-label,
 .sb-card-detail-page.sb-template-page-surface .sbux-pro-detail-descriptions .arco-descriptions-item-label,
 .sb-card-detail-page.sb-template-page-surface .sbux-pro-detail-descriptions .arco-v-descriptions-item-label,
 .sb-data-detail-page.sb-template-page-surface .sbux-pro-detail-descriptions .arco-descriptions-item-label,
@@ -2337,7 +2406,7 @@ html[data-framework='vue']
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  padding: var(--spacing-8) var(--spacing-6) var(--spacing-6);
+  padding: var(--spacing-8) var(--spacing-10) var(--spacing-6);
   color: var(--color-text-primary);
   font-family: var(--font-family);
   background: var(--bg-color-container);

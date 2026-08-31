@@ -21,6 +21,13 @@ export const couponBasicInfo: DetailDataItem[] = [
   { label: '门店查看描述', value: '' },
 ]
 
+export const couponBasicInfoColumns = [
+  couponBasicInfo.filter((_, index) => index % 2 === 0),
+  couponBasicInfo.filter((_, index) => index % 2 === 1),
+]
+
+export const DETAIL_LABEL_VALUE_GAP = 24
+
 export const couponUsageRules: DetailDataItem[] = [
   { label: '核销渠道', value: 'GAODE_MOP' },
   { label: '展示渠道', value: 'GAODE' },

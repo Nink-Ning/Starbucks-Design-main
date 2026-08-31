@@ -58,11 +58,15 @@ test('Basic Detail documents focused read-only anatomy and renders a page header
   ])
 
   assert.match(doc, /focused read-only object page template/)
-  assert.match(doc, /有意义的父级 Breadcrumb/)
+  assert.match(doc, /depth 2 使用 icon-only Back、20px 标题和可选 Context Help，不显示文字 Back、Breadcrumb/)
   for (const source of [react, vue]) {
-    assert.match(source, /DetailPageHeader/)
+    assert.match(source, /PageHeader/)
     assert.match(source, /DetailPageLayout/)
     assert.match(source, /DetailSection/)
     assert.match(source, /DetailDescriptions/)
+    assert.match(source, /couponBasicInfoColumns/)
+    assert.match(source, /column=\{1\}|:column="1"/)
+    assert.match(source, /tableLayout="auto"|table-layout="auto"/)
+    assert.match(source, /labelStyle|label-style/)
   }
 })

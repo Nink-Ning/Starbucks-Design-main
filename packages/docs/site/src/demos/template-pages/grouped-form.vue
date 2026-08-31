@@ -1,5 +1,20 @@
 <template>
   <div class="sb-grouped-form-page sb-template-page-surface">
+    <PageHeader
+      v-if="!pageHeaderInDocs"
+      title="门店设置"
+      help-text="按业务分组维护门店配置"
+      backable
+      @back="handleBack"
+    />
+    <Teleport v-if="pageHeaderInDocs" :to="pageHeaderTarget">
+      <PageHeader
+        title="门店设置"
+        help-text="按业务分组维护门店配置"
+        backable
+        @back="handleBack"
+      />
+    </Teleport>
     <FormPageLayout>
       <Form
         ref="formRef"
@@ -111,7 +126,7 @@ import {
   Switch,
   Textarea,
 } from '@sbux/starbucks-design-vue'
-import { FormActions, FormControlArea, FormGrid, FormGridItem, FormPageLayout, FormSection } from '@sbux/starbucks-design-vue/pro'
+import { FormActions, FormControlArea, FormGrid, FormGridItem, FormPageLayout, FormSection, PageHeader } from '@sbux/starbucks-design-vue/pro'
 import {
   FORM_TEMPLATE_CHANNEL_OPTIONS,
   FORM_TEMPLATE_MESSAGES,
@@ -148,4 +163,8 @@ const handleReset = () => {
   formRef.value?.resetFields()
   submitSuccess.value = false
 }
+
+const handleBack = () => Message.info('返回门店列表')
+const pageHeaderTarget = '[data-template-page-header-host="grouped-form"]'
+const pageHeaderInDocs = typeof document !== 'undefined' && Boolean(document.querySelector(pageHeaderTarget))
 </script>
