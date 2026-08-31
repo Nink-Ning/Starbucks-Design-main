@@ -76,11 +76,13 @@
 
 Basic List 的搜索、工具按钮和响应式排列由 `StarbucksReact.TableToolbar` 负责。页面只能提供 `quickFilters`、`quickFilterValues`、`tableTools.refresh` 和相应回调，不生成 `.dk-page__table-toolbar`、`.dk-page__toolbar-left` 或 `.dk-page__toolbar-right`。
 
-Card List 同样直接复用 `StarbucksReact.TableToolbar` 和已查证的基础组件。页面负责筛选结果、选择集合、Card Grid、单个对象内容和页面级事件；`TableToolbar` 负责筛选、选择摘要、批量操作及其组件状态。不得在页面中复制 Toolbar 的按钮、禁用、折叠菜单或响应式实现。
+Card List 同样直接复用 `StarbucksReact.TableToolbar` 和已查证的基础组件。页面负责筛选结果、Selection Set、Card Grid、单个对象内容、唯一可见 selection summary 和页面级事件；`TableToolbar` 负责已批准的筛选、Card-specific batch-action layout 及其组件状态。若 page-owned summary 已存在，必须在 Card List scope 隐藏 generic selection-summary region，不得生成第二个通用 selected-count。不得在页面中复制 Toolbar 的按钮、禁用、折叠菜单或响应式实现。Card 的 frozen DOM/structure、media、selection treatment 和 footer/actions 必须来自 Docs approved Card List structure，而非手写替代解剖。
 
 Card List 可以使用页面专用语义类维护 Card 容器、媒体、内容、元数据、选择入口、操作区和响应式网格，但这些结构仍属于页面模板，不得声明或导出为公共 `CardListPage`、`CheckCard` 或 Card API。Card Body 不隐式改变选择；选择只能由具有明确可访问名称的 Selection Control 触发。
 
 `examples/multi-select-card-list.html` 是 Card List 的只读 Golden Example。生成结果只能参考其能力边界，不复制其中的商品数据、默认选择、页面私有素材或实现代码，也不得写回 Golden。
+
+所有模板默认遵守 [P1 Starter Default Template Baselines](default-template-baselines.md)。默认模板是标准答案；业务字段、标签、值、状态、选项和 Mock 内容可以适配，页面 anatomy、layout、spacing、media shape、page context、selection/batch relationship 和 Drawer anatomy 需要明确 Override。
 
 ## Header 与行操作结构契约
 

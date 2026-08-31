@@ -14,6 +14,8 @@ When an approved Page Template exists, the Template is the implementation baseli
 
 AI may adapt business copy, business fields, mock data, applicable actions and domain content. AI must preserve the template's page anatomy, structural hierarchy, component composition, interaction ownership, spacing relationships and responsive behavior. AI must not reconstruct the page independently from lower-level components unless the template explicitly permits the variation.
 
+`APPROVED DEFAULT TEMPLATE = STANDARD ANSWER`. Read [P1 Starter Default Template Baselines](default-template-baselines.md) and bind the manifest reference before making business substitutions. Supported capability does not become enabled by default merely because a Runtime component exists. Layout, spacing, media shape, page context, selection/batch relationship and Drawer anatomy require an explicit user override; record the override and its impact.
+
 Do not replace a Basic Form or Basic Detail with a generic card, or replace the Basic List data-region composition with independently styled Toolbar/Table cards. Do not invent a new card anatomy, action treatment, page spacing system or shell behavior.
 
 ## Page composition
@@ -35,11 +37,11 @@ When `CONTEXT_HELP` exists, keep a title-adjacent, keyboard-accessible Context H
 
 Toolbar, Table and Pagination are one continuous region. Do not add a default Toolbar Card, Summary Card and Table Card stack, duplicate borders/radii/shadows or unnecessary page-level gaps. The page owns the composition and state; each component owns only its internal layout.
 
-Card List preserves the approved compact horizontal media/content relationship, title and metadata hierarchy, selection anchor, compact footer, action relationship, grid relationship and responsive column behavior. Do not invent a tall media banner, marketing-card hierarchy, new chrome, selected badge, card-body selection or a different density model.
+Card List preserves the approved compact horizontal media/content relationship, circular default media, title/status and metadata hierarchy, page-owned selection anchor, exactly one visible selection summary, compact footer, action relationship, grid relationship and responsive column behavior. When Runtime `TableToolbar` is used, hide its generic selection-summary region within Card List scope unless it is the one canonical summary. Do not invent a tall media banner, square/rounded-square hero, marketing-card hierarchy, new chrome, selected badge, card-body selection, duplicate `已选择 X 项` feedback or a different density model.
 
 Basic Form is a complete Create/Edit family: both states preserve the same header, form surface, sections, actions, spacing relationships and responsive structure. Create uses empty/default values and a create action; Edit uses prefilled values and a save/update action.
 
-Basic Detail is a focused read-only object page, not a generic information card or an enterprise workspace. Preserve its header, meaningful child breadcrumb, information hierarchy, surface/sections, action placement and responsive behavior.
+Basic Detail is a focused read-only object page, not a generic information card or an enterprise workspace. Preserve its shared depth-2 header, information hierarchy, surface/sections, action placement and responsive behavior. The header is icon-only Back + 20px title + optional approved Context Help; at depth 2 do not add text Back or Breadcrumb; at depth > 2, use the approved Breadcrumb reference only when the IA context requires it.
 
 ## Shell wrapping
 
@@ -49,7 +51,14 @@ Shell MUST NOT alter Template anatomy. Basic List `4px / 16px / 16px` remains th
 
 ## Breadcrumb and help
 
-Hide Breadcrumb by default on a module root when the surrounding navigation already supplies clear position context. Show it for a meaningful child workflow or detail page. Breadcrumb represents information hierarchy, not technical URL depth. For root data-management pages, use contextual Help instead of a persistent explanatory subtitle when the explanation is supplementary; this does not prohibit subtitles where a template requires them.
+Breadcrumb represents information hierarchy, not a page type or technical URL depth. Level 1 uses title + optional approved Context Help. Depth-2 full-page Create/Edit/Detail/Grouped/Step uses icon-only Back + title + optional approved Context Help and no Breadcrumb. Depth > 2 may use the approved Breadcrumb reference when a meaningful parent path is part of the IA; do not combine Back and Breadcrumb unless the deeper pattern explicitly approves it. Page Header has no persistent subtitle. Read the [P1 Starter Default Template Baselines](default-template-baselines.md) for the full context matrix.
+
+## Full-page Form and Drawer Form contexts
+
+- FULL-PAGE FORM: Shell Main left/right 24px; Form Surface fills the available Main width; Form content has at least 32px horizontal inner padding; Basic/Grouped/Step variants preserve the same outer rules.
+- FULL-PAGE DETAIL: Shell Main left/right 24px; depth-2 icon-only Back + 20px title + optional Context Help; no text Back/Breadcrumb.
+- DRAWER FORM: Drawer header title + close, body directly contains Form with canonical 24px/24px body spacing, and approved footer/actions. No path, duplicate title, persistent subtitle, duplicate task header or standalone Back.
+- Do not add Drawer body 24px plus Form 32px as an accidental double inset; use the canonical reference spacing.
 
 ## Scope
 

@@ -91,6 +91,7 @@ TableToolbar 没有统一 Loading、Empty 或 Error 页面状态。具体操作�
 
 - 可以使用轻量 Search、Select、选择摘要、批量操作、MoreActions 和 Refresh。
 - 选择集合、当前结果全选/半选、Card Actions、危险操作确认和反馈由页面负责。
+- 当 Card List 页面已经提供 page-owned canonical selection summary 时，模板必须隐藏 TableToolbar 的 generic selection-summary region；TableToolbar 的 `selectedCount` 仍可作为 operation state，但不得再产生第二个可见 `已选择 X 项`。
 - 依赖选择的批量操作必须设置 `requiresSelection: true`。
 - 不从 Card List Golden Example 推断跨页选择、真实导出、权限工作流或服务端批量能力。
 

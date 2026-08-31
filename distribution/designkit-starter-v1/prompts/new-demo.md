@@ -9,6 +9,7 @@
 使用角色：[填写角色]
 核心任务：[填写用户要完成的任务]
 页面类型：[基础列表页 / 卡片列表页 / 基础表单页 / 基础详情页]
+可选参考变体：[分组表单页 / 步骤表单页 / Drawer Form；先检查 manifest 的 `starterEnabled`]
 Shell 模式：[default / content-only / none；未填写时为 default]
 字段或数据：[填写字段和示例数据]
 主要操作：[填写主操作和次要操作]
@@ -25,9 +26,11 @@ Shell 模式：[default / content-only / none；未填写时为 default]
 - references/application-shell.md
 - references/template-usage-contract.md
 - references/implementation-binding-contract.md
-- manifest.json 中 `referenceImplementations` 指向的 Shell 和 Template reference
+- references/default-template-baselines.md
+- manifest.json 中 `referenceImplementations` 指向的 Shell、Template 和 context reference
+- 如果请求是 Grouped Form、Step Form 或 Drawer Form，先检查 manifest `templateVariants[].starterEnabled`；为 `true` 时绑定对应 executable reference 后生成，为 `false` 时停止并报告 BLOCKED，不得用未登记能力猜测实现
 - references/cdn-runtime.md
-- 对应的 templates/list.md、templates/card-list.md、templates/form.md 或 templates/detail.md
+- 对应的 templates/list.md、templates/card-list.md、templates/form.md、templates/grouped-form.md、templates/step-form.md、templates/detail.md 或 templates/drawer-form.md
 - 对应的 examples/list.html、examples/multi-select-card-list.html、examples/form.html 或 examples/detail.html（仅作结构和组合参考）
 
 请遵守：
@@ -35,7 +38,12 @@ Shell 模式：[default / content-only / none；未填写时为 default]
 - 常规后台页默认使用 `default` Application Shell；只有用户明确已有系统框架时使用 `content-only`，明确 standalone 时使用 `none`；不得创建第四种模式；
 - 用户只说“帮我做一个商品管理列表页”且没有导航说明时，必须选择 Basic List + `default`，并生成 Brand Top Menu、Real System Switch、Collapsible Side Menu、Basic List、Notification、Theme Toggle 和 User access；
 - `default` 只使用批准的 Brand Top Menu + Collapsible Embedded Side Menu + Page Template；不得发明自定义导航；
-- 组合前必须绑定 `patterns/default-application-shell.html` 和已选模板 reference；Shell 只提供 Main Slot，Template 以完整 approved subtree 进入该 slot，不能根据业务文案重新生成模板 chrome；
+- 组合前必须绑定 `patterns/default-application-shell.html` 和已选模板 reference；Shell 只提供 Main Slot，Template 以完整 approved subtree 进入该 slot，不能根据业务文案重新生成模板 chrome；`APPROVED DEFAULT TEMPLATE = STANDARD ANSWER`；
+- 只允许适配业务字段、标签、值、状态、Mock 数据、选项和模板范围内的业务文案；不得自行改变页面 anatomy、布局、spacing、media shape、footer/action hierarchy、selection/batch relationship、Page Header、Breadcrumb、Back 或 Drawer header/body/footer；任何改变都必须是用户明确的 Override，并在输出中记录影响；
+- Card List 默认使用 circular media、approved footer/action hierarchy 和一个 canonical visible selection summary；page-owned summary 与 Card-specific batch actions 读取同一 Selection Set；若使用 TableToolbar，隐藏其 generic selection-summary region，不生成第二个通用 `已选择 X 项`；
+- FULL-PAGE FORM 默认使用 Shell Main 24px/24px、二级 Page Header 的 icon-only Back + 20px title + optional approved Context Help、Form Surface 全部可用 Main、Form content 横向至少 32px；Basic/Grouped/Step 共用该 outer rule；depth 2 不生成文字 Back/Breadcrumb 或 persistent subtitle；
+- FULL-PAGE DETAIL 默认使用 Shell Main 24px/24px、二级 Page Header 的 icon-only Back + 20px title + optional approved Context Help；depth 2 不生成文字 Back/Breadcrumb；depth > 2 只按 approved Breadcrumb reference；
+- DRAWER FORM 默认只允许 Drawer title + close、直接 Form body、canonical 24px/24px body spacing 和 approved footer/actions；不得加入 path、duplicate title、persistent subtitle、duplicate task header 或 standalone Back；
 - Generic UI / navigation Icon 必须来自 `window.arcoicon`；不要从 `StarbucksReact` 解构 Icon，不使用 Emoji、手绘 SVG、CSS Icon 或第三方 Icon library；固定 Pattern Icon 保持 `IconNotification`、`IconMoon`、`IconSun`、`IconPlus`、`IconMore`、`IconDelete` 映射；Side 业务菜单只能选择真实且语义合理的 Arco Icon，禁止虚构名称；渲染前对每个使用的 Icon 执行 `typeof window.arcoicon[iconName] !== 'undefined'`，缺失即替换并失败，不留空白 slot；
 - Basic List 的 Page Header 保持 `Page Title + optional Context Help + Header Actions`；存在 `CONTEXT_HELP` 时使用标题相邻、可键盘访问的 Help control，禁止生成 persistent page subtitle；
 - Top action order 为 Store/System Switch → Notification → Theme Toggle → Divider → Avatar/User；Light 显示 `window.arcoicon.IconMoon` 和“切换到深色模式”，Dark 显示 `IconSun` 和“切换到浅色模式”；
@@ -57,7 +65,7 @@ Shell 模式：[default / content-only / none；未填写时为 default]
 - 卡片列表必须保持 Selection Control 的选择所有权、Card Actions 与 Batch Actions 分离、宽度驱动的 Grid、标题省略、主题语义色和可访问性契约；
 - 页面需要状态演示时，将状态 Select 放在 Header 右侧操作区最左侧并标记为 Demo-only，不生成独立顶部状态卡片；
 - 表格查看、编辑等页面内行操作使用品牌色文字 Button 和 `sbux-table-row-actions`，不得为了颜色改用 Link 或在页面 CSS 中覆盖 `.arco-btn-text`；
-- 不修改 `runtime/`、`templates/`、`examples/` 或 Starter 规则文件。
+- 不修改 `runtime/`、`examples/`、Frozen Golden、release ZIP 或发布资产；生成 output 时遵守上述 `templates/` 和 Starter 规则文件，不把它们当作可自由重写的业务 slots。
 
 请将文件写入 output/<descriptive-name>.html，并在最后按 references/quality-checklist.md 自检。
 没有实际在浏览器中打开和检查的内容必须标记为 UNVERIFIED。

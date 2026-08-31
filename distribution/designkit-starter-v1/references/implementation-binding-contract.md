@@ -25,10 +25,29 @@ Template Decision → Shell Mode Decision → Shell Reference Binding
 | --- | --- | --- | --- |
 | Default Application Shell | `patterns/default-application-shell.html` | `approved reference implementation` | `NO` |
 | Basic List | `patterns/basic-list.html` | `approved template reference` | `NO` |
+| Card List | `patterns/card-list.html` | `approved template reference` | `NO` |
+| Basic Form | `patterns/basic-form.html` | `approved template reference` | `NO` |
+| Grouped Form | `patterns/grouped-form.html` | `approved executable template reference; native section + fixed Runtime primitives` | `NO` |
+| Step Form | `patterns/step-form.html` | `approved executable template reference; fixed Runtime Steps + native layout` | `NO` |
+| Basic Detail | `patterns/basic-detail.html` | `approved template reference` | `NO` |
+| Page Header | `patterns/page-header.html` | `approved context reference` | `NO` |
+| Breadcrumb policy | `patterns/breadcrumb.html` | `approved context reference` | `NO` |
+| Drawer | `patterns/drawer.html` | `approved context reference` | `NO` |
+| Drawer Form | `patterns/drawer-form.html` | `approved executable template reference; fixed Runtime Drawer + Form` | `NO` |
 
-The Shell reference owns the complete approved Brand Top Navigation subtree, the Side/Main outer frame and the `approved-template` Main Slot. The Basic List reference enters that slot as a complete subtree. The composition layer must not recreate Top Menu item or quick-action treatment, Page Header, Toolbar, Table, Row Actions or Pagination from business copy. Only approved business labels/data may vary; the fixed Starbucks logo and Top action hierarchy remain bound to the reference. Starter output uses package-local references and does not include Docs source, tests or the complete Golden implementation.
+The Shell reference owns the complete approved Brand Top Navigation subtree, the Side/Main outer frame and the `approved-template` Main Slot. The selected template reference enters that slot as a complete subtree. Page Header is a shared authority consumed by Card List, Basic Form, Basic Detail, Grouped Form and Step Form; Card List uses its Level-1 title/help anatomy without Back, while the reviewed Form/Detail pages use the depth-2 icon Back anatomy. The composition layer must not recreate either anatomy from business copy. Only approved business labels/data may vary; the fixed Starbucks logo and Top action hierarchy remain bound to the reference. Starter output uses package-local references and does not include Docs source, tests or the complete Golden implementation.
 
 Basic List business slots are limited to `PAGE_TITLE`, `CONTEXT_HELP`, `PRIMARY_ACTION`, `QUICK_FILTER`, `SEARCH_PLACEHOLDER`, `TABLE_COLUMNS`, `TABLE_DATA`, `STATUS_DATA` and `ROW_ACTION_LABELS`. CSS, layout DOM, Toolbar regions and spacing are not free slots. When `CONTEXT_HELP` is present, render a title-adjacent Help control; never generate a persistent page subtitle.
+
+## 3.1 P1 default binding
+
+Before business substitution, load `references/default-template-baselines.md` and the reference selected by `manifest.json`. The selected reference is the standard answer. Only business data, labels, values, statuses, options and mock content may vary without an explicit override. A request to change anatomy, spacing, media shape, selection-summary ownership, batch-action relationship, Breadcrumb/Back, or Drawer header/body/footer is an explicit override and must be recorded.
+
+Card List has one canonical visible selection summary. The page-owned summary and Card-specific batch actions read the same Selection Set. The generic `TableToolbar` selection region must be hidden in the Card List scope when the page-owned summary is present; do not render an additional generic `已选择 X 项` label.
+
+FULL-PAGE FORM and FULL-PAGE DETAIL use the Shell Main 24px/24px outer rule. At depth 2, the shared Page Header is icon-only Back + 20px title + optional Context Help, with no text Back or Breadcrumb. Form and Basic Detail surfaces have no outer border and retain a 6px radius; Form content has at least 32px horizontal padding, while Basic Detail has 32px on all sides. Basic Detail keeps equal outer columns, a shared longest-label track and a 24px label/value gap. Step Form is Steps → Docs-aligned full-surface divider → content. DRAWER FORM uses Drawer title + close, direct Form body and 24px/24px body spacing; it has no path, duplicate title, persistent subtitle, duplicate header or standalone Back.
+
+`templateVariants` in the manifest are discoverable references. A variant whose `starterEnabled` is `true` may be generated through its executable reference; a variant whose `starterEnabled` is `false` must be reported as `BLOCKED`.
 
 ## 4. Icon Binding
 
@@ -63,6 +82,8 @@ Side-menu business items may select a semantic Arco icon, but the name must be r
 | Card anatomy | approved template-local `.dk-card*` relationship |
 
 There is no public Runtime CardList component. Use the approved template-local anatomy without copying Golden business data or example-specific Export.
+
+Card List must reuse the actual approved Docs/Golden Card List DOM/structure for its frozen toolbar, container, card, selection, media and footer/action regions. The Starter reference records this provenance; business substitutions are limited to title/data/filter/status/action slots. It must expose one canonical visible selection summary.
 
 ## 6. Approved Default Application Shell bindings
 

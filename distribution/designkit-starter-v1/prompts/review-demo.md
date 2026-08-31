@@ -11,10 +11,12 @@
 - references/quality-checklist.md
 - references/application-shell.md
 - references/implementation-binding-contract.md
-- manifest.json 中 `referenceImplementations` 指向的 Shell 和 Template reference
+- references/default-template-baselines.md
+- manifest.json 中 `referenceImplementations` 指向的 Shell、Template 和 context reference
 - 对应的页面模板
 
 请按以下顺序检查：
+0. 以 `references/default-template-baselines.md` 作为 default contract：`APPROVED DEFAULT TEMPLATE = STANDARD ANSWER`；默认只允许业务 slots/data 变化，任何 anatomy、layout、spacing、context、media 或 Drawer 变化都必须有明确 Override；
 1. 页面模板选择是否正确：视觉对象浏览、选择和管理使用 Card List，结构化比较使用 Basic List，模糊“列表”仍默认 Basic List；
 2. 是否是完整单文件 HTML；
 3. CDN 版本和加载顺序是否固定；
@@ -48,6 +50,12 @@
 31. 是否实际使用 approved Shell Reference 和 Template Reference；是否通过 Shell Main Slot 挂载完整 Template subtree，而不是重新创建 Template chrome。
 32. Basic List 是否保持 Page Title + Context Help（无 persistent subtitle）、TableToolbar Filter Region、approved Row Actions 和 `TableToolbar → Table → Pagination` structural signature。
 33. Approved Top Nav reference 与 Composed Shell Top Nav 是否对齐 Menu item treatment、Notification/Badge、Theme Toggle、Divider、Avatar/User；头像无图片默认填充是否与品牌色背景有清晰对比，差异是否仅为业务 label/data。
+34. 是否遵守 `APPROVED DEFAULT TEMPLATE = STANDARD ANSWER`：仅改变业务 slots/data；是否未经明确 Override 改变了 page anatomy、layout/spacing、media shape、footer/action hierarchy、selection/batch relationship 或 Drawer anatomy。
+35. Card List 是否默认使用 circular media、approved footer/action hierarchy，且只有一个 canonical visible selection summary；是否隐藏了 generic TableToolbar selection region，避免重复 `已选择 X 项`。
+36. Full-page Form 是否遵守 Shell Main 24px/24px、二级共享 Page Header 的 icon-only Back + 20px title + optional Context Help、Form Surface 全宽、Form content 横向至少 32px、desktop two-column / narrow one-column；是否错误加入文字 Back、Breadcrumb 或 persistent subtitle。
+37. Full-page Detail 是否在 depth 2 使用共享 icon-only Back + 20px title + optional Context Help 且无文字 Back/Breadcrumb，并且没有因页面类型自动加入窄 page-level wrapper；depth > 2 是否只按 approved Breadcrumb reference。
+38. Drawer Form 是否保持 title + close、直接 Form body、canonical 24px/24px body spacing 和 approved footer；是否出现 path、duplicate title、persistent subtitle、duplicate header 或 standalone Back。
+39. 如果页面使用 Grouped Form、Step Form 或 Drawer Form variant，manifest 中是否明确 `starterEnabled` 并绑定对应 executable reference；为 `false` 时是否报告 `BLOCKED`，而不是把 capability presence 当成 default support。
 
 请输出：
 - 通过项；

@@ -14,6 +14,12 @@
 
 如果需求与规则冲突，先说明冲突和影响，不要默默改变组件行为。
 
+## 默认模板合同
+
+- `APPROVED DEFAULT TEMPLATE = STANDARD ANSWER`：先读取 `references/default-template-baselines.md` 和 manifest reference，再替换业务 slots。
+- 默认只可适配业务字段、标签、值、状态、选项、Mock 数据和模板范围内的业务文案。页面 anatomy、layout、spacing、media shape、footer/action hierarchy、selection/batch relationship、Breadcrumb/Back 和 Drawer anatomy 必须保留；改变它们需要用户明确 Override。
+- `SUPPORTED CAPABILITY != CAPABILITY ENABLED BY DEFAULT`。manifest 中 `starterEnabled: false` 的 variant 必须报告 `BLOCKED`，不能从 Runtime 或 Docs 中的能力存在推断 Starter 支持。
+
 ## 页面结构
 
 - 页面只能有一个主要任务中心。
@@ -51,6 +57,8 @@
 - Basic List 的 Continuous Data Region 使用模板专属的 `4px 16px 16px`（上、横向、下）内边距；这不是 Universal List Spacing Token。Toolbar 与 Table 之间不附加页面级 gap。
 - 表格“查看、编辑”等页面内行操作使用 `Button type="text"`，并放入 Runtime 提供的 `sbux-table-row-actions` 作用域以获得品牌色；不得为了颜色改用 Link，也不得在页面 CSS 中覆盖 `.arco-btn-text`。
 - Card List 批量上架、移动、删除分别绑定 Starter Runtime 的 `IconPlus`、`IconSwap`、`IconDelete`；删除入口默认使用 neutral/default/secondary treatment 并保留确认。Card 外圆角遵循当前 Golden 的 12px 基线，内容区顶部/下方分别为 10px/12px；这些是模板几何关系，不是全局 Token。
+- Card List 默认媒体为圆形；默认只能有一个可见 selection summary。page-owned summary、Card-specific batch actions 和 Selection Set 必须一致；若使用 TableToolbar，隐藏其 generic selection-summary region，避免重复 `已选择 X 项`。
+- Full-page Form / Detail 使用 Shell Main 左右 24px；二级页头固定为 icon-only Back + 20px title + optional Context Help，Form Surface 填满可用 Main，Form content 横向至少 32px；depth 2 无文字 Back/Breadcrumb，depth > 2 才按 IA 使用 approved Breadcrumb。Drawer Form 使用 title + close、直接 Form body 和 24px/24px body spacing，不添加 path、duplicate title、persistent subtitle 或 standalone Back。
 - 危险操作使用明确文案和确认流程，不使用模糊的“确定”；红色保留给 error/status 等语义状态。
 - Loading 时禁用重复提交，并保留用户已经输入的数据。
 - 操作反馈要说明成功、失败和下一步，而不只显示“操作失败”。

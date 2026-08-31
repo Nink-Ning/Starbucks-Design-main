@@ -1,0 +1,16 @@
+<!--
+  Starter P1.2 structural reference: Basic Detail
+  Golden: NO. Authority: approved Docs Basic Detail React/Vue implementation.
+-->
+<main data-reference-id="starter.template.basic-detail" data-template-context="FULL-PAGE-DETAIL" data-reference-structure="shared-page-header+detail-layout" data-outer-border="absent" data-surface-radius="6px" data-surface-padding="32px" data-description-layout="2-equal-columns" data-description-table-layout="auto" data-description-label-width="longest-label-in-group" data-description-label-value-gap="24px">
+  <header data-template-region="page-header" data-header-level="2" data-text-back="absent" data-breadcrumb="absent">
+    <button data-template-slot="BACK_ICON" data-icon="IconLeft" data-back-label="返回上一级"></button>
+    <h1 data-template-slot="PAGE_TITLE" data-title-font-size="20px"></h1>
+    <button data-template-slot="CONTEXT_HELP" data-help-pattern="title-adjacent" data-icon="IconQuestionCircle" data-trigger="Tooltip[position=bottom]" data-optional="true"></button>
+    <div data-template-slot="HEADER_ACTIONS"></div>
+  </header>
+  <section data-template-region="detail-surface" data-surface-width="available-main" data-outer-border="absent" data-surface-radius="6px" data-surface-padding="32px">
+    <div data-template-slot="DETAIL_LAYOUT"></div>
+    <div data-template-slot="DETAIL_SECTION"></div>
+  </section>
+</main>

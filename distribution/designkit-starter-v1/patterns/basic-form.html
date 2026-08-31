@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Form Reference</title>
+  <link rel="stylesheet" href="../runtime/starbucks-react.css" />
+  <style>
+    :root { color: #1d2129; background: #f5f6f7; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; } body { margin: 0; min-width: 320px; background: #f5f6f7; }
+    .p11-shell-top { height: 56px; display: flex; align-items: center; padding: 0 24px; color: #fff; background: #00754a; }
+    .p11-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
+    .p11-brand img { width: 26px; height: 26px; filter: brightness(0) invert(1); }
+    .p11-shell-body { display: flex; min-height: calc(100vh - 56px); }
+    .p11-shell-side { width: 260px; flex: 0 0 260px; padding: 24px 16px; background: #fff; border-right: 1px solid #e5e6eb; }
+    .p11-shell-side-label { margin: 0 8px 12px; color: #86909c; font-size: 12px; }
+    .p11-shell-side-item { padding: 10px 12px; border-radius: 4px; color: #4e5969; font-size: 14px; }
+    .p11-shell-side-item.is-active { color: #00754a; background: #e8f7f0; font-weight: 600; }
+    .p11-shell-main { flex: 1 1 auto; min-width: 0; padding: 24px; }
+    .p11-page-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    .p11-title-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .p11-title { margin: 0; color: #1d2129; font-size: var(--fs-20, 20px); line-height: var(--lh-28, 28px); }
+    .p11-help { display: inline-flex; align-items: center; color: #86909c; cursor: help; }
+    .p11-form-surface { width: 100%; min-width: 0; overflow: hidden; background: #fff; border: 0; border-radius: 6px; }
+    .p11-form-content { width: 100%; min-width: 0; padding: 32px; }
+    .p11-form-actions { display: flex; justify-content: flex-end; gap: 12px; padding-top: 8px; }
+    .p11-feedback { margin: 0 0 16px; padding: 10px 12px; color: #00754a; background: #e8f7f0; border-radius: 4px; }
+    @media (max-width: 1023px) {
+      .p11-shell-top { padding: 0 16px; } .p11-shell-side { width: 56px; flex-basis: 56px; padding: 24px 0; }
+      .p11-shell-side > * { display: none; }
+      .p11-shell-main { padding: 24px; } .p11-page-header { align-items: flex-start; flex-wrap: wrap; }
+      .p11-form-content { padding: 32px; }
+    }
+    @media (max-width: 480px) { .p11-shell-main { padding: 24px; } .p11-form-content { padding: 32px; } }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@arco-design/web-react@2.66.15/dist/arco.min.js"></script>
+  <script src="https://unpkg.com/@arco-design/web-react@2.66.15/dist/arco-icon.min.js"></script>
+  <script src="../runtime/starbucks-react.umd.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.8/babel.min.js"></script>
+  <script>
+    window.__p11ReferenceErrors = [];
+    ["FormPageLayout", "FormGrid", "FormGridItem", "FormActions", "Form", "Input", "Select", "Button", "Tooltip"].forEach(function (name) {
+      if (!window.StarbucksReact || !window.StarbucksReact[name]) window.__p11ReferenceErrors.push(name);
+    });
+    ["IconLeft", "IconQuestionCircle"].forEach(function (name) {
+      if (!window.arcoicon || !window.arcoicon[name]) window.__p11ReferenceErrors.push(name);
+    });
+  </script>
+  <script type="text/babel">
+    const { Button, Form, FormActions, FormGrid, FormGridItem, FormPageLayout, Input, Select, Tooltip } = window.StarbucksReact;
+    const BackIcon = window.arcoicon && window.arcoicon.IconLeft;
+    const QuestionIcon = window.arcoicon && window.arcoicon.IconQuestionCircle;
+    function Shell({ children }) { return <div data-reference-executable="true" data-reference-role="next-release-authority" data-template="basic-form" data-template-context="FULL-PAGE-FORM" data-runtime-binding="FormPageLayout+FormGrid+FormActions" data-reference-structure="shared-page-header+form-layout"><header className="p11-shell-top"><span className="p11-brand"><img src="../assets/starbucks-system-logo.svg" alt="" />Starter Reference</span></header><div className="p11-shell-body"><aside className="p11-shell-side"><p className="p11-shell-side-label">门店管理</p><div className="p11-shell-side-item">门店列表</div><div className="p11-shell-side-item is-active">新建门店</div></aside><main className="p11-shell-main" data-shell-main-padding="24px">{children}</main></div></div>; }
+    function App() { const [form] = Form.useForm(); const [saved, setSaved] = React.useState(false); const [backNotice, setBackNotice] = React.useState(false); return <Shell><header className="p11-page-header" data-header-level="2" data-text-back="absent" data-breadcrumb="absent"><div className="p11-title-row"><Button type="secondary" shape="square" icon={BackIcon ? <BackIcon /> : null} aria-label="返回上一级" onClick={() => setBackNotice(true)} /><h1 className="p11-title">新建门店</h1><Tooltip position="bottom" content="填写门店基础信息后保存"><span className="p11-help" data-template-slot="CONTEXT_HELP" data-optional="true" role="img" tabIndex={0} aria-label="页面帮助">{QuestionIcon ? <QuestionIcon /> : null}</span></Tooltip></div></header>{backNotice && <p className="p11-feedback" role="status">已返回门店列表（本地演示）</p>}<div className="p11-form-surface" data-form-surface="full-available-main" data-surface-width="available-main" data-outer-border="absent" data-surface-radius="6px"><FormPageLayout maxWidth="none" padding={0}><div className="p11-form-content" data-form-content-inset="32px" data-horizontal-padding="32px-min">{saved && <p className="p11-feedback" role="status">门店已保存（本地演示）</p>}<Form form={form} layout="vertical" initialValues={{ name: "上海静安嘉里中心店", city: "上海", manager: "林晓" }} onSubmit={() => setSaved(true)}><FormGrid><FormGridItem><Form.Item field="name" label="门店名称" required><Input placeholder="请输入门店名称" /></Form.Item></FormGridItem><FormGridItem><Form.Item field="city" label="所在城市" required><Select placeholder="请选择城市"><Select.Option value="上海">上海</Select.Option><Select.Option value="北京">北京</Select.Option><Select.Option value="杭州">杭州</Select.Option></Select></Form.Item></FormGridItem><FormGridItem><Form.Item field="manager" label="负责人" required><Input placeholder="请输入负责人" /></Form.Item></FormGridItem><FormGridItem><Form.Item field="phone" label="联系电话"><Input placeholder="请输入联系电话" /></Form.Item></FormGridItem><FormGridItem span={2}><Form.Item field="address" label="门店地址"><Input.TextArea autoSize={{ minRows: 3, maxRows: 5 }} placeholder="请输入详细地址" /></Form.Item></FormGridItem></FormGrid><FormActions><div className="p11-form-actions"><Button>取消</Button><Button type="primary" htmlType="submit">保存</Button></div></FormActions></Form></div></FormPageLayout></div></Shell>; }
+    ReactDOM.createRoot(document.getElementById("root")).render(window.__p11ReferenceErrors.length ? <pre>{window.__p11ReferenceErrors.join(", ")}</pre> : <App />);
+  </script>
+</body>
+</html>

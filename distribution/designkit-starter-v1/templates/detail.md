@@ -4,6 +4,8 @@
 
 用于查看和确认一个对象的键值信息，保持信息聚焦，不把页面扩展成复杂数据分析页。它是页面组合参考，不是公共 `BasicDetailTemplate` 组件。
 
+`APPROVED DEFAULT TEMPLATE = STANDARD ANSWER`。生成前绑定 `patterns/basic-detail.html`；字段、标签、状态和值可以适配，Page Header、Detail hierarchy、surface、action placement 和 IA context 不得自行重构。
+
 ## 适用场景
 
 - 详情字段结构稳定；
@@ -22,18 +24,21 @@
 
 ```text
 Page Header
-├── 左侧：标题 + Tooltip 说明
+├── 左侧：depth 2 icon-only Back + 20px 标题 + 可选 Context Help
 └── 右侧：Demo 状态 Select（Demo-only）/ 更多 / 编辑
 
 DetailPageLayout maxWidth=1120
 └── DetailSection
-    └── DetailDescriptions
+    └── 两个等宽 DetailDescriptions 组（column=1，tableLayout="auto"）
 ```
 
+- Basic Detail 属于 FULL-PAGE DETAIL context：Shell Main 左右 24px，页面级 surface 使用可用 Main 宽度、无外边框、6px 圆角和四周 32px 内边距；approved DetailPageLayout 的 1120px inner limit 只能作为 reference 已批准的内容层约束，不得另建 page-level narrow wrapper。
+- depth 2 默认使用 icon-only Back + 20px 标题 + optional Context Help，不显示文字 Back、Breadcrumb 或 persistent subtitle；depth > 2 只有 IA 明确需要时才使用 `patterns/breadcrumb.html`。页面类型本身不触发 Breadcrumb。
+- Page Header 使用标题 + optional approved title-adjacent Context Help，不自行发明 Tooltip/Popover 或重复 header。
 - Basic Detail 使用 `DetailPageLayout maxWidth={1120}`，不是无限制流式详情页。
 - 只使用一个 `DetailSection`。
 - 当前示例不显示额外的“基本信息”标题、Section 描述或 Card Header。
-- 页面标题使用 16px 标题和标题后的说明 Tooltip；右侧只放“更多 / 编辑”核心操作。
+- 页面标题使用共享 Page Header 的 20px 标题和标题相邻的 approved Context Help；depth 2 的 Back 使用 icon-only Button，不显示文字 Back 或 Breadcrumb；右侧只放“更多 / 编辑”核心操作。
 - 页面状态 Select 位于右侧操作区最左侧，先于“更多 / 编辑”，使用 `aria-label="页面状态"` 和 `data-demo-only="true"`；不生成独立顶部状态卡片。
 - Header 与详情容器保持 10px 间距；Starter 单文件不依赖 Docs 面包屑。
 
@@ -44,6 +49,8 @@ Starter Runtime 只选择性提供 Basic Detail 实际需要的：
 - `DetailPageLayout`
 - `DetailSection`
 - `DetailDescriptions`
+
+双列详情在页面组合层使用两个等宽外层 track；两组 `DetailDescriptions` 共享由当前数据最长 label 实测得到的 label 宽度，label 与 value 之间固定保留 24px。不得使用任意的 100/120/160px 等固定 label 宽度。窄屏收敛为单列时仍复用同一最长 label 对齐规则。
 
 不要使用 `export * from './pro'`，也不要引入其他 Detail 模板的实现。
 

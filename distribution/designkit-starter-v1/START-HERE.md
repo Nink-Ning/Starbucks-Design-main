@@ -24,6 +24,7 @@ references/application-shell.md
 patterns/default-application-shell.html
 patterns/<对应模板 reference>.html
 templates/<对应页面类型>.md
+references/default-template-baselines.md
 ```
 
 如果 AI 只能读取单个文件，先提供 `SKILL.md`，再按 AI 要求补充对应 reference 和模板。
@@ -35,7 +36,7 @@ templates/<对应页面类型>.md
 - 页面名称
 - 使用角色
 - 核心任务
-- 页面类型：基础列表、卡片列表、表单或详情
+- 页面类型：基础列表、卡片列表、基础表单、分组表单、步骤表单、基础详情或 Drawer Form
 - 需要展示的字段
 - 主要操作
 - 需要的状态
@@ -50,6 +51,8 @@ templates/<对应页面类型>.md
 - 如果需要独立 Demo，请明确要求 `none`，不生成顶部导航或侧边菜单。
 
 Shell 与 Template 组合时，必须从 manifest 的 `referenceImplementations` 加载 approved reference；先将完整模板 subtree 放入 Shell Main Slot，再只替换允许的业务 slots。Reference asset 不是 Golden，也不是公共 API。
+
+默认模板是标准答案，不是视觉灵感。只允许替换业务字段、标签、值、状态、选项和 Mock 内容；布局、spacing、media shape、页面上下文、selection/batch relationship 和 Drawer anatomy 需要明确 Override。Grouped Form、Step Form、Drawer Form 当前已通过 package-local executable reference 启用；生成前仍必须检查 manifest 的 `starterEnabled`，只有为 `false` 时才报告 `BLOCKED`。
 
 不需要在需求中重复描述批准的导航样式；如果需要自定义导航体系、真实路由或权限菜单，该需求超出当前 Starter 边界。
 

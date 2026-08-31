@@ -59,6 +59,7 @@ AI 只有在本 Registry 存在对应 `starter.*` Capability ID，并且当前 S
 | `starter.template.card-list` | Card List | Template | 依赖视觉特征的对象浏览、选择和轻量管理；只覆盖当前结果、本地选择和本地 Mock 操作 | [Template](../templates/card-list.md)、[Component Catalog](component-catalog.md) | [Card List Golden](../examples/multi-select-card-list.html) | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `READY` | 不包含跨页选择、真实导出、权限或服务端任务 | 保持空选择为生成默认；Golden 预置选择只属于示例 |
 | `starter.template.basic-form` | Basic Form | Template | 创建或编辑结构稳定的数据；支持基础校验、提交 Loading、本地成功反馈和重置 | [Template](../templates/form.md)、[Component Catalog](component-catalog.md) | [Basic Form Golden](../examples/form.html) | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `READY` | 不包含分步表单、动态字段、上传、自动保存或审批流程 | 补充逐维度 Evidence Records |
 | `starter.template.basic-detail` | Basic Detail | Template | 只读查看单个对象；使用批准的单区块详情结构、基础状态和本地操作反馈 | [Template](../templates/detail.md)、[Component Catalog](component-catalog.md) | [Basic Detail Golden](../examples/detail.html) | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `READY` | 不包含复杂模块、导出、表格、时间线、Tabs 或真实接口 | 补充逐维度 Evidence Records |
+
 | `starter.component.table-toolbar` | TableToolbar | Business Component | Non-Developer 页面支持；允许 selection summary、模板批准的轻量 batch actions、basic filtering container 和 action state display，不提供工程级配置或高级扩展 | [Business Component Knowledge](../business-components/table-toolbar.md)、[Component Catalog](component-catalog.md) | 由 [Basic List](../examples/list.html) 和 [Card List](../examples/multi-select-card-list.html) 间接覆盖 | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `READY` | Basic List 与 Card List 使用不同能力子集 | 按模板区分验证证据，不从 Runtime 扩大范围 |
 | `starter.pattern.quick-filter` | Quick Filter | Pattern | 仅允许 TableToolbar 已查证的 1～3 个轻量 Search、Select、ButtonGroup 或完整 DateRange；不含 Label、校验、复杂联动或查询面板 | [TableToolbar Knowledge](../business-components/table-toolbar.md)、[Component Catalog](component-catalog.md) | 由 Basic List 与 Card List Golden 间接覆盖 | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `PARTIAL` | 不得用多个 Quick Filters 伪造高级筛选 | 补充 Capability-specific Decision 和 Evidence |
 | `starter.pattern.default-application-shell` | Default Application Shell | Pattern | Product Manager / Non-Developer Starter；只允许固定 Brand Top + Collapsible Side + approved Page Template，支持 `default` / `content-only` / `none` | [Application Shell Contract](application-shell.md)、[Template Usage](template-usage-contract.md)、[Implementation Binding](implementation-binding-contract.md) | None；Docs Menu patterns 仅为 `IMPLEMENTATION REFERENCE`，不是 Starter Golden | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md)、[Default Application Shell Evidence](validation/evidence/starter-pattern-default-application-shell.md) | `READY` | Support state `SUPPORTED` 不等于完整 Navigation Shell engineering | 保持 fixed composition；Package-only clean-room 与 browser evidence 已独立记录 |
@@ -67,6 +68,18 @@ AI 只有在本 Registry 存在对应 `starter.*` Capability ID，并且当前 S
 | `starter.foundation.theme` | Theme | Foundation | Starter 页面跟随批准的 Light/Dark 主题；状态、文本、背景、边框和图标保持可读 | [Design Rules](design-rules.md)、[Quality Checklist](quality-checklist.md) | 四个 Starter Golden 是页面级检查对象 | [Validation Contract](validation/validation-contract.md) | `PARTIAL` | Manifest 汇总状态不能代替逐能力 Theme Evidence | 登记每个模板的 Light/Dark 证据 |
 | `starter.foundation.responsive` | Responsive | Foundation | 页面和组件按可用宽度响应；Header/Toolbar 可换行，Card Grid 重排，宽表只在内部容器滚动 | [Design Rules](design-rules.md)、[Template Contract](template-contract.md) | 四个 Starter Golden 是宽/窄检查对象 | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `PARTIAL` | Viewport 与组件容器响应式不能混为同一证据 | 登记逐模板 viewport/container 证据 |
 | `starter.foundation.accessibility` | Accessibility | Foundation | 核心任务需要语义、可访问名称、键盘操作、可见 Focus、非颜色状态和可感知反馈 | [Template Contract](template-contract.md)、[TableToolbar Knowledge](../business-components/table-toolbar.md) | Goldens 只提供部分页面语义参考 | [Quality Checklist](quality-checklist.md)、[Validation Contract](validation/validation-contract.md) | `PARTIAL` | 静态 `aria-*` 存在不等于完整验证 | 建立 Keyboard、Focus、Name/Role/Value 和反馈证据 |
+
+### P1.1 executable variants
+
+The following variants remain within the `starter.template.basic-form` family rather than becoming additional `starter.*` capabilities. Their executable references use only fixed Runtime exports or native composition and are enabled Starter defaults.
+
+| Variant | Reference | Binding | Generation status |
+| --- | --- | --- | --- |
+| Grouped Form | [Grouped Form reference](../patterns/grouped-form.html) | Native `section` + `FormGrid` + `FormActions` | `READY` |
+| Step Form | [Step Form reference](../patterns/step-form.html) | `Steps` + native step content + `FormGrid` + `FormActions` | `READY` |
+| Drawer Form | [Drawer Form reference](../patterns/drawer-form.html) | `Drawer` + `Form` + fixed Runtime base controls | `READY` |
+
+These variants do not modify Runtime exports, public packages, tokens, dependencies, or release assets.
 
 ## 5. Projection maintenance
 

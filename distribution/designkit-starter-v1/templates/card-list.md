@@ -10,6 +10,7 @@
 
 - **Hard Rule**：Card List 是组合 `TableToolbar`、选择控件、响应式 Card Grid 和对象级操作的页面模板，不是公共 `CardListPage`、`CheckCard` 或 Card 组件。
 - **Hard Rule**：页面拥有筛选结果、选择集合和页面级操作；单张 Card 只表达一个对象、其状态和对象级操作。
+- **Hard Rule**：`APPROVED DEFAULT TEMPLATE = STANDARD ANSWER`。生成前绑定 manifest 的 `card-list` reference；业务数据可以变化，Card anatomy、media shape、selection feedback 和 footer/action hierarchy 不得自行重写。
 - **Guideline**：Card 应优先承载可帮助用户识别对象的媒体、标题、少量关键元数据和操作入口。
 
 ## When to use
@@ -27,9 +28,12 @@
 
 ## Page structure
 
+- **Hard Rule**：Card List 是 Level-1 页面；Page Header 使用 20px 标题和可选 Context Help，不显示 Back Icon、文字 Back 或 Breadcrumb。
+- **Hard Rule**：完整页默认由 `patterns/default-application-shell.html` 包裹 Card List reference，Shell Main 左右保留 24px；不把 Card List 当作脱离页面上下文的 fragment。
 - **Hard Rule**：页面结构由 Toolbar、Card Grid 和 Card 组成；页面自身不得复制基础组件或业务组件内部实现。
-- **Hard Rule**：Toolbar 承载当前结果的选择控制、选择摘要、页面内批量操作、轻量筛选、搜索和已支持的工具操作。
+- **Hard Rule**：Toolbar 承载当前结果的选择控制、唯一选择摘要、页面内批量操作、轻量筛选、搜索和已支持的工具操作；不得同时显示 page-owned summary 与通用 `已选择 X 项`。
 - **Hard Rule**：Card 承载媒体、标题、语义状态、关键元数据、Selection Control 和对象级操作。
+- **Hard Rule**：默认媒体为圆形；square、rounded-square、rect hero 或新的媒体 banner 只能来自明确 override。
 - **Guideline**：页面 Header 只承载页面级主操作；作用于已有对象集合的操作留在 Toolbar。
 
 推荐结构：
@@ -39,12 +43,12 @@
 → Toolbar Row
    → 当前结果的全选 / 半选控件
    → TableToolbar
-      → 选择摘要和批量操作
+      → Card-specific 批量操作（generic selection-summary region 隐藏）
       → Search / Select / Refresh
 → Card Grid
    → Card
       → Selection Control
-      → Media
+      → Circular Media
       → Title + Status
       → Metadata
       → Card Actions
@@ -55,10 +59,12 @@
 
 - **Hard Rule**：选择集合由页面管理；只有 Checkbox 等 Selection Control 可以改变选择，Card Body 不隐式选择。
 - **Hard Rule**：全选和取消全选只影响当前筛选结果；选择摘要与批量操作必须读取同一选择集合。
+- **Hard Rule**：页面只能有一个 canonical visible selection summary。若使用 `TableToolbar`，必须在 Card List scope 隐藏其 generic selection-summary region，除非它被明确证明是唯一摘要；不得盲目再渲染一个通用 selected-count 文案。
 - **Hard Rule**：选中状态在 Hover 后仍然保持，且不能只依赖背景色表达。
 - **Hard Rule**：筛选结果变化时，不得让不可见对象被“全选当前结果”意外新增或移除；页面必须明确当前结果与完整选择集合的关系。
 - **Guideline**：首次进入默认使用空选择，除非需求明确要求恢复既有选择或展示特定任务上下文。
 - **Example Specific**：Golden 中预置的选中项和选择数量仅用于演示状态，不是生成页面的默认值。
+- **Hard Rule**：Card List 的 batch action relationship 必须保持 Card-specific；不得把 generic TableToolbar selected-count 作为额外的第二个用户反馈。
 
 ## Card Actions
 
@@ -107,8 +113,9 @@
 
 ## Golden Example reference
 
-- **Hard Rule**：生成前读取 `examples/multi-select-card-list.html`，只将其作为结构、能力边界和视觉组合参考，不复制实现代码。
+- **Hard Rule**：生成前读取 `patterns/card-list.html` 作为 structural reference，再读取 `examples/multi-select-card-list.html` 作为结构、能力边界和视觉组合的只读交叉检查，不复制实现代码。
 - **Hard Rule**：不得修改或写回 Golden Example。
+- **Hard Rule**：Golden 的圆形媒体、唯一可见选择反馈、Card footer/action hierarchy 和 Card Grid relationship 属于 approved default；业务名称、图片、默认选择和操作文案属于 Example Specific。
 - **Example Specific**：Golden 中的 Starbucks 商品名称、图片、价格、编码、状态、操作文案和 Mock 反馈只用于业务演示。
 - **Example Specific**：Golden 的默认选择集合、具体 Card 数量、具体筛选项和像素校准值不构成模板通用默认值。
 
@@ -117,6 +124,8 @@
 - [ ] **Hard Rule**：已确认核心任务依赖视觉对象识别，而不是高密度结构化比较。
 - [ ] **Hard Rule**：页面使用真实 `StarbucksReact.TableToolbar` 和已查证的基础组件，没有复制组件内部结构或状态。
 - [ ] **Hard Rule**：Selection Control 是唯一选择入口，全选范围、选择摘要和批量操作集合一致。
+- [ ] **Hard Rule**：页面只有一个 canonical visible selection summary；Card List scope 没有额外 generic `已选择 X 项`。
+- [ ] **Hard Rule**：默认 media 是 circular，且保留 approved Card content hierarchy、footer 和 action hierarchy。
 - [ ] **Hard Rule**：Card Actions 与 Batch Actions 独立，危险操作有确认和反馈。
 - [ ] **Hard Rule**：Card 操作入口数量、More 顺序和可访问名称符合规则。
 - [ ] **Hard Rule**：Toolbar 可换行，Grid 按可用宽度变化，标题省略且页面无异常横向滚动。

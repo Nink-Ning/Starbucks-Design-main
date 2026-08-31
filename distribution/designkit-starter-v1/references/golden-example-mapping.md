@@ -55,6 +55,10 @@ Implementation Reference 不是 Starter Golden；实际 browser `PASS` evidence 
 
 The Card List Golden maps delete to the approved Runtime icon and confirmation behavior. Persistent destructive entries use neutral/default/secondary treatment by default; red remains reserved for error/status semantics unless an approved pattern explicitly authorizes a red action treatment. The Golden's business action data is example-specific and must not override this interaction policy.
 
+## 3.1 P1.1 executable variants
+
+Grouped Form, Step Form and Drawer Form remain within the Basic Form family and do not add new `starter.*` capability IDs or Goldens. Their package-local executable references are enabled because they use approved fixed Runtime exports or native composition. A generated output is still subject to the clean-room and browser evidence records; executable binding alone is not visual sign-off.
+
 ## 4. Golden rule
 
 Golden Example 是 AI 输出参考样例，不是公共组件 API。

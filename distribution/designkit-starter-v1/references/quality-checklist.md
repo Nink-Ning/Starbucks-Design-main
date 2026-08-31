@@ -105,8 +105,34 @@
 
 ### Form 与 Detail
 
+#### Default binding and page context
+
+- [ ] 已读取 `references/default-template-baselines.md`，并从 manifest 绑定 approved Template reference；没有把 capability presence 当成 default support。
+- [ ] 未经用户明确 Override，未改变 approved page anatomy、layout/spacing、media shape、footer/action hierarchy、selection/batch relationship 或 Drawer anatomy。
+- [ ] Card List 默认 media 为 circular，保留 approved footer/action hierarchy，且只有一个 canonical visible selection summary；generic TableToolbar selection region 未造成重复反馈。
+- [ ] FULL-PAGE FORM 的 Shell Main 左右为 24px，Form Surface 填满可用 Main，Form content 横向内边距至少 32px。
+- [ ] FULL-PAGE DETAIL 的 Shell Main 左右为 24px；depth 2 有 icon-only Back + 20px title + optional Context Help，且无文字 Back/Breadcrumb；depth > 2 仅按 approved Breadcrumb reference。
+- [ ] Page Header 为 title + optional approved Context Help，无 persistent subtitle、重复标题或自行发明 Tooltip/Popover。
+- [ ] 在 1280/768/390 检查 desktop two-column / narrow one-column，页面 document 无异常横向溢出。
+
+#### Basic Form
+
 - [ ] Form 未出现 Upload、动态字段、Modal、Drawer 或 Step Form。
+- [ ] Basic Form 保留 `patterns/basic-form.html` 的 Form Surface、Form content、fields 和 actions 层级。
+- [ ] Submit Loading、校验错误、reset baseline 和本地成功反馈不改变页面 anatomy。
+
+#### Grouped / Step / Drawer variants
+
+- [ ] Grouped Form、Step Form、Drawer Form 先检查 manifest `templateVariants[].starterEnabled`。
+- [ ] `starterEnabled: true` 的 variant 先绑定 package-local executable reference；`starterEnabled: false` 的 variant 标记 `BLOCKED`，不使用未登记的 Runtime binding。
+- [ ] Grouped Form 未将 section description 迁移为 persistent page subtitle 或重复 header。
+- [ ] Step Form 未因 step indicator 自动添加第二个 page header、Back 或 Breadcrumb。
+- [ ] Drawer Form 只保留 Drawer title + close、直接 Form body、canonical 24px/24px body spacing 和 approved footer/actions；没有 path、duplicate title、persistent subtitle、duplicate task header 或 standalone Back。
+
+#### Basic Detail
+
 - [ ] Detail 只使用 shared model 的 12 个字段、单 DetailSection 和 `emptyValue="—"`，未出现 Export、Card、Timeline、Table、Tabs 或 Pagination。
+- [ ] Basic Detail 不因页面类型自动增加 Breadcrumb/Back、persistent subtitle 或任意 page-level narrow wrapper。
 
 ## 浏览器检查
 
