@@ -33,7 +33,7 @@ DetailPageLayout maxWidth=1120
 ```
 
 - Basic Detail 属于 FULL-PAGE DETAIL context：Shell Main 左右 24px，页面级 surface 使用可用 Main 宽度、无外边框、6px 圆角和四周 32px 内边距；approved DetailPageLayout 的 1120px inner limit 只能作为 reference 已批准的内容层约束，不得另建 page-level narrow wrapper。
-- depth 2 默认使用 icon-only Back + 20px 标题 + optional Context Help，不显示文字 Back、Breadcrumb 或 persistent subtitle；depth > 2 只有 IA 明确需要时才使用 `patterns/breadcrumb.html`。页面类型本身不触发 Breadcrumb。
+- depth 2 默认使用 icon-only Back + 20px 标题 + optional Context Help，不显示文字 Back、Breadcrumb 或 persistent subtitle；depth >= 3 只使用 `patterns/breadcrumb.html` 的 approved Breadcrumb-only context，不显示独立 Page Title、Back 或 title-level Context Help。页面类型本身不触发 Breadcrumb。
 - Page Header 使用标题 + optional approved title-adjacent Context Help，不自行发明 Tooltip/Popover 或重复 header。
 - Basic Detail 使用 `DetailPageLayout maxWidth={1120}`，不是无限制流式详情页。
 - 只使用一个 `DetailSection`。

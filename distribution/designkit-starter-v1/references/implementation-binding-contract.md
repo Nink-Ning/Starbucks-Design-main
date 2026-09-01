@@ -35,9 +35,11 @@ Template Decision → Shell Mode Decision → Shell Reference Binding
 | Drawer | `patterns/drawer.html` | `approved context reference` | `NO` |
 | Drawer Form | `patterns/drawer-form.html` | `approved executable template reference; fixed Runtime Drawer + Form` | `NO` |
 
-The Shell reference owns the complete approved Brand Top Navigation subtree, the Side/Main outer frame and the `approved-template` Main Slot. The selected template reference enters that slot as a complete subtree. Page Header is a shared authority consumed by Card List, Basic Form, Basic Detail, Grouped Form and Step Form; Card List uses its Level-1 title/help anatomy without Back, while the reviewed Form/Detail pages use the depth-2 icon Back anatomy. The composition layer must not recreate either anatomy from business copy. Only approved business labels/data may vary; the fixed Starbucks logo and Top action hierarchy remain bound to the reference. Starter output uses package-local references and does not include Docs source, tests or the complete Golden implementation.
+The Shell reference owns the complete approved Brand Top Navigation subtree, the Side/Main outer frame and the `approved-template` Main Slot. The selected template reference enters that slot as a complete subtree. Reference DOM/structure reuse is required: the composition layer must not replace the Shell with a prose-derived lookalike or recreate the approved Top/Side subtree. Page Header is a shared authority consumed by Card List, Basic Form, Basic Detail, Grouped Form and Step Form; Card List uses its Level-1 title/help anatomy without Back, while the reviewed Form/Detail pages use the depth-2 icon Back anatomy. At depth >= 3, the approved Breadcrumb is the only page context and its terminal item replaces an independent title, Back and title-level Context Help. The composition layer must not recreate either anatomy from business copy. Only approved business labels/data may vary; the fixed Starbucks logo and Top action hierarchy remain bound to the reference. Starter output uses package-local references and does not include Docs source, tests or the complete Golden implementation.
 
 Basic List business slots are limited to `PAGE_TITLE`, `CONTEXT_HELP`, `PRIMARY_ACTION`, `QUICK_FILTER`, `SEARCH_PLACEHOLDER`, `TABLE_COLUMNS`, `TABLE_DATA`, `STATUS_DATA` and `ROW_ACTION_LABELS`. CSS, layout DOM, Toolbar regions and spacing are not free slots. When `CONTEXT_HELP` is present, render a title-adjacent Help control; never generate a persistent page subtitle.
+
+Basic List binds one approved Content Surface around the continuous `TableToolbar → Table → Pagination` subtree. Its data-region inset is `4px` top, `16px` left/right and `16px` bottom. TableToolbar retains its own `12px` vertical padding, while the external Toolbar→Table gap is `0`. The first two Runtime Table columns bind `fixed: 'left'`, the operation column binds `fixed: 'right'` with the approved `180px` width, and row actions bind the approved centered `4px`-gap row-actions wrapper. Page Header actions bind the highest-priority action to the only Primary button at the far right; other page actions bind to Secondary Outlined. Card List batch actions bind to `Button[type=outline]` only, and visible-versus-More placement expresses priority. Navigable table fields bind to the actual Runtime `Link`; row hover binds to the Runtime `Table` hover selectors and theme tokens.
 
 ## 3.1 P1 default binding
 
@@ -45,9 +47,13 @@ Before business substitution, load `references/default-template-baselines.md` an
 
 Card List has one canonical visible selection summary. The page-owned summary and Card-specific batch actions read the same Selection Set. The generic `TableToolbar` selection region must be hidden in the Card List scope when the page-owned summary is present; do not render an additional generic `已选择 X 项` label.
 
-FULL-PAGE FORM and FULL-PAGE DETAIL use the Shell Main 24px/24px outer rule. At depth 2, the shared Page Header is icon-only Back + 20px title + optional Context Help, with no text Back or Breadcrumb. Form and Basic Detail surfaces have no outer border and retain a 6px radius; Form content has at least 32px horizontal padding, while Basic Detail has 32px on all sides. Basic Detail keeps equal outer columns, a shared longest-label track and a 24px label/value gap. Step Form is Steps → Docs-aligned full-surface divider → content. DRAWER FORM uses Drawer title + close, direct Form body and 24px/24px body spacing; it has no path, duplicate title, persistent subtitle, duplicate header or standalone Back.
+FULL-PAGE FORM and FULL-PAGE DETAIL use the Shell Main 24px/24px outer rule. At depth 2, the shared Page Header is icon-only Back + 20px title + optional Context Help, with no text Back or Breadcrumb. At depth >= 3, use the approved Breadcrumb-only context and omit the independent Page Title, Back and title-level Context Help. Form and Basic Detail surfaces have no outer border and retain a 6px radius; Form content has at least 32px horizontal padding, while Basic Detail has 32px on all sides. Basic Detail keeps equal outer columns, a shared longest-label track and a 24px label/value gap. Step Form is Steps → Docs-aligned full-surface divider → content. DRAWER FORM uses Drawer title + close, direct Form body and 24px/24px body spacing; Drawer owns exactly one action region in its Footer and the nested Form must omit FormActions; it has no path, duplicate title, persistent subtitle, duplicate header or standalone Back.
 
 `templateVariants` in the manifest are discoverable references. A variant whose `starterEnabled` is `true` may be generated through its executable reference; a variant whose `starterEnabled` is `false` must be reported as `BLOCKED`.
+
+### 3.2 Dark presentation binding
+
+The package-local Default Shell style binding is `assets/default-application-shell.css`. It is applied to the same approved Shell DOM and reads existing Runtime semantic tokens. Dark Mode is not a second template, a private palette, or a Theme Provider; fixed Light-only surfaces, borders and text values must not mask Runtime theme variables.
 
 ## 4. Icon Binding
 
@@ -96,7 +102,7 @@ Card List must reuse the actual approved Docs/Golden Card List DOM/structure for
 | Theme | `html[data-theme]` + body `arco-theme` / `data-arco-theme` + existing Runtime tokens |
 | Main | semantic Template wrapper inside Shell-owned outer layout |
 
-Light shows `IconMoon` with “切换到深色模式”；Dark shows `IconSun` with “切换到浅色模式”。Icons express target mode and must not be destructured from `StarbucksReact`. Theme applies to Top, Side, Main and all components. Do not add a Theme API or Theme Provider.
+Light shows `IconMoon` with “切换到深色模式”；Dark shows `IconSun` with “切换到浅色模式”。Icons express target mode and must not be destructured from `StarbucksReact`. Theme applies to Top, Side, Main and all components while preserving the same DOM/reference structure. Do not add a Theme API or Theme Provider, a second token set, or Light-only hardcoded surface/text styling.
 
 ## 7. Provenance failures
 

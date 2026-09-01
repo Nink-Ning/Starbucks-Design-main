@@ -41,8 +41,8 @@ Generated single-file HTML
 
 | Context | Approved default anatomy | Default prohibitions |
 | --- | --- | --- |
-| FULL-PAGE FORM | Shell Main left/right 24px；二级 Page Header 为 icon-only Back + 20px Page Title + optional Context Help；Form Surface 填满可用 Main、无外边框且保留 6px 圆角；Form content horizontal padding 至少 32px | depth 2 不加 Breadcrumb、文字 Back 或 persistent subtitle；depth > 2 才按 IA 使用 approved Breadcrumb |
-| FULL-PAGE DETAIL | Shell Main left/right 24px；二级 Page Header 为 icon-only Back + 20px Page Title + optional Context Help；Basic Detail Surface 无外边框、6px 圆角、32px 内边距 | depth 2 不加 Breadcrumb、文字 Back 或 persistent subtitle；不因页面类型自动加路径、卡片化或窄页级 wrapper |
+| FULL-PAGE FORM | Shell Main left/right 24px；二级 Page Header 为 icon-only Back + 20px Page Title + optional Context Help；Form Surface 填满可用 Main、无外边框且保留 6px 圆角；Form content horizontal padding 至少 32px | depth 2 不加 Breadcrumb、文字 Back 或 persistent subtitle；depth >= 3 只显示 approved Breadcrumb，不显示独立 Page Title 或 Back |
+| FULL-PAGE DETAIL | Shell Main left/right 24px；二级 Page Header 为 icon-only Back + 20px Page Title + optional Context Help；Basic Detail Surface 无外边框、6px 圆角、32px 内边距 | depth 2 不加 Breadcrumb、文字 Back 或 persistent subtitle；depth >= 3 只显示 approved Breadcrumb，不显示独立 Page Title、Back 或 title-level Context Help |
 | DRAWER FORM | Drawer Header title + close；Body 直接进入 Form；canonical body spacing 24px/24px；保留 approved footer/actions | 不加 breadcrumb/path、duplicate title、persistent subtitle、duplicate task header 或 standalone Back；不把删除的说明移到新的永久 block |
 
 ## IA rule
@@ -50,8 +50,10 @@ Generated single-file HTML
 - Breadcrumb 由信息架构深度和明确父级上下文决定，不由 `form` / `detail` 页面类型自动决定。
 - level 1 只显示 20px Page Title + optional Context Help；depth 2 的 full-page Create/Edit/Detail/Grouped/Step 统一显示 icon-only Back + 20px Page Title + optional Context Help。
 - depth 2 的 Back 使用现有填充方形 `Button[type=secondary][shape=square]` 与 `IconLeft`，可访问标签为“返回上一级”；禁止文字 Back 和 Breadcrumb。
-- depth > 2 按 IA 使用 approved Breadcrumb；除非明确批准，不自动组合 Back + Breadcrumb。
+- depth >= 3 按 IA 使用 approved Breadcrumb-only context；Breadcrumb terminal item 表达当前页面身份，不再重复 Page Title、Back 或 title-level Context Help。
 - Page Header 默认没有 persistent subtitle；Context Help 使用 approved title-adjacent Help pattern。
+- level 1、level 2 与 depth >= 3 的页面上下文到内容区使用同一 approved 间距；depth >= 3 只将 Page Header context 替换为 Breadcrumb-only，不为页面类型另加 margin。
+- Page Header actions 遵循优先级：最高优先级 Primary 位于最右侧，其余 actions 使用 Secondary Outlined；不得用多个 Primary 或用填充 Secondary 冒充低优先级 action。
 
 ## Template baselines
 
@@ -63,7 +65,20 @@ Generated single-file HTML
 - 保留 approved Card anatomy、title/status hierarchy、secondary metadata、footer/action hierarchy 和 grid relationship；不得加入任意营销信息或新的 banner/chrome。
 - 选择集合由页面拥有；只能有一个 canonical visible selection summary。Card List 的 page-owned summary 与 Card-specific batch actions 使用同一选择集合；不要再渲染通用 `已选择 X 项`。
 - 若使用 Runtime `TableToolbar`，必须在 Card List scope 隐藏其 generic selection-summary region，或证明它就是唯一 canonical summary；不得盲目同时显示两个摘要。
+- Card List batch actions 全部使用 Secondary Outlined（`Button[type=outline]`）；不可使用 Primary。操作优先级通过 visible actions 与 More 收纳表达，不能通过额外填充色按钮表达。
 - Card List 必须复用 Docs approved Card List DOM/structure；冻结 toolbar、container、card、selection、media、footer/action regions，只替换业务数据和已批准的选项。
+
+### Basic List
+
+- Basic List 使用一个 approved Content Surface 包含完整连续数据区：`TableToolbar → Table → Pagination`；不得拆成 Toolbar Card、Table Card、Pagination Card。
+- Content Surface 内的数据区域保持 `4px` top、`16px` left/right、`16px` bottom inset；该规则不改变 Shell Main 的外层几何。
+- Basic List 的 `TableToolbar` 只保留自身的 `12px` vertical padding；Toolbar 与 Table 之间没有额外外部 gap、margin、spacer 或 reserved space，三者保持一个连续数据区。
+- Basic List 使用真实 Runtime `Table` 的语义 fixed API：前两列 `fixed: 'left'`，操作列 `fixed: 'right'`；操作列宽度按 approved reference 为 `180px`。行操作使用 approved row-actions layout，按钮垂直居中且相邻间距为 `4px`。
+- 可导航的表格业务字段使用真实 Runtime `Link`；表格行 hover 使用 Runtime `Table` 的 theme-aware hover，不得添加模板私有 `tr:hover`。
+
+### Side Navigation hierarchy
+
+- Side level 1 items 可以使用语义 Arco icon；level 2 及更深层级默认不使用 icon。保留 approved level-1 icon、active、spacing 和 collapse 关系，不因业务文案自行补图标。
 
 ### Full-page Form family
 
@@ -80,7 +95,7 @@ Basic Detail 是聚焦的 read-only object page。默认保留共享二级 Page 
 
 ### Drawer Form
 
-Drawer Form 是独立于 full-page Form 的上下文。Drawer header 只承载 title + close，body 直接承载 Form，footer/actions 沿用 Drawer approved behavior。Drawer body 与 Form inner padding 不得叠加出未经批准的 double inset。
+Drawer Form 是独立于 full-page Form 的上下文。Drawer header 只承载 title + close，body 直接承载 Form，footer/actions 沿用 Drawer approved behavior。Drawer body 与 Form inner padding 不得叠加出未经批准的 double inset。Drawer owns the single action region；嵌套 Form 只保留字段、布局和校验，不渲染 `FormActions`。
 
 ## Binding status
 

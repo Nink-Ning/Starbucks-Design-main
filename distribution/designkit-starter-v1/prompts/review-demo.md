@@ -39,21 +39,21 @@
 20. Card List 的暗色语义色和 Selected、Hover、Focus、Disabled 是否可读且不只依赖颜色或透明度。
 21. Checkbox、Card Actions、Batch Actions、More Menu 和图标按钮是否支持键盘、可见 Focus 和可访问名称。
 22. Shell Mode 是否只为 `default` / `content-only` / `none`，且常规后台页默认 `default`。
-23. Default Shell 是否整体复用批准的 Brand Top Navigation subtree，固定使用 Starbucks logo，当前菜单名称是否作为标题展示，且 Top action order 是否为 Notification → Theme Toggle → Divider → Avatar/User。
+23. Default Shell 是否整体复用批准的 Brand Top Navigation reference DOM/structure，固定使用 Starbucks logo，当前菜单名称是否作为标题展示，且 Top action order 是否为 Notification → Theme Toggle → Divider → Avatar/User。
 24. Theme Toggle 是否用 `window.arcoicon.IconMoon` / `IconSun` 表达 target mode，Notification 是否用 `IconNotification`，且没有 Theme Provider。
 25. 所有 Generic UI / navigation Icon 是否来自 `window.arcoicon`，固定 Pattern Icon 是否保持 `IconNotification`、`IconMoon`、`IconSun`、`IconPlus`、`IconMore`、`IconDelete`；是否不存在 Emoji、手绘 SVG、CSS Icon、第三方 Icon 或虚构 Icon 名称；每个使用的 Icon 是否通过 `typeof window.arcoicon[iconName] !== 'undefined'`。
-26. Theme 是否通过 html/body attributes 作用于 Top、Side、Main 和所有组件，localStorage 是否使用 `designkit-starter-theme` 的批准优先级。
+26. Theme 是否通过 html/body attributes 作用于 Top、Side、Main 和所有组件，localStorage 是否使用 `designkit-starter-theme` 的批准优先级；Light/Dark 是否保持同一份 approved reference DOM 并使用现有 semantic tokens，没有固定浅色 template reconstruction。
 27. Shell 是否保持 Template anatomy、Breadcrumb independence 和 Basic List `4px / 16px / 16px` ownership。
 28. 1280/768/390 是否符合 Side 260/56/56、required global actions 和 document overflow contract；390 是否没有发明 Drawer、Hamburger、Bottom Navigation 或新 mobile pattern；展开、收起和 active item 的 Side Icon 是否可见。
 29. 是否泄漏 Custom Navigation Shell、Navigation API、dynamic permission menu、backend-driven navigation、real router、permission routing、system switch backend logic 或 React/Vue project navigation integration。
 30. 如果需求是普通后台页且没有导航说明，是否解析为 Basic List 或其他已选 Template + `default` Shell；如果已有导航或明确 standalone，是否分别使用 `content-only` 或 `none`。
-31. 是否实际使用 approved Shell Reference 和 Template Reference；是否通过 Shell Main Slot 挂载完整 Template subtree，而不是重新创建 Template chrome。
+31. 是否实际使用 approved Shell Reference DOM/structure 和 Template Reference；是否通过 Shell Main Slot 挂载完整 Template subtree，而不是重新创建 Shell 或 Template chrome。
 32. Basic List 是否保持 Page Title + Context Help（无 persistent subtitle）、TableToolbar Filter Region、approved Row Actions 和 `TableToolbar → Table → Pagination` structural signature。
 33. Approved Top Nav reference 与 Composed Shell Top Nav 是否对齐 Menu item treatment、Notification/Badge、Theme Toggle、Divider、Avatar/User；头像无图片默认填充是否与品牌色背景有清晰对比，差异是否仅为业务 label/data。
 34. 是否遵守 `APPROVED DEFAULT TEMPLATE = STANDARD ANSWER`：仅改变业务 slots/data；是否未经明确 Override 改变了 page anatomy、layout/spacing、media shape、footer/action hierarchy、selection/batch relationship 或 Drawer anatomy。
 35. Card List 是否默认使用 circular media、approved footer/action hierarchy，且只有一个 canonical visible selection summary；是否隐藏了 generic TableToolbar selection region，避免重复 `已选择 X 项`。
 36. Full-page Form 是否遵守 Shell Main 24px/24px、二级共享 Page Header 的 icon-only Back + 20px title + optional Context Help、Form Surface 全宽、Form content 横向至少 32px、desktop two-column / narrow one-column；是否错误加入文字 Back、Breadcrumb 或 persistent subtitle。
-37. Full-page Detail 是否在 depth 2 使用共享 icon-only Back + 20px title + optional Context Help 且无文字 Back/Breadcrumb，并且没有因页面类型自动加入窄 page-level wrapper；depth > 2 是否只按 approved Breadcrumb reference。
+37. Full-page Detail 是否在 depth 2 使用共享 icon-only Back + 20px title + optional Context Help 且无文字 Back/Breadcrumb，并且没有因页面类型自动加入窄 page-level wrapper；depth >= 3 是否只按 approved Breadcrumb-only reference 且不重复 Page Title、Back 或 title-level Context Help。
 38. Drawer Form 是否保持 title + close、直接 Form body、canonical 24px/24px body spacing 和 approved footer；是否出现 path、duplicate title、persistent subtitle、duplicate header 或 standalone Back。
 39. 如果页面使用 Grouped Form、Step Form 或 Drawer Form variant，manifest 中是否明确 `starterEnabled` 并绑定对应 executable reference；为 `false` 时是否报告 `BLOCKED`，而不是把 capability presence 当成 default support。
 

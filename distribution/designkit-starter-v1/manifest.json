@@ -200,6 +200,33 @@
       "default-enabled capability"
     ]
   },
+  "candidateHumanReviewContract": {
+    "phase": "P1.4.2",
+    "status": "HUMAN_REVIEW_FAIL_NEXT_RELEASE_CANDIDATE_NOT_APPROVED",
+    "sourceBaseline": "TARGETED_REOPEN_FOR_HUMAN_REPORTED_CORRECTIONS_ONLY",
+    "defaultShell": {
+      "reference": "patterns/default-application-shell.html",
+      "styleReference": "assets/default-application-shell.css",
+      "domStructureReuse": "required",
+      "mainSlot": "approved-template",
+      "runtimeComposition": ["Menu", "Cascader", "Badge", "Button", "Avatar", "Dropdown"]
+    },
+    "pageContext": {
+      "level1": { "title": "20px", "back": false, "breadcrumb": false },
+      "level2": { "title": "20px", "back": "icon-only", "breadcrumb": false },
+      "depthGte3": { "title": false, "back": false, "breadcrumb": "approved-only" },
+      "drawer": { "title": true, "close": true, "fullPageBack": false, "breadcrumb": false }
+    },
+    "darkMode": {
+      "mechanism": "html[data-theme]+body[arco-theme]+body[data-arco-theme]",
+      "storageKey": "designkit-starter-theme",
+      "sameDomAsLight": true,
+      "usesExistingRuntimeTokens": true,
+      "themeProvider": false,
+      "additionalDependency": false
+    },
+    "explicitOverrideIsolation": "H changes media shape only"
+  },
   "templateVariants": [
     {
       "id": "grouped-form",
@@ -286,7 +313,9 @@
       "path": "patterns/default-application-shell.html",
       "status": "approved reference implementation",
       "golden": false,
-      "mainSlot": "approved-template"
+      "mainSlot": "approved-template",
+      "styleReference": "assets/default-application-shell.css",
+      "bindingStrategy": "reference-dom-structure+approved-runtime-slots"
     },
     {
       "id": "basic-list",

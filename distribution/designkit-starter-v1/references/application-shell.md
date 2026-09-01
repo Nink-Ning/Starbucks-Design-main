@@ -36,7 +36,7 @@ Validation
 
 Page Template 先决定页面是什么；Shell Mode 只决定是否包裹该模板。
 
-Shell Selected 不等于 Shell Reimplemented。组合必须先绑定 approved Shell Reference Implementation，再将完整 approved Page Template subtree 放入 Main Content Slot；不得把 Shell rules 与 Template rules 合并后重新绘制页面。
+Shell Selected 不等于 Shell Reimplemented。组合必须先绑定 approved Shell Reference Implementation，再将完整 approved Page Template subtree 放入 Main Content Slot；必须复用 reference DOM/structure 和 approved Runtime slots，不得把 Shell rules 与 Template rules 合并后重新绘制页面。
 
 ## 2. Shell Modes
 
@@ -80,6 +80,10 @@ Top Menu item（当前菜单名称标题位）、Notification/Badge、Theme Togg
 
 窄宽度只允许截断 optional text 或隐藏 example-only label，不得隐藏 required identity/global actions，也不得改变 Menu 视觉模式。
 
+## 4.1 Viewport ownership
+
+Default Shell owns the browser viewport with a column flex frame: Shell uses `height: 100dvh` and `min-height: 0`; Top keeps its approved intrinsic height and `flex-shrink: 0`; Body owns the remaining height with `flex: 1` and `min-height: 0`. Side fills Body with `height: 100%`, `min-height: 0` and a column flex layout. The Runtime Menu remains the Side Menu Area and owns its internal vertical scrolling; its collapse control remains visible at the bottom of the constrained Side. Main uses `min-height: 0` and `overflow: auto` for independent content scrolling. Do not use `100vh` on Side/Body, document flow expansion, `position: fixed` collapse controls or page-specific overflow patches to conceal a Shell geometry error.
+
 Default Shell 的 Brand / System Region 与 Side 使用同一份 collapsed state：expanded 时 Top 与 Side 均为 `260px`，collapsed 时均为 `56px`；collapsed 只保留固定 Starbucks logo，expanded 恢复 system name 和 System Switch。System Switch 使用批准的 Runtime `Cascader` / trigger 行为，不实现第二套导航状态。
 
 ## 5. Side Navigation Binding
@@ -88,6 +92,7 @@ Side 使用 Runtime `StarbucksReact.Menu`、`collapse`、`hasCollapseButton`、`
 
 - expanded：`260px`；
 - collapsed：shared Menu CSS 的 `56px`；
+- level 1 菜单项可以保留语义 Arco icon；level 2 及更深层级默认不显示 icon；
 - 不创建 Starter-specific sidebar component；
 - 不复制 Menu 内部 DOM、状态或样式。
 
@@ -109,7 +114,7 @@ Notification 使用 `window.arcoicon.IconNotification`。禁止从 `window.Starb
 | Light | `data-theme="light"` | 移除 `arco-theme` 和 `data-arco-theme` |
 | Dark | `data-theme="dark"` | `arco-theme="dark"` 且 `data-arco-theme="dark"` |
 
-Theme 必须作用于 Top、Side、Main 和所有 DesignKit Components，不得只切换 Shell。
+Theme 必须作用于 Top、Side、Main 和所有 DesignKit Components，不得只切换 Shell。Dark Mode 使用同一份 approved reference DOM，并通过现有 Runtime semantic tokens 适配，不得用固定浅色 surface、border 或 text literal 重建模板。
 
 ## 8. Persistence
 
@@ -147,7 +152,7 @@ test-only composition fixture 和最终 Starter ZIP 的 package-only clean-room 
 | Global Theme Toggle and DOM binding | Table / Card / Form / Detail |
 | Shell responsive relationship | Pagination、page state、Mock data、page interaction |
 
-Shell wraps Template，不能改变 Template anatomy、internal spacing、Toolbar anatomy 或 Breadcrumb policy。Basic List 的 `4px / 16px / 16px` Continuous Data Region inset 仍由 Basic List Template 拥有。
+Shell wraps Template，不能改变 Template anatomy、internal spacing、Toolbar anatomy 或 Breadcrumb policy。Basic List 的 `4px / 16px / 16px` Continuous Data Region inset 仍由 Basic List Template 拥有。Page context follows the shared contract: Level 1 is title-only, Level 2 is icon Back + title, and depth >= 3 is approved Breadcrumb-only with no independent title or Back.
 
 Default Shell Main outer layout uses fixed `24px` horizontal padding at `1280px`、`768px` 和 `390px`，并保持 `min-width: 0` 与 page `width: 100%`；不通过 max-width 缩窄可用内容区。Basic List 的 `4px / 16px / 16px` inset 仍由 Template 自身拥有。
 
@@ -155,7 +160,7 @@ Root List 没有 meaningful IA 时不显示 Breadcrumb；Create / Edit / Detail 
 
 ### Reference binding and Main Slot
 
-正式 Starter Shell reference implementation 为 `patterns/default-application-shell.html`，status 为 `approved reference implementation`，Golden 为 `NO`。它拥有完整 approved Brand Top Navigation subtree、Side、Main outer frame、shared collapse state、theme binding 和 `approved-template` Main Slot。
+正式 Starter Shell reference implementation 为 `patterns/default-application-shell.html`，status 为 `approved reference implementation`，Golden 为 `NO`。它拥有完整 approved Brand Top Navigation subtree、Side、Main outer frame、shared collapse state、theme binding 和 `approved-template` Main Slot；其配套视觉绑定为 `assets/default-application-shell.css`，只复用现有 Runtime semantic tokens，不创建第二套 Shell 或主题系统。
 
 Template Decision 完成后，依次执行 Shell Reference Binding、Template Reference Binding 和 business slot/data substitution。Shell 不得拆开或重建 Top Menu item、Notification/Badge、Theme Toggle、Divider、Avatar/User treatment，也不得拆开或重建 Page Header、Context Help、Toolbar、Table、Row Actions、Pagination、Form 或 Detail anatomy。Basic List 的 approved template reference 为 `patterns/basic-list.html`，必须作为完整 continuous Data Region subtree 进入 Main Slot。
 

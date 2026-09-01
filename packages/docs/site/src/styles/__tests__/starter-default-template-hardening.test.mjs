@@ -104,7 +104,7 @@ test('P1 references encode the standard answer and context-specific hard rules',
   assert.match(header, /data-back-control="Button\[type=secondary\]\[shape=square\]"/)
   assert.match(header, /data-context-help-icon="IconQuestionCircle"/)
   assert.match(header, /data-subtitle-default="false"/)
-  assert.match(breadcrumb, /depth-1-no-back-depth-2-icon-back-depth-gt-2-approved-breadcrumb/)
+  assert.match(breadcrumb, /level-1-title-only-level-2-icon-back-title-depth-gte-3-breadcrumb-only/)
   assert.match(drawer, /data-body-padding="24px"/)
 })
 

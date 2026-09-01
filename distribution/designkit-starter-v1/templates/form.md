@@ -35,7 +35,7 @@ Page Header：depth 2 icon-only Back + 20px 标题 + optional approved Context H
 ```
 
 - **Hard Rule**：Shell Main 左右保留 24px；Form Surface 使用 Main 的全部可用宽度，保留无外边框的 6px 圆角 surface，不在页面层新增任意窄的居中 max-width wrapper。
-- **Hard Rule**：Basic Form depth 2 使用 icon-only Back + 20px 标题 + optional approved Context Help；禁止文字 Back、Breadcrumb 或 persistent subtitle。depth > 2 只有 IA 明确需要时才读取 approved Breadcrumb reference。
+- **Hard Rule**：Basic Form depth 2 使用 icon-only Back + 20px 标题 + optional approved Context Help；禁止文字 Back、Breadcrumb 或 persistent subtitle。depth >= 3 只读取 approved Breadcrumb reference，不显示独立 Page Title、Back 或 title-level Context Help。
 - **Hard Rule**：Page Header 使用 title + optional title-adjacent Context Help；不要自行发明 Tooltip、Popover 或第二个说明区块。
 - **Hard Rule**：Grouped Form 和 Step Form 共享上述 outer rules，分别使用 native section / fixed Runtime Steps 组合；不复制 Docs 的 `FormSection` / `StepFormLayout` 内部实现。
 
