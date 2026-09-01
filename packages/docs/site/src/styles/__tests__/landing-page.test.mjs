@@ -96,7 +96,7 @@ test('the hero download action opens an accessible role starter modal', async ()
 test('only the product manager starter pack is available for download', async () => {
   const landing = await readSource('src/landing/designkit-landing.html');
 
-  assert.match(landing, /href="\.\.\/\.\.\/public\/downloads\/designkit-starter-v1-r2\.zip" download="designkit-starter-v1-r2\.zip"/);
+  assert.match(landing, /href="\.\.\/\.\.\/public\/downloads\/designkit-starter-v1-r3\.zip" download="designkit-starter-v1-r3\.zip"/);
   assert.match(landing, /下载产品经理启动包/);
   assert.match(landing, /前端开发启动包/);
   assert.doesNotMatch(landing, /前端研发启动包/);
@@ -144,8 +144,8 @@ test('the product manager starter pack URL works from the source file and remain
     readSource('src/landing/renderLandingPage.ts'),
   ]);
 
-  assert.match(renderer, /\['\.\.\/\.\.\/public\/downloads\/designkit-starter-v1-r2\.zip', 'downloads\/designkit-starter-v1-r2\.zip'\]/);
-  await assert.doesNotReject(() => readSource('public/downloads/designkit-starter-v1-r2.zip'));
+  assert.match(renderer, /\['\.\.\/\.\.\/public\/downloads\/designkit-starter-v1-r3\.zip', 'downloads\/designkit-starter-v1-r3\.zip'\]/);
+  await assert.doesNotReject(() => readSource('public/downloads/designkit-starter-v1-r3.zip'));
   assert.match(renderer, /normalizeBaseUrl\(baseUrl \|\| '\/'\)/);
   assert.doesNotMatch(`${landing}\n${renderer}`, /\/Starbucks-Design-main\/|\/kning\/starbucks-design-main\/|nink1992\.github\.io|pages\.scm\.starbucks\.com/);
   assert.doesNotMatch(`${landing}\n${renderer}`, /starbucks-design-react-preview\.zip/);

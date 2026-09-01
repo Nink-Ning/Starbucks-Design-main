@@ -1,5 +1,5 @@
 import React from 'react'
-import release from '../../../../../distribution/releases/designkit-starter-v1-r2-release.json'
+import release from '../../../../../distribution/releases/designkit-starter-v1-r3-release.json'
 
 interface ReleaseRecord {
   key: string
@@ -20,12 +20,12 @@ const releaseRoles = ['产品经理', '其他非研发角色']
 
 const records: ReleaseRecord[] = [
   {
-    key: 'product-v1-r2',
-    version: 'DesignKit Starter V1-r2',
+    key: 'product-v1-r3',
+    version: 'DesignKit Starter V1-r3',
     roles: releaseRoles,
     releaseDate,
     content: releaseContent,
-    downloadHref: '../../downloads/designkit-starter-v1-r2.zip'
+    downloadHref: '../../downloads/designkit-starter-v1-r3.zip'
   }
 ]
 

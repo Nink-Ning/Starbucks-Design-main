@@ -1,7 +1,7 @@
 import landingSource from './designkit-landing.html?raw';
 
 const linkTargets = [
-  ['../../public/downloads/designkit-starter-v1-r2.zip', 'downloads/designkit-starter-v1-r2.zip'],
+  ['../../public/downloads/designkit-starter-v1-r3.zip', 'downloads/designkit-starter-v1-r3.zip'],
   ['/guide/product-manager', 'guide/ai-skills-releases/'],
   ['/guide/designer', 'guide/ai-skills-starters/'],
   ['/guide/developer', 'guide/ai-skills-developer/'],
