@@ -5,44 +5,27 @@ sidebar:
   order: 4
 ---
 
-启动包按使用角色管理，版本记录保留在对应启动包页面内。左侧导航不再按 V1、V1-r1 或 V1-r2 拆分入口。
+启动包按使用角色管理，版本记录保留在对应启动包页面内。左侧导航不按 V1、V1-r1、V1-r2 或 V1-r3 拆分入口。
 
 <div class="sb-ai-skill-page-marker" aria-hidden="true"></div>
 
 ## 当前启动包
 
-<div class="sb-ai-skill-table-scroll" role="region" aria-label="DesignKit Starter 启动包列表" tabindex="0">
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">启动包</th>
-        <th scope="col">适用对象</th>
-        <th scope="col">状态</th>
-        <th scope="col">可获得内容</th>
-        <th scope="col">管理入口</th>
-        <th scope="col">最新下载</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>产品经理启动包</td>
-        <td>产品经理 / 非开发者</td>
-        <td>Available / Preview</td>
-        <td>固定 Runtime、页面模板、能力与决策知识、Golden Example、验证知识</td>
-        <td><a href="../ai-skills-releases/">查看产品经理启动包</a></td>
-        <td><a href="../../downloads/designkit-starter-v1-r2.zip">下载 V1-r2</a></td>
-      </tr>
-      <tr>
-        <td>前端开发启动包</td>
-        <td>前端开发者</td>
-        <td>Coming Soon</td>
-        <td>尚未发布，不承诺 React/Vue 工程、组件 API 或工程配置</td>
-        <td><a href="../ai-skills-developer/">查看建设状态</a></td>
-        <td>暂无下载</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+| 启动包 | 适用对象 | 状态 | 可获得内容 | 管理入口 | 最新下载 |
+| --- | --- | --- | --- | --- | --- |
+| 产品经理启动包 | 产品经理 / 非开发者 | Available / V1-r3 RC Ready | 固定 Runtime、标准应用框架、已批准页面模板、能力与决策知识、验证知识 | [查看产品经理启动包](../ai-skills-releases/) | [下载当前生产版 V1-r2](../../downloads/designkit-starter-v1-r2.zip) |
+| 前端开发启动包 | 前端开发者 | Coming Soon | 尚未发布，不承诺 React/Vue 工程、组件 API 或工程配置 | [查看建设状态](../ai-skills-developer/) | 暂无下载 |
+
+V1-r3 正式 RC 已就绪，但尚未完成生产发布切换。当前下载继续指向 V1-r2；V1-r3 不提供临时 RC 下载路径。
+
+## 产品经理启动包能力
+
+- **标准应用框架**：固定的 Top Navigation、Side Navigation、展开/收起关系、响应式 viewport 布局与 Light / Dark；
+- **页面模板**：Basic List、Card List、Basic Detail、Basic Form、Grouped Form、Step Form、Drawer Form；
+- **页面层级**：Level 1 标题、Level 2 返回与标题、Depth ≥ 3 面包屑；
+- **标准组件组合**：Toolbar、Table actions、Link、Breadcrumb、Steps、Drawer 与 Form controls。
+
+这些能力用于快速生成标准页面和连贯的静态多页面演示，不等同于自定义导航架构、真实 Router、权限路由或完整前端工程。
 
 ## 如何管理版本
 
@@ -50,7 +33,7 @@ sidebar:
 
 - 当前推荐版本和下载入口；
 - 当前支持与暂不支持的能力；
-- V1、V1-r1、V1-r2 的能力对比；
+- V1、V1-r1、V1-r2、V1-r3 的能力对比；
 - 按时间倒序排列的版本历史和可信校验信息。
 
 新版本发布时，应更新对应启动包页面，而不是在侧栏增加一个新的版本菜单项。

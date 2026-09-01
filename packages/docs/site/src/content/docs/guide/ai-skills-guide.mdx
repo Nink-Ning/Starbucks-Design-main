@@ -23,9 +23,11 @@ sidebar:
 
 ## 什么是 DesignKit Starter
 
-DesignKit Starter 是面向产品经理和非开发者的 AI 设计协作启动包。它提供固定 Runtime、页面模板、Capability Registry、Golden Example、设计规则和验证知识，帮助 AI 在已确认的范围内输出单个 HTML Demo。
+DesignKit Starter 是面向产品经理和非开发者的 AI 设计协作启动包。它提供固定 Runtime、标准应用框架、页面模板、Capability Registry、批准参考、设计规则和验证知识，帮助 AI 在已确认的范围内输出单 HTML 页面或结构连贯的静态多页面 Demo。
 
 Starter 适合产品评审、页面探索和交互验证，不是 React/Vue 工程包，也不负责组件 API 集成、真实后端接入或生产部署。
+
+当标准 Application Shell 或页面模板已有批准参考时，AI 会优先从标准实现开始，再替换业务字段、数据和文案，而不是重新绘制一个看起来相似的页面。**业务内容可以变化，已批准的页面结构默认保持一致。**
 
 ## 从哪里开始
 
@@ -50,8 +52,8 @@ Starter 适合产品评审、页面探索和交互验证，不是 React/Vue 工�
   </section>
   <section>
     <span>04</span>
-    <h3>获取当前版本</h3>
-    <p>产品经理启动包当前推荐 V1-r2。页面内同时保留可信的版本能力对比和历史记录。</p>
+    <h3>查看版本状态</h3>
+    <p>V1-r3 正式 RC 已就绪，生产下载仍保持 V1-r2。页面内同时保留可信的能力对比和历史记录。</p>
     <p><a href="../ai-skills-releases/">查看产品经理启动包</a></p>
   </section>
 </div>
@@ -62,39 +64,51 @@ Starter 适合产品评审、页面探索和交互验证，不是 React/Vue 工�
   <div class="sb-ai-skill-flow-list" role="list">
     <div class="sb-ai-skill-flow-item" role="listitem">
       <span class="sb-ai-skill-flow-index">01</span>
-      <span class="sb-ai-skill-flow-name">SKILL</span>
-      <strong>读取规则</strong>
-      <p>理解 Starter 的范围和协作方式。</p>
+      <span class="sb-ai-skill-flow-name">Request</span>
+      <strong>理解业务需求</strong>
+      <p>确认目标、使用者、数据和操作。</p>
     </div>
     <div class="sb-ai-skill-flow-item" role="listitem">
       <span class="sb-ai-skill-flow-index">02</span>
-      <span class="sb-ai-skill-flow-name">Capability</span>
-      <strong>确认能力</strong>
-      <p>只使用 Registry 已登记的能力。</p>
+      <span class="sb-ai-skill-flow-name">Rules / Capability</span>
+      <strong>确认范围</strong>
+      <p>读取 Starter 规则并完成能力路由。</p>
     </div>
     <div class="sb-ai-skill-flow-item" role="listitem">
       <span class="sb-ai-skill-flow-index">03</span>
-      <span class="sb-ai-skill-flow-name">Decision</span>
-      <strong>做出决策</strong>
-      <p>判断模板和页面内交互。</p>
+      <span class="sb-ai-skill-flow-name">Template</span>
+      <strong>选择模板</strong>
+      <p>根据业务任务选择批准的页面类型。</p>
     </div>
     <div class="sb-ai-skill-flow-item" role="listitem">
       <span class="sb-ai-skill-flow-index">04</span>
-      <span class="sb-ai-skill-flow-name">Template</span>
-      <strong>组合页面</strong>
-      <p>按模板边界组织页面结构。</p>
+      <span class="sb-ai-skill-flow-name">Shell</span>
+      <strong>选择应用框架</strong>
+      <p>判断使用默认框架、仅内容或独立 Demo。</p>
     </div>
     <div class="sb-ai-skill-flow-item" role="listitem">
       <span class="sb-ai-skill-flow-index">05</span>
-      <span class="sb-ai-skill-flow-name">Golden Example</span>
-      <strong>参考示例</strong>
-      <p>对照已确认的组合与层级。</p>
+      <span class="sb-ai-skill-flow-name">Approved Reference</span>
+      <strong>绑定标准实现</strong>
+      <p>复用批准参考，而不是重新拼装相似结构。</p>
     </div>
     <div class="sb-ai-skill-flow-item" role="listitem">
       <span class="sb-ai-skill-flow-index">06</span>
+      <span class="sb-ai-skill-flow-name">Business Slots</span>
+      <strong>替换业务内容</strong>
+      <p>填入字段、数据、状态和业务文案。</p>
+    </div>
+    <div class="sb-ai-skill-flow-item" role="listitem">
+      <span class="sb-ai-skill-flow-index">07</span>
+      <span class="sb-ai-skill-flow-name">Implementation</span>
+      <strong>生成实现</strong>
+      <p>输出可在浏览器中检查的静态 Demo。</p>
+    </div>
+    <div class="sb-ai-skill-flow-item" role="listitem">
+      <span class="sb-ai-skill-flow-index">08</span>
       <span class="sb-ai-skill-flow-name">Validation</span>
       <strong>检查结果</strong>
-      <p>验证功能、响应式和可访问性。</p>
+      <p>验证功能、主题、响应式和可访问性。</p>
     </div>
   </div>
 </div>

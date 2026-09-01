@@ -1,17 +1,17 @@
 ---
 title: AI 使用指南
-description: 使用 DesignKit Starter V1-r2 与 AI 完成页面方案生成和验证。
+description: 使用 DesignKit Starter V1-r3 能力与 AI 完成标准页面方案生成和验证。
 sidebar:
   order: 2
 ---
 
-DesignKit Starter 的目标不是让 AI 直接生成页面，而是先完成范围判断、能力确认和模板选择，再进入实现与验证。
+DesignKit Starter 的目标不是让 AI 从模糊的“DesignKit 风格”重新设计页面，而是先完成范围判断、能力确认、模板与 Shell 决策，再从批准参考进入实现与验证。
 
 <div class="sb-ai-skill-page-marker" aria-hidden="true"></div>
 
 ## 使用前准备
 
-1. 从[产品经理启动包](../ai-skills-releases/)下载当前推荐的 `designkit-starter-v1-r2.zip`。
+1. 从[产品经理启动包](../ai-skills-releases/)确认版本状态。V1-r3 正式 RC 已就绪；生产发布切换前，下载入口仍提供 `designkit-starter-v1-r2.zip`。
 2. 解压后将完整目录交给 AI Agent，不要只复制某一个 Skill 或示例文件。
 3. 用自然语言说明页面目标、使用角色、要展示的数据和主要操作。
 
@@ -21,17 +21,60 @@ DesignKit Starter 的目标不是让 AI 直接生成页面，而是先完成范�
 
 <div class="sb-ai-skill-flow sb-ai-skill-flow--compact" aria-label="Starter Package 使用流程">
   <div class="sb-ai-skill-flow-list" role="list">
-    <div class="sb-ai-skill-flow-item" role="listitem"><strong>用户需求</strong></div>
-    <div class="sb-ai-skill-flow-item" role="listitem"><strong>AI 判断 Profile</strong></div>
-    <div class="sb-ai-skill-flow-item" role="listitem"><strong>Capability Registry</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>用户业务需求</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>Starter 规则与能力路由</strong></div>
     <div class="sb-ai-skill-flow-item" role="listitem"><strong>Template Decision</strong></div>
-    <div class="sb-ai-skill-flow-item" role="listitem"><strong>Interaction Decision</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>Shell Decision</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>Approved Reference Binding</strong></div>
+    <div class="sb-ai-skill-flow-item" role="listitem"><strong>业务内容替换</strong></div>
     <div class="sb-ai-skill-flow-item" role="listitem"><strong>Implementation</strong></div>
     <div class="sb-ai-skill-flow-item" role="listitem"><strong>Validation</strong></div>
   </div>
 </div>
 
-AI 只能实现 Capability Registry 中存在、且当前 Template 允许的能力。Golden Example 用于参考页面结构和交互组合，不能证明某项新能力已经发布。
+AI 只能实现 Capability Registry 中存在、且当前 Template 允许的能力。批准参考是标准实现起点；业务数据可以替换，但不能据此推断某项新能力已经发布。
+
+## 默认生成方式
+
+例如提出：
+
+> 帮我做一个商品管理列表页。
+
+在没有额外导航要求时，Starter 默认使用：
+
+```text
+Default Application Shell
++
+approved Basic List
+```
+
+用户不需要重复指定 Top Navigation、Side Navigation、标准 Table reference 或默认页面间距。AI 应直接复用批准的 Shell 与模板，只替换商品字段、数据、状态和适用操作。
+
+## Shell 模式
+
+| 模式 | 何时使用 | 生成结果 |
+| --- | --- | --- |
+| `default` | 常规企业应用页面，也是默认值 | 公司标准 Application Shell + 已批准页面模板 |
+| `content-only` | 你的应用已经拥有 Top / Side navigation | 只移除 Application Shell，保留完整页面内容与层级 |
+| `none` | 明确需要 standalone / 独立 Demo | 不生成 Application Shell |
+
+只有这三种模式。`content-only` 不等于删除页面层级：一个 Level 2 Form 仍会保留返回、页面标题和表单，只是不再包含 Top 与 Side。
+
+## 页面层级
+
+| 信息架构深度 | 默认页面上下文 |
+| --- | --- |
+| Level 1 | 页面标题 + 可选的上下文帮助；无返回、无面包屑 |
+| Level 2 | icon-only 返回 + 页面标题 + 可选的上下文帮助；无面包屑 |
+| Depth ≥ 3 | 只使用面包屑；无独立页面标题、无返回 |
+
+页面层级由业务信息架构决定，而不是由模板名称决定。例如“门店列表 → 门店详情”中的详情是 Level 2；“活动管理 → 活动详情 → 参与门店详情”中的参与门店详情是 Depth 3。Detail 并不总是 Level 2。
+
+## 明确覆盖与默认能力
+
+如果你提出“商品图片改成方形，其余保持默认”，AI 只应改变媒体形状，并继续保留批准的 Shell、Header、Toolbar、Card anatomy、Selection 和 Footer。未明确要求的标准结构不应一起被重新设计。
+
+同时，Starter 支持某项能力不代表每个页面都要默认启用它。例如存在选择与批量操作能力，不代表每个 Card List 都应该自动增加批量动作；是否启用仍取决于业务场景和模板默认值。
 
 ## 如何描述需求
 
@@ -45,7 +88,7 @@ AI 只能实现 Capability Registry 中存在、且当前 Template 允许的能�
 
 例如：
 
-> 帮我设计一个商品管理页面，用于产品评审。需要展示商品图片、名称和状态，并验证当前列表内的多选与批量操作。只需要本地 HTML Demo，不接真实接口。
+> 帮我设计一个商品管理页面，用于产品评审。需要展示商品图片、名称和状态，并验证当前列表内的多选与批量操作。使用公司默认应用框架，只需要本地 HTML Demo，不接真实接口。
 
 ## 推荐场景
 
@@ -71,12 +114,12 @@ AI 只能实现 Capability Registry 中存在、且当前 Template 允许的能�
 
 生成完成后，至少确认：
 
-- 页面是否采用已登记模板；
+- 页面是否复用了批准的 Shell 与已登记模板；
 - 操作是否落在该模板允许的范围内；
 - HTML Demo 是否可以在浏览器中打开；
 - 明暗主题和不同宽度下是否仍然可用；
 - 未实际检查的项目是否明确标记为未验证。
 
 :::caution[Starter 边界]
-Starter 不提供 React/Vue 工程开发、组件 API 集成、真实导出、真实后端/API、权限系统或生产部署。超出范围时，AI 应说明边界并停止假设。
+Starter 不提供自定义应用 Shell 架构、Navigation API、真实 Router、权限路由、后端动态菜单或系统切换集成，也不提供 React/Vue 工程开发、组件 API 集成、真实导出、真实后端/API 或生产部署。前端开发启动包仍为 Coming Soon。超出范围时，AI 应说明边界并停止假设。
 :::

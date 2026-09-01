@@ -13,7 +13,7 @@ async function readSite(relativePath) {
   return readFile(new URL(relativePath, siteRoot))
 }
 
-test('generic Starter download surfaces target the latest V1-r2 artifact', async () => {
+test('production Starter download surfaces stay on V1-r2 while V1-r3 remains RC-only', async () => {
   const [landing, renderer, overview, starterOverview, releaseHistory, releaseTable] = await Promise.all([
     read('landing/designkit-landing.html'),
     read('landing/renderLandingPage.ts'),
@@ -30,10 +30,12 @@ test('generic Starter download surfaces target the latest V1-r2 artifact', async
   assert.doesNotMatch(renderer, /designkit-starter-v1-r1\.zip/)
   assert.match(overview, /href="\.\.\/ai-skills-releases\/">查看产品经理启动包<\/a>/)
   assert.doesNotMatch(overview, /downloads\/designkit-starter-v1-r2\.zip/)
-  assert.match(releaseHistory, /## 当前版本[\s\S]*?designkit-starter-v1-r2\.zip/)
+  assert.match(releaseHistory, /## 当前版本状态[\s\S]*?下载当前生产版 V1-r2/)
+  assert.match(releaseHistory, /### DesignKit Starter V1-r3/)
   assert.match(releaseHistory, /### DesignKit Starter V1-r2[\s\S]*?designkit-starter-v1-r2\.zip/)
   assert.match(releaseHistory, /### DesignKit Starter V1-r1[\s\S]*?designkit-starter-v1-r1\.zip/)
-  assert.ok(releaseHistory.indexOf('### DesignKit Starter V1-r2') < releaseHistory.indexOf('### DesignKit Starter V1-r1'))
+  assert.ok(releaseHistory.indexOf('### DesignKit Starter V1-r3') < releaseHistory.indexOf('### DesignKit Starter V1-r2'))
+  assert.doesNotMatch(releaseHistory, /designkit-starter-v1-r3\.zip|\/private\/tmp\//)
 })
 
 test('historical V1-r1 release entry keeps its exact frozen artifact', async () => {
