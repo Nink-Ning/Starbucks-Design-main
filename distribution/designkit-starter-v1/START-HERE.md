@@ -1,4 +1,4 @@
-# START HERE — Starter V1-r2
+# START HERE — Starter V1-r3
 
 ## 目标
 
@@ -100,4 +100,4 @@ http://127.0.0.1:8000/examples/detail.html
 
 ## 试用边界
 
-Starter V1-r2 适合产品方案验证、评审和沟通，不适合作为生产代码、真实接口实现或正式组件库源码。R2 的 Visual Fidelity 仍需要真实截图和人工审查，不能由静态检查自动推导；新生成的 `output/*.html` 仍需由使用者自行验证。
+Starter V1-r3 适合产品方案验证、评审和沟通，不适合作为生产代码、真实接口实现或正式组件库源码。R3 的 Visual Fidelity 仍需要真实截图和人工审查，不能由静态检查自动推导；新生成的 `output/*.html` 仍需由使用者自行验证。

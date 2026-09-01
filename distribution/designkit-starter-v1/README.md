@@ -1,8 +1,8 @@
-# DesignKit Starter V1-r2
+# DesignKit Starter V1-r3
 
 DesignKit Starter V1 是一个面向产品经理的零工程环境 Demo 生成包。用户无需安装 Node.js 或前端工程环境，AI 最终生成可直接在浏览器打开的单文件 HTML Demo。HTML 内部允许使用固定版本的 React UMD/CDN、Babel 和少量 JavaScript。
 
-本目录是 V1-r2 fidelity/composition Starter（internal-trial），不是 React / Vue 组件库的替代品。Frozen V1-r1 与本版本并存。
+本目录是 V1-r3 fidelity/composition Starter（internal-trial），不是 React / Vue 组件库的替代品。Frozen V1-r1 与本版本并存。
 
 ## V1 支持范围
 

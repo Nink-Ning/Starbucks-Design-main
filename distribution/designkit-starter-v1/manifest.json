@@ -1,8 +1,8 @@
 {
   "name": "DesignKit Starter V1",
   "releaseLine": "V1",
-  "releaseRevision": 2,
-  "releaseId": "designkit-starter-v1-r2",
+  "releaseRevision": 3,
+  "releaseId": "designkit-starter-v1-r3",
   "status": "internal-trial",
   "description": "DesignKit Starter V1 是一个面向产品经理的零工程环境 Demo 生成包。用户无需安装 Node.js 或前端工程环境，AI 最终生成可直接在浏览器打开的单文件 HTML Demo。HTML 内部允许使用固定版本的 React UMD/CDN、Babel 和少量 JavaScript。",
   "defaultOutput": "single-html",
@@ -439,7 +439,7 @@
     "examples": "BROWSER_CONFIRMED_WITH_TEMP_SOURCE_RUNTIME",
     "browserSmoke": "BROWSER_CONFIRMED_WITH_TEMP_SOURCE_RUNTIME",
     "cdnHttpReachability": "CHECKED",
-    "phase": "starter-v1-r2-formal-starter-integration",
+    "phase": "starter-v1-r3-formal-starter-integration",
     "localRuntime": "BROWSER_CONFIRMED"
   },
   "sourcePolicy": {
