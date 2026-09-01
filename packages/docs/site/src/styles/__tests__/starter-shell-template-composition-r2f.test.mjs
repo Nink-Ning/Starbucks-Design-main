@@ -21,6 +21,8 @@ test('R2-R.3.2 binds the approved Shell and Basic List references without Golden
       status: 'approved reference implementation',
       golden: false,
       mainSlot: 'approved-template',
+      styleReference: 'assets/default-application-shell.css',
+      bindingStrategy: 'reference-dom-structure+approved-runtime-slots',
     },
     {
       id: 'basic-list',
@@ -28,6 +30,84 @@ test('R2-R.3.2 binds the approved Shell and Basic List references without Golden
       path: 'patterns/basic-list.html',
       status: 'approved template reference',
       golden: false,
+    },
+    {
+      id: 'card-list',
+      capability: 'starter.template.card-list',
+      path: 'patterns/card-list.html',
+      status: 'approved template reference',
+      golden: false,
+      visualCrossCheck: 'examples/multi-select-card-list.html',
+      defaultEnabled: true,
+    },
+    {
+      id: 'basic-form',
+      capability: 'starter.template.basic-form',
+      path: 'patterns/basic-form.html',
+      status: 'approved template reference',
+      golden: false,
+      visualCrossCheck: 'examples/form.html',
+      defaultEnabled: true,
+    },
+    {
+      id: 'grouped-form',
+      capability: 'starter.template.basic-form',
+      path: 'patterns/grouped-form.html',
+      status: 'approved executable template reference',
+      golden: false,
+      defaultEnabled: true,
+      starterBinding: 'APPROVED: native section + fixed Runtime FormGrid/FormActions',
+    },
+    {
+      id: 'step-form',
+      capability: 'starter.template.basic-form',
+      path: 'patterns/step-form.html',
+      status: 'approved executable template reference',
+      golden: false,
+      defaultEnabled: true,
+      starterBinding: 'APPROVED: fixed Runtime Steps + native step content',
+    },
+    {
+      id: 'basic-detail',
+      capability: 'starter.template.basic-detail',
+      path: 'patterns/basic-detail.html',
+      status: 'approved template reference',
+      golden: false,
+      visualCrossCheck: 'examples/detail.html',
+      defaultEnabled: true,
+    },
+    {
+      id: 'page-header',
+      capability: 'reference.page-header',
+      path: 'patterns/page-header.html',
+      status: 'approved context reference',
+      golden: false,
+      defaultEnabled: true,
+    },
+    {
+      id: 'breadcrumb',
+      capability: 'reference.breadcrumb-policy',
+      path: 'patterns/breadcrumb.html',
+      status: 'approved context reference',
+      golden: false,
+      defaultEnabled: true,
+    },
+    {
+      id: 'drawer',
+      capability: 'reference.drawer',
+      path: 'patterns/drawer.html',
+      status: 'approved context reference',
+      golden: false,
+      defaultEnabled: true,
+    },
+    {
+      id: 'drawer-form',
+      capability: 'reference.drawer-form',
+      path: 'patterns/drawer-form.html',
+      status: 'approved executable template reference',
+      golden: false,
+      defaultEnabled: true,
+      starterBinding: 'APPROVED: fixed Runtime Drawer + Form',
     },
   ])
   assert.equal(shellReference.includes('Golden: NO'), true)
@@ -113,7 +193,7 @@ test('R2-R.3.2 keeps Basic List chrome in the real React/Vue template and restor
     assert.doesNotMatch(source, /persistent page subtitle|<p className=.*subtitle|className="[^"]*subtitle/)
     assert.doesNotMatch(source, /createPortal|Teleport.*basic-list|data-template-action-host="basic-list"/)
   }
-  assert.doesNotMatch(breadcrumb, /data-template-action-host="basic-list"/)
+  assert.match(breadcrumb, /data-template-action-host="basic-list"/)
   assert.match(docs, /Context Help|上下文帮助/)
   assert.match(templateBinding, /patterns\/basic-list\.html[\s\S]*Page Header[\s\S]*Context Help[\s\S]*persistent page subtitle/)
 })

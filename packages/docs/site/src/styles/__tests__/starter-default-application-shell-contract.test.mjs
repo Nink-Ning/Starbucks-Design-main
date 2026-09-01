@@ -30,7 +30,7 @@ test('canonical and Starter registries register only the narrow Default Applicat
   assert.deepEqual(manifest.patternCapabilityFiles, ['references/application-shell.md'])
   assert.equal(manifest.knowledge.capabilitySummary.total, 12)
   assert.equal(manifest.knowledge.capabilitySummary.categories.patterns, 1)
-  assert.equal(manifest.validation.phase, 'starter-v1-r2-formal-starter-integration')
+  assert.equal(manifest.validation.phase, 'starter-v1-r3-formal-starter-integration')
   assert.equal(
     [...starterRegistry.matchAll(/^\| `starter\./gm)].length,
     manifest.knowledge.capabilitySummary.total,
@@ -179,6 +179,6 @@ test('Starter prompts default, preserve, and review the approved Shell contract'
   assert.match(newDemo, /未填写时为 default/)
   assert.match(newDemo, /常规后台页默认使用 `default`/)
   assert.match(refineDemo, /refinement 不得重新设计 Shell/)
-  assert.match(reviewDemo, /是否使用批准.*Top\/Side Menu|是否使用批准的 Brand Top Menu|是否整体复用批准的 Brand Top Navigation subtree/)
+  assert.match(reviewDemo, /Default Shell 是否整体复用批准的 Brand Top Navigation reference DOM\/structure/)
   assert.match(reviewDemo, /是否泄漏 Custom Navigation Shell/)
 })

@@ -11,10 +11,11 @@ async function read(relativePath) {
 test('Starter Overview keeps its table inside a focusable local scroll region', async () => {
   const doc = await read('content/docs/guide/ai-skills-starters.mdx')
 
-  assert.match(doc, /<div class="sb-ai-skill-table-scroll" role="region" aria-label="DesignKit Starter 启动包列表" tabindex="0">/)
-  assert.match(doc, /<table>[\s\S]*?<th scope="col">启动包<\/th>[\s\S]*?<\/table>/)
-  assert.match(doc, /href="\.\.\/ai-skills-releases\/">查看产品经理启动包<\/a>/)
-  assert.match(doc, /href="\.\.\/\.\.\/downloads\/designkit-starter-v1-r2\.zip">下载 V1-r2<\/a>/)
+  assert.match(doc, /\| 启动包 \| 适用对象 \| 状态 \| 可获得内容 \| 管理入口 \| 最新下载 \|/)
+  assert.match(doc, /\| 产品经理启动包 \| 产品经理 \/ 非开发者 \| Available \/ V1-r3 \|/)
+  assert.doesNotMatch(doc, /<div class="sb-ai-skill-table-scroll"/)
+  assert.match(doc, /\[查看产品经理启动包\]\(\.\.\/ai-skills-releases\/\)/)
+  assert.match(doc, /\[下载当前生产版 V1-r3\]\(\.\.\/\.\.\/downloads\/designkit-starter-v1-r3\.zip\)/)
 })
 
 test('Starter Overview reuses the local table overflow contract without adding a global table patch', async () => {
