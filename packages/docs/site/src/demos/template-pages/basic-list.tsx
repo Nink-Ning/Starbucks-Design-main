@@ -1,34 +1,34 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {
   Button,
   Checkbox,
   Dropdown,
   Empty,
-  FilterBar,
   Input,
   Menu,
   Modal,
   Pagination,
-  Radio,
   Result,
   Select,
   Space,
   Table,
+  TableToolbar,
   Tag,
-  Tooltip,
 } from '@sbux/starbucks-design-react';
 import type {
-  FilterFieldSchema,
-  FilterValue,
   TableColumnProps,
+  TableToolbarAction,
+  TableToolbarQuickFilter,
+  TableToolbarQuickFilterValues,
 } from '@sbux/starbucks-design-react';
+import { PageHeader } from '@sbux/starbucks-design-react/pro';
 import {
-  IconDownload,
+  IconCheckCircle,
+  IconCloseCircle,
   IconMore,
+  IconMinusCircle,
   IconPlus,
-  IconRefresh,
-  IconSettings,
 } from '@sbux/starbucks-design-react/icon';
 
 type StoreStatus = 'open' | 'preparing' | 'closed';
@@ -98,56 +98,17 @@ const cityOptions = [
   },
 ];
 
-const fields: FilterFieldSchema[] = [
-  {
-    type: 'input',
-    name: 'keyword',
-    label: '关键词',
-    placeholder: '搜索门店名称或门店编号',
-    allowClear: true,
-    priority: 0,
-  },
-  {
-    type: 'select',
-    name: 'status',
-    label: '营业状态',
-    placeholder: '请选择营业状态',
-    allowClear: true,
-    options: statusOptions,
-    priority: 1,
-  },
-  {
-    type: 'cascader',
-    name: 'city',
-    label: '所在城市',
-    placeholder: '请选择城市',
-    allowClear: true,
-    options: cityOptions,
-    priority: 2,
-  },
-  {
-    type: 'multiSelect',
-    name: 'storeType',
-    label: '门店类型',
-    placeholder: '请选择门店类型',
-    allowClear: true,
-    maxTagCount: 1,
-    options: typeOptions,
-    priority: 3,
-  },
-  {
-    type: 'dateRange',
-    name: 'openingDate',
-    label: '开业日期',
-    placeholder: ['开始日期', '结束日期'],
-    allowClear: true,
-    priority: 4,
-  },
+const pageSize = 20;
+const quickFilters: TableToolbarQuickFilter[] = [
+  { type: 'search', name: 'keyword', placeholder: '搜索门店名称或编号' },
 ];
-
-const initialFilterValues: FilterValue = {};
-const filterColumns = { xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 3 };
-const pageSize = 8;
+const operationActions: TableToolbarAction[] = [
+  { key: 'open', label: '启用', icon: <IconCheckCircle />, requiresSelection: true },
+  { key: 'closed', label: '停用', icon: <IconMinusCircle />, requiresSelection: true },
+];
+const moreActions: TableToolbarAction[] = [
+  { key: 'clear', label: '清除选择', icon: <IconCloseCircle />, requiresSelection: true },
+];
 const columnModalTitle = <span className="sb-basic-list-page__modal-title">列设置</span>;
 const createModalTitle = <span className="sb-basic-list-page__modal-title">新建门店</span>;
 
@@ -168,6 +129,10 @@ const initialStores: StoreRecord[] = [
   { id: '14', code: 'SU-018', name: '苏州工业园区店', region: '华东', city: '苏州', cityValue: 'suzhou', type: 'standard', status: 'open', openedAt: '2023-02-11', manager: 'Mark', updatedAt: '2026-07-13 15:02' },
   { id: '15', code: 'TJ-017', name: '天津滨海文化中心店', region: '华北', city: '天津', cityValue: 'tianjin', type: 'delivery', status: 'closed', openedAt: '2019-07-07', manager: 'Cora', updatedAt: '2026-07-12 13:25' },
   { id: '16', code: 'SH-033', name: '上海徐家汇港汇店', region: '华东', city: '上海', cityValue: 'shanghai', type: 'standard', status: 'open', openedAt: '2017-09-16', manager: 'Will', updatedAt: '2026-07-11 18:16' },
+  { id: '17', code: 'HZ-036', name: '杭州武林广场店', region: '华东', city: '杭州', cityValue: 'hangzhou', type: 'standard', status: 'open', openedAt: '2024-05-20', manager: 'Grace', updatedAt: '2026-07-10 16:42' },
+  { id: '18', code: 'BJ-035', name: '北京三里屯太古里店', region: '华北', city: '北京', cityValue: 'beijing', type: 'reserve', status: 'open', openedAt: '2020-08-08', manager: 'Eric', updatedAt: '2026-07-09 14:18' },
+  { id: '19', code: 'SZ-028', name: '深圳卓悦中心店', region: '华南', city: '深圳', cityValue: 'shenzhen', type: 'delivery', status: 'preparing', openedAt: '2026-11-12', manager: 'Fiona', updatedAt: '2026-07-08 11:36' },
+  { id: '20', code: 'GZ-041', name: '广州北京路店', region: '华南', city: '广州', cityValue: 'guangzhou', type: 'standard', status: 'open', openedAt: '2023-06-30', manager: 'Henry', updatedAt: '2026-07-07 09:54' },
 ];
 
 const columnOptions: Array<{ key: ColumnKey; label: string; fixed?: boolean }> = [
@@ -202,33 +167,6 @@ function statusTag(status: StoreStatus) {
   return <Tag color="gray">已停业</Tag>;
 }
 
-function normalizeArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.map(String) : [];
-}
-
-function filterStores(stores: StoreRecord[], activeValues: FilterValue) {
-  const keyword = String(activeValues.keyword ?? '').trim().toLowerCase();
-  const status = activeValues.status as StoreStatus | undefined;
-  const cityPath = normalizeArray(activeValues.city);
-  const city = cityPath[cityPath.length - 1];
-  const types = normalizeArray(activeValues.storeType);
-  const openingDate = normalizeArray(activeValues.openingDate);
-  const [startDate, endDate] = openingDate;
-
-  return stores.filter((store) => {
-    const keywordMatched =
-      !keyword ||
-      store.name.toLowerCase().includes(keyword) ||
-      store.code.toLowerCase().includes(keyword);
-    const statusMatched = !status || store.status === status;
-    const cityMatched = !city || store.cityValue === city;
-    const typeMatched = types.length === 0 || types.includes(store.type);
-    const startMatched = !startDate || store.openedAt >= startDate;
-    const endMatched = !endDate || store.openedAt <= endDate;
-    return keywordMatched && statusMatched && cityMatched && typeMatched && startMatched && endMatched;
-  });
-}
-
 function toCsv(rows: StoreRecord[]) {
   const header = ['门店编号', '门店名称', '所在城市', '门店类型', '营业状态', '开业日期', '店长', '更新时间'];
   const body = rows.map((row) => [
@@ -259,8 +197,7 @@ function downloadCsv(rows: StoreRecord[]) {
 
 export default function Demo() {
   const [stores, setStores] = useState<StoreRecord[]>(initialStores);
-  const [draftValues, setDraftValues] = useState<FilterValue>(initialFilterValues);
-  const [activeValues, setActiveValues] = useState<FilterValue>(initialFilterValues);
+  const [quickFilterValues, setQuickFilterValues] = useState<TableToolbarQuickFilterValues>({ keyword: '' });
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
   const [current, setCurrent] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>('normal');
@@ -268,6 +205,8 @@ export default function Demo() {
   const [columnModalVisible, setColumnModalVisible] = useState(false);
   const [createModalVisible, setCreateModalVisible] = useState(false);
   const [visibleColumnKeys, setVisibleColumnKeys] = useState<ColumnKey[]>(columnOptions.map((option) => option.key));
+  const tableViewportRef = useRef<HTMLDivElement>(null);
+  const [tableBodyHeight, setTableBodyHeight] = useState(480);
   const [newStore, setNewStore] = useState<NewStoreForm>({
     code: '',
     name: '',
@@ -276,21 +215,38 @@ export default function Demo() {
   });
 
   const isLoading = viewMode === 'loading' || refreshing;
-  const filteredStores = useMemo(() => {
+  const visibleStores = useMemo(() => {
     if (viewMode === 'empty') return [];
-    return filterStores(stores, activeValues);
-  }, [activeValues, stores, viewMode]);
-  const total = filteredStores.length;
-  const pageData = filteredStores.slice((current - 1) * pageSize, current * pageSize);
+    const normalizedKeyword = String(quickFilterValues.keyword ?? '').trim().toLowerCase();
+    if (!normalizedKeyword) return stores;
+    return stores.filter(
+      (store) =>
+        store.name.toLowerCase().includes(normalizedKeyword) ||
+        store.code.toLowerCase().includes(normalizedKeyword)
+    );
+  }, [quickFilterValues.keyword, stores, viewMode]);
+  const total = visibleStores.length;
+  const pageData = visibleStores.slice((current - 1) * pageSize, current * pageSize);
 
   useEffect(() => {
     setCurrent(1);
     setSelectedRowKeys([]);
-  }, [activeValues, viewMode]);
+  }, [quickFilterValues.keyword, viewMode]);
 
-  const setActiveSnapshot = (values: FilterValue) => {
-    setActiveValues(values);
-  };
+  useEffect(() => {
+    const viewport = tableViewportRef.current;
+    if (!viewport || viewMode === 'error') return;
+
+    const updateTableBodyHeight = () => {
+      const headerHeight = Math.ceil(viewport.querySelector('thead')?.getBoundingClientRect().height ?? 41);
+      const nextHeight = Math.max(160, Math.floor(viewport.clientHeight - headerHeight));
+      setTableBodyHeight((previous) => (previous === nextHeight ? previous : nextHeight));
+    };
+    const observer = new ResizeObserver(updateTableBodyHeight);
+    observer.observe(viewport);
+    updateTableBodyHeight();
+    return () => observer.disconnect();
+  }, [viewMode]);
 
   const changeStatusForSelected = (status: StoreStatus) => {
     if (selectedRowKeys.length === 0) return;
@@ -313,6 +269,14 @@ export default function Demo() {
       okText: '确定',
       onOk: () => changeStatusForSelected(status),
     });
+  };
+
+  const handleToolbarOperation = (key: string) => {
+    if (key === 'open' || key === 'closed') {
+      openBatchConfirm(key);
+      return;
+    }
+    if (key === 'clear') setSelectedRowKeys([]);
   };
 
   const refreshData = () => {
@@ -371,19 +335,30 @@ export default function Demo() {
       title: '操作',
       width: 180,
       fixed: 'right',
-      render: () => (
-        <Space className="sb-basic-list-page__row-actions" size={4}>
-          <Button type="text" size="mini">查看</Button>
-          <Button type="text" size="mini">编辑</Button>
+      render: (_, record) => (
+        <Space className="sb-basic-list-page__row-actions sbux-table-row-actions" size={4}>
+          <Button type="text" size="mini" aria-label={`查看 ${record.name}`}>查看</Button>
+          <Button type="text" size="mini" aria-label={`编辑 ${record.name}`}>编辑</Button>
           <Dropdown
             droplist={
-              <Menu>
+              <Menu
+                onClickMenuItem={(key) => {
+                  if (key === 'archive') {
+                    Modal.warning({
+                      title: '确认停用门店？',
+                      content: `将停用“${record.name}”，该操作需要再次确认。`,
+                      okText: '确认',
+                      cancelText: '取消',
+                    });
+                  }
+                }}
+              >
                 <Menu.Item key="copy">复制门店</Menu.Item>
                 <Menu.Item key="archive">停用门店</Menu.Item>
               </Menu>
             }
           >
-            <Button type="text" size="mini" icon={<IconMore />} />
+            <Button type="text" size="mini" icon={<IconMore />} aria-label={`${record.name} 更多操作`} />
           </Dropdown>
         </Space>
       ),
@@ -391,71 +366,59 @@ export default function Demo() {
   ];
 
   const columns = allColumns.filter((column, index) => visibleColumnKeys.includes(columnOptions[index].key));
-  const actionHost =
+  const pageHeader = (
+    <PageHeader
+      title="门店列表"
+      helpText="展示门店信息、营业状态和行操作"
+      extra={(
+        <div className="sb-basic-list-page__breadcrumb-actions">
+          <Select
+            aria-label="页面状态"
+            style={{ width: 120 }}
+            value={viewMode}
+            options={[
+              { label: 'Normal', value: 'normal' },
+              { label: 'Loading', value: 'loading' },
+              { label: 'Empty', value: 'empty' },
+              { label: 'Error', value: 'error' },
+            ]}
+            onChange={(value) => setViewMode(value as ViewMode)}
+          />
+          <Button type="primary" icon={<IconPlus />} onClick={() => setCreateModalVisible(true)}>
+            新建门店
+          </Button>
+        </div>
+      )}
+    />
+  );
+  const pageHeaderHost =
     typeof document === 'undefined'
       ? null
-      : document.querySelector<HTMLElement>('[data-template-action-host="basic-list"]');
+      : document.querySelector<HTMLElement>('[data-template-page-header-host="basic-list"]');
 
   return (
     <>
-      {actionHost &&
-        createPortal(
-          <div className="sb-basic-list-page__breadcrumb-actions">
-            <span>页面状态</span>
-            <Radio.Group type="button" value={viewMode} onChange={setViewMode}>
-              <Radio value="normal">Normal</Radio>
-              <Radio value="loading">Loading</Radio>
-              <Radio value="empty">Empty</Radio>
-              <Radio value="error">Error</Radio>
-            </Radio.Group>
-            <Button type="primary" icon={<IconPlus />} onClick={() => setCreateModalVisible(true)}>
-              新建门店
-            </Button>
-          </div>,
-          actionHost
-        )}
-    <div className="sb-basic-list-page">
-      <section className="sb-basic-list-page__module">
-        <FilterBar
-          fields={fields}
-          value={draftValues}
-          activeValues={activeValues}
-          defaultValue={initialFilterValues}
-          columns={filterColumns}
-          defaultVisibleCount={3}
-          submitMode="manual"
-          loading={isLoading}
-          onValuesChange={setDraftValues}
-          onActiveValuesChange={setActiveSnapshot}
-        />
-      </section>
-
+      {pageHeaderHost && createPortal(pageHeader, pageHeaderHost)}
+    <div className="sb-basic-list-page sb-template-page-surface">
+      {!pageHeaderHost && pageHeader}
       <section className="sb-basic-list-page__module sb-basic-list-page__table-module">
-        <div className="sb-basic-list-page__toolbar">
-          <div className="sb-basic-list-page__toolbar-left">
-            {selectedRowKeys.length > 0 && <span className="sb-basic-list-page__selection">已选择 {selectedRowKeys.length} 项</span>}
-            <Button disabled={selectedRowKeys.length === 0} onClick={() => openBatchConfirm('open')}>
-              批量启用
-            </Button>
-            <Button disabled={selectedRowKeys.length === 0} onClick={() => openBatchConfirm('closed')}>
-              批量停用
-            </Button>
-            <Button disabled={selectedRowKeys.length === 0} onClick={() => setSelectedRowKeys([])}>
-              清除选择
-            </Button>
-          </div>
-          <div className="sb-basic-list-page__toolbar-right">
-            <Tooltip content="刷新">
-              <Button aria-label="刷新" icon={<IconRefresh />} loading={refreshing} onClick={refreshData} />
-            </Tooltip>
-            <Tooltip content="列设置">
-              <Button aria-label="列设置" icon={<IconSettings />} onClick={() => setColumnModalVisible(true)} />
-            </Tooltip>
-            <Tooltip content="导出">
-              <Button aria-label="导出" icon={<IconDownload />} onClick={() => downloadCsv(filteredStores)} />
-            </Tooltip>
-          </div>
-        </div>
+        <TableToolbar
+          selectedCount={selectedRowKeys.length}
+          quickFilters={quickFilters}
+          quickFilterValues={quickFilterValues}
+          operationActions={operationActions}
+          moreActions={moreActions}
+          tableTools={{
+            export: true,
+            columnSettings: true,
+            refresh: { loading: refreshing },
+          }}
+          onQuickFilterChange={setQuickFilterValues}
+          onOperation={handleToolbarOperation}
+          onExport={() => downloadCsv(visibleStores)}
+          onColumnSettings={() => setColumnModalVisible(true)}
+          onRefresh={refreshData}
+        />
 
         {viewMode === 'error' ? (
           <Result
@@ -470,20 +433,22 @@ export default function Demo() {
           />
         ) : (
           <>
-            <Table
-              rowKey="id"
-              columns={columns}
-              data={pageData}
-              loading={isLoading}
-              pagination={false}
-              scroll={{ x: 1160 }}
-              noDataElement={<Empty description="暂无符合条件的门店" />}
-              rowSelection={{
-                type: 'checkbox',
-                selectedRowKeys,
-                onChange: (keys) => setSelectedRowKeys(keys as string[]),
-              }}
-            />
+            <div ref={tableViewportRef} className="sb-basic-list-page__table-viewport">
+              <Table
+                rowKey="id"
+                columns={columns}
+                data={pageData}
+                loading={isLoading}
+                pagination={false}
+                scroll={{ x: 1160, y: tableBodyHeight }}
+                noDataElement={<Empty description="暂无符合条件的门店" />}
+                rowSelection={{
+                  type: 'checkbox',
+                  selectedRowKeys,
+                  onChange: (keys) => setSelectedRowKeys(keys as string[]),
+                }}
+              />
+            </div>
             <div className="sb-basic-list-page__pagination">
               <Pagination
                 total={total}

@@ -7,8 +7,61 @@ tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="树状筛选列表" description="树状筛选列表模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/tree-filter-list" />
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>左侧区域树作为固定筛选面板，支持运营区域和地理区域切换、勾选、半选、展开和折叠。</li>
+      <li>右侧采用 <code>FilterBar</code> 样式 B 的模块分离式布局，组合门店状态、业务状态、门店类型、渠道和开业日期筛选。</li>
+      <li>查询提交时合并 Tree Active 和 FilterBar Active，更新本地 Mock 表格结果。</li>
+      <li>表格使用真实 children 层级数据和基础 Table 的树形数据展示能力，不提供行选择与批量操作。</li>
+      <li>Normal、Loading、Empty、Error 同时演示页面内容和区域树状态。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>业务组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>FilterBar</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Tree</code>
+        <code>Table</code>
+        <code>Pagination</code>
+        <code>Button</code>
+        <code>Radio</code>
+        <code>Tag</code>
+        <code>Tooltip</code>
+        <code>Spin</code>
+        <code>Empty</code>
+        <code>Result</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>设计规则</h2>
+    <ol>
+      <li>页面头部使用共享 PageHeader，左侧展示页面标题和可选 Context Help，右侧展示业务核心操作或全局功能操作。</li>
+      <li>操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
+      <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
+      <li>左侧树筛选面板与右侧数据内容保持清晰分栏，面板支持独立滚动和折叠。</li>
+      <li>Tree 勾选只更新 Draft，点击 FilterBar 查询后才提交统一 Active 查询。</li>
+      <li>父子勾选和半选状态由真实 Tree 负责，页面只提取当前区域类型的叶子节点 key。</li>
+      <li>表格层级使用真实 children 数据和展开能力，不手写缩进符号。</li>
+      <li>表格自身处理横向滚动，页面根容器不产生横向溢出。</li>
+      <li>页面模板只负责组合、本地 Mock 和页面状态，不新增公共树筛选业务组件。</li>
+    </ol>
+  </section>
+</section>

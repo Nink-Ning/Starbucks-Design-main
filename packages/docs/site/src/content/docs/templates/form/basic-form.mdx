@@ -1,14 +1,103 @@
 ---
 title: 基础表单
-description: 表单页面模板。
+description: 新建门店基本信息的单区块表单页面模板。
 sidebar:
   order: 1
 tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="基础表单" description="基础表单模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/basic-form" />
+<p>预览可切换 React / Vue；展开代码区可查看并复制当前框架示例。</p>
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>模板定义</h2>
+    <p>基础表单是完整的单区块 Page Template Family，用于组合真实 Form 和共用表单布局能力完成新建或编辑门店场景。</p>
+    <p>本模板是页面组合参考，不是公共 <code>BasicFormPage</code> 组件。</p>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>适用场景</h2>
+    <ul>
+      <li>新建或编辑一组结构稳定的基础信息。</li>
+      <li>需要统一校验、提交、重置和反馈的单区块表单。</li>
+    </ul>
+    <h2>不适用场景</h2>
+    <ul>
+      <li>分组、分步、动态增减字段或表格内编辑。</li>
+      <li>文件上传、自动保存、服务端异步校验和权限控制。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>页面保留共享 Page Header、Form Surface、Form Layout、字段区块和页面级 Actions；默认预览不在卡片内部重复展示页面标题。</li>
+      <li>Form Surface 填满可用 Main；<code>FormPageLayout</code> 只保留 approved inner width，Form Content 横向内边距至少为 32px。</li>
+      <li>桌面端表单使用顶部标签和两列布局，窄屏通过公共断点切换为单列。</li>
+      <li>操作区位于表单内容末尾，保持同一 Create/Edit family 的 Cancel 与 Primary Submit/Save 层级。</li>
+      <li>React 和 Vue 均使用真实 Form 管理字段值、校验、错误和重置。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>表单布局能力</strong>
+      <div class="sb-template-docs-component-list">
+        <code>FormPageLayout</code>
+        <code>FormGrid</code>
+        <code>FormGridItem</code>
+        <code>FormControlArea</code>
+        <code>FormActions</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Form</code>
+        <code>Form.Item</code>
+        <code>Input</code>
+        <code>Textarea</code>
+        <code>Select</code>
+        <code>RadioGroup</code>
+        <code>CheckboxGroup</code>
+        <code>Switch</code>
+        <code>DatePicker</code>
+        <code>Button</code>
+        <code>Space</code>
+        <code>Message</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>表单规则</h2>
+    <ol>
+      <li>二级全页 Create/Edit 使用共享 Page Header 的 icon-only Back + 20px 标题 + 可选 Context Help；不显示 Breadcrumb 或文字 Back。depth &gt; 2 仅在信息架构需要时使用 approved Breadcrumb。</li>
+      <li>页面级操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
+      <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
+      <li>表单使用 <code>FormGrid</code> 统一控制 24px 行列间距，复杂字段和操作区使用 <code>span=2</code> 占满整行；Create 与 Edit 共享该 anatomy。</li>
+      <li>窄屏切换为单列，表单和控件占满可用宽度，操作按钮允许换行。</li>
+      <li>必填、长度和格式校验交由真实 Form 执行，页面不复制错误展示逻辑。</li>
+      <li>保存通过真实校验后进入 Loading，完成本地 Mock 保存并保留字段值。</li>
+      <li>Cancel 调用真实 Form reset 能力，恢复 baseline 并清除反馈；Breadcrumb 由 IA depth 决定，不由表单类型或 URL 深度机械生成。</li>
+      <li>分组、分步和动态表单属于其他页面模板；当前模板不暴露新的公共页面组件。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用注意事项</h2>
+    <ul>
+      <li>字段较少、关系简单时使用基础表单；少量字段编辑优先考虑弹窗或抽屉。</li>
+      <li>需要底部吸附操作区时，可将页面级 <code>FormActions</code> 设置为 <code>sticky</code>；默认不吸附。</li>
+      <li>业务接口、字段枚举、权限和提交逻辑由页面示例或业务页面自行接入。</li>
+      <li>本模板依赖现代浏览器的 CSS Container Queries；项目未声明旧浏览器兼容范围。</li>
+    </ul>
+  </section>
+</section>

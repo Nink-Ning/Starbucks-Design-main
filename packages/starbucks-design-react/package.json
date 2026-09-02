@@ -38,6 +38,7 @@
   },
   "scripts": {
     "build": "tsc --noEmit && vite build && vite build -c vite.config.umd.ts && node scripts/build-shims.mjs",
+    "build:starter-runtime": "node scripts/build-starter-runtime.mjs",
     "test": "vitest run"
   },
   "dependencies": {

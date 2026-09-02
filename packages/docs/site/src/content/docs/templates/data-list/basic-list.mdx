@@ -17,11 +17,10 @@ import Demo from '../../../../components/Demo.astro';
   <section class="sb-template-docs-section">
     <h2>页面结构</h2>
     <ul>
-      <li>面包屑右侧放置页面状态切换和主操作“新建门店”。</li>
-      <li>筛选区直接调用业务组件 <code>FilterBar</code>。</li>
-      <li>表格工具栏组合选择数量、批量操作和表格操作，批量变更需二次确认。</li>
+      <li>模块根列表由页面标题、上下文操作和连续数据区域组成；只有存在有意义的父级页面关系时才显示面包屑，不根据 URL 深度机械生成。</li>
+      <li>表格工具栏直接调用业务组件 <code>TableToolbar</code>，左侧展示选择数量和批量操作，右侧提供关键词搜索与表格工具。</li>
       <li>数据表格展示门店信息、业务状态和行操作。</li>
-      <li>分页跟随筛选结果联动，并与表格处于同一内容区域。</li>
+      <li><code>TableToolbar</code>、Table 和 Pagination 属于同一个连续 Data Region，不插入独立 Summary Card 或 Debug Metadata 行。</li>
       <li>顶部状态切换演示 Normal、Loading、Empty、Error。</li>
     </ul>
   </section>
@@ -31,7 +30,7 @@ import Demo from '../../../../components/Demo.astro';
     <div class="sb-template-docs-component-group">
       <strong>业务组件</strong>
       <div class="sb-template-docs-component-list">
-        <code>FilterBar</code>
+        <code>TableToolbar</code>
       </div>
     </div>
     <div class="sb-template-docs-component-group">
@@ -58,9 +57,9 @@ import Demo from '../../../../components/Demo.astro';
       <strong>图标</strong>
       <div class="sb-template-docs-component-list">
         <code>IconPlus</code>
-        <code>IconRefresh</code>
-        <code>IconSettings</code>
-        <code>IconDownload</code>
+        <code>IconCheckCircle</code>
+        <code>IconMinusCircle</code>
+        <code>IconCloseCircle</code>
         <code>IconMore</code>
       </div>
     </div>
@@ -69,11 +68,18 @@ import Demo from '../../../../components/Demo.astro';
   <section class="sb-template-docs-section">
     <h2>设计规则</h2>
     <ol>
-      <li>页面主操作位于面包屑行右侧。</li>
-      <li>FilterBar 位于数据内容上方。</li>
-      <li>批量操作靠近表格选择区域左侧，并在执行前二次确认。</li>
+      <li>页面头部使用共享 PageHeader，左侧展示页面标题和可选 Context Help，右侧展示业务核心操作或全局功能操作；根页面不因技术路由自动添加面包屑。</li>
+      <li>操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
+      <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
+      <li>页面主操作位于 PageHeader 右侧。</li>
+      <li>基础列表不放置顶部筛选栏，轻量关键词搜索位于表格工具栏右侧，按 Enter 后提交。</li>
+      <li>批量操作由 TableToolbar 按业务优先级响应式折叠，并在执行前二次确认。</li>
       <li>列设置、导出和刷新位于工具栏右侧。</li>
-      <li>分页与表格处于同一内容容器。</li>
+      <li>“查看、编辑”等页面内行操作使用品牌色文字 Button，并通过共享 <code>sbux-table-row-actions</code> 作用域获得组件视觉，不在页面样式中覆盖 Button。</li>
+      <li>分页、表格和 TableToolbar 处于同一个连续内容区域；页面不额外插入重复边框、圆角、阴影或无意义的 section gap。</li>
+      <li>具体 List padding 依 Profile、Template 和已批准的 spacing evidence 决定；当前 12/24/24 与 4/16/16 的来源差异仍需独立 Design Decision，本模板不宣称 universal spacing。</li>
+      <li>当同时存在选择型筛选、自由文本 Search 和 Utility Actions 时，推荐顺序为“选择型筛选 → Search → Utility Actions”，不固化业务字段顺序。</li>
+      <li>行操作使用共享 <code>sbux-table-row-actions</code> pattern，保持操作优先级、More overflow、危险操作确认和对象级可访问名称。</li>
       <li>页面模板负责组合，不重复实现业务组件内部能力。</li>
     </ol>
   </section>

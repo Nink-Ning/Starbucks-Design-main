@@ -1,0 +1,32 @@
+// TableRowActions.less
+// Shared React / Vue visual contract for brand-colored text Buttons used in
+// table operation columns. Keep this file identical in both packages.
+
+.sbux-table-row-actions {
+  .arco-btn,
+  .arco-v-btn {
+    padding-inline: var(--spacing-1);
+  }
+
+  .arco-btn-text:not(.arco-btn-disabled),
+  .arco-v-btn-text:not(.arco-v-btn-disabled) {
+    color: var(--color-text-brand);
+    font-size: var(--fs-14);
+    line-height: var(--lh-22);
+    background-color: transparent;
+  }
+
+  .arco-btn-text:not(.arco-btn-disabled):not(.arco-btn-loading):hover,
+  .arco-v-btn-text:not(.arco-v-btn-disabled):not(.arco-v-btn-loading):hover,
+  .arco-btn-text:not(.arco-btn-disabled):focus-visible,
+  .arco-v-btn-text:not(.arco-v-btn-disabled):focus-visible {
+    color: var(--color-text-brand);
+    background-color: var(--color-primary-light);
+  }
+
+  .arco-btn-text:not(.arco-btn-disabled):not(.arco-btn-loading):active,
+  .arco-v-btn-text:not(.arco-v-btn-disabled):not(.arco-v-btn-loading):active {
+    color: var(--color-text-brand);
+    background-color: var(--color-primary-light-hover);
+  }
+}

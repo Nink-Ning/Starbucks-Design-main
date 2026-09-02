@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新建门店 | DesignKit Starter V1</title>
+  <style>
+    :root {
+      --dk-page-max-width: 1280px;
+      --dk-page-gutter: 24px;
+      --dk-page-header-gap: 10px;
+      --dk-page-surface: #ffffff;
+      --dk-page-background: #f5f6f7;
+      --dk-page-text: #1d2129;
+      --dk-page-muted: #86909c;
+      --dk-page-border: #e5e6eb;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--dk-page-background);
+      color: var(--dk-page-text);
+      font-family: "Noto Sans SC", "Poppins", Roboto, sans-serif;
+    }
+
+    #root {
+      min-height: 100vh;
+    }
+
+    .dk-runtime-error {
+      box-sizing: border-box;
+      width: min(100% - 32px, 720px);
+      margin: 48px auto;
+      padding: 24px;
+      border: 1px solid #f3b7b7;
+      border-radius: 8px;
+      background: #fff7f7;
+      color: #8b1e1e;
+      line-height: 1.7;
+    }
+
+    .dk-runtime-error h1 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .dk-runtime-error p {
+      margin: 0;
+    }
+
+    .dk-demo-shell {
+      min-width: 0;
+      padding: 16px 0 40px;
+    }
+
+    .dk-page {
+      box-sizing: border-box;
+      width: min(calc(100% - 48px), var(--dk-page-max-width));
+      min-width: 0;
+      margin: 0 auto;
+      font-family: var(--font-family);
+    }
+
+    .dk-page__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: var(--dk-page-header-gap);
+    }
+
+    .dk-page__header-main {
+      min-width: 0;
+    }
+
+    .dk-page__title-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dk-page__title {
+      margin: 0;
+      color: var(--dk-page-text);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+    }
+
+    .dk-page__title-help {
+      display: inline-flex;
+      align-items: center;
+      color: var(--dk-page-muted);
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .dk-page__form-surface {
+      box-sizing: border-box;
+      min-width: 0;
+      padding: var(--spacing-8) var(--spacing-6) var(--spacing-6);
+      border-radius: var(--border-radius-md);
+      background: var(--dk-page-surface);
+      color: var(--color-text-primary);
+      font-family: var(--font-family);
+    }
+
+    .dk-page__form-success {
+      margin-top: var(--spacing-4);
+      color: var(--color-text-brand);
+      font-size: var(--fs-14);
+      line-height: var(--lh-22);
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --dk-page-gutter: 16px;
+      }
+
+      .dk-page {
+        width: min(calc(100% - 32px), var(--dk-page-max-width));
+      }
+
+      .dk-page__header {
+        gap: 16px;
+      }
+
+      .dk-page__form-surface {
+        padding: var(--spacing-6) var(--spacing-4) var(--spacing-4);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="dk-runtime-error" role="status">
+      <h1>正在加载新建门店 Demo</h1>
+      <p>正在加载 Starbucks Design 运行资源。如果页面长时间没有显示，请检查网络连接后刷新。</p>
+    </div>
+  </div>
+
+  <script>
+    window.__designKitStarterCdnErrors = [];
+    window.__designKitStarterRuntimeErrors = [];
+    window.addEventListener('error', function (event) {
+      if (event.target && event.target.tagName === 'SCRIPT' && event.target.src) {
+        window.__designKitStarterCdnErrors.push(event.target.src);
+      } else if (event.message) {
+        window.__designKitStarterRuntimeErrors.push(event.message);
+      }
+    }, true);
+  </script>
+
+  <!-- Fixed runtime: React 18.3.1 -->
+  <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <!-- Fixed runtime: Arco React 2.66.15 -->
+  <script src="https://cdn.jsdelivr.net/npm/@arco-design/web-react@2.66.15/dist/arco.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@arco-design/web-react@2.66.15/dist/arco-icon.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <!-- Starter local runtime: generated from the current React workspace build -->
+  <link rel="stylesheet" href="../runtime/starbucks-react.css" onerror="window.__designKitStarterCdnErrors.push(this.href)">
+  <script src="../runtime/starbucks-react.umd.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+  <!-- Fixed runtime: Babel Standalone 7.29.8 -->
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.29.8/babel.min.js" onerror="window.__designKitStarterCdnErrors.push(this.src)"></script>
+
+  <script type="text/babel">
+    const requiredRuntimeExports = [
+      'Form',
+      'Input',
+      'Select',
+      'DatePicker',
+      'Radio',
+      'Checkbox',
+      'Switch',
+      'Button',
+      'Message',
+      'Tooltip',
+      'FormPageLayout',
+      'FormGrid',
+      'FormGridItem',
+      'FormControlArea',
+      'FormActions',
+    ];
+
+    if (!window.React || !window.ReactDOM || !window.StarbucksReact) {
+      window.__designKitStarterRuntimeErrors.push('Starbucks Design React 运行时未完整加载。');
+    } else {
+      const missingRuntimeExports = requiredRuntimeExports.filter((name) => !StarbucksReact[name]);
+      if (missingRuntimeExports.length) {
+        window.__designKitStarterRuntimeErrors.push(`Starter Runtime 缺少表单能力：${missingRuntimeExports.join('、')}`);
+      } else {
+        const { useState } = React;
+        const {
+          Button,
+          Checkbox,
+          DatePicker,
+          Form,
+          FormActions,
+          FormControlArea,
+          FormGrid,
+          FormGridItem,
+          FormPageLayout,
+          Input,
+          Message,
+          Radio,
+          Select,
+          Switch,
+          Tooltip,
+        } = StarbucksReact;
+        const { IconInfoCircle } = window.arcoicon || {};
+
+        const storeTypeOptions = [
+          { label: '标准店', value: 'standard' },
+          { label: '臻选店', value: 'reserve' },
+          { label: '外送店', value: 'delivery' },
+        ];
+
+        const businessStatusOptions = [
+          { label: '筹备中', value: 'preparing' },
+          { label: '营业中', value: 'operating' },
+          { label: '已停业', value: 'closed' },
+        ];
+
+        const serviceChannelOptions = [
+          { label: '门店点单', value: 'store-order' },
+          { label: '专星送', value: 'delivery' },
+          { label: '啡快', value: 'pickup' },
+          { label: '即时零售', value: 'instant-retail' },
+        ];
+
+        const storeCodePattern = /^[A-Za-z0-9-]+$/;
+
+        const messages = {
+          storeNameRequired: '请输入门店名称',
+          storeNameLength: '门店名称长度为 2-40 个字符',
+          storeCodeRequired: '请输入门店编号',
+          storeCodeFormat: '门店编号只允许字母、数字和短横线',
+          storeCodeLength: '门店编号长度为 2-20 个字符',
+          storeTypeRequired: '请选择门店类型',
+          businessStatusRequired: '请选择营业状态',
+          openingDateRequired: '请选择开业日期',
+          managerLength: '店长姓名不能超过 20 个字符',
+          descriptionLength: '备注不能超过 200 个字符',
+        };
+
+        const createBaseline = () => ({
+          storeName: '',
+          storeCode: '',
+          storeType: undefined,
+          businessStatus: 'preparing',
+          openingDate: undefined,
+          serviceChannels: [],
+          deliveryEnabled: false,
+          manager: '',
+          description: '',
+        });
+
+        function BasicFormDemo() {
+          const [form] = Form.useForm();
+          const [submitting, setSubmitting] = useState(false);
+          const [submitSuccess, setSubmitSuccess] = useState(false);
+          const [businessStatus, setBusinessStatus] = useState('preparing');
+          const [serviceChannels, setServiceChannels] = useState([]);
+          const [deliveryEnabled, setDeliveryEnabled] = useState(false);
+
+          const handleSubmit = async () => {
+            if (submitting) return;
+
+            setSubmitting(true);
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            Message.success('表单校验通过，Starter V1 已模拟保存。');
+            setSubmitSuccess(true);
+            setSubmitting(false);
+          };
+
+          const handleReset = () => {
+            form.resetFields();
+            setSubmitting(false);
+            setSubmitSuccess(false);
+            setBusinessStatus('preparing');
+            setServiceChannels([]);
+            setDeliveryEnabled(false);
+            Message.info('已恢复默认值。');
+          };
+
+          return (
+            <div className="dk-demo-shell">
+              <main className="dk-page">
+                <header className="dk-page__header">
+                  <div className="dk-page__header-main">
+                    <div className="dk-page__title-row">
+                      <h1 className="dk-page__title">新建门店</h1>
+                      {Tooltip && IconInfoCircle && (
+                        <Tooltip mini content="填写门店基础信息并保存，用于验证产品方案。">
+                          <span className="dk-page__title-help" aria-label="页面说明"><IconInfoCircle /></span>
+                        </Tooltip>
+                      )}
+                    </div>
+                  </div>
+                </header>
+
+                <section className="dk-page__form-surface" aria-label="新建门店表单">
+                  <FormPageLayout>
+                    <Form
+                      form={form}
+                      layout="vertical"
+                      initialValues={createBaseline()}
+                      autoComplete="off"
+                      disabled={submitting}
+                      scrollToFirstError
+                      onValuesChange={() => setSubmitSuccess(false)}
+                      onSubmit={handleSubmit}
+                      onSubmitFailed={() => setSubmitSuccess(false)}
+                    >
+                      <FormGrid>
+                        <FormGridItem>
+                          <Form.Item
+                            label="门店名称"
+                            field="storeName"
+                            required
+                            rules={[
+                              { required: true, message: messages.storeNameRequired },
+                              { minLength: 2, maxLength: 40, message: messages.storeNameLength },
+                            ]}
+                          >
+                            <Input maxLength={40} placeholder="请输入门店名称" />
+                          </Form.Item>
+                        </FormGridItem>
+
+                        <FormGridItem>
+                          <Form.Item
+                            label="门店编号"
+                            field="storeCode"
+                            required
+                            rules={[
+                              { required: true, message: messages.storeCodeRequired },
+                              { minLength: 2, maxLength: 20, message: messages.storeCodeLength },
+                              { match: storeCodePattern, message: messages.storeCodeFormat },
+                            ]}
+                          >
+                            <Input maxLength={20} placeholder="请输入门店编号" />
+                          </Form.Item>
+                        </FormGridItem>
+
+                        <FormGridItem>
+                          <Form.Item
+                            label="门店类型"
+                            field="storeType"
+                            required
+                            rules={[{ required: true, message: messages.storeTypeRequired }]}
+                          >
+                            <Select options={storeTypeOptions} placeholder="请选择门店类型" />
+                          </Form.Item>
+                        </FormGridItem>
+
+                        <FormGridItem>
+                          <Form.Item
+                            label="营业状态"
+                            field="businessStatus"
+                            required
+                            rules={[{ required: true, message: messages.businessStatusRequired }]}
+                          >
+                            <FormControlArea>
+                              <Radio.Group
+                                value={businessStatus}
+                                onChange={(value) => {
+                                  setBusinessStatus(value);
+                                  form.setFieldValue('businessStatus', value);
+                                }}
+                              >
+                                {businessStatusOptions.map((option) => (
+                                  <Radio key={option.value} value={option.value}>{option.label}</Radio>
+                                ))}
+                              </Radio.Group>
+                            </FormControlArea>
+                          </Form.Item>
+                        </FormGridItem>
+
+                        <FormGridItem>
+                          <Form.Item
+                            label="开业日期"
+                            field="openingDate"
+                            required
+                            rules={[{ required: true, message: messages.openingDateRequired }]}
+                          >
+                            <DatePicker style={{ width: '100%' }} />
+                          </Form.Item>
+                        </FormGridItem>
+
+                        <FormGridItem>
+                          <Form.Item label="服务渠道" field="serviceChannels">
+                            <FormControlArea>
+                              <Checkbox.Group
+                                value={serviceChannels}
+                                onChange={(value) => {
+                                  setServiceChannels(value);
+                                  form.setFieldValue('serviceChannels', value);
+                                }}
+                              >
+                                {serviceChannelOptions.map((option) => (
+                                  <Checkbox key={option.value} value={option.value}>{option.label}</Checkbox>
+                                ))}
+                              </Checkbox.Group>
+                            </FormControlArea>
+                          </Form.Item>
+                        </FormGridItem>
+
+                        <FormGridItem>
+                          <Form.Item label="支持外送" field="deliveryEnabled" triggerPropName="checked">
+                            <FormControlArea>
+                              <Switch
+                                checked={deliveryEnabled}
+                                onChange={(checked) => {
+                                  setDeliveryEnabled(checked);
+                                  form.setFieldValue('deliveryEnabled', checked);
+                                }}
+                              />
+                            </FormControlArea>
+                          </Form.Item>
+                        </FormGridItem>
+
+                        <FormGridItem>
+                          <Form.Item
+                            label="店长姓名"
+                            field="manager"
+                            rules={[{ maxLength: 20, message: messages.managerLength }]}
+                          >
+                            <Input maxLength={20} placeholder="请输入店长姓名" />
+                          </Form.Item>
+                        </FormGridItem>
+
+                        <FormGridItem span={2} className="dk-page__form-full-row">
+                          <Form.Item
+                            label="备注"
+                            field="description"
+                            rules={[{ maxLength: 200, message: messages.descriptionLength }]}
+                          >
+                            <Input.TextArea
+                              style={{ resize: 'none' }}
+                              wrapperStyle={{ width: '100%' }}
+                              maxLength={200}
+                              showWordLimit
+                              autoSize={{ minRows: 3, maxRows: 6 }}
+                              placeholder="请输入备注"
+                            />
+                          </Form.Item>
+                        </FormGridItem>
+
+                        <FormGridItem span={2} className="dk-page__form-full-row">
+                          <FormActions>
+                            <Button disabled={submitting} onClick={handleReset}>重置</Button>
+                            <Button type="primary" htmlType="submit" loading={submitting}>保存</Button>
+                          </FormActions>
+                        </FormGridItem>
+                      </FormGrid>
+                    </Form>
+
+                    {submitSuccess && (
+                      <div className="dk-page__form-success" role="status" aria-live="polite">
+                        表单校验通过，Starter V1 已模拟保存。
+                      </div>
+                    )}
+                  </FormPageLayout>
+                </section>
+              </main>
+            </div>
+          );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<BasicFormDemo />);
+      }
+    }
+  </script>
+</body>
+</html>

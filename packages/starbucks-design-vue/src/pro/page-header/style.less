@@ -15,25 +15,36 @@
   }
 
   &-back {
-    display: inline-flex;
-    align-items: center;
+    box-sizing: border-box;
+    width: var(--spacing-10);
+    min-width: var(--spacing-10);
+    height: var(--spacing-10);
+    padding: 0;
     margin-right: 4px; // 箭头↔标题共 8(2015:24564 x24→标题 x32,gap4+margin4)
-    color: var(--color-text-1);
-    font-size: 24px; // arrow-left 24×24(2015:24564)
-    cursor: pointer;
   }
 
   &-title {
     color: var(--color-text-1);
-    font-size: 16px; // title-medium(1804:5416)
+    font-size: var(--fs-20); // title-medium(1804:5416)
     font-weight: 600;
-    line-height: 24px;
+    line-height: var(--lh-28);
   }
 
   &-help {
     color: var(--color-text-3);
     font-size: 16px; // help-circle 16×16(1804:5417)
     cursor: help;
+  }
+
+  &-help-trigger {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 2px;
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary-6);
+      outline-offset: 2px;
+    }
   }
 
   &-help-link {

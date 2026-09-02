@@ -490,6 +490,144 @@
 }
 
 // Vue DOM adapters
+// Web Vue renders the single control on the Select root instead of the React
+// Select > SelectView subtree targeted above.
+.arco-select.arco-select-view-single {
+  box-sizing: border-box;
+  height: 32px;
+  padding: 0 var(--spacing-4);
+  align-items: center;
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-select.arco-select-view-single:not(.arco-select-view-disabled):hover {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-select.arco-select-view-single:focus-within,
+.arco-select.arco-select-view-single.arco-select-view-focus,
+.arco-select.arco-select-view-single.arco-select-view-open,
+.arco-select.arco-select-view-single:not(.arco-select-view-disabled):active {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-select.arco-select-view-single:focus-within:hover,
+.arco-select.arco-select-view-single.arco-select-view-focus:hover,
+.arco-select.arco-select-view-single.arco-select-view-open:hover,
+.arco-select.arco-select-view-single:not(.arco-select-view-disabled):active:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+}
+
+.arco-select.arco-select-view-single.arco-select-view-error,
+.arco-select.arco-select-view-single.arco-select-view-error:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger);
+}
+
+.arco-select.arco-select-view-single.arco-select-view-error:focus-within,
+.arco-select.arco-select-view-single.arco-select-view-error.arco-select-view-focus {
+  box-shadow: 0 0 0 2px var(--color-danger-focus);
+}
+
+.arco-form-item-status-warning .arco-select.arco-select-view-single,
+.arco-form-item-status-warning .arco-select.arco-select-view-single:hover {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-warning);
+}
+
+.arco-form-item-status-warning .arco-select.arco-select-view-single:focus-within,
+.arco-form-item-status-warning .arco-select.arco-select-view-single.arco-select-view-focus {
+  box-shadow: 0 0 0 2px var(--color-warning-focus);
+}
+
+.arco-select.arco-select-view-single.arco-select-view-disabled,
+.arco-select.arco-select-view-single.arco-select-view-disabled:hover {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+  box-shadow: none;
+}
+
+.arco-select.arco-select-view-size-mini.arco-select-view-single,
+.arco-select.arco-select-view-size-small.arco-select-view-single {
+  height: 24px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.arco-select.arco-select-view-size-medium.arco-select-view-single {
+  height: 32px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+}
+
+.arco-select.arco-select-view-size-large.arco-select-view-single {
+  height: 40px;
+  padding: 0 var(--spacing-5);
+  font-size: var(--fs-16);
+  line-height: var(--lh-24);
+}
+
+.arco-select.arco-select-view-single .arco-select-view-input,
+.arco-select.arco-select-view-single .arco-select-view-value {
+  height: 100%;
+  min-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  align-items: center;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.arco-select.arco-select-view-single .arco-select-view-suffix {
+  display: inline-flex;
+  width: 16px;
+  height: 100%;
+  margin-left: var(--spacing-4);
+  padding: 0;
+  flex: 0 0 16px;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+}
+
+.arco-select.arco-select-view-single .arco-select-view-clear-btn,
+.arco-select.arco-select-view-single .arco-select-view-icon,
+.arco-select.arco-select-view-single .arco-select-view-arrow-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-16);
+  line-height: 16px;
+}
+
+.arco-select.arco-select-view-size-mini.arco-select-view-single .arco-select-view-clear-btn,
+.arco-select.arco-select-view-size-mini.arco-select-view-single .arco-select-view-icon,
+.arco-select.arco-select-view-size-mini.arco-select-view-single .arco-select-view-arrow-icon,
+.arco-select.arco-select-view-size-small.arco-select-view-single .arco-select-view-clear-btn,
+.arco-select.arco-select-view-size-small.arco-select-view-single .arco-select-view-icon,
+.arco-select.arco-select-view-size-small.arco-select-view-single .arco-select-view-arrow-icon {
+  font-size: var(--fs-14);
+}
+
 // Web Vue renders the multiple control as the Select view itself rather than
 // the React Select > InputTag subtree targeted above.
 .arco-select.arco-select-view-multiple {
@@ -566,7 +704,7 @@
 
 .arco-select.arco-select-view-size-mini.arco-select-view-multiple,
 .arco-select.arco-select-view-size-small.arco-select-view-multiple {
-  height: 28px;
+  height: 24px;
   min-height: 24px;
   padding: 1px 3px;
   font-size: var(--fs-12);
@@ -580,7 +718,7 @@
 }
 
 .arco-select.arco-select-view-size-large.arco-select-view-multiple {
-  height: 56px;
+  height: 40px;
   min-height: 40px;
   padding: 7px var(--spacing-4);
   font-size: var(--fs-16);
@@ -599,15 +737,15 @@
 }
 
 .arco-select.arco-select-view-size-medium.arco-select-view-multiple .arco-select-view-inner,
-.arco-select.arco-select-view-size-mini.arco-select-view-multiple .arco-select-view-inner,
-.arco-select.arco-select-view-size-small.arco-select-view-multiple .arco-select-view-inner {
+.arco-select.arco-select-view-size-large.arco-select-view-multiple .arco-select-view-inner {
   height: 24px;
   padding-top: 0;
   padding-bottom: 0;
 }
 
-.arco-select.arco-select-view-size-large.arco-select-view-multiple .arco-select-view-inner {
-  height: 30px;
+.arco-select.arco-select-view-size-mini.arco-select-view-multiple .arco-select-view-inner,
+.arco-select.arco-select-view-size-small.arco-select-view-multiple .arco-select-view-inner {
+  height: 20px;
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -623,6 +761,13 @@
   background-color: var(--bg-color-container);
   border: 1px solid var(--color-fill-3);
   border-radius: var(--border-radius-sm);
+}
+
+.arco-select.arco-select-view-size-mini.arco-select-view-multiple .arco-select-view-inner .arco-select-view-tag,
+.arco-select.arco-select-view-size-small.arco-select-view-multiple .arco-select-view-inner .arco-select-view-tag {
+  height: 20px;
+  min-height: 20px;
+  padding: 0 var(--spacing-2);
 }
 
 .arco-select.arco-select-view-multiple.arco-select-view-focus .arco-select-view-tag {
@@ -659,10 +804,10 @@
 }
 
 .arco-select.arco-select-view-size-large.arco-select-view-multiple .arco-select-view-input {
-  height: 28px;
-  min-height: 28px;
-  margin: 1px 0;
-  line-height: 26px;
+  height: 24px;
+  min-height: 24px;
+  margin: 0;
+  line-height: var(--lh-22);
 }
 
 .arco-select.arco-select-view-multiple .arco-select-view-suffix {
@@ -703,6 +848,69 @@
 
 // Web Vue teleports `.arco-select-dropdown`; the retained multiple-option
 // subtree safely distinguishes it from Mention and AutoComplete popups.
+.arco-select-dropdown:not(:has(.arco-select-option-multiple)) {
+  margin-top: var(--spacing-2);
+  padding: var(--spacing-3);
+  overflow: hidden;
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-dropdown-list-wrapper,
+.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-dropdown-list {
+  padding: 0;
+}
+
+.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-option {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 28px;
+  margin: 0 0 var(--spacing-1);
+  padding: 3px var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-22);
+  background-color: transparent;
+  border-radius: var(--border-radius-sm);
+}
+
+.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-option:last-child {
+  margin-bottom: 0;
+}
+
+.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-option-active,
+.arco-select-dropdown:not(:has(.arco-select-option-multiple))
+  .arco-select-option:not(.arco-select-option-disabled):hover {
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container-hover);
+}
+
+.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-option-selected {
+  color: var(--color-primary);
+  font-weight: var(--fw-medium);
+  background-color: var(--color-primary-light);
+}
+
+.arco-select-dropdown:not(:has(.arco-select-option-multiple))
+  .arco-select-option-selected.arco-select-option-active,
+.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-option-selected:hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light-hover);
+}
+
+.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-option-disabled,
+.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-option-disabled:hover {
+  color: var(--color-text-disabled);
+  font-weight: var(--fw-regular);
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
 .arco-select-dropdown:has(.arco-select-option-multiple) {
   margin-top: var(--spacing-2);
   padding: var(--spacing-3);

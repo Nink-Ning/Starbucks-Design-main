@@ -1,0 +1,95 @@
+# Starter V1 设计规则
+
+本文件是面向产品经理和 AI 的精简规则。它适配 React 视觉基准，不复制组件库源码，也不维护完整组件 API。
+
+## 规则优先级
+
+```text
+当前任务约束
+→ 已确认的 React 视觉基准
+→ 本文件和对应页面模板
+→ 已查证的组件 API
+→ Arco 默认行为
+```
+
+如果需求与规则冲突，先说明冲突和影响，不要默默改变组件行为。
+
+## 默认模板合同
+
+- `APPROVED DEFAULT TEMPLATE = STANDARD ANSWER`：先读取 `references/default-template-baselines.md` 和 manifest reference，再替换业务 slots。
+- 默认只可适配业务字段、标签、值、状态、选项、Mock 数据和模板范围内的业务文案。页面 anatomy、layout、spacing、media shape、footer/action hierarchy、selection/batch relationship、Breadcrumb/Back 和 Drawer anatomy 必须保留；改变它们需要用户明确 Override。
+- `SUPPORTED CAPABILITY != CAPABILITY ENABLED BY DEFAULT`。manifest 中 `starterEnabled: false` 的 variant 必须报告 `BLOCKED`，不能从 Runtime 或 Docs 中的能力存在推断 Starter 支持。
+
+## 页面结构
+
+- 页面只能有一个主要任务中心。
+- 页面标题、说明和主操作建立一级层级。
+- 当 Demo 提供 Normal、Loading、Empty、Error 页面状态切换时，使用紧凑 `Select` 放在 Header 右侧操作区最左侧，并以 `data-demo-only="true"` 标记；不得另建占据整行的状态控制卡片。
+- 数据、表单或详情内容建立二级层级。
+- 辅助说明、历史信息和次要操作不得与主任务争夺视觉焦点。
+- 优先使用上下结构；只有当左侧对象选择需要持续可见时才使用左右结构。
+- 页面容器、区块容器和控件内部间距保持稳定，不使用随机间距。
+
+## 列表模板选择
+
+- Basic List 用于以结构化字段扫描、列对齐和跨记录比较为核心的任务。
+- Card List 用于以图片、封面或其他明显视觉特征识别对象，并进行对象选择和管理的任务。
+- 批量操作本身不是选择 Card List 的依据；如果对象不依赖视觉识别，仍优先使用 Basic List。
+- 用户只提出“列表”而没有明确视觉对象需求时，默认使用 Basic List。
+- 当视觉识别与多字段比较同时重要时，先说明 Card List 与 Basic List 的取舍并请求确认。
+
+## 组件和样式
+
+- 优先使用 `references/component-catalog.md` 中的组件。
+- 不复制基础组件或业务组件内部逻辑。
+- 不把页面做成配置驱动的万能组件。
+- 组件视觉由 Starbucks React UMD 提供；页面 CSS 只负责页面容器、区块、网格和响应式。
+- 不覆盖宽泛的 `.arco-*` 选择器，不使用 `!important`。
+- 不通过缩小字号解决所有信息密度问题。
+
+## 操作
+
+- 每个页面尽量只有一个视觉主操作。
+- 主操作放在页面标题区域或表单操作区。
+- 次要操作使用默认、文本或下拉操作。
+- 以下搜索、工具栏、内容容器和表格行操作规则只适用于 Basic List，不自动应用于 Card List。
+- Basic List 的搜索和表格工具按钮使用真实 `TableToolbar`；无批量操作时筛选器和 Search 位于 Start，表格工具保持在 End。Basic List 当前只启用 Search + Refresh，不显示导出、列设置或批量操作占位入口。
+- Basic List 的 Continuous Data Region 使用模板专属的 `4px 16px 16px`（上、横向、下）内边距；这不是 Universal List Spacing Token。Toolbar 与 Table 之间不附加页面级 gap。
+- 表格“查看、编辑”等页面内行操作使用 `Button type="text"`，并放入 Runtime 提供的 `sbux-table-row-actions` 作用域以获得品牌色；不得为了颜色改用 Link，也不得在页面 CSS 中覆盖 `.arco-btn-text`。
+- Card List 批量上架、移动、删除分别绑定 Starter Runtime 的 `IconPlus`、`IconSwap`、`IconDelete`；删除入口默认使用 neutral/default/secondary treatment 并保留确认。Card 外圆角遵循当前 Golden 的 12px 基线，内容区顶部/下方分别为 10px/12px；这些是模板几何关系，不是全局 Token。
+- Card List 默认媒体为圆形；默认只能有一个可见 selection summary。page-owned summary、Card-specific batch actions 和 Selection Set 必须一致；若使用 TableToolbar，隐藏其 generic selection-summary region，避免重复 `已选择 X 项`。
+- Full-page Form / Detail 使用 Shell Main 左右 24px；二级页头固定为 icon-only Back + 20px title + optional Context Help，Form Surface 填满可用 Main，Form content 横向至少 32px；depth 2 无文字 Back/Breadcrumb，depth > 2 才按 IA 使用 approved Breadcrumb。Drawer Form 使用 title + close、直接 Form body 和 24px/24px body spacing，不添加 path、duplicate title、persistent subtitle 或 standalone Back。
+- 危险操作使用明确文案和确认流程，不使用模糊的“确定”；红色保留给 error/status 等语义状态。
+- Loading 时禁用重复提交，并保留用户已经输入的数据。
+- 操作反馈要说明成功、失败和下一步，而不只显示“操作失败”。
+
+## 状态
+
+区分以下状态：
+
+- Normal：展示正常 Mock 数据。
+- Loading：保留页面结构，说明正在加载，避免重复操作。
+- Empty：说明是首次无数据还是筛选无结果，并给出下一步。
+- Error：说明影响范围，并提供重试或恢复入口。
+- Disabled：说明为什么不能操作，避免用户误以为页面失效。
+
+## 响应式
+
+- 先保留核心任务、主操作和关键数据，再折叠次要内容。
+- 页面头部允许换行，主操作不能被挤出可视区域。
+- 表单多列布局在窄屏下降为单列。
+- 左右结构在窄屏下应转换为可折叠或上下结构；V1 不生成复杂固定侧栏。
+- 宽表格只在明确的表格容器内滚动。
+- 页面自身不得出现无意义的横向滚动。
+
+## 信息不完整
+
+可以合理推断页面类型、最近似模板、本地 Mock 数据和常见交互。
+
+必须标记待确认的内容：
+
+- 真实业务规则；
+- 权限和敏感数据；
+- 需要后端支持的操作；
+- 影响路由或状态恢复的容器选择；
+- 需求是否超出 V1 的基础列表、卡片列表、基础表单和基础详情四类模板。

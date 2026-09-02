@@ -1,0 +1,60 @@
+export type DataDetailChannel = 'all' | 'GAODE' | 'GAODE_MOP'
+
+export type DataDetailState = 'normal' | 'empty'
+
+export const dataDetailChannelLabels: Record<DataDetailChannel, string> = {
+  all: '全部渠道',
+  GAODE: 'GAODE',
+  GAODE_MOP: 'GAODE_MOP',
+}
+
+export const dataDetailMetrics = {
+  all: { issued: 126840, claimed: 98224, used: 74186, rate: 75.5 },
+  GAODE: { issued: 68420, claimed: 53180, used: 40016, rate: 75.2 },
+  GAODE_MOP: { issued: 58420, claimed: 45044, used: 34170, rate: 75.8 },
+} satisfies Record<DataDetailChannel, { issued: number; claimed: number; used: number; rate: number }>
+
+export const dataDetailContext = [
+  { label: 'ID', value: '15008867' },
+  { label: 'QID', value: 'QID_0000102229' },
+  { label: '核销渠道', value: 'GAODE_MOP' },
+  { label: '有效期', value: '2025-06-06～2026-08-30', span: 3 },
+]
+
+export const dataDetailWeeklyTrend = [
+  { label: '06/09', issued: 8420, used: 4680 },
+  { label: '06/16', issued: 9160, used: 5210 },
+  { label: '06/23', issued: 10240, used: 5850 },
+  { label: '06/30', issued: 9860, used: 6120 },
+  { label: '07/07', issued: 11040, used: 6480 },
+  { label: '07/14', issued: 11480, used: 6920 },
+  { label: '07/21', issued: 12160, used: 7280 },
+  { label: '07/28', issued: 10860, used: 6740 },
+  { label: '08/04', issued: 11620, used: 7160 },
+  { label: '08/11', issued: 12480, used: 7620 },
+  { label: '08/18', issued: 13240, used: 8140 },
+  { label: '08/25', issued: 14080, used: 7986 },
+]
+
+export const dataDetailChannelDistribution = [
+  { key: 'GAODE_MOP', label: 'GAODE_MOP', percent: 68, count: 50432 },
+  { key: 'GAODE', label: 'GAODE', percent: 24, count: 17804 },
+  { key: 'MINI_PROGRAM', label: '小程序', percent: 8, count: 5950 },
+]
+
+export const dataDetailCityDistribution = [
+  { label: '上海', percent: 31, count: 22980 },
+  { label: '北京', percent: 24, count: 17786 },
+  { label: '杭州', percent: 18, count: 13344 },
+  { label: '广州', percent: 15, count: 11127 },
+  { label: '其他城市', percent: 12, count: 8949 },
+]
+
+export const dataDetailRedemptionRows = [
+  { id: 'redeem-001', time: '2025-08-25 09:18', channel: 'GAODE_MOP', city: '上海', store: '上海陆家嘴店', member: 'M*****23', quantity: 1, status: '已核销' },
+  { id: 'redeem-002', time: '2025-08-25 10:42', channel: 'GAODE', city: '北京', store: '北京国贸店', member: 'L*****08', quantity: 1, status: '已核销' },
+  { id: 'redeem-003', time: '2025-08-25 11:06', channel: 'GAODE_MOP', city: '杭州', store: '杭州湖滨店', member: 'W*****71', quantity: 1, status: '已核销' },
+  { id: 'redeem-004', time: '2025-08-25 13:25', channel: 'GAODE_MOP', city: '广州', store: '广州天汇店', member: 'C*****42', quantity: 1, status: '已核销' },
+  { id: 'redeem-005', time: '2025-08-25 14:10', channel: 'GAODE', city: '上海', store: '上海静安店', member: 'Z*****19', quantity: 1, status: '已核销' },
+  { id: 'redeem-006', time: '2025-08-25 16:36', channel: 'GAODE_MOP', city: '北京', store: '北京三里屯店', member: 'H*****56', quantity: 1, status: '已核销' },
+]

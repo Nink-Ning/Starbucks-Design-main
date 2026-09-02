@@ -1,0 +1,171 @@
+@import '../style/variables.less';
+
+.sbux-pro-detail-page-layout {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  gap: @sbux-pro-detail-section-gap;
+  container-type: inline-size;
+}
+
+.sbux-pro-detail-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: @sbux-pro-detail-header-gap;
+  min-width: 0;
+
+  &-main {
+    display: flex;
+    flex: 1 1 480px;
+    align-items: flex-start;
+    min-width: 0;
+    gap: var(--spacing-4);
+  }
+
+  &-back {
+    flex: 0 0 auto;
+    margin-top: 2px;
+  }
+
+  &-content {
+    min-width: 0;
+  }
+
+  &-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-4);
+    min-width: 0;
+  }
+
+  &-title {
+    min-width: 0;
+    margin: 0;
+    color: var(--color-text-1);
+    font-size: var(--fs-24);
+    font-weight: var(--fw-semibold, var(--fw-medium));
+    line-height: var(--lh-32);
+    overflow-wrap: anywhere;
+  }
+
+  &-status {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+
+  &-description,
+  &-meta {
+    margin: var(--spacing-4) 0 0;
+    color: var(--color-text-2);
+    font-size: var(--fs-14);
+    line-height: var(--lh-22);
+  }
+
+  &-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-6);
+  }
+
+  &-actions {
+    display: flex;
+    flex: 0 1 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: @sbux-pro-detail-actions-gap;
+    min-width: 0;
+    margin-left: auto;
+  }
+}
+
+.sbux-pro-detail-section {
+  min-width: 0;
+
+  &-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: @sbux-pro-detail-section-header-gap;
+    margin-bottom: @sbux-pro-detail-section-header-gap;
+  }
+
+  &-heading {
+    min-width: 0;
+  }
+
+  &-title {
+    margin: 0;
+    color: var(--color-text-1);
+    font-size: var(--fs-16);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-24);
+  }
+
+  &-description {
+    margin: var(--spacing-2) 0 0;
+    color: var(--color-text-2);
+    font-size: var(--fs-14);
+    line-height: var(--lh-22);
+  }
+
+  &-actions {
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: @sbux-pro-detail-actions-gap;
+  }
+
+  &-content {
+    min-width: 0;
+  }
+
+  &-divider {
+    padding-bottom: @sbux-pro-detail-section-gap;
+    border-bottom: 1px solid var(--color-border-1);
+  }
+}
+
+.sbux-pro-detail-descriptions {
+  min-width: 0;
+
+  .arco-descriptions-item-label,
+  .arco-v-descriptions-item-label {
+    // Arco uses a 1px label cell with nowrap to let the label's intrinsic
+    // width determine the label column. Allowing normal wrapping here makes
+    // labels collapse to a single pixel and renders Chinese labels vertically.
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .arco-descriptions-item-value,
+  .arco-v-descriptions-item-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+}
+
+@media (max-width: @sbux-pro-detail-narrow-breakpoint) {
+  .sbux-pro-detail-page-header-actions {
+    flex-basis: 100%;
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+}
+
+@container (max-width: @sbux-pro-detail-narrow-breakpoint) {
+  .sbux-pro-detail-page-header-actions {
+    flex-basis: 100%;
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+}

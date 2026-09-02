@@ -86,3 +86,8 @@
 
 // Component-specific overrides from the designer-adjusted stylesheet set
 @import './overrides/_index.less';
+
+// Manually maintained business-component layouts live outside the generated
+// override index so regeneration cannot remove them.
+@import './overrides/TableToolbar.less';
+@import './overrides/TableRowActions.less';

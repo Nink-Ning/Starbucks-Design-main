@@ -7,6 +7,114 @@ sidebar:
 
 用于记录 Starbucks UI Docs 与组件库的设计、功能和文档更新。
 
+## 2026-08-07
+
+<div class="sbux-changelog">
+  <section class="sbux-changelog-item">
+    <div class="sbux-changelog-meta">
+      <div class="sbux-changelog-dot" />
+      <div class="sbux-changelog-date">2026-08-07</div>
+      <div class="sbux-changelog-author">更新人：宁凯Nink</div>
+    </div>
+
+    <div class="sbux-changelog-content">
+      <div class="sbux-changelog-card">
+        <div class="sbux-changelog-card-header">
+          <h2>业务组件、页面模板与 AI 协作指南更新</h2>
+          <p>
+            本周完成 React / Vue FilterBar、TagGroupManagement 业务组件和 Pro 页面布局建设，补充列表、表单、详情页模板及 Docs 示例；同步统一 AI 协作指南入口、角色路径和站点信息架构，并完成本地构建、测试和浏览器验证。
+          </p>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-feature">Feature</span>
+              业务组件
+            </h3>
+            <ul>
+              <li><strong>FilterBar：</strong>完成 React / Vue 双端实现，支持字段 Schema、常用筛选类型、Manual / Change 查询、Draft / Active 状态、重置、校验、Loading、Disabled、展开收起和响应式布局。</li>
+              <li><strong>TagGroupManagement：</strong>支持受控 / 非受控选中、异步回退、搜索与校验、新增、重命名、删除确认、权限、Loading、空状态、长列表和键盘操作；左侧管理区与右侧业务内容解耦。</li>
+              <li>补齐 React / Vue 公共导出、真实 Docs Demo、组件逻辑测试和入口测试，保持双框架行为一致。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-style">Style</span>
+              基础组件与 Pro 布局
+            </h3>
+            <ul>
+              <li>优化 Dropdown、Input、Textarea、Form 和 TagGroup 的 React / Vue 状态样式、间距、边框及交互表现，统一表单和输入类组件体验。</li>
+              <li>新增 React / Vue Form Pro 与 Detail Pro 布局能力，覆盖表单网格、分组、操作区、步骤表单和详情页结构，并完成公共导出与样式配套。</li>
+              <li>修复文本域重复边框、聚焦状态、控件宽度和响应式布局问题。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-docs">Templates</span>
+              页面模板
+            </h3>
+            <ul>
+              <li>完善基础列表、筛选列表、树筛选列表，以及基础、分组、分步表单和四类详情页 React / Vue 真实 Demo。</li>
+              <li>补齐查询、重置、分页、选择、批量操作、列设置、树形筛选、局部滚动、Mock 数据和窄屏响应式示例。</li>
+              <li>完成 Secondary Detail 卡片高度、内边距、表格内部滚动和移动端自适应调整；页面模板作为 Docs 组合示例，不加入组件包导出。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-docs">Docs</span>
+              AI 协作指南与站点入口
+            </h3>
+            <ul>
+              <li>FilterBar Docs 补齐基本用法、样式 A / B、响应式分栏、Manual / Change、展开收起、Validation、Loading、Disabled、DateRange 和 Cascader 场景，并使用真实 FilterBar、Table 和 Popup。</li>
+              <li>TagGroupManagement Docs 补齐主从布局、分组管理、受控模式、Normal / Loading / Disabled / Empty / Search Empty 和 30 条长列表场景，明确当前能力边界。</li>
+              <li>统一正式入口为 <code>/guide/ai-skills-guide/</code>，按产品经理、设计师、React 开发者和 Vue 开发者整理使用路径。</li>
+              <li>保留 <code>/guide/ai-skills/</code> 兼容页面，仅提供迁移提示；统一 Sidebar、Header、Docs 首页和 Landing 页面入口，移除重复的 Skills 下载入口。</li>
+              <li>完善 React / Vue Skill 下载链接和 DesignKit Starter V1 使用边界，修正产品经理标题并移除“| DesignKit Starter V1”标记。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-chore">Chore</span>
+              验证与发布边界
+            </h3>
+            <ul>
+              <li>React 测试 146/146、Vue 测试 154/154、Docs 测试 101/101 通过；React / Vue 类型检查、构建和 Docs production build 通过。</li>
+              <li>完成表单、详情页、列表页和业务组件浏览器验证；重启本地 Docs 服务，确认 AI 协作指南页面返回 HTTP 200。</li>
+              <li>完成个人 GitHub Pages 与公司 SCM Pages 发布关系审计；本周未执行 Git 提交、远端推送或两套 Pages 发布。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sbux-changelog-group">
+          <div class="sbux-changelog-group-content">
+            <h3>
+              <span class="sbux-changelog-tag sbux-changelog-tag-chore">Risk</span>
+              待完善
+            </h3>
+            <ul>
+              <li>ESLint 仍受仓库缺少 <code>eslint-plugin-vue</code> 影响；React 包 CJS 入口兼容、基础组件视觉差异和 TreeSelect 视觉闭环仍需独立处理。</li>
+              <li>以上遗留问题与本周业务组件、页面模板和 Docs 主流程分开记录，未影响已完成场景的构建与验证。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
 ## 2026-07-30
 
 <div class="sbux-changelog">
@@ -69,6 +177,7 @@ sidebar:
               文档与示例
             </h3>
             <ul>
+              <li>新增 AI Skill 使用指南，覆盖适用人群、三种使用模式、两阶段工作方式、Demo 提示词、Figma 还原、组件选择、验收标准、结果状态和常见问题。</li>
               <li>重构 FilterBar 文档，补齐用法、布局、行为、状态、API、AI Contract 和 Evaluator。</li>
               <li>双框架 Demo 均使用真实组件，覆盖响应式、展开收起、查询模式、校验和禁用等场景。</li>
               <li>查询结果使用真实 Table 展示，并明确 FilterBar 与页面容器的职责边界。</li>
@@ -97,6 +206,7 @@ sidebar:
             </h3>
             <ul>
               <li>统一 React / Vue 文档入口，更新站点落地页、Header、Sidebar、菜单滚动和模板面包屑。</li>
+              <li>更新 Skills 顶部入口和左侧菜单结构，新增“使用指南”，并保留“Skills 下载”作为第二个菜单项。</li>
               <li>新增页面模板占位组件，调整 Astro 配置、Docs 依赖与锁文件。</li>
               <li>优化 Demo 容器、代码展开、Arco 样式隔离、满宽预览、滚动和响应式行为。</li>
               <li>补充 Demo Code、Guide、Table、InputTag、ColorPicker / Mentions、FilterBar、Progress 和页面模板等 Docs 测试。</li>

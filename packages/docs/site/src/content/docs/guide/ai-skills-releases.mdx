@@ -1,0 +1,163 @@
+---
+title: 产品经理启动包
+description: 查看 DesignKit 产品经理启动包的当前能力、版本对比和可信下载记录。
+sidebar:
+  order: 5
+---
+
+产品经理启动包面向产品经理和非开发者，用于通过 AI Agent 生成单 HTML 页面或结构连贯的静态多页面 Demo，支持页面方案验证、产品评审和交互沟通。
+
+<div class="sb-ai-skill-page-marker" aria-hidden="true"></div>
+
+## 当前版本状态
+
+<div class="sb-starter-current-version">
+  <div class="sb-starter-current-version__cover" aria-hidden="true">
+    <svg viewBox="0 0 48 48"><path d="M9 15.5 24 8l15 7.5v17L24 40 9 32.5v-17Z" /><path d="m9 15.5 15 7.7 15-7.7M24 23.2V40M16.5 11.8l15 7.6" /></svg>
+    <strong>V1-r3</strong>
+  </div>
+  <div class="sb-starter-current-version__content">
+    <div class="sb-starter-current-version__eyebrow">
+      <span class="sb-ai-skill-kicker">更新时间：2026-09-01</span>
+      <span class="sb-starter-current-version__status"><span aria-hidden="true"></span>internal-trial · 当前生产下载</span>
+    </div>
+    <div class="sb-starter-current-version__title"><h3>DesignKit Starter V1-r3</h3><span class="sb-starter-current-version__new">NEW</span></div>
+    <p>V1-r3 已完成生产发布并通过验证。它会优先复用固定的标准应用框架和批准页面参考，再替换业务内容，以更稳定地生成列表、卡片、详情和表单页面及静态多页面演示。</p>
+    <a class="sb-ai-skill-download-button sb-ai-skill-download-button--primary" href="../../downloads/designkit-starter-v1-r3.zip" download="designkit-starter-v1-r3.zip"><svg class="sb-ai-skill-download-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v8m0 0 3-3m-3 3L5 6M2 12.5V14h12v-1.5" /></svg>下载当前生产版 V1-r3</a>
+  </div>
+</div>
+
+:::caution[当前生产下载]
+V1-r3 已完成生产发布切换，当前生产下载提供 V1-r3；历史版本仍保留在下方，本页不提供临时 RC 路径。
+:::
+
+## 支持能力
+
+| 能力分类 | 支持内容 |
+| --- | --- |
+| 标准应用框架 | 固定的 Top Navigation 与 Side Navigation；<br />展开/收起关系、响应式 viewport 布局与全局 Light / Dark。 |
+| Shell 模式 | `default`：标准 Application Shell + 页面模板；<br />`content-only`：保留页面层级与内容，移除 Top / Side；<br />`none`：独立 Demo。 |
+| 页面模板 | Basic List、Card List、Basic Detail、Basic Form、Grouped Form、Step Form、Drawer Form。 |
+| 页面层级 | Level 1 标题；<br />Level 2 icon-only 返回 + 标题；<br />Depth ≥ 3 只使用批准的面包屑。 |
+| 标准组件组合 | Toolbar、Table actions、Link、Breadcrumb、Steps、Drawer 与 Form controls。 |
+| AI 生成与验证 | 优先绑定批准参考，再替换业务字段、数据和文案；<br />使用固定 Runtime、单 HTML 与本地 Mock；<br />支持包内规则驱动和静态多页面一致性验证。 |
+
+## 默认生成与批准参考
+
+常规企业应用页面默认使用标准 Application Shell 和与任务匹配的批准模板。用户只需描述业务目标、关键数据和操作，不需要重新指定 Top、Side、标准间距或组件组合。
+
+批准模板是标准答案：业务字段、数据、状态和文案可以变化，页面 anatomy、交互归属与响应式关系默认保持一致。明确提出的覆盖只影响被请求的属性。例如“商品图片改成方形，其余保持默认”只改变媒体形状，不应同时重做 Shell、Header、Toolbar、Card、Selection 或 Footer。
+
+能力存在也不等于默认启用。选择、批量操作或其他可选能力只在场景需要、且模板允许时出现。
+
+## 页面模板说明
+
+| 模板 | 适用场景 | 默认组合重点 |
+| --- | --- | --- |
+| Basic List | 管理列表、搜索/筛选、表格操作与分页 | Toolbar → Table → Pagination 位于同一批准内容区域；可导航名称使用 Link，关键标识与操作列在横向滚动时保持可用。 |
+| Card List | 需要图片或卡片浏览、选择与管理的集合 | 响应式卡片排列、批准的卡片 anatomy、默认媒体处理、选择与批量操作。 |
+| Basic Detail | 聚焦查看单一对象 | 稳定的多列信息布局与统一字段标签/内容对齐。 |
+| Basic Form | 标准创建与编辑 | 同一表单家族内保持一致的字段、内容区域与操作关系。 |
+| Grouped Form | 分区较多的复杂编辑 | 在标准表单外层规则内组织分组内容。 |
+| Step Form | 多步骤创建或配置 | Steps、当前步骤内容与底部操作区域保持批准关系。 |
+| Drawer Form | 轻量上下文编辑 | Drawer 拥有最终操作区域，内部 Form 不生成重复 Footer。 |
+
+Table List 的全选来自 Table header；Card List 没有 Table header，因此选择控制属于 Card Toolbar，页面只保留一个可见选择汇总。Card Toolbar 批量操作使用次要/描边层级，优先级由直接显示或进入 More 表达，而不是提升为页面主按钮。
+
+## 主题、响应式与多页面演示
+
+Light / Dark 使用同一份批准结构和既有 DesignKit 主题机制，不是两套页面设计，也不需要用户单独请求“深色版”。标准 Shell 和模板包含已验证的响应式关系，但不承诺 Drawer hamburger、底部导航或新的移动 Navigation API。
+
+Starter 包自身携带 AI 所需的规则与参考，不要求访问完整 DesignKit 仓库。V1-r3 已通过“活动管理”等综合业务场景验证，可以帮助 AI 生成结构连贯的静态多页面演示；该场景是验证证据，不是新增官方模板，也不代表真实 Router 或完整 SPA 工程。
+
+## 当前暂不支持
+
+以下项目明确不属于当前产品经理 Starter：
+
+- 自定义 Application Shell 架构或完整 Navigation API；
+- 真实客户端 Router、权限路由、后端动态菜单或后端系统切换集成；
+- Dashboard 与 Result Page；
+- React/Vue 工程、组件 API 集成和 Developer Starter；
+- 真实 Export、真实后端/API、上传和生产部署；
+- 复杂生产应用状态管理；
+- Capability Registry 中标记为 `OUT` 或未登记的能力。
+
+前端开发启动包仍为 Coming Soon，V1-r3 不提供或暗示上述工程能力。
+
+## 版本能力对比
+
+状态说明：**支持**表示已有明确能力证据；**基础支持**表示范围有限；**增强**表示在原能力边界内提高保真、绑定或验证；**暂不支持**表示明确不在范围内；**未知**表示历史证据不足。
+
+<div class="sb-ai-skill-table-scroll" role="region" aria-label="DesignKit Starter 版本能力对比" tabindex="0">
+  <table>
+    <thead><tr><th scope="col">能力</th><th scope="col">V1</th><th scope="col">V1-r1</th><th scope="col">V1-r2</th><th scope="col">V1-r3</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Default Application Shell</th><td>暂不支持</td><td>暂不支持</td><td>支持 · 固定组合</td><td>支持 · 保真与 viewport 增强</td></tr>
+      <tr><th scope="row">Light / Dark</th><td>基础支持</td><td>基础支持</td><td>支持 · 全局基线</td><td>支持 · Shell/Template 一致性验证</td></tr>
+      <tr><th scope="row">Basic List</th><td>基础支持</td><td>支持</td><td>支持 · 组合增强</td><td>支持 · 固定列、Link 与连续内容区增强</td></tr>
+      <tr><th scope="row">Card List</th><td>暂不支持</td><td>支持</td><td>支持 · 保真增强</td><td>支持 · Toolbar、选择与响应式增强</td></tr>
+      <tr><th scope="row">Basic Form Create / Edit</th><td>基础支持</td><td>支持</td><td>支持 · 同模板族增强</td><td>支持 · 批准参考绑定</td></tr>
+      <tr><th scope="row">Basic Detail</th><td>基础支持</td><td>支持</td><td>支持 · 只读约束增强</td><td>支持 · 对齐与层级增强</td></tr>
+      <tr><th scope="row">Grouped / Step / Drawer Form</th><td>暂不支持</td><td>暂不支持</td><td>暂不支持</td><td>支持 · 可执行批准参考</td></tr>
+      <tr><th scope="row">TableToolbar / Row Actions</th><td>基础支持</td><td>支持</td><td>支持 · Runtime 绑定增强</td><td>支持 · 交互归属增强</td></tr>
+      <tr><th scope="row">Selection / Batch Actions</th><td>暂不支持</td><td>基础支持 · 本地 Demo</td><td>增强 · 仍限模板范围</td><td>增强 · 单一汇总与 Toolbar 规则</td></tr>
+      <tr><th scope="row">完整 IA 深度规则</th><td>未知</td><td>未知</td><td>基础规则</td><td>支持 · Level 1 / Level 2 / Depth ≥ 3</td></tr>
+      <tr><th scope="row">Approved Reference Binding</th><td>基础支持</td><td>基础支持</td><td>支持 · Shell/模板参考</td><td>支持 · 标准答案与局部覆盖</td></tr>
+      <tr><th scope="row">Package-only fidelity</th><td>未知</td><td>基础支持</td><td>基础支持</td><td>支持 · 综合验证</td></tr>
+      <tr><th scope="row">Integrated multi-page validation</th><td>暂不支持</td><td>暂不支持</td><td>暂不支持</td><td>支持 · 静态业务场景</td></tr>
+      <tr><th scope="row">Custom Navigation / Router / Developer Starter</th><td>暂不支持</td><td>暂不支持</td><td>暂不支持</td><td>暂不支持</td></tr>
+      <tr><th scope="row">真实 Export / 后端 API / React/Vue 工程</th><td>暂不支持</td><td>暂不支持</td><td>暂不支持</td><td>暂不支持</td></tr>
+    </tbody>
+  </table>
+</div>
+
+V1-r2 建立了固定 Default Application Shell 与全局 Light / Dark 基线，但不包含 V1-r3 的完整 IA 深度、全部模板族保真、最终 Card Toolbar / Drawer action ownership、固定列默认值或综合活动管理验证。这些 R3 能力没有回写到 R2 历史描述中。
+
+## 版本历史
+
+### DesignKit Starter V1-r3
+
+| 项目 | 内容 |
+| --- | --- |
+| 版本 | V1-r3 |
+| 状态 | `internal-trial` · 当前生产下载 |
+| 更新时间 | 2026-09-01 |
+| 下载文件 | `designkit-starter-v1-r3.zip` <a class="sb-ai-skill-download-button" href="../../downloads/designkit-starter-v1-r3.zip" download="designkit-starter-v1-r3.zip"><svg class="sb-ai-skill-download-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v8m0 0 3-3m-3 3L5 6M2 12.5V14h12v-1.5" /></svg>立即下载</a> |
+| SHA-256 | `bfa3af81fc96d82fac9c5dc45eb48183d9454691b2f5ba0c4d0878ab3ffb7d77` |
+| Source commit | `4c16b3390cebdbd15c6accb07068d03011cfcacc` |
+| 本版重点 | 固定批准 Shell 与模板参考；完成 Level 1 / Level 2 / Depth ≥ 3 层级规则；强化 List、Card、Detail、Form 与 Drawer 组合；验证 Light / Dark、package-only 绑定和静态多页面业务场景。 |
+
+### DesignKit Starter V1-r2
+
+| 项目 | 内容 |
+| --- | --- |
+| 版本 | V1-r2 |
+| 状态 | `internal-trial` · 历史版本 |
+| 更新时间 | 2026-08-28 |
+| 下载文件 | `designkit-starter-v1-r2.zip` <a class="sb-ai-skill-download-button" href="../../downloads/designkit-starter-v1-r2.zip" download="designkit-starter-v1-r2.zip"><svg class="sb-ai-skill-download-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v8m0 0 3-3m-3 3L5 6M2 12.5V14h12v-1.5" /></svg>立即下载</a> |
+| SHA-256 | `65ab2f82b7192ed276bcddfee8ab8dbc07fd46338e5b960b1f8fa5321bc2fa20` |
+| 本版重点 | 引入并稳定固定的 Default Application Shell，形成 Top / Side / Main 组合、三种 Shell 模式和全局 Light / Dark 基线；同时继续增强 Basic List、Card List、Basic Form 与 Basic Detail 的模板和 Runtime 绑定。 |
+
+### DesignKit Starter V1-r1
+
+| 项目 | 内容 |
+| --- | --- |
+| 版本 | V1-r1 |
+| 状态 | `internal-trial` |
+| 更新时间 | 2026-08-25 |
+| 下载文件 | `designkit-starter-v1-r1.zip` <a class="sb-ai-skill-download-button" href="../../downloads/designkit-starter-v1-r1.zip" download="designkit-starter-v1-r1.zip"><svg class="sb-ai-skill-download-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v8m0 0 3-3m-3 3L5 6M2 12.5V14h12v-1.5" /></svg>立即下载</a> |
+| SHA-256 | `6287895a54ebc0828f9e8250cb05d132ff7712c38fddceb891cfb0126a7302cf` |
+| 本版重点 | 建立统一的能力判断、使用者范围判断、模板与交互选择、Golden Example 对应关系，以及生成结果的验证和证据记录。 |
+
+### DesignKit Starter V1 · Initial Baseline
+
+| 项目 | 内容 |
+| --- | --- |
+| 版本 | V1 |
+| 状态 | `internal-trial` |
+| 更新时间 | 2026-08-07 |
+| 下载文件 | 历史原始包当前不可验证，不提供下载入口 |
+| SHA-256 | 未提供可信的当前校验值 |
+| 本版重点 | 建立基础列表、创建与编辑表单、基础详情页、固定 Runtime、单 HTML Demo 和本地验证清单。 |
+
+V1 仅保留由历史清单与模板确认的能力基线。当前工作区同名归档不能证明它仍是初始 V1，因此本页不展示可能误导的下载链接或 SHA。

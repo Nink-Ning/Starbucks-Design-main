@@ -1,12 +1,241 @@
 ---
 title: 表格工具栏 TableToolbar
-description: 用于承载列表操作入口、视图控制和辅助工具的业务组件。
+description: 用于组合列表操作、轻量快捷筛选和表格工具的业务组件。
 sidebar:
   order: 1
 ---
 
-表格工具栏用于集中放置新增、导出、刷新、列设置等列表相关操作。
+import Demo from '../../../../components/Demo.astro'
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro'
 
-## 建设状态
+TableToolbar 位于表格或列表上方，用于组合批量操作、轻量快捷筛选和表格工具。批量操作位于左侧；QuickFilters 默认位于操作区之后，也可将核心筛选前置；没有批量操作时，快捷筛选与表格工具会从左侧开始排列。组件负责稳定布局、响应式折叠、操作状态、QuickFilters 提交时机和语义事件，不负责表格数据、分页、请求、导出文件生成或列设置面板。
 
-组件文档建设中，后续补充使用场景、示例与 API。
+## 基本用法
+
+标准态同时包含批量操作、快捷筛选和表格工具。基础示例使用真实 TableToolbar 和 Table：选择数据后才显示“已选择 N 项”，其中数量使用品牌色加粗强调；需要选择对象的操作在未选择时保持禁用。Select 会立即过滤，Search 只在按 Enter 后提交；右侧依次为导出、列设置和刷新。当前文档宽度默认外露前 2 个高频批量操作，其余操作进入“更多”；紧凑宽度保留第 1 个核心操作，并将入口改为“批量操作”。
+
+<Demo name="business-components/table-toolbar/basic" />
+
+## 无批量操作
+
+纯展示或只读列表不渲染批量操作区。QuickFilters 会自动从左侧开始排列，表格工具紧随其后；支持仅搜索、下拉筛选、下拉筛选加搜索三种常见轻量组合。
+
+<Demo name="business-components/table-toolbar/read-only" />
+
+## 筛选功能强调
+
+当某个业务筛选需要成为首要入口时，将它的 `placement` 设为 `start`。核心筛选在左侧，常规 Search 和表格工具仍保持在右侧。示例分别展示“全部 / 已上架 / 已下架”商品状态筛选，以及“近30天 / 近90天 / 近1年 / 近3年”时间筛选。
+
+<Demo name="business-components/table-toolbar/quick-filters" />
+
+## 复杂操作与折叠
+
+批量操作按业务优先级从左到右排列，宽容器最多外露 4 项，空间不足时逐步收进“更多”。批量操作区只放对已有数据执行的操作，例如启用、编辑、移动、删除和归档；导入、新增等创建数据入口应放在页面头部或对应导入流程中。
+
+<Demo name="business-components/table-toolbar/complex-actions" />
+
+## Loading / Disabled
+
+Loading 由具体操作或表格工具承担，避免整个工具栏进入含义不清的统一 Loading。Disabled 会禁用操作、筛选和表格工具，但保留当前内容和布局；当某个折叠菜单内的操作全部不可用时，对应的“更多”或“批量操作”入口也同步禁用。
+
+<Demo name="business-components/table-toolbar/states" />
+
+## 适用场景
+
+- 表格或列表上方需要批量操作、轻量快捷筛选、表格工具中的一种或多种能力。
+- 只有 1～3 个无 Label、无校验、无联动的高频筛选条件，并希望选择后实时生效、搜索按 Enter 生效。
+- 页面需要统一批量操作优先级与响应式折叠规则，或统一导出、列设置和刷新的位置及事件语义。
+
+## 不适用场景
+
+- 多字段查询、字段 Label、校验、查询/重置、展开收起或 Draft/Active 分离，请使用 FilterBar。
+- 行内操作请使用 RowActions；分页保持在表格底部。
+- 新增、导入等创建数据入口应放在页面头部或对应业务流程，不放入批量操作区。
+- 异步导出任务、列偏好保存、危险操作确认和业务请求由页面或对应业务组件负责。
+
+## Anatomy
+
+```text
+TableToolbar
+├── Start
+│   ├── OperationActions
+│   │   ├── SelectionSummary（有选择时出现）
+│   │   ├── Operation Buttons
+│   │   └── More Dropdown
+│   └── Start QuickFilters（核心筛选，可选）
+└── Controls
+    ├── End QuickFilters（默认）
+    └── TableTools
+        ├── Export
+        ├── ColumnSettings
+        └── Refresh
+```
+
+## 行为规则
+
+- `selectedCount > 0` 时显示选择数量，并使用品牌色加粗强调数字；为 `0` 时不占位。
+- `requiresSelection` 操作在没有选择对象时自动禁用。
+- 某个响应式折叠菜单内的操作全部禁用时，对应“更多”或“批量操作”触发按钮同步禁用；存在任一可用操作时保持可用。
+- Select、ButtonGroup 和完整 DateRange 变化立即提交 `quickFilterChange`。
+- Search 输入不提交；Enter 提交去除首尾空格后的关键词；清空立即提交空值。
+- 中文输入法组合阶段的 Enter 不触发搜索提交。
+- `quickFilterValues` 提供时为受控模式；否则由 `defaultQuickFilterValues` 初始化非受控状态。
+- 导出、列设置和刷新只发出语义事件，不执行页面业务。
+- `operationActions` 数组顺序就是业务优先级，最高频核心操作放在第 1 项，业务默认建议只外露 1～2 项。
+- 批量操作只作用于已有数据；导入、新增等创建数据入口不放入 `operationActions` 或 `moreActions`。
+- 宽容器最多外露前 4 项，中等容器外露前 2 项；紧凑容器只外露第 1 项，并使用“批量操作”入口承载其余操作。
+- 超出外露上限的批量操作与显式 `moreActions` 按原顺序合并，重复 `key` 保留优先级更高的第一项。
+- 同一行空间竞争时优先保留前 2 个批量操作，Select 与 Search 可以弹性缩窄；表格工具按钮保持固定尺寸。
+- 没有批量操作区时，QuickFilters 和表格工具从工具栏左侧开始排列；有批量操作区时 controls 保持右对齐。
+- QuickFilter 的 `placement` 默认为 `end`；核心筛选可设为 `start`，与常规搜索和表格工具分居两侧。
+- ButtonGroup 使用基础 Radio 的默认填充型样式，各选项在配置宽度内等分，不保留尾部空白。
+- 窄容器使用组件自身的 container query 换行和堆叠，不依赖页面 viewport。
+
+## QuickFilters 与 FilterBar
+
+<div className="sb-table-toolbar-doc-table">
+
+| 能力         | QuickFilters         | FilterBar       |
+| ------------ | -------------------- | --------------- |
+| 条件数量     | 推荐 1～3 个         | 多字段          |
+| 布局         | 紧凑横向             | 响应式分栏      |
+| Label / 校验 | 不支持               | 支持            |
+| 查询 / 重置  | 不支持               | 支持            |
+| 展开 / 收起  | 不支持               | 支持            |
+| 生效方式     | 选择实时、搜索 Enter | Manual / Change |
+
+</div>
+
+## API
+
+<FrameworkBlock framework="react">
+
+### React API
+
+<div className="sb-table-toolbar-doc-table">
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `quickFilters` | `readonly TableToolbarQuickFilter[]` | `[]` | 轻量筛选 Schema，数组顺序即展示顺序。 |
+| `quickFilterValues` | `Record<string, unknown>` | - | 受控已生效筛选值。 |
+| `defaultQuickFilterValues` | `Record<string, unknown>` | `{}` | 非受控初始筛选值。 |
+| `selectedCount` | `number` | `0` | 已选对象数量，大于 0 时显示摘要。 |
+| `operationActions` | `readonly TableToolbarAction[]` | `[]` | 左侧操作；数组顺序即业务优先级，最多外露 4 项。 |
+| `moreActions` | `readonly TableToolbarAction[]` | `[]` | “更多”下拉操作。 |
+| `tableTools` | `TableToolbarTools` | - | 导出、列设置和刷新配置。 |
+| `disabled` | `boolean` | `false` | 禁用工具栏交互。 |
+| `texts` | `Partial<TableToolbarTexts>` | 中文默认值 | 文案和选择数量格式。 |
+| `ariaLabel` | `string` | `表格工具栏` | 根节点可访问名称。 |
+| `className` | `string` | - | 根节点 class。 |
+| `style` | `CSSProperties` | - | 根节点行内样式。 |
+
+</div>
+
+#### Events
+
+<div className="sb-table-toolbar-doc-table">
+
+| 事件                                    | 说明                      |
+| --------------------------------------- | ------------------------- |
+| `onQuickFilterChange(values, meta)`     | 已生效快捷筛选变化。      |
+| `onSearchSubmit(keyword, values, meta)` | Search Enter 或清空提交。 |
+| `onOperation(actionKey, meta)`          | 左侧或“更多”操作。        |
+| `onExport(meta)`                        | 触发导出意图。            |
+| `onColumnSettings(meta)`                | 打开列设置意图。          |
+| `onRefresh(meta)`                       | 刷新列表意图。            |
+
+</div>
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### Vue API
+
+Vue 使用同一组 Props 和行为契约；根节点 `class`、`style` 通过 attrs fallthrough 传入。
+
+<div className="sb-table-toolbar-doc-table">
+
+| Emits                      | 说明                      |
+| -------------------------- | ------------------------- |
+| `update:quickFilterValues` | 快捷筛选受控更新。        |
+| `quickFilterChange`        | 已生效快捷筛选变化。      |
+| `searchSubmit`             | Search Enter 或清空提交。 |
+| `operation`                | 左侧或“更多”操作。        |
+| `export`                   | 触发导出意图。            |
+| `columnSettings`           | 打开列设置意图。          |
+| `refresh`                  | 刷新列表意图。            |
+
+</div>
+
+</FrameworkBlock>
+
+## Schema
+
+`TableToolbarQuickFilter` 是 `search`、`select`、`buttonGroup`、`dateRange` 的联合类型。所有类型包含稳定的 `name`，可配置 `visible`、`disabled`、`placement`、`width`、`ariaLabel` 和 `defaultValue`；`placement` 默认为 `end`，设为 `start` 时用于前置核心筛选。Select 与 ButtonGroup 使用统一的 `{ label, value, disabled? }` options。
+
+`TableToolbarAction` 包含 `key`、`label`，可配置 `icon`、`type`、`status`、`visible`、`disabled`、`disabledReason`、`loading` 和 `requiresSelection`。危险操作确认不在 Toolbar 内部完成。`TableToolbarTexts` 可覆盖 `more` 和紧凑态的 `batchActions` 等内置文案。
+
+## AI Contract
+
+### Trigger
+
+当表格或列表上方需要稳定承载批量操作、1～3 个轻量快捷筛选或导出/列设置/刷新中的一种或多种能力时，优先使用 TableToolbar。
+
+### Do not use
+
+不要用 TableToolbar 替代 FilterBar、Pagination、RowActions、ColumnSettings 面板、ExportPanel 或页面请求层。
+
+### Generation Rules
+
+1. 左侧批量操作只放作用于已有数据的操作；导入、新增和页面级全局操作放 Page Header 或对应业务流程。
+2. QuickFilters 不增加 Label、校验、查询/重置或展开收起。
+3. 需要选择对象的操作必须设置 `requiresSelection` 并传入 `selectedCount`。
+4. 页面接收事件后负责过滤数据、请求、确认和错误恢复。
+5. 表格工具顺序保持导出、列设置、刷新。
+6. 按业务使用频率排列 `operationActions`；第 1 项必须是最高频核心操作，默认建议外露 1～2 项，单行最多外露 4 项，其余操作自动进入折叠菜单。
+7. 超过 3 个条件或出现复杂联动时改用 FilterBar。
+
+### Known Pitfalls
+
+- Search 的 `quickFilterValues` 是已提交值，不是正在输入的 Draft。
+- `onExport` 不会自动下载文件，`onColumnSettings` 不会自动打开弹窗。
+- `disabledReason` 只解释禁用原因，不能替代权限判断。
+- 折叠菜单内全部操作不可用时，触发按钮也会禁用；不要依赖点击禁用入口展示操作说明。
+
+## Evaluator
+
+<div className="sb-table-toolbar-doc-table">
+
+| 检查项     | Pass                                      | Warn                    | Block                         |
+| ---------- | ----------------------------------------- | ----------------------- | ----------------------------- |
+| 组件选择   | 轻量工具栏场景                            | 4 个以上简单条件        | 用 Toolbar 复制完整 FilterBar |
+| 搜索提交   | 输入不提交，Enter 提交                    | 清空策略未说明          | 每次输入都请求                |
+| 快捷筛选   | Select/ButtonGroup/DateRange 实时生效     | 页面重复包装控件        | 组件内发业务请求              |
+| 选择操作   | 选择后显示数量，依赖选择的操作及全禁用菜单入口正确禁用 | 未说明选择范围 | 无选择仍执行批量操作          |
+| 操作优先级 | 高频操作在前，按 4 / 2 / 1 规则响应式外露 | 顺序未体现使用频率      | 低频操作挤占核心操作位置      |
+| 工具事件   | 导出/列设置/刷新语义明确                  | 使用通用 operation 替代 | 组件内写死导出或列偏好        |
+| 双端一致性 | React/Vue 默认值和事件时机一致            | 仅框架语法不同          | 用户可见行为不同              |
+| 可访问性   | Toolbar 有名称，图标按钮有名称和 Tooltip  | 部分禁用原因缺失        | 图标按钮不可感知              |
+
+</div>
+
+## 当前限制
+
+- V1 不支持自定义筛选渲染、依赖联动、保存筛选和逐按钮动态测量。
+- V1 使用固定容器断点执行 4 / 2 / 1 外露规则；组件以数组顺序作为业务优先级，不自动推断操作频率。
+- 不管理跨页选择、导出范围、列配置内容或服务端请求。
+
+## Change Log
+
+### 2026-08-21
+
+- 新增 React / Vue TableToolbar、QuickFilters、标准表格工具和真实 Docs Demo。
+- 明确选择数量、实时筛选、Search Enter 提交以及与 FilterBar 的边界。
+- 增加中窄容器操作自动收纳，并将 Docs Demo 调整为填充画布与内层业务卡片。
+- 增加批量操作 4 / 2 / 1 优先级外露、紧凑态“批量操作”入口、无操作时 controls 左对齐，以及筛选器弹性缩窄规则。
+- 补齐常用、无批量操作、筛选强调、复杂操作四类场景 Demo，并增加 QuickFilter `start` / `end` 布局语义。
+- 明确批量操作区不承载导入或新增入口；Demo 中使用“移动”替代“导入”。
+- Demo 业务卡片去除描边，并修正“更多”菜单图标与文字的垂直对齐。
+- ButtonGroup 改用默认填充型并在配置宽度内等分；时间快捷筛选固定为“近30天 / 近90天 / 近1年 / 近3年”。
+- 选择数量中的数字使用品牌色加粗；折叠菜单内全部操作不可用时，同步禁用“更多”或“批量操作”入口。

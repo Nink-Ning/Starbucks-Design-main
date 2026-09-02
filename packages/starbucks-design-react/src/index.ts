@@ -27,8 +27,44 @@ export type {
   MultiSelectFilterField,
   SelectFilterField,
   TreeSelectFilterField,
-  TreeSelectOption,
+  TreeSelectOption
 } from './business/filter-bar'
+export { TagGroupManagement } from './business/tag-group-management'
+export type {
+  TagGroupContentContext,
+  TagGroupDeleteConfirm,
+  TagGroupDeleteConfirmOptions,
+  TagGroupEmptyContext,
+  TagGroupEventMeta,
+  TagGroupEventSource,
+  TagGroupItem,
+  TagGroupManagementProps,
+  TagGroupManagementTexts
+} from './business/tag-group-management'
+export { TableToolbar } from './business/table-toolbar'
+export type {
+  TableToolbarAction,
+  TableToolbarButtonGroupFilter,
+  TableToolbarButtonType,
+  TableToolbarDateRangeFilter,
+  TableToolbarOperationEventMeta,
+  TableToolbarOption,
+  TableToolbarPrimitiveValue,
+  TableToolbarProps,
+  TableToolbarQuickFilter,
+  TableToolbarQuickFilterBase,
+  TableToolbarQuickFilterEventMeta,
+  TableToolbarQuickFilterPlacement,
+  TableToolbarQuickFilterSource,
+  TableToolbarQuickFilterValues,
+  TableToolbarSearchFilter,
+  TableToolbarSelectFilter,
+  TableToolbarTexts,
+  TableToolbarToolConfig,
+  TableToolbarToolEventMeta,
+  TableToolbarToolName,
+  TableToolbarTools
+} from './business/table-toolbar'
 export * from '@arco-design/web-react'
 
 // Locale type is not exported from @arco-design/web-react's main entry,

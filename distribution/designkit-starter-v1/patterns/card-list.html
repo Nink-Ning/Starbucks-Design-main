@@ -1,0 +1,32 @@
+<!--
+  Starter P1.2 structural reference: Card List
+  Golden: NO. Authority: approved Docs Product Card List implementation.
+  Business data, images, default selection and exact action labels are slots.
+-->
+<main data-reference-id="starter.template.card-list" data-reference-status="approved-template-reference" data-reference-structure="shared-page-header+docs-card-list-dom" data-docs-authority="pages/golden-examples/card-list.html.ts" data-golden-cross-check="examples/multi-select-card-list.html" data-reference-dom-reused="true" data-frozen-regions="toolbar;container;card;selection;media;footer-action">
+  <header data-template-region="page-header" data-header-level="1" data-back-icon="absent" data-text-back="absent" data-breadcrumb="absent">
+    <h1 data-template-slot="PAGE_TITLE" data-title-font-size="20px"></h1>
+    <button data-template-slot="CONTEXT_HELP" data-help-pattern="title-adjacent" data-icon="IconQuestionCircle" data-trigger="Tooltip[position=bottom]" data-optional="true"></button>
+    <div data-template-slot="HEADER_ACTIONS"></div>
+  </header>
+  <section data-template-region="card-list" data-selection-summary-policy="exactly-one-canonical-summary">
+    <div data-template-region="toolbar-row">
+      <div data-template-slot="SELECTION_SUMMARY" data-selection-owner="page"></div>
+      <div data-template-slot="TABLE_TOOLBAR" data-hide-generic-selection-summary="true"></div>
+      <div data-template-slot="CARD_BATCH_ACTIONS" data-selection-owner="page" data-action-owner="card-list" data-action-variant="secondary-outlined-only" data-primary-action="forbidden" data-priority="visible-vs-more"></div>
+    </div>
+    <div data-template-slot="CARD_GRID" data-grid-width-driven="true" data-card-anatomy="approved-only" data-dom-authority="dk-card-grid">
+      <article data-template-slot="CARD" data-card-node="dk-card" data-media-shape="circle" data-media-override="explicit-only">
+        <div data-template-slot="CARD_CONTENT" data-card-node="dk-card__content">
+          <div data-template-slot="CARD_MEDIA" data-card-node="dk-card__media"></div>
+          <div data-card-node="dk-card__primary">
+            <div data-template-slot="CARD_TITLE_STATUS" data-card-node="dk-card__heading"></div>
+            <div data-template-slot="CARD_METADATA" data-card-node="dk-card__metadata" data-metadata-policy="approved-only"></div>
+          </div>
+          <div data-template-slot="CARD_SELECTION_CONTROL" data-card-node="dk-card__selection"></div>
+        </div>
+        <footer data-template-slot="CARD_FOOTER_ACTIONS" data-card-node="dk-card__footer"></footer>
+      </article>
+    </div>
+  </section>
+</main>

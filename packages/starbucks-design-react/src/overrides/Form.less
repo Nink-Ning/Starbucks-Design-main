@@ -10,6 +10,11 @@
   margin-bottom: var(--spacing-8);
 }
 
+.arco-form .arco-form-layout-vertical,
+.arco-form .arco-form-item-layout-vertical {
+  margin-bottom: var(--spacing-6);
+}
+
 .arco-form .arco-form-item:last-child {
   margin-bottom: 0;
 }
@@ -169,6 +174,12 @@
 #form-validation-status(success, var(--color-success), var(--color-success-focus));
 #form-validation-status(warning, var(--color-warning), var(--color-warning-focus));
 #form-validation-status(error, var(--color-danger), var(--color-danger-focus));
+
+// React Form.Item uses this class. Keep its block layout when the Docs site
+// also loads the Vue form stylesheet, whose base item rule is flex.
+.arco-form .arco-form-layout-vertical {
+  display: block;
+}
 
 .arco-form.arco-form-layout-vertical > .arco-form-label-item,
 .arco-form .arco-form-item-layout-vertical > .arco-form-label-item {

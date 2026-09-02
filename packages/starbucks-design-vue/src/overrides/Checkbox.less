@@ -192,6 +192,12 @@
   line-height: var(--lh-22);
 }
 
+.arco-checkbox .arco-checkbox-icon-check {
+  width: 12px;
+  height: 100%;
+  color: #fff;
+}
+
 .arco-checkbox:not(.arco-checkbox-disabled):not(.arco-checkbox-checked):not(.arco-checkbox-indeterminate):hover
   .arco-checkbox-icon {
   border-color: var(--color-primary);
@@ -216,4 +222,12 @@
 
 .arco-checkbox-disabled .arco-checkbox-label {
   color: var(--color-text-disabled);
+}
+
+.arco-checkbox-disabled .arco-checkbox-icon-check {
+  color: var(--color-text-disabled);
+}
+
+.arco-checkbox-disabled.arco-checkbox-indeterminate .arco-checkbox-icon::after {
+  background-color: var(--color-text-disabled);
 }

@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 
 const srcDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const vueSrcDir = resolve(srcDir, '../../starbucks-design-vue/src')
 
 const expectExactRule = (styles: string, selector: string, declarations: string[]) => {
   expect(styles).toContain(
@@ -12,6 +13,54 @@ const expectExactRule = (styles: string, selector: string, declarations: string[
 }
 
 describe('stylesheet entry', () => {
+  it('maintains the FilterBar React/Vue override parity contract', () => {
+    const reactFilterBar = readFileSync(resolve(srcDir, 'overrides/FilterBar.less'), 'utf8')
+    const vueFilterBar = readFileSync(resolve(vueSrcDir, 'overrides/FilterBar.less'), 'utf8')
+
+    expect(reactFilterBar).toBe(vueFilterBar)
+    expect(reactFilterBar).not.toContain('scripts/generate-overrides.py')
+    expect(reactFilterBar).toContain('currently maintained manually with shared Design Tokens')
+  })
+
+  it('maintains the compact Menu React/Vue override parity contract', () => {
+    const reactMenu = readFileSync(resolve(srcDir, 'overrides/Menu.less'), 'utf8')
+    const vueMenu = readFileSync(resolve(vueSrcDir, 'overrides/Menu.less'), 'utf8')
+
+    expect(reactMenu).toBe(vueMenu)
+    expect(reactMenu).toContain('height: 34px;')
+    expect(reactMenu).toContain('font-size: var(--fs-14);')
+    expect(reactMenu).not.toContain('font-size: 13px;')
+    expect(reactMenu).toContain('border-radius: var(--border-radius-md);')
+    expect(reactMenu).not.toContain('border-radius: var(--border-radius-lg);')
+    expect(reactMenu).toContain('.arco-menu-item .arco-menu-item-inner > .arco-icon')
+    expect(reactMenu).toContain('.arco-menu-item.arco-menu-has-icon')
+    expect(reactMenu).toContain('margin-right: var(--spacing-5);')
+    expect(reactMenu).toContain('margin-left: var(--spacing-9);')
+    expect(reactMenu).toContain('> span:first-child:not(.arco-menu-icon):not(.arco-menu-icon-suffix)')
+    expect(reactMenu).toContain('display: inline-flex;')
+    expect(reactMenu).toContain('align-items: center;')
+    expect(reactMenu).toContain("content: '';")
+    expect(reactMenu).toContain('transition: height 0.25s cubic-bezier(0.77, 0, 0.175, 1);')
+    expect(reactMenu).toContain('transform: translateY(-50%) rotate(-90deg);')
+    expect(reactMenu).toContain('width: var(--spacing-14);')
+    expect(reactMenu).toContain('.arco-menu-vertical.arco-menu-collapse .arco-menu-inner')
+    expect(reactMenu).toContain('overflow-x: hidden;')
+    expect(reactMenu).toContain('justify-content: center;')
+    expect(reactMenu).toContain('min-width: 34px;')
+    expect(reactMenu).toContain('font-size: 0;')
+    expect(reactMenu).toContain('.arco-menu-has-icon')
+    expect(reactMenu).toContain('.arco-menu-collapsed .arco-menu-title')
+    expect(reactMenu).toContain('background-color: var(--bg-color-secondarycontainer);')
+    expect(reactMenu).toContain('color: var(--color-primary);')
+    expect(reactMenu).toContain('color: var(--color-primary-active);')
+    expect(reactMenu).toContain(":where([data-theme='dark'], [arco-theme='dark'])")
+    expect(reactMenu).toContain('.arco-menu-inline-header.arco-menu-selected')
+    expect(reactMenu).toContain('.arco-menu-icon-suffix')
+    expect(reactMenu).toContain('box-shadow: inset 0 0 0 2px var(--color-primary);')
+    expect(reactMenu).not.toContain('!important')
+    expect(reactMenu).not.toContain('margin-right: 20px;')
+  })
+
   it('loads the designer compile-time theme and overrides after Arco', () => {
     const entry = readFileSync(resolve(srcDir, 'components.less'), 'utf8')
     const arcoImport = "@import '@arco-design/web-react/es/Watermark/style/index.less';"
@@ -54,6 +103,35 @@ describe('stylesheet entry', () => {
     ])
   })
 
+  it('keeps disabled outline and dashed buttons neutral at Arco type-selector specificity', () => {
+    const reactButton = readFileSync(resolve(srcDir, 'overrides/Button.less'), 'utf8')
+    const vueButton = readFileSync(resolve(vueSrcDir, 'overrides/Button.less'), 'utf8')
+
+    for (const button of [reactButton, vueButton]) {
+      expect(button).toContain(".arco-btn-outline[type='button'].arco-btn-disabled")
+      expect(button).toContain(".arco-btn-outline[type='submit'].arco-btn-disabled")
+      expect(button).toContain(".arco-btn-dashed[type='button'].arco-btn-disabled")
+      expect(button).toContain(".arco-btn-dashed[type='submit'].arco-btn-disabled")
+      expect(button).toContain('color: var(--color-text-disabled);')
+      expect(button).toContain('background-color: var(--bg-color-component-disabled);')
+      expect(button).toContain('border-color: var(--color-border-component);')
+      expect(button).not.toContain('!important')
+    }
+  })
+
+  it('keeps the React Dropdown trigger wrapper visually neutral', () => {
+    const dropdown = readFileSync(resolve(srcDir, 'overrides/Dropdown.less'), 'utf8')
+
+    expectExactRule(dropdown, '.arco-trigger.arco-dropdown', [
+      'padding: 0;',
+      'overflow: visible;',
+      'background-color: transparent;',
+      'border: 0;',
+      'border-radius: 0;',
+      'box-shadow: none;',
+    ])
+  })
+
   it('keeps Progress line background on the track instead of the React root', () => {
     const progress = readFileSync(resolve(srcDir, 'overrides/Progress.less'), 'utf8')
 
@@ -65,6 +143,18 @@ describe('stylesheet entry', () => {
       'border-radius: 999px;',
     ])
     expect(progress).not.toMatch(/^\.arco-progress-line\s*\{/m)
+  })
+
+  it('keeps React vertical Form.Item layout block when Vue styles are also loaded', () => {
+    const form = readFileSync(resolve(srcDir, 'overrides/Form.less'), 'utf8')
+
+    expectExactRule(form, '.arco-form .arco-form-layout-vertical', ['display: block;'])
+    expectExactRule(
+      form,
+      '.arco-form .arco-form-layout-vertical,\n' +
+        '.arco-form .arco-form-item-layout-vertical',
+      ['margin-bottom: var(--spacing-6);'],
+    )
   })
 
   it('maps React List containers, rows, and meta text to shared tokens', () => {

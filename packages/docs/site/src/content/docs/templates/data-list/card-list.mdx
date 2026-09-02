@@ -1,14 +1,94 @@
 ---
 title: 卡片列表
-description: 列表页页面模板。
+description: 适用于以卡片形式展示结构化内容，并支持单项操作、批量选择与批量操作的列表页面。
 sidebar:
   order: 2
 tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import GoldenExamplePreview from '../../../../components/GoldenExamplePreview.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="卡片列表" description="卡片列表模板预留中，后续补充完整页面预览。" />
+<GoldenExamplePreview title="卡片列表 Golden Example" />
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>卡片列表是组合共享 Page Header、工具栏、搜索筛选、批量操作和响应式卡片网格的页面模板，用于浏览、选择和管理具有明显视觉特征的对象。</li>
+      <li>Toolbar 组合全选、一个 canonical 选择摘要、批量操作、搜索、筛选和工具操作；不得再显示第二个通用 selected count。</li>
+      <li>Card Grid 根据可用内容宽度自动决定列数，不根据浏览器设备名称固定为桌面、平板或手机列数。</li>
+      <li>Card 承载媒体、标题、状态、元数据、选择控件和对象级操作。</li>
+      <li>页面模板负责选择集合、筛选结果和批量操作，卡片只表达单个对象及其状态。</li>
+      <li>页面头部使用共享 PageHeader，标题使用 20px；卡片列表是一级页面，不显示返回按钮。以下 Docs/Golden DOM anatomy 是实现基线：紧凑横向媒体、标题与状态摘要、次级元数据、悬浮/聚焦可见的选择控件、底部序号与对象操作区。</li>
+      <li>Golden 中的具体商品文案、图片、价格、预置选择和 Export 入口属于 Example Specific；Export 不代表 Starter 支持真实导出。</li>
+      <li>Normal、Loading、Empty、Error 和 Retry/Recovery 是状态覆盖要求；Card Body 默认不改变选择，Selection Set 由页面统一拥有。</li>
+      <li>Golden Preview 至少占满当前首屏剩余高度并保留 20px 底部 gutter；内容超过首屏时按真实内容高度继续增长。Toolbar 与 Card Grid 始终顶对齐，首屏剩余空间保留在列表下方，不参与卡片高度分配。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>业务组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>TableToolbar</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Checkbox</code>
+        <code>Button</code>
+        <code>Tag</code>
+        <code>Dropdown</code>
+        <code>Menu</code>
+        <code>Popconfirm</code>
+        <code>Empty</code>
+        <code>Message</code>
+      </div>
+    </div>
+    <ul>
+      <li>本模板是页面组合参考，不是公共 <code>CardListPage</code> 或 <code>CheckCard</code> 组件。Golden 内部的 <code>.dk-card</code> 是页面级组合样式，不代表仓库已经发布公共 Card API。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>设计规则</h2>
+    <ol>
+      <li>适合商品、内容、门店和视觉资产等依赖“看图识物”的对象；海量数据比较、多字段排序和高密度结构化扫描应优先使用 Table / Basic List。</li>
+      <li>只有 Selection Control 改变选择状态，Card Body 默认不触发选择。</li>
+      <li>列表首次进入时默认不选择任何 Card；批量操作保持禁用，直到选择集合非空。</li>
+      <li>全选只影响当前筛选结果；选择摘要与批量操作使用同一选择集合。Card Actions 与 Batch Actions 独立配置，前者作用于单个对象，后者作用于当前选择集合。</li>
+      <li>Card 最多展示 3 个操作入口，More 本身计为一个入口；超过 3 个时保留优先级最高的 2 个，其余按原顺序进入 More Menu。More 入口使用 Arco <code>IconMore</code> 图标按钮，并保留描述对象名称的可访问标签。</li>
+      <li>Card 最小宽度以单行可读至少 14 个中文字符的标题为目标；当前模板校准值为 360px，不升级为全局 DesignKit Token。</li>
+      <li>标题优先单行展示，超出可用宽度时省略，不通过 <code>maxlength</code> 限制真实字符串长度。</li>
+      <li>Grid 使用 Card 最小宽度、8px Grid Gap 和可用内容宽度自动决定列数，并保留当前宽度已经能够容纳的列轨道。结果数量减少时只留下空位，不把单张或最后一行少量 Card 拉伸填满整行；例如容器可放 3 列时，1、2 或 5 张结果仍使用三列卡宽，只有可用宽度不足时才自然降为 2 列或 1 列。</li>
+      <li>Card Grid 行高由卡片内容决定并保持顶对齐，不随 Preview 首屏高度拉伸；同一行 Card 使用一致的自然高度。</li>
+      <li>Toolbar 与 Grid 使用独立响应式策略；Toolbar 在搜索或筛选控件失去可用宽度之前换行，Grid 只改变可容纳的列轨道数量，不根据当前筛选结果数量重新分配卡片宽度。页面内容容器四周统一使用 16px padding。</li>
+      <li>Card 四周圆角和内容区下方圆角均为 12px，内容区顶部圆角为 10px；Card DOM、圆形 media、footer/actions 和 selection treatment 直接复用 Docs Card List approved structure。批量操作、筛选、搜索和工具操作仅在 Docs 实际使用时复用 TableToolbar。</li>
+      <li>悬浮和键盘聚焦显示选择入口；不支持 hover 的设备保持选择入口可见。Checkbox、对象操作和 More Menu 必须支持键盘操作并具有可访问名称，选中状态不只依赖颜色，复制、删除和批量操作提供反馈或确认。</li>
+      <li>Preview 跟随 Docs 亮色或暗色主题；主题动画层使用已渲染内容的轻量快照，避免重新挂载大型 iframe 造成卡顿。Preview 直接加载冻结的 <code>multi-select-card-list.html</code>，Docs 只提供嵌入尺寸、主题和响应式壳层适配。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>Golden Fidelity Contract</h2>
+    <h3>必须保留</h3>
+    <ul>
+      <li>Card 的外层比例、紧凑密度、媒体与内容关系、标题/状态/元数据层级、底部操作区和选择控件位置。</li>
+      <li>Card Actions 与 Batch Actions 的目标边界、More overflow、选中状态持久性，以及基于可用内容宽度的 Grid 响应式行为。</li>
+    </ul>
+    <h3>允许适配</h3>
+    <ul>
+      <li>业务字段、图片内容、标题文案、状态值、标签和已获批准的对象级/批量操作。</li>
+    </ul>
+    <h3>不得自行发明</h3>
+    <ul>
+      <li>顶部大图 Banner、新的边框/阴影/选中徽标、常驻未选中 Checkbox、新 Footer 层级、新卡片容器或新的信息密度模型。</li>
+      <li>不得让 Card Body 隐式选择，不得把 Card Actions 当作 Batch Actions，也不得从 Golden 的 Export 推断 Starter 能力。</li>
+    </ul>
+  </section>
+</section>

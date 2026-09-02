@@ -1,62 +1,58 @@
 <template>
-  <Teleport to="[data-template-action-host='basic-list']">
-    <div class="sb-basic-list-page__breadcrumb-actions">
-      <span>页面状态</span>
-      <RadioGroup v-model="viewMode" type="button">
-        <Radio value="normal">Normal</Radio>
-        <Radio value="loading">Loading</Radio>
-        <Radio value="empty">Empty</Radio>
-        <Radio value="error">Error</Radio>
-      </RadioGroup>
-      <Button type="primary" @click="createModalVisible = true">
-        <template #icon><IconPlus /></template>
-        新建门店
-      </Button>
-    </div>
+  <Teleport v-if="pageHeaderInDocs" :to="pageHeaderTarget">
+    <PageHeader title="门店列表" help-text="展示门店信息、营业状态和行操作">
+      <template #extra>
+        <div class="sb-basic-list-page__breadcrumb-actions">
+          <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
+            <Option value="normal">Normal</Option>
+            <Option value="loading">Loading</Option>
+            <Option value="empty">Empty</Option>
+            <Option value="error">Error</Option>
+          </Select>
+          <Button type="primary" @click="createModalVisible = true">
+            <template #icon><IconPlus /></template>
+            新建门店
+          </Button>
+        </div>
+      </template>
+    </PageHeader>
   </Teleport>
 
-  <div class="sb-basic-list-page">
-    <section class="sb-basic-list-page__module">
-      <FilterBar
-        :fields="fields"
-        :model-value="draftValues"
-        :active-values="activeValues"
-        :default-value="initialFilterValues"
-        :columns="filterColumns"
-        :default-visible-count="3"
-        submit-mode="manual"
-        :loading="isLoading"
-        @values-change="handleValuesChange"
-        @update:active-values="handleActiveValuesChange"
-      />
-    </section>
-
+  <div class="sb-basic-list-page sb-template-page-surface">
+    <PageHeader v-if="!pageHeaderInDocs" title="门店列表" help-text="展示门店信息、营业状态和行操作">
+      <template #extra>
+        <div class="sb-basic-list-page__breadcrumb-actions">
+          <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
+            <Option value="normal">Normal</Option>
+            <Option value="loading">Loading</Option>
+            <Option value="empty">Empty</Option>
+            <Option value="error">Error</Option>
+          </Select>
+          <Button type="primary" @click="createModalVisible = true">
+            <template #icon><IconPlus /></template>
+            新建门店
+          </Button>
+        </div>
+      </template>
+    </PageHeader>
     <section class="sb-basic-list-page__module sb-basic-list-page__table-module">
-      <div class="sb-basic-list-page__toolbar">
-        <div class="sb-basic-list-page__toolbar-left">
-          <span v-if="selectedRowKeys.length > 0" class="sb-basic-list-page__selection">已选择 {{ selectedRowKeys.length }} 项</span>
-          <Button :disabled="selectedRowKeys.length === 0" @click="openBatchConfirm('open')">批量启用</Button>
-          <Button :disabled="selectedRowKeys.length === 0" @click="openBatchConfirm('closed')">批量停用</Button>
-          <Button :disabled="selectedRowKeys.length === 0" @click="selectedRowKeys = []">清除选择</Button>
-        </div>
-        <div class="sb-basic-list-page__toolbar-right">
-          <Tooltip content="刷新">
-            <Button aria-label="刷新" :loading="refreshing" @click="refreshData">
-              <template #icon><IconRefresh /></template>
-            </Button>
-          </Tooltip>
-          <Tooltip content="列设置">
-            <Button aria-label="列设置" @click="columnModalVisible = true">
-              <template #icon><IconSettings /></template>
-            </Button>
-          </Tooltip>
-          <Tooltip content="导出">
-            <Button aria-label="导出" @click="downloadCsv(filteredStores)">
-              <template #icon><IconDownload /></template>
-            </Button>
-          </Tooltip>
-        </div>
-      </div>
+      <TableToolbar
+        :selected-count="selectedRowKeys.length"
+        :quick-filters="quickFilters"
+        :quick-filter-values="quickFilterValues"
+        :operation-actions="operationActions"
+        :more-actions="moreActions"
+        :table-tools="{
+          export: true,
+          columnSettings: true,
+          refresh: { loading: refreshing },
+        }"
+        @update:quick-filter-values="quickFilterValues = $event"
+        @operation="handleToolbarOperation"
+        @export="downloadCsv(visibleStores)"
+        @column-settings="columnModalVisible = true"
+        @refresh="refreshData"
+      />
 
       <Result
         v-if="viewMode === 'error'"
@@ -70,38 +66,40 @@
       </Result>
 
       <template v-else>
-        <Table
-          row-key="id"
-          :columns="visibleColumns"
-          :data="pageData"
-          :loading="isLoading"
-          :pagination="false"
-          :scroll="{ x: 1160 }"
-          :row-selection="rowSelection"
-          v-model:selectedKeys="selectedRowKeys"
-        >
-          <template #status="{ record }">
-            <Tag :color="statusColor(record.status)">{{ statusLabel(record.status) }}</Tag>
-          </template>
-          <template #type="{ record }">{{ typeLabel(record.type) }}</template>
-          <template #city="{ record }">{{ record.region }} / {{ record.city }}</template>
-          <template #actions>
-            <Space class="sb-basic-list-page__row-actions" :size="4">
-              <Button type="text" size="mini">查看</Button>
-              <Button type="text" size="mini">编辑</Button>
-              <Dropdown>
-                <Button type="text" size="mini"><template #icon><IconMore /></template></Button>
-                <template #content>
-                  <Doption>复制门店</Doption>
-                  <Doption>停用门店</Doption>
-                </template>
-              </Dropdown>
-            </Space>
-          </template>
-          <template #empty>
-            <Empty description="暂无符合条件的门店" />
-          </template>
-        </Table>
+        <div ref="tableViewport" class="sb-basic-list-page__table-viewport">
+          <Table
+            row-key="id"
+            :columns="visibleColumns"
+            :data="pageData"
+            :loading="isLoading"
+            :pagination="false"
+            :scroll="{ x: 1160, y: tableBodyHeight }"
+            :row-selection="rowSelection"
+            v-model:selectedKeys="selectedRowKeys"
+          >
+            <template #status="{ record }">
+              <Tag :color="statusColor(record.status)">{{ statusLabel(record.status) }}</Tag>
+            </template>
+            <template #type="{ record }">{{ typeLabel(record.type) }}</template>
+            <template #city="{ record }">{{ record.region }} / {{ record.city }}</template>
+            <template #actions="{ record }">
+              <Space class="sb-basic-list-page__row-actions sbux-table-row-actions" :size="4">
+                <Button type="text" size="mini" :aria-label="`查看 ${record.name}`">查看</Button>
+                <Button type="text" size="mini" :aria-label="`编辑 ${record.name}`">编辑</Button>
+                <Dropdown @select="handleRowAction($event, record)">
+                  <Button type="text" size="mini" :aria-label="`${record.name} 更多操作`"><template #icon><IconMore /></template></Button>
+                  <template #content>
+                    <Doption>复制门店</Doption>
+                    <Doption>停用门店</Doption>
+                  </template>
+                </Dropdown>
+              </Space>
+            </template>
+            <template #empty>
+              <Empty description="暂无符合条件的门店" />
+            </template>
+          </Table>
+        </div>
         <div class="sb-basic-list-page__pagination">
           <Pagination
             :total="total"
@@ -175,16 +173,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed, getCurrentInstance, ref, watch } from 'vue';
-import { FilterBar, Modal } from '@sbux/starbucks-design-vue';
-import type { FilterFieldSchema, FilterValue } from '@sbux/starbucks-design-vue';
+import { computed, getCurrentInstance, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { Modal, TableToolbar } from '@sbux/starbucks-design-vue';
+import { PageHeader } from '@sbux/starbucks-design-vue/pro';
+import type {
+  TableToolbarAction,
+  TableToolbarQuickFilter,
+  TableToolbarQuickFilterValues,
+} from '@sbux/starbucks-design-vue';
 import {
-  IconDownload,
+  IconCheckCircle,
+  IconCloseCircle,
   IconMore,
+  IconMinusCircle,
   IconPlus,
-  IconRefresh,
-  IconSettings,
 } from '@sbux/starbucks-design-vue/icon';
+
+const pageHeaderTarget = '[data-template-page-header-host="basic-list"]';
+const pageHeaderInDocs = typeof document !== 'undefined' && Boolean(document.querySelector(pageHeaderTarget));
 
 type StoreStatus = 'open' | 'preparing' | 'closed';
 type BatchStatus = Extract<StoreStatus, 'open' | 'closed'>;
@@ -255,17 +261,28 @@ const cityOptions = [
   },
 ];
 
-const fields: FilterFieldSchema[] = [
-  { type: 'input', name: 'keyword', label: '关键词', placeholder: '搜索门店名称或门店编号', allowClear: true, priority: 0 },
-  { type: 'select', name: 'status', label: '营业状态', placeholder: '请选择营业状态', allowClear: true, options: statusOptions, priority: 1 },
-  { type: 'cascader', name: 'city', label: '所在城市', placeholder: '请选择城市', allowClear: true, options: cityOptions, priority: 2 },
-  { type: 'multiSelect', name: 'storeType', label: '门店类型', placeholder: '请选择门店类型', allowClear: true, maxTagCount: 1, options: typeOptions, priority: 3 },
-  { type: 'dateRange', name: 'openingDate', label: '开业日期', placeholder: ['开始日期', '结束日期'], allowClear: true, priority: 4 },
+const pageSize = 20;
+const quickFilters: TableToolbarQuickFilter[] = [
+  { type: 'search', name: 'keyword', placeholder: '搜索门店名称或编号' },
+];
+const operationActions: TableToolbarAction[] = [
+  { key: 'open', label: '启用', icon: IconCheckCircle, requiresSelection: true },
+  { key: 'closed', label: '停用', icon: IconMinusCircle, requiresSelection: true },
+];
+const moreActions: TableToolbarAction[] = [
+  { key: 'clear', label: '清除选择', icon: IconCloseCircle, requiresSelection: true },
 ];
 
-const initialFilterValues: FilterValue = {};
-const filterColumns = { xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 3 };
-const pageSize = 8;
+const handleRowAction = (key: string, record: StoreRecord) => {
+  if (key === 'archive') {
+    Modal.warning({
+      title: '确认停用门店？',
+      content: `将停用“${record.name}”，该操作需要再次确认。`,
+      okText: '确认',
+      cancelText: '取消',
+    });
+  }
+};
 
 const initialStores: StoreRecord[] = [
   { id: '1', code: 'SH-001', name: '上海静安嘉里中心店', region: '华东', city: '上海', cityValue: 'shanghai', type: 'reserve', status: 'open', openedAt: '2020-05-18', manager: 'Nink', updatedAt: '2026-07-24 10:30' },
@@ -284,6 +301,10 @@ const initialStores: StoreRecord[] = [
   { id: '14', code: 'SU-018', name: '苏州工业园区店', region: '华东', city: '苏州', cityValue: 'suzhou', type: 'standard', status: 'open', openedAt: '2023-02-11', manager: 'Mark', updatedAt: '2026-07-13 15:02' },
   { id: '15', code: 'TJ-017', name: '天津滨海文化中心店', region: '华北', city: '天津', cityValue: 'tianjin', type: 'delivery', status: 'closed', openedAt: '2019-07-07', manager: 'Cora', updatedAt: '2026-07-12 13:25' },
   { id: '16', code: 'SH-033', name: '上海徐家汇港汇店', region: '华东', city: '上海', cityValue: 'shanghai', type: 'standard', status: 'open', openedAt: '2017-09-16', manager: 'Will', updatedAt: '2026-07-11 18:16' },
+  { id: '17', code: 'HZ-036', name: '杭州武林广场店', region: '华东', city: '杭州', cityValue: 'hangzhou', type: 'standard', status: 'open', openedAt: '2024-05-20', manager: 'Grace', updatedAt: '2026-07-10 16:42' },
+  { id: '18', code: 'BJ-035', name: '北京三里屯太古里店', region: '华北', city: '北京', cityValue: 'beijing', type: 'reserve', status: 'open', openedAt: '2020-08-08', manager: 'Eric', updatedAt: '2026-07-09 14:18' },
+  { id: '19', code: 'SZ-028', name: '深圳卓悦中心店', region: '华南', city: '深圳', cityValue: 'shenzhen', type: 'delivery', status: 'preparing', openedAt: '2026-11-12', manager: 'Fiona', updatedAt: '2026-07-08 11:36' },
+  { id: '20', code: 'GZ-041', name: '广州北京路店', region: '华南', city: '广州', cityValue: 'guangzhou', type: 'standard', status: 'open', openedAt: '2023-06-30', manager: 'Henry', updatedAt: '2026-07-07 09:54' },
 ];
 
 const columnOptions: Array<{ key: ColumnKey; label: string; fixed?: boolean }> = [
@@ -317,8 +338,7 @@ const cityByValue = new Map(
 );
 
 const stores = ref<StoreRecord[]>([...initialStores]);
-const draftValues = ref<FilterValue>({ ...initialFilterValues });
-const activeValues = ref<FilterValue>({ ...initialFilterValues });
+const quickFilterValues = ref<TableToolbarQuickFilterValues>({ keyword: '' });
 const selectedRowKeys = ref<string[]>([]);
 const current = ref(1);
 const viewMode = ref<ViewMode>('normal');
@@ -326,6 +346,9 @@ const refreshing = ref(false);
 const columnModalVisible = ref(false);
 const createModalVisible = ref(false);
 const visibleColumnKeys = ref<ColumnKey[]>(columnOptions.map((option) => option.key));
+const tableViewport = ref<HTMLElement | null>(null);
+const tableBodyHeight = ref(480);
+let tableResizeObserver: ResizeObserver | undefined;
 const newStore = ref<NewStoreForm>({
   code: '',
   name: '',
@@ -340,42 +363,47 @@ const visibleColumns = computed(() =>
   allColumns.filter((_, index) => visibleColumnKeys.value.includes(columnOptions[index].key))
 );
 
-const filteredStores = computed(() => {
+const visibleStores = computed(() => {
   if (viewMode.value === 'empty') return [];
-  return filterStores(stores.value, activeValues.value);
+  const normalizedKeyword = String(quickFilterValues.value.keyword ?? '').trim().toLowerCase();
+  if (!normalizedKeyword) return stores.value;
+  return stores.value.filter(
+    (store) =>
+      store.name.toLowerCase().includes(normalizedKeyword) ||
+      store.code.toLowerCase().includes(normalizedKeyword)
+  );
 });
 
-const total = computed(() => filteredStores.value.length);
-const pageData = computed(() => filteredStores.value.slice((current.value - 1) * pageSize, current.value * pageSize));
+const total = computed(() => visibleStores.value.length);
+const pageData = computed(() => visibleStores.value.slice((current.value - 1) * pageSize, current.value * pageSize));
 
-watch([activeValues, viewMode], () => {
+watch([() => quickFilterValues.value.keyword, viewMode], () => {
   current.value = 1;
   selectedRowKeys.value = [];
 });
 
-function normalizeArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.map(String) : [];
+function updateTableBodyHeight() {
+  const viewport = tableViewport.value;
+  if (!viewport) return;
+  const headerHeight = Math.ceil(viewport.querySelector('thead')?.getBoundingClientRect().height ?? 41);
+  tableBodyHeight.value = Math.max(160, Math.floor(viewport.clientHeight - headerHeight));
 }
 
-function filterStores(source: StoreRecord[], filters: FilterValue) {
-  const keyword = String(filters.keyword ?? '').trim().toLowerCase();
-  const status = filters.status as StoreStatus | undefined;
-  const cityPath = normalizeArray(filters.city);
-  const city = cityPath[cityPath.length - 1];
-  const types = normalizeArray(filters.storeType);
-  const openingDate = normalizeArray(filters.openingDate);
-  const [startDate, endDate] = openingDate;
-
-  return source.filter((store) => {
-    const keywordMatched = !keyword || store.name.toLowerCase().includes(keyword) || store.code.toLowerCase().includes(keyword);
-    const statusMatched = !status || store.status === status;
-    const cityMatched = !city || store.cityValue === city;
-    const typeMatched = types.length === 0 || types.includes(store.type);
-    const startMatched = !startDate || store.openedAt >= startDate;
-    const endMatched = !endDate || store.openedAt <= endDate;
-    return keywordMatched && statusMatched && cityMatched && typeMatched && startMatched && endMatched;
-  });
+function observeTableViewport() {
+  tableResizeObserver?.disconnect();
+  const viewport = tableViewport.value;
+  if (!viewport) return;
+  tableResizeObserver = new ResizeObserver(updateTableBodyHeight);
+  tableResizeObserver.observe(viewport);
+  updateTableBodyHeight();
 }
+
+onMounted(observeTableViewport);
+onBeforeUnmount(() => tableResizeObserver?.disconnect());
+watch(viewMode, async () => {
+  await nextTick();
+  observeTableViewport();
+});
 
 function statusLabel(status: StoreStatus) {
   return statusOptions.find((option) => option.value === status)?.label ?? status;
@@ -389,14 +417,6 @@ function statusColor(status: StoreStatus) {
 
 function typeLabel(type: StoreType) {
   return typeOptions.find((option) => option.value === type)?.label ?? type;
-}
-
-function handleValuesChange(values: FilterValue) {
-  draftValues.value = values;
-}
-
-function handleActiveValuesChange(values: FilterValue) {
-  activeValues.value = values;
 }
 
 function handlePageChange(page: number) {
@@ -425,6 +445,14 @@ function openBatchConfirm(status: BatchStatus) {
     },
     appContext
   );
+}
+
+function handleToolbarOperation(key: string) {
+  if (key === 'open' || key === 'closed') {
+    openBatchConfirm(key);
+    return;
+  }
+  if (key === 'clear') selectedRowKeys.value = [];
 }
 
 function refreshData() {

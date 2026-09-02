@@ -1,0 +1,227 @@
+// TableToolbar.less
+// React / Vue shared business layout for TableToolbar.
+// Keep the two copies identical. Base control visuals remain owned by Arco
+// Button, Input, Select, Radio, DatePicker, Dropdown, Menu, and Tooltip.
+
+.sbux-table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-6);
+  width: 100%;
+  min-width: 0;
+  padding-block: var(--spacing-5);
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  container-type: inline-size;
+}
+
+.sbux-table-toolbar,
+.sbux-table-toolbar__start,
+.sbux-table-toolbar__operations,
+.sbux-table-toolbar__controls,
+.sbux-table-toolbar__quick-filters,
+.sbux-table-toolbar__quick-filter,
+.sbux-table-toolbar__tools,
+.sbux-table-toolbar__selection {
+  box-sizing: border-box;
+}
+
+.sbux-table-toolbar__start,
+.sbux-table-toolbar__operations,
+.sbux-table-toolbar__controls,
+.sbux-table-toolbar__quick-filters,
+.sbux-table-toolbar__tools {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.sbux-table-toolbar__start {
+  flex: 0 1 auto;
+  gap: var(--spacing-4);
+}
+
+.sbux-table-toolbar__operations {
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  gap: var(--spacing-4);
+}
+
+.sbux-table-toolbar__controls {
+  flex: 1 1 0;
+  justify-content: flex-start;
+  gap: var(--spacing-4);
+  margin-inline-start: 0;
+}
+
+.sbux-table-toolbar[data-has-start-content='true'] > .sbux-table-toolbar__controls {
+  justify-content: flex-end;
+  margin-inline-start: auto;
+}
+
+.sbux-table-toolbar__quick-filters {
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: var(--spacing-4);
+}
+
+.sbux-table-toolbar__quick-filters--start {
+  flex: 0 1 auto;
+}
+
+.sbux-table-toolbar[data-has-start-content='true']
+  > .sbux-table-toolbar__controls
+  > .sbux-table-toolbar__quick-filters--end {
+  justify-content: flex-end;
+}
+
+.sbux-table-toolbar__quick-filter {
+  flex: 1 1 var(--sbux-table-toolbar-filter-width);
+  width: var(--sbux-table-toolbar-filter-width);
+  max-width: var(--sbux-table-toolbar-filter-width);
+  min-width: 0;
+}
+
+.sbux-table-toolbar__quick-filter > * {
+  width: 100%;
+  min-width: 0;
+}
+
+.sbux-table-toolbar__quick-filter[data-filter-type='buttonGroup'] > .arco-radio-group {
+  display: flex;
+}
+
+.sbux-table-toolbar__quick-filter[data-filter-type='buttonGroup'] .arco-radio-button {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.sbux-table-toolbar__quick-filter[data-filter-type='buttonGroup'] .arco-radio-button-inner,
+.sbux-table-toolbar__quick-filter[data-filter-type='buttonGroup'] .arco-radio-button-content {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.sbux-table-toolbar__tools {
+  flex: 0 0 auto;
+  gap: var(--spacing-4);
+}
+
+.sbux-table-toolbar__tools > span,
+.sbux-table-toolbar__operations > span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sbux-table-toolbar__operations > .sbux-table-toolbar__operation-action--overflow,
+.sbux-table-toolbar__operations > .sbux-table-toolbar__more-group--standard,
+.sbux-table-toolbar__operations > .sbux-table-toolbar__more-group--compact {
+  display: none;
+}
+
+.sbux-table-toolbar__selection {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  white-space: nowrap;
+}
+
+.sbux-table-toolbar__selection-count {
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+}
+
+.sbux-table-toolbar__more .arco-icon,
+.sbux-table-toolbar__more .arco-v-icon {
+  margin-inline-start: var(--spacing-2);
+}
+
+.sbux-table-toolbar__menu-content,
+.sbux-table-toolbar__menu-icon {
+  display: inline-flex;
+  align-items: center;
+  line-height: normal;
+}
+
+.sbux-table-toolbar__menu-content {
+  height: 100%;
+  vertical-align: top;
+}
+
+.sbux-table-toolbar__menu-icon {
+  margin-inline-end: var(--spacing-4);
+  vertical-align: middle;
+}
+
+@container (max-width: 1200px) {
+  .sbux-table-toolbar__operations > .sbux-table-toolbar__operation-action--priority-3,
+  .sbux-table-toolbar__operations > .sbux-table-toolbar__operation-action--priority-4,
+  .sbux-table-toolbar__operations > .sbux-table-toolbar__more-group--wide {
+    display: none;
+  }
+
+  .sbux-table-toolbar__operations > .sbux-table-toolbar__more-group--standard {
+    display: inline-flex;
+  }
+}
+
+@container (max-width: 720px) {
+  .sbux-table-toolbar__start,
+  .sbux-table-toolbar__controls {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+    width: 100%;
+    margin-inline-start: 0;
+  }
+
+  .sbux-table-toolbar__start {
+    flex-wrap: wrap;
+  }
+
+  .sbux-table-toolbar__quick-filters {
+    flex: 1 1 auto;
+    justify-content: flex-start;
+  }
+
+  .sbux-table-toolbar[data-has-start-content='true'] > .sbux-table-toolbar__controls {
+    justify-content: flex-end;
+  }
+}
+
+@container (max-width: 520px) {
+  .sbux-table-toolbar__operations > .sbux-table-toolbar__operation-action--priority-2,
+  .sbux-table-toolbar__operations > .sbux-table-toolbar__more-group--standard {
+    display: none;
+  }
+
+  .sbux-table-toolbar__operations > .sbux-table-toolbar__more-group--compact {
+    display: inline-flex;
+  }
+
+  .sbux-table-toolbar__start,
+  .sbux-table-toolbar__controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sbux-table-toolbar__quick-filters {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .sbux-table-toolbar__quick-filter {
+    flex-basis: 100%;
+    width: 100%;
+  }
+
+  .sbux-table-toolbar[data-has-start-content='true'] > .sbux-table-toolbar__controls {
+    align-items: flex-end;
+  }
+}

@@ -1,14 +1,99 @@
 ---
 title: 分步表单
-description: 表单页面模板。
+description: 用于创建活动的步骤校验和进度提示表单页面模板。
 sidebar:
   order: 3
 tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="分步表单" description="分步表单模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/step-form" />
+<p>预览可切换 React / Vue；展开代码区可查看并复制当前框架示例。</p>
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>模板定义</h2>
+    <p>分步表单使用真实 <code>Steps</code> 展示创建活动进度，使用 <code>StepFormLayout</code> 组织步骤条、当前步骤内容和操作区。</p>
+    <p>本模板是页面组合参考，不是公共 <code>StepFormPage</code> 组件。</p>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>适用场景</h2>
+    <ul>
+      <li>创建活动流程存在明确先后顺序，后一步依赖前一步结果。</li>
+      <li>单页字段过多，需要让用户持续感知当前进度和剩余步骤。</li>
+    </ul>
+    <h2>不适用场景</h2>
+    <ul>
+      <li>字段数量少且没有步骤依赖的简单创建或编辑页面。</li>
+      <li>需要自由跳转、刷新恢复、自动保存或跨页面恢复的流程；这些由业务页面另行决定。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>默认预览不在卡片内部重复展示页面标题；共享 Page Header 使用 20px 标题和二级 icon-only Back，Form Surface 填满可用 Main，Form Content 横向内边距至少为 32px，<code>FormPageLayout</code> 只保留 approved inner width。</li>
+      <li>每一步继续组合 <code>FormSection</code>、<code>FormGrid</code> 和 <code>FormControlArea</code>。</li>
+      <li>点击“下一步”只校验当前步骤字段；“上一步”不触发校验并保留已填写内容。</li>
+      <li>示例默认不允许直接点击步骤条跳转，操作区可通过 <code>stickyActions</code> 吸附到底部。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>表单布局能力</strong>
+      <div class="sb-template-docs-component-list">
+        <code>FormPageLayout</code>
+        <code>StepFormLayout</code>
+        <code>FormSection</code>
+        <code>FormGrid</code>
+        <code>FormGridItem</code>
+        <code>FormControlArea</code>
+        <code>FormActions</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Form</code>
+        <code>Steps</code>
+        <code>Input</code>
+        <code>Select</code>
+        <code>DatePicker</code>
+        <code>Radio</code>
+        <code>Checkbox</code>
+        <code>Button</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>设计规则</h2>
+    <ol>
+      <li>二级全页 Step Form 使用共享 Page Header 的 icon-only Back + 20px 标题 + 可选 Context Help；不显示 Breadcrumb 或文字 Back。depth &gt; 2 仅在信息架构需要时使用 approved Breadcrumb。</li>
+      <li>页面级操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
+      <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
+      <li>步骤条之后保留 approved divider，再进入步骤内容；步骤内容、操作区由公共布局能力统一排列，不复制步骤条实现。</li>
+      <li>第一步填写活动基础信息，中间步骤设置活动准入规则，最后一步配置活动任务内容。</li>
+      <li>第一步为“取消 / 下一步”，中间步骤为“上一步 / 下一步”，最后一步为“上一步 / 提交”。</li>
+      <li>字段校验失败时停留在当前步骤并依赖真实 Form 定位首个错误字段。</li>
+      <li>步骤跳转、保存草稿和刷新恢复不作为模板默认行为，按业务需要组合。</li>
+      <li>页面模板只负责组合，不承担业务接口、权限和持久化状态。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用注意事项</h2>
+    <ul>
+      <li>只有创建活动等场景存在顺序关系或流程依赖时使用分步表单；不要把简单字段拆成多个步骤。</li>
+      <li>步骤跳转、保存草稿和刷新恢复由业务页面决定，模板默认不绕过当前步骤校验。</li>
+      <li>本模板依赖现代浏览器的 CSS Container Queries；项目未声明旧浏览器兼容范围。</li>
+    </ul>
+  </section>
+</section>

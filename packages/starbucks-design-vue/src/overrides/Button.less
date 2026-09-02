@@ -207,7 +207,11 @@
 }
 
 .arco-btn-outline.arco-btn-disabled,
-.arco-btn-dashed.arco-btn-disabled {
+.arco-btn-outline[type='button'].arco-btn-disabled,
+.arco-btn-outline[type='submit'].arco-btn-disabled,
+.arco-btn-dashed.arco-btn-disabled,
+.arco-btn-dashed[type='button'].arco-btn-disabled,
+.arco-btn-dashed[type='submit'].arco-btn-disabled {
   color: var(--color-text-disabled);
   background-color: var(--bg-color-component-disabled);
   border-color: var(--color-border-component);

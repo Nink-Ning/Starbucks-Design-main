@@ -1,0 +1,33 @@
+<!--
+  Starter P1.2 structural reference: shared Page Header contract
+  Golden: NO. Authority: approved PageHeader implementation.
+-->
+<header
+  data-reference-id="starter.pattern.page-header"
+  data-reference-structure="shared"
+  data-title-font-size="20px"
+  data-title-token="--fs-20"
+  data-level-1="title+context-help"
+  data-level-2="icon-back+title+context-help"
+  data-depth-2-breadcrumb="absent"
+  data-depth-2-text-back="absent"
+  data-depth-2-icon-back="present"
+  data-depth-gte-3="breadcrumb-only"
+  data-depth-gte-3-title="absent"
+  data-depth-gte-3-back="absent"
+  data-depth-gte-3-context-help="absent"
+  data-back-icon="IconLeft"
+  data-back-control="Button[type=secondary][shape=square]"
+  data-context-help-icon="IconQuestionCircle"
+  data-context-help-trigger="Tooltip[position=bottom]"
+  data-subtitle-default="false"
+  data-action-hierarchy="secondary-outlined-plus-primary-far-right"
+  data-primary-action-position="far-right"
+>
+  <div data-template-region="PAGE_HEADER_MAIN">
+    <button data-template-slot="BACK_ICON" data-back-label="返回上一级" data-icon="IconLeft"></button>
+    <div data-template-slot="PAGE_TITLE"></div>
+    <div data-template-slot="CONTEXT_HELP" data-help-pattern="title-adjacent" data-optional="true"></div>
+  </div>
+  <div data-template-slot="HEADER_ACTIONS"></div>
+</header>

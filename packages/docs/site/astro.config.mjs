@@ -3,9 +3,18 @@ import starlight from '@astrojs/starlight';
 import react from '@astrojs/react';
 import vue from '@astrojs/vue';
 
+function normalizeBasePath(value) {
+  const path = value?.trim() || '/';
+  if (path === '/') return '/';
+  return `/${path.replace(/^\/+|\/+$/g, '')}/`;
+}
+
+const site = process.env.DOCS_SITE_URL || 'https://pages.scm.starbucks.com';
+const base = normalizeBasePath(process.env.DOCS_BASE_PATH || '/kning/starbucks-design-main/');
+
 export default defineConfig({
-  site: 'https://pages.scm.starbucks.com',
-  base: '/kning/starbucks-design-main/',
+  site,
+  base,
   integrations: [
     starlight({
       title: 'Starbucks Design',
@@ -61,6 +70,7 @@ export default defineConfig({
               label: '表单页',
               items: [
                 { label: '基础表单', slug: 'templates/form/basic-form' },
+                { label: '分组表单', slug: 'templates/form/grouped-form' },
                 { label: '分步表单', slug: 'templates/form/step-form' },
               ],
             },
@@ -84,8 +94,25 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Skills',
-          items: [{ label: 'Skills', slug: 'guide/ai-skills' }],
+          label: 'AI 协作指南',
+          items: [
+            { label: '概览', slug: 'guide/ai-skills-guide' },
+            {
+              label: '使用指南',
+              items: [
+                { label: 'AI 使用指南', slug: 'guide/ai-skills-usage' },
+                { label: '如何选择启动包', slug: 'guide/ai-skills-selection' },
+              ],
+            },
+            {
+              label: '启动包管理',
+              items: [
+                { label: '启动包总览', slug: 'guide/ai-skills-starters' },
+                { label: '产品经理启动包', slug: 'guide/ai-skills-releases' },
+                { label: '前端开发启动包 · Coming Soon', slug: 'guide/ai-skills-developer' },
+              ],
+            },
+          ],
         },
       ],
       components: {

@@ -1,0 +1,99 @@
+.sb-demo[data-demo^='business-components/table-toolbar/'] > .sb-demo-preview > .fw-react,
+.sb-demo[data-demo^='business-components/table-toolbar/'] > .sb-demo-preview > .fw-vue {
+  flex: 1 1 100%;
+  width: 100%;
+  min-width: 0;
+}
+
+.sb-demo[data-demo^='business-components/table-toolbar/'] {
+  width: 100%;
+  max-width: 100%;
+}
+
+.sb-demo[data-demo^='business-components/table-toolbar/'] > .sb-demo-preview {
+  padding: 0;
+  background: var(--bg-color-secondarycontainer);
+}
+
+.sb-table-toolbar-demo {
+  display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  gap: var(--spacing-5);
+  min-width: 0;
+  padding: var(--spacing-7);
+  background: var(--bg-color-secondarycontainer);
+  border-radius: var(--border-radius-md);
+}
+
+.sb-table-toolbar-demo__surface {
+  display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  gap: 0;
+  min-width: 0;
+  padding: var(--spacing-2) var(--spacing-6) var(--spacing-6);
+  background: var(--bg-color-container);
+  border-radius: var(--border-radius-md);
+}
+
+.sb-table-toolbar-demo__table {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.sb-table-toolbar-demo__result {
+  padding: var(--spacing-5);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-14);
+  line-height: var(--lh-22);
+  background: var(--bg-color-secondarycontainer);
+  border-radius: var(--border-radius-md);
+}
+
+.sb-table-toolbar-demo--states {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.sb-table-toolbar-demo__state {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: var(--spacing-5);
+  background: var(--bg-color-container);
+  border-radius: var(--border-radius-md);
+}
+
+.sb-table-toolbar-demo__scenario {
+  display: grid;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
+.sb-table-toolbar-demo__scenario-title {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.sb-table-toolbar-demo__state-title {
+  margin-bottom: var(--spacing-4);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-12);
+  line-height: var(--lh-20);
+}
+
+.sb-table-toolbar-doc-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.sb-table-toolbar-doc-table > table {
+  min-width: max-content;
+}
+
+@media (max-width: 520px) {
+  .sb-table-toolbar-demo {
+    padding: var(--spacing-6);
+  }
+}

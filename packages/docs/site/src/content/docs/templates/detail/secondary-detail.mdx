@@ -7,8 +7,90 @@ tableOfContents: false
 ---
 
 import TemplatePageBreadcrumb from '../../../../components/TemplatePageBreadcrumb.astro';
-import TemplatePagePlaceholder from '../../../../components/TemplatePagePlaceholder.astro';
+import Demo from '../../../../components/Demo.astro';
 
 <TemplatePageBreadcrumb />
 
-<TemplatePagePlaceholder title="二级详情页" description="二级详情页模板预留中，后续补充完整页面预览。" />
+<Demo name="template-pages/secondary-detail" />
+<p>预览可切换 React / Vue；示例源码可在代码区域查看并复制。</p>
+
+<section class="sb-template-docs-card">
+  <section class="sb-template-docs-section">
+    <h2>模板定义</h2>
+    <p>二级详情页用于从父级对象详情继续查看一个下级对象。示例以“卡券核销记录”为当前二级对象，在二级内容卡片的标签页上方保留父级卡券名称、QID 和状态，避免用户在二级内容中丢失上下文。</p>
+    <p>这是页面组合参考和起始实现，不是公共 <code>SecondaryDetailTemplate</code> 组件。</p>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>适用场景</h2>
+    <ul>
+      <li>从卡券详情继续查看核销记录、适用门店、发行批次或操作日志。</li>
+      <li>多个内容面板属于同一父级对象下的同级二级信息。</li>
+      <li>当前页面操作只针对正在查看的二级内容。</li>
+    </ul>
+    <h2>不适用场景</h2>
+    <ul>
+      <li>只需要展示单层属性信息时，使用基础详情页。</li>
+      <li>页面由多个独立信息模块组成时，使用卡片详情页。</li>
+      <li>页面主要用于指标和趋势分析时，使用数据详情页。</li>
+      <li>不应因为路由嵌套两层就自动采用二级详情页。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>页面结构</h2>
+    <ul>
+      <li>页面头部使用共享 Page Header；二级页面使用左侧 icon-only Back + 20px 标题，页面级操作放在标题行右侧。</li>
+      <li>父级上下文嵌入二级内容卡片，固定在 Tabs 上方，不单独占用卡片。</li>
+      <li>Tabs 只切换核销记录、适用门店、发行批次和操作日志四个同级面板。</li>
+      <li>表格只在自己的容器内滚动，父级上下文和 Tabs 不产生页面级横向溢出。</li>
+    </ul>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用组件</h2>
+    <div class="sb-template-docs-component-group">
+      <strong>详情布局能力</strong>
+      <div class="sb-template-docs-component-list">
+        <code>DetailPageLayout</code>
+        <code>PageHeader</code>
+        <code>DetailDescriptions</code>
+      </div>
+    </div>
+    <div class="sb-template-docs-component-group">
+      <strong>基础组件</strong>
+      <div class="sb-template-docs-component-list">
+        <code>Card</code>
+        <code>Tabs</code>
+        <code>Table</code>
+        <code>Timeline</code>
+        <code>Button</code>
+        <code>Dropdown</code>
+        <code>Tag</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>二级详情页规则</h2>
+    <ol>
+      <li>页面模板头部统一采用“左侧 icon-only Back + 20px 页面标题、右侧业务核心操作或全局功能操作”的两区结构。</li>
+      <li>操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
+      <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
+      <li>当前页标题必须明确表达二级对象，例如“卡券核销记录”。</li>
+      <li>父级上下文只保留识别当前对象所需的最小信息，不重复完整的父级基础信息。</li>
+      <li>Tabs 只负责同级二级内容切换，不承载父级基础信息。</li>
+      <li>操作按钮随当前 Tab 指向当前二级对象，不引入接口、权限或状态流转逻辑。</li>
+    </ol>
+  </section>
+
+  <section class="sb-template-docs-section">
+    <h2>使用注意事项</h2>
+    <ul>
+      <li>标题行右侧的操作区和父级上下文均应让用户辨认当前内容属于哪个父级对象。</li>
+      <li>表格较宽时只在内容容器内部横向滚动，不让页面产生横向溢出。</li>
+      <li>页面模板只负责组合，不承担接口、权限、字段注册和状态流转能力。</li>
+      <li>React 和 Vue 示例使用相同字段、默认值、空值规则和页面结构。</li>
+    </ul>
+  </section>
+</section>

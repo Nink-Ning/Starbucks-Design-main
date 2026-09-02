@@ -1,0 +1,231 @@
+---
+title: 标签与分组管理 TagGroupManagement
+description: 用于管理单层标签组并承载右侧自定义业务内容的双栏业务组件。
+sidebar:
+  order: 5
+---
+
+import Demo from '../../../../components/Demo.astro'
+import FrameworkBlock from '../../../../components/FrameworkBlock.astro'
+
+## 组件定义
+
+TagGroupManagement 用于管理单层平铺的标签组，并提供当前分组状态、搜索和分组管理操作。右侧内容由调用方通过 React `renderContent` 或 Vue `content` slot 提供，组件不内置表格、分页、导出、请求或标签关系维护。
+
+组件本体负责左侧管理区和左右主从布局；页面外层背景、卡片、固定高度等容器样式由页面或 Docs Preview 承接。
+
+## 基本用法
+
+基础示例使用真实的 React / Vue TagGroupManagement，展示左侧分组管理和右侧业务内容的主从结构。右侧的标签列表、工具栏和表格只是调用方提供的业务内容示例，不属于组件内置能力。新增、重命名和删除事件由 Demo 的父级更新 `groups`；组件本身不发请求、不持久化数据。
+
+<Demo name="business-components/tag-group-management/basic" />
+
+## 分组管理
+
+该示例展示新增、重命名、删除确认、删除当前分组后的选中回退，以及不可删除分组的禁用原因。删除确认只负责确认用户意图，父级收到事件后更新 `groups`。
+
+<Demo name="business-components/tag-group-management/management" />
+
+## 受控模式
+
+通过外部 `activeGroupId` 和按钮切换当前分组，React 使用 `onActiveGroupChange`，Vue 使用 `activeGroupChange` / `update:activeGroupId`。右侧内容随外部选中状态同步变化。
+
+<Demo name="business-components/tag-group-management/controlled" />
+
+## 状态场景
+
+组件管理区支持 Normal、Loading、整体 Disabled、Empty 和 Search Empty。状态切换每次展示一个完整尺寸的真实组件：Loading 和 Disabled 只影响左侧管理区，右侧内容插槽仍由调用方决定。Search Empty 需要在左侧搜索框输入不存在的名称。
+
+<Demo name="business-components/tag-group-management/states" />
+
+## 长列表与独立滚动
+
+长列表示例包含 30 个标签组，Preview 提供约 600px 高度。左侧分组列表和右侧业务内容分别滚动，用于验证固定头部、长名称截断以及窄容器下的内容边界。
+
+<Demo name="business-components/tag-group-management/long-list" />
+
+## 暂不支持
+
+V1 暂不支持维度分类模式、批量管理模式、多级树、拖拽排序、Checkbox、标签跨分组移动、分页、导出和组件内请求。需要这些能力时，应由页面组合现有基础组件或另行设计业务组件。
+
+## Anatomy
+
+```text
+TagGroupManagement
+├── Sidebar
+│   ├── 标题
+│   ├── 搜索与新增
+│   ├── 分组列表
+│   │   └── 选择按钮与操作按钮
+│   └── Loading / Empty
+└── Content Panel
+```
+
+分组选择按钮与重命名、删除按钮是同级的独立操作。列表使用 `ul`，选择按钮使用 `aria-current` 表示当前分组；操作按钮有独立的可访问名称。
+
+## 适用场景
+
+- 左侧单层标签组管理，右侧承载列表、表格或业务详情。
+- 需要统一分组切换、搜索、新增、重命名和删除确认交互的管理页面。
+- 由页面负责请求和数据关系，组件负责稳定的管理区交互。
+
+## 不适用场景
+
+- 多级树、拖拽排序或跨分组移动。
+- 组件自身需要维护标签关系、表格请求、分页或导出。
+- 需要 readonly 但仍保留部分管理入口的场景，V1 暂不提供 readonly。
+
+## 行为规则
+
+- `activeGroupId` 提供时为受控模式；未提供时使用 `defaultActiveGroupId` 初始化非受控状态。
+- `activeGroupId={null}` 明确表示受控无选中项，公开事件也统一使用 `string | null`。
+- 非受控初始化在首次 `loading=false` 时只解析一次，优先使用有效且未禁用的 `defaultActiveGroupId`，否则选择第一个可用分组。
+- 搜索只匹配分组名称，输入和名称会先去除首尾空格；搜索回调在 500ms debounce 后触发，搜索不会改变当前分组。
+- 组件不修改外部 `groups`。新增、重命名和删除事件表示经过组件校验后的操作意图，接口结果和数据更新由调用方处理。
+- 当前分组被外部数据删除时，非受控模式按原位置优先选择下一项、再选择上一项；受控模式等待调用方更新。
+- `loading` 和 `disabled` 只影响左侧管理区；右侧 `renderContent` / `content` slot 保持渲染。
+
+## API
+
+<FrameworkBlock framework="react">
+
+### React API
+
+#### Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `groups` | `readonly TagGroupItem[]` | 必填 | 单层标签组数据；重复 `id` 只保留首次出现项。 |
+| `activeGroupId` | `string \| null` | 未提供 | 受控当前分组；`null` 表示无选中项。 |
+| `defaultActiveGroupId` | `string \| null` | 未提供 | 非受控模式的初始化分组。 |
+| `searchable` | `boolean` | `true` | 是否显示左侧搜索。 |
+| `loading` | `boolean` | `false` | 是否显示左侧加载状态。 |
+| `disabled` | `boolean` | `false` | 是否禁用左侧管理区。 |
+| `allowCreate` | `boolean` | `true` | 是否显示新增入口。 |
+| `allowRename` | `boolean` | `true` | 是否显示重命名入口。 |
+| `allowDelete` | `boolean` | `true` | 是否显示删除入口。 |
+| `texts` | `Partial<TagGroupManagementTexts>` | 中文默认值 | 聚合文本配置。 |
+| `deleteConfirm` | `TagGroupDeleteConfirm` | 默认文案 | 删除确认配置或按分组生成配置。 |
+| `className` | `string` | - | 组件根节点 class。 |
+| `style` | `React.CSSProperties` | - | 组件根节点样式，可用于提供父级高度约束。 |
+| `renderContent` | `(context) => React.ReactNode` | - | 渲染右侧内容；只负责内容，不负责左侧布局。 |
+| `renderEmpty` | `(context) => React.ReactNode` | - | 自定义数据为空或搜索无结果的空状态。 |
+
+#### Events
+
+| 事件                  | 参数                    | 说明                               |
+| --------------------- | ----------------------- | ---------------------------------- |
+| `onActiveGroupChange` | `(groupId, meta)`       | 用户选择或非受控数据回退时触发。   |
+| `onSearchChange`      | `(keyword, meta)`       | 搜索 debounce 完成后触发。         |
+| `onCreateGroup`       | `(name, meta)`          | 名称校验通过并确认新增后触发。     |
+| `onRenameGroup`       | `(groupId, name, meta)` | 名称校验通过且名称发生变化后触发。 |
+| `onDeleteGroup`       | `(groupId, meta)`       | 删除确认后触发。                   |
+
+</FrameworkBlock>
+
+<FrameworkBlock framework="vue">
+
+### Vue API
+
+Vue 使用同一组业务 Props 和事件契约。`class`、`style` 通过组件根节点的 attrs fallthrough 传入，不作为额外的业务 Props 声明。
+
+#### Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `groups` | `readonly TagGroupItem[]` | 必填 | 单层标签组数据；重复 `id` 只保留首次出现项。 |
+| `active-group-id` | `string \| null` | 未提供 | 受控当前分组；`null` 表示无选中项。 |
+| `default-active-group-id` | `string \| null` | 未提供 | 非受控模式的初始化分组。 |
+| `searchable` | `boolean` | `true` | 是否显示左侧搜索。 |
+| `loading` | `boolean` | `false` | 是否显示左侧加载状态。 |
+| `disabled` | `boolean` | `false` | 是否禁用左侧管理区。 |
+| `allow-create` | `boolean` | `true` | 是否显示新增入口。 |
+| `allow-rename` | `boolean` | `true` | 是否显示重命名入口。 |
+| `allow-delete` | `boolean` | `true` | 是否显示删除入口。 |
+| `texts` | `Partial<TagGroupManagementTexts>` | 中文默认值 | 聚合文本配置。 |
+| `delete-confirm` | `TagGroupDeleteConfirm` | 默认文案 | 删除确认配置或按分组生成配置。 |
+
+#### Emits
+
+| 事件                   | 参数                    | 说明                                      |
+| ---------------------- | ----------------------- | ----------------------------------------- |
+| `update:activeGroupId` | `(groupId)`             | 受控绑定更新事件，值为 `string \| null`。 |
+| `activeGroupChange`    | `(groupId, meta)`       | 用户选择或非受控数据回退时触发。          |
+| `searchChange`         | `(keyword, meta)`       | 搜索 debounce 完成后触发。                |
+| `createGroup`          | `(name, meta)`          | 名称校验通过并确认新增后触发。            |
+| `renameGroup`          | `(groupId, name, meta)` | 名称校验通过且名称发生变化后触发。        |
+| `deleteGroup`          | `(groupId, meta)`       | 删除确认后触发。                          |
+
+#### Slots
+
+| Slot      | Context                          | 说明               |
+| --------- | -------------------------------- | ------------------ |
+| `content` | `{ activeGroupId, activeGroup }` | 承接右侧业务内容。 |
+| `empty`   | `{ type, keyword }`              | 自定义空状态。     |
+
+</FrameworkBlock>
+
+### 公共类型
+
+`TagGroupItem` 至少包含唯一的 `id` 和 `name`，也可以配置 `disabled`、`allowRename`、`allowDelete` 与 `deleteDisabledReason`。`TagGroupEventMeta.source` 取值为 `itemClick`、`keyboard`、`groupsUpdateFallback` 或 `search`。
+
+## AI Contract
+
+### Trigger
+
+当页面需要管理单层标签组，并在右侧承载与当前分组相关的自定义业务内容时，选择 TagGroupManagement。
+
+### Do not use
+
+不要用于多级树、拖拽排序、标签关系维护、跨分组移动、表格分页导出或需要组件直接请求接口的场景。
+
+### Selection priority
+
+优先确认页面是否只需要左侧分组管理；右侧内容应由调用方传入。只有在需要新增、重命名、删除和搜索等稳定管理交互时才使用该组件。
+
+### Generation Rules
+
+1. `groups` 必须从调用方传入，`id` 必须唯一。
+2. 需要受控选择时传入 `activeGroupId`，明确无选中项时传入 `null`；否则使用 `defaultActiveGroupId`。
+3. React 使用 `renderContent`，Vue 使用 `content` slot；不要在组件外复制左侧状态机。
+4. 操作事件只表示用户意图，事件处理器负责更新 `groups` 和调用接口。
+5. 页面高度由外层容器提供，不能为组件增加固定业务高度配置。
+
+### Known Pitfalls
+
+- 受控模式下组件不会替调用方更新 `activeGroupId` 或 `groups`。
+- `loading` 和 `disabled` 不会自动禁用右侧内容。
+- `allowDelete=false` 隐藏全局删除能力，单项 `allowDelete=false` 会保留禁用入口并可用 Tooltip 说明原因。
+- Tree、批量管理和 readonly 不属于当前 V1。
+
+### References
+
+- 业务组件开发规范：稳定 Props、Events、Types 和 React/Vue 行为等价。
+- Tag & Group Management 设计规范：`Design System V2.0` 标签与分组管理规格。
+
+## Evaluator
+
+| 检查项 | 证据来源 | Pass | Warn | Block |
+| --- | --- | --- | --- | --- |
+| 组件选择 | 页面业务需求与本页“不适用场景” | 单层标签组管理且右侧内容由调用方承接 | 同时需要复杂表格业务 | 将表格、请求或关系维护塞入组件 |
+| 数据边界 | `groups`、事件和内容插槽 | 调用方持有数据并处理接口结果 | Demo 只做本地更新 | 组件静默修改外部数据 |
+| 选择状态 | `activeGroupId` API 与事件 | 受控/非受控和 `null` 语义一致 | 只使用默认值 | 外部受控值被组件覆盖 |
+| 操作权限 | `allow*` 与 Group Item 字段 | 全局和单项权限按优先级生效 | 只隐藏未配置入口 | 绕过 disabled/loading 触发操作 |
+| 双端一致性 | React Demo、Vue Demo、共享类型 | 相同数据和事件语义 | 仅语法不同 | 用户可见行为不同 |
+| 可访问性 | 列表 DOM、aria 属性、键盘操作 | 选择和操作入口均可感知和操作 | Popup focusLock 依赖基础组件 | 无法键盘选择或操作按钮无名称 |
+
+## 当前限制
+
+- V1 只支持单层平铺标签组，不支持多级树、拖拽排序、批量管理、Checkbox 或跨分组移动。
+- 维度分类模式暂未进入 V1，批量管理模式暂未进入 V1。
+- 不支持 readonly；权限判断由调用方通过 Props 和 Group Item 能力字段表达。
+- 不维护标签与分组关系，不内置 Table、分页、导出、请求或页面路由状态。
+- 右侧 Popup、表格和内容的视觉与交互由基础组件或调用方负责。
+
+## Change Log
+
+### 2026-08-04
+
+- 新增 React / Vue TagGroupManagement 公开入口和双端 Docs 示例。
+- 增加分组搜索、选择、新增、重命名、删除确认、Loading、Disabled 和 Empty 场景说明。
+- 明确右侧内容由 `renderContent` / `content` slot 承接，组件不管理表格请求和标签关系。

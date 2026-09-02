@@ -84,7 +84,7 @@ describe('stylesheet entry', () => {
       expect(importedComponents).toContain(supportPrimitive)
       expect(existsSync(resolve(srcDir, `overrides/${supportPrimitive}.less`))).toBe(true)
     }
-    expect(auditRows).toHaveLength(55)
+    expect(auditRows).toHaveLength(56)
     expect(auditedComponents).toEqual(componentOverrides)
     for (const row of auditRows) {
       expectFinalAuditStatus(row.status)
@@ -102,6 +102,46 @@ describe('stylesheet entry', () => {
     expect(entry).not.toContain('@sbux/design-tokens')
     expect(entry).toContain(overridesImport)
     expect(entry.indexOf(overridesImport)).toBeGreaterThan(entry.indexOf(arcoImport))
+  })
+
+  it('loads the compact Menu sidebar contract without force overrides', () => {
+    const menu = readFileSync(resolve(srcDir, 'overrides/Menu.less'), 'utf8')
+    const index = readFileSync(resolve(srcDir, 'overrides/_index.less'), 'utf8')
+
+    expect(index).toContain("@import './Menu.less';")
+    expect(menu).toContain('.arco-menu-vertical .arco-menu-item')
+    expect(menu).toContain('height: 34px;')
+    expect(menu).toContain('font-size: var(--fs-14);')
+    expect(menu).not.toContain('font-size: 13px;')
+    expect(menu).toContain('padding: 0 var(--spacing-5);')
+    expect(menu).toContain('border-radius: var(--border-radius-md);')
+    expect(menu).not.toContain('border-radius: var(--border-radius-lg);')
+    expect(menu).toContain('.arco-menu-item .arco-menu-item-inner > .arco-icon')
+    expect(menu).toContain('.arco-menu-item.arco-menu-has-icon')
+    expect(menu).toContain('margin-right: var(--spacing-5);')
+    expect(menu).toContain('margin-left: var(--spacing-9);')
+    expect(menu).toContain('> span:first-child:not(.arco-menu-icon):not(.arco-menu-icon-suffix)')
+    expect(menu).toContain('display: inline-flex;')
+    expect(menu).toContain('align-items: center;')
+    expect(menu).toContain("content: '';")
+    expect(menu).toContain('transition: height 0.25s cubic-bezier(0.77, 0, 0.175, 1);')
+    expect(menu).toContain('transform: translateY(-50%) rotate(-90deg);')
+    expect(menu).toContain('width: var(--spacing-14);')
+    expect(menu).toContain('.arco-menu-vertical.arco-menu-collapsed .arco-menu-inner')
+    expect(menu).toContain('overflow-x: hidden;')
+    expect(menu).toContain('justify-content: center;')
+    expect(menu).toContain('min-width: 34px;')
+    expect(menu).toContain('font-size: 0;')
+    expect(menu).toContain('.arco-menu-has-icon')
+    expect(menu).toContain('.arco-menu-collapsed .arco-menu-title')
+    expect(menu).toContain('background-color: var(--bg-color-secondarycontainer);')
+    expect(menu).toContain('color: var(--color-primary);')
+    expect(menu).toContain('color: var(--color-primary-active);')
+    expect(menu).toContain(":where([data-theme='dark'], [arco-theme='dark'])")
+    expect(menu).toContain('.arco-menu-inline-header.arco-menu-selected')
+    expect(menu).toContain('.arco-menu-icon-suffix')
+    expect(menu).not.toContain('!important')
+    expect(menu).not.toContain('margin-right: 20px;')
   })
 
   it('resolves every designer override imported by the override index', () => {
@@ -125,6 +165,17 @@ describe('stylesheet entry', () => {
     )
     expect(packageEntry).not.toContain("import './theme/starbucks.less'")
     expect(existsSync(resolve(srcDir, 'theme'))).toBe(false)
+  })
+
+  it('uses the compact spacing token for vertical Form items', () => {
+    const form = readFileSync(resolve(srcDir, 'overrides/Form.less'), 'utf8')
+
+    expectExactRule(
+      form,
+      '.arco-form .arco-form-layout-vertical,\n' +
+        '.arco-form .arco-form-item-layout-vertical',
+      ['margin-bottom: var(--spacing-6);'],
+    )
   })
 
   it('centers TimePicker numbers inside their filled option surface', () => {
@@ -398,7 +449,7 @@ describe('stylesheet entry', () => {
       '.arco-select.arco-select-view-size-mini.arco-select-view-multiple,\n' +
         '.arco-select.arco-select-view-size-small.arco-select-view-multiple',
       [
-        'height: 28px;',
+        'height: 24px;',
         'min-height: 24px;',
         'padding: 1px 3px;',
         'font-size: var(--fs-12);',
@@ -411,7 +462,7 @@ describe('stylesheet entry', () => {
       'font-size: var(--fs-14);',
     ])
     expectExactRule('.arco-select.arco-select-view-size-large.arco-select-view-multiple', [
-      'height: 56px;',
+      'height: 40px;',
       'min-height: 40px;',
       'padding: 7px var(--spacing-4);',
       'font-size: var(--fs-16);',
@@ -499,11 +550,130 @@ describe('stylesheet entry', () => {
     )
   })
 
+  it('maps Vue Select single DOM to React visual metrics', () => {
+    const select = readFileSync(resolve(srcDir, 'overrides/Select.less'), 'utf8')
+
+    expectExactRule(select, '.arco-select.arco-select-view-single', [
+      'box-sizing: border-box;',
+      'height: 32px;',
+      'padding: 0 var(--spacing-4);',
+      'align-items: center;',
+      'color: var(--color-text-primary);',
+      'font-size: var(--fs-14);',
+      'line-height: var(--lh-22);',
+      'background-color: var(--bg-color-container);',
+      'border: 1px solid var(--color-border-component);',
+      'border-radius: var(--border-radius-sm);',
+      'transition:',
+      '  color 0.2s ease,',
+      '  background-color 0.2s ease,',
+      '  border-color 0.2s ease,',
+      '  box-shadow 0.2s ease;',
+    ])
+    expectExactRule(
+      select,
+      '.arco-select.arco-select-view-size-mini.arco-select-view-single,\n' +
+        '.arco-select.arco-select-view-size-small.arco-select-view-single',
+      [
+        'height: 24px;',
+        'padding: 0 var(--spacing-4);',
+        'font-size: var(--fs-12);',
+        'line-height: var(--lh-20);',
+      ],
+    )
+    expectExactRule(select, '.arco-select.arco-select-view-size-medium.arco-select-view-single', [
+      'height: 32px;',
+      'padding: 0 var(--spacing-4);',
+      'font-size: var(--fs-14);',
+      'line-height: var(--lh-22);',
+    ])
+    expectExactRule(select, '.arco-select.arco-select-view-size-large.arco-select-view-single', [
+      'height: 40px;',
+      'padding: 0 var(--spacing-5);',
+      'font-size: var(--fs-16);',
+      'line-height: var(--lh-24);',
+    ])
+    expectExactRule(
+      select,
+      '.arco-select.arco-select-view-single:not(.arco-select-view-disabled):hover',
+      [
+        'background-color: var(--bg-color-container-hover);',
+        'border-color: var(--color-border-component);',
+      ],
+    )
+    expectExactRule(
+      select,
+      '.arco-select.arco-select-view-single:focus-within,\n' +
+        '.arco-select.arco-select-view-single.arco-select-view-focus,\n' +
+        '.arco-select.arco-select-view-single.arco-select-view-open,\n' +
+        '.arco-select.arco-select-view-single:not(.arco-select-view-disabled):active',
+      [
+        'color: var(--color-text-primary);',
+        'background-color: var(--bg-color-container);',
+        'border-color: var(--color-primary);',
+        'box-shadow: 0 0 0 2px var(--color-primary-focus);',
+      ],
+    )
+    expectExactRule(
+      select,
+      '.arco-select.arco-select-view-single.arco-select-view-disabled,\n' +
+        '.arco-select.arco-select-view-single.arco-select-view-disabled:hover',
+      [
+        'color: var(--color-text-disabled);',
+        'background-color: var(--bg-color-component-disabled);',
+        'border-color: var(--color-border-component);',
+        'box-shadow: none;',
+      ],
+    )
+    expectExactRule(
+      select,
+      '.arco-select-dropdown:not(:has(.arco-select-option-multiple))',
+      [
+        'margin-top: var(--spacing-2);',
+        'padding: var(--spacing-3);',
+        'overflow: hidden;',
+        'color: var(--color-text-primary);',
+        'background-color: var(--bg-color-container);',
+        'border: 1px solid var(--color-border-component);',
+        'border-radius: var(--border-radius-md);',
+        'box-shadow: var(--shadow-md);',
+      ],
+    )
+    expectExactRule(
+      select,
+      '.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-option',
+      [
+        'display: flex;',
+        'align-items: center;',
+        'box-sizing: border-box;',
+        'min-height: 28px;',
+        'margin: 0 0 var(--spacing-1);',
+        'padding: 3px var(--spacing-4);',
+        'color: var(--color-text-primary);',
+        'font-size: var(--fs-14);',
+        'font-weight: var(--fw-regular);',
+        'line-height: var(--lh-22);',
+        'background-color: transparent;',
+        'border-radius: var(--border-radius-sm);',
+      ],
+    )
+    expect(select).toContain(
+      '.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-option-selected',
+    )
+    expect(select).toContain(
+      '.arco-select-dropdown:not(:has(.arco-select-option-multiple)) .arco-select-option-disabled',
+    )
+  })
+
   it('scopes Vue Cascader visual adapters to component-owned popup DOM', () => {
     const cascader = readFileSync(resolve(srcDir, 'overrides/Cascader.less'), 'utf8')
 
     expect(cascader).not.toMatch(/^\.arco-select-view/m)
     expectExactRule(cascader, '.arco-cascader-panel', [
+      'height: auto;',
+      'min-height: 160px;',
+      'max-height: 280px;',
+      'margin-top: var(--spacing-2);',
       'box-sizing: border-box;',
       'overflow: hidden;',
       'color: var(--color-text-primary);',
@@ -514,17 +684,34 @@ describe('stylesheet entry', () => {
       'border-radius: var(--border-radius-md);',
       'box-shadow: var(--shadow-md);',
     ])
-    expectExactRule(cascader, '.arco-cascader-panel .arco-cascader-option', [
-      'box-sizing: border-box;',
-      'min-height: 28px;',
-      'margin: 0 0 var(--spacing-1);',
-      'padding: 3px var(--spacing-4);',
-      'color: var(--color-text-primary);',
-      'font-size: var(--fs-14);',
-      'line-height: var(--lh-22);',
-      'background-color: transparent;',
-      'border-radius: var(--border-radius-sm);',
-    ])
+    expectExactRule(
+      cascader,
+      '.arco-cascader-panel .arco-cascader-option,\n' +
+        '.arco-cascader-panel .arco-cascader-search-option',
+      [
+        'box-sizing: border-box;',
+        'height: auto;',
+        'min-height: 28px;',
+        'margin: 0 0 var(--spacing-1);',
+        'padding: 0;',
+        'color: var(--color-text-primary);',
+        'font-size: var(--fs-14);',
+        'line-height: var(--lh-22);',
+        'background-color: transparent;',
+        'border-radius: var(--border-radius-sm);',
+      ],
+    )
+    expectExactRule(
+      cascader,
+      '.arco-cascader-panel .arco-cascader-option-label,\n' +
+        '.arco-cascader-panel .arco-cascader-search-option-label',
+      [
+        'display: flex;',
+        'min-height: 28px;',
+        'padding: 3px 28px 3px var(--spacing-4);',
+        'align-items: center;',
+      ],
+    )
   })
 
   it('maps shared Vue Cascader and TreeSelect triggers without overriding Select', () => {
@@ -636,6 +823,14 @@ describe('stylesheet entry', () => {
       'font-size: var(--fs-14);',
       'line-height: var(--lh-22);',
     ])
+    expectExactRule(checkbox, '.arco-checkbox .arco-checkbox-icon-check', [
+      'width: 12px;',
+      'height: 100%;',
+      'color: #fff;',
+    ])
+    expectExactRule(checkbox, '.arco-checkbox-disabled .arco-checkbox-icon-check', [
+      'color: var(--color-text-disabled);',
+    ])
   })
 
   it('maps Vue Input wrapper DOM to the React field shell', () => {
@@ -660,6 +855,69 @@ describe('stylesheet entry', () => {
       'background-color: var(--bg-color-container);',
       'border-color: var(--color-danger);',
     ])
+    expectExactRule(
+      input,
+      '.arco-input-wrapper.arco-input-disabled,\n' +
+        '.arco-input-wrapper.arco-input-disabled:hover',
+      [
+        'color: var(--color-text-disabled);',
+        'background-color: var(--bg-color-component-disabled);',
+        'border-color: var(--color-border-component);',
+        'box-shadow: none;',
+        'cursor: not-allowed;',
+      ],
+    )
+  })
+
+  it('uses the Vue Textarea wrapper as the only visible field shell', () => {
+    const input = readFileSync(resolve(srcDir, 'overrides/Input.less'), 'utf8')
+
+    expectExactRule(input, '.arco-textarea-wrapper', [
+      'box-sizing: border-box;',
+      'min-height: 56px;',
+      'color: var(--color-text-primary);',
+      'background-color: var(--bg-color-container);',
+      'border: 1px solid var(--color-border-component);',
+      'border-radius: var(--border-radius-sm);',
+      'transition:',
+      '  color 0.2s ease,',
+      '  background-color 0.2s ease,',
+      '  border-color 0.2s ease,',
+      '  box-shadow 0.2s ease;',
+    ])
+    expectExactRule(
+      input,
+      '.arco-textarea-wrapper:focus-within,\n' +
+        '.arco-textarea-wrapper.arco-textarea-focus',
+      [
+        'background-color: var(--bg-color-container);',
+        'border-color: var(--color-primary);',
+        'box-shadow: 0 0 0 2px var(--color-primary-focus);',
+      ],
+    )
+    expect(input).toContain(
+      '.arco-textarea-wrapper:not(.arco-textarea-disabled, :has(> .arco-textarea-disabled), :focus-within):hover {',
+    )
+    expectExactRule(
+      input,
+      '.arco-textarea-wrapper .arco-textarea,\n' +
+        '.arco-textarea-wrapper .arco-textarea:hover,\n' +
+        '.arco-textarea-wrapper .arco-textarea:focus,\n' +
+        '.arco-textarea-wrapper .arco-textarea:focus:hover,\n' +
+        '.arco-textarea-wrapper .arco-textarea-focus,\n' +
+        '.arco-textarea-wrapper .arco-textarea-error,\n' +
+        '.arco-textarea-wrapper .arco-textarea-warning,\n' +
+        '.arco-textarea-wrapper .arco-textarea-disabled',
+      [
+        'height: 100%;',
+        'color: inherit;',
+        'background-color: transparent;',
+        'border: none;',
+        'border-radius: 0;',
+        'outline: none;',
+        'box-shadow: none;',
+      ],
+    )
   })
 
   it('maps Vue InputSearch outer DOM to React joined-field metrics', () => {
@@ -741,6 +999,24 @@ describe('stylesheet entry', () => {
       'margin-left: var(--spacing-4);',
       'color: var(--color-text-primary);',
     ])
+    expectExactRule(radio, '.arco-radio .arco-radio-icon::after', [
+      'top: 3px;',
+      'left: 3px;',
+      'width: 8px;',
+      'height: 8px;',
+      'background-color: var(--color-primary);',
+      'transform: scale(0);',
+    ])
+    expectExactRule(
+      radio,
+      '.arco-radio-group-size-mini.arco-radio-group-button .arco-radio-button',
+      ['height: 20px;', 'font-size: var(--fs-12);'],
+    )
+    expectExactRule(
+      radio,
+      '.arco-radio-group-size-large.arco-radio-group-button .arco-radio-button',
+      ['height: 32px;', 'font-size: var(--fs-14);'],
+    )
   })
 
   it('maps Vue Switch handle DOM to the React dot metrics', () => {
@@ -845,7 +1121,7 @@ describe('stylesheet entry', () => {
   it('maps Vue Dropdown popup DOM to React menu metrics', () => {
     const dropdown = readFileSync(resolve(srcDir, 'overrides/Dropdown.less'), 'utf8')
 
-    expectExactRule(dropdown, '.arco-dropdown', [
+    expectExactRule(dropdown, '.arco-dropdown:not(.arco-trigger)', [
       'box-sizing: border-box;',
       'max-height: 240px;',
       'padding: var(--spacing-3);',
@@ -857,6 +1133,7 @@ describe('stylesheet entry', () => {
       'border-radius: var(--border-radius-md);',
       'box-shadow: var(--shadow-md);',
     ])
+    expect(dropdown).not.toMatch(/^\.arco-dropdown\s*\{/m)
     expect(dropdown).not.toContain('.arco-dropdown .arco-dropdown-submenu')
     expectExactRule(dropdown, '.arco-dropdown .arco-dropdown-option', [
       'position: relative;',

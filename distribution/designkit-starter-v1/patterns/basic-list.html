@@ -1,0 +1,35 @@
+<!--
+  DesignKit Starter V1 approved template reference.
+  status: approved template reference
+  capability: starter.template.basic-list
+  Golden: NO
+
+  Business substitutions are limited to the named slots. The subtree and
+  ownership markers remain stable when this template is mounted in a Shell.
+  Generic UI icons in substituted actions remain bound to window.arcoicon;
+  Create, More and Delete keep their approved IconPlus, IconMore and
+  IconDelete mappings.
+-->
+<div class="sb-basic-list-page" data-reference-id="starter.template.basic-list" data-reference-status="approved">
+  <header class="sb-basic-list-page__header" data-template-region="page-header">
+    <div class="sb-basic-list-page__title">
+      <h1 data-template-slot="PAGE_TITLE">页面标题</h1>
+      <span class="sb-basic-list-page__title-help" data-template-slot="CONTEXT_HELP" role="button" tabindex="0" aria-label="页面说明"></span>
+    </div>
+    <div class="sb-basic-list-page__header-actions" data-template-region="header-actions">
+      <span data-template-slot="PRIMARY_ACTION"></span>
+    </div>
+  </header>
+  <section class="sb-basic-list-page__module sb-basic-list-page__table-module" data-template-region="continuous-data-region" data-content-surface="approved" data-data-region-inset="4px 16px 16px" data-toolbar-own-vertical-padding="12px" data-toolbar-table-gap="0" data-table-columns-fixed="first-two-left+operation-right" data-operation-column-width="180px" data-row-actions="approved-table-row-actions" data-row-action-align="center" data-row-action-gap="4px">
+    <div class="sbux-table-toolbar" data-template-region="toolbar">
+      <div data-toolbar-region="filter">
+        <span data-template-slot="QUICK_FILTER"></span>
+      </div>
+      <div data-toolbar-region="actions">
+        <span data-template-slot="REFRESH"></span>
+      </div>
+    </div>
+    <div class="sb-basic-list-page__table-viewport" data-template-region="table"></div>
+    <div class="sb-basic-list-page__pagination" data-template-region="pagination"></div>
+  </section>
+</div>

@@ -9,9 +9,10 @@ import VueDemoLoader from '../demos/_shared/VueDemoLoader.vue';
 // whose theme/lang registry arrays (`shiki/themes`, `shiki/langs`) get
 // tree-shaken to empty during the static build, throwing "Theme `github-dark`
 // is not included in this bundle" even for a bare `<Code lang="tsx" />` with
-// no Demo/glob involvement. Passing resolved objects bypasses that registry
+// no Demo/glob involvement. Passing resolved theme objects and language bundles bypasses that registry
 // lookup entirely (Code.astro's documented "load a custom theme/language" path).
-import githubLight from '@shikijs/themes/github-light';
+import githubLight from '@shikijs/themes/github-light-high-contrast';
+import githubDark from '@shikijs/themes/github-dark-high-contrast';
 import tsxLang from '@shikijs/langs/tsx';
 import vueLang from '@shikijs/langs/vue';
 
@@ -35,8 +36,21 @@ const hasVue = vueKey in vueModules;
 const reactCode = reactSources[reactKey];
 const vueCode = vueSources[vueKey];
 
+const tsxLanguage = tsxLang.find((language) => language.name === 'tsx');
+// `@shikijs/langs/vue` exports the Vue grammar together with every embedded
+// grammar required by SFC template/script/style blocks. Astro's <Code> accepts
+// one `lang` value, while Shiki accepts a nested grammar bundle. Give the
+// cloned bundle an entry-point name so <Code> selects Vue without dropping its
+// TypeScript, JavaScript, HTML, and CSS dependencies.
+const vueLanguage = Object.assign([...vueLang], { name: 'vue' }) as unknown as (typeof vueLang)[number];
+const codeThemes = { light: githubLight, dark: githubDark };
+
 if (!hasReact && !hasVue) {
   throw new Error(`Demo 不存在: src/demos/${name}.{tsx,vue}`);
+}
+
+if (!tsxLanguage) {
+  throw new Error('TSX syntax grammar is unavailable');
 }
 ---
 
@@ -83,8 +97,8 @@ if (!hasReact && !hasVue) {
         <span class="sb-demo-copy-label">Copy</span>
       </button>
     </div>
-    {reactCode && <div class="fw-react" data-code={reactCode}><Code code={reactCode} lang={tsxLang} theme={githubLight} /></div>}
-    {vueCode && <div class="fw-vue" data-code={vueCode}><Code code={vueCode} lang={vueLang} theme={githubLight} /></div>}
+    {reactCode && <div class="fw-react" data-code={reactCode}><Code code={reactCode} lang={tsxLanguage} themes={codeThemes} defaultColor={false} /></div>}
+    {vueCode && <div class="fw-vue" data-code={vueCode}><Code code={vueCode} lang={vueLanguage} themes={codeThemes} defaultColor={false} /></div>}
   </details>
 </div>
 

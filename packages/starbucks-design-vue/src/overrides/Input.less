@@ -98,14 +98,14 @@
 .arco-input-inner-wrapper[disabled] {
   color: var(--color-text-disabled);
   background-color: var(--bg-color-component-disabled);
-  border-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
   cursor: not-allowed;
 }
 
 .arco-input-inner-wrapper.arco-input-inner-wrapper-disabled:hover,
 .arco-input-inner-wrapper[disabled]:hover {
   background-color: var(--bg-color-component-disabled);
-  border-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
 }
 
 .arco-input-inner-wrapper.arco-input-inner-wrapper-error {
@@ -227,14 +227,14 @@
 .arco-input-disabled {
   color: var(--color-text-disabled);
   background-color: var(--bg-color-component-disabled);
-  border-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
   cursor: not-allowed;
 }
 
 .arco-input[disabled]:hover,
 .arco-input-disabled:hover {
   background-color: var(--bg-color-component-disabled);
-  border-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
 }
 
 .arco-input-inner-wrapper-size-mini,
@@ -540,14 +540,14 @@
 .arco-textarea-disabled {
   color: var(--color-text-disabled);
   background-color: var(--bg-color-component-disabled);
-  border-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
   cursor: not-allowed;
 }
 
 .arco-textarea[disabled]:hover,
 .arco-textarea-disabled:hover {
   background-color: var(--bg-color-component-disabled);
-  border-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
 }
 
 .arco-textarea-error,
@@ -576,6 +576,85 @@
 .arco-textarea-warning:focus,
 .arco-textarea.arco-textarea-warning:focus {
   box-shadow: 0 0 0 2px var(--color-warning-focus);
+}
+
+// Arco Vue renders Textarea with a stateful wrapper. Keep the visible shell on
+// that wrapper so the nested native textarea does not draw a second border and
+// focus ring.
+.arco-textarea-wrapper {
+  box-sizing: border-box;
+  min-height: 56px;
+  color: var(--color-text-primary);
+  background-color: var(--bg-color-container);
+  border: 1px solid var(--color-border-component);
+  border-radius: var(--border-radius-sm);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.arco-textarea-wrapper:not(.arco-textarea-disabled, :has(> .arco-textarea-disabled), :focus-within):hover {
+  background-color: var(--bg-color-container-hover);
+  border-color: var(--color-border-component);
+}
+
+.arco-textarea-wrapper:focus-within,
+.arco-textarea-wrapper.arco-textarea-focus {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.arco-textarea-wrapper.arco-textarea-error,
+.arco-textarea-wrapper:has(> .arco-textarea-error) {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-danger);
+}
+
+.arco-textarea-wrapper.arco-textarea-error.arco-textarea-focus,
+.arco-textarea-wrapper:has(> .arco-textarea-error):focus-within {
+  box-shadow: 0 0 0 2px var(--color-danger-focus);
+}
+
+.arco-textarea-wrapper.arco-textarea-warning,
+.arco-textarea-wrapper:has(> .arco-textarea-warning) {
+  background-color: var(--bg-color-container);
+  border-color: var(--color-warning);
+}
+
+.arco-textarea-wrapper.arco-textarea-warning.arco-textarea-focus,
+.arco-textarea-wrapper:has(> .arco-textarea-warning):focus-within {
+  box-shadow: 0 0 0 2px var(--color-warning-focus);
+}
+
+.arco-textarea-wrapper.arco-textarea-disabled,
+.arco-textarea-wrapper.arco-textarea-disabled:hover,
+.arco-textarea-wrapper:has(> .arco-textarea-disabled),
+.arco-textarea-wrapper:has(> .arco-textarea-disabled):hover {
+  color: var(--color-text-disabled);
+  background-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.arco-textarea-wrapper .arco-textarea,
+.arco-textarea-wrapper .arco-textarea:hover,
+.arco-textarea-wrapper .arco-textarea:focus,
+.arco-textarea-wrapper .arco-textarea:focus:hover,
+.arco-textarea-wrapper .arco-textarea-focus,
+.arco-textarea-wrapper .arco-textarea-error,
+.arco-textarea-wrapper .arco-textarea-warning,
+.arco-textarea-wrapper .arco-textarea-disabled {
+  height: 100%;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
 }
 
 // Arco Vue uses `.arco-input-wrapper` for the visible field shell.
@@ -627,7 +706,7 @@
 .arco-input-wrapper.arco-input-disabled:hover {
   color: var(--color-text-disabled);
   background-color: var(--bg-color-component-disabled);
-  border-color: var(--bg-color-component-disabled);
+  border-color: var(--color-border-component);
   box-shadow: none;
   cursor: not-allowed;
 }
