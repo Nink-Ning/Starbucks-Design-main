@@ -184,16 +184,16 @@ test('R2-R.3.2 keeps Basic List chrome in the real React/Vue template and restor
     read('distribution/designkit-starter-v1/references/template-usage-contract.md'),
   ])
   for (const source of [reactDemo, vueDemo]) {
-    assert.match(source, /sb-basic-list-page__header/)
-    assert.match(source, /IconInfoCircle/)
-    assert.match(source, /aria-label="门店列表说明"/)
+    assert.match(source, /PageHeader/)
+    assert.match(source, /helpText=|help-text=/)
+    assert.match(source, /data-template-page-header-host="basic-list"/)
     assert.match(source, /TableToolbar/)
     assert.match(source, /sbux-table-row-actions/)
     assert.match(source, /Pagination/)
     assert.doesNotMatch(source, /persistent page subtitle|<p className=.*subtitle|className="[^"]*subtitle/)
-    assert.doesNotMatch(source, /createPortal|Teleport.*basic-list|data-template-action-host="basic-list"/)
+    assert.doesNotMatch(source, /data-template-action-host="basic-list"/)
   }
-  assert.match(breadcrumb, /data-template-action-host="basic-list"/)
+  assert.match(breadcrumb, /data-template-page-header-host=\{pageHeaderId\}/)
   assert.match(docs, /Context Help|上下文帮助/)
   assert.match(templateBinding, /patterns\/basic-list\.html[\s\S]*Page Header[\s\S]*Context Help[\s\S]*persistent page subtitle/)
 })

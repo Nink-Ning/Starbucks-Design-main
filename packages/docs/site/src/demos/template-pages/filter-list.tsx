@@ -23,6 +23,7 @@ import type {
   TableColumnProps,
   TableToolbarAction,
 } from '@sbux/starbucks-design-react';
+import { PageHeader } from '@sbux/starbucks-design-react/pro';
 import {
   IconCheckCircle,
   IconCloseCircle,
@@ -406,35 +407,41 @@ export default function Demo() {
   ];
 
   const columns = allColumns.filter((column, index) => visibleColumnKeys.includes(columnOptions[index].key));
-  const actionHost =
+  const pageHeader = (
+    <PageHeader
+      title="门店列表"
+      helpText="支持通过多条件筛选定位门店"
+      extra={(
+        <div className="sb-filter-list-page__breadcrumb-actions">
+          <Select
+            aria-label="页面状态"
+            style={{ width: 120 }}
+            value={viewMode}
+            options={[
+              { label: 'Normal', value: 'normal' },
+              { label: 'Loading', value: 'loading' },
+              { label: 'Empty', value: 'empty' },
+              { label: 'Error', value: 'error' },
+            ]}
+            onChange={(value) => setViewMode(value as ViewMode)}
+          />
+          <Button type="primary" icon={<IconPlus />} onClick={() => setCreateModalVisible(true)}>
+            新建门店
+          </Button>
+        </div>
+      )}
+    />
+  );
+  const pageHeaderHost =
     typeof document === 'undefined'
       ? null
-      : document.querySelector<HTMLElement>('[data-template-action-host="filter-list"]');
+      : document.querySelector<HTMLElement>('[data-template-page-header-host="filter-list"]');
 
   return (
     <>
-      {actionHost &&
-        createPortal(
-          <div className="sb-filter-list-page__breadcrumb-actions">
-            <Select
-              aria-label="页面状态"
-              style={{ width: 120 }}
-              value={viewMode}
-              options={[
-                { label: 'Normal', value: 'normal' },
-                { label: 'Loading', value: 'loading' },
-                { label: 'Empty', value: 'empty' },
-                { label: 'Error', value: 'error' },
-              ]}
-              onChange={(value) => setViewMode(value as ViewMode)}
-            />
-            <Button type="primary" icon={<IconPlus />} onClick={() => setCreateModalVisible(true)}>
-              新建门店
-            </Button>
-          </div>,
-          actionHost
-        )}
-    <div className="sb-filter-list-page">
+      {pageHeaderHost && createPortal(pageHeader, pageHeaderHost)}
+    <div className="sb-filter-list-page sb-template-page-surface">
+      {!pageHeaderHost && pageHeader}
       <section className="sb-filter-list-page__module">
         <FilterBar
           fields={fields}

@@ -1,20 +1,40 @@
 <template>
-  <Teleport to="[data-template-action-host='filter-list']">
-    <div class="sb-filter-list-page__breadcrumb-actions">
-      <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
-        <Option value="normal">Normal</Option>
-        <Option value="loading">Loading</Option>
-        <Option value="empty">Empty</Option>
-        <Option value="error">Error</Option>
-      </Select>
-      <Button type="primary" @click="createModalVisible = true">
-        <template #icon><IconPlus /></template>
-        新建门店
-      </Button>
-    </div>
+  <Teleport v-if="pageHeaderInDocs" :to="pageHeaderTarget">
+    <PageHeader title="门店列表" help-text="支持通过多条件筛选定位门店">
+      <template #extra>
+        <div class="sb-filter-list-page__breadcrumb-actions">
+          <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
+            <Option value="normal">Normal</Option>
+            <Option value="loading">Loading</Option>
+            <Option value="empty">Empty</Option>
+            <Option value="error">Error</Option>
+          </Select>
+          <Button type="primary" @click="createModalVisible = true">
+            <template #icon><IconPlus /></template>
+            新建门店
+          </Button>
+        </div>
+      </template>
+    </PageHeader>
   </Teleport>
 
-  <div class="sb-filter-list-page">
+  <div class="sb-filter-list-page sb-template-page-surface">
+    <PageHeader v-if="!pageHeaderInDocs" title="门店列表" help-text="支持通过多条件筛选定位门店">
+      <template #extra>
+        <div class="sb-filter-list-page__breadcrumb-actions">
+          <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
+            <Option value="normal">Normal</Option>
+            <Option value="loading">Loading</Option>
+            <Option value="empty">Empty</Option>
+            <Option value="error">Error</Option>
+          </Select>
+          <Button type="primary" @click="createModalVisible = true">
+            <template #icon><IconPlus /></template>
+            新建门店
+          </Button>
+        </div>
+      </template>
+    </PageHeader>
     <section class="sb-filter-list-page__module">
       <FilterBar
         :fields="fields"
@@ -165,6 +185,7 @@
 <script setup lang="ts">
 import { computed, getCurrentInstance, ref, watch } from 'vue';
 import { FilterBar, Modal, TableToolbar } from '@sbux/starbucks-design-vue';
+import { PageHeader } from '@sbux/starbucks-design-vue/pro';
 import type {
   FilterFieldSchema,
   FilterValue,
@@ -177,6 +198,9 @@ import {
   IconMinusCircle,
   IconPlus,
 } from '@sbux/starbucks-design-vue/icon';
+
+const pageHeaderTarget = '[data-template-page-header-host="filter-list"]';
+const pageHeaderInDocs = typeof document !== 'undefined' && Boolean(document.querySelector(pageHeaderTarget));
 
 type StoreStatus = 'open' | 'preparing' | 'closed';
 type BatchStatus = Extract<StoreStatus, 'open' | 'closed'>;

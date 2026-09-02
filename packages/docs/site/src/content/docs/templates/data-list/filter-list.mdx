@@ -17,7 +17,7 @@ import Demo from '../../../../components/Demo.astro';
   <section class="sb-template-docs-section">
     <h2>页面结构</h2>
     <ul>
-      <li>面包屑右侧放置页面状态切换和主操作“新建门店”。</li>
+      <li>PageHeader 右侧放置页面状态切换和主操作“新建门店”。</li>
       <li>筛选区直接调用业务组件 <code>FilterBar</code>，支持关键词、营业状态、所在城市、门店类型和开业日期筛选。</li>
       <li>表格工具栏组合选择数量、批量操作和表格操作，批量变更需二次确认。</li>
       <li>数据表格展示门店信息、业务状态和行操作。</li>
@@ -70,11 +70,12 @@ import Demo from '../../../../components/Demo.astro';
   <section class="sb-template-docs-section">
     <h2>设计规则</h2>
     <ol>
-      <li>页面模板头部统一采用“左侧面包屑或页面标题、右侧业务核心操作或全局功能操作”的两区结构；存在页面级操作时，操作区与面包屑保持同一层级。</li>
+      <li>页面头部使用共享 PageHeader，左侧展示页面标题和可选 Context Help，右侧展示业务核心操作或全局功能操作。</li>
       <li>操作区最多展示 4 个按钮；超过 4 个时，前 3 个保留，剩余操作统一收进第 4 个“更多”下拉菜单。</li>
       <li>操作区最多保留 1 个主按钮，放在操作区最优位置；其他按钮使用白色填充的描边样式。</li>
-      <li>页面主操作位于面包屑行右侧。</li>
+      <li>页面主操作位于 PageHeader 右侧。</li>
       <li>FilterBar 位于数据内容上方，查询提交后更新表格结果。</li>
+      <li>筛选区卡片与顶部 PageHeader 保持 16px 间距。</li>
       <li>批量操作由 TableToolbar 按业务优先级响应式折叠，并在执行前二次确认。</li>
       <li>列设置、导出和刷新位于工具栏右侧。</li>
       <li>分页与表格处于同一内容容器，并跟随 Active 筛选条件更新。</li>

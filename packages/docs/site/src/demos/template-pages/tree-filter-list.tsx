@@ -16,6 +16,7 @@ import {
   Tree,
 } from '@sbux/starbucks-design-react';
 import type { FilterFieldSchema, FilterValue, TableColumnProps } from '@sbux/starbucks-design-react';
+import { PageHeader } from '@sbux/starbucks-design-react/pro';
 import {
   IconDown,
   IconDownCircle,
@@ -311,32 +312,38 @@ export default function Demo() {
       ),
     },
   ];
-  const actionHost =
+  const pageHeader = (
+    <PageHeader
+      title="门店列表"
+      helpText="通过区域树和筛选条件定位门店"
+      extra={(
+        <div className="sb-tree-filter-list-page__breadcrumb-actions">
+          <Select
+            aria-label="页面状态"
+            style={{ width: 120 }}
+            value={viewMode}
+            options={[
+              { label: 'Normal', value: 'normal' },
+              { label: 'Loading', value: 'loading' },
+              { label: 'Empty', value: 'empty' },
+              { label: 'Error', value: 'error' },
+            ]}
+            onChange={(value) => setViewMode(value as ViewMode)}
+          />
+        </div>
+      )}
+    />
+  );
+  const pageHeaderHost =
     typeof document === 'undefined'
       ? null
-      : document.querySelector<HTMLElement>('[data-template-action-host="tree-filter-list"]');
+      : document.querySelector<HTMLElement>('[data-template-page-header-host="tree-filter-list"]');
 
   return (
     <>
-      {actionHost &&
-        createPortal(
-          <div className="sb-tree-filter-list-page__breadcrumb-actions">
-            <Select
-              aria-label="页面状态"
-              style={{ width: 120 }}
-              value={viewMode}
-              options={[
-                { label: 'Normal', value: 'normal' },
-                { label: 'Loading', value: 'loading' },
-                { label: 'Empty', value: 'empty' },
-                { label: 'Error', value: 'error' },
-              ]}
-              onChange={(value) => setViewMode(value as ViewMode)}
-            />
-          </div>,
-          actionHost
-        )}
-    <div className="sb-tree-filter-list-page">
+      {pageHeaderHost && createPortal(pageHeader, pageHeaderHost)}
+    <div className="sb-tree-filter-list-page sb-template-page-surface">
+      {!pageHeaderHost && pageHeader}
       <div className={`sb-tree-filter-list-page__layout${sidebarCollapsed ? ' is-sidebar-collapsed' : ''}`}>
         <aside className="sb-tree-filter-list-page__sidebar">
           <div className="sb-tree-filter-list-page__sidebar-header">

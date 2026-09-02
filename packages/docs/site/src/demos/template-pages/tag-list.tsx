@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Button,
   Dropdown,
@@ -9,12 +10,14 @@ import {
   Pagination,
   Popconfirm,
   Popover,
+  Select,
   Space,
   Table,
   Tag,
   Tooltip,
 } from '@sbux/starbucks-design-react';
 import type { TableColumnProps } from '@sbux/starbucks-design-react';
+import { PageHeader } from '@sbux/starbucks-design-react/pro';
 import {
   IconDelete,
   IconDown,
@@ -79,6 +82,7 @@ export default function Demo() {
   const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState('');
   const [addTagModalVisible, setAddTagModalVisible] = useState(false);
+  const [newTagGroupId, setNewTagGroupId] = useState(activeGroupId);
   const [newTagName, setNewTagName] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -126,9 +130,16 @@ export default function Demo() {
     setActiveGroupId(group.id);
   }
 
+  function openAddTagModal() {
+    setNewTagGroupId(activeGroupId);
+    setNewTagName('');
+    setAddTagModalVisible(true);
+  }
+
   function addTag() {
     const name = newTagName.trim();
-    if (!name) return;
+    const targetGroupId = newTagGroupId;
+    if (!name || !targetGroupId) return;
     const next = tags.length + 1;
     setTags((current: TagRecord[]) => [
       {
@@ -141,6 +152,7 @@ export default function Demo() {
       },
       ...current,
     ]);
+    setActiveGroupId(targetGroupId);
     setCurrentPage(1);
     setNewTagName('');
     setAddTagModalVisible(false);
@@ -201,24 +213,33 @@ export default function Demo() {
     },
   ];
 
-  return (
-    <div className="sb-tag-list-page">
-      <header className="sb-tag-list-page__header">
-        <div className="sb-tag-list-page__title">
-          <span>客户标签</span>
-          <Tooltip content="用于维护客户标签组和标签数据">
-            <IconInfoCircle aria-label="客户标签说明" />
-          </Tooltip>
-        </div>
-        <div className="sb-tag-list-page__header-actions">
-          <Button type="primary" icon={<IconUpload />} onClick={() => Message.info('已触发全局操作')}>
-            全局操作
-          </Button>
+  const pageHeader = (
+    <PageHeader
+      title="标签管理"
+      helpText="管理标签组和标签数据"
+      extra={(
+        <div className="sb-tag-list-page__breadcrumb-actions">
           <Button type="outline" icon={<IconUpload />} onClick={() => Message.info('已触发核心操作')}>
             核心操作
           </Button>
+          <Button type="primary" icon={<IconUpload />} onClick={() => Message.info('已触发全局操作')}>
+            全局操作
+          </Button>
         </div>
-      </header>
+      )}
+    />
+  );
+  const pageHeaderHost =
+    typeof document === 'undefined'
+      ? null
+      : document.querySelector<HTMLElement>('[data-template-page-header-host="tag-list"]');
+
+  return (
+    <>
+      {pageHeaderHost && createPortal(pageHeader, pageHeaderHost)}
+
+      <div className="sb-tag-list-page sb-template-page-surface">
+      {!pageHeaderHost && pageHeader}
 
       <section className="sb-tag-list-page__card">
         <aside className="sb-tag-list-page__sidebar">
@@ -324,7 +345,7 @@ export default function Demo() {
 
           <div className="sb-tag-list-page__toolbar">
             <div className="sb-tag-list-page__toolbar-left">
-              <Button type="outline" icon={<IconPlus />} onClick={() => setAddTagModalVisible(true)}>添加标签</Button>
+              <Button type="outline" icon={<IconPlus />} onClick={openAddTagModal}>添加标签</Button>
               <Button type="outline" icon={<IconUpload />} onClick={() => Message.info('已触发标签导入')}>导入</Button>
               <Dropdown
                 droplist={
@@ -381,7 +402,7 @@ export default function Demo() {
       <Modal
         title={<span className="sb-tag-list-page__modal-title">添加标签</span>}
         visible={addTagModalVisible}
-        okButtonProps={{ disabled: !newTagName.trim() }}
+        okButtonProps={{ disabled: !newTagName.trim() || !newTagGroupId }}
         onOk={addTag}
         onCancel={() => {
           setAddTagModalVisible(false);
@@ -392,8 +413,27 @@ export default function Demo() {
       >
         <div className="sb-tag-list-page__modal-form">
           <label>
-            <span>标签名称</span>
+            <span>标签组</span>
+            <Select
+              aria-label="标签组"
+              value={newTagGroupId}
+              style={{ width: '100%' }}
+              onChange={(value) => setNewTagGroupId(String(value))}
+            >
+              {groups.filter((group: TagGroup) => !group.disabled).map((group: TagGroup) => (
+                <Select.Option key={group.id} value={group.id}>
+                  {group.name}
+                </Select.Option>
+              ))}
+            </Select>
+          </label>
+          <label>
+            <span>
+              <span className="sb-tag-list-page__required-mark" aria-hidden="true">*</span>
+              标签名称
+            </span>
             <Input
+              aria-required="true"
               value={newTagName}
               placeholder="请输入标签名称"
               allowClear
@@ -403,6 +443,7 @@ export default function Demo() {
           </label>
         </div>
       </Modal>
-    </div>
+      </div>
+    </>
   );
 }

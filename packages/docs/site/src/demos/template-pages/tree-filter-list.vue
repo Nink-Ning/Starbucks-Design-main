@@ -1,16 +1,32 @@
 <template>
-  <Teleport to="[data-template-action-host='tree-filter-list']">
-    <div class="sb-tree-filter-list-page__breadcrumb-actions">
-      <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
-        <Option value="normal">Normal</Option>
-        <Option value="loading">Loading</Option>
-        <Option value="empty">Empty</Option>
-        <Option value="error">Error</Option>
-      </Select>
-    </div>
+  <Teleport v-if="pageHeaderInDocs" :to="pageHeaderTarget">
+    <PageHeader title="门店列表" help-text="通过区域树和筛选条件定位门店">
+      <template #extra>
+        <div class="sb-tree-filter-list-page__breadcrumb-actions">
+          <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
+            <Option value="normal">Normal</Option>
+            <Option value="loading">Loading</Option>
+            <Option value="empty">Empty</Option>
+            <Option value="error">Error</Option>
+          </Select>
+        </div>
+      </template>
+    </PageHeader>
   </Teleport>
 
-  <div class="sb-tree-filter-list-page">
+  <div class="sb-tree-filter-list-page sb-template-page-surface">
+    <PageHeader v-if="!pageHeaderInDocs" title="门店列表" help-text="通过区域树和筛选条件定位门店">
+      <template #extra>
+        <div class="sb-tree-filter-list-page__breadcrumb-actions">
+          <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
+            <Option value="normal">Normal</Option>
+            <Option value="loading">Loading</Option>
+            <Option value="empty">Empty</Option>
+            <Option value="error">Error</Option>
+          </Select>
+        </div>
+      </template>
+    </PageHeader>
     <div :class="['sb-tree-filter-list-page__layout', { 'is-sidebar-collapsed': sidebarCollapsed }]">
       <aside class="sb-tree-filter-list-page__sidebar">
         <div class="sb-tree-filter-list-page__sidebar-header">
@@ -182,6 +198,7 @@
 <script setup lang="ts">
 import { computed, h, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { FilterBar } from '@sbux/starbucks-design-vue';
+import { PageHeader } from '@sbux/starbucks-design-vue/pro';
 import type { FilterFieldSchema, FilterValue } from '@sbux/starbucks-design-vue';
 import {
   businessStatusOptions,
@@ -216,6 +233,9 @@ import {
   IconRefresh,
   IconRightCircle,
 } from '@sbux/starbucks-design-vue/icon';
+
+const pageHeaderTarget = '[data-template-page-header-host="tree-filter-list"]';
+const pageHeaderInDocs = typeof document !== 'undefined' && Boolean(document.querySelector(pageHeaderTarget));
 
 type ViewMode = 'normal' | 'loading' | 'empty' | 'error';
 

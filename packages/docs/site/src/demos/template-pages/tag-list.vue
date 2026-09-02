@@ -3,6 +3,7 @@ import { computed, ref } from 'vue';
 import {
   Message,
 } from '@sbux/starbucks-design-vue';
+import { PageHeader } from '@sbux/starbucks-design-vue/pro';
 import {
   IconDelete,
   IconDown,
@@ -14,6 +15,9 @@ import {
   IconSettings,
   IconUpload,
 } from '@sbux/starbucks-design-vue/icon';
+
+const pageHeaderTarget = '[data-template-page-header-host="tag-list"]';
+const pageHeaderInDocs = typeof document !== 'undefined' && Boolean(document.querySelector(pageHeaderTarget));
 
 type TagGroup = {
   id: string;
@@ -63,6 +67,7 @@ const currentPage = ref(1);
 const editingGroupId = ref<string | null>(null);
 const editingName = ref('');
 const addTagModalVisible = ref(false);
+const newTagGroupId = ref(activeGroupId.value);
 const newTagName = ref('');
 const loading = ref(false);
 
@@ -73,6 +78,7 @@ const visibleGroups = computed(() => {
   const keyword = groupKeyword.value.trim().toLowerCase();
   return groups.value.filter((group) => group.name.toLowerCase().includes(keyword));
 });
+const availableTagGroups = computed(() => groups.value.filter((group) => !group.disabled));
 const filteredTags = computed(() => {
   const keyword = tagKeyword.value.trim().toLowerCase();
   return tags.value.filter((tag) =>
@@ -129,9 +135,16 @@ function addGroup() {
   activeGroupId.value = group.id;
 }
 
+function openAddTagModal() {
+  newTagGroupId.value = activeGroup.value?.id ?? availableTagGroups.value[0]?.id ?? '';
+  newTagName.value = '';
+  addTagModalVisible.value = true;
+}
+
 function addTag() {
   const name = newTagName.value.trim();
-  if (!name) return;
+  const targetGroupId = newTagGroupId.value;
+  if (!name || !targetGroupId) return;
   const next = tags.value.length + 1;
   tags.value.unshift({
     id: `TAG-${String(next).padStart(3, '0')}`,
@@ -141,6 +154,7 @@ function addTag() {
     creator: 'Nink',
     createdAt: '2026-07-30 10:00',
   });
+  activeGroupId.value = targetGroupId;
   currentPage.value = 1;
   newTagName.value = '';
   addTagModalVisible.value = false;
@@ -172,26 +186,38 @@ function handleTagSearch(value: string) {
 </script>
 
 <template>
-  <div class="sb-tag-list-page">
-    <header class="sb-tag-list-page__header">
-      <div class="sb-tag-list-page__title">
-        <span>客户标签</span>
-        <a-tooltip content="用于维护客户标签组和标签数据">
-          <IconInfoCircle aria-label="客户标签说明" />
-        </a-tooltip>
-      </div>
-      <div class="sb-tag-list-page__header-actions">
-        <a-button type="primary" @click="Message.info('已触发全局操作')">
-          <template #icon><IconUpload /></template>
-          全局操作
-        </a-button>
-        <a-button type="outline" @click="Message.info('已触发核心操作')">
-          <template #icon><IconUpload /></template>
-          核心操作
-        </a-button>
-      </div>
-    </header>
+  <Teleport v-if="pageHeaderInDocs" :to="pageHeaderTarget">
+    <PageHeader title="标签管理" help-text="管理标签组和标签数据">
+      <template #extra>
+        <div class="sb-tag-list-page__breadcrumb-actions">
+          <a-button type="outline" @click="Message.info('已触发核心操作')">
+            <template #icon><IconUpload /></template>
+            核心操作
+          </a-button>
+          <a-button type="primary" @click="Message.info('已触发全局操作')">
+            <template #icon><IconUpload /></template>
+            全局操作
+          </a-button>
+        </div>
+      </template>
+    </PageHeader>
+  </Teleport>
 
+  <div class="sb-tag-list-page sb-template-page-surface">
+    <PageHeader v-if="!pageHeaderInDocs" title="标签管理" help-text="管理标签组和标签数据">
+      <template #extra>
+        <div class="sb-tag-list-page__breadcrumb-actions">
+          <a-button type="outline" @click="Message.info('已触发核心操作')">
+            <template #icon><IconUpload /></template>
+            核心操作
+          </a-button>
+          <a-button type="primary" @click="Message.info('已触发全局操作')">
+            <template #icon><IconUpload /></template>
+            全局操作
+          </a-button>
+        </div>
+      </template>
+    </PageHeader>
     <section class="sb-tag-list-page__card">
       <aside class="sb-tag-list-page__sidebar">
         <h2>标签组</h2>
@@ -295,7 +321,7 @@ function handleTagSearch(value: string) {
 
         <div class="sb-tag-list-page__toolbar">
           <div class="sb-tag-list-page__toolbar-left">
-            <a-button @click="addTagModalVisible = true">
+            <a-button @click="openAddTagModal">
               <template #icon><IconPlus /></template>
               添加标签
             </a-button>
@@ -380,15 +406,27 @@ function handleTagSearch(value: string) {
     <a-modal
       v-model:visible="addTagModalVisible"
       title-align="start"
-      :ok-button-props="{ disabled: !newTagName.trim() }"
+      :ok-button-props="{ disabled: !newTagName.trim() || !newTagGroupId }"
       @ok="addTag"
       @cancel="closeAddTagModal"
     >
       <template #title>添加标签</template>
       <div class="sb-tag-list-page__modal-form">
         <label>
-          <span>标签名称</span>
+          <span>标签组</span>
+          <a-select v-model="newTagGroupId" aria-label="标签组" style="width: 100%">
+            <a-option v-for="group in availableTagGroups" :key="group.id" :value="group.id">
+              {{ group.name }}
+            </a-option>
+          </a-select>
+        </label>
+        <label>
+          <span>
+            <span class="sb-tag-list-page__required-mark" aria-hidden="true">*</span>
+            标签名称
+          </span>
           <a-input
+            aria-required="true"
             v-model="newTagName"
             placeholder="请输入标签名称"
             allow-clear

@@ -1,32 +1,40 @@
 <template>
+  <Teleport v-if="pageHeaderInDocs" :to="pageHeaderTarget">
+    <PageHeader title="门店列表" help-text="展示门店信息、营业状态和行操作">
+      <template #extra>
+        <div class="sb-basic-list-page__breadcrumb-actions">
+          <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
+            <Option value="normal">Normal</Option>
+            <Option value="loading">Loading</Option>
+            <Option value="empty">Empty</Option>
+            <Option value="error">Error</Option>
+          </Select>
+          <Button type="primary" @click="createModalVisible = true">
+            <template #icon><IconPlus /></template>
+            新建门店
+          </Button>
+        </div>
+      </template>
+    </PageHeader>
+  </Teleport>
+
   <div class="sb-basic-list-page sb-template-page-surface">
-    <header class="sb-basic-list-page__header">
-      <div class="sb-basic-list-page__title">
-        <h1>门店列表</h1>
-        <Tooltip content="用于维护门店信息、营业状态和门店类型" :trigger="['hover', 'focus']">
-          <span
-            class="sb-basic-list-page__title-help"
-            role="button"
-            tabindex="0"
-            aria-label="门店列表说明"
-          >
-            <IconInfoCircle aria-hidden="true" />
-          </span>
-        </Tooltip>
-      </div>
-      <div class="sb-basic-list-page__header-actions">
-        <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
-          <Option value="normal">Normal</Option>
-          <Option value="loading">Loading</Option>
-          <Option value="empty">Empty</Option>
-          <Option value="error">Error</Option>
-        </Select>
-        <Button type="primary" @click="createModalVisible = true">
-          <template #icon><IconPlus /></template>
-          新建门店
-        </Button>
-      </div>
-    </header>
+    <PageHeader v-if="!pageHeaderInDocs" title="门店列表" help-text="展示门店信息、营业状态和行操作">
+      <template #extra>
+        <div class="sb-basic-list-page__breadcrumb-actions">
+          <Select v-model="viewMode" aria-label="页面状态" style="width: 120px">
+            <Option value="normal">Normal</Option>
+            <Option value="loading">Loading</Option>
+            <Option value="empty">Empty</Option>
+            <Option value="error">Error</Option>
+          </Select>
+          <Button type="primary" @click="createModalVisible = true">
+            <template #icon><IconPlus /></template>
+            新建门店
+          </Button>
+        </div>
+      </template>
+    </PageHeader>
     <section class="sb-basic-list-page__module sb-basic-list-page__table-module">
       <TableToolbar
         :selected-count="selectedRowKeys.length"
@@ -166,7 +174,8 @@
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { Modal, TableToolbar, Tooltip } from '@sbux/starbucks-design-vue';
+import { Modal, TableToolbar } from '@sbux/starbucks-design-vue';
+import { PageHeader } from '@sbux/starbucks-design-vue/pro';
 import type {
   TableToolbarAction,
   TableToolbarQuickFilter,
@@ -175,11 +184,13 @@ import type {
 import {
   IconCheckCircle,
   IconCloseCircle,
-  IconInfoCircle,
   IconMore,
   IconMinusCircle,
   IconPlus,
 } from '@sbux/starbucks-design-vue/icon';
+
+const pageHeaderTarget = '[data-template-page-header-host="basic-list"]';
+const pageHeaderInDocs = typeof document !== 'undefined' && Boolean(document.querySelector(pageHeaderTarget));
 
 type StoreStatus = 'open' | 'preparing' | 'closed';
 type BatchStatus = Extract<StoreStatus, 'open' | 'closed'>;

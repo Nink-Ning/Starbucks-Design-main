@@ -30,6 +30,11 @@ const normalized = pathname
   .replace(/^\/+|\/+$/g, '');
 const [group, current] = pages.get(normalized) ?? [undefined, undefined];
 const pageHeaderTemplates = new Map([
+  ['templates/data-list/basic-list', ['basic-list', '门店列表', undefined]],
+  ['templates/data-list/card-list', ['card-list', '商品列表', undefined]],
+  ['templates/data-list/filter-list', ['filter-list', '门店列表', undefined]],
+  ['templates/data-list/tree-filter-list', ['tree-filter-list', '门店列表', undefined]],
+  ['templates/data-list/tag-list', ['tag-list', '标签管理', undefined]],
   ['templates/form/basic-form', ['basic-form', '新建门店', '填写门店基础信息后保存']],
   ['templates/form/grouped-form', ['grouped-form', '门店设置', '按业务分组维护门店配置']],
   ['templates/form/step-form', ['step-form', '新建活动', '按步骤完成活动配置']],
@@ -39,12 +44,24 @@ const pageHeaderTemplates = new Map([
   ['templates/detail/secondary-detail', ['secondary-detail', '卡券核销记录', '查看卡券的下级核销记录']],
 ]);
 const pageHeader = pageHeaderTemplates.get(normalized);
-const [pageHeaderId] = pageHeader ?? [];
+const [pageHeaderId, pageHeaderTitle] = pageHeader ?? [];
 ---
 
 {pageHeaderId ? (
   <header class="sb-template-page-header not-content" data-template-page-header={pageHeaderId}>
-    <div data-template-page-header-host={pageHeaderId}></div>
+    {['basic-list', 'card-list', 'filter-list', 'tree-filter-list', 'tag-list'].includes(pageHeaderId) ? (
+      pageHeaderId === 'card-list' ? (
+        <div class="sbux-pro-page-header">
+          <div class="sbux-pro-page-header-main">
+            <span class="sbux-pro-page-header-title">{pageHeaderTitle}</span>
+          </div>
+        </div>
+      ) : (
+        <div data-template-page-header-host={pageHeaderId}></div>
+      )
+    ) : (
+      <div data-template-page-header-host={pageHeaderId}></div>
+    )}
   </header>
 ) : (
   <nav class="sb-template-page-breadcrumb not-content" aria-label="页面模板面包屑">
@@ -53,18 +70,6 @@ const [pageHeaderId] = pageHeader ?? [];
     {group && <span>{group}</span>}
     <span aria-hidden="true">/</span>
     <span aria-current="page">{current}</span>
-    {normalized === 'templates/data-list/basic-list' && (
-      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="basic-list"></div>
-    )}
-    {normalized === 'templates/data-list/filter-list' && (
-      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="filter-list"></div>
-    )}
-    {normalized === 'templates/data-list/tree-filter-list' && (
-      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="tree-filter-list"></div>
-    )}
-    {normalized === 'templates/data-list/tag-list' && (
-      <div class="sb-template-page-breadcrumb__actions" data-template-action-host="tag-list"></div>
-    )}
     {normalized === 'templates/detail/card-detail' && (
       <div class="sb-template-page-breadcrumb__actions" data-template-action-host="card-detail"></div>
     )}
